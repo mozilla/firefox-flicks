@@ -1,15 +1,14 @@
 from django.conf import settings
 from django.conf.urls.defaults import *
 
-from .examples import urls
+from . import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    (r'', include(urls)),
+    url(r'^/?$', views.home, name='flicks.home'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),

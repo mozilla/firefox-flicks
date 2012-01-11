@@ -1,0 +1,3 @@
+[submodule "src/django-south"]
+    path = src/django-south
+    url = git://github.com/lambdafu/django-south.git

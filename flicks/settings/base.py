@@ -7,18 +7,16 @@ from funfactory.settings_base import *
 # and js files that can be bundled together by the minify app.
 MINIFY_BUNDLES = {
     'css': {
-        'example_css': (
-            'css/examples/main.css',
-        ),
-        'example_mobile_css': (
-            'css/examples/mobile.css',
+        'flicks_css': (
+            'css/main.css',
         ),
     },
     'js': {
-        'example_js': (
-            'js/examples/libs/jquery-1.4.4.min.js',
-            'js/examples/libs/jquery.cookie.js',
-            'js/examples/init.js',
+        'flicks_js': (
+            'js/libs/jquery-1.4.4.min.js',
+            'js/libs/jquery.cookie.js',
+            'js/init.js',
+            'js/main.js',
         ),
     }
 }
@@ -28,9 +26,9 @@ ROOT_URLCONF = 'flicks.urls'
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     # Application base, containing global templates.
-    'flicks.base',
-    # Example code. Can (and should) be removed for actual projects.
-    'flicks.examples',
+    'flicks',
+
+    'south',
 ]
 
 
