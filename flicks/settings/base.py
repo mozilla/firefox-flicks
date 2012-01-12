@@ -13,7 +13,7 @@ MINIFY_BUNDLES = {
     },
     'js': {
         'flicks_js': (
-            'js/libs/jquery-1.4.4.min.js',
+            'js/libs/jquery-1.7.1.min.js',
             'js/libs/jquery.cookie.js',
             'js/init.js',
             'js/main.js',
@@ -24,10 +24,22 @@ MINIFY_BUNDLES = {
 # Defines the views served for root URLs.
 ROOT_URLCONF = 'flicks.urls'
 
+# BrowserID Authentication
+BROWSERID_CREATE_USER = True
+LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL_FAILURE = '/'
+AUTHENTICATION_BACKENDS = (
+    'django_browserid.auth.BrowserIDBackend',
+)
+TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
+    'django_browserid.context_processors.browserid_form',
+]
+
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     # Application base, containing global templates.
     'flicks',
 
+    'django_browserid',
     'south',
 ]
 

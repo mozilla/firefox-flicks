@@ -71,3 +71,6 @@ SECRET_KEY = ''
 # Common Event Format logging parameters
 #CEF_PRODUCT = 'Playdoh'
 #CEF_VENDOR = 'Mozilla'
+
+# Replace with site protocol, domain, and (optionally) port.
+SITE_URL = 'http://localhost:8000'
