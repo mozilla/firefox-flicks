@@ -1,14 +1,12 @@
 from django.conf import settings
 from django.conf.urls.defaults import *
 
-from . import views
-
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^/?$', views.home, name='flicks.home'),
+    url(r'', include('flicks.videos.urls')),
 
     url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': '/'},
         name='logout'),

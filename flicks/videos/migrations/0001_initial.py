@@ -9,17 +9,17 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'Video'
-        db.create_table('flicks_video', (
+        db.create_table('videos_video', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=100)),
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
         ))
-        db.send_create_signal('flicks', ['Video'])
+        db.send_create_signal('videos', ['Video'])
 
     def backwards(self, orm):
         # Deleting model 'Video'
-        db.delete_table('flicks_video')
+        db.delete_table('videos_video')
 
     models = {
         'auth.group': {
@@ -58,7 +58,7 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'flicks.video': {
+        'videos.video': {
             'Meta': {'object_name': 'Video'},
             'description': ('django.db.models.fields.TextField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -67,4 +67,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['flicks']
+    complete_apps = ['videos']

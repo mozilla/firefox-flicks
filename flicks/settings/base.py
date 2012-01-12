@@ -36,8 +36,8 @@ TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
 ]
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
-    # Application base, containing global templates.
-    'flicks',
+    'flicks.base',
+    'flicks.videos',
 
     'django_browserid',
     'south',
