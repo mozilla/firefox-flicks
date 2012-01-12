@@ -10,6 +10,10 @@ from . import views
 urlpatterns = patterns('',
     url(r'^/?$', views.home, name='flicks.home'),
 
+    url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': '/'},
+        name='logout'),
+    (r'^browserid/', include('django_browserid.urls')),
+
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
