@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
-from session_csrf import anonymous_csrf
+from models import Video
 
 
-@anonymous_csrf
-def home(request):
-    """Landing page for Flicks."""
-    return render(request, 'videos/home.html')
+def details(request, video_id=None):
+    """Landing page for video details."""
+    video = get_object_or_404(Video, pk=video_id)
+    return render(request, 'videos/details.html', {'video': video})

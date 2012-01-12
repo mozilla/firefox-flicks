@@ -2,17 +2,17 @@
 <html LANG="{{ LANG }}" dir="{{ DIR }}">
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <title>{% block page_title %}{{ _('Firefox Flicks') }}{% endblock %}</title>
+    <title>{% block page_title %}{{ _('Home') }}{% endblock %}</title>
 
     {% block site_css %}
       {{ css('flicks_css') }}
     {% endblock %}
   </head>
   <body data-mobile-cookie="{{ settings.MOBILE_COOKIE }}">
+    {% include "shared/header.html" %}
+    
     {% block content %}{% endblock %}
-
-    {% block site_js %}
-      {{ js('flicks_js') }}
-    {% endblock %}
+    
+    {% include "shared/footer.html" %}
   </body>
 </html>

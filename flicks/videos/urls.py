@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, url
 
-from . import views
+from flicks.videos import views
 
 urlpatterns = patterns('',
-    url(r'^/?$', views.home, name='flicks.home'),
+    url(r'^video/(?P<video_id>[\w]+)$', views.details, name='flicks.videos.details'),
 )
