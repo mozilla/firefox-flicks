@@ -1,0 +1,13 @@
+<div id="header">
+  <div id="logo">{{ _('Firefox Flicks') }}</div>
+
+  {% if not user.is_authenticated() %}
+    <a id="browserid" href="#"><img src="{{ MEDIA_URL }}img/sign_in_red.png"></a>
+    <form method="POST" action="{{ url('browserid_verify') }}">
+      {{ csrf() }}
+      {{ browserid_form.as_p() }}
+    </form>
+  {% else %}
+    <p>{% trans email=user.email %}You are logged in as {{ email }}.{% endtrans %}<a href="{{ url('logout') }}">{{ _('Logout') }}</a></p>
+  {% endif %}
+</div>

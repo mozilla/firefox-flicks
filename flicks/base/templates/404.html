@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ _('Page not found') }}{% endblock %}
+
+{% block content %}
+  <div class="wrapper error">
+    <h1>{{ _('Page not found') }}</h1>
+
+    <p>
+      {% trans home_url=url('flicks.base.home') %}
+        Sorry, but we couldn't find the page you're looking for.
+        <a href="{{ home_url }}">Go back</a> to the home page.
+      {% endtrans %}
+    </p>
+  </div>
+{% endblock %}

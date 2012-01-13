@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ _('Something went wrong!') }}{% endblock %}
+
+{% block content %}
+  <div class="wrapper error">
+    <h1>{{ _('Something went wrong!') }}</h1>
+
+    <p>
+      {% trans home_url=url('flicks.base.home') %}
+        Sorry, but something went wrong.
+        <a href="{{ home_url }}">Go back</a> to the home page.
+      {% endtrans %}
+    </p>
+  </div>
+{% endblock %}

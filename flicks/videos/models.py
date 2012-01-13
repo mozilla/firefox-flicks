@@ -8,4 +8,4 @@ class Video(models.Model):
     """
     title = models.CharField(max_length=100, blank=False)
     description = models.TextField()
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User, unique=True, blank=False)
