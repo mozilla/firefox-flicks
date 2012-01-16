@@ -8,7 +8,8 @@ from funfactory.settings_base import *
 MINIFY_BUNDLES = {
     'css': {
         'flicks_css': (
-            'css/main.css',
+            'css/flicks_css/less.css',
+            'css/flicks_css/main.css',
         ),
     },
     'js': {
@@ -20,6 +21,8 @@ MINIFY_BUNDLES = {
         ),
     }
 }
+
+PROD_LANGUAGES = ('de', 'en-US', 'es', 'fr', 'pt-BR')
 
 # Defines the views served for root URLs.
 ROOT_URLCONF = 'flicks.urls'
@@ -37,12 +40,14 @@ TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     'flicks.base',
+    'flicks.users',
     'flicks.videos',
 
     'django_browserid',
     'south',
 ]
 
+AUTH_PROFILE_MODULE = 'flicks.UserProfile'
 
 # Because Jinja2 is the default template loader, add any non-Jinja templated
 # apps here:
