@@ -3,5 +3,12 @@
 {% block page_title %}{{ _('Home Page') }}{% endblock %}
 
 {% block content %}
-    <h1>{{ _('Home page') }}</h1>
+	<div class="home">
+		<ol>
+			{% for video in videos %}
+        <li id="slide-{{ loop.index }}">{{ video.title }}</li>
+      {% endfor %}
+    </ol>
+    <button>{{ _('Upload a Video') }}</button>
+	</div>
 {% endblock %}
