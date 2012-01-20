@@ -27,16 +27,22 @@ PROD_LANGUAGES = ('de', 'en-US', 'es', 'fr', 'pt-BR')
 # Defines the views served for root URLs.
 ROOT_URLCONF = 'flicks.urls'
 
-# BrowserID Authentication
+# Authentication
 BROWSERID_CREATE_USER = True
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/'
+
 AUTHENTICATION_BACKENDS = (
     'django_browserid.auth.BrowserIDBackend',
 )
+
 TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
     'django_browserid.context_processors.browserid_form',
 ]
+
+# Paths that do not need a locale
+SUPPORTED_NONLOCALES += ['notify']
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     'flicks.base',

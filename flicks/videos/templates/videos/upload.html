@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ _('Upload a Video') }}{% endblock %}
+
+{% block content %}
+    <h1>{{ _('Upload a Video') }}</h1>
+    <form method="post">
+      {{ csrf() }}
+      {{ upload_form.as_p() }}
+      <button type="submit">{{ _('Upload') }}</button>
+    </form>
+{% endblock %}
