@@ -12,7 +12,7 @@ def send_video_to_vidly(video):
                          absolutify(reverse('flicks.videos.notify')))
 
     if shortlink is None:
-        video.state = 'error';
+        video.state = 'error'
         video.save()
     else:
         video.shortlink = shortlink

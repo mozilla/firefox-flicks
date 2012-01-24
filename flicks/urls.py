@@ -6,6 +6,7 @@ from django.shortcuts import render
 # from django.contrib import admin
 # admin.autodiscover()
 
+
 def error_page(request, template, status=None):
     """Render error templates, found in the root /templates directory.
 
@@ -18,6 +19,7 @@ def error_page(request, template, status=None):
 
 handler404 = lambda r: error_page(r, 404)
 handler500 = lambda r: error_page(r, 500)
+
 
 urlpatterns = patterns('',
     url(r'', include('flicks.base.urls')),
@@ -33,6 +35,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
 )
+
 
 ## In DEBUG mode, serve media files through Django.
 if settings.DEBUG:
