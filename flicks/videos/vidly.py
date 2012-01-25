@@ -135,8 +135,6 @@ def embedCode(shortlink):
     """Generate escaped HTML code to embed a vid.ly video."""
     return """
     <iframe frameborder="0"
-            width="640"
-            height="360"
             name="vidly-frame"
             src="http://s.vid.ly/embeded.html?link=%(shortlink)s&autoplay=false">
       <a target='_blank' href='http://vid.ly/%(shortlink)s'>
