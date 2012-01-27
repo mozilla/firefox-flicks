@@ -19,9 +19,6 @@ class BaseTest(TestCase):
         r = self.client.get(reverse('flicks.base.judges'), follow=True)
         eq_(200, r.status_code)
 
-        r = self.client.get(reverse('flicks.base.legal'), follow=True)
-        eq_(200, r.status_code)
-
         r = self.client.get(reverse('flicks.base.partners'), follow=True)
         eq_(200, r.status_code)
 

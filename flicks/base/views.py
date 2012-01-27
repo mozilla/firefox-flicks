@@ -17,7 +17,7 @@ def home(request):
     want to return 9 per request.
     """
     show_pagination = False
-    videos = Video.objects.all()
+    videos = Video.objects.filter(state='complete').order_by('-id')
 
     if videos.count < 50:
         pagination_limit = PAGINATION_LIMIT_MINI
@@ -57,8 +57,8 @@ def judges(request):
 
 @anonymous_csrf
 def prizes(request):
-    """Judges page."""
-    return render(request, 'judges.html')
+    """Prizes page."""
+    return render(request, 'prizes.html')
 
 
 @anonymous_csrf
@@ -71,9 +71,3 @@ def partners(request):
 def faq(request):
     """FAQ page."""
     return render(request, 'faq.html')
-
-
-@anonymous_csrf
-def legal(request):
-    """Legal page."""
-    return render(request, 'legal.html')

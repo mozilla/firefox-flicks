@@ -3,5 +3,240 @@
 {% block page_title %}{{ _('FAQ') }}{% endblock %}
 
 {% block content %}
-    <h1>{{ _('FAQ') }}</h1>
+  <div class="info">
+    <a href="{{ url('flicks.base.home') }}" class="home-link">&laquo; {{ _('Return Home') }}</a>
+
+    <h1>{{ _('Firefox Flicks FAQ') }}</h1>
+
+    <h2>{{ _('What is Firefox Flicks?') }}</h2>
+    <p>
+      {% trans %}
+        Firefox Flicks is a contest that invites Firefox fans and filmmakers
+        from all over the world to create short videos (or &#34;flicks&#34;) to help
+        tell the Firefox story.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('When will the contest open?') }}</h2>
+    <p>
+      {% trans %}
+        The Firefox Flicks contest site is now open. You can now upload your video and
+        vote on your favorites.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Can I submit more than one flick?') }}</h2>
+    <p>
+      {% trans %}
+        You can submit as many as you like, but you have to submit a new entry each time.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Can a team develop the flick?') }}</h2>
+    <p>
+      {% trans %}
+        Of course! Teams can be up to 10 people. We will, however, be sending out
+        a maximum of one Firefox prize pack per submission to be shared with the
+        team. Also, please appoint a team leader. All communication will be with this
+        person and only one prize will be awarded per entry.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Is the contest open to international entries?') }}</h2>
+    <p>
+      {% trans %}
+        Yes. This contest is open to anyone in world. We will, however, choose one
+        winner for North America, one winner for Latin America, one winner for Asia,
+        Australia &amp; New Zealand and one winner for Europe &amp; Africa (or whichever
+        of those is closest to where you’re from).
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('What are the judging criteria?') }}</h2>
+    <p>
+      {% trans %}
+        Videos will be judged on quality of shooting, editing and how closely they align
+        with the creative brief.
+      {% endtrans %}
+    </p>
+    <p>
+      {{ _('Entries will be judged in the following categories:') }}
+      <ol>
+        <li>
+          {{ _('Best :30 Spot') }}
+        </li>
+        <li>
+          {{ _('Best Animation') }}
+        </li>
+        <li>
+          {{ _('Best Use of New Technology (e.g. Popcorn.js, shot entirely with a mobile device, 3D)') }}
+        </li>
+        <li>
+          {{ _('Best Public Service Announcement') }}
+        </li>
+      </ol>
+    </p>
+    <p>
+      {% trans %}
+        A panel of judges will choose the grand prize winner from a selection of videos that have
+        been voted on by the public.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Who are the judges?') }}</h2>
+    <p>
+      {% trans %}
+        See our Judges page for a complete list.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('What can I win?') }}</h2>
+    <p>
+      {% trans %}
+        Simply by competing, your flick will be seen and voted on by millions of Firefox fans around
+        the world, giving you exposure to a global audience. You'll also get your entry in front of
+        international advertising executives and film luminaries while working on one of the world's
+        biggest brands &#8212; a great piece to add to any portfolio.
+      {% endtrans %}
+    </p>
+    <p>
+      {% trans %}
+        But there's more! The grand prize winner in each region (North America, Latin America, EU and
+        Asia, Australia &amp; New Zealand) will receive their choice of either $5,000 in video equipment or
+        a film school scholarship. The top two winners in each category get $1,000 in video equipment. Top
+        category winners for each region and the grand prize winner will also get a trip to a Firefox
+        Flicks event in 2012. Any video that makes it into the contest will get a Firefox prize pack. On
+        top of all that, if you win, your flick could be used to share the amazing story of Firefox with
+        the world.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Is there a maximum video length and file size?') }}</h2>
+    <p>
+      {% trans %}
+        The maximum video length is 120 seconds and the maximum file size is **KB.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('How do I submit my flick and enter the contest?') }}</h2>
+    <p>
+      {% trans video_upload=url('flicks.videos.upload'), vidly='http://vid.ly' %}
+        Fill out your filmmaker profile and submit your video <a href="{{ video_upload }}">here</a>. You will
+        need to upload your video to a personal server or to a service like Dropbox. We will be reposting all
+        videos to a contest gallery on <a href="{{ vidly }}">Vid.ly</a>. You'll need to give your Flick a
+        title, select the video category you are entering it in and your region.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Who can I contact if I have additional questions on the contest?') }}</h2>
+    <p>
+      {% trans flicks_mail='mailto:firefoxflicks@mozilla.org' %}
+        Drop us a note at <a href="{{ flicks_mail }}">firefoxflicks@mozilla.org</a> and we'll get back to you
+        as soon as we can.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Can I submit an entry as a university project?') }}</h2>
+    <p>
+      {% trans %}
+        Absolutely! We think that Firefox Flicks is a great opportunity for students to participate in a real
+        world, high visibility campaign with expert judges from the film, television and advertising industries.
+        Talk to your professors about using the video as your project.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Can I use the Firefox wordmark and logo in my flick?') }}</h2>
+    <p>
+      {% trans trademark='http://www.mozilla.org/foundation/trademarks/policy.html',
+               wordmark='http://mozilla.org/en-US/firefox/brand/' %}
+        Yes. For the purposes of this contest, you may use the <a href="{{ wordmark }}">Firefox wordmark and
+        logo</a>. For more information, see the <a href="{{ trademark }}">Mozilla Trademark Policy</a>.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('How do I get high resolution Firefox name and logo artwork?') }}</h2>
+    <p>
+      {% trans brand='http://mozilla.org/en-US/firefox/brand/' %}
+        To get high resolution copies of the Firefox name and logo artwork, as well as guidance on
+        how to use the Firefox logo and wordmarks, please visit our <a href="{{ brand }}">Brand Toolkit</a>.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Where can I find music or other materials to include in my flick?') }}</h2>
+    <p>
+      {% trans creative_commons='http://search.creativecommons.org',
+               public_domain='http://en.wikipedia.org/wiki/Public_domain' %}
+        If you're looking for additional materials &#8212; whether music, video footage, artwork or
+        graphics &#8212; we suggest you investigate public domain media.<a href="{{ creative_commons }}">Creative
+        Commons</a> has a nice search service for locating public domain work. You can read more about the public
+        domain at <a href="{{ public_domain }}">Wikipedia</a>.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Can I use 3rd party trademarks or copyrighted materials in my flick?') }}</h2>
+    <p>
+      {% trans %}
+        No, not without permission from the owner of those materials.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Can I submit a flick in a language other than English?') }}</h2>
+    <p>
+      {% trans %}
+        Yes. For non-English entries, you will need to submit a full and accurate script or subtitles. If
+        you're having trouble getting your flick translated, please contact us. We can help.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('What if I want to withdraw my submission?') }}</h2>
+    <p>
+      {% trans flicks_email='firefoxflicks@mozilla.org' %}
+        If you would like to withdraw your submission, please contact us at
+        <a href="{{ flicks_email }}">firefoxflicks@mozilla.org</a> and we will remove your entry from
+        the competition.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('What aspect ratio should I use for my entry?') }}</h2>
+    <p>
+      {% trans %}
+        All aspect ratios will be accepted, but 16:9 is recommended and preferred.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('Will entries be available to the general public?') }}</h2>
+    <p>
+      {% trans %}
+        Your flick will be posted on the voting site so that people can help choose the grand prize winner.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('What files do I need to submit?') }}</h2>
+    <p>
+      {{ _('You can submit your ad in the following file format here:') }}
+      <ol>
+        <li><a href="{{ url('flicks.videos.upload') }}">http://mozilla.org/firefoxflicks/upload</a></li>
+        <li>flv, iPhone stream, mov, mp4, ogg, webm, 3gp</li>
+      </ol>
+    </p>
+
+    <h2>{{ _('Where do I send the high resolution video file?') }}</h2>
+    <p>
+      {% trans upload=url('flicks.videos.upload') %}
+        You can send your high resolution file to:
+      {% endtrans %}
+    </p>
+    <div id="hcard-Firefox-Flicks" class="vcard">
+      <span class="fn n">
+        <span class="given-name">Firefox Flicks</span>
+      </span>
+      <div class="org">Mozilla</div>
+      <div class="adr">
+        <div class="street-address">650 Castro Street, Suite 300</div>
+        <span class="locality">Mountain View</span>
+        <span class="region">California</span>
+        <span class="postal-code">94041-2021</span>
+      </div>
+    </div>
+  </div>
 {% endblock %}

@@ -1,34 +1,30 @@
 <div id="header">
-  <div class="logo">{{ _('Firefox Flicks') }}</div>
-  <ul>
-    <li><a href="{{ url('flicks.base.home') }}"
-           title="{{ _('Home') }}">{{ _('Home') }}</a></li>
-    <li><a href="{{ url('flicks.base.creative')}}"
-           title="{{ _('Creative Brief') }}">{{ _('Creative Brief') }}</a></li>
-    <li><a href="{{ url('flicks.base.judges') }}"
-           title="{{ _('Judges') }}">{{ _('Judges') }}</a></li>
-    <li><a href="{{ url('flicks.base.prizes') }}"
-           title="{{ _('Prizes') }}">{{ _('Prizes') }}</a></li>
-    <li><a href="{{ url('flicks.base.partners') }}"
-           title="{{ _('Partners') }}">{{ _('Partners') }}</a></li>
-    <li><a href="{{ url('flicks.base.faq') }}"
-           title="{{ _('Legal') }}">{{ _('Legal') }}</a></li>
-  </ul>
-  <div class="user-login">
-    {% if not user.is_authenticated() %}
-      <a id="browserid" href="#"><img src="{{ MEDIA_URL }}img/sign_in_red.png"></a>
-      <form method="POST" action="{{ url('browserid_verify') }}">
-        {{ csrf() }}
-        {{ browserid_form.as_p() }}
-      </form>
-    {% else %}
-      <p>
-        {{ gravatar_img(user, size=32, img_class='gravatar') }}
-        {% trans email=user.email %}
-          You are logged in as {{ email }}.
-        {% endtrans %}
-        <a href="{{ url('logout') }}">{{ _('Logout') }}</a>
-      </p>
-    {% endif %}
+  <div class="header-wrapper">
+    <a href="{{ url('flicks.base.home') }}"
+       title="{{ _('Firefox Flicks') }}" class="logo">{{ _('Firefox Flicks') }}</a>
+    <ul>
+      <li><a href="{{ url('flicks.base.creative')}}"
+             title="{{ _('Creative Brief') }}">{{ _('Creative Brief') }}</a></li>
+      <li><a href="{{ url('flicks.base.judges') }}"
+             title="{{ _('Judges') }}">{{ _('Judges') }}</a></li>
+      <li><a href="{{ url('flicks.base.prizes') }}"
+             title="{{ _('Prizes') }}">{{ _('Prizes') }}</a></li>
+      <li><a href="{{ url('flicks.base.partners') }}"
+             title="{{ _('Partners') }}">{{ _('Partners') }}</a></li>
+      <li><a href="{{ url('flicks.base.faq') }}"
+             title="{{ _('FAQ') }}">{{ _('FAQ') }}</a></li>
+      <li>
+        {% if not user.is_authenticated() %}
+          <a id="browserid" href="#"><img src="{{ MEDIA_URL }}img/sign_in_red.png"></a>
+          <form method="POST" action="{{ url('browserid_verify') }}">
+            {{ csrf() }}
+            {{ browserid_form.as_p() }}
+          </form>
+        {% else %}
+          <a href="{{ url('logout') }}">{{ _('Logout') }}</a>
+        {% endif %}
+      </li>
+    </ul>
+    <a href="http://mozilla.org" id="mozilla-tag">{{ _('Mozilla') }}</a>
   </div>
 </div>

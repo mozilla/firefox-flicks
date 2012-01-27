@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>{% block page_title %}{{ _('Home') }}{% endblock %}</title>
 
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&amp;
+    subset=latin,greek,latin-ext,cyrillic-ext,cyrillic,greek-ext" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -19,7 +21,9 @@
     <div class="wrapper">
       {% include "shared/header.html" %}
       
-      {% block content %}{% endblock %}
+      <div class="content-wrapper">
+        {% block content %}{% endblock %}
+      </div>
       
       {% include "shared/footer.html" %}
     </div>
