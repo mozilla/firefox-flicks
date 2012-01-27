@@ -1,5 +1,7 @@
 import xml.etree.ElementTree as ET
 
+from django.conf import settings
+
 import commonware.log
 import requests
 
@@ -9,17 +11,11 @@ ERROR_CODES = ['1.1', '1.2', '2.2', '2.3']  # Vidly error codes
 log = commonware.log.getLogger('f.vidly')
 
 
-try:
-    from django.conf import settings
-    VIDLY_API_URL = getattr(settings, 'VIDLY_API_URL', _API_URL)
-    VIDLY_USER_ID = getattr(settings, 'VIDLY_USER_ID', None)
-    VIDLY_USER_KEY = getattr(settings, 'VIDLY_USER_KEY', None)
-    VIDLY_OUTPUT_FORMATS = getattr(settings, 'VIDLY_OUTPUT_FORMATS', ['webm'])
-except ImportError:
-    VIDLY_API_URL = _API_URL
-    VIDLY_USER_ID = None
-    VIDLY_USER_KEY = None
-    VIDLY_OUTPUT_FORMATS = ['webm']
+VIDLY_API_URL = getattr(settings, 'VIDLY_API_URL', _API_URL)
+VIDLY_USER_ID = getattr(settings, 'VIDLY_USER_ID', None)
+VIDLY_USER_KEY = getattr(settings, 'VIDLY_USER_KEY', None)
+VIDLY_OUTPUT_FORMATS = getattr(settings, 'VIDLY_OUTPUT_FORMATS', ['webm'])
+VIDLY_OUTPUT_SIZE = getattr(settings, 'VIDLY_OUTPUT_SIZE', '640x480')
 
 
 def request(action, params, notify_url, user_id=VIDLY_USER_ID,
@@ -93,7 +89,8 @@ def _build_param_xml(parent, params):
 def addMedia(source_file, notify_url):
     """Send a media file to vid.ly for conversion."""
     params = {'Source': {'SourceFile': source_file,
-                         'Output': ','.join(VIDLY_OUTPUT_FORMATS)}}
+                         'Output': ','.join(VIDLY_OUTPUT_FORMATS),
+                         'Size': VIDLY_OUTPUT_SIZE}}
 
     response = request('AddMedia', params, notify_url)
     if response is None:
