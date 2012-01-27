@@ -74,3 +74,7 @@ SECRET_KEY = ''
 
 # Replace with site protocol, domain, and (optionally) port.
 SITE_URL = 'http://localhost:8000'
+
+# Vidly Credentials (Fill these in!)
+VIDLY_USER_ID = ''
+VIDLY_USER_KEY = ''
