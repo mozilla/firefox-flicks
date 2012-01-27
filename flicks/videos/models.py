@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from funfactory.urlresolvers import reverse
 from jinja2 import Markup
 
 from flicks.videos.vidly import embedCode
@@ -34,3 +35,8 @@ class Video(models.Model):
     def embed_html(self):
         """Return the escaped HTML code to embed this video."""
         return Markup(embedCode(self.shortlink))
+
+    @property
+    def details_href(self):
+        """Return the url for this video's details page."""
+        return reverse('flicks.videos.details', kwargs={'video_id': self.id})

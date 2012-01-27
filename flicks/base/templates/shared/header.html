@@ -22,7 +22,13 @@
         {{ browserid_form.as_p() }}
       </form>
     {% else %}
-      <p>{% trans email=user.email %}You are logged in as {{ email }}.{% endtrans %}<a href="{{ url('logout') }}">{{ _('Logout') }}</a></p>
+      <p>
+        {{ gravatar_img(user, size=32, img_class='gravatar') }}
+        {% trans email=user.email %}
+          You are logged in as {{ email }}.
+        {% endtrans %}
+        <a href="{{ url('logout') }}">{{ _('Logout') }}</a>
+      </p>
     {% endif %}
   </div>
 </div>

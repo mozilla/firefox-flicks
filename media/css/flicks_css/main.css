@@ -9,6 +9,11 @@
   margin-right: 10px;
 }
 
+.gravatar {
+    height: 32px;
+    width: 32px;
+}
+
 .home {
   margin: 20px 0px 20px 0px;
 }

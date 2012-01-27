@@ -25,7 +25,7 @@ class UploadTests(TestCase):
         return response
 
     def setUp(self):
-        self.user = self.test_user(login=True)
+        self.user = self.build_user(login=True)
 
     def test_get(self, send_video_to_vidly):
         """An empty form should do nothing."""
@@ -74,7 +74,7 @@ class NotifyTests(TestCase):
         return response
 
     def setUp(self):
-        self.user = self.test_user()
+        self.user = self.build_user()
 
     def test_invalid_user_id(self):
         """Returning with an invalid user id fails."""

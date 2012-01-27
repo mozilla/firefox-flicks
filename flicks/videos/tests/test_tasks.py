@@ -17,7 +17,7 @@ class SendVideoToVidlyTests(TestCase):
         return video
 
     def setUp(self):
-        self.user = self.test_user()
+        self.user = self.build_user()
 
     def test_error(self):
         """If there's an error, the video's state should change to error."""
