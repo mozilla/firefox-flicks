@@ -3,12 +3,14 @@
 {% block page_title %}{{ _('Home Page') }}{% endblock %}
 
 {% block content %}
-	<div class="home">
-		<ol>
-			{% for video in videos %}
-        <li id="slide-{{ loop.index }}">{{ video.title }}</li>
+  <div class="home">
+    <ol>
+      {% for video in videos %}
+        <li id="slide-{{ loop.index }}">
+          <a href="{{ video.details_href }}">{{ video.title }}</a>
+        </li>
       {% endfor %}
     </ol>
     <button>{{ _('Upload a Video') }}</button>
-	</div>
+  </div>
 {% endblock %}
