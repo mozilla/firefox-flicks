@@ -1,7 +1,6 @@
 import socket
 
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
@@ -9,6 +8,7 @@ from django.views.decorators.http import require_POST
 
 import commonware.log
 
+from flicks.users.decorators import profile_required
 from flicks.videos.forms import UploadForm
 from flicks.videos.models import Video
 from flicks.videos.tasks import send_video_to_vidly
@@ -24,7 +24,7 @@ def details(request, video_id=None):
     return render(request, 'videos/details.html', {'video': video})
 
 
-@login_required
+@profile_required
 def upload(request):
     """Video upload page."""
     if request.method == 'POST':

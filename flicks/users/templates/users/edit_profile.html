@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% if not profile %}
+  {% set title = _('Create your profile') %}
+{% else %}
+  {% set title = _('Edit your profile') %}
+{% endif %}
+
+{% block page_title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form method="post">
+      {{ csrf() }}
+      {{ edit_form.as_p() }}
+      <button type="submit">{{ _('Save') }}</button>
+    </form>
+{% endblock %}

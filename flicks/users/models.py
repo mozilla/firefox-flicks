@@ -4,6 +4,7 @@ from django.db import models
 
 class UserProfile(models.Model):
     """Additional fields required for a user."""
+    user = models.OneToOneField(User, primary_key=True)
+
     country = models.CharField(max_length=100, blank=True)
     bio = models.TextField()
-    user = models.ForeignKey(User, unique=True, blank=False)
