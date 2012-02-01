@@ -1,9 +1,9 @@
-from django import forms
+from happyforms import ModelForm
 
 from flicks.users.models import UserProfile
 
 
-class UserProfileForm(forms.ModelForm):
+class UserProfileForm(ModelForm):
     """Video upload form."""
     class Meta:
         model = UserProfile
