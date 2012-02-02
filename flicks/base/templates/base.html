@@ -27,5 +27,9 @@
 
       {% include "shared/footer.html" %}
     </div>
+    {% block site_js %}
+      {{ js('flicks_js') }}
+      <script src="https://browserid.org/include.js"></script>
+    {% endblock %}
   </body>
 </html>
