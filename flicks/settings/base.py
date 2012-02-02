@@ -19,6 +19,9 @@ MINIFY_BUNDLES = {
             'js/init.js',
             'js/main.js',
         ),
+        'video_details': (
+            'js/vote.js',
+        ),
     }
 }
 
@@ -47,6 +50,9 @@ SUPPORTED_NONLOCALES += ['notify']
 # Gravatar Settings
 GRAVATAR_URL = 'https://secure.gravatar.com'
 DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
+
+# Vote settings
+VOTE_COOKIE_AGE = 946080000 # 30 years
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     'flicks.base',

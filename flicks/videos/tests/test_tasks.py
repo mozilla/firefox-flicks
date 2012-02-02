@@ -3,7 +3,7 @@ from nose.tools import eq_
 
 from flicks.base.tests import TestCase
 from flicks.videos.models import Video
-from flicks.videos.tasks import send_video_to_vidly
+from flicks.videos.tasks import add_vote, send_video_to_vidly
 from flicks.videos.tests import build_video
 
 
@@ -32,3 +32,16 @@ class SendVideoToVidlyTests(TestCase):
             video = self._send(video, 'asdf')
             eq_(video.shortlink, 'asdf')
             eq_(video.state, 'pending')
+
+
+class AddVotesTests(TestCase):
+    def setUp(self):
+        self.user = self.build_user()
+
+    def test_basic(self):
+        """Calling add_vote increases the vote count."""
+        with build_video(self.user, votes=0) as video:
+            votes = video.votes
+            add_vote(video)
+            video = Video.objects.get(pk=video.pk)
+            eq_(video.votes, votes + 1)

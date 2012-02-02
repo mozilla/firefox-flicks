@@ -1,3 +1,5 @@
+from django.db import models
+
 from celery.decorators import task
 from funfactory.urlresolvers import reverse
 
@@ -18,3 +20,10 @@ def send_video_to_vidly(video):
         video.shortlink = shortlink
         video.state = 'pending'
         video.save()
+
+
+@task
+def add_vote(video):
+    """Add a vote to a video."""
+    video.votes = models.F('votes') + 1
+    video.save()

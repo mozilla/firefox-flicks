@@ -1,3 +1,4 @@
+import json
 import socket
 
 from django.conf import settings
@@ -8,6 +9,7 @@ from django.views.decorators.http import require_POST
 
 import commonware.log
 
+from flicks.base.util import get_object_or_none
 from flicks.users.decorators import profile_required
 from flicks.videos.forms import UploadForm
 from flicks.videos.models import Video
@@ -66,3 +68,34 @@ def notify(request):
                         'exist: %s' % notification['shortlink'])
 
     return HttpResponse()
+
+
+@require_POST
+def upvote(request, video_shortlink):
+    """Add an upvote to a video."""
+    response = HttpResponse(mimetype='application/json')
+    if video_shortlink in request.COOKIES:
+        response.status_code = 403
+        response.content = json.dumps({'error': 'already voted'})
+        return response
+
+    video = get_object_or_none(Video, shortlink=video_shortlink)
+    if video is not None:
+        try:
+            video.upvote()
+        except socket.timeout:
+            log.warning('Timeout connecting to celery to upvote video '
+                        'shortlink: %s' % video_shortlink)
+            response.status_code = 500
+            response.content = json.dumps({'error': 'celery timeout'})
+        else:
+            response.set_cookie(str(video_shortlink), value='1',
+                                httponly=False,
+                                max_age=settings.VOTE_COOKIE_AGE)
+            response.content = json.dumps({'success': 'success'})
+    else:
+        response.status_code = 404
+        response.content = json.dumps({'error': 'video not found'})
+
+
+    return response

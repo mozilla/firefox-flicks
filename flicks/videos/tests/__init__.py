@@ -1,5 +1,6 @@
 from contextlib import contextmanager
 
+
 from flicks.videos.models import Video
 
 
@@ -13,7 +14,8 @@ def build_video(user, **kwargs):
             'category': 'test',
             'region': 'test',
             'upload_url': 'http://test.com',
-            'shortlink': 'test_shortlink'}
+            'shortlink': 'test_shortlink',
+            'votes': 0}
     args.update(kwargs)
 
     video = Video.objects.create(**args)

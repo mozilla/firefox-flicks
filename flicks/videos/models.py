@@ -5,6 +5,7 @@ from funfactory.urlresolvers import reverse
 from jinja2 import Markup
 from tower import ugettext_lazy as _lazy
 
+from flicks.videos.tasks import add_vote
 from flicks.videos.vidly import embedCode
 
 
@@ -48,6 +49,8 @@ class Video(models.Model):
     state = models.CharField(max_length=10, choices=STATE_CHOICES,
                              default='unsent')
 
+    votes = models.BigIntegerField(default=0)
+
     @property
     def embed_html(self):
         """Return the escaped HTML code to embed this video."""
@@ -57,3 +60,7 @@ class Video(models.Model):
     def details_href(self):
         """Return the url for this video's details page."""
         return reverse('flicks.videos.details', kwargs={'video_id': self.id})
+
+    def upvote(self):
+        """Add an upvote to this video."""
+        add_vote.delay(self)
