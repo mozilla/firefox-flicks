@@ -17,7 +17,7 @@
       {{ css('flicks_css') }}
     {% endblock %}
   </head>
-  <body data-mobile-cookie="{{ settings.MOBILE_COOKIE }}">
+  <body data-mobile-cookie="{{ settings.MOBILE_COOKIE }}" class="{{ page_type }}">
     <div class="wrapper">
       {% include "shared/header.html" %}
 

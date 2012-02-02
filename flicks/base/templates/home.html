@@ -1,16 +1,34 @@
 {% extends 'base.html' %}
+{% from 'shared/macros.html' import video_item %}
 
 {% block page_title %}{{ _('Home Page') }}{% endblock %}
 
 {% block content %}
   <div class="home">
-    <ol>
+    <div class="headline">
+      <p>{{ _('Lights! Camera! Awesome!') }}</p>
+      <p>{{ _('Mozilla Presents! Firefox Flicks') }}</p>
+      <p>{{ _('A global video contest to tell our story') }}</p>
+      <p>{{ _('The contest is now open for entries, so upload your flick today!') }}</p>
+      <p>{{ _('Join or log in to get started') }}</p>
+      <p>
+        {% trans %}
+          As a non-profit, Firefox is the only browser that puts you first. Now we've put
+          you in the director’s chair to help spread our message. Just create a short video
+          for a chance to win some amazing prizes. You’ll get a Firefox prize pack just for
+          entering and your submission will be seen by Hollywood judges. You could even meet
+          them at one of four international events and we might feature your video in a global
+          campaign.
+        {% endtrans %}
+      </p>
+      <p>{{ _('You can also check out the entries and vote on your favorite!') }}</p>
+    </div>
+
+    <ol class="videos">
       {% for video in videos %}
-        <li id="slide-{{ loop.index }}">
-          <a href="{{ video.details_href }}">{{ video.title }}</a>
-        </li>
+        {{ video_item(loop.index, video) }}
       {% endfor %}
     </ol>
-    <button>{{ _('Upload a Video') }}</button>
+    <a href="{{ url('flicks.videos.upload') }}">{{ _('Upload a Video') }}</a>
   </div>
 {% endblock %}

@@ -1,7 +1,6 @@
 from contextlib import nested
 
 from django.conf import settings
-from django.contrib.auth.models import User
 
 from funfactory.urlresolvers import reverse
 from nose.tools import eq_
@@ -65,18 +64,19 @@ class EditProfileTests(TestCase):
         user = self.build_user(salt='no.profile', login=True, profile=False)
         eq_(UserProfile.objects.filter(pk=user.pk).exists(), False)
 
-        self._post(bio='asdf')
+        self._post(bio='asdf', full_name='bob')
         eq_(UserProfile.objects.filter(pk=user.pk).exists(), True)
 
     def test_has_profile(self):
         """If the user has a profile, it is edited."""
         user = self.build_user(salt='has.profile', login=True)
+        user.userprofile.full_name = 'bob'
         user.userprofile.bio = 'asdf'
         user.userprofile.save()
 
         profile = UserProfile.objects.get(pk=user.pk)
         eq_(profile.bio, 'asdf')
 
-        self._post(bio='1234')
+        self._post(bio='1234', full_name='bob')
         profile = UserProfile.objects.get(pk=user.pk)
         eq_(profile.bio, '1234')

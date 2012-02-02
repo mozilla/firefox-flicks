@@ -29,7 +29,8 @@ class TestCase(test_utils.TestCase):
         set_url_prefix(old_prefix)
         activate(old_locale)
 
-    def build_user(self, email=None, salt=None, login=False, profile=True):
+    def build_user(self, email=None, salt=None, login=False,
+                   profile=True):
         """Retrieve a test user account for this class, creating one if it
         does not exist.
 

@@ -173,7 +173,7 @@
       {% endtrans %}
     </p>
 
-    <h2>{{ _('Can I use 3rd party trademarks or copyrighted materials in my flick?') }}</h2>
+    <h2>{{ _('Can I use third-party trademarks or copyrighted materials in my flick?') }}</h2>
     <p>
       {% trans %}
         No, not without permission from the owner of those materials.
@@ -211,32 +211,14 @@
       {% endtrans %}
     </p>
 
-    <h2>{{ _('What files do I need to submit?') }}</h2>
+    <h2>{{ _('What is a PSA?') }}</h2>
     <p>
-      {{ _('You can submit your ad in the following file format here:') }}
-      <ol>
-        <li><a href="{{ url('flicks.videos.upload') }}">http://mozilla.org/firefoxflicks/upload</a></li>
-        <li>flv, iPhone stream, mov, mp4, ogg, webm, 3gp</li>
-      </ol>
-    </p>
-
-    <h2>{{ _('Where do I send the high resolution video file?') }}</h2>
-    <p>
-      {% trans upload=url('flicks.videos.upload') %}
-        You can send your high resolution file to:
+      {% trans %}
+        A public service announcement (PSA) is a type of advertisement that intends to affect public
+        attitudes by raising awareness of an issue and possibly inspiring action. If entering this category,
+        your video should focus more on the issues that affect people and their online lives, including
+        privacy and security, and less about Firefox specifically.
       {% endtrans %}
     </p>
-    <div id="hcard-Firefox-Flicks" class="vcard">
-      <span class="fn n">
-        <span class="given-name">Firefox Flicks</span>
-      </span>
-      <div class="org">Mozilla</div>
-      <div class="adr">
-        <div class="street-address">650 Castro Street, Suite 300</div>
-        <span class="locality">Mountain View</span>
-        <span class="region">California</span>
-        <span class="postal-code">94041-2021</span>
-      </div>
-    </div>
   </div>
 {% endblock %}

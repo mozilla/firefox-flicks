@@ -82,3 +82,5 @@ JINGO_EXCLUDE_APPS = [
 # ]
 
 LOGGING = dict(loggers=dict(playdoh={'level': logging.DEBUG}))
+
+ANON_ALWAYS = True

@@ -1,15 +1,10 @@
+from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
 
-from session_csrf import anonymous_csrf
-
 from flicks.videos.models import Video
 
-PAGINATION_LIMIT_MINI = 3
-PAGINATION_LIMIT_FULL = 9
 
-
-@anonymous_csrf
 def home(request):
     """Landing page for Flicks. Displays all videos.
     If the total number of videos is less than 50, we
@@ -20,9 +15,9 @@ def home(request):
     videos = Video.objects.filter(state='complete').order_by('-id')
 
     if videos.count < 50:
-        pagination_limit = PAGINATION_LIMIT_MINI
+        pagination_limit = getattr(settings, 'PAGINATION_LIMIT_MINI', 3)
     else:
-        pagination_limit = PAGINATION_LIMIT_FULL
+        pagination_limit = getattr(settings, 'PAGINATION_LIMIT_FULL', 9)
 
     paginator = Paginator(videos, pagination_limit)
     page = request.GET.get('page', 1)
@@ -38,36 +33,37 @@ def home(request):
         show_pagination = True
 
     d = dict(videos=videos.object_list,
-             show_pagination=show_pagination)
+             show_pagination=show_pagination,
+             page_type='home')
 
     return render(request, 'home.html', d)
 
 
-@anonymous_csrf
 def creative(request):
     """Creative Brief page."""
     return render(request, 'creative.html')
 
 
-@anonymous_csrf
 def judges(request):
     """Judges page."""
     return render(request, 'judges.html')
 
 
-@anonymous_csrf
 def prizes(request):
     """Prizes page."""
     return render(request, 'prizes.html')
 
 
-@anonymous_csrf
 def partners(request):
     """Partners page."""
     return render(request, 'partners.html')
 
 
-@anonymous_csrf
 def faq(request):
     """FAQ page."""
     return render(request, 'faq.html')
+
+
+def rules(request):
+    """Contest Rules page."""
+    return render(request, 'rules.html')

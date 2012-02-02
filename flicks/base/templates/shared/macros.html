@@ -1,0 +1,32 @@
+{% macro video_item(idx, video) -%}
+  <li id="slide-{{ idx }}">
+    {{ video.embed_html }}
+    <div class="video-details">
+      <a href="{{ video.details_href }}"
+         class="title" title="{{ video.title }}">{{ video.title }}</a>
+      <a href="{{ url('flicks.users.details', user_id=video.user_id) }}"
+         class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</a>
+      <p class="category">
+      	{# TODO: add views for these pages. #}
+      	<a href="#"
+      	   title="{{ video.category }}">{{ video.category }}</a> for
+      	<a href="#"
+      	   title="{{ video.user.userprofile.country }}">{{ video.user.userprofile.country }}</a>
+      </p>
+    </div>
+  </li>
+{%- endmacro %}
+
+{% macro form_section(f, form) -%}
+  <div class="field {{ 'error' if form.errors[f] }}
+    {{ form[f].field.widget.attrs['class'] }}">
+    {{ form[f].label_tag() }}
+
+    {% if form[f].field.required %}
+      <span class="required">*</span>
+    {% endif %}
+
+    {{ form.errors[f] }}
+    {{ form[f] }}
+  </div>
+{%- endmacro %}

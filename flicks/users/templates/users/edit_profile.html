@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from 'shared/macros.html' import form_section %}
 
 {% if not profile %}
   {% set title = _('Create your profile') %}
@@ -14,7 +15,32 @@
     <h1>{{ title }}</h1>
     <form method="post">
       {{ csrf() }}
-      {{ edit_form.as_p() }}
+
+      {% if edit_form.errors %}
+        <p class="form-errors">
+          {{ _("Sorry, but there were problems with the info you submitted.
+                Please review the form, correct any errors, and try again.") }}
+        </p>
+      {% endif %}
+
+      {% for f in ['full_name', 'country', 'website', 'bio'] %}
+        {{ form_section(f, edit_form) }}
+      {% endfor %}
+
+      <p>
+        {% trans %}
+          We'd like to send you a prize pack to thank you for entering. If you'd like to
+          receive it, please provide your mailing address. Your address will only be used
+          for the purpose of sending you the gift and will not be shared with anyone. If
+          you'd rather not provide your address, we totally understand.
+        {% endtrans %}
+      </p>
+
+      {% for f in ['address', 'city', 'country', 'postal_code'] %}
+        {{ edit_form[f].label_tag() }}
+        {{ edit_form[f] }}
+      {% endfor %}
+
       <button type="submit">{{ _('Save') }}</button>
     </form>
 {% endblock %}

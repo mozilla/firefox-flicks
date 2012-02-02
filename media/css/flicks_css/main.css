@@ -95,11 +95,11 @@ body {
     font-family: Georgia, serif;
 }
 
-body.home {
+body.home, body.videos {
     background-image: url('../../img/black-bg.jpg');
 }
 
-h1, h2, h3, #header li, .home-link {
+h1, h2, h3, #header li, .home-link, a.title {
     color: #fff;
     font-family: 'Open Sans Condensed', sans-serif;
     font-weight: normal;
@@ -188,7 +188,7 @@ h2 {
     width: 32px;
 }
 
-.home {
+div.home {
     margin: 20px 0px 20px 0px;
 }
 
@@ -207,4 +207,38 @@ h2 {
 
 .content-wrapper ol li {
     margin-bottom: 10px;
+}
+
+ol.videos li {
+    float: left;
+    list-style-type: none;
+    margin-right: 25px;
+    overflow: hidden;
+    width: 252px;
+}
+
+.video-details {
+    margin-top: 10px;
+}
+
+.video-details a {
+    clear: both;
+    display: block;
+    float: left;
+    outline: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 252px;
+}
+
+.video-details a.title {
+    color: #fff;
+    font-size: 17px;
+    text-transform: uppercase;
+}
+
+.video-details a.user {
+    color: #c74c09;
+    font-size: 14px;
 }
