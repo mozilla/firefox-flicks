@@ -1,3 +1,4 @@
+from contextlib import nested
 from functools import partial
 
 from django.conf import settings
@@ -50,7 +51,7 @@ class TestGetObjectOrNone(TestCase):
     def test_multiple_objects_returned(self):
         """Return None if multiple objects are returned."""
         mkvideo = partial(build_video, self.user, title='multiple')
-        with mkvideo(), mkvideo():
+        with nested(mkvideo(), mkvideo()):
             value = get_object_or_none(Video, title='multiple')
             eq_(value, None)
 

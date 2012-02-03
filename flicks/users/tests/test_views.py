@@ -1,3 +1,5 @@
+from contextlib import nested
+
 from django.conf import settings
 from django.contrib.auth.models import User
 
@@ -11,7 +13,7 @@ from flicks.users.tests import mock_browserid
 
 class VerifyTests(TestCase):
     def _post(self, email, assertion='asdf'):
-        with self.activate('en-US'), mock_browserid(email):
+        with nested(self.activate('en-US'), mock_browserid(email)):
             response = self.client.post(reverse('flicks.users.verify'),
                                         {'assertion': assertion})
 
