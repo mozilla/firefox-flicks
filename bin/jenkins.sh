@@ -35,7 +35,9 @@ pip install -q -r requirements/compiled.txt
 pip install -q -r requirements/dev.txt
 
 cat > flicks/settings/local.py <<SETTINGS
-ROOT_URLCONF = 'workspace.urls'
+import logging
+from flicks.settings.base import INSTALLED_APPS
+
 LOG_LEVEL = logging.ERROR
 # Database name has to be set because of sphinx
 DATABASES = {
@@ -54,6 +56,9 @@ DATABASES = {
 
 INSTALLED_APPS += ('django_nose',)
 CELERY_ALWAYS_EAGER = True
+SECRET_KEY = 'asdf'
+SESSION_COOKIE_SECURE = True
+
 SETTINGS
 
 echo "Creating database if we need it..."
