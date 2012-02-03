@@ -67,6 +67,6 @@ echo "CREATE DATABASE IF NOT EXISTS \`${JOB_NAME}\`"|mysql -u $DB_USER -h $DB_HO
 echo "Starting tests..."
 export FORCE_DB=1
 coverage run manage.py test --noinput --with-xunit
-coverage xml $(find apps lib -name '*.py')
+coverage xml $(find flicks lib -name '*.py')
 
 echo "FIN"
