@@ -4,7 +4,7 @@ import sys
 
 # Edit this if necessary or override the variable in your environment.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flicks.settings')
-
+print os.environ['DJANGO_SETTINGS_MODULE']
 try:
     # For local development in a virtualenv:
     from funfactory import manage
