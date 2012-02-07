@@ -54,6 +54,9 @@ DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
 # Vote settings
 VOTE_COOKIE_AGE = 946080000 # 30 years
 
+# Elasticutils
+ES_DISABLED = True
+
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     'flicks.base',
     'flicks.users',

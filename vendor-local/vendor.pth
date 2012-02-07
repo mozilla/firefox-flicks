@@ -1,3 +1,5 @@
 src/django-browserid
 src/django-south
+src/elasticutils
 src/happyforms
+src/pyes

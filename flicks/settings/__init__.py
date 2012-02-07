@@ -1,4 +1,8 @@
+import sys
+
 from .base import *
+
+
 try:
     from .local import *
 except ImportError, exc:
@@ -6,8 +10,9 @@ except ImportError, exc:
                       % exc.args[0]])
     raise exc
 
-import sys
-if sys.argv[1] == 'test':
+
+TEST = sys.argv[1] == 'test'
+if TEST:
     try:
         from .test import *
     except ImportError:
