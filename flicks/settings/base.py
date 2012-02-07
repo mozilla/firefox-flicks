@@ -73,6 +73,14 @@ JINGO_EXCLUDE_APPS = [
 
 # Tells the extract script what files to look for L10n in and what function
 # handles the extraction. The Tower library expects this.
+DOMAIN_METHODS = {
+    'messages': [
+        ('**/flicks/**.py',
+            'tower.management.commands.extract.extract_tower_python'),
+        ('**/flicks/**/templates/**.html',
+            'tower.management.commands.extract.extract_tower_template')
+    ],
+}
 
 # # Use this if you have localizable HTML files:
 # DOMAIN_METHODS['lhtml'] = [
