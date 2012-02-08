@@ -2,6 +2,15 @@
 
 {% block page_title %}Firefox Flicks Contest Official Rules{% endblock %}
 
+{% block meta_description -%}
+  <meta property="og:description" content="{% trans %}
+
+  Firefox Flicks Legal &#8212; Review all the legals details you need to enter
+  Firefox Flicks video contest 
+
+  {% endtrans %}">
+{%- endblock %}
+
 {% block content %}
   <a href="{{ url('flicks.base.home') }}" class="home-link">&laquo; {{ _('Return Home') }}</a>
    

@@ -2,6 +2,15 @@
 
 {% block page_title %}{{ _('Judges') }}{% endblock %}
 
+{% block meta_description -%}
+  <meta property="og:description" content="{% trans %}
+
+  Firefox Flicks Judges &#8212; Meet our panel of Hollywood judges excited to
+  watch your Firefox video story.
+
+  {% endtrans %}">
+{%- endblock %}
+
 {% block content %}
   <div class="info">
     <a href="{{ url('flicks.base.home') }}" class="home-link">&laquo; {{ _('Return Home') }}</a>

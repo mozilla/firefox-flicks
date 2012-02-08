@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block page_title %}{{ _('Video Details') }}{% endblock %}
+{% block page_title %}{{ video.title }}{% endblock %}
 
 {% block site_js %}
   {{ super() }}
@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ _('Video Details Page') }}</h1>
+    <h1>{{ video.title }}</h1>
     <div>
       {{ video.embed_html }}
     </div>
@@ -17,7 +17,7 @@
               data-shortlink="{{ video.shortlink }}"
               data-upvote-url="{{ url('flicks.videos.upvote', video.shortlink)}}"
               data-token="{{ csrf_token }}">
-        Upvote!
+        {{ _('Upvote') }}
       </button>
       <div id="vote-count" data-votes="{{ video.votes }}">{{ video.votes }}</div>
     </div>

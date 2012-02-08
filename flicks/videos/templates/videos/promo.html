@@ -1,0 +1,10 @@
+{% extends 'videos/details.html' %}
+
+{% block page_title %}{{ video_title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ video_title }}</h1>
+    <div>
+      {{ video_embed }}
+    </div>
+{% endblock %}

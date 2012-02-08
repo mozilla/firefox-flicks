@@ -1,17 +1,32 @@
 {% macro video_item(idx, video) -%}
   <li id="slide-{{ idx }}">
     {{ video.embed_html }}
+    <a class="vote" data-shortlink="{{ video.shortlink }}"
+         data-upvote-url="{{ url('flicks.videos.upvote', video.shortlink)}}"
+         data-token="{{ csrf_token }}" data-votes="{{ video.votes }}">{{ video.votes }}</a>
     <div class="video-details">
       <a href="{{ video.details_href }}"
          class="title" title="{{ video.title }}">{{ video.title }}</a>
       <a href="{{ url('flicks.users.details', user_id=video.user_id) }}"
          class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</a>
       <p class="category">
-      	{# TODO: add views for these pages. #}
-      	<a href="#"
-      	   title="{{ video.category }}">{{ video.category }}</a> for
-      	<a href="#"
-      	   title="{{ video.user.userprofile.country }}">{{ video.user.userprofile.country }}</a>
+        {# TODO: Add views for these pages. #}
+        {% trans category=video.category, country=video.user.userprofile.country %}
+          <a href="#"
+             title="{{ category }}">{{ category }}</a> <span>for</span>
+          <a href="#"
+             title="{{ country }}">{{ country }}</a>
+        {% endtrans %}
+      </p>
+      <p class="video-info">
+        {# TODO: Add video upload date and view count. #}
+        <span class="date"></span>
+        <span class="views">
+          {# L10n: Refers to the number of views a video received. For example, 100 views. #}
+          {% trans %} 
+            {{ _('views') }}
+          {% endtrans %}
+        </span>
       </p>
     </div>
   </li>

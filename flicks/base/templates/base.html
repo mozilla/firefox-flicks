@@ -6,7 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>{% block page_title %}{{ _('Home') }}{% endblock %}</title>
 
+    {# OpenGraph Metadata #}
+    <meta property="og:title" content="{{ _('Firefox Flicks') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="http://mozcom-cdn.mozilla.net/img/firefox-100.jpg">
+    <meta property="og:url" content="http://www.mozilla.org/firefoxflicks/">
+    <meta property="og:site_name" content="{{ _('Firefox Flicks') }}">
+    {% block meta_description -%}
+      <meta property="og:description" content="{% trans %}
+
+      Firefox Flicks &#8212; A video contest to tell the story of your favorite browser.
+      Submit your entry by May 1, 2012 and win prizes.
+
+      {% endtrans %}">
+    {%- endblock %}
+
     <link href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&amp;
+    subset=latin,greek,latin-ext,cyrillic-ext,cyrillic,greek-ext" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:700&amp;
     subset=latin,greek,latin-ext,cyrillic-ext,cyrillic,greek-ext" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,6 +37,35 @@
   <body data-mobile-cookie="{{ settings.MOBILE_COOKIE }}" class="{{ page_type }}">
     <div class="wrapper">
       {% include "shared/header.html" %}
+
+      {% block userbar %}
+        <div class="profile-header">
+          <div class="content-wrapper">
+            {% block titlebar %}
+            {% endblock %}
+
+            <ul class="user-actions">
+              {% if user.is_authenticated() %}
+                <li>
+                  <a href="{{ url('flicks.users.edit_profile') }}">{{ _('My Profile') }}</a>
+                </li>
+                <li>
+                  <a href="{{ url('flicks.videos.upload') }}">{{ _('Upload') }}</a>
+                </li>
+                <li>
+                  <a href="{{ url('flicks.users.logout') }}">{{ _('Logout') }}</a>
+                </li>
+              {% else %}
+                <a id="browserid" href="#">{{ _('Sign in') }}</a>
+                <form method="POST" action="{{ url('flicks.users.verify') }}">
+                  {{ csrf() }}
+                  {{ browserid_form.as_p() }}
+                </form>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      {% endblock %}
 
       <div class="content-wrapper">
         {% block content %}{% endblock %}

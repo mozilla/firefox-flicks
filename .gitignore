@@ -17,3 +17,5 @@ build
 tmp/*
 *~
 *.mo
+flicks/locale/templates
+flicks/locale/.svn
