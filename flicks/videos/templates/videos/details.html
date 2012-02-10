@@ -17,7 +17,7 @@
               data-shortlink="{{ video.shortlink }}"
               data-upvote-url="{{ url('flicks.videos.upvote', video.shortlink)}}"
               data-token="{{ csrf_token }}">
-        {# L10n: Refers to voting up a video for scoring in the contest. #}
+        {# L10n: Refers to a user voting up a video. #}
         {{ _('Upvote') }}
       </button>
       <div id="vote-count" data-votes="{{ video.votes }}">{{ video.votes }}</div>
