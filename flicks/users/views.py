@@ -38,7 +38,7 @@ def details(request, user_id=None):
 
     d = dict(videos=videos.object_list,
              show_pagination=show_pagination,
-             page_type='videos',
+             page_type='secondary',
              user=user.user)
 
     return render(request, 'users/details.html', d)
@@ -79,5 +79,14 @@ def edit_profile(request):
     else:
         form = UserProfileForm(instance=profile)
 
-    ctx = {'profile': profile, 'edit_form': form}
-    return render(request, 'users/edit_profile.html', ctx)
+    d = dict(profile=profile,
+             edit_form=form,
+             page_type='secondary')
+
+    return render(request, 'users/edit_profile.html', d)
+
+
+@login_required
+def my_profile(request):
+    """Quick link to your profile that avoids referring by user_id."""
+    return redirect('flicks.users.details', args=[request.user.pk])

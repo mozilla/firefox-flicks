@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 {% from 'shared/macros.html' import video_item %}
 
-{% block page_title %}{{ user.full_name }}{% endblock %}
+{% block page_title %}{{ user.userprofile.full_name }}{% endblock %}
+
+{% block titlebar %}
+  <div class="avatar">
+    {{ gravatar_img(user, size=36) }}
+  </div>
+  <h1>{{ user.userprofile.full_name }}</h1>
+{% endblock %}
 
 {% block content %}
-    <h1>{{ user.full_name }}</h1>
-    <div class="avatar">
-      {{ gravatar_img(user, size=36) }}
-    </div>
-
-    <ol class="videos">
-      {% for video in videos %}
-        {{ video_item(loop.index, video) }}
-      {% endfor %}
-    </ol>
+  <ol class="videos">
+    {% for video in videos %}
+      {{ video_item(loop.index, video) }}
+    {% endfor %}
+  </ol>
 {% endblock %}

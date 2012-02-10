@@ -90,3 +90,7 @@ JINGO_EXCLUDE_APPS = [
 LOGGING = dict(loggers=dict(playdoh={'level': logging.DEBUG}))
 
 ANON_ALWAYS = True
+
+VIDEO_PROMOS_NOIR = '4j0a6w'
+VIDEO_PROMOS_DANCE = '4j0a6w'
+VIDEO_PROMOS_TWILIGHT = '4j0a6w'

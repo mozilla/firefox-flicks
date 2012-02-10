@@ -2,6 +2,15 @@
 
 {% block page_title %}{{ _('FAQ') }}{% endblock %}
 
+{% block meta_description -%}
+  <meta property="og:description" content="{% trans %}
+
+  Firefox Flicks FAQ &#8212; Your questions answered. Our FAQ covers all the details on
+  how to enter the video contest and win prizes.
+
+  {% endtrans %}">
+{%- endblock %}
+
 {% block content %}
   <div class="info">
     <a href="{{ url('flicks.base.home') }}" class="home-link">&laquo; {{ _('Return Home') }}</a>

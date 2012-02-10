@@ -1,7 +1,9 @@
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.urlresolvers import reverse
 from django.shortcuts import render
 
+from flicks.base.util import absolutify
 from flicks.videos.models import Video
 
 
@@ -41,22 +43,27 @@ def home(request):
 
 def creative(request):
     """Creative Brief page."""
-    return render(request, 'creative.html')
+    d = dict(promo_dance=absolutify(reverse('flicks.videos.promo_video_dance')),
+             promo_noir=absolutify(reverse('flicks.videos.promo_video_noir')),
+             promo_twilight=absolutify(reverse('flicks.videos.promo_video_twilight')),
+             page_type='secondary')
+
+    return render(request, 'creative.html', d)
 
 
 def judges(request):
     """Judges page."""
-    return render(request, 'judges.html')
+    return render(request, 'judges.html', {'page_type': 'secondary'})
 
 
 def prizes(request):
     """Prizes page."""
-    return render(request, 'prizes.html')
+    return render(request, 'prizes.html', {'page_type': 'secondary'})
 
 
 def partners(request):
     """Partners page."""
-    return render(request, 'partners.html')
+    return render(request, 'partners.html', {'page_type': 'secondary'})
 
 
 def faq(request):

@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from jinja2 import Markup
 
 import commonware.log
 
@@ -14,7 +15,7 @@ from flicks.users.decorators import profile_required
 from flicks.videos.forms import UploadForm
 from flicks.videos.models import Video
 from flicks.videos.tasks import send_video_to_vidly
-from flicks.videos.vidly import parseNotify
+from flicks.videos.vidly import embedCode, parseNotify
 
 
 log = commonware.log.getLogger('f.videos')
@@ -24,6 +25,36 @@ def details(request, video_id=None):
     """Landing page for video details."""
     video = get_object_or_404(Video, pk=video_id)
     return render(request, 'videos/details.html', {'video': video})
+
+
+def promo_video_noir(request):
+    """Film Noir promo video."""
+    d = dict(video_title='',
+             video_descrption='',
+             page_type='videos',
+             video_embed=Markup(embedCode(settings.VIDEO_PROMOS_NOIR,
+                                          width=600, height=337)))
+    return render(request, 'videos/promo.html', d)
+
+
+def promo_video_dance(request):
+    """Dancing promo video."""
+    d = dict(video_title='',
+             video_descrption='',
+             page_type='videos',
+             video_embed=Markup(embedCode(settings.VIDEO_PROMOS_DANCE,
+                                          width=600, height=337)))
+    return render(request, 'videos/promo.html', d)
+
+
+def promo_video_twilight(request):
+    """Twilight parody promo video."""
+    d = dict(video_title='',
+             video_descrption='',
+             page_type='videos',
+             video_embed=Markup(embedCode(settings.VIDEO_PROMOS_TWILIGHT,
+                                          width=600, height=337)))
+    return render(request, 'videos/promo.html', d)
 
 
 @profile_required

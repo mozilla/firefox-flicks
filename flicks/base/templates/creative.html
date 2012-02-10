@@ -2,6 +2,15 @@
 
 {% block page_title %}{{ _('Creative Brief') }}{% endblock %}
 
+{% block meta_description -%}
+  <meta property="og:description" content="{% trans %}
+
+  Firefox Flicks Creative Brief &#8212; Get all the details for building your video
+  entry for the Firefox Flicks video contest.
+
+  {% endtrans %}">
+{%- endblock %}
+
 {% block content %}
   <div class="info">
     <a href="{{ url('flicks.base.home') }}" class="home-link">&laquo; {{ _('Return Home') }}</a>
@@ -32,7 +41,7 @@
     <p>
       {% trans %}
         Mozilla wants the world to know more about what makes Firefox different:
-        that we’re a non-profit organization aimed at keeping the power of the
+        that we're a non-profit organization aimed at keeping the power of the
         Web in people’s hands. Our hope is that through high-quality videos, we
         can help mainstream Internet users know more about the issues that affect
         their online lives and, more importantly, how Firefox addresses these
@@ -280,5 +289,20 @@
         </li>
       </ol>
     </p>
+
+    <h2>{{ _('Inspiration')}}</h2>
+    <p>{{ _('Check out our videos for Firefox Flicks to get into movie making mode') }}</p>
+
+    <ol>
+      <li>
+        <a href="{{ promo_dance }}">{{ promo_dance }}</a>
+      </li>
+      <li>
+        <a href="{{ promo_twilight }}">{{ promo_twilight }}</a>
+      </li>
+      <li>
+        <a href="{{ promo_noir }}">{{ promo_noir }}</a>
+      </li>
+    </ol>
   </div>
 {% endblock %}

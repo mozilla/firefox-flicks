@@ -2,6 +2,15 @@
 
 {% block page_title %}{{ _('Prizes') }}{% endblock %}
 
+{% block meta_description -%}
+  <meta property="og:description" content="{% trans %}
+
+  Firefox Flicks Prizes &#8212; Learn more about the contest and check out the
+  prizes you can win.
+
+  {% endtrans %}">
+{%- endblock %}
+
 {% block content %}
   <div class="info">
     <a href="{{ url('flicks.base.home') }}" class="home-link">&laquo; {{ _('Return Home') }}</a>

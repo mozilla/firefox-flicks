@@ -128,14 +128,16 @@ def parseNotify(request):
             'status': task.find('Status').text}
 
 
-def embedCode(shortlink):
+def embedCode(shortlink, width=252, height=141):
     """Generate escaped HTML code to embed a vid.ly video."""
     return """
     <iframe frameborder="0"
             name="vidly-frame"
+            width="%(width)s"
+            height="%(height)s"
             src="http://s.vid.ly/embeded.html?link=%(shortlink)s&autoplay=false">
       <a target='_blank' href='http://vid.ly/%(shortlink)s'>
         <img src='http://cf.cdn.vid.ly/%(shortlink)s/poster.jpg' />
       </a>
     </iframe>
-    """ % {'shortlink': shortlink}
+    """ % {'shortlink': shortlink, 'width': width, 'height': height}

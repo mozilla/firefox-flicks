@@ -2,6 +2,14 @@
 
 {% block page_title %}{{ _('Partners') }}{% endblock %}
 
+{% block meta_description -%}
+  <meta property="og:description" content="{% trans %}
+
+  Firefox Flicks Partners &#8212; Review a list of all our partners, maybe become one too!
+
+  {% endtrans %}">
+{%- endblock %}
+
 {% block content %}
   <div class="info">
     <a href="{{ url('flicks.base.home') }}" class="home-link">&laquo; {{ _('Return Home') }}</a>
