@@ -23,8 +23,10 @@
         <span class="date"></span>
         <span class="views">
           {# L10n: Refers to the number of views a video received. For example, 300 views. #}
-          {% trans %}
-            300 views
+          {% trans view_count=300 %}
+            {{ view_count }} view
+            {% pluralize %}
+            {{ view_count }} views
           {% endtrans %}
         </span>
       </p>
