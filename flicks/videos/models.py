@@ -36,15 +36,21 @@ class Video(models.Model):
     """Users can only have one video associated with
     their account.
     """
-    title = models.CharField(max_length=100, blank=False)
-    description = models.TextField(blank=True)
+    # L10n: Title refers to the title of a video.
+    title = models.CharField(max_length=100, blank=False,
+                             verbose_name=_lazy(u'Title'))
+    description = models.TextField(blank=True,
+                                   verbose_name=_lazy(u'Description'))
     user = models.ForeignKey(User, blank=False)
     category = models.CharField(max_length=50, blank=False,
-                                choices=CATEGORY_CHOICES)
+                                choices=CATEGORY_CHOICES,
+                                verbose_name=_lazy(u'Category'))
     region = models.CharField(max_length=50, blank=False,
-                              choices=REGION_CHOICES)
+                              choices=REGION_CHOICES,
+                              verbose_name=_lazy(u'Region'))
 
-    upload_url = models.URLField(verify_exists=False, blank=False, default='')
+    upload_url = models.URLField(verify_exists=False, blank=False, default='',
+                                 verbose_name=_lazy(u'Video URL'))
     shortlink = models.CharField(max_length=32, blank=True)
     state = models.CharField(max_length=10, choices=STATE_CHOICES,
                              default='unsent')
