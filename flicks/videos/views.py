@@ -10,6 +10,7 @@ from jinja2 import Markup
 
 import commonware.log
 from elasticutils import S
+from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import get_object_or_none
 from flicks.users.decorators import profile_required
@@ -30,8 +31,10 @@ def details(request, video_id=None):
 
 def promo_video_noir(request):
     """Film Noir promo video."""
-    d = dict(video_title='',
-             video_descrption='',
+    d = dict(video_title=_lazy('Noir'),
+             video_description=_lazy('The fox meets a damsel in distress, but can '
+                                     'he help her? Get inspired for your Firefox '
+                                     'Flicks entry by checking out our video.'),
              page_type='videos',
              video_embed=Markup(embedCode(settings.VIDEO_PROMOS_NOIR,
                                           width=600, height=337)))
@@ -40,8 +43,10 @@ def promo_video_noir(request):
 
 def promo_video_dance(request):
     """Dancing promo video."""
-    d = dict(video_title='',
-             video_descrption='',
+    d = dict(video_title=_lazy('Dance'),
+             video_description=_lazy("He's got the moves, he's got ambition. How far "
+                                     "can this fox's feet take him? Get inspired for "
+                                     "your Firefox Flicks entry by checking out our video."),
              page_type='videos',
              video_embed=Markup(embedCode(settings.VIDEO_PROMOS_DANCE,
                                           width=600, height=337)))
@@ -50,8 +55,10 @@ def promo_video_dance(request):
 
 def promo_video_twilight(request):
     """Twilight parody promo video."""
-    d = dict(video_title='',
-             video_descrption='',
+    d = dict(video_title=_lazy('Twilight'),
+             video_description=_lazy('A teenage girl learns the truth about the fox. '
+                                     'Get inspired for your Firefox Flicks entry by '
+                                     'checking out our video.'),
              page_type='videos',
              video_embed=Markup(embedCode(settings.VIDEO_PROMOS_TWILIGHT,
                                           width=600, height=337)))
