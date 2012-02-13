@@ -75,7 +75,7 @@ def edit_profile(request):
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return redirect('flicks.base.home')
+            return redirect('flicks.users.edit_profile')
     else:
         form = UserProfileForm(instance=profile)
 

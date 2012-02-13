@@ -2,10 +2,70 @@
     width: 100%;
 }
 
+.home .wrapper {
+    background-image: url('../../img/curtains.jpg');
+    background-repeat: repeat-x;
+    min-height: 1042px;
+}
+
 .content-wrapper, .header-wrapper, .footer-wrapper {
     margin: 0 auto;
     position: relative;
     width: 896px;
+}
+
+.home .headline p.intro {
+    color: #e05f26;
+    font-size: 56px;
+    line-height: 66px;
+    margin: 0px 0px 40px 0px;
+    text-transform: uppercase;
+}
+
+.home .flicks-logo {
+    display: block;
+    margin: 0 auto;
+    width: 191px;
+}
+
+.home .mozilla-presents {
+    clear: both;
+    height: 73px;
+    margin: 20px auto;
+    position: relative;
+    width: 734px;
+}
+
+.home .mozilla-presents .flair {
+    background-image: url('../../img/flair.png');
+    background-position: 0px 48px;
+    background-repeat: no-repeat;
+    color: #fff;
+    float: left;
+    font-family: Lobster;
+    font-size: 34px;
+    height: 65px;
+    padding-top: 20px;
+    text-indent: 20px;
+    width: 270px;
+}
+
+.home .mozilla-presents img {
+    display: block;
+    float: right;
+}
+
+.home .headline .blob {
+    margin: 0 auto;
+    width: 536px;
+}
+
+.home .videos {
+    margin: 120px 0px 40px 0px;
+}
+
+.home .videos li {
+    margin: 23px;
 }
 
 .info {
@@ -23,7 +83,7 @@
     right: 0px;
     text-indent: -9999px;
     top: -20px;
-    width: 147px;
+    width: 152px;
 }
 
 #header {
@@ -61,9 +121,21 @@
         line-height: 15px;
         margin-top: 15px;
     }
+
+    .home .flicks-logo {
+        width: 161px;
+    }
+
+    .home .mozilla-presents {
+        background-size: 60%;
+    }
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
+    html, body {
+        overflow-x: hidden;
+    }
+
     .content-wrapper, .header-wrapper, .info, .footer-wrapper {
         width: 436px;
     }
@@ -77,9 +149,24 @@
         clear: both;
         float: left;
     }
+
+    .home .wrapper {
+        background-image: url('../../img/curtains-mid.jpg');
+        background-repeat: repeat-x;
+        min-height: 1327px;
+    }
+
+    .home .headline .blob {
+        margin: 0 auto;
+        width: 436px;
+    }
 }
 
 @media only screen and (max-width: 479px) {
+    html, body {
+        overflow-x: hidden;
+    }
+
     #header {
         background-image: url('../../img/sub-curtains-mobile.png');
         height: 116px;
@@ -94,6 +181,25 @@
     #mozilla-tag {
         display: none;
     }
+
+    .home .wrapper {
+        background-image: url('../../img/curtains-mobile.jpg');
+        background-repeat: repeat-x;
+        min-height: 1587px;
+    }
+
+    .home .flicks-logo {
+        width: 121px;
+    }
+
+    .home .mozilla-presents {
+        background-size: 35%;
+    }
+
+    .home .headline .blob {
+        margin: 0 auto;
+        width: 236px;
+    }
 }
 
 body {
@@ -101,16 +207,64 @@ body {
     font-family: Georgia, serif;
 }
 
-h1, h2, h3, #header li, .home-link, a.title, .secondary .content-wrapper h1 {
-    color: #fff;
+h1, h2, h3, #header li, .home-link, a.title, .content-wrapper span.title,
+.headline p.intro, .headline p.flicks-description {
     font-family: 'Open Sans Condensed', sans-serif;
     font-weight: normal;
 }
 
+.home .headline .blob p {
+    color: #e05f26;
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.home .headline .blob p a {
+    color: #fff;
+}
+
+.home p.flicks-description {
+    color: #fff;
+    font-size: 36px;
+    line-height: 46px;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+h2, h3, #header li, .home-link, a.title, .content-wrapper span.title {
+    color: #fff;
+}
+
 h1 {
     clear: both;
-    float: left;
+    color: #fab041;
     text-transform: uppercase;
+}
+
+.home #header {
+    background-image: none;
+}
+
+.home .headline {
+    clear: both;
+    float: left;
+    position: relative;
+    width: 100%;
+}
+
+.home .headline p {
+    clear: both;
+    display: block;
+    float: left;
+    text-align: center;
+    width: 100%;
+}
+
+.content-wrapper h1 {
+    text-align: center;
+    margin: 46px 0px 46px 0px;
 }
 
 h2 {
@@ -119,11 +273,72 @@ h2 {
     margin: 20px 0px 10px 0px;
 }
 
-#footer {
+.content-wrapper span.title {
+    font-size: 28px;
+    margin-left: 15px;
+    text-transform: uppercase;
+}
+
+.content-wrapper form {
+    float: left;
+    width: 100%;
+}
+
+.content-wrapper form div.field {
     clear: both;
     float: left;
-    padding: 30px 0px 30px 0px;
+    margin-bottom: 10px;
     width: 100%;
+}
+
+.content-wrapper form label, .content-wrapper form span {
+    color: #eee;
+    display: block;
+    float: left;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 26px;
+    line-height: 36px;
+    margin-right: 10px;
+    text-transform: uppercase;
+}
+
+.content-wrapper .agreement input {
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+
+.content-wrapper .agreement label {
+    display: block;
+    float: left;
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    line-height: 18px;
+    text-transform: none;
+}
+
+.content-wrapper form span.required {
+    color: #fff;
+}
+
+.content-wrapper form div.field input {
+    margin-bottom: 5px;
+    padding: 3px;
+}
+
+#footer {
+    background-image: url('../../img/footer-mini.jpg');
+    background-repeat: repeat-x;
+    clear: both;
+    float: left;
+    height: 95px;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.home #footer {
+    background-image: url('../../img/footer.jpg');
+    height: 268px;
 }
 
 #footer label, #footer li a {
@@ -194,12 +409,40 @@ div.home {
     margin: 20px 0px 20px 0px;
 }
 
-.home button {
+.home #browserid, button {
+    background-image: linear-gradient(bottom, #267CC2 26%, #4590C9 63%, #70B8EB 100%);
+    background-image: -o-linear-gradient(bottom, #267CC2 26%, #4590C9 63%, #70B8EB 100%);
+    background-image: -moz-linear-gradient(bottom, #267CC2 26%, #4590C9 63%, #70B8EB 100%);
+    background-image: -webkit-linear-gradient(bottom, #267CC2 26%, #4590C9 63%, #70B8EB 100%);
+    background-image: -ms-linear-gradient(bottom, #267CC2 26%, #4590C9 63%, #70B8EB 100%);
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.26, #267CC2),
+        color-stop(0.63, #4590C9),
+        color-stop(1, #70B8EB)
+    );
+    border: 0px;
+    border-radius: 3px;
+    clear: both;
+    color: #fff;
     display: block;
-    font-size: 30px;
+    font-family: Open Sans, sans-serif;
+    font-size: 16px;
+    height: 30px;
+    line-height: 30px;
     margin: 0 auto;
-    padding: 10px;
-    width: 300px;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    width: 250px;
+}
+
+button {
+    float: left;
+    line-height: 18px;
+    margin-top: 20px;
 }
 
 .content-wrapper ol {
@@ -263,10 +506,10 @@ ol.videos li {
 }
 
 .profile-header .content-wrapper {
-    padding: 25px 0px 25px 0px;
+    padding: 15px 0px 15px 0px;
 }
 
-.profile-header .content-wrapper h1 {
+.profile-header .content-wrapper span.user {
     clear: none;
     display: block;
     float: left;
@@ -277,6 +520,14 @@ ol.videos li {
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 205px;
+}
+
+.content-wrapper {
+    min-height: 700px;
+}
+
+.content-wrapper p {
+    margin-bottom: 20px;
 }
 
 .category {
@@ -319,13 +570,42 @@ ol.videos li {
 ul.user-actions {
     clear: none;
     display: block;
-    float: left;
+    float: right;
     margin-left: 10px;
-    width: 250px;
 }
 
 ul.user-actions li {
     float: left;
     list-style-type: none;
     margin-right: 10px;
+    text-align: right;
+}
+
+ul.user-actions li a, .footer-wrapper li span {
+    color: #76838d;
+    font-family: Open Sans, sans-serif;
+    font-size: 12px;
+}
+
+.content-wrapper ul.partners {
+    display: block;
+    float: none;
+    margin: 0 auto;
+    width: 174px;
+}
+
+.partners li {
+    list-style-type: none;
+    margin-bottom: 20px;
+    width: 174px;
+}
+
+.footer-wrapper {
+    font-family: Open Sans, sans-serif;
+    padding: 20px;
+    text-align: center;
+}
+
+form.search {
+    width: 252px;
 }

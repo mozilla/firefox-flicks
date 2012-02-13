@@ -4,7 +4,11 @@
 {% block page_title %}{{ _('Search') }}{% endblock %}
 
 {% block content %}
-  <h1>{{ _('Search') }}</h1>
+  <form method="get" class="search">
+    <input type="text" name="title">
+    <button type="submit">{{ _('Search') }}</button>
+  </form>
+  <h1>{{ _('Search Results') }}</h1>
   <div class="search">
     <ol class="videos">
       {% for video in videos %}

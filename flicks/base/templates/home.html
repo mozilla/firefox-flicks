@@ -7,30 +7,47 @@
 
 {% block content %}
   <div class="home">
+    <img src="{{ MEDIA_URL }}img/flicks-logo.png" class="flicks-logo">
     <div class="headline">
-      <p>{{ _('Lights! Camera! Awesome!') }}</p>
-      <p>{{ _('Mozilla Presents! Firefox Flicks') }}</p>
-      <p>{{ _('A global video contest to tell our story') }}</p>
-      <p>{{ _('The contest is now open for entries, so upload your flick today!') }}</p>
-      <p>{{ _('Join or log in to get started') }}</p>
-      <p>
-        {% trans %}
-          As a non-profit, Firefox is the only browser that puts you first. Now we've put
-          you in the director’s chair to help spread our message. Just create a short video
-          for a chance to win some amazing prizes. You’ll get a Firefox prize pack just for
-          entering and your submission will be seen by Hollywood judges. You could even meet
-          them at one of four international events and we might feature your video in a global
-          campaign.
-        {% endtrans %}
-      </p>
-      <p>{{ _('You can also check out the entries and vote on your favorite!') }}</p>
+      <p class="intro">{{ _('Lights! Camera! Awesome!') }}</p>
+      <div class="mozilla-presents">
+        <div class="flair">
+          {{ _('Mozilla Presents!') }}
+        </div>
+        <img src="{{ MEDIA_URL }}img/firefox-flicks-wm.png">
+      </div>
+      <p class="flicks-description">{{ _('A global video contest to tell our story') }}</p>
+      <div class="blob">
+        <p>{{ _('The contest is now open for entries, so upload your flick today!') }}</p>
+        <p>{{ _('Join or log in to get started') }}</p>
+        <p>
+          {% trans %}
+            As a non-profit, Firefox is the only browser that puts you first. Now we've put
+            you in the director’s chair to help spread our message. Just create a short video
+            for a chance to win some amazing prizes. You’ll get a Firefox prize pack just for
+            entering and your submission will be seen by Hollywood judges. You could even meet
+            them at one of four international events and we might feature your video in a global
+            campaign.
+          {% endtrans %}
+        </p>
+        <p>
+          <a href="{{ url('flicks.videos.recent') }}">
+            {{ _('You can also check out the entries and vote on your favorite!') }}
+          </a>
+        </p>
+      </div>
     </div>
 
+    <a href="#" id="browserid">{{ _('Upload a Video') }}</a>
+    <form method="POST" action="{{ url('flicks.users.verify') }}">
+      {{ csrf() }}
+      {{ browserid_form.as_p() }}
+    </form>
+
     <ol class="videos">
-      {% for video in videos %}
-        {{ video_item(loop.index, video) }}
-      {% endfor %}
+      <li>{{ promo_dance }}</li>
+      <li>{{ promo_noir }}</li>
+      <li>{{ promo_twilight }}</li>
     </ol>
-    <a href="{{ url('flicks.videos.upload') }}">{{ _('Upload a Video') }}</a>
   </div>
 {% endblock %}

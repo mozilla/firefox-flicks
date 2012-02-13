@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% from 'shared/macros.html' import video_item %}
+
+{% block page_title %}{{ _('Recent') }}{% endblock %}
+
+{% block content %}
+  <h1>{{ _('Recent') }}</h1>
+  <ol class="videos">
+    {% for video in videos %}
+      {{ video_item(loop.index, video) }}
+    {% endfor %}
+  </ol>
+{% endblock %}

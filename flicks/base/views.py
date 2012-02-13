@@ -1,41 +1,21 @@
 from django.conf import settings
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
+from jinja2 import Markup
 
 from flicks.base.util import absolutify
 from flicks.videos.models import Video
+from flicks.videos.vidly import embedCode
 
 
 def home(request):
-    """Landing page for Flicks. Displays all videos.
-    If the total number of videos is less than 50, we
-    want to only return 3 per request - otherwise, we
-    want to return 9 per request.
-    """
-    show_pagination = False
-    videos = Video.objects.filter(state='complete').order_by('-id')
-
-    if videos.count < 50:
-        pagination_limit = getattr(settings, 'PAGINATION_LIMIT_MINI', 3)
-    else:
-        pagination_limit = getattr(settings, 'PAGINATION_LIMIT_FULL', 9)
-
-    paginator = Paginator(videos, pagination_limit)
-    page = request.GET.get('page', 1)
-
-    try:
-        videos = paginator.page(page)
-    except PageNotAnInteger:
-        videos = paginator.page(1)
-    except EmptyPage:
-        videos = paginator.page(paginator.num_pages)
-
-    if paginator.count > pagination_limit:
-        show_pagination = True
-
-    d = dict(videos=videos.object_list,
-             show_pagination=show_pagination,
+    """Landing page for Flicks. Displays only the promo videos."""
+    d = dict(promo_dance=Markup(embedCode(settings.VIDEO_PROMOS_DANCE,
+                                          width=252, height=141)),
+             promo_noir=Markup(embedCode(settings.VIDEO_PROMOS_NOIR,
+                                          width=252, height=141)),
+             promo_twilight=Markup(embedCode(settings.VIDEO_PROMOS_TWILIGHT,
+                                          width=252, height=141)),
              page_type='home')
 
     return render(request, 'home.html', d)

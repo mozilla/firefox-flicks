@@ -33,7 +33,7 @@ ROOT_URLCONF = 'flicks.urls'
 # Authentication
 BROWSERID_CREATE_USER = True
 LOGIN_URL = '/'
-LOGIN_REDIRECT = 'flicks.base.home'
+LOGIN_REDIRECT = 'flicks.videos.upload'
 LOGIN_REDIRECT_FAILURE = 'flicks.base.home'
 
 AUTHENTICATION_BACKENDS = (
