@@ -23,7 +23,7 @@
         <span class="date">{{ video.created|babel_date }}</span>
         <span class="views">
           {# L10n: Refers to the number of views a video received. For example, 300 views. #}
-          {% trans view_count=30000|babel_number %}
+          {% trans view_count=video.views_cached()|babel_number %}
             {{ view_count }} view
             {% pluralize %}
             {{ view_count }} views

@@ -2,7 +2,7 @@ import json
 import socket
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -17,6 +17,7 @@ from flicks.users.decorators import profile_required
 from flicks.videos.forms import UploadForm
 from flicks.videos.models import Video
 from flicks.videos.tasks import send_video_to_vidly
+from flicks.videos.util import add_view, cached_viewcount
 from flicks.videos.vidly import embedCode, parseNotify
 
 
@@ -26,7 +27,22 @@ log = commonware.log.getLogger('f.videos')
 def details(request, video_id=None):
     """Landing page for video details."""
     video = get_object_or_404(Video, pk=video_id)
-    return render(request, 'videos/details.html', {'video': video})
+    viewcount = cached_viewcount(video_id)
+    return render(request, 'videos/details.html', {'video': video,
+                                                   'viewcount': viewcount})
+
+
+@require_POST
+def ajax_add_view(request):
+    video_id = request.POST.get('video_id', None)
+    if video_id is None:
+        raise Http404
+
+    viewcount = add_view(video_id)
+    if viewcount is None:
+        raise Http404
+
+    return HttpResponse()
 
 
 def promo_video_noir(request):

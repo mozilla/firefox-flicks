@@ -15,12 +15,20 @@
     <div>
       <button id="upvote"
               data-shortlink="{{ video.shortlink }}"
-              data-upvote-url="{{ url('flicks.videos.upvote', video.shortlink)}}"
-              data-token="{{ csrf_token }}">
+              data-upvote-url="{{ url('flicks.videos.upvote', video.shortlink)}}">
         {# L10n: Refers to a user voting up a video. #}
         {{ _('Upvote') }}
       </button>
       <div id="vote-count" data-votes="{{ video.votes }}">{{ video.votes }}</div>
       <div id="video-date">{{ video.created|babel_date }}</div>
+      <div id="view-count"
+           data-add-view-url="{{ url('flicks.videos.add_view') }}"
+           data-video-id="{{ video.id }}">
+        {% trans view_count=video.views_cached()|babel_number %}
+          {{ view_count }} view
+          {% pluralize %}
+          {{ view_count }} views
+        {% endtrans %}
+      </div>
     </div>
 {% endblock %}

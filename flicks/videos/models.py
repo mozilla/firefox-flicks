@@ -60,6 +60,7 @@ class Video(models.Model, SearchMixin):
                              default='unsent')
 
     votes = models.BigIntegerField(default=0)
+    views = models.BigIntegerField(default=0)
 
     @property
     def embed_html(self):
@@ -74,6 +75,11 @@ class Video(models.Model, SearchMixin):
     def upvote(self):
         """Add an upvote to this video."""
         add_vote.delay(self)
+
+    def views_cached(self):
+        """Retrieve the viewcount for this video from the cache."""
+        from flicks.videos.util import cached_viewcount
+        return cached_viewcount(self.id)
 
     def fields(self):
         return {'pk': self.pk,

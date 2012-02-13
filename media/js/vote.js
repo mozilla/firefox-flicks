@@ -3,7 +3,7 @@ $(function() {
     // When the upvote button is clicked, send an upvote request to the server.
     $('body').on('click', 'a.vote', function() {
         var $self = $(this),
-            token = button.data('token'),
+            token = $('body').data('token'),
             upvote_url = button.data('upvote-url'),
             vote_count = $self.find('#vote-count');
 

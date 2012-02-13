@@ -21,6 +21,7 @@ MINIFY_BUNDLES = {
         ),
         'video_details': (
             'js/vote.js',
+            'js/views.js',
         ),
     }
 }
