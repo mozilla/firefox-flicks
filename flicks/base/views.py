@@ -43,10 +43,13 @@ def home(request):
 
 def creative(request):
     """Creative Brief page."""
-    d = dict(promo_dance=absolutify(reverse('flicks.videos.promo_video_dance')),
-             promo_noir=absolutify(reverse('flicks.videos.promo_video_noir')),
-             promo_twilight=absolutify(reverse('flicks.videos.promo_video_twilight')),
-             page_type='secondary')
+    d = dict(
+        promo_dance=absolutify(reverse('flicks.videos.promo_video_dance')),
+        promo_noir=absolutify(reverse('flicks.videos.promo_video_noir')),
+        promo_twilight=absolutify(
+            reverse('flicks.videos.promo_video_twilight')),
+        page_type='secondary'
+    )
 
     return render(request, 'creative.html', d)
 

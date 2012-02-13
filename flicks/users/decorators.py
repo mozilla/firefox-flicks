@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from flicks.base.util import redirect
 from flicks.users.models import UserProfile
 
+
 def profile_required(func):
     """View decorator that redirects users to the create profile page if they
     have yet to create their profile. Implies (and applies) login_required.

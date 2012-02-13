@@ -32,6 +32,7 @@ def add_view(video_id):
 
     return viewcount
 
+
 def cached_viewcount(video_id):
     """Get the viewcount for the specified video from the cache. If the
     viewcount isn't in the cache, load it from the DB and store it in the
