@@ -11,7 +11,7 @@ except ImportError, exc:
     raise exc
 
 
-TEST = sys.argv[1] == 'test'
+TEST = len(sys.argv) > 1 and sys.argv[1] == 'test'
 if TEST:
     try:
         from .test import *
