@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.dispatch import receiver
 
+from elasticutils.models import SearchMixin
+from elasticutils.tasks import index_objects, unindex_objects
 from funfactory.urlresolvers import reverse
 from jinja2 import Markup
 from tower import ugettext_lazy as _lazy
@@ -32,7 +35,7 @@ REGION_CHOICES = (
 )
 
 
-class Video(models.Model):
+class Video(models.Model, SearchMixin):
     """Users can only have one video associated with
     their account.
     """
@@ -70,3 +73,21 @@ class Video(models.Model):
     def upvote(self):
         """Add an upvote to this video."""
         add_vote.delay(self)
+
+    def fields(self):
+        return {'pk': self.pk,
+                'title': self.title,
+                'category': self.category,
+                'region': self.region}
+
+
+@receiver(models.signals.post_save, sender=Video)
+def index_video(sender, instance, **kwargs):
+    """Update the search index when a video is saved."""
+    index_objects.delay(sender, [instance.id])
+
+
+@receiver(models.signals.post_delete, sender=Video)
+def unindex_video(sender, instance, **kwargs):
+    """Update the search index when a video is deleted."""
+    unindex_objects.delay(sender, [instance.id])

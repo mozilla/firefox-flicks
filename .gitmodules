@@ -10,3 +10,9 @@
 [submodule "vendor-local/src/happyforms"]
 	path = vendor-local/src/happyforms
 	url = git://github.com/mozilla/happyforms.git
+[submodule "vendor-local/src/elasticutils"]
+	path = vendor-local/src/elasticutils
+	url = git://github.com/davedash/elasticutils.git
+[submodule "vendor-local/src/pyes"]
+	path = vendor-local/src/pyes
+	url = git://github.com/aparo/pyes.git

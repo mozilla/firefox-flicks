@@ -9,6 +9,7 @@ from django.views.decorators.http import require_POST
 from jinja2 import Markup
 
 import commonware.log
+from elasticutils import S
 
 from flicks.base.util import get_object_or_none
 from flicks.users.decorators import profile_required
@@ -55,6 +56,21 @@ def promo_video_twilight(request):
              video_embed=Markup(embedCode(settings.VIDEO_PROMOS_TWILIGHT,
                                           width=600, height=337)))
     return render(request, 'videos/promo.html', d)
+
+
+def search(request):
+    """Perform a video search."""
+    search_string = request.GET.get('title', '')
+    category = request.GET.get('category', None)
+    region = request.GET.get('region', None)
+
+    videos = S(Video).query(title__text=search_string)
+    if category is not None:
+        videos = videos.filter(category=category)
+    if region is not None:
+        videos = videos.filter(region=region)
+
+    return render(request, 'videos/search_results.html', {'videos': videos})
 
 
 @profile_required
