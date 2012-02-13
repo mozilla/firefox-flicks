@@ -8,10 +8,11 @@ from funfactory.urlresolvers import reverse
 from mock import patch
 from nose.tools import eq_, ok_
 
-from flicks.base.tests import TestCase
+from flicks.base.tests import TestCache, TestCase
 from flicks.videos.models import Video
 from flicks.videos.tasks import send_video_to_vidly
 from flicks.videos.tests import build_video
+from flicks.videos.util import cached_viewcount
 
 
 class SearchTests(TestCase):
@@ -188,3 +189,31 @@ class UpvoteTests(TestCase):
 
         self.video = Video.objects.get(pk=self.video.pk)
         eq_(self.video.votes, votes + 1)
+
+
+class AjaxAddViewTests(TestCase):
+    def _post(self, video_id=None):
+        params = {'video_id': video_id} if video_id is not None else {}
+        with self.activate('en-US'):
+            response = self.client.post(reverse('flicks.videos.add_view'),
+                                        params)
+        return response
+
+    def test_no_video_id(self):
+        """If no video_id is given, return a 404."""
+        response = self._post(None)
+        eq_(response.status_code, 404)
+
+    def test_no_video(self):
+        """If there is no video with the given ID, return a 404."""
+        response = self._post(9999999)
+        eq_(response.status_code, 404)
+
+    @patch('flicks.videos.util.cache', TestCache())
+    def test_add_view(self):
+        """If a video with the given ID exists, increment it's view count."""
+        with build_video(self.build_user(), views=10) as video:
+            eq_(cached_viewcount(video.id), 10)
+            response = self._post(video.id)
+            eq_(response.status_code, 200)
+            eq_(cached_viewcount(video.id), 11)

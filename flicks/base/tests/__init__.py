@@ -68,3 +68,18 @@ class TestCase(test_utils.TestCase):
 
         return ok_(url.endswith(view_url),
                    'URL Match failed: %s != %s' % (url, view_url))
+
+
+class TestCache(object):
+    def __init__(self):
+        self.store = {}
+
+    def get(self, id):
+        return self.store.get(id, None)
+
+    def set(self, id, value, timeout=None):
+        self.store[id] = value
+
+    def incr(self, id):
+        self.store[id] += 1
+        return self.store[id]

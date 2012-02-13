@@ -23,7 +23,7 @@ def add_view(video_id):
     save_viewcount = (
         (viewcount < 10) or
         (viewcount < 100 and viewcount % 5 == 0) or
-        (viewcount < 1000 and viewcount % 50 == 0) or
+        (viewcount < 1000 and viewcount % 25 == 0) or
         (viewcount > 1000 and viewcount % 100 == 0)
     )
 
