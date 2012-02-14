@@ -25,6 +25,7 @@
     subset=latin,greek,latin-ext,cyrillic-ext,cyrillic,greek-ext" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:700&amp;
     subset=latin,greek,latin-ext,cyrillic-ext,cyrillic,greek-ext" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -58,11 +59,13 @@
                   <a href="{{ url('flicks.users.logout') }}">{{ _('Logout') }}</a>
                 </li>
               {% else %}
-                <a id="browserid" href="#">{{ _('Sign in') }}</a>
-                <form method="POST" action="{{ url('flicks.users.verify') }}">
-                  {{ csrf() }}
-                  {{ browserid_form.as_p() }}
-                </form>
+                <li>
+                  <a id="browserid" href="#">{{ _('Sign in') }}</a>
+                  <form method="POST" action="{{ url('flicks.users.verify') }}">
+                    {{ csrf() }}
+                    {{ browserid_form.as_p() }}
+                  </form>
+                </li>
               {% endif %}
             </ul>
           </div>

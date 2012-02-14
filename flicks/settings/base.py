@@ -21,7 +21,6 @@ MINIFY_BUNDLES = {
         ),
         'video_details': (
             'js/vote.js',
-            'js/views.js',
         ),
     }
 }
@@ -34,7 +33,7 @@ ROOT_URLCONF = 'flicks.urls'
 # Authentication
 BROWSERID_CREATE_USER = True
 LOGIN_URL = '/'
-LOGIN_REDIRECT = 'flicks.base.home'
+LOGIN_REDIRECT = 'flicks.videos.upload'
 LOGIN_REDIRECT_FAILURE = 'flicks.base.home'
 
 AUTHENTICATION_BACKENDS = (
@@ -53,7 +52,7 @@ GRAVATAR_URL = 'https://secure.gravatar.com'
 DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
 
 # Vote settings
-VOTE_COOKIE_AGE = 946080000  # 30 years
+VOTE_COOKIE_AGE = 946080000 # 30 years
 
 # Elasticutils
 ES_DISABLED = True

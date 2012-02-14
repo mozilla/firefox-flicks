@@ -7,10 +7,11 @@
   <div class="avatar">
     {{ gravatar_img(user, size=36) }}
   </div>
-  <h1>{{ user.userprofile.full_name }}</h1>
+  <span class="title">{{ user.userprofile.full_name }}</span>
 {% endblock %}
 
 {% block content %}
+  <h1>{{ user.userprofile.full_name }}</h1>
   <ol class="videos">
     {% for video in videos %}
       {{ video_item(loop.index, video) }}

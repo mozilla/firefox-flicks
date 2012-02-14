@@ -37,8 +37,7 @@
       </p>
 
       {% for f in ['address', 'city', 'country', 'postal_code'] %}
-        {{ edit_form[f].label_tag() }}
-        {{ edit_form[f] }}
+        {{ form_section(f, edit_form) }}
       {% endfor %}
 
       <button type="submit">{{ _('Save') }}</button>

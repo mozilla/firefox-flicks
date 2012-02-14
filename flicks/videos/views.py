@@ -2,6 +2,7 @@ import json
 import socket
 
 from django.conf import settings
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
@@ -22,6 +23,33 @@ from flicks.videos.vidly import embedCode, parseNotify
 
 
 log = commonware.log.getLogger('f.videos')
+
+
+def recent(request):
+    """List all videos, by recency."""
+    show_pagination = False
+    videos = Video.objects.filter(state='complete').order_by('-id')
+
+    pagination_limit = getattr(settings, 'PAGINATION_LIMIT_FULL', 9)
+
+    paginator = Paginator(videos, pagination_limit)
+    page = request.GET.get('page', 1)
+
+    try:
+        videos = paginator.page(page)
+    except PageNotAnInteger:
+        videos = paginator.page(1)
+    except EmptyPage:
+        videos = paginator.page(paginator.num_pages)
+
+    if paginator.count > pagination_limit:
+        show_pagination = True
+
+    d = dict(videos=videos.object_list,
+             show_pagination=show_pagination,
+             page_type='secondary')
+
+    return render(request, 'videos/recent.html', d)
 
 
 def details(request, video_id=None):
@@ -85,16 +113,19 @@ def promo_video_twilight(request):
 
 
 def search(request):
-    """Perform a video search."""
-    search_string = request.GET.get('title', '')
-    category = request.GET.get('category', None)
-    region = request.GET.get('region', None)
+    """Display the search page or perform a video search."""
+    search_string = request.GET.get('title', None)
+    if search_string is not None:
+        category = request.GET.get('category', None)
+        region = request.GET.get('region', None)
 
-    videos = S(Video).query(title__text=search_string)
-    if category is not None:
-        videos = videos.filter(category=category)
-    if region is not None:
-        videos = videos.filter(region=region)
+        videos = S(Video).query(title__text=search_string)
+        if category is not None:
+            videos = videos.filter(category=category)
+        if region is not None:
+            videos = videos.filter(region=region)
+    else:
+        videos = []
 
     return render(request, 'videos/search_results.html', {'videos': videos})
 
