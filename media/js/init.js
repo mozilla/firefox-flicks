@@ -1,4 +1,7 @@
 $(function() {
+    // Dummy console for IE7
+    if (window.console === undefined) window.console = {log: function() {}};
+
     var cookie_name = $('body').attr('data-mobile-cookie');
     $(".desktop-link").attr("href", window.location).click(function() {
         $.cookie(cookie_name, "off", {expires:30});
