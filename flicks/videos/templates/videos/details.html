@@ -21,5 +21,6 @@
         {{ _('Upvote') }}
       </button>
       <div id="vote-count" data-votes="{{ video.votes }}">{{ video.votes }}</div>
+      <div id="video-date">{{ video.created|babel_date }}</div>
     </div>
 {% endblock %}

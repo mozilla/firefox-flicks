@@ -20,10 +20,10 @@
       </p>
       <p class="video-info">
         {# TODO: Add video upload date and view count. #}
-        <span class="date"></span>
+        <span class="date">{{ video.created|babel_date }}</span>
         <span class="views">
           {# L10n: Refers to the number of views a video received. For example, 300 views. #}
-          {% trans view_count=300 %}
+          {% trans view_count=30000|babel_number %}
             {{ view_count }} view
             {% pluralize %}
             {{ view_count }} views
