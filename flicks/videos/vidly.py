@@ -128,7 +128,7 @@ def parseNotify(request):
             'status': task.find('Status').text}
 
 
-def embedCode(shortlink, width=252, height=141):
+def embedCode(shortlink, width=600, height=337):
     """Generate escaped HTML code to embed a vid.ly video."""
     return """
     <iframe frameborder="0"

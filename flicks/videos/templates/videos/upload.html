@@ -4,6 +4,7 @@
 {% block page_title %}{{ _('Upload a Video') }}{% endblock %}
 
 {% block content %}
+  <div class="form-wrapper">
     <h1>{{ _('Upload a Video') }}</h1>
     <p>
       {% trans dropbox='http://dropbox.com', vidly='http://vid.ly' %}
@@ -36,4 +37,5 @@
       </div>
       <button type="submit">{{ _('Upload') }}</button>
     </form>
+  </div>
 {% endblock %}

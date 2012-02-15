@@ -3,8 +3,15 @@
 {% block page_title %}{{ video_title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ video_title }}</h1>
-    <div>
+  <h1>{{ video_title }}</h1>
+  <div class="video-details">
+    <p>
+      {{ video_description }}
+    </p>
+  </div>
+  <div class="video-content">
+    <div class="video-wrapper">
       {{ video_embed }}
     </div>
+  </div>
 {% endblock %}

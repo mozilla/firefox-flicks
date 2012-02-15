@@ -17,7 +17,6 @@ MINIFY_BUNDLES = {
             'js/libs/jquery-1.7.1.min.js',
             'js/libs/jquery.cookie.js',
             'js/init.js',
-            'js/main.js',
         ),
         'video_details': (
             'js/vote.js',

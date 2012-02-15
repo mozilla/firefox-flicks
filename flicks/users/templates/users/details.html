@@ -1,20 +1,55 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import video_item %}
+{% from 'shared/macros.html' import paginate, sort_filter, video_item %}
 
-{% block page_title %}{{ user.userprofile.full_name }}{% endblock %}
+{% block page_title %}{{ profile.full_name }}{% endblock %}
 
 {% block titlebar %}
-  <div class="avatar">
-    {{ gravatar_img(user, size=36) }}
-  </div>
-  <span class="title">{{ user.userprofile.full_name }}</span>
+  {% if user.is_authenticated() and not user == request.user %}
+    <div class="avatar">
+      {{ gravatar_img(profile.user, size=36) }}
+    </div>
+    <span class="title">{{ profile.full_name }}</span>
+  {% endif %}
 {% endblock %}
 
 {% block content %}
-  <h1>{{ user.userprofile.full_name }}</h1>
+  <div class="user-metadata">    
+    <div class="user-details">
+      <div class="left-col">{{ gravatar_img(profile.user, size=140) }}</div>
+      <div class="right-col">
+        <h1>{{ profile.full_name }}</h1>
+
+        <p>{{ profile.country }}</p>
+
+        {% if profile.website %}
+          <p>
+            <a href="{{ profile.website }}">{{ profile.website }}</a>
+          </p>
+        {% endif %}
+
+        {% if user == request.user %}
+          <a href="{{ url('flicks.users.edit_profile') }}" class="button">{{ _('Edit your profile') }}</a>
+        {% endif %}    
+      </div>
+      <p class="bio">{{ profile.bio }}</p>
+    </div>
+  </div>
+
+  <h2>
+    {% if user == profile %}
+      {{ _('Your Videos') }}
+    {% else %}
+      {{ _('Videos') }}
+    {% endif %}
+  </h2>
+
+  {{ sort_filter() }}
+
   <ol class="videos">
     {% for video in videos %}
       {{ video_item(loop.index, video) }}
     {% endfor %}
   </ol>
+
+  {{ paginate(show_pagination, video_pages, url('flicks.users.details', user_id=profile.user.id)) }}
 {% endblock %}

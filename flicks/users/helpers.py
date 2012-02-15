@@ -33,7 +33,9 @@ def gravatar_url(arg, size=80):
 
 @register.function
 def gravatar_img(arg, size=80, img_class=None):
-    return Markup('<img class="%(class)s" src="%(src)s">' % {
+    return Markup('<img class="%(class)s" src="%(src)s" '
+        'width="%(width)s">' % {
         'class': img_class,
-        'src': gravatar_url(arg, size=size)
+        'src': gravatar_url(arg, size=size),
+        'width': size
     })

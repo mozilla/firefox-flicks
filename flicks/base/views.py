@@ -13,12 +13,9 @@ def home(request):
     if request.user.is_active:
         return redirect('flicks.videos.recent')
 
-    d = dict(promo_dance=Markup(embedCode(settings.VIDEO_PROMOS_DANCE,
-                                          width=252, height=141)),
-             promo_noir=Markup(embedCode(settings.VIDEO_PROMOS_NOIR,
-                                          width=252, height=141)),
-             promo_twilight=Markup(embedCode(settings.VIDEO_PROMOS_TWILIGHT,
-                                          width=252, height=141)),
+    d = dict(promo_dance=settings.VIDEO_PROMOS_DANCE,
+             promo_noir=settings.VIDEO_PROMOS_NOIR,
+             promo_twilight=settings.VIDEO_PROMOS_TWILIGHT,
              page_type='home')
 
     return render(request, 'home.html', d)

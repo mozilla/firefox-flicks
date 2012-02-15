@@ -1,37 +1,39 @@
 {% macro video_item(idx, video) -%}
   <li id="slide-{{ idx }}">
-    {{ video.embed_html }}
-    <a class="vote" data-shortlink="{{ video.shortlink }}"
-         data-upvote-url="{{ url('flicks.videos.upvote', video.shortlink)}}"
-         data-token="{{ csrf_token }}" data-votes="{{ video.votes }}">{{ video.votes }}</a>
+    <a href="{{ video.details_href }}" class="title" title="{{ video.title }}">
+      <img src="http://cf.cdn.vid.ly/{{ video.shortlink }}/poster.jpg" height="141">
+    </a>
     <div class="video-details">
       <a href="{{ video.details_href }}"
          class="title" title="{{ video.title }}">{{ video.title }}</a>
-      <a href="{{ url('flicks.users.details', user_id=video.user_id) }}"
-         class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</a>
-      <p class="category">
-        {# TODO: Add views for these pages. #}
-        {% trans category=video.category, country=video.user.userprofile.country %}
-          <a href="#"
-             title="{{ category }}">{{ category }}</a> <span>for</span>
-          <a href="#"
-             title="{{ country }}">{{ country }}</a>
-        {% endtrans %}
-      </p>
-      <p class="video-info">
-        {# TODO: Add video upload date and view count. #}
-        <span class="date">{{ video.created|babel_date }}</span>
-        <span class="views">
-          {# L10n: Refers to the number of views a video received. For example, 300 views. #}
-          {% trans view_count=video.views_cached()|babel_number %}
-            {{ view_count }} view
-            {% pluralize %}
-            {{ view_count }} views
-          {% endtrans %}
-        </span>
-      </p>
+      {{ video_details(video) }}
     </div>
   </li>
+{%- endmacro %}
+
+{% macro video_details(video) -%}
+  <a href="{{ url('flicks.users.details', user_id=video.user_id) }}"
+     class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</a>
+  <p class="category">
+    {# TODO: Add views for these pages. #}
+    {% trans category=video.category, country=video.user.userprofile.country %}
+      <a href="#"
+         title="{{ category }}">{{ category }}</a> <span>for</span>
+      <a href="#"
+         title="{{ country }}">{{ country }}</a>
+    {% endtrans %}
+  </p>
+  <p class="video-info">
+    <span class="date">{{ video.created|babel_date }}</span>
+    <span class="views">
+      {# L10n: Refers to the number of views a video received. For example, 300 views. #}
+      {% trans view_count=video.views_cached() %}
+        {{ view_count }} view
+        {% pluralize %}
+        {{ view_count }} views
+      {% endtrans %}
+    </span>
+  </p>
 {%- endmacro %}
 
 {% macro form_section(f, form) -%}
@@ -41,9 +43,65 @@
 
     {% if form[f].field.required %}
       <span class="required">*</span>
+    {% else %}
+      <span class="optional">&#xa0;</span>
     {% endif %}
 
     {{ form.errors[f] }}
     {{ form[f] }}
   </div>
+{%- endmacro %}
+
+{% macro paginate(show_pagination, items, url) -%}
+  {% if show_pagination %}
+    <div class="pagination">
+      {% for page in items.paginator.page_range %}
+        {% if page == items.number %}
+          <span>{{ page }}</span>
+        {% else %}
+          <a href="{{ url|urlparams(page=page, limit=limit) }}">{{ page }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+{%- endmacro %}
+
+{% macro sort_filter() -%}
+  <ul class="sort_filter">
+    <li>
+      <h3>{{ _('Category') }}</h3>
+      <select name="category">
+        <option value="all">{{ _('All') }}</option>
+        <option value="thirty_spot">{{ _(':30 Spot') }}</option>
+        <option value="animation">{{ _('Animation') }}</option>
+        <option value="new_technology">{{ _('New Technology') }}</option>
+        <option value="psa">{{ _('Public Service Announcement') }}</option>
+      </select>
+    </li>
+    <li>
+      <h3>{{ _('Region') }}</h3>
+      <select name="region">
+        <option value="all">{{ _('All') }}</option>
+        <option value="americas">{{ _('The Americas') }}</option>
+        <option value="europe">{{ _('Europe') }}</option>
+        <option value="asia">{{ _('Asia, Oceania &amp; Australia') }}</option>
+        <option value="africa">{{ _('Africa') }}</option>
+      </select>
+    </li>
+    <li>
+      <h3>{{ _('Sort by') }}</h3>
+      <select name="sort_by">
+        <option value="upload_date">{{ _('Upload Date') }}</option>
+        <option value="votes">{{ _('Votes') }}</option>
+        <option value="views">{{ _('Views') }}</option>
+      </select>
+    </li>
+    <li>
+      <h3>Search</h3>
+      <form method="get" action="{{ url('flicks.videos.search') }}" class="search">
+        <input type="text" name="title">
+        <button type="submit">{{ _('Search') }}</button>
+      </form>
+    </li>
+  </ul>
 {%- endmacro %}

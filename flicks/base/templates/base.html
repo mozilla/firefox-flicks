@@ -45,18 +45,24 @@
         <div class="profile-header">
           <div class="content-wrapper">
             {% block titlebar %}
+              {% if user.is_authenticated() %}
+                <div class="avatar">
+                  {{ gravatar_img(user, size=36) }}
+                </div>
+                <span class="title">{{ user.userprofile.full_name }}</span>
+              {% endif %}
             {% endblock %}
 
             <ul class="user-actions">
               {% if user.is_authenticated() %}
                 <li>
-                  <a href="{{ url('flicks.users.edit_profile') }}">{{ _('My Profile') }}</a>
+                  <a href="{{ url('flicks.users.my_profile') }}">{{ _('My Profile') }}</a> &#xa0;|
                 </li>
                 <li>
-                  <a href="{{ url('flicks.videos.upload') }}">{{ _('Upload') }}</a>
+                  <a href="{{ url('flicks.users.logout') }}">{{ _('Logout') }}</a> &#xa0;|
                 </li>
                 <li>
-                  <a href="{{ url('flicks.users.logout') }}">{{ _('Logout') }}</a>
+                  <a href="{{ url('flicks.videos.upload') }}" class="button">{{ _('Upload') }}</a>
                 </li>
               {% else %}
                 <li>
@@ -76,7 +82,31 @@
         {% block content %}{% endblock %}
       </div>
 
-      {% include "shared/footer.html" %}
+      {% block footer %}
+        <div id="footer">
+          <div class="footer-wrapper">
+            {% block homefooter %}{% endblock %}
+            <ul>
+              <li><a href="http://www.mozilla.org/privacy-policy.html"
+                     title="{{ _('Privacy Policy') }}">{{ _('Privacy Policy') }}</a> <span>&#xa0;|</span></li> 
+              <li><a href="http://www.mozilla.org/about/legal.html"
+                     title="{{ _('Legal') }}">{{ _('Legal') }}</a></li>
+            </ul>
+            <div id="language-switcher">
+              <form id="language-switcher" class="languages go" method="GET">
+                <label for="language">{{ _('Other languages:') }}</label>
+                <select id="language" name="lang" dir="ltr">
+                  {% for code, name in LANGUAGES|dictsort -%}
+                    <option value="{{ code }}" {{ code|ifeq(LANG|lower, "selected") }}>
+                      {{ name }}
+                    </option>
+                  {%- endfor %}
+                </select>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endblock %}
     </div>
     {% block site_js %}
       {{ js('flicks_js') }}

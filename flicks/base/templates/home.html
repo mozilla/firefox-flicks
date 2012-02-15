@@ -5,6 +5,8 @@
 
 {% block userbar %}{% endblock %}
 
+{% block titlebar %}{% endblock %}
+
 {% block content %}
   <div class="home">
     <img src="{{ MEDIA_URL }}img/flicks-logo.png" class="flicks-logo">
@@ -45,9 +47,30 @@
     </form>
 
     <ol class="videos">
-      <li>{{ promo_dance }}</li>
-      <li>{{ promo_noir }}</li>
-      <li>{{ promo_twilight }}</li>
+      <li>
+        <a href="{{ url('flicks.videos.promo_video_dance') }}" class="title" title="{{ _('Dance')}}">
+          <img src="http://cf.cdn.vid.ly/{{ promo_dance }}/poster.jpg" height="141">
+        </a>
+      </li>
+      <li>
+        <a href="{{ url('flicks.videos.promo_video_noir') }}" class="title" title="{{ _('Noir')}}">
+          <img src="http://cf.cdn.vid.ly/{{ promo_noir }}/poster.jpg" height="141">
+        </a>
+      </li>
+      <li>
+        <a href="{{ url('flicks.videos.promo_video_twilight') }}" class="title" title="{{ _('Twilight')}}">
+          <img src="http://cf.cdn.vid.ly/{{ promo_twilight }}/poster.jpg" height="141">
+        </a>
+      </li>
     </ol>
   </div>
+{% endblock %}
+
+{% block homefooter %}
+  <section id="social">
+    <h3>{{ _('Flicks News') }}</h3>
+    {# Twitter and Facebook stay as is and are not to be translated. #}
+    <a href="https://twitter.com/#!/FirefoxFlicks" class="social-share share-twitter">Twitter</a>
+    <a href="https://www.facebook.com/FirefoxFlicks" class="social-share share-facebook">Facebook</a>
+  </section>
 {% endblock %}

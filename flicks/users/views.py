@@ -11,12 +11,17 @@ from django_browserid.forms import BrowserIDForm
 from flicks.base.util import get_object_or_none, redirect
 from flicks.users.forms import UserProfileForm
 from flicks.users.models import UserProfile
-from flicks.videos.models import Video
+from flicks.videos.models import User, Video
 
 
 def details(request, user_id=None):
     """User profile page."""
-    user = get_object_or_404(UserProfile, pk=user_id)
+    if request.user.id == user_id:
+        user = request.user
+        page_type = 'profile secondary user-details'
+    else:
+        user = get_object_or_404(User, id=user_id)
+        page_type = 'secondary user-details'
 
     show_pagination = False
     videos = Video.objects.filter(state='complete', user=user).order_by('-id')
@@ -37,9 +42,11 @@ def details(request, user_id=None):
         show_pagination = True
 
     d = dict(videos=videos.object_list,
+             video_pages= videos,
              show_pagination=show_pagination,
-             page_type='secondary',
-             user=user.user)
+             page_type=page_type,
+             user=user,
+             profile=user.userprofile)
 
     return render(request, 'users/details.html', d)
 
@@ -68,20 +75,20 @@ def verify(request):
 @login_required
 def edit_profile(request):
     """Create and/or edit a user profile."""
-    profile = get_object_or_none(UserProfile, pk=request.user.pk)
+    profile = request.user.userprofile
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
-            return redirect('flicks.users.edit_profile')
+            return redirect('flicks.users.my_profile')
     else:
         form = UserProfileForm(instance=profile)
 
     d = dict(profile=profile,
              edit_form=form,
-             page_type='secondary')
+             page_type='secondary form')
 
     return render(request, 'users/edit_profile.html', d)
 

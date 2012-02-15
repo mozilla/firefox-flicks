@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import video_item %}
+{% from 'shared/macros.html' import paginate, video_item %}
 
 {% block page_title %}{{ _('Recent') }}{% endblock %}
 
@@ -10,4 +10,6 @@
       {{ video_item(loop.index, video) }}
     {% endfor %}
   </ol>
+
+  {{ paginate(show_pagination, video_pages, url('flicks.videos.recent')) }}
 {% endblock %}

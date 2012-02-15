@@ -47,6 +47,7 @@ def recent(request):
         show_pagination = True
 
     d = dict(videos=videos.object_list,
+             video_pages=videos,
              show_pagination=show_pagination,
              page_type='secondary')
 
@@ -57,8 +58,12 @@ def details(request, video_id=None):
     """Landing page for video details."""
     video = get_object_or_404(Video, pk=video_id)
     viewcount = cached_viewcount(video_id)
-    return render(request, 'videos/details.html', {'video': video,
-                                                   'viewcount': viewcount})
+
+    d = dict(video=video,
+             viewcount=viewcount,
+             page_type='video-view')
+
+    return render(request, 'videos/details.html', d)
 
 
 @require_POST
@@ -153,7 +158,10 @@ def upload(request):
     else:
         form = UploadForm()
 
-    return render(request, 'videos/upload.html', {'upload_form': form})
+    d = dict(upload_form=form,
+             page_type='secondary form')
+
+    return render(request, 'videos/upload.html', d)
 
 
 @require_POST
