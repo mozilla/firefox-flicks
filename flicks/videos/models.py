@@ -1,15 +1,17 @@
 from datetime import datetime
 
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.dispatch import receiver
 
 from elasticutils.models import SearchMixin
 from elasticutils.tasks import index_objects, unindex_objects
-from funfactory.urlresolvers import reverse
+from funfactory.urlresolvers import reverse, split_path
 from jinja2 import Markup
 from tower import ugettext_lazy as _lazy
 
+from flicks.base.util import absolutify, generate_bitly_link
 from flicks.videos.tasks import add_vote
 from flicks.videos.vidly import embedCode
 
@@ -64,6 +66,7 @@ class Video(models.Model, SearchMixin):
 
     votes = models.BigIntegerField(default=0)
     views = models.BigIntegerField(default=0)
+    bitly_link_db = models.URLField(verify_exists=False, blank=True, default='')
 
     @property
     def embed_html(self):
@@ -75,6 +78,33 @@ class Video(models.Model, SearchMixin):
         """Return the url for this video's details page."""
         return reverse('flicks.videos.details', kwargs={'video_id': self.id})
 
+    @property
+    def bitly_link(self):
+        """Returns a mzl.la shortlink for this video, generating one if one
+        doesn't exist.
+        """
+        if self.bitly_link_db:
+            return self.bitly_link_db
+
+        # Generate a URL, remove the locale (let the site handle redirecting
+        # to the proper locale), and finally add the domain to the URL.
+        url = reverse('flicks.videos.details', kwargs={'video_id': self.id})
+        locale, url = split_path(url)
+        url = absolutify(url)
+
+        # Don't actually generate a shortlink if we're developing locally.
+        if settings.DEV:
+            bitly_link = None
+        else:
+            bitly_link = generate_bitly_link(url)
+
+        # Fallback to long URL if needed.
+        if bitly_link is None:
+            return url
+        else:
+            Video.objects.filter(pk=self.pk).update(bitly_link_db=bitly_link)
+            return bitly_link
+
     def upvote(self):
         """Add an upvote to this video."""
         add_vote.delay(self)
@@ -85,6 +115,7 @@ class Video(models.Model, SearchMixin):
         return cached_viewcount(self.id)
 
     def fields(self):
+        """Serialize video for search indexing."""
         return {'pk': self.pk,
                 'title': self.title,
                 'category': self.category,

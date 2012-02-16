@@ -86,3 +86,7 @@ ES_INDEXES = {'default': 'flicks_local'}
 
 # Send email to the console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Bit.ly API Credentials
+BITLY_API_LOGIN = ''
+BITLY_API_KEY = ''

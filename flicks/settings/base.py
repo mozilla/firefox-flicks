@@ -97,10 +97,10 @@ DOMAIN_METHODS = {
 #    ('media/js/**.js', 'javascript'),
 # ]
 
-LOGGING = dict(loggers=dict(playdoh={'level': logging.DEBUG}))
-
+# Always generate a CSRF token for anonymous users
 ANON_ALWAYS = True
 
+# Promotional video shortlinks
 VIDEO_PROMOS_NOIR = '4j0a6w'
 VIDEO_PROMOS_DANCE = '4j0a6w'
 VIDEO_PROMOS_TWILIGHT = '4j0a6w'
@@ -109,3 +109,8 @@ VIDEO_PROMOS_TWILIGHT = '4j0a6w'
 DEFAULT_FROM_EMAIL = 'firefoxflicks@mozilla.com'
 FACEBOOK_LINK = 'http://www.facebook.com/FirefoxFlicks'
 TWITTER_LINK = 'https://twitter.com/#!/firefoxflicks'
+
+# Bit.ly API settings
+BITLY_API_SHORTEN = 'https://api-ssl.bitly.com/v3/shorten'
+BITLY_API_KEY = ''
+BITLY_API_LOGIN = ''
