@@ -3,13 +3,16 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from jinja2 import Markup
 
-from flicks.base.util import absolutify
-from flicks.videos.models import Video
+from flicks.base.util import absolutify, redirect
 from flicks.videos.vidly import embedCode
 
 
 def home(request):
     """Landing page for Flicks. Displays only the promo videos."""
+    # Redirect logged in users to the recent videos page.
+    if request.user.is_active:
+        return redirect('flicks.videos.recent')
+
     d = dict(promo_dance=Markup(embedCode(settings.VIDEO_PROMOS_DANCE,
                                           width=252, height=141)),
              promo_noir=Markup(embedCode(settings.VIDEO_PROMOS_NOIR,
