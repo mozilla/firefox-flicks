@@ -19,7 +19,9 @@ MINIFY_BUNDLES = {
             'js/init.js',
         ),
         'video_details': (
+            'js/libs/script.js',
             'js/vote.js',
+            'js/share.js',
         ),
     }
 }

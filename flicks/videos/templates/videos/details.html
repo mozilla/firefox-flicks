@@ -24,6 +24,14 @@
            data-token="{{ csrf_token }}" data-votes="{{ video.votes }}"
            title="{{ _('Upvote') }}">{{ video.votes }}</a>
       </div>
+      <div id="share-container">
+        <button class="share">Share!</button>
+        <div class="share-links">
+          <div class="bitly-link">
+            <input type="text" value="{{ video.bitly_link }}">
+          </div>
+        </div>
+      </div>
     </div>
     <div class="video-details">
       {{ video_details(video) }}
