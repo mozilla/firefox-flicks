@@ -1,6 +1,12 @@
+from django.conf import settings
+from django.core import mail
 from django.core.cache import cache
+from django.template.loader import render_to_string
 
-from flicks.base.util import get_object_or_none
+from funfactory.urlresolvers import reverse
+from tower import ugettext_lazy as _lazy
+
+from flicks.base.util import absolutify, get_object_or_none
 from flicks.videos.models import Video
 
 
@@ -49,3 +55,19 @@ def cached_viewcount(video_id):
         viewcount = video.views
 
     return viewcount
+
+
+def send_video_complete_email(video):
+    """Send an email to the uploader of a video that the video conversion has
+    completed.
+    """
+    subject = _lazy('Your Firefox Flick is ready!')
+    video_url = reverse('flicks.videos.details', kwargs={'video_id': video.id})
+    message = render_to_string('videos/notification_email.html', {
+        'video_link': absolutify(video_url),
+        'flicks_email': settings.DEFAULT_FROM_EMAIL,
+        'facebook_link': settings.FACEBOOK_LINK,
+        'twitter_link': settings.TWITTER_LINK
+    })
+    mail.send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
+                   [video.user.email])

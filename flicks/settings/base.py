@@ -105,3 +105,8 @@ ANON_ALWAYS = True
 VIDEO_PROMOS_NOIR = '4j0a6w'
 VIDEO_PROMOS_DANCE = '4j0a6w'
 VIDEO_PROMOS_TWILIGHT = '4j0a6w'
+
+# Email Settings
+DEFAULT_FROM_EMAIL = 'firefoxflicks@mozilla.com'
+FACEBOOK_LINK = 'http://www.facebook.com/FirefoxFlicks'
+TWITTER_LINK = 'https://twitter.com/#!/firefoxflicks'

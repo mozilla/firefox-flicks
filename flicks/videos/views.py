@@ -18,7 +18,8 @@ from flicks.users.decorators import profile_required
 from flicks.videos.forms import UploadForm
 from flicks.videos.models import Video
 from flicks.videos.tasks import send_video_to_vidly
-from flicks.videos.util import add_view, cached_viewcount
+from flicks.videos.util import (add_view, cached_viewcount,
+                                send_video_complete_email)
 from flicks.videos.vidly import embedCode, parseNotify
 
 
@@ -167,6 +168,7 @@ def notify(request):
             video = Video.objects.get(shortlink=notification['shortlink'])
             video.state = 'complete'
             video.save()
+            send_video_complete_email(video)
         except Video.DoesNotExist:
             log.warning('Vid.ly notification with shortlink that does not '
                         'exist: %s' % notification['shortlink'])

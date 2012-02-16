@@ -83,3 +83,6 @@ VIDLY_USER_KEY = ''
 ES_DISABLED = True  # Change to false to enable search
 ES_HOSTS = ['127.0.0.1:9200']
 ES_INDEXES = {'default': 'flicks_local'}
+
+# Send email to the console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

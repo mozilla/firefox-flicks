@@ -3,6 +3,7 @@ from contextlib import nested
 from functools import partial
 
 from django.conf import settings
+from django.core import mail
 
 from funfactory.urlresolvers import reverse
 from mock import patch
@@ -138,6 +139,14 @@ class NotifyTests(TestCase):
             self._post(video.shortlink)
             video = Video.objects.get(pk=video.pk)  # Refresh
             eq_(video.state, 'complete')
+
+            # Check for sent notification email
+            eq_(len(mail.outbox), 1)
+            with self.activate('en-US'):
+                video_url = reverse('flicks.videos.details',
+                                    kwargs={'video_id': video.id})
+            ok_(video_url in mail.outbox[0].body)
+            eq_(mail.outbox[0].to, [self.user.email])
 
 
 class UpvoteTests(TestCase):
