@@ -63,7 +63,7 @@
                   <a id="browserid" href="#">{{ _('Sign in') }}</a>
                   <form method="POST" action="{{ url('flicks.users.verify') }}">
                     {{ csrf() }}
-                    {{ browserid_form.as_p() }}
+                    {{ browserid_form.as_p()|safe }}
                   </form>
                 </li>
               {% endif %}

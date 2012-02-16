@@ -41,7 +41,7 @@
     <a href="#" id="browserid">{{ _('Upload a Video') }}</a>
     <form method="POST" action="{{ url('flicks.users.verify') }}">
       {{ csrf() }}
-      {{ browserid_form.as_p() }}
+      {{ browserid_form.as_p()|safe }}
     </form>
 
     <ol class="videos">
