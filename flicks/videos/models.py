@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.dispatch import receiver
@@ -51,7 +53,8 @@ class Video(models.Model, SearchMixin):
     region = models.CharField(max_length=50, blank=False,
                               choices=REGION_CHOICES,
                               verbose_name=_lazy(u'Region'))
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True,
+                                   default=datetime(2012, 2, 28))
 
     upload_url = models.URLField(verify_exists=False, blank=False, default='',
                                  verbose_name=_lazy(u'Video URL'))
