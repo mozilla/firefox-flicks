@@ -78,3 +78,8 @@ SITE_URL = 'http://localhost:8000'
 # Vidly Credentials (Fill these in!)
 VIDLY_USER_ID = ''
 VIDLY_USER_KEY = ''
+
+# Elasticsearch settings
+ES_DISABLED = True  # Change to false to enable search
+ES_HOSTS = ['127.0.0.1:9200']
+ES_INDEXES = {'default': 'flicks_local'}
