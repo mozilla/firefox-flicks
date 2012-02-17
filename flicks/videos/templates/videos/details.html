@@ -8,6 +8,11 @@
   {{ js('video_details') }}
 {% endblock %}
 
+{% block og_title %}{{ video.title }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_image %}http://cf.cdn.vid.ly/{{ video.shortlink }}/poster.jpg{% endblock %}
+{% block og_url %}{{ video.details_href }}{% endblock %}
+
 {% block content %}
     <h1>{{ video.title }}</h1>
     <div class="video-details">
@@ -25,7 +30,7 @@
            title="{{ _('Upvote') }}">{{ video.votes }}</a>
       </div>
       <div id="share-container">
-        <button class="share">Share!</button>
+        <button class="share" data-tweet-text="{{ tweet_text|e }}">Share!</button>
         <div class="share-links">
           <div class="bitly-link">
             <input type="text" value="{{ video.bitly_link }}">

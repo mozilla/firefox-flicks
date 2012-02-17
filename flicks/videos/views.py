@@ -23,6 +23,7 @@ from flicks.videos.util import (add_view, cached_viewcount,
 from flicks.videos.vidly import embedCode, parseNotify
 
 
+TWEET_TEXT = _lazy("Check out '%(video_title)s' on Firefox Flicks. %(link)s")
 log = commonware.log.getLogger('f.videos')
 
 
@@ -58,10 +59,13 @@ def details(request, video_id=None):
     """Landing page for video details."""
     video = get_object_or_404(Video, pk=video_id)
     viewcount = cached_viewcount(video_id)
+    tweet_text = TWEET_TEXT % {'video_title': video.title[0:90],
+                               'link': video.bitly_link}
 
     d = dict(video=video,
              viewcount=viewcount,
-             page_type='video-view')
+             page_type='video-view',
+             tweet_text=tweet_text)
 
     return render(request, 'videos/details.html', d)
 

@@ -86,14 +86,16 @@ $.fn.showShare.facebook = function(options) {
 $.fn.showShare.twitter = function(options) {
     var settings = $.extend({
         count: 'vertical',
-        lang: locale
+        lang: locale,
+        text: ''
     }, ('twitter' in options ? options.twitter : {}));
 
     var output =
             '<a href="https://twitter.com/share" '
             + 'class="twitter-share-button" '
             + 'data-count="' + settings.count + '" '
-            + 'data-lang="' + settings.lang + '"></a>';
+            + 'data-lang="' + settings.lang + '" '
+            + 'data-text="' + settings.text + '"></a>';
 
     return {
         script: 'https://platform.twitter.com/widgets.js',
@@ -103,7 +105,10 @@ $.fn.showShare.twitter = function(options) {
 
 // Flicks-specific init code.
 $('body').on('click', '.share', function() {
-    $(this).next('.share-links').showShare(['facebook', 'twitter']);
+    $(this).next('.share-links').showShare(['facebook', 'twitter'], {
+        facebook: {appId: '198137183603911'},
+        twitter: {text: $(this).data('tweet-text')}
+    });
 });
 
 })(jQuery);

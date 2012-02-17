@@ -7,10 +7,10 @@
     <title>{% block page_title %}{{ _('Home') }}{% endblock %}</title>
 
     {# OpenGraph Metadata #}
-    <meta property="og:title" content="{{ _('Firefox Flicks') }}">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="http://mozcom-cdn.mozilla.net/img/firefox-100.jpg">
-    <meta property="og:url" content="http://www.mozilla.org/firefoxflicks/">
+    <meta property="og:title" content="{% block og_title %}{{ _('Firefox Flicks') }}{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}http://mozcom-cdn.mozilla.net/img/firefox-100.jpg{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}http://www.mozilla.org/firefoxflicks/{% endblock %}">
     <meta property="og:site_name" content="{{ _('Firefox Flicks') }}">
     {% block meta_description -%}
       <meta property="og:description" content="{% trans %}
