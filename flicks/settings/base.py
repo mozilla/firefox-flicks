@@ -124,3 +124,6 @@ TWITTER_LINK = 'https://twitter.com/#!/firefoxflicks'
 BITLY_API_SHORTEN = 'https://api-ssl.bitly.com/v3/shorten'
 BITLY_API_KEY = ''
 BITLY_API_LOGIN = ''
+
+# Secure Cookies
+SESSION_COOKIE_SECURE = True

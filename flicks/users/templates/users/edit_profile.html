@@ -3,6 +3,8 @@
 
 {% if not profile %}
   {% set title = _('Create your profile') %}
+
+  {% block userbar %}{% endblock %}
 {% else %}
   {% set title = _('Edit your profile') %}
 {% endif %}
@@ -28,21 +30,23 @@
         {{ form_section(f, edit_form) }}
       {% endfor %}
 
-      <div class="field gravatar-content">
-        <label for="id_avatar">{{ _('Avatar') }}</label>
-        <span class="optional">&#xa0;</span>
-        <div class="gravatar">
-          {{ gravatar_img(user, size=60) }}
-          <img src="{{ MEDIA_URL }}img/gravatar.png">
+      {% if profile %}
+        <div class="field gravatar-content">
+          <label for="id_avatar">{{ _('Avatar') }}</label>
+          <span class="optional">&#xa0;</span>
+          <div class="gravatar">
+            {{ gravatar_img(user, size=60) }}
+            <img src="{{ MEDIA_URL }}img/gravatar.png">
+          </div>
+          <div class="gravatar-link">
+            {# The word 'Gravatar' isn't translated to other languages. #}
+            <a href="http://gravatar.com">Gravatar</a>
+            <span id="gravatar-tip">
+              {{ _('to add or modify your avatar') }}
+            </span>
+          </div>
         </div>
-        <div class="gravatar-link">
-          {# The word 'Gravatar' isn't translated to other languages. #}
-          <a href="http://gravatar.com">Gravatar</a>
-          <span id="gravatar-tip">
-            {{ _('to add or modify your avatar') }}
-          </span>
-        </div>
-      </div>
+      {% endif %}
 
       <p>
         {% trans %}

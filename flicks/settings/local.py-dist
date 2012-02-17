@@ -91,6 +91,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 BITLY_API_LOGIN = ''
 BITLY_API_KEY = ''
 
-SESSION_COOKIE_HTTPONLY = False
-# set to true in production
-#SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = not DEV

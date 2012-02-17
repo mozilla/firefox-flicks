@@ -75,7 +75,7 @@ def verify(request):
 @login_required
 def edit_profile(request):
     """Create and/or edit a user profile."""
-    profile = request.user.userprofile
+    profile = get_object_or_none(UserProfile, pk=request.user.pk)
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
