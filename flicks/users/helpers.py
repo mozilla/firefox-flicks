@@ -10,7 +10,7 @@ from flicks.base.util import absolutify
 from flicks.users.models import User
 
 
-GRAVATAR_URL = getattr(settings, 'GRAVATAR_URL', 'http://www.gravatar.com')
+GRAVATAR_URL = getattr(settings, 'GRAVATAR_URL', 'https://secure.gravatar.com')
 DEFAULT_GRAVATAR = absolutify(settings.DEFAULT_GRAVATAR)
 
 

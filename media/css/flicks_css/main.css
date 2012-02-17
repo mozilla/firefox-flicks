@@ -881,10 +881,6 @@ div.home {
     margin: 20px 0px 20px 0px;
 }
 
-div.home ol.videos li {
-    margin-top: 80px;
-}
-
 .home #browserid, button {
     background-image: linear-gradient(bottom, #267CC2 26%, #4590C9 63%, #70B8EB 100%);
     background-image: -o-linear-gradient(bottom, #267CC2 26%, #4590C9 63%, #70B8EB 100%);
