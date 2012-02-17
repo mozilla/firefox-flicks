@@ -13,7 +13,7 @@ import commonware.log
 from elasticutils import S
 from tower import ugettext_lazy as _lazy
 
-from flicks.base.util import get_object_or_none
+from flicks.base.util import get_object_or_none, promo_video_shortlink
 from flicks.users.decorators import profile_required
 from flicks.videos.forms import UploadForm
 from flicks.videos.models import Video
@@ -91,7 +91,7 @@ def promo_video_noir(request):
                                      'Firefox Flicks entry by checking out '
                                      'our video.'),
              page_type='videos',
-             video_embed=Markup(embedCode(settings.VIDEO_PROMOS_NOIR,
+             video_embed=Markup(embedCode(promo_video_shortlink('noir'),
                                           width=600, height=337)))
     return render(request, 'videos/promo.html', d)
 
@@ -104,7 +104,7 @@ def promo_video_dance(request):
                                      "Get inspired for your Firefox Flicks "
                                      "entry by checking out our video."),
              page_type='videos',
-             video_embed=Markup(embedCode(settings.VIDEO_PROMOS_DANCE,
+             video_embed=Markup(embedCode(promo_video_shortlink('dance'),
                                           width=600, height=337)))
     return render(request, 'videos/promo.html', d)
 
@@ -117,7 +117,7 @@ def promo_video_twilight(request):
                                      'Flicks entry by checking out our '
                                      'video.'),
              page_type='videos',
-             video_embed=Markup(embedCode(settings.VIDEO_PROMOS_TWILIGHT,
+             video_embed=Markup(embedCode(promo_video_shortlink('twilight'),
                                           width=600, height=337)))
     return render(request, 'videos/promo.html', d)
 

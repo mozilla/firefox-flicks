@@ -9,7 +9,8 @@ from nose.tools import eq_
 
 from flicks.base.tests import TestCase
 from flicks.base.util import (absolutify, generate_bitly_link,
-                              get_object_or_none, redirect)
+                              get_object_or_none, promo_video_shortlink,
+                              redirect)
 from flicks.videos.models import Video
 from flicks.videos.tests import build_video
 
@@ -76,3 +77,40 @@ class GenerateBitlyLinkTests(TestCase):
         # Test an exception
         get.side_effect = requests.exceptions.RequestException
         eq_(generate_bitly_link('test'), None)
+
+
+promo_videos = {
+    'noir': {
+        'en-us': 'english',
+        'fr': 'french'
+    },
+    'no-en-us': {
+        'fr': 'french'
+    }
+}
+
+
+@patch.object(settings, 'PROMO_VIDEOS', promo_videos)
+class TestPromoVideoShortlin(TestCase):
+    def test_invalid_promo(self):
+        """If an invalid promo name is given, return None."""
+        eq_(promo_video_shortlink('invalid'), None)
+
+    def test_no_locale(self):
+        """If there is no video matching the current locale, default to
+        en-US.
+        """
+        with self.activate('es'):
+            eq_(promo_video_shortlink('noir'), 'english')
+
+    def test_no_en_us(self):
+        """If there is no video matching the current locale or en-US,
+        return None.
+        """
+        with self.activate('es'):
+            eq_(promo_video_shortlink('no-en-us'), None)
+
+    def test_success(self):
+        """If a video for the current locale exists, return it's shortlink."""
+        with self.activate('fr'):
+            eq_(promo_video_shortlink('noir'), 'french')

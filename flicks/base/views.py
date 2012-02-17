@@ -3,7 +3,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render
 from jinja2 import Markup
 
-from flicks.base.util import absolutify, redirect
+from flicks.base.util import absolutify, promo_video_shortlink, redirect
 from flicks.videos.vidly import embedCode
 
 
@@ -13,9 +13,9 @@ def home(request):
     if request.user.is_active:
         return redirect('flicks.videos.recent')
 
-    d = dict(promo_dance=settings.VIDEO_PROMOS_DANCE,
-             promo_noir=settings.VIDEO_PROMOS_NOIR,
-             promo_twilight=settings.VIDEO_PROMOS_TWILIGHT,
+    d = dict(promo_dance=promo_video_shortlink('dance'),
+             promo_noir=promo_video_shortlink('noir'),
+             promo_twilight=promo_video_shortlink('twilight'),
              page_type='home')
 
     return render(request, 'home.html', d)

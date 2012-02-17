@@ -102,10 +102,18 @@ DOMAIN_METHODS = {
 # Always generate a CSRF token for anonymous users
 ANON_ALWAYS = True
 
-# Promotional video shortlinks
-VIDEO_PROMOS_NOIR = '4j0a6w'
-VIDEO_PROMOS_DANCE = '4j0a6w'
-VIDEO_PROMOS_TWILIGHT = '4j0a6w'
+# Promo video shortlinks
+PROMO_VIDEOS = {
+    'noir': {
+        'en-us': '4j0a6w'
+    },
+    'dance': {
+        'en-us': '4j0a6w'
+    },
+    'twilight': {
+        'en-us': '4j0a6w'
+    }
+}
 
 # Email Settings
 DEFAULT_FROM_EMAIL = 'firefoxflicks@mozilla.com'

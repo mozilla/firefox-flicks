@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
+from django.utils.translation import get_language
 
 import commonware.log
 import requests
@@ -66,3 +67,19 @@ def generate_bitly_link(url):
         return None
 
     return response.content.strip()
+
+
+def promo_video_shortlink(promo_name):
+    """Returns a promo video for the current locale, defaulting to en-US if
+    none is found.
+    """
+    videos = settings.PROMO_VIDEOS.get(promo_name, None)
+    if videos is None:
+        return None
+
+    lang = get_language()
+    video = videos.get(lang, None)
+    if video is None:
+        video = videos.get('en-us', None)
+
+    return video
