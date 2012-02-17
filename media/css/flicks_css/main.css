@@ -93,6 +93,14 @@ div.field.error input, div.field.error select {
     border: 1px solid #f00;
 }
 
+.home .headline {
+    clear: both;
+    float: left;
+    height: 670px;
+    position: relative;
+    width: 100%;
+}
+
 .content-wrapper span.title {
     display: block;
     float: left;
@@ -372,6 +380,10 @@ ul.user-actions {
         float: right;
     }
 
+    .home .headline {
+        height: 880px;
+    }
+
     div.field label {
         clear: both;
         float: left;
@@ -512,6 +524,10 @@ ul.user-actions {
         float: left;
         margin-top: 3px;
         text-align: none;
+    }
+
+    .home .headline {
+        height: 1220px;
     }
 
     div.field label {
@@ -701,13 +717,6 @@ body.form h1 {
 
 .home #header {
     background-image: none;
-}
-
-.home .headline {
-    clear: both;
-    float: left;
-    position: relative;
-    width: 100%;
 }
 
 .home .headline p {
