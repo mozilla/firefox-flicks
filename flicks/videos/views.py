@@ -15,7 +15,7 @@ from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import get_object_or_none, promo_video_shortlink
 from flicks.users.decorators import profile_required
-from flicks.videos.forms import UploadForm
+from flicks.videos.forms import SearchForm, UploadForm
 from flicks.videos.models import Video
 from flicks.videos.tasks import send_video_to_vidly
 from flicks.videos.util import (add_view, cached_viewcount,
@@ -47,7 +47,9 @@ def recent(request):
     if paginator.count > pagination_limit:
         show_pagination = True
 
-    d = dict(videos=videos.object_list,
+    d = dict(search_form=SearchForm(),
+             search=False,
+             videos=videos.object_list,
              video_pages=videos,
              show_pagination=show_pagination,
              page_type='secondary')

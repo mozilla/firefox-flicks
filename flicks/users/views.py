@@ -11,6 +11,7 @@ from django_browserid.forms import BrowserIDForm
 from flicks.base.util import get_object_or_none, redirect
 from flicks.users.forms import UserProfileForm
 from flicks.users.models import UserProfile
+from flicks.videos.forms import SearchForm
 from flicks.videos.models import User, Video
 
 
@@ -45,6 +46,7 @@ def details(request, user_id=None):
              video_pages= videos,
              show_pagination=show_pagination,
              page_type=page_type,
+             search_form=SearchForm(),
              user=user,
              profile=user.userprofile)
 

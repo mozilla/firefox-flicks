@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="user-metadata">    
+  <div class="user-metadata">
     <div class="user-details">
       <div class="left-col">{{ gravatar_img(profile.user, size=140) }}</div>
       <div class="right-col">
@@ -29,7 +29,7 @@
 
         {% if user == request.user %}
           <a href="{{ url('flicks.users.edit_profile') }}" class="button">{{ _('Edit your profile') }}</a>
-        {% endif %}    
+        {% endif %}
       </div>
       <p class="bio">{{ profile.bio }}</p>
     </div>
@@ -43,7 +43,7 @@
     {% endif %}
   </h2>
 
-  {{ sort_filter() }}
+  {{ sort_filter(search_form) }}
 
   <ol class="videos">
     {% for video in videos %}

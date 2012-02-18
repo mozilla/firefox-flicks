@@ -1,15 +1,32 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import paginate, video_item %}
+{% from 'shared/macros.html' import paginate, sort_filter, video_item %}
 
-{% block page_title %}{{ _('Recent') }}{% endblock %}
+{% if search %}
+  {% set title=_('Video Search Results') %}
+{% else %}
+  {% set title=_('Videos') %}
+{% endif %}
+
+{% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
-  <h1>{{ _('Recent') }}</h1>
-  <ol class="videos">
-    {% for video in videos %}
-      {{ video_item(loop.index, video) }}
-    {% endfor %}
-  </ol>
+  <h1>{{ title }}</h1>
+  <form>
+    <div>
+      {{ search_form.search }}
+      <button type="submit">{{ _('Search') }}</button>
+    </div>
+    {{ sort_filter(search_form) }}
+  </form>
+  {% if videos|length > 0 %}
+    <ol class="videos">
+      {% for video in videos %}
+        {{ video_item(loop.index, video) }}
+      {% endfor %}
+    </ol>
 
-  {{ paginate(show_pagination, video_pages, url('flicks.videos.recent')) }}
+    {{ paginate(show_pagination, video_pages, url('flicks.videos.recent')) }}
+  {% else %}
+    <p>{{ _('Sorry, no videos found. Please try another search.') }}</p>
+  {% endif %}
 {% endblock %}

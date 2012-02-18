@@ -15,12 +15,12 @@
   <a href="{{ url('flicks.users.details', user_id=video.user_id) }}"
      class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</a>
   <p class="category">
-    {# TODO: Add views for these pages. #}
-    {% trans category=video.category, country=video.user.userprofile.country %}
-      <a href="#"
-         title="{{ category }}">{{ category }}</a> <span>for</span>
-      <a href="#"
-         title="{{ country }}">{{ country }}</a>
+    {% set category_link='<a href="#" title="{title}">{title}</a>'|fe(title=video.category) %}
+    {% set country_link='<a href="#" title="{title}">{title}</a>'|fe(title=video.user.userprofile.country) %}
+
+    {# L10n: Shown below videos to indicate which category and country they were submitted under, such as ':30 Spot for Europe' #}
+    {% trans category_link=category_link, country_link=country_link %}
+      {{ category_link }} <span>for</span> {{ country_link }}
     {% endtrans %}
   </p>
   <p class="video-info">
@@ -66,42 +66,13 @@
   {% endif %}
 {%- endmacro %}
 
-{% macro sort_filter() -%}
+{% macro sort_filter(form) -%}
   <ul class="sort_filter">
-    <li>
-      <h3>{{ _('Category') }}</h3>
-      <select name="category">
-        <option value="all">{{ _('All') }}</option>
-        <option value="thirty_spot">{{ _(':30 Spot') }}</option>
-        <option value="animation">{{ _('Animation') }}</option>
-        <option value="new_technology">{{ _('New Technology') }}</option>
-        <option value="psa">{{ _('Public Service Announcement') }}</option>
-      </select>
-    </li>
-    <li>
-      <h3>{{ _('Region') }}</h3>
-      <select name="region">
-        <option value="all">{{ _('All') }}</option>
-        <option value="americas">{{ _('The Americas') }}</option>
-        <option value="europe">{{ _('Europe') }}</option>
-        <option value="asia">{{ _('Asia, Oceania &amp; Australia') }}</option>
-        <option value="africa">{{ _('Africa') }}</option>
-      </select>
-    </li>
-    <li>
-      <h3>{{ _('Sort by') }}</h3>
-      <select name="sort_by">
-        <option value="upload_date">{{ _('Upload Date') }}</option>
-        <option value="votes">{{ _('Votes') }}</option>
-        <option value="views">{{ _('Views') }}</option>
-      </select>
-    </li>
-    <li>
-      <h3>Search</h3>
-      <form method="get" action="{{ url('flicks.videos.search') }}" class="search">
-        <input type="text" name="title">
-        <button type="submit">{{ _('Search') }}</button>
-      </form>
-    </li>
+    {% for f in ['category', 'region', 'sort_by'] %}
+      <li>
+        <h3>{{ form[f].label }}</h3>
+        {{ form[f] }}
+      </li>
+    {% endfor %}
   </ul>
 {%- endmacro %}

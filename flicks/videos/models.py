@@ -34,7 +34,7 @@ CATEGORY_CHOICES = (
 REGION_CHOICES = (
     ('americas', _lazy('The Americas')),
     ('europe', _lazy('Europe')),
-    ('asia', _lazy('Asia, Oceania &amp; Australia')),
+    ('asia', _lazy('Asia, Oceania & Australia')),
     ('africa', _lazy('Africa'))
 )
 

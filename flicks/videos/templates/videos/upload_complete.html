@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 
-{% block page_title %}{{ _('Your Video is Ready') }}{% endblock %}
+{% block page_title %}{{ _('Your Video is Processing') }}{% endblock %}
 
 {% block content %}
     <h1>{{ _('Your Video is processing and will be ready shortly!') }}</h1>
-    <p>{{ _('Promote your video') }}</p>
+    <p>
+      {# L10n: link points to the list of submitted videos. #}
+      {% trans link=url('flicks.videos.recent') %}
+        Sit tight! You will get an e-mail when your video is ready for
+        viewing and sharing. While you're waiting <a href="{{ link }}">
+        have a look at some of the other videos that have already
+        been submitted.</a>
+      {% endtrans %}
+    </p>
 {% endblock %}
