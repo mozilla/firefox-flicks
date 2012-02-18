@@ -37,7 +37,8 @@
   </head>
   <body class="{{ page_type }}"
         data-mobile-cookie="{{ settings.MOBILE_COOKIE }}"
-        data-token="{{ csrf_token }}">
+        data-token="{{ csrf_token }}"
+        {% block body_data %}{% endblock %}>
     <div class="wrapper">
       {% include "shared/header.html" %}
 
@@ -88,7 +89,7 @@
             {% block homefooter %}{% endblock %}
             <ul>
               <li><a href="http://www.mozilla.org/privacy-policy.html"
-                     title="{{ _('Privacy Policy') }}">{{ _('Privacy Policy') }}</a> <span>&#xa0;|</span></li> 
+                     title="{{ _('Privacy Policy') }}">{{ _('Privacy Policy') }}</a> <span>&#xa0;|</span></li>
               <li><a href="http://www.mozilla.org/about/legal.html"
                      title="{{ _('Legal') }}">{{ _('Legal') }}</a></li>
             </ul>

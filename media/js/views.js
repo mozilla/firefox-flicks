@@ -1,7 +1,7 @@
 $(function() {
     var token = $('body').data('token'),
-        add_view_url = $('#view-count').data('add-view-url'),
-        video_id = $('#view-count').data('video-id');
+        add_view_url = $('body').data('add-view-url'),
+        video_id = $('body').data('video-id');
 
     $.ajax({
         url: add_view_url,

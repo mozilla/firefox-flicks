@@ -13,6 +13,11 @@
 {% block og_image %}http://cf.cdn.vid.ly/{{ video.shortlink }}/poster.jpg{% endblock %}
 {% block og_url %}{{ video.details_href }}{% endblock %}
 
+{% block body_data %}
+  data-video-id="{{ video.id }}"
+  data-add-view-url="{{ url('flicks.videos.add_view') }}"
+{% endblock %}
+
 {% block content %}
     <h1>{{ video.title }}</h1>
     <div class="video-details">
@@ -25,7 +30,7 @@
         {{ video.embed_html }}
         {# L10n: Refers to a user voting up a video. #}
         <a id="upvote" class="vote" data-shortlink="{{ video.shortlink }}"
-           data-upvote-url="{{ url('flicks.videos.upvote', video.shortlink)}}"
+           data-upvote-url="{{ url('flicks.videos.upvote', video.shortlink) }}"
            data-token="{{ csrf_token }}" data-votes="{{ video.votes }}"
            title="{{ _('Upvote') }}">{{ video.votes }}</a>
       </div>
