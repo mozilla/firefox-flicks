@@ -66,7 +66,11 @@
   {% endif %}
 {%- endmacro %}
 
-{% macro sort_filter(form) -%}
+{% macro display_search_form(form) -%}
+  <div>
+    {{ form.search }}
+    <button type="submit">{{ _('Search') }}</button>
+  </div>
   <ul class="sort_filter">
     {% for f in ['category', 'region', 'sort_by'] %}
       <li>

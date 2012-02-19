@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import paginate, sort_filter, video_item %}
+{% from 'shared/macros.html' import paginate, display_search_form, video_item %}
 
 {% block page_title %}{{ profile.full_name }}{% endblock %}
 
@@ -43,6 +43,9 @@
     {% endif %}
   </h2>
 
+  <form>
+    {{ display_search_form(search_form) }}
+  </form>
   <ol class="videos">
     {% for video in videos %}
       {{ video_item(loop.index, video) }}

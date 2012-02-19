@@ -25,7 +25,15 @@ def details(request, user_id=None):
         page_type = 'secondary user-details'
 
     show_pagination = False
-    videos = Video.objects.filter(state='complete', user=user).order_by('-id')
+
+    # Handle search and filtering
+    search_form = SearchForm(request.GET)
+    if search_form.is_valid():
+        videos = search_form.videos().filter(user_id=user_id)
+    else:
+        videos = (Video.objects
+                  .filter(state='complete', user__id=user_id)
+                  .order_by('-id'))
 
     pagination_limit = getattr(settings, 'PAGINATION_LIMIT_FULL', 9)
 

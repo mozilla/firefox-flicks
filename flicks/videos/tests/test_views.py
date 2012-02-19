@@ -16,52 +16,6 @@ from flicks.videos.tests import build_video
 from flicks.videos.util import cached_viewcount
 
 
-class SearchTests(TestCase):
-    """Tests for the search view.
-
-    These tests are throwing odd issues that seem to only occur during testing.
-    Due to time constraints, I've marked the test functions as no_test to
-    avoid running them. We'll be covering this view via manual testing and
-    other testing venues until we can figure out the issue with these tests.
-    """
-    def setUp(self):
-        self.user = self.build_user()
-
-    def _search(self, **kwargs):
-        with self.activate('en-US'):
-            response = self.client.get(reverse('flicks.videos.search'),
-                                       kwargs)
-        return [v.title for v in response.context['videos']]
-
-    def _test_video_search(self):
-        """Test that basic video title searching works."""
-        with nested(build_video(self.user, title='Fuzzy cats'),
-                    build_video(self.user, title='Furry cats')):
-            # Basic search
-            eq_(['Fuzzy cats'], self._search(title='Fuzzy'))
-
-            # Multiple results
-            multiple = self._search(title='cats')
-            ok_('Fuzzy cats' in multiple and 'Furry cats' in multiple)
-
-            # Case-insensitive
-            eq_(['Furry cats'], self._search(title='furry'))
-
-    def _test_category_filter(self):
-        """Searches can be filtered via category."""
-        v = partial(build_video, self.user)
-        with nested(v(title='Fuzzy cats', category='psa'),
-                    v(title='Furry cats', category='animation')):
-            eq_(['Fuzzy cats'], self._search(title='cats', category='psa'))
-
-    def _test_region_filter(self):
-        """Searches can be filtered via region."""
-        v = partial(build_video, self.user)
-        with nested(v(title='Fuzzy cats', region='americas'),
-                    v(title='Furry cats', region='europe')):
-            eq_(['Fuzzy cats'], self._search(title='cats', region='americas'))
-
-
 @patch.object(send_video_to_vidly, 'delay')
 class UploadTests(TestCase):
     def _post(self, **kwargs):

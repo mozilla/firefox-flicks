@@ -119,7 +119,14 @@ class Video(models.Model, SearchMixin):
         return {'pk': self.pk,
                 'title': self.title,
                 'category': self.category,
-                'region': self.region}
+                'region': self.region,
+                'votes': self.votes,
+                'views': self.views,
+                'created': self.created,
+                'user_id': self.user.id}
+
+    def __unicode__(self):
+        return '%s: %s %s' % (self.id, self.shortlink, self.title)
 
 
 @receiver(models.signals.post_save, sender=Video)
