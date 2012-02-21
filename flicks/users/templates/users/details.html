@@ -43,8 +43,6 @@
     {% endif %}
   </h2>
 
-  {{ sort_filter(search_form) }}
-
   <ol class="videos">
     {% for video in videos %}
       {{ video_item(loop.index, video) }}

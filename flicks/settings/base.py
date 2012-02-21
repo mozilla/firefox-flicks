@@ -64,8 +64,13 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'flicks.users',
     'flicks.videos',
 
+    'csp',
     'django_browserid',
     'south',
+]
+
+MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
+    'csp.middleware.CSPMiddleware',
 ]
 
 AUTH_PROFILE_MODULE = 'flicks.UserProfile'
@@ -128,3 +133,15 @@ BITLY_API_LOGIN = ''
 
 # Secure Cookies
 SESSION_COOKIE_SECURE = True
+
+# Django-CSP
+CSP_IMG_SRC = ("'self'",
+               'http://cf.cdn.vid.ly',
+               'https://www.gravatar.com',
+               'https://secure.gravatar.com',)
+CSP_STYLE_SRC = ("'self'",
+                 'https://fonts.googleapis.com',)
+CSP_SCRIPT_SRC = ("'self'",
+                  'http://browserid.org',
+                  'https://browserid.org',)
+CSP_FRAME_SRC = ('http://s.vid.ly',)

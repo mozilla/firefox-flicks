@@ -1,3 +1,6 @@
 [submodule "src/django-south"]
     path = src/django-south
     url = git://github.com/lambdafu/django-south.git
+[submodule "src/django-csp"]
+    path = src/django-csp
+    url = git://github.com/mozilla/django-csp.git
