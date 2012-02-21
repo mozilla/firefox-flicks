@@ -140,7 +140,9 @@ CSP_IMG_SRC = ("'self'",
                'https://www.gravatar.com',
                'https://secure.gravatar.com',)
 CSP_STYLE_SRC = ("'self'",
-                 'https://fonts.googleapis.com',)
+                 'https://fonts.googleapis.com')
+CSP_FONT_SRC = ("'self'",
+                'https://themes.googleusercontent.com',)
 CSP_SCRIPT_SRC = ("'self'",
                   'http://browserid.org',
                   'https://browserid.org',)
