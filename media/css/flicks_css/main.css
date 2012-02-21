@@ -1172,3 +1172,10 @@ div.field img {
     line-height: 15px;
     text-transform: none;
 }
+
+img.judge {
+    float: left;
+    height: 139px;
+    margin: 5px 15px 10px 0px;
+    width: 139px;
+}
