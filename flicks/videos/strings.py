@@ -10,8 +10,8 @@ _('You\'re impossibly fast and strong.')
 _('You make me feel safe.')
 _('Your fur is soft and warm... and bright orange.')
 _('Your eyes are kind and you\'re always thinking of others.')
-_('You’re never closed and you never compromise.')
-_('Please don’t make me choose. Because it\'ll be him.')
+_('You\'re never closed and you never compromise.')
+_('Please don\'t make me choose. Because it\'ll be him.')
 
 _('Say it. Out loud.')
 
