@@ -27,7 +27,7 @@ div.field.agreement label {
 .home .wrapper {
     background-image: url('../../img/curtains.jpg');
     background-repeat: repeat-x;
-    min-height: 1042px;
+    min-height: 738px;
 }
 
 .content-wrapper, .header-wrapper, .footer-wrapper {
@@ -96,7 +96,6 @@ div.field.error input, div.field.error select {
 .home .headline {
     clear: both;
     float: left;
-    height: 670px;
     position: relative;
     width: 100%;
 }
@@ -125,7 +124,7 @@ body.form .profile-header {
 }
 
 .home ol.videos {
-    padding-top: 100px;
+    padding-top: 50px;
 }
 
 ol.videos li {
@@ -193,7 +192,7 @@ ul.user-actions {
     color: #e05f26;
     font-size: 56px;
     line-height: 66px;
-    margin: 0px 0px 40px 0px;
+    margin: 0px;
     text-transform: uppercase;
 }
 
@@ -206,7 +205,7 @@ ul.user-actions {
 .home .mozilla-presents {
     clear: both;
     height: 73px;
-    margin: 20px auto;
+    margin: 10px auto;
     position: relative;
     width: 734px;
 }
@@ -380,10 +379,6 @@ ul.user-actions {
         float: right;
     }
 
-    .home .headline {
-        height: 880px;
-    }
-
     div.field label {
         clear: both;
         float: left;
@@ -427,12 +422,6 @@ ul.user-actions {
         width: 400px;
     }
 
-    .home .wrapper {
-        background-image: url('../../img/curtains-mid.jpg');
-        background-repeat: repeat-x;
-        min-height: 1327px;
-    }
-
     .home .mozilla-presents {
         width: 480px;
     }
@@ -449,14 +438,19 @@ ul.user-actions {
         margin: 0 auto;
     }
 
+    .home .headline p.flicks-description {
+        width: 300px;
+    }
+
     .home .mozilla-presents img {
+        padding-right: 30px;
         width: 400px;
     }
 
     .home .headline p.flicks-description {
         margin: 80px 0px 20px 0px;
         text-align: center;
-        width: 500px;
+        width: 450px;
     }
 
     .profile-header {
@@ -526,10 +520,6 @@ ul.user-actions {
         text-align: none;
     }
 
-    .home .headline {
-        height: 1220px;
-    }
-
     div.field label {
         clear: both;
         float: left;
@@ -559,12 +549,6 @@ ul.user-actions {
 
     #mozilla-tag {
         display: none;
-    }
-
-    .home .wrapper {
-        background-image: url('../../img/curtains-mobile.jpg');
-        background-repeat: repeat-x;
-        min-height: 1587px;
     }
 
     .home .mozilla-presents {
@@ -670,6 +654,10 @@ body.form {
     background-image: url('../../img/grey-bg.jpg');
 }
 
+body.home {
+    background-image: url('../../img/home-back.jpg');
+}
+
 h1, h2, h3, #header li, .home-link, a.title, .content-wrapper span.title,
 .headline p.intro, .headline p.flicks-description, .user-details .right-col p,
 .home section h3 {
@@ -682,7 +670,7 @@ h1, h2, h3, #header li, .home-link, a.title, .content-wrapper span.title,
     font-size: 18px;
     line-height: 26px;
     margin-bottom: 25px;
-    text-align: left;
+    text-align: justify;
 }
 
 .home .headline .blob p a {
@@ -693,7 +681,7 @@ h1, h2, h3, #header li, .home-link, a.title, .content-wrapper span.title,
     color: #fff;
     font-size: 36px;
     line-height: 46px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     text-transform: uppercase;
 }
 
@@ -804,10 +792,11 @@ h2 {
 #footer {
     background-image: url('../../img/footer-mini.jpg');
     background-repeat: repeat-x;
+    bottom: 0px;
     clear: both;
     float: left;
     height: 95px;
-    margin-top: 30px;
+    position: absolute;
     width: 100%;
 }
 
