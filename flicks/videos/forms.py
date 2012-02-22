@@ -1,5 +1,6 @@
 from django import forms
 
+from elasticutils import S
 from happyforms import Form, ModelForm
 from tower import ugettext_lazy as _lazy
 
@@ -8,7 +9,7 @@ from flicks.videos.models import CATEGORY_CHOICES, REGION_CHOICES, Video
 
 SEARCH_CATEGORY_CHOICES = (('all', _lazy(u'All')),) + CATEGORY_CHOICES
 SEARCH_REGION_CHOICES = (('all', _lazy(u'All')),) + REGION_CHOICES
-SEARCH_SORT_CHOICES = (('upload_date', _lazy(u'Upload Date')),
+SEARCH_SORT_CHOICES = (('created', _lazy(u'Upload Date')),
                        ('votes', _lazy('Votes')),
                        ('views', _lazy('Views')))
 
@@ -35,3 +36,21 @@ class SearchForm(Form):
                                choices=SEARCH_REGION_CHOICES)
     sort_by = forms.ChoiceField(label=_lazy(u'Sort by'),
                                 choices=SEARCH_SORT_CHOICES)
+
+    def videos(self):
+        """Return an elasticutils search object that performs a search
+        matching this form's parameters.
+        """
+        if self.is_valid():
+            s = self.cleaned_data
+            videos = S(Video).order_by('-%s' % s['sort_by'])
+            if s['search']:
+                videos = videos.query(title__text=s['search'])
+            if s['category'] != 'all':
+                videos = videos.filter(category=s['category'])
+            if s['region'] != 'all':
+                videos = videos.filter(region=s['region'])
+        else:
+            videos = []
+
+        return videos

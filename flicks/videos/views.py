@@ -10,7 +10,6 @@ from django.views.decorators.http import require_POST
 from jinja2 import Markup
 
 import commonware.log
-from elasticutils import S
 from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import get_object_or_none, promo_video_shortlink
@@ -30,7 +29,13 @@ log = commonware.log.getLogger('f.videos')
 def recent(request):
     """List all videos, by recency."""
     show_pagination = False
-    videos = Video.objects.filter(state='complete').order_by('-id')
+
+    # Handle search and filtering
+    search_form = SearchForm(request.GET)
+    if search_form.is_valid():
+        videos = search_form.videos()
+    else:
+        videos = Video.objects.filter(state='complete').order_by('-id')
 
     pagination_limit = getattr(settings, 'PAGINATION_LIMIT_FULL', 9)
 
@@ -122,24 +127,6 @@ def promo_video_twilight(request):
              video_embed=Markup(embedCode(promo_video_shortlink('twilight'),
                                           width=600, height=337)))
     return render(request, 'videos/promo.html', d)
-
-
-def search(request):
-    """Display the search page or perform a video search."""
-    search_string = request.GET.get('title', None)
-    if search_string is not None:
-        category = request.GET.get('category', None)
-        region = request.GET.get('region', None)
-
-        videos = S(Video).query(title__text=search_string)
-        if category is not None:
-            videos = videos.filter(category=category)
-        if region is not None:
-            videos = videos.filter(region=region)
-    else:
-        videos = []
-
-    return render(request, 'videos/search_results.html', {'videos': videos})
 
 
 @profile_required

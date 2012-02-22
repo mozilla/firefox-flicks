@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import paginate, sort_filter, video_item %}
+{% from 'shared/macros.html' import paginate, display_search_form, video_item %}
 
 {% if search %}
   {% set title=_('Video Search Results') %}
@@ -12,11 +12,7 @@
 {% block content %}
   <h1>{{ title }}</h1>
   <form>
-    <div>
-      {{ search_form.search }}
-      <button type="submit">{{ _('Search') }}</button>
-    </div>
-    {{ sort_filter(search_form) }}
+    {{ display_search_form(search_form) }}
   </form>
   {% if videos|length > 0 %}
     <ol class="videos">
