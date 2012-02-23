@@ -67,16 +67,19 @@
 {%- endmacro %}
 
 {% macro display_search_form(form) -%}
-  <div>
-    {{ form.search }}
-    <button type="submit">{{ _('Search') }}</button>
-  </div>
   <ul class="sort_filter">
-    {% for f in ['category', 'region', 'sort_by'] %}
+    {% for f in ['category', 'region'] %}
       <li>
         <h3>{{ form[f].label }}</h3>
         {{ form[f] }}
       </li>
     {% endfor %}
+    <li>
+      <h3>{{ _('Search') }}</h3>
+      <div class="search-wrapper">
+        {{ form.search }}
+        <button type="submit" class="search">{{ _('Search') }}</button>
+      </div>
+    </li>
   </ul>
 {%- endmacro %}

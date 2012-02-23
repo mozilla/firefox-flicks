@@ -4,7 +4,7 @@
 {% block page_title %}{{ profile.full_name }}{% endblock %}
 
 {% block titlebar %}
-  {% if user.is_authenticated() and not user == request.user %}
+  {% if request.user.is_active and not profile == user.userprofile %}
     <div class="avatar">
       {{ gravatar_img(profile.user, size=36) }}
     </div>

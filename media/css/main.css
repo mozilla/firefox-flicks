@@ -1,4 +1,5 @@
 .wrapper {
+    position: relative;
     width: 100%;
 }
 
@@ -792,11 +793,10 @@ h2 {
 #footer {
     background-image: url('../img/footer-mini.jpg');
     background-repeat: repeat-x;
-    bottom: 0px;
     clear: both;
     float: left;
     height: 95px;
-    position: absolute;
+    margin-top: 20px;
     width: 100%;
 }
 
@@ -1066,13 +1066,19 @@ ul.user-actions a.button {
     display: block;
     float: none;
     margin: 0 auto;
-    width: 174px;
+    width: 270px;
 }
 
 .partners li {
     list-style-type: none;
-    margin-bottom: 20px;
-    width: 174px;
+    margin-bottom: 40px;
+    text-align: center;
+    width: 270;
+}
+
+.partners li a {
+    clear: both;
+    display: block;
 }
 
 .footer-wrapper {
@@ -1081,12 +1087,65 @@ ul.user-actions a.button {
     text-align: center;
 }
 
-form.search {
-    width: 252px;
+.sort_filter {
+    position: relative;
 }
 
-form.search button {
-    display: none;
+.sort_filter .search-wrapper {
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    width: 200px;
+}
+
+.sort_filter input {
+    float: left;
+    padding: 2px;
+    width: 150px;
+}
+
+.sort_filter .search {
+    background-color: #267CC2;
+    background-image: url('../img/search.png');
+    background-position: 3px;
+    background-repeat: no-repeat;
+    clear: none;
+    display: block;
+    float: left;
+    font-size: 1px;
+    height: 25px;
+    margin: 0px 0px 0px 10px;
+    padding: 3px;
+    text-indent: -9999px;
+    width: 30px;
+}
+
+#share-container {
+    clear: both;
+    float: left;
+    margin: 10px 0px 30px 0px;
+    position: relative;
+    width: 100%;
+}
+
+button.share, #share-container input {
+    display: block;
+    float: left;
+    margin: 0px;
+    width: auto;
+}
+
+button.share {
+    font-size: 13px;
+    font-weight: normal;
+    height: 27px;
+    margin-right: 10px;
+    padding: 0px 5px 0px 5px;
+}
+
+#share-container input {
+    padding: 3px;
+    width: 180px;
 }
 
 .pagination {
