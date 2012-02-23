@@ -25,7 +25,7 @@ div.field.agreement label {
 }
 
 .home .wrapper {
-    background-image: url('../../img/curtains.jpg');
+    background-image: url('../img/curtains.jpg');
     background-repeat: repeat-x;
     min-height: 738px;
 }
@@ -54,7 +54,7 @@ div.field.agreement label {
 
 .social-share {
     background-color: #3f4a52;
-    background: url('../../img/social-logos.png') no-repeat scroll 0pt 50% rgba(63, 74, 82, 0.4);
+    background: url('../img/social-logos.png') no-repeat scroll 0pt 50% rgba(63, 74, 82, 0.4);
     box-shadow: 0px 1px rgba(0, 0, 0, 0.2);
     border: 1px solid #434c54;
     color: #fff;
@@ -113,14 +113,14 @@ div.field.error input, div.field.error select {
 }
 
 .profile-header {
-    background-image: url('../../img/profile-banner.png');
+    background-image: url('../img/profile-banner.png');
     background-repeat: repeat-x;
     height: 61px;
     margin: -10px 0px 5px 0px;
 }
 
 body.form .profile-header {
-    background-image: url('../../img/form-profile-banner.png');
+    background-image: url('../img/form-profile-banner.png');
 }
 
 .home ol.videos {
@@ -211,7 +211,7 @@ ul.user-actions {
 }
 
 .home .mozilla-presents .flair {
-    background-image: url('../../img/flair.png');
+    background-image: url('../img/flair.png');
     background-position: 0px 48px;
     background-repeat: no-repeat;
     color: #fff;
@@ -276,7 +276,7 @@ ul.user-actions {
 }
 
 #mozilla-tag {
-    background-image: url('../../img/mozilla-tab.png');
+    background-image: url('../img/mozilla-tab.png');
     background-repeat: no-repeat;
     display: block;
     font-size: 1px;
@@ -289,7 +289,7 @@ ul.user-actions {
 }
 
 #header {
-    background-image: url('../../img/sub-curtains.png');
+    background-image: url('../img/sub-curtains.png');
     background-repeat: repeat-x;
     border-top: 2px solid #fff;
     height: 56px;
@@ -409,7 +409,7 @@ ul.user-actions {
     }
 
     #header {
-        background-image: url('../../img/sub-curtains-mid.png');
+        background-image: url('../img/sub-curtains-mid.png');
         height: 86px;
     }
 
@@ -454,13 +454,13 @@ ul.user-actions {
     }
 
     .profile-header {
-        background-image: url('../../img/profile-banner-mobile.png');
+        background-image: url('../img/profile-banner-mobile.png');
         background-repeat: repeat-x;
         height: 91px;
     }
 
     body.form .profile-header {
-        background-image: url('../../img/form-profile-banner-mobile.png');
+        background-image: url('../img/form-profile-banner-mobile.png');
     }
 
     ul.user-actions {
@@ -537,7 +537,7 @@ ul.user-actions {
     }
 
     #header {
-        background-image: url('../../img/sub-curtains-mobile.png');
+        background-image: url('../img/sub-curtains-mobile.png');
         height: 116px;
     }
 
@@ -573,13 +573,13 @@ ul.user-actions {
     }
 
     .profile-header {
-        background-image: url('../../img/profile-banner-mobile.png');
+        background-image: url('../img/profile-banner-mobile.png');
         background-repeat: repeat-x;
         height: 91px;
     }
 
     body.form .profile-header {
-        background-image: url('../../img/form-banner-mobile.png');
+        background-image: url('../img/form-banner-mobile.png');
     }
 
     ul.user-actions {
@@ -646,16 +646,16 @@ ul.user-actions {
 }
 
 body {
-    background-image: url('../../img/black-bg.jpg');
+    background-image: url('../img/black-bg.jpg');
     font-family: Georgia, serif;
 }
 
 body.form {
-    background-image: url('../../img/grey-bg.jpg');
+    background-image: url('../img/grey-bg.jpg');
 }
 
 body.home {
-    background-image: url('../../img/home-back.jpg');
+    background-image: url('../img/home-back.jpg');
 }
 
 h1, h2, h3, #header li, .home-link, a.title, .content-wrapper span.title,
@@ -790,7 +790,7 @@ h2 {
 }
 
 #footer {
-    background-image: url('../../img/footer-mini.jpg');
+    background-image: url('../img/footer-mini.jpg');
     background-repeat: repeat-x;
     bottom: 0px;
     clear: both;
@@ -801,11 +801,11 @@ h2 {
 }
 
 body.form #footer {
-    background-image: url('../../img/form-footer-mini.jpg');
+    background-image: url('../img/form-footer-mini.jpg');
 }
 
 .home #footer {
-    background-image: url('../../img/footer.jpg');
+    background-image: url('../img/footer.jpg');
     height: 268px;
 }
 
@@ -835,7 +835,7 @@ body.form #footer {
 }
 
 #header a.logo {
-    background-image: url('../../img/title-en-US.png');
+    background-image: url('../img/title-en-US.png');
     background-repeat: no-repeat;
     display: block;
     float: left;
@@ -995,7 +995,7 @@ body.form button {
 }
 
 .content-wrapper a.vote {
-    background-image: url('../../img/vote.png');
+    background-image: url('../img/vote.png');
     background-position: -30px;
     background-repeat: no-repeat;
     color: #fff;

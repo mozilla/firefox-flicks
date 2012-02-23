@@ -8,8 +8,8 @@ from funfactory.settings_base import *
 MINIFY_BUNDLES = {
     'css': {
         'flicks_css': (
-            'css/flicks_css/less.css',
-            'css/flicks_css/main.css',
+            'css/less.css',
+            'css/main.css',
         ),
     },
     'js': {
