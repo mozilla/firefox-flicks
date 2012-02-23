@@ -34,6 +34,7 @@
     {% block site_css %}
       {{ css('flicks_css') }}
     {% endblock %}
+    <link rel="shortcut icon" type="image/png" href="{{ MEDIA_URL }}img/favicon.png">
   </head>
   <body class="{{ page_type }}"
         data-mobile-cookie="{{ settings.MOBILE_COOKIE }}"
