@@ -147,3 +147,11 @@ CSP_SCRIPT_SRC = ("'self'",
                   'http://browserid.org',
                   'https://browserid.org',)
 CSP_FRAME_SRC = ('http://s.vid.ly',)
+
+# Configure logging
+warning = dict(level=logging.WARNING)
+LOGGING = {
+    'loggers': {
+        'django_browserid': warning,
+    }
+}
