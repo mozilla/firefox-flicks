@@ -13,8 +13,7 @@ class SearchFormTests(TestCase, ESTestCase):
         params = {
             'search': '',
             'category': 'all',
-            'region': 'all',
-            'sort_by': 'created'
+            'region': 'all'
         }
         params.update(kwargs)
         f = SearchForm(params)
@@ -22,12 +21,6 @@ class SearchFormTests(TestCase, ESTestCase):
 
     def setUp(self):
         self.user = self.build_user()
-
-    def test_sorting(self):
-        """Test that results are sorted properly."""
-        with nested(build_video(self.user, votes=5),
-                    build_video(self.user, votes=10)) as (v1, v2):
-            eq_(list(self._videos(sort_by='votes')), [v2, v1])
 
     def test_search(self):
         """Test that basic title searching works."""

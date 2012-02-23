@@ -46,7 +46,7 @@
         <div class="profile-header">
           <div class="content-wrapper">
             {% block titlebar %}
-              {% if user.is_authenticated() %}
+              {% if request.user.is_active %}
                 <div class="avatar">
                   {{ gravatar_img(user, size=36) }}
                 </div>
@@ -55,7 +55,7 @@
             {% endblock %}
 
             <ul class="user-actions">
-              {% if user.is_authenticated() %}
+              {% if request.user.is_active %}
                 <li>
                   <a href="{{ url('flicks.users.my_profile') }}">{{ _('My Profile') }}</a> &#xa0;|
                 </li>

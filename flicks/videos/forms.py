@@ -9,9 +9,6 @@ from flicks.videos.models import CATEGORY_CHOICES, REGION_CHOICES, Video
 
 SEARCH_CATEGORY_CHOICES = (('all', _lazy(u'All')),) + CATEGORY_CHOICES
 SEARCH_REGION_CHOICES = (('all', _lazy(u'All')),) + REGION_CHOICES
-SEARCH_SORT_CHOICES = (('created', _lazy(u'Upload Date')),
-                       ('votes', _lazy('Votes')),
-                       ('views', _lazy('Views')))
 
 
 class UploadForm(ModelForm):
@@ -34,8 +31,6 @@ class SearchForm(Form):
                                  choices=SEARCH_CATEGORY_CHOICES)
     region = forms.ChoiceField(label=_lazy(u'Region'),
                                choices=SEARCH_REGION_CHOICES)
-    sort_by = forms.ChoiceField(label=_lazy(u'Sort by'),
-                                choices=SEARCH_SORT_CHOICES)
 
     def videos(self):
         """Return an elasticutils search object that performs a search
@@ -43,7 +38,7 @@ class SearchForm(Form):
         """
         if self.is_valid():
             s = self.cleaned_data
-            videos = S(Video).order_by('-%s' % s['sort_by'])
+            videos = S(Video).order_by('-created')
             if s['search']:
                 videos = videos.query(title__text=s['search'])
             if s['category'] != 'all':
