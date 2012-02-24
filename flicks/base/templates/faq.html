@@ -52,10 +52,10 @@
     <h2>{{ _('Is the contest open to international entries?') }}</h2>
     <p>
       {% trans %}
-        Yes. This contest is open to anyone in world. We will, however, choose one
-        winner for North America, one winner for Latin America, one winner for Asia,
-        Australia &amp; New Zealand and one winner for Europe &amp; Africa (or whichever
-        of those is closest to where you’re from).
+        Yes. This contest is open to anyone in world. We will, however, choose one winner
+        for North America, one winner for Latin America, one winner for Africa, Australia
+        &amp; New Zealand and one winner for Europe (or whichever of those is closest to
+        where you're from).
       {% endtrans %}
     </p>
 
@@ -109,19 +109,19 @@
     <p>
       {% trans %}
         But there's more! The grand prize winner in each region (North America, Latin America, EU and
-        Asia, Australia &amp; New Zealand) will receive their choice of either $5,000 in video equipment or
-        a film school scholarship. The top two winners in each category get $1,000 in video equipment. Top
-        category winners for each region and the grand prize winner will also get a trip to a Firefox
-        Flicks event in 2012. Any video that makes it into the contest will get a Firefox prize pack. On
-        top of all that, if you win, your flick could be used to share the amazing story of Firefox with
-        the world.
+        Asia, Australia &amp; New Zealand) will receive their choice of either $10,000 (USD) in video
+        equipment or cash to spend on film school expenses or your next project. There will be four
+        category winners in each of the four regions, the winners will get $5,000 (USD) in video
+        equipment or cash to spend on film school expenses or your next project. There will also be
+        runner ups in each of the four categories in each region, these winners will receive $1000
+        (USD) in video equipment or cash to spend on film school expenses or your next project.
       {% endtrans %}
     </p>
 
-    <h2>{{ _('Is there a maximum video length and file size?') }}</h2>
+    <h2>{{ _('Is there a maximum video length?') }}</h2>
     <p>
       {% trans %}
-        The maximum video length is 120 seconds and the maximum file size is **KB.
+        The maximum video length is 120 seconds.
       {% endtrans %}
     </p>
 
@@ -189,9 +189,10 @@
 
     <h2>{{ _('Can I submit a flick in a language other than English?') }}</h2>
     <p>
-      {% trans %}
+      {% trans flicks_email='mailto:firefoxflicks@mozilla.org' %}
         Yes. For non-English entries, you will need to submit a full and accurate script or subtitles. If
-        you're having trouble getting your flick translated, please contact us. We can help.
+        you're having trouble getting your flick translated, please
+        <a href="{{ flicks_email }}">contact us</a>. We can help.
       {% endtrans %}
     </p>
 
@@ -214,7 +215,7 @@
     <h2>{{ _('Will entries be available to the general public?') }}</h2>
     <p>
       {% trans %}
-        Your flick will be posted on the voting site so that people can help choose the grand prize winner.
+        Your flick will be posted on the voting site so that people can watch and upvote their favorite flicks.
       {% endtrans %}
     </p>
 

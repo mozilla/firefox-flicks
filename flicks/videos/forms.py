@@ -1,8 +1,9 @@
 from django import forms
 
+import jinja2
 from elasticutils import S
 from happyforms import Form, ModelForm
-from tower import ugettext_lazy as _lazy
+from tower import ugettext as _, ugettext_lazy as _lazy
 
 from flicks.videos.models import CATEGORY_CHOICES, REGION_CHOICES, Video
 
@@ -17,11 +18,15 @@ class UploadForm(ModelForm):
         model = Video
         fields = ('title', 'upload_url', 'category', 'region', 'description')
 
-    agreement = forms.BooleanField(label=_lazy(u'I agree to the Contest Rules,'
-                                                'Vid.ly terms of service and '
-                                                'give Mozilla permission to '
-                                                'use my video.'),
-                                   required=True)
+    agreement = forms.BooleanField(required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(UploadForm, self).__init__(*args, **kwargs)
+
+        self.fields['agreement'].label = jinja2.Markup(_(
+            u'I agree to the Contest Rules, <a href="{url}" target="_blank">Vid.ly '
+            'terms of service</a> and give Mozilla permission to use my '
+            'video.')).format(url='http://www.encoding.com/sla')
 
 
 class SearchForm(Form):
