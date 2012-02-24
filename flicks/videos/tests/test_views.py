@@ -21,7 +21,7 @@ class UploadTests(TestCase):
     def _post(self, **kwargs):
         """Execute upload view with kwargs as POST arguments."""
         args = {'title': 'Test', 'upload_url': 'http://test.com',
-                'category': 'thirty_spot', 'region': 'americas',
+                'category': 'thirty_spot', 'region': 'america',
                 'agreement': 'on'}
         args.update(kwargs)
         with self.activate('en-US'):
