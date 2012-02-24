@@ -1232,3 +1232,8 @@ img.judge {
     margin: 5px 15px 10px 0px;
     width: 139px;
 }
+
+#signup-public-message {
+    font-size: 14px;
+    margin-top: 20px;
+}
