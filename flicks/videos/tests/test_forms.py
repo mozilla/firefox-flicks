@@ -36,9 +36,9 @@ class SearchFormTests(TestCase, ESTestCase):
 
     def test_region_filter(self):
         """Test that search results can be filtered by region."""
-        with nested(build_video(self.user, region='asia'),
-                    build_video(self.user, region='africa')) as (v1, v2):
-            eq_(list(self._videos(region='africa')), [v2])
+        with nested(build_video(self.user, region='america'),
+                    build_video(self.user, region='europe')) as (v1, v2):
+            eq_(list(self._videos(region='europe')), [v2])
 
     def test_invalid_search(self):
         """Test that an invalid form will return an empty list."""

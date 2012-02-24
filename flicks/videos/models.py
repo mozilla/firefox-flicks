@@ -32,10 +32,10 @@ CATEGORY_CHOICES = (
 )
 
 REGION_CHOICES = (
-    ('americas', _lazy('The Americas')),
+    ('america', _lazy('North America')),
+    ('latin_america', _lazy('Latin America')),
     ('europe', _lazy('Europe')),
-    ('asia', _lazy('Asia, Oceania & Australia')),
-    ('africa', _lazy('Africa'))
+    ('asia_africa_australia', _lazy('Asia, Africa & Australia'))
 )
 
 
