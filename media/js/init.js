@@ -20,4 +20,9 @@ $(function() {
             }
         });
     });
+
+    // Submit on locale selector choice
+    $('form.languages select').change(function(){
+        this.form.submit();
+    });
 });
