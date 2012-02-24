@@ -9,7 +9,7 @@ from django_browserid.auth import get_audience
 from django_browserid.forms import BrowserIDForm
 
 from flicks.base.util import get_object_or_none, redirect
-from flicks.users.forms import UserProfileForm
+from flicks.users.forms import UserProfileCreateForm, UserProfileEditForm
 from flicks.users.models import UserProfile
 from flicks.videos.forms import SearchForm
 from flicks.videos.models import User, Video
@@ -87,14 +87,20 @@ def edit_profile(request):
     """Create and/or edit a user profile."""
     profile = get_object_or_none(UserProfile, pk=request.user.pk)
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=profile)
+        if profile:
+            form = UserProfileEditForm(request.POST, instance=profile)
+        else:
+            form = UserProfileCreateForm(request.POST, instance=profile)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = request.user
             profile.save()
             return redirect('flicks.users.my_profile')
     else:
-        form = UserProfileForm(instance=profile)
+        if profile:
+            form = UserProfileEditForm(instance=profile)
+        else:
+            form = UserProfileCreateForm(instance=profile)
 
     d = dict(profile=profile,
              edit_form=form,

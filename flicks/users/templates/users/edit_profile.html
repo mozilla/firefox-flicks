@@ -61,6 +61,18 @@
         {{ form_section(f, edit_form) }}
       {% endfor %}
 
+      {% if not profile %}
+        <p id="signup-public-message">
+          {% trans %}
+            Your name will be displayed publicly with your video.
+          {% endtrans %}
+        </p>
+        <div class="agreement field">
+          {{ edit_form['agreement'] }}
+          {{ edit_form['agreement'].label_tag() }}
+        </div>
+      {% endif %}
+
       <button type="submit">{{ _('Save') }}</button>
     </form>
   </div>
