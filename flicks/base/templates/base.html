@@ -95,7 +95,7 @@
                      title="{{ _('Legal') }}">{{ _('Legal') }}</a></li>
             </ul>
             <div id="language-switcher">
-              <form id="language-switcher" class="languages go" method="GET">
+              <form class="languages go" method="GET">
                 <label for="language">{{ _('Other languages:') }}</label>
                 <select id="language" name="lang" dir="ltr">
                   {% for code, name in LANGUAGES|dictsort -%}
