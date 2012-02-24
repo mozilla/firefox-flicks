@@ -4,7 +4,7 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>{% block page_title %}{{ _('Home') }}{% endblock %}</title>
+    <title>{{ _('Firefox Flicks') }} : {% block page_title %}{% endblock %}</title>
 
     {# OpenGraph Metadata #}
     <meta property="og:title" content="{% block og_title %}{{ _('Firefox Flicks') }}{% endblock %}">
@@ -34,6 +34,7 @@
     {% block site_css %}
       {{ css('flicks_css') }}
     {% endblock %}
+    <link rel="shortcut icon" type="image/png" href="{{ MEDIA_URL }}img/favicon.png">
   </head>
   <body class="{{ page_type }}"
         data-mobile-cookie="{{ settings.MOBILE_COOKIE }}"
