@@ -70,6 +70,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 ]
 
 MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
+    'commonware.response.middleware.StrictTransportMiddleware',
     'csp.middleware.CSPMiddleware',
 ]
 
