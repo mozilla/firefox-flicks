@@ -43,7 +43,7 @@ class SearchForm(Form):
         """
         if self.is_valid():
             s = self.cleaned_data
-            videos = S(Video).order_by('-created')
+            videos = S(Video).order_by('-created').filter(status='complete')
             if s['search']:
                 videos = videos.query(title__text=s['search'])
             if s['category'] != 'all':
