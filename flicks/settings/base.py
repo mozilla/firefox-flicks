@@ -145,5 +145,10 @@ CSP_FONT_SRC = ("'self'",
                 'https://themes.googleusercontent.com',)
 CSP_SCRIPT_SRC = ("'self'",
                   'http://browserid.org',
-                  'https://browserid.org',)
-CSP_FRAME_SRC = ('http://s.vid.ly',)
+                  'https://browserid.org',
+                  'https://platform.twitter.com',
+                  'https://connect.facebook.net',)
+CSP_FRAME_SRC = ('http://s.vid.ly',
+                 'http://platform.twitter.com',
+                 'https://www.facebook.com',)
+CSP_OPTIONS = ('eval-script',)
