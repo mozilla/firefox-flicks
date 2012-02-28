@@ -15,8 +15,8 @@
   <a href="{{ url('flicks.users.details', user_id=video.user_id) }}"
      class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</a>
   <p class="category">
-    {% set category_link='<a href="#" title="{title}">{title}</a>'|fe(title=video.category) %}
-    {% set country_link='<a href="#" title="{title}">{title}</a>'|fe(title=video.user.userprofile.country) %}
+    {% set category_link='<a href="#" title="{title}">{title}</a>'|fe(title=video.get_category_display()) %}
+    {% set country_link='<a href="#" title="{title}">{title}</a>'|fe(title=video.get_region_display()) %}
 
     {# L10n: Shown below videos to indicate which category and country they were submitted under, such as ':30 Spot for Europe' #}
     {% trans category_link=category_link, country_link=country_link %}
