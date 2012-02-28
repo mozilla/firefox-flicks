@@ -112,13 +112,13 @@ ANON_ALWAYS = True
 # Promo video shortlinks
 PROMO_VIDEOS = {
     'noir': {
-        'en-us': '4j0a6w'
+        'en-us': '3q4s0q'
     },
     'dance': {
-        'en-us': '4j0a6w'
+        'en-us': '3x8n2e'
     },
     'twilight': {
-        'en-us': '4j0a6w'
+        'en-us': '6d9t7l'
     }
 }
 

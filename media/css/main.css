@@ -80,6 +80,13 @@ div.field.agreement label a {
     background-position: -400px 50%;
 }
 
+.share-links .share-widget {
+    float: left;
+    margin-left: 10px;
+    position: relative;
+    width: 50px;
+}
+
 body.form .form-wrapper, ul.errorlist, .content-wrapper .agreement {
     clear: both;
     display: block;
