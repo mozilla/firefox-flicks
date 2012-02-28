@@ -123,7 +123,8 @@ class Video(models.Model, SearchMixin):
                 'votes': self.votes,
                 'views': self.views,
                 'created': self.created,
-                'user_id': self.user.id}
+                'user_id': self.user.id,
+                'state': self.state}
 
     def __unicode__(self):
         return '%s: %s %s' % (self.id, self.shortlink, self.title)

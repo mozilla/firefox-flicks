@@ -18,6 +18,7 @@ def build_video(user, **kwargs):
             'region': 'test',
             'upload_url': 'http://test.com',
             'shortlink': 'test_shortlink',
+            'state': 'complete',
             'votes': 0}
     args.update(kwargs)
 

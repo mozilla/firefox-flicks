@@ -80,6 +80,13 @@ div.field.agreement label a {
     background-position: -400px 50%;
 }
 
+.share-links .share-widget {
+    float: left;
+    margin-left: 10px;
+    position: relative;
+    width: 50px;
+}
+
 body.form .form-wrapper, ul.errorlist, .content-wrapper .agreement {
     clear: both;
     display: block;
@@ -1231,4 +1238,9 @@ img.judge {
     height: 139px;
     margin: 5px 15px 10px 0px;
     width: 139px;
+}
+
+#signup-public-message {
+    font-size: 14px;
+    margin-top: 20px;
 }

@@ -70,6 +70,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 ]
 
 MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
+    'commonware.response.middleware.StrictTransportMiddleware',
     'csp.middleware.CSPMiddleware',
 ]
 
@@ -111,13 +112,13 @@ ANON_ALWAYS = True
 # Promo video shortlinks
 PROMO_VIDEOS = {
     'noir': {
-        'en-us': '4j0a6w'
+        'en-us': '3q4s0q'
     },
     'dance': {
-        'en-us': '4j0a6w'
+        'en-us': '3x8n2e'
     },
     'twilight': {
-        'en-us': '4j0a6w'
+        'en-us': '6d9t7l'
     }
 }
 
@@ -145,5 +146,11 @@ CSP_FONT_SRC = ("'self'",
                 'https://themes.googleusercontent.com',)
 CSP_SCRIPT_SRC = ("'self'",
                   'http://browserid.org',
-                  'https://browserid.org',)
-CSP_FRAME_SRC = ('http://s.vid.ly',)
+                  'https://browserid.org',
+                  'https://platform.twitter.com',
+                  'https://connect.facebook.net',)
+CSP_FRAME_SRC = ('http://s.vid.ly',
+                 'http://platform.twitter.com',
+                 'https://platform.twitter.com',
+                 'https://www.facebook.com',)
+CSP_OPTIONS = ('eval-script',)

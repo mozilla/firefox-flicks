@@ -40,15 +40,15 @@ def request(action, params, notify_url, user_id=VIDLY_USER_ID,
     # Getting an xml version header out of ElementTree is tough.
     # It's easier for our use case to just prepend it.
     xml_str = '<?xml version="1.0"?>%s' % ET.tostring(query)
-    log.info('Vidly Request: %s' % xml_str)
+    log.error('Vidly Request: %s' % xml_str)
 
     res = requests.post(api_url, data={'xml': xml_str})
     if res.status_code != 200:
-        log.warning('Vidly returned non-200 response: %s' % res.status_code)
+        log.error('Vidly returned non-200 response: %s' % res.status_code)
         return None
 
     # Parse response
-    log.info('Vidly Response: %s' % res.content)
+    log.error('Vidly Response: %s' % res.content)
     response_elem = ET.fromstring(res.content)
     message = response_elem.find('Message')
     message_code = response_elem.find('MessageCode')
@@ -113,7 +113,7 @@ def parseNotify(request):
     if xml_str is None:
         return None
 
-    log.info('Vidly Notification: %s' % xml_str)
+    log.error('Vidly Notification: %s' % xml_str)
     result = ET.fromstring(xml_str).find('Result')
 
     # Vid.ly sends two notifications; one as soon as the video is sent, and one

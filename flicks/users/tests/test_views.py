@@ -64,7 +64,7 @@ class EditProfileTests(TestCase):
         user = self.build_user(salt='no.profile', login=True, profile=False)
         eq_(UserProfile.objects.filter(pk=user.pk).exists(), False)
 
-        self._post(bio='asdf', full_name='bob')
+        self._post(bio='asdf', full_name='bob', agreement='on')
         eq_(UserProfile.objects.filter(pk=user.pk).exists(), True)
 
     def test_has_profile(self):
@@ -77,6 +77,6 @@ class EditProfileTests(TestCase):
         profile = UserProfile.objects.get(pk=user.pk)
         eq_(profile.bio, 'asdf')
 
-        self._post(bio='1234', full_name='bob')
+        self._post(bio='1234', full_name='bob', agreement='on')
         profile = UserProfile.objects.get(pk=user.pk)
         eq_(profile.bio, '1234')
