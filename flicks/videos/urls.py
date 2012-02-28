@@ -3,7 +3,7 @@ from django.conf.urls.defaults import patterns, url
 from flicks.videos import views
 
 urlpatterns = patterns('',
-    url(r'^video/(?P<video_id>[\w]+)$', views.details,
+    url(r'^video/(?P<video_id>\d+)$', views.details,
         name='flicks.videos.details'),
     url(r'^add_view/?$', views.ajax_add_view,
         name='flicks.videos.add_view'),
