@@ -52,7 +52,7 @@ def recent(request):
     if paginator.count > pagination_limit:
         show_pagination = True
 
-    d = dict(search_form=SearchForm(),
+    d = dict(search_form=search_form,
              search=False,
              videos=videos.object_list,
              video_pages=videos,
