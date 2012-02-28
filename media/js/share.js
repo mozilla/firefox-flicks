@@ -24,6 +24,12 @@ $.fn.showShare = function (services, options) {
         output = [],
         settings = $.extend({}, options);
 
+    if (this.data('share-shown') === true) {
+        return this;
+    } else {
+        this.data('share-shown', true);
+    }
+
     // Each service is available as a property on $.fn.showShare
     // that returns the script it needs to load and HTML code
     // for the widget.
