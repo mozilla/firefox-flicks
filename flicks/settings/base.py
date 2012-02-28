@@ -151,5 +151,6 @@ CSP_SCRIPT_SRC = ("'self'",
                   'https://connect.facebook.net',)
 CSP_FRAME_SRC = ('http://s.vid.ly',
                  'http://platform.twitter.com',
+                 'https://platform.twitter.com',
                  'https://www.facebook.com',)
 CSP_OPTIONS = ('eval-script',)
