@@ -122,7 +122,7 @@ div.field.error input, div.field.error select {
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
-    width: 600px;
+    width: 500px;
 }
 
 .profile-header {
@@ -1194,7 +1194,6 @@ button.share {
     font-family: Arial, sans-serif;
     font-size: 14px;
 }
-
 
 .sort_filter li {
     float: left;
