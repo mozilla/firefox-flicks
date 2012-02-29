@@ -23,7 +23,8 @@
 
         {% if profile.website %}
           <p>
-            <a href="{{ profile.website }}">{{ profile.website }}</a>
+            <a href="{{ profile.website }}" class="website"
+               title="{{ profile.website }}">{{ profile.website }}</a>
           </p>
         {% endif %}
 

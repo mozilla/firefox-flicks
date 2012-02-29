@@ -1282,3 +1282,11 @@ img.judge {
     text-align: center;
     width: 100%;
 }
+
+a.website {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px;
+}
