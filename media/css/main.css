@@ -1017,13 +1017,18 @@ body.form button {
     margin-bottom: 20px;
 }
 
-.category {
+.region-info {
     width: 252px;
 }
 
-.category span {
+.region-info span {
     color: #fff;
     font-size: 13px;
+}
+
+.region-info .category,
+.region-info .region {
+    color: #C74C09;
 }
 
 .category a {
