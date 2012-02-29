@@ -26,7 +26,7 @@ class UploadForm(ModelForm):
         self.fields['agreement'].label = jinja2.Markup(_(
             u'I agree to the Contest Rules, <a href="{url}" target="_blank">Vid.ly '
             'terms of service</a> and give Mozilla permission to use my '
-            'video.')).format(url='http://www.encoding.com/sla')
+            'video.')).format(url='http://www.encoding.com/terms')
 
 
 class SearchForm(Form):
