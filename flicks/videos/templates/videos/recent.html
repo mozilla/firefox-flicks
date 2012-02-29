@@ -23,6 +23,6 @@
 
     {{ paginate(show_pagination, video_pages, url('flicks.videos.recent')) }}
   {% else %}
-    <p>{{ _('Sorry, no videos found. Please try another search.') }}</p>
+    <p class="search-message">{{ _('Sorry, no videos found. Please try another search.') }}</p>
   {% endif %}
 {% endblock %}

@@ -46,11 +46,15 @@
   <form>
     {{ display_search_form(search_form) }}
   </form>
-  <ol class="videos">
-    {% for video in videos %}
-      {{ video_item(loop.index, video) }}
-    {% endfor %}
-  </ol>
 
-  {{ paginate(show_pagination, video_pages, url('flicks.users.details', user_id=profile.user.id)) }}
+  {% if videos|length > 0 %}
+    <ol class="videos">
+      {% for video in videos %}
+        {{ video_item(loop.index, video) }}
+      {% endfor %}
+    </ol>
+    {{ paginate(show_pagination, video_pages, url('flicks.users.details', user_id=profile.user.id)) }}
+  {% else %}
+    <p class="search-message">{{ _('Sorry, no videos found. Please try another search.') }}</p>
+  {% endif %}
 {% endblock %}

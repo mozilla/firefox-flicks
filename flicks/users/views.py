@@ -54,7 +54,7 @@ def details(request, user_id=None):
              video_pages= videos,
              show_pagination=show_pagination,
              page_type=page_type,
-             search_form=SearchForm(),
+             search_form=search_form,
              user=user,
              profile=user.userprofile)
 

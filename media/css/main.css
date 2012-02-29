@@ -1277,3 +1277,8 @@ img.judge {
     font-size: 14px;
     margin-top: 20px;
 }
+
+.search-message {
+    text-align: center;
+    width: 100%;
+}
