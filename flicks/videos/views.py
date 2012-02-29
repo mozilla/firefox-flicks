@@ -64,7 +64,7 @@ def recent(request):
 
 def details(request, video_id=None):
     """Landing page for video details."""
-    video = get_object_or_404(Video, pk=video_id)
+    video = get_object_or_404(Video, pk=video_id, state='complete')
     viewcount = cached_viewcount(video_id)
     tweet_text = TWEET_TEXT % {'video_title': video.title[0:90],
                                'link': video.bitly_link}
