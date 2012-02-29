@@ -14,7 +14,6 @@ class UserProfile(models.Model):
     # L10n: Bio refers to a short paragraph describing a user.
     bio = models.TextField(blank=True, verbose_name=_lazy(u'Bio'))
     full_name = models.CharField(max_length=100, blank=False,
-                                 default='Unknown',
                                  verbose_name=_lazy(u'Full name'))
 
     # L10n: Website is used as a field name for a user's website URL

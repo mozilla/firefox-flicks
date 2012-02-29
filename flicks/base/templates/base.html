@@ -51,7 +51,7 @@
                 <div class="avatar">
                   {{ gravatar_img(user, size=36) }}
                 </div>
-                <span class="title">{{ user.userprofile.full_name }}</span>
+                <span class="title">{{ profile_name(user) }}</span>
               {% endif %}
             {% endblock %}
 
