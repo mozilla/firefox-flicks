@@ -133,7 +133,8 @@ class Video(models.Model, SearchMixin):
 @receiver(models.signals.post_save, sender=Video)
 def index_video(sender, instance, **kwargs):
     """Update the search index when a video is saved."""
-    index_objects.delay(sender, [instance.id])
+    if instance.state == 'complete':
+        index_objects.delay(sender, [instance.id])
 
 
 @receiver(models.signals.post_delete, sender=Video)
