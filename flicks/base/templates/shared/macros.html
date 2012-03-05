@@ -83,3 +83,26 @@
     </li>
   </ul>
 {%- endmacro %}
+
+{% macro search_results(videos, show_pagination, video_pages, profile=False) -%}
+  {% if videos|length > 0 %}
+    <ol class="videos">
+      {% for video in videos %}
+        {{ video_item(loop.index, video) }}
+      {% endfor %}
+    </ol>
+    {% if profile %}
+      {{ paginate(show_pagination, video_pages, url('flicks.users.details',
+         user_id=profile.user.id)) }}
+    {% else %}
+      {{ paginate(show_pagination, video_pages, url('flicks.videos.recent')) }}
+    {% endif %}
+  {% else %}
+    <p class="search-message">
+      {% trans videos=url('flicks.videos.recent') %}
+        Nothing matching that <em>yet</em>, but we're sure people are working on it!
+        Why not check <a href="{{ videos }}">these videos</a> in the meantime.
+      {% endtrans %}
+    </p>
+  {% endif %}
+{%- endmacro %}

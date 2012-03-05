@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import paginate, display_search_form, video_item %}
+{% from 'shared/macros.html' import paginate, display_search_form, search_results, video_item %}
 
 {% block page_title %}{{ profile.full_name }}{% endblock %}
 
@@ -48,14 +48,5 @@
     {{ display_search_form(search_form) }}
   </form>
 
-  {% if videos|length > 0 %}
-    <ol class="videos">
-      {% for video in videos %}
-        {{ video_item(loop.index, video) }}
-      {% endfor %}
-    </ol>
-    {{ paginate(show_pagination, video_pages, url('flicks.users.details', user_id=profile.user.id)) }}
-  {% else %}
-    <p class="search-message">{{ _('Sorry, no videos found. Please try another search.') }}</p>
-  {% endif %}
+  {{ search_results(videos, show_pagination, video_pages, profile) }}
 {% endblock %}
