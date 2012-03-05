@@ -83,7 +83,11 @@ def ajax_add_view(request):
     if video_id is None:
         raise Http404
 
-    viewcount = add_view(video_id)
+    try:
+        viewcount = add_view(video_id)
+    except ValueError:
+        raise Http404  # video_id is not an integer
+
     if viewcount is None:
         raise Http404
 

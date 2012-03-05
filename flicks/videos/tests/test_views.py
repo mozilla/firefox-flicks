@@ -167,6 +167,11 @@ class AjaxAddViewTests(TestCase):
         response = self._post(None)
         eq_(response.status_code, 404)
 
+    def test_invalid_video_id(self):
+        """If video_id isn't an integer, return a 404."""
+        response = self._post('asdf')
+        eq_(response.status_code, 404)
+
     def test_no_video(self):
         """If there is no video with the given ID, return a 404."""
         response = self._post(9999999)
