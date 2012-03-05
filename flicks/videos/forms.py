@@ -2,6 +2,7 @@ from django import forms
 
 import jinja2
 from elasticutils import S
+from funfactory.urlresolvers import reverse
 from happyforms import Form, ModelForm
 from tower import ugettext as _, ugettext_lazy as _lazy
 
@@ -24,9 +25,11 @@ class UploadForm(ModelForm):
         super(UploadForm, self).__init__(*args, **kwargs)
 
         self.fields['agreement'].label = jinja2.Markup(_(
-            u'I agree to the Contest Rules, <a href="{url}" target="_blank">Vid.ly '
+            u'I agree to the <a href="{contest}" target="_blank">Contest '
+            'Rules<a/>, <a href="{url}" target="_blank">Vid.ly '
             'terms of service</a> and give Mozilla permission to use my '
-            'video.')).format(url='http://www.encoding.com/terms')
+            'video.')).format(url='http://www.encoding.com/terms',
+                              contest=reverse('flicks.base.rules'))
 
 
 class SearchForm(Form):
