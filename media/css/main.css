@@ -1125,6 +1125,10 @@ ul.user-actions a.button {
     display: block;
 }
 
+.partners li img {
+    border: 5px solid #76838d;
+}
+
 .footer-wrapper {
     font-family: Open Sans, sans-serif;
     padding: 20px;
