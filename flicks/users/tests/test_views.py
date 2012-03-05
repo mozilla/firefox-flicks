@@ -80,3 +80,17 @@ class EditProfileTests(TestCase):
         self._post(bio='1234', full_name='bob', agreement='on')
         profile = UserProfile.objects.get(pk=user.pk)
         eq_(profile.bio, '1234')
+
+
+class DetailsTests(TestCase):
+    def _get(self, user_id):
+        with self.activate('en-US'):
+            response = self.client.get(reverse('flicks.users.details',
+                                               kwargs={'user_id': user_id}))
+        return response
+
+    def test_no_profile_404(self):
+        """If the requested user has no profile, return a 404."""
+        user = self.build_user(salt='no.profile', profile=False)
+        response = self._get(user.id)
+        eq_(response.status_code, 404)

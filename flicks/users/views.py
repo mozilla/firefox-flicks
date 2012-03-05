@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
@@ -12,7 +13,7 @@ from flicks.base.util import get_object_or_none, redirect
 from flicks.users.forms import UserProfileCreateForm, UserProfileEditForm
 from flicks.users.models import UserProfile
 from flicks.videos.forms import SearchForm
-from flicks.videos.models import User, Video
+from flicks.videos.models import Video
 
 
 def details(request, user_id=None):
@@ -23,6 +24,7 @@ def details(request, user_id=None):
     else:
         user = get_object_or_404(User, id=user_id)
         page_type = 'secondary user-details'
+    profile = get_object_or_404(UserProfile, user=user)
 
     show_pagination = False
 
@@ -56,7 +58,7 @@ def details(request, user_id=None):
              page_type=page_type,
              search_form=search_form,
              user=user,
-             profile=user.userprofile)
+             profile=profile)
 
     return render(request, 'users/details.html', d)
 
