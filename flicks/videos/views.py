@@ -67,7 +67,7 @@ def details(request, video_id=None):
     video = get_object_or_404(Video, pk=video_id, state='complete')
     viewcount = cached_viewcount(video_id)
     tweet_text = TWEET_TEXT % {'video_title': video.title[0:90],
-                               'link': video.bitly_link}
+                               'link': ''}  # URL is now included via JS
 
     d = dict(video=video,
              viewcount=viewcount,

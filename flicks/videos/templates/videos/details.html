@@ -35,7 +35,9 @@
            title="{{ _('Upvote') }}">{{ video.votes }}</a>
       </div>
       <div id="share-container">
-        <button class="share" data-tweet-text="{{ tweet_text|e }}">Share!</button>
+        <button class="share"
+                data-tweet-text="{{ tweet_text|e }}"
+                data-video-share-link="{{ video.bitly_link }}">Share!</button>
         <div class="share-links">
           <div class="bitly-link">
             <input type="text" value="{{ video.bitly_link }}">
