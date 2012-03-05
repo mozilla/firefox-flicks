@@ -1290,3 +1290,10 @@ a.website {
     white-space: nowrap;
     width: 250px;
 }
+
+html[lang="ja"] body {
+    font-family: "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans",
+    "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", "Verdana",
+    "ＭＳ Ｐゴシック", "MS PGothic", "VL Pゴシック", "Takao Pゴシック",
+    "IPA Pゴシック", sans-serif;
+}
