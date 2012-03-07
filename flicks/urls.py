@@ -1,10 +1,13 @@
 from django.conf import settings
-from django.conf.urls.defaults import *
+from django.conf.urls.defaults import include, patterns, url
+from django.contrib.admin import autodiscover
 from django.shortcuts import render
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from funfactory import admin
+
+
+# Autodiscover admin.py files in each app
+autodiscover()
 
 
 def error_page(request, template, status=None):
@@ -29,11 +32,7 @@ urlpatterns = patterns('',
     url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': '/'},
         name='logout'),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # (r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
 )
 
 

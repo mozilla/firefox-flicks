@@ -66,7 +66,8 @@ class Video(models.Model, SearchMixin):
 
     votes = models.BigIntegerField(default=0)
     views = models.BigIntegerField(default=0)
-    bitly_link_db = models.URLField(verify_exists=False, blank=True, default='')
+    bitly_link_db = models.URLField(verify_exists=False, blank=True, default='',
+                                    verbose_name=u'Saved sharing link (mzl.la)')
 
     @property
     def embed_html(self):

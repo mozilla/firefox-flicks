@@ -42,6 +42,7 @@ LOGIN_REDIRECT_FAILURE = 'flicks.base.home'
 
 AUTHENTICATION_BACKENDS = (
     'django_browserid.auth.BrowserIDBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
@@ -49,7 +50,7 @@ TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
 ]
 
 # Paths that do not need a locale
-SUPPORTED_NONLOCALES += ['notify']
+SUPPORTED_NONLOCALES += ['notify', 'admin']
 
 # Gravatar Settings
 GRAVATAR_URL = 'https://secure.gravatar.com'
@@ -65,6 +66,8 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'flicks.base',
     'flicks.users',
     'flicks.videos',
+
+    'django.contrib.admin',
 
     'csp',
     'django_browserid',
@@ -82,6 +85,7 @@ AUTH_PROFILE_MODULE = 'flicks.UserProfile'
 # apps here:
 JINGO_EXCLUDE_APPS = [
     'admin',
+    'registration',
 ]
 
 # Tells the extract script what files to look for L10n in and what function

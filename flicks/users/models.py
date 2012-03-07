@@ -4,6 +4,13 @@ from django.db import models
 from tower import ugettext_lazy as _lazy
 
 
+# User class extensions
+def user_unicode(self):
+    """Change user string representation to use the user's email address."""
+    return self.email
+User.add_to_class('__unicode__', user_unicode)
+
+
 class UserProfile(models.Model):
     """Additional fields required for a user."""
     user = models.OneToOneField(User, primary_key=True)
