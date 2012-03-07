@@ -1301,3 +1301,7 @@ html[lang="ja"] body {
     "ＭＳ Ｐゴシック", "MS PGothic", "VL Pゴシック", "Takao Pゴシック",
     "IPA Pゴシック", sans-serif;
 }
+
+p.form-errors {
+    color: #ff8383;
+}
