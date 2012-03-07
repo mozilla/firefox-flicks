@@ -12,7 +12,9 @@
     <img src="{{ MEDIA_URL }}img/flicks-logo.png" class="flicks-logo">
     <div class="headline">
       <p class="intro">
-        {{ _('The search for the ultimate Firefox video has begun') }}
+        {% trans %}
+          The search for the <span>ultimate Firefox video</span> has begun
+        {% endtrans %}
       </p>
       <div class="blob">
         <div class="video-promo">
@@ -30,11 +32,11 @@
         <p>
           {% trans prizes=url('flicks.base.prizes'), judges=url('flicks.base.judges'),
                    creative=url('flicks.base.creative') %}
-            Enter our global contest today for your chance at some amazing
-            <a href="{{ prizes }}">prizes</a>. Your video could even be seen by a panel of
-            <a href="{{ judges }}">Hollywood judges</a>. Plus, you'll get a Firefox prize
-            pack just for entering. So read the <a href="{{ creative }}">brief</a> and
-            starting filming. 
+            Enter our global contest today for your chance at some
+            <a href="{{ prizes }}">amazing prizes</a>. Your video could even be seen by
+            a panel of <a href="{{ judges }}">Hollywood judges</a>. Plus, you'll get a
+            Firefox prize pack just for entering. So <a href="{{ creative }}">read the brief</a>
+            and starting filming. 
           {% endtrans %}
         </p>
         <p>
@@ -80,7 +82,7 @@
           {% trans judges=url('flicks.base.judges') %}
             Actor, director, producer and activist Edward Norton has been nominated for two Academy
             Awards and won a Golden Globe along with numerous other awards for his performances.
-            <a href="{{ judges }}" class="judge-promo">See all Judges &#187;</a>
+            <a href="{{ judges }}" class="judge-promo">Meet them all &#187;</a>
           {% endtrans %}
         </p>
       </li>
