@@ -85,6 +85,67 @@ div.field.agreement label a {
     width: auto;
 }
 
+.home .video-promo {
+    display: block;
+    float: left;
+    width: 527px;
+}
+
+.home .video-promo img {
+    height: 300px;
+    width: 527px;
+}
+
+.home .contest-blurb {
+    float: left;
+    margin: -5px 20px 0px;
+    width: 325px;
+}
+
+.home .contest-blurb a#browserid {
+    float: left;
+    margin-top: 32px;
+}
+
+.home .video-wrapper .left-col, .home .video-wrapper .right-col {
+    float: left;
+}
+
+.home .video-wrapper {
+    display: block;
+    margin: 0 auto;
+    width: 896px;
+}
+
+.home .video-wrapper .left-col {
+    width: 570px;
+}
+
+.home .video-wrapper .right-col {
+    width: 320px;
+}
+
+.home .video-wrapper h2 {
+    color: #fab041;
+    text-transform: uppercase;
+}
+
+.home ol.videos {
+    display: block;
+    float: left;
+}
+
+.home ol.videos li {
+    margin: 0px 20px 0px 0px;
+}
+
+.home .video-wrapper h2 {
+    clear: both;
+    display: block;
+    float: left;
+    width: 100%;
+}
+
 .social-share {
     background-color: #3f4a52;
     background: url('../img/social-logos.png') no-repeat scroll 0pt 50% rgba(63, 74, 82, 0.4);
@@ -163,8 +224,14 @@ body.form .profile-header {
     background-image: url('../img/form-profile-banner.png');
 }
 
-.home ol.videos {
-    padding-top: 50px;
+.home .video-blob {
+    background-image: url('../img/home-black-bg.png');
+    background-repeat: repeat-x;
+    clear: both;
+    display: block;
+    float: left;
+    margin-bottom: -21px;
+    width: 100%;
 }
 
 ol.videos li {
@@ -174,6 +241,38 @@ ol.videos li {
     overflow: hidden;
     position: relative;
     width: 252px;
+}
+
+.home ol.videos li p {
+    color: #c74c09;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 5px 0px 20px 0px;
+}
+
+.home a.judge-promo {
+    clear: both;
+    color: #2983c8;
+    display: block;
+    margin-top: 5px;
+    text-decoration: none;
+}
+
+.home ol.judge img {
+    display: block;
+    float: left;
+    height: 97px;
+    margin-top: 0px;
+    width: 97px;
+}
+
+.home ol.judge p {
+    color: #788e9e;
+    display: block;
+    float: left;
+    font-size: 14px;
+    line-height: 20px;
+    width: 200px;
 }
 
 .user-details .left-col {
@@ -231,47 +330,14 @@ ul.user-actions {
 .home .headline p.intro {
     color: #e05f26;
     font-size: 56px;
-    line-height: 66px;
-    margin: 0px;
+    line-height: 56px;
+    margin: 30px 0px;
+    text-align: center;
     text-transform: uppercase;
 }
 
-.home .flicks-logo {
-    display: block;
-    margin: 0 auto;
-    width: 191px;
-}
-
-.home .mozilla-presents {
-    clear: both;
-    height: 73px;
-    margin: 10px auto;
-    position: relative;
-    width: 734px;
-}
-
-.home .mozilla-presents .flair {
-    background-image: url('../img/flair.png');
-    background-position: 0px 48px;
-    background-repeat: no-repeat;
-    color: #fff;
-    float: left;
-    font-family: Lobster;
-    font-size: 28px;
-    height: 65px;
-    padding-top: 20px;
-    text-indent: 20px;
-    width: 270px;
-}
-
-.home .mozilla-presents img {
-    display: block;
-    float: right;
-}
-
-.home .headline .blob {
-    margin: 0 auto;
-    width: 536px;
+.home .headline p.intro span {
+    color: #fab041;
 }
 
 .video-content, .video-view .video-details,
@@ -353,12 +419,47 @@ ul.user-actions {
         width: 400px;
     }
 
+    .home .video-promo {
+        float: none;
+        margin: 0 auto;
+    }
+
+    .home .contest-blurb {
+        width: 100%;
+    }
+
+    .home .contest-blurb a#browserid {
+        float: none;
+        margin: 0 auto;
+    }
+
     .content-wrapper ol.videos {
         width: 600px;
     }
 
     #header ul {
         float: left;
+    }
+
+    .home .video-blob {
+        background-image: url('../img/home-black-bg-mid.png');
+    }
+
+    .home .video-wrapper {
+        width: 650px;
+    }
+
+    .home .video-wrapper .left-col {
+        width: 300px;
+    }
+
+    .home .video-wrapper .right-col {
+        width: 350px;
+    }
+
+    .video-content, .video-content iframe, .video-view .video-details,
+    .video-view p.video-info {
+        width: 400px;
     }
 }
 
@@ -381,21 +482,57 @@ ul.user-actions {
         width: 400px;
     }
 
-    .home .flicks-logo {
-        width: 161px;
+    .home .contest-blurb {
+        float: left;
+        margin: 20px 0px;
+        width: 100%;
     }
 
-    .home .mozilla-presents {
-        background-size: 60%;
+    .home .contest-blurb p {
+        width: 500px;
     }
 
-    .video-content, .video-content iframe, .video-view .video-details,
-    .video-view p.video-info {
-        width: 400px;
+    .home .video-promo {
+        width: 427px;
     }
 
-    .video-content, .video-content iframe {
-        height: 225px;
+    .home .video-promo img {
+        height: 240px;
+        width: 427px;
+    }
+
+    .home .contest-blurb a#browserid {
+        float: none;
+        margin: 0 auto;
+    }
+
+    .home .video-wrapper {
+        display: block;
+        margin: 0 auto;
+        width: 796px;
+    }
+
+    .home .video-blob {
+        background-image: url('../img/home-black-bg-mid.png');
+    }
+
+    .home .video-wrapper {
+        width: 504px;
+    }
+
+    .home .video-wrapper .left-col {
+        clear: both;
+        width: 252px;
+    }
+
+    .home .video-wrapper .right-col {
+        clear: both;
+        padding-bottom: 20px;
+        width: 504px;
+    }
+
+    .home .video-wrapper .right-col p {
+        width: 390px;
     }
 }
 
@@ -417,6 +554,44 @@ ul.user-actions {
     .home section .social-share {
         display: block;
         float: right;
+    }
+
+    .home .contest-blurb {
+        float: left;
+        margin: 20px 0px;
+        width: 100%;
+    }
+
+    .home .video-promo p {
+        width: 300px;
+    }
+
+    .home .video-promo img {
+        height: 240px;
+        width: 427px;
+    }
+
+    .home .contest-blurb {
+        float: left;
+        margin: 20px 0px;
+        width: 100%;
+    }
+
+    .home .contest-blurb p {
+        width: 500px;
+    }
+
+    .home .video-promo {
+        width: 427px;
+    }
+
+    .home .video-promo img {
+        height: 240px;
+        width: 427px;
+    }
+
+    .video-content, .video-content iframe {
+        height: 225px;
     }
 
     div.field label {
@@ -460,37 +635,6 @@ ul.user-actions {
 
     .user-metadata {
         width: 400px;
-    }
-
-    .home .mozilla-presents {
-        width: 480px;
-    }
-
-    .home .mozilla-presents .flair {
-        float: none;
-        margin: 0 auto;
-    }
-
-    .home .mozilla-presents img, .home .headline p.flicks-description {
-        display: block;
-        clear: both;
-        float: none;
-        margin: 0 auto;
-    }
-
-    .home .headline p.flicks-description {
-        width: 300px;
-    }
-
-    .home .mozilla-presents img {
-        padding-right: 30px;
-        width: 400px;
-    }
-
-    .home .headline p.flicks-description {
-        margin: 80px 0px 20px 0px;
-        text-align: center;
-        width: 450px;
     }
 
     .profile-header {
@@ -560,6 +704,49 @@ ul.user-actions {
         text-align: none;
     }
 
+    .home .contest-blurb {
+        float: left;
+        margin: 20px 0px;
+        width: 100%;
+    }
+
+    .home .contest-blurb p {
+        width: 100%;
+    }
+
+    .home .video-promo {
+        width: 252px;
+    }
+
+    .home .video-promo img {
+        height: 141px;
+        width: 252px;
+    }
+
+    .home .video-promo p {
+        width: 100%;
+    }
+
+    
+    .home .video-blob {
+        background-image: url('../img/home-black-bg-mobile.png');
+    }
+
+    .home .video-wrapper {
+        width: 252px;
+    }
+
+    .home .video-wrapper .right-col {
+        clear: both;
+        padding-bottom: 20px;
+        width: 252px;
+    }
+
+    .home .video-wrapper .right-col p {
+        clear: both;
+        width: 100%;
+    }
+
     div.field label {
         clear: both;
         float: left;
@@ -591,27 +778,6 @@ ul.user-actions {
         display: none;
     }
 
-    .home .mozilla-presents {
-        width: 252px;
-    }
-
-    .home .mozilla-presents img, .home .headline p.flicks-description {
-        display: block;
-        clear: both;
-        float: none;
-        margin: 0 auto;
-    }
-
-    .home .mozilla-presents img {
-        width: 252px;
-    }
-
-    .home .headline p.flicks-description {
-        margin: 80px 0px 20px 0px;
-        text-align: center;
-        width: 252px;
-    }
-
     .profile-header {
         background-image: url('../img/profile-banner-mobile.png');
         background-repeat: repeat-x;
@@ -630,14 +796,6 @@ ul.user-actions {
 
     .user-metadata {
         width: 252px;
-    }
-
-    .home .flicks-logo {
-        width: 121px;
-    }
-
-    .home .mozilla-presents {
-        background-size: 35%;
     }
 
     .home .headline .blob {
@@ -885,6 +1043,13 @@ body.form #footer {
     width: 160px;
 }
 
+body.home #header a.logo {
+    background-image: url('../img/home-title-en-US.png');
+    height: 57px;
+    margin-top: 30px;
+    width: 263px;
+}
+
 .content-wrapper p a, .content-wrapper li a {
     color: #398bc8;
     text-decoration: none;
@@ -1010,7 +1175,7 @@ body.form button {
 }
 
 .content-wrapper {
-    min-height: 700px;
+    min-height: 600px;
 }
 
 .content-wrapper p {
