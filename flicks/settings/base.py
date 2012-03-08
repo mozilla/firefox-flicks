@@ -71,12 +71,15 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 
     'csp',
     'django_browserid',
+    'django_statsd',
     'south',
 ]
 
 MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
     'commonware.response.middleware.StrictTransportMiddleware',
     'csp.middleware.CSPMiddleware',
+    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
+    'django_statsd.middleware.GraphiteMiddleware',
 ]
 
 AUTH_PROFILE_MODULE = 'flicks.UserProfile'
@@ -199,4 +202,10 @@ CSP_OPTIONS = ('eval-script',)
 # Blacklist of unacceptable content-types for video URLs
 INVALID_VIDEO_CONTENT_TYPES = [
     'text/'
+]
+
+# Activate statsd patches to time database and cache hits.
+STATSD_PATCHES = [
+    'django_statsd.patches.db',
+    'django_statsd.patches.cache',
 ]

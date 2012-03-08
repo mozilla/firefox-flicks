@@ -2,6 +2,8 @@ src/django-browserid
 src/django-cache-machine
 src/django-csp
 src/django-south
+src/django-statsd
 src/elasticutils
 src/happyforms
 src/pyes
+src/pystatsd

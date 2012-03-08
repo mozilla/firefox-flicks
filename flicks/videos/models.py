@@ -6,6 +6,7 @@ from django.db import models
 from django.dispatch import receiver
 
 from caching.base import CachingManager, CachingMixin
+from django_statsd.clients import statsd
 from elasticutils.models import SearchMixin
 from elasticutils.tasks import index_objects, unindex_objects
 from funfactory.urlresolvers import reverse, split_path
@@ -120,6 +121,7 @@ class Video(models.Model, SearchMixin, CachingMixin):
     def upvote(self):
         """Add an upvote to this video."""
         add_vote.delay(self)
+        statsd.incr('video_upvotes')  # Add to graphite stats display
 
     def views_cached(self):
         """Retrieve the viewcount for this video from the cache."""
