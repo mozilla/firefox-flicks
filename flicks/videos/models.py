@@ -69,6 +69,9 @@ class Video(models.Model, SearchMixin):
     bitly_link_db = models.URLField(verify_exists=False, blank=True, default='',
                                     verbose_name=u'Saved sharing link (mzl.la)')
 
+    judge_mark = models.BooleanField(default=False,
+                                     verbose_name=u'Marked for judges')
+
     @property
     def embed_html(self):
         """Return the escaped HTML code to embed this video."""
@@ -134,11 +137,12 @@ class Video(models.Model, SearchMixin):
 @receiver(models.signals.post_save, sender=Video)
 def index_video(sender, instance, **kwargs):
     """Update the search index when a video is saved."""
-    if instance.state == 'complete':
+    if instance.state == 'complete' and not settings.ES_DISABLED:
         index_objects.delay(sender, [instance.id])
 
 
 @receiver(models.signals.post_delete, sender=Video)
 def unindex_video(sender, instance, **kwargs):
     """Update the search index when a video is deleted."""
-    unindex_objects.delay(sender, [instance.id])
+    if not settings.ES_DISABLED:
+        unindex_objects.delay(sender, [instance.id])

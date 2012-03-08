@@ -185,3 +185,35 @@ class AjaxAddViewTests(TestCase):
             response = self._post(video.id)
             eq_(response.status_code, 200)
             eq_(cached_viewcount(video.id), 11)
+
+
+class DetailsTests(TestCase):
+    def _post(self, video, **kwargs):
+        with self.activate('en-US'):
+            url = reverse('flicks.videos.details',
+                          kwargs={'video_id': video.id})
+            response = self.client.post(url, kwargs)
+        return response
+
+    def setUp(self):
+        self.user = self.build_user()
+
+    def test_staff_mark(self):
+        """Test that staff members can mark videos for later judging."""
+        with build_video(self.user, judge_mark=False) as video:
+            # Log in as staff user
+            self.build_user(salt='staff', login=True, is_staff=True)
+
+            eq_(Video.objects.get(pk=video.pk).judge_mark, False)
+            self._post(video, admin_mark='asdf')
+            eq_(Video.objects.get(pk=video.pk).judge_mark, True)
+
+    def test_nonstaff_no_mark(self):
+        """Test that normal users cannot mark videos for later judging."""
+        with build_video(self.user, judge_mark=False) as video:
+            # Log in as normal user
+            self.build_user(salt='staff', login=True, is_staff=False)
+
+            eq_(Video.objects.get(pk=video.pk).judge_mark, False)
+            self._post(video, admin_mark='asdf')
+            eq_(Video.objects.get(pk=video.pk).judge_mark, False)

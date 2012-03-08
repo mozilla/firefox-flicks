@@ -65,6 +65,13 @@ def recent(request):
 def details(request, video_id=None):
     """Landing page for video details."""
     video = get_object_or_404(Video, pk=video_id, state='complete')
+
+    # Check if admin is marking this video for judging.
+    if request.POST.get('admin_mark', None) is not None:
+        if request.user.is_staff:
+            video.judge_mark = True
+            video.save()
+
     viewcount = cached_viewcount(video_id)
     tweet_text = TWEET_TEXT % {'video_title': video.title[0:90],
                                'link': ''}  # URL is now included via JS

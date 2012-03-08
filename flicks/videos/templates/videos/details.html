@@ -34,6 +34,23 @@
            data-token="{{ csrf_token }}" data-votes="{{ video.votes }}"
            title="{{ _('Upvote') }}">{{ video.votes }}</a>
       </div>
+      <div id="judge_mark">
+        {# Do not mark for l10n: Strings are for admins only! #}
+        {% if user.is_staff %}
+          <p>
+            {% if video.judge_mark %}
+              This video is marked for judging.
+            {% else %}
+              <form method="POST">
+                {{ csrf() }}
+                <button type="submit" name="admin_mark" value="mark">
+                  Mark video for judging
+                </button>
+              </form>
+            {% endif %}
+          </p>
+        {% endif %}
+      </div>
       <div id="share-container">
         <button class="share"
                 data-tweet-text="{{ tweet_text|e }}"
