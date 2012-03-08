@@ -118,13 +118,46 @@ ANON_ALWAYS = True
 # Promo video shortlinks
 PROMO_VIDEOS = {
     'noir': {
-        'en-us': '3q4s0q'
+        'en-us': '3q4s0q',
+        'fr': '9j6k9j',
+        'de': '7r0d1f',
+        'es': '3d1g2d',
+        'ja': '8r9w3d',
+        'lij': '8y4r4v',
+        'nl': '8d0f4b',
+        'pl': '8u7s6j',
+        'sl': '6e3t9x',
+        'sq': '7c9p0d',
+        'zh-cn': '0i8v1n',
+        'zh-tw': '3r1o8k'
     },
     'dance': {
-        'en-us': '3x8n2e'
+        'en-us': '3x8n2e',
+        'fr': '2s8o4r',
+        'de': '5i1u9r',
+        'es': '8r3y6e',
+        'ja': '5o7b0l',
+        'lij': '7a8r6a',
+        'nl': '0m4s3u',
+        'pl': '4v1w8v',
+        'sl': '6v3h2g',
+        'sq': '0o5k7n',
+        'zh-cn': '9w8d4k',
+        'zh-tw': '5q2v4y'
     },
     'twilight': {
-        'en-us': '6d9t7l'
+        'en-us': '6d9t7l',
+        'fr': '4k0a3w',
+        'de': '8n1f7u',
+        'es': '9s9c9d',
+        'ja': '3f9o1c',
+        'lij': '5i0n9p',
+        'nl': '8c5a2f',
+        'pl': '3d8u9p',
+        'sl': '9e2i0u',
+        'sq': '3c8y0t',
+        'zh-cn': '4w9f9x',
+        'zh-tw': '3m0y4x'
     }
 }
 
