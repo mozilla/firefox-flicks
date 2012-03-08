@@ -9,7 +9,6 @@
 
 {% block content %}
   <div class="home">
-    <img src="{{ MEDIA_URL }}img/flicks-logo.png" class="flicks-logo">
     <div class="headline">
       <p class="intro">
         {% trans %}
@@ -29,64 +28,81 @@
             {% endtrans %}
           </p>
         </div>
-        <p>
-          {% trans prizes=url('flicks.base.prizes'), judges=url('flicks.base.judges'),
-                   creative=url('flicks.base.creative') %}
-            Enter our global contest today for your chance at some
-            <a href="{{ prizes }}">amazing prizes</a>. Your video could even be seen by
-            a panel of <a href="{{ judges }}">Hollywood judges</a>. Plus, you'll get a
-            Firefox prize pack just for entering. So <a href="{{ creative }}">read the brief</a>
-            and starting filming. 
-          {% endtrans %}
-        </p>
-        <p>
-          {% trans %}
-            Contest closes May 1, 2012.
-          {% endtrans %}
-        </p>
-        <p>
-          <a href="#" id="browserid">{{ _('Upload a Video') }}</a>
-          <form method="POST" action="{{ url('flicks.users.verify') }}">
-            {{ csrf() }}
-            {{ browserid_form.as_p()|safe }}
-          </form>
-        </p>
+        <div class="contest-blurb">
+          <p>
+            {% trans prizes=url('flicks.base.prizes'), judges=url('flicks.base.judges'),
+                     creative=url('flicks.base.creative') %}
+              Enter our global contest today for your chance at some
+              <a href="{{ prizes }}">amazing prizes</a>. Your video could even be seen by
+              a panel of <a href="{{ judges }}">Hollywood judges</a>. Plus, you'll get a
+              Firefox prize pack just for entering. So <a href="{{ creative }}">read the brief</a>
+              and starting filming. 
+            {% endtrans %}
+          </p>
+          <p>
+            <em>
+              {% trans %}
+                Contest closes May 1, 2012.
+              {% endtrans %}
+            </em>
+          </p>
+          <p>
+            <a href="#" id="browserid">{{ _('Upload a Video') }}</a>
+            <form method="POST" action="{{ url('flicks.users.verify') }}">
+              {{ csrf() }}
+              {{ browserid_form.as_p()|safe }}
+            </form>
+          </p>
+        </div>
       </div>
     </div>
+  </div>
+{% endblock %}
 
-    <ol class="videos judge">
-      <li>
+{% block videocontent %}
+  <div class="video-blob">
+    <div class="video-wrapper">
+      <div class="left-col">
         <h2>{{ _('Trailers') }}</h2>
-        <a href="{{ url('flicks.videos.promo_video_dance') }}" class="title" title="{{ _('Dance')}}">
-          <img src="http://cf.cdn.vid.ly/{{ promo_dance }}/poster.jpg" height="141">
-        </a>
-        <p>
-          {% trans %}
-            He's got the moves. He's got ambition. How far can this fox's feet take him?
-          {% endtrans %}
-        </p>
-      </li>
-      <li>
-        <a href="{{ url('flicks.videos.promo_video_noir') }}" class="title" title="{{ _('Noir')}}">
-          <img src="http://cf.cdn.vid.ly/{{ promo_noir }}/poster.jpg" height="141">
-        </a>
-        <p>
-          {% trans %}
-            The fox meets a damsel in distress, but can he help her?
-          {% endtrans %}
-        </p>
-      </li>
-      <li>
+        <ol class="videos">
+          <li>
+            <a href="{{ url('flicks.videos.promo_video_dance') }}" class="title" title="{{ _('Dance')}}">
+              <img src="http://cf.cdn.vid.ly/{{ promo_dance }}/poster.jpg" height="141">
+            </a>
+            <p>
+              {% trans %}
+                He's got the moves. He's got ambition. How far can this fox's feet take him?
+              {% endtrans %}
+            </p>
+          </li>
+          <li>
+            <a href="{{ url('flicks.videos.promo_video_noir') }}" class="title" title="{{ _('Noir')}}">
+              <img src="http://cf.cdn.vid.ly/{{ promo_noir }}/poster.jpg" height="141">
+            </a>
+            <p>
+              {% trans %}
+                The fox meets a damsel in distress, but can he help her?
+              {% endtrans %}
+            </p>
+          </li>
+        </ol>
+      </div>
+      <div class="right-col">
         <h2>{{ _('Meet a Flicks Judge') }}</h2>
-        <p>
-          {% trans judges=url('flicks.base.judges') %}
-            Actor, director, producer and activist Edward Norton has been nominated for two Academy
-            Awards and won a Golden Globe along with numerous other awards for his performances.
-            <a href="{{ judges }}" class="judge-promo">Meet them all &#187;</a>
-          {% endtrans %}
-        </p>
-      </li>
-    </ol>
+        <ol class="judge">
+          <li>
+            <img src="{{ MEDIA_URL }}img/judge_edward_norton.jpg" class="judge">
+            <p>
+              {% trans judges=url('flicks.base.judges') %}
+                Actor, director, producer and activist Edward Norton has been nominated for two Academy
+                Awards and won a Golden Globe along with numerous other awards for his performances.
+                <a href="{{ judges }}" class="judge-promo">Meet them all &#187;</a>
+              {% endtrans %}
+            </p>
+          </li>
+        </ol>
+      </div>
+    </div>
   </div>
 {% endblock %}
 
