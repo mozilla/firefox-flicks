@@ -30,7 +30,7 @@ class TestCase(test_utils.TestCase):
         activate(old_locale)
 
     def build_user(self, email=None, salt=None, login=False,
-                   profile=True):
+                   profile=True, **kwargs):
         """Retrieve a test user account for this class, creating one if it
         does not exist.
 
@@ -58,6 +58,9 @@ class TestCase(test_utils.TestCase):
             profile = UserProfile.objects.create(user=user)
             user.userprofile = profile
             user.save()
+
+        if kwargs:
+            User.objects.filter(pk=user.pk).update(**kwargs)
 
         return user
 
