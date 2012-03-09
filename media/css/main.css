@@ -168,6 +168,10 @@ div.field.agreement label a {
     background-position: -400px 50%;
 }
 
+.social-share.share-tumblr {
+    background-position: -190px 50%;
+}
+
 .share-links .share-widget {
     float: left;
     margin-left: 10px;
@@ -840,6 +844,15 @@ ul.user-actions {
 
     div.gravatar-content {
         height: 160px;
+    }
+
+    .home section .social-share {
+        font-size: 1px;
+        margin-right: 5px;
+        margin-top: 20px;
+        padding-right: 5px;
+        text-indent: -9999px;
+        width: auto;
     }
 }
 
