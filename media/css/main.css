@@ -69,6 +69,12 @@ div.field.agreement label a {
     width: 896px;
 }
 
+.header-wrapper ul {
+    display: block;
+    float: left;
+    width: 480px;
+}
+
 .home section {
     clear: both;
     display: block;
@@ -399,11 +405,21 @@ ul.user-actions {
 }
 
 #header {
-    background-image: url('../img/sub-curtains.png');
+    background-image: url('../img/sub-curtains-mid.png');
     background-repeat: repeat-x;
     border-top: 2px solid #fff;
     height: 56px;
     padding-top: 20px;
+}
+
+html[lang="es"] #header,
+html[lang="fr"] #header,
+html[lang="ja"] #header,
+html[lang="pl"] #header,
+html[lang="pt-BR"] #header,
+html[lang="tr"] #header {
+    background-image: url('../img/sub-curtains-mid.png');
+    height: 86px;
 }
 
 #header li {
@@ -411,6 +427,15 @@ ul.user-actions {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+    html[lang="es"] .header-wrapper ul,
+    html[lang="fr"] .header-wrapper ul,
+    html[lang="ja"] .header-wrapper ul,
+    html[lang="pl"] .header-wrapper ul,
+    html[lang="pt-BR"] .header-wrapper ul,
+    html[lang="tr"] .header-wrapper ul {
+        width: 400px;
+    }
+
     .content-wrapper, .header-wrapper, .footer-wrapper {
         width: 712px;
     }
@@ -468,6 +493,15 @@ ul.user-actions {
 }
 
 @media only screen and (max-width: 767px) {
+    html[lang="es"] #header,
+    html[lang="fr"] #header,
+    html[lang="ja"] #header,
+    html[lang="pl"] #header,
+    html[lang="pt-BR"] #header,
+    html[lang="tr"] #header {
+        background-image: url('../img/sub-curtains-mobile.png');
+    }
+
     .content-wrapper, .header-wrapper, .info, .footer-wrapper {
         width: 252px;
     }
@@ -691,6 +725,16 @@ ul.user-actions {
         overflow-x: hidden;
     }
 
+    html[lang="es"] #header,
+    html[lang="fr"] #header,
+    html[lang="ja"] #header,
+    html[lang="pl"] #header,
+    html[lang="pt-BR"] #header,
+    html[lang="tr"] #header {
+        background-image: url('../img/sub-curtains-mobile-long.png');
+        height: 136px;
+    }
+
     .errorlist li {
         margin-left: 20px;
         text-align: left;
@@ -853,6 +897,10 @@ ul.user-actions {
         padding-right: 5px;
         text-indent: -9999px;
         width: auto;
+    }
+
+    .header-wrapper ul {
+        width: 255px;
     }
 }
 
