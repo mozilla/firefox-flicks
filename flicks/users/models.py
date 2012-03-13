@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from caching.base import CachingManager, CachingMixin
 from tower import ugettext_lazy as _lazy
 
 
@@ -11,7 +12,7 @@ def user_unicode(self):
 User.add_to_class('__unicode__', user_unicode)
 
 
-class UserProfile(models.Model):
+class UserProfile(models.Model, CachingMixin):
     """Additional fields required for a user."""
     user = models.OneToOneField(User, primary_key=True)
 
@@ -31,3 +32,5 @@ class UserProfile(models.Model):
                             verbose_name=_lazy(u'City'))
     postal_code = models.CharField(max_length=50, blank=True,
                                    verbose_name=_lazy(u'Postal code'))
+
+    objects = CachingManager()

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.dispatch import receiver
 
+from caching.base import CachingManager, CachingMixin
 from elasticutils.models import SearchMixin
 from elasticutils.tasks import index_objects, unindex_objects
 from funfactory.urlresolvers import reverse, split_path
@@ -39,7 +40,7 @@ REGION_CHOICES = (
 )
 
 
-class Video(models.Model, SearchMixin):
+class Video(models.Model, SearchMixin, CachingMixin):
     """Users can only have one video associated with
     their account.
     """
@@ -71,6 +72,8 @@ class Video(models.Model, SearchMixin):
 
     judge_mark = models.BooleanField(default=False,
                                      verbose_name=u'Marked for judges')
+
+    objects = CachingManager()
 
     @property
     def embed_html(self):
