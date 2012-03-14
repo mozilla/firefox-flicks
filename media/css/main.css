@@ -1266,7 +1266,7 @@ body.form button {
 
 .content-wrapper a.vote {
     background-image: url('../img/vote.png');
-    background-position: -30px;
+    background-position: 0px;
     background-repeat: no-repeat;
     color: #fff;
     cursor: pointer;
@@ -1274,20 +1274,19 @@ body.form button {
     font-family: 'Open Sans', sans-serif;
     font-size: 12px;
     font-weight: 400;
-    height: 30px;
-    line-height: 28px;
+    height: 42px;
+    line-height: 43px;
     position: absolute;
     right: 10px;
     text-align: center;
     top: 10px;
-    width: 31px;
+    width: 42px;
     z-index: 5;
 }
 
 .content-wrapper a.vote:hover, .content-wrapper a.vote.on {
-    background-position: 0px;
-    color: #111;
-    width: 30px;
+    background-position: -42px;
+    width: 42px;
 }
 
 ul.user-actions li {
