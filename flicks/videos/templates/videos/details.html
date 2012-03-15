@@ -52,9 +52,10 @@
         {% endif %}
       </div>
       <div id="share-container">
+        {# L10n: Used in the share button below videos for sharing videos on social networks. #}
         <button class="share"
                 data-tweet-text="{{ tweet_text|e }}"
-                data-video-share-link="{{ video.bitly_link }}">Share!</button>
+                data-video-share-link="{{ video.bitly_link }}">{{ _('Share!') }}</button>
         <div class="share-links">
           <div class="bitly-link">
             <input type="text" value="{{ video.bitly_link }}">
