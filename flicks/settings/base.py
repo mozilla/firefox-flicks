@@ -28,8 +28,8 @@ MINIFY_BUNDLES = {
     }
 }
 
-PROD_LANGUAGES = ('de', 'en-US', 'es', 'fr', 'it', 'lij', 'nl', 'pl', 'pt-BR',
-                  'sq')
+PROD_LANGUAGES = ('de', 'en-US', 'es', 'fr', 'it', 'ja', 'lij', 'nl', 'pl',
+                  'pt-BR', 'sq', 'zh-TW')
 
 # Defines the views served for root URLs.
 ROOT_URLCONF = 'flicks.urls'
