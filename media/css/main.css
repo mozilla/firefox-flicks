@@ -189,7 +189,6 @@ body.form .form-wrapper, ul.errorlist, .content-wrapper .agreement {
     clear: both;
     display: block;
     margin: 0 auto;
-    width: 600px;
 }
 
 div.gravatar-content {
@@ -197,7 +196,9 @@ div.gravatar-content {
 }
 
 .content-wrapper ul.errorlist {
-    text-align: center;
+    color: #FF8383;
+    list-style-type: none;
+    margin-left: 230px;
 }
 
 div.field.error input, div.field.error select {
@@ -579,6 +580,10 @@ html[lang="tr"] #header {
         overflow-x: hidden;
     }
 
+    .content-wrapper ul.errorlist {
+        margin-left: 0px;
+    }
+
     .errorlist li {
         margin-left: 20px;
         text-align: left;
@@ -735,6 +740,10 @@ html[lang="tr"] #header {
         height: 136px;
     }
 
+    .content-wrapper ul.errorlist {
+        margin-left: 0px;
+    }
+
     .errorlist li {
         margin-left: 20px;
         text-align: left;
@@ -775,7 +784,7 @@ html[lang="tr"] #header {
         width: 100%;
     }
 
-    
+
     .home .video-blob {
         background-image: url('../img/home-black-bg-mobile.png');
     }

@@ -1,9 +1,12 @@
 from django import forms
+from django.conf import settings
 
 import jinja2
+import requests
 from elasticutils import S
 from funfactory.urlresolvers import reverse
 from happyforms import Form, ModelForm
+from requests.exceptions import RequestException
 from tower import ugettext as _, ugettext_lazy as _lazy
 
 from flicks.videos.models import CATEGORY_CHOICES, REGION_CHOICES, Video
@@ -30,6 +33,37 @@ class UploadForm(ModelForm):
             'terms of service</a> and give Mozilla permission to use my '
             'video.')).format(url='http://www.encoding.com/terms',
                               contest=reverse('flicks.base.rules'))
+
+    def clean_upload_url(self):
+        """Verify that the user-submitted URL doesn't point to a non-video
+        resource.
+        """
+        url = self.cleaned_data['upload_url']
+        try:
+            response = requests.head(url)
+        except RequestException:
+            raise forms.ValidationError(_(
+                "Server error. This video is inaccessible right now. Please "
+                "try again in a few minutes. Maybe go make some popcorn "
+                "while we fix things."))
+
+        # Check if video can be accessed by the server.
+        if response.status_code != 200:
+            raise forms.ValidationError(_(
+                "Oops. It looks like we can't access the video you're trying "
+                "to upload. Please make sure your file is in a publicly "
+                "accessible space."))
+
+        # Validate video content type against blacklist.
+        for content_type in settings.INVALID_VIDEO_CONTENT_TYPES:
+            if response.headers['content-type'].startswith(content_type):
+                raise forms.ValidationError(_(
+                    "It looks like you're trying to upload a video from a "
+                    "video URL. Your video link must point directly at the "
+                    "video file. Please upload your video from a personal "
+                    "server or tool like Dropbox."))
+
+        return url
 
 
 class SearchForm(Form):
