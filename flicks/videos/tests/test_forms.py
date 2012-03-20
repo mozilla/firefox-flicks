@@ -1,10 +1,16 @@
 from contextlib import nested
 
+from django.conf import settings
+
+import requests
 from elasticutils.tests import ESTestCase
+from mock import patch
 from nose.tools import eq_
+from requests.exceptions import RequestException
+from requests.models import Response
 
 from flicks.base.tests import TestCase
-from flicks.videos.forms import SearchForm
+from flicks.videos.forms import SearchForm, UploadForm
 from flicks.videos.tests import build_video
 
 
@@ -43,3 +49,47 @@ class SearchFormTests(TestCase, ESTestCase):
     def test_invalid_search(self):
         """Test that an invalid form will return an empty list."""
         eq_(self._videos(category=''), [])
+
+
+class UploadFormTests(TestCase):
+    def _form(self, **kwargs):
+        params = {
+            'title': 'Test',
+            'upload_url': 'asdf',
+            'category': 'psa',
+            'region': 'america'
+        }
+        params.update(kwargs)
+        return UploadForm(params)
+
+    def _response(self, status_code, content_type):
+        response = Response()
+        response.status_code = status_code
+        response.content_type = content_type
+        return response
+
+    @patch.object(requests, 'head')
+    def test_request_exception(self, head):
+        """If an error occurs while testing the upload url, the form is not
+        valid.
+        """
+        head.side_effect = RequestException
+        form = self._form()
+        eq_(form.is_valid(), False)
+
+    @patch.object(requests, 'head')
+    def test_invalid_status_code(self, head):
+        """If the url returns a non-200 status code, the form is not valid."""
+        head.return_value = self._response(404, '')
+        form = self._form()
+        eq_(form.is_valid(), False)
+
+    @patch.object(requests, 'head')
+    @patch.object(settings, 'INVALID_VIDEO_CONTENT_TYPES', ['invalid/type'])
+    def test_invalid_content_type(self, head):
+        """If the url returns an invalid content-type, the form is not
+        valid.
+        """
+        head.return_value = self._response(200, 'invalid/type; charset=UTF-8')
+        form = self._form();
+        eq_(form.is_valid(), False)

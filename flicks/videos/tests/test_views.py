@@ -1,6 +1,4 @@
 import socket
-from contextlib import nested
-from functools import partial
 
 from django.conf import settings
 from django.core import mail
@@ -10,6 +8,7 @@ from mock import patch
 from nose.tools import eq_, ok_
 
 from flicks.base.tests import TestCache, TestCase
+from flicks.videos.forms import UploadForm
 from flicks.videos.models import Video
 from flicks.videos.tasks import send_video_to_vidly
 from flicks.videos.tests import build_video
@@ -18,7 +17,9 @@ from flicks.videos.util import cached_viewcount
 
 @patch.object(send_video_to_vidly, 'delay')
 class UploadTests(TestCase):
-    def _post(self, **kwargs):
+    @patch.object(UploadForm, 'clean_upload_url')
+    def _post(self, clean_upload_url, **kwargs):
+        clean_upload_url.return_value = kwargs.get('url', 'http://test.com')
         """Execute upload view with kwargs as POST arguments."""
         args = {'title': 'Test', 'upload_url': 'http://test.com',
                 'category': 'thirty_spot', 'region': 'america',

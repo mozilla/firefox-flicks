@@ -195,3 +195,8 @@ CSP_FRAME_SRC = ('http://s.vid.ly',
                  'https://platform.twitter.com',
                  'https://www.facebook.com',)
 CSP_OPTIONS = ('eval-script',)
+
+# Blacklist of unacceptable content-types for video URLs
+INVALID_VIDEO_CONTENT_TYPES = [
+    'text/'
+]
