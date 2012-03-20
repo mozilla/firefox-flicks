@@ -1,9 +1,11 @@
 import xml.etree.ElementTree as ET
+from collections import namedtuple
 
 from django.conf import settings
 
 import commonware.log
 import requests
+from requests.exceptions import RequestException
 
 
 _API_URL = 'https://m.vid.ly/api/'
@@ -18,6 +20,11 @@ VIDLY_OUTPUT_FORMATS = getattr(settings, 'VIDLY_OUTPUT_FORMATS', ['webm'])
 VIDLY_OUTPUT_SIZE = getattr(settings, 'VIDLY_OUTPUT_SIZE', '640x480')
 
 POSTER_URL = 'https://d3fenhwk93s16g.cloudfront.net/%s/poster.jpg'
+
+
+Error = namedtuple('Error', ['shortlink', 'code', 'name', 'desc'])
+Success = namedtuple('Success', ['shortlink', 'source'])
+Task = namedtuple('Task', ['shortlink', 'finished'])
 
 
 def request(action, params, notify_url, user_id=VIDLY_USER_ID,
@@ -44,7 +51,12 @@ def request(action, params, notify_url, user_id=VIDLY_USER_ID,
     xml_str = '<?xml version="1.0"?>%s' % ET.tostring(query)
     log.error('Vidly Request: %s' % xml_str)
 
-    res = requests.post(api_url, data={'xml': xml_str})
+    try:
+        res = requests.post(api_url, data={'xml': xml_str})
+    except RequestException, e:
+        log.error('Error connecting to Vidly: %s' % e)
+        return None
+
     if res.status_code != 200:
         log.error('Vidly returned non-200 response: %s' % res.status_code)
         return None
@@ -54,10 +66,9 @@ def request(action, params, notify_url, user_id=VIDLY_USER_ID,
     response_elem = ET.fromstring(res.content)
     message = response_elem.find('Message')
     message_code = response_elem.find('MessageCode')
-    success = response_elem.find('Success')
 
-    errors_elem = response_elem.find('Errors')
-    errors = _parse_errors(errors_elem) if errors_elem is not None else None
+    success = _parse_success(response_elem.find('Success'))
+    errors = _parse_errors(response_elem.find('Errors'))
 
     return {'code': message_code.text,
             'msg': message.text,
@@ -65,14 +76,27 @@ def request(action, params, notify_url, user_id=VIDLY_USER_ID,
             'errors': errors}
 
 
+def _parse_success(success_elem):
+    """Parse success XML"""
+    if success_elem is None:
+        return None
+    elem = success_elem.find('MediaShortLink')
+    return Success(elem.find('ShortLink').text, elem.find('SourceFile').text)
+
+
 def _parse_errors(errors_elem):
     """Parse error XML."""
     errors = []
-    for error in errors_elem.findall('Error'):
-        errors.append('Code: %s, Name: %s, Description: %s, Suggestion: %s' % (
-            error.find('ErrorCode').text, error.find('ErrorName').text,
-            error.find('Description').text, error.find('Suggestion').text
-        ))
+    if errors_elem is not None:
+        for error in errors_elem.findall('Error'):
+            # If there is no shortlink, we have no use for the error.
+            if error.find('MediaShortLink') is None:
+                continue
+
+            errors.append(Error(error.find('MediaShortLink').text,
+                                error.find('ErrorCode').text,
+                                error.find('ErrorName').text,
+                                error.find('Description').text))
 
     return errors
 
@@ -98,15 +122,12 @@ def addMedia(source_file, notify_url):
     if response is None:
         log.error('Error connecting to vid.ly with file: %s' % source_file)
         return None
-    elif response['code'] in ERROR_CODES:
+    elif response['code'] in ERROR_CODES or response['success'] is None:
         for error in response['errors']:
             log.error('Error converting media: %s; %s' % (source_file, error))
         return None
 
-    success = response['success']
-    shortlink = success.find('MediaShortLink').find('ShortLink').text
-
-    return shortlink
+    return response['success'].shortlink
 
 
 def parseNotify(request):
@@ -116,18 +137,22 @@ def parseNotify(request):
         return None
 
     log.error('Vidly Notification: %s' % xml_str)
-    result = ET.fromstring(xml_str).find('Result')
+    response = ET.fromstring(xml_str)
 
-    # Vid.ly sends two notifications; one as soon as the video is sent, and one
-    # after the video finishes processing. We really only care about the second
-    # one, so here we ignore the first.
-    if result is None:
-        return None
+    # Parse tasks (usually means success) and errors.
+    errors = _parse_errors(response.find('Errors'))
+    tasks = _parse_result(response.find('Result'))
+    return {'tasks': tasks, 'errors': errors}
 
-    task = result.find('Task')
-    return {'user_id': task.find('UserID').text,
-            'shortlink': task.find('MediaShortLink').text,
-            'status': task.find('Status').text}
+
+def _parse_result(result_elem):
+    """Parse result XML and return a list of tasks."""
+    tasks = []
+    if result_elem is not None:
+        for task in result_elem.findall('Task'):
+            tasks.append(Task(task.find('MediaShortLink').text,
+                              task.find('Status').text == 'Finished'))
+    return tasks
 
 
 def embedCode(shortlink, width=600, height=337):

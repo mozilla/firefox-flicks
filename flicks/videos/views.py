@@ -3,7 +3,7 @@ import socket
 
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -19,7 +19,8 @@ from flicks.videos.forms import SearchForm, UploadForm
 from flicks.videos.models import Video
 from flicks.videos.tasks import send_video_to_vidly
 from flicks.videos.util import (add_view, cached_viewcount,
-                                send_video_complete_email)
+                                send_video_complete_email,
+                                send_video_error_email)
 from flicks.videos.vidly import embedCode, parseNotify
 
 
@@ -178,20 +179,30 @@ def upload(request):
 
 @require_POST
 @csrf_exempt
-def notify(request):
+def notify(request, key):
     """Process vid.ly notification requests."""
+    # Verify key matches stored key.
+    if key != settings.NOTIFY_KEY:
+        return HttpResponseForbidden()
+
     notification = parseNotify(request)
 
-    # Verify that user id matches to avoid spoofing (kind've weak)
-    if notification and notification['user_id'] == settings.VIDLY_USER_ID:
-        try:
-            video = Video.objects.get(shortlink=notification['shortlink'])
-            video.state = 'complete'
+    # Check for finished videos.
+    for task in notification['tasks']:
+        if task.finished:
+            video = get_object_or_none(Video, shortlink=task.shortlink)
+            if video is not None:
+                video.state = 'complete'
+                video.save()
+                send_video_complete_email(video)
+
+    # Check for video errors
+    for error in notification['errors']:
+        video = get_object_or_none(Video, shortlink=error.shortlink)
+        if video is not None:
+            video.state = 'error'
             video.save()
-            send_video_complete_email(video)
-        except Video.DoesNotExist:
-            log.warning('Vid.ly notification with shortlink that does not '
-                        'exist: %s' % notification['shortlink'])
+            send_video_error_email(video)
 
     return HttpResponse()
 
