@@ -1,7 +1,8 @@
 <h2>{{ _('Firefox Flicks Youth Contest') }}</h2>
 <p>
-  {% trans %}
+  {% trans link='%s#%s' % (url('flicks.base.prizes'), 'youth-contest') %}
     Are you between the ages of 13-19? Make a 30 second video about
-    Mozilla for the Firefox Flicks Youth Contest and win great prizes.
+    Mozilla for the Firefox Flicks Youth Contest and
+    <a href="{{ link }}">win great prizes</a>.
   {% endtrans %}
 </p>
