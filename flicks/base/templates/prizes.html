@@ -37,6 +37,43 @@
       {% endtrans %}
     </p>
 
+    <h2 id="panavision">{{ _('PANAVISION PRIZE') }}</h2>
+    <p>
+      {% trans link='%s#%s' % (url('flicks.base.rules'), 'panavision') %}
+        The Panavision prize winner (one worldwide) will be awarded the
+        use of Panavision's digital or film camera equipment, lenses and
+        accessories for up to four weeks. The Panavision prize is
+        equivalent to a rental value of $60,000 (USD). For full
+        Panavision prize details, please see the
+        <a href="{{ link }}#panavision">Panavision prize
+        legal requirements</a>.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('FIREFOX FLICKS YOUTH CONTEST') }}</h2>
+    <p>
+      {% trans bavc_link='http://www.bavc.org',
+               rules_link='%s#%s' % (url('flicks.base.rules'), 'youth-contest') %}
+        Firefox Flicks participants between the age of 13-19 are
+        eligible to participate in the Firefox Flicks Youth Contest, in
+        partnership with the <a href="{{ bavc_link }}">Bay Area Video
+        Coalition</a>. The winner will be chosen by a panel of youth judges.
+        Prizes are: $500 (USD) for first place; $300 (USD) for second place
+        and $200 (USD) for third. Full contest rules can be found
+        <a href="{{ rules_link }}">here</a>.
+      {% endtrans %}
+    </p>
+    <p>
+      {% trans link='%s#%s' % (url('flicks.base.rules'), 'parental-consent'),
+               email='firefoxflicks@mozilla.org' %}
+        Please note: If you are under 18 in the U.S. or the age of
+        majority in your country of residence, you must submit a
+        <a href="{{ link }}">Parental Consent form</a> before you
+        upload your video. Please send your completed form to
+        <a href="mailto:{{ email }}">{{ email }}</a>.
+      {% endtrans %}
+    </p>
+
     <h2>{{ _('PRIZE PACKS') }}</h2>
     <p>
       {% trans %}

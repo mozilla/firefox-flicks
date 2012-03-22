@@ -286,6 +286,18 @@ ol.videos li {
     width: 200px;
 }
 
+.home .promo > p {
+    color: #788e9e;
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.home .promo a {
+    color: #2983c8;
+    text-decoration: none;
+}
+
 .user-details .left-col {
     float: left;
     margin-top: 3px;
