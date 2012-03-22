@@ -50,6 +50,14 @@ div.field.agreement label a {
     padding-bottom: 20px;
 }
 
+.content-wrapper div.youth-contest {
+    margin-left: 230px;
+}
+
+.content-wrapper div.youth-contest label {
+    width: 300px;
+}
+
 .content-wrapper p, .content-wrapper ol, .content-wrapper ul {
     clear: both;
     color: #9eaab3;
@@ -596,6 +604,14 @@ html[lang="tr"] #header {
         margin-left: 0px;
     }
 
+    .content-wrapper div.youth-contest {
+        margin-left: 0px;
+    }
+
+    .content-wrapper div.youth-contest label {
+        width: 200px;
+    }
+
     .errorlist li {
         margin-left: 20px;
         text-align: left;
@@ -754,6 +770,14 @@ html[lang="tr"] #header {
 
     .content-wrapper ul.errorlist {
         margin-left: 0px;
+    }
+
+    .content-wrapper div.youth-contest {
+        margin-left: 0px;
+    }
+
+    .content-wrapper div.youth-contest label {
+        width: 200px;
     }
 
     .errorlist li {

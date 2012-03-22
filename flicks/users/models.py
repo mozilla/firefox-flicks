@@ -33,4 +33,7 @@ class UserProfile(models.Model, CachingMixin):
     postal_code = models.CharField(max_length=50, blank=True,
                                    verbose_name=_lazy(u'Postal code'))
 
+    youth_contest = models.BooleanField(default=False,
+                                        verbose_name=u'Youth Contest Opt In')
+
     objects = CachingManager()
