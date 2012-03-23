@@ -190,7 +190,10 @@ div.field.agreement label a {
     float: left;
     margin-left: 10px;
     position: relative;
-    width: 50px;
+}
+
+.share-widget.facebook {
+    width: 120px;
 }
 
 body.form .form-wrapper, ul.errorlist, .content-wrapper .agreement {
