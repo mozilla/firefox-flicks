@@ -193,7 +193,7 @@ CSP_SCRIPT_SRC = ("'self'",
                   'https://platform.twitter.com',
                   'https://connect.facebook.net',
                   'https://statse.webtrendslive.com',)
-CSP_FRAME_SRC = ('http://s.vid.ly',
+CSP_FRAME_SRC = ('https://vid.ly',
                  'http://platform.twitter.com',
                  'https://platform.twitter.com',
                  'https://www.facebook.com',)
