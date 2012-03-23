@@ -1,10 +1,8 @@
-from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import render
-from jinja2 import Markup
 
 from flicks.base.util import absolutify, promo_video_shortlink, redirect
-from flicks.videos.vidly import embedCode
+from flicks.videos.vidly import POSTER_URL
 
 
 def home(request):
@@ -16,6 +14,7 @@ def home(request):
     d = dict(promo_dance=promo_video_shortlink('dance'),
              promo_noir=promo_video_shortlink('noir'),
              promo_twilight=promo_video_shortlink('twilight'),
+             POSTER_URL=POSTER_URL,
              page_type='home')
 
     return render(request, 'home.html', d)

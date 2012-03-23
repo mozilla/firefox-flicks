@@ -1,7 +1,7 @@
 {% macro video_item(idx, video) -%}
   <li id="slide-{{ idx }}">
     <a href="{{ video.details_href }}" class="title" title="{{ video.title }}">
-      <img src="http://cf.cdn.vid.ly/{{ video.shortlink }}/poster.jpg" height="141">
+      <img src="{{ video.poster_href }}" height="141">
     </a>
     <div class="video-details">
       <a href="{{ video.details_href }}"

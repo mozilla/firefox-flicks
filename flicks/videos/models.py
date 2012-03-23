@@ -14,7 +14,7 @@ from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import absolutify, generate_bitly_link
 from flicks.videos.tasks import add_vote
-from flicks.videos.vidly import embedCode
+from flicks.videos.vidly import POSTER_URL, embedCode
 
 
 # Untranslated as they're only seen in the admin interface.
@@ -79,6 +79,11 @@ class Video(models.Model, SearchMixin, CachingMixin):
     def embed_html(self):
         """Return the escaped HTML code to embed this video."""
         return Markup(embedCode(self.shortlink))
+
+    @property
+    def poster_href(self):
+        """Return the url for this video's poster."""
+        return POSTER_URL % self.shortlink
 
     @property
     def details_href(self):

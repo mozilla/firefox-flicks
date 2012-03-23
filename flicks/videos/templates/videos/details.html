@@ -10,7 +10,7 @@
 
 {% block og_title %}{{ video.title }}{% endblock %}
 {% block og_type %}article{% endblock %}
-{% block og_image %}http://cf.cdn.vid.ly/{{ video.shortlink }}/poster.jpg{% endblock %}
+{% block og_image %}{{ video.poster_href }}{% endblock %}
 {% block og_url %}{{ video.details_href }}{% endblock %}
 
 {% block body_data %}

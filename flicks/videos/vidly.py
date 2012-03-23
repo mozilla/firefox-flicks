@@ -17,6 +17,8 @@ VIDLY_USER_KEY = getattr(settings, 'VIDLY_USER_KEY', None)
 VIDLY_OUTPUT_FORMATS = getattr(settings, 'VIDLY_OUTPUT_FORMATS', ['webm'])
 VIDLY_OUTPUT_SIZE = getattr(settings, 'VIDLY_OUTPUT_SIZE', '640x480')
 
+POSTER_URL = 'https://d3fenhwk93s16g.cloudfront.net/%s/poster.jpg'
+
 
 def request(action, params, notify_url, user_id=VIDLY_USER_ID,
             user_key=VIDLY_USER_KEY, api_url=VIDLY_API_URL):
@@ -130,14 +132,16 @@ def parseNotify(request):
 
 def embedCode(shortlink, width=600, height=337):
     """Generate escaped HTML code to embed a vid.ly video."""
+    poster = POSTER_URL % shortlink
     return """
     <iframe frameborder="0"
             name="vidly-frame"
             width="%(width)s"
             height="%(height)s"
-            src="http://s.vid.ly/embeded.html?link=%(shortlink)s&autoplay=false">
+            src="https://vid.ly/embeded.html?link=%(shortlink)s&autoplay=false">
       <a target='_blank' href='http://vid.ly/%(shortlink)s'>
-        <img src='http://cf.cdn.vid.ly/%(shortlink)s/poster.jpg' />
+        <img src='%(poster)s'>
       </a>
     </iframe>
-    """ % {'shortlink': shortlink, 'width': width, 'height': height}
+    """ % {'shortlink': shortlink, 'poster': poster, 'width': width,
+           'height': height}

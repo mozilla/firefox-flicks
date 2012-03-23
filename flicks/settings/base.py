@@ -176,7 +176,7 @@ SESSION_COOKIE_SECURE = True
 
 # Django-CSP
 CSP_IMG_SRC = ("'self'",
-               'http://cf.cdn.vid.ly',
+               'https://d3fenhwk93s16g.cloudfront.net',
                'https://www.gravatar.com',
                'https://secure.gravatar.com',
                'https://statse.webtrendslive.com',)
