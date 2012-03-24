@@ -258,6 +258,7 @@ body.form .profile-header {
 
 ol.videos li {
     float: left;
+    height: 345px;
     list-style-type: none;
     margin: 0px 15px 35px 15px;
     overflow: hidden;
