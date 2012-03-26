@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
+{% from 'shared/macros.html' import share_container %}
 
 {% block page_title %}{{ video_title }}{% endblock %}
+
+{% block site_js %}
+  {{ super() }}
+  {{ js('promo_video') }}
+{% endblock %}
+
+{% block og_title %}{{ video_title }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}
+{% block meta_description -%}
+  <meta property="og:description" content="{{ video_description }}">
+{%- endblock %}
 
 {% block content %}
   <h1>{{ video_title }}</h1>
@@ -13,5 +26,6 @@
     <div class="video-wrapper">
       {{ video_embed }}
     </div>
+    {{ share_container(video_description, request.build_absolute_uri()) }}
   </div>
 {% endblock %}

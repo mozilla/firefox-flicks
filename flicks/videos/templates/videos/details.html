@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import video_details %}
+{% from 'shared/macros.html' import share_container, video_details %}
 
 {% block page_title %}{{ video.title }}{% endblock %}
 
@@ -11,7 +11,7 @@
 {% block og_title %}{{ video.title }}{% endblock %}
 {% block og_type %}article{% endblock %}
 {% block og_image %}{{ video.poster_href }}{% endblock %}
-{% block og_url %}{{ video.details_href }}{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}
 
 {% block body_data %}
   data-video-id="{{ video.id }}"
@@ -51,17 +51,7 @@
           </p>
         {% endif %}
       </div>
-      <div id="share-container">
-        {# L10n: Used in the share button below videos for sharing videos on social networks. #}
-        <button class="share"
-                data-tweet-text="{{ tweet_text|e }}"
-                data-video-share-link="{{ video.bitly_link }}">{{ _('Share!') }}</button>
-        <div class="share-links">
-          <div class="bitly-link">
-            <input type="text" value="{{ video.bitly_link }}">
-          </div>
-        </div>
-      </div>
+      {{ share_container(tweet_text, video.bitly_link) }}
     </div>
     <div class="video-details">
       {{ video_details(video) }}

@@ -36,6 +36,20 @@
   </p>
 {%- endmacro %}
 
+{% macro share_container(tweet_text, share_link) -%}
+  <div id="share-container">
+    {# L10n: Used in the share button below videos for sharing videos on social networks. #}
+    <button class="share"
+            data-tweet-text="{{ tweet_text }}"
+            data-video-share-link="{{ share_link }}">{{ _('Share!') }}</button>
+    <div class="share-links">
+      <div class="bitly-link">
+        <input type="text" value="{{ share_link }}">
+      </div>
+    </div>
+  </div>
+{%- endmacro %}
+
 {% macro form_section(f, form) -%}
   <div class="field {{ 'error' if form.errors[f] }}
     {{ form[f].field.widget.attrs['class'] }}">

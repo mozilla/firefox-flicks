@@ -25,6 +25,10 @@ MINIFY_BUNDLES = {
             'js/views.js',
             'js/share.js',
         ),
+        'promo_video': (
+            'js/libs/script.js',
+            'js/share.js',
+        ),
     }
 }
 
