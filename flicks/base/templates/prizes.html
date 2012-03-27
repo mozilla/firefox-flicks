@@ -64,7 +64,7 @@
       {% endtrans %}
     </p>
     <p>
-      {% trans link='%s#%s' % (url('flicks.base.rules'), 'parental-consent'),
+      {% trans link=[MEDIA_URL, 'parental_consent.pdf']|join,
                email='firefoxflicks@mozilla.org' %}
         Please note: If you are under 18 in the U.S. or the age of
         majority in your country of residence, you must submit a
