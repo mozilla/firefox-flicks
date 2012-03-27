@@ -1230,6 +1230,10 @@ body.form button {
     margin-left: 30px;
 }
 
+.content-wrapper ol.numbered {
+    list-style-type: decimal;
+}
+
 .content-wrapper ol li {
     margin-bottom: 10px;
 }
