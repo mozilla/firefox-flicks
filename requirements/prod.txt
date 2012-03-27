@@ -1,5 +1,8 @@
 -r ../vendor/src/funfactory/funfactory/requirements/prod.txt
 
+statsd==0.3.0
+django-statsd-mozilla==0.2.1
+
 -e git://github.com/jsocol/django-cronjobs.git#egg=django-cronjobs
 -e git://github.com/davedash/elasticutils.git#egg=elasticutils
 # pyes 0.15, other versions... not so great.

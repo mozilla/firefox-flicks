@@ -6,6 +6,7 @@ from django.db import models
 from django.dispatch import receiver
 
 from caching.base import CachingManager, CachingMixin
+from django_statsd.clients import statsd
 from elasticutils.models import SearchMixin
 from elasticutils.tasks import index_objects, unindex_objects
 from funfactory.urlresolvers import reverse, split_path
@@ -14,7 +15,7 @@ from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import absolutify, generate_bitly_link
 from flicks.videos.tasks import add_vote
-from flicks.videos.vidly import embedCode
+from flicks.videos.vidly import POSTER_URL, embedCode
 
 
 # Untranslated as they're only seen in the admin interface.
@@ -81,6 +82,11 @@ class Video(models.Model, SearchMixin, CachingMixin):
         return Markup(embedCode(self.shortlink))
 
     @property
+    def poster_href(self):
+        """Return the url for this video's poster."""
+        return POSTER_URL % self.shortlink
+
+    @property
     def details_href(self):
         """Return the url for this video's details page."""
         return reverse('flicks.videos.details', kwargs={'video_id': self.id})
@@ -115,6 +121,7 @@ class Video(models.Model, SearchMixin, CachingMixin):
     def upvote(self):
         """Add an upvote to this video."""
         add_vote.delay(self)
+        statsd.incr('video_upvotes')  # Add to graphite stats display
 
     def views_cached(self):
         """Retrieve the viewcount for this video from the cache."""

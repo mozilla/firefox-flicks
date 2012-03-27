@@ -1,7 +1,7 @@
 {% macro video_item(idx, video) -%}
   <li id="slide-{{ idx }}">
     <a href="{{ video.details_href }}" class="title" title="{{ video.title }}">
-      <img src="http://cf.cdn.vid.ly/{{ video.shortlink }}/poster.jpg" height="141">
+      <img src="{{ video.poster_href }}" height="141">
     </a>
     <div class="video-details">
       <a href="{{ video.details_href }}"
@@ -34,6 +34,20 @@
       {% endtrans %}
     </span>
   </p>
+{%- endmacro %}
+
+{% macro share_container(tweet_text, share_link) -%}
+  <div id="share-container">
+    {# L10n: Used in the share button below videos for sharing videos on social networks. #}
+    <button class="share"
+            data-tweet-text="{{ tweet_text }}"
+            data-video-share-link="{{ share_link }}">{{ _('Share!') }}</button>
+    <div class="share-links">
+      <div class="bitly-link">
+        <input type="text" value="{{ share_link }}">
+      </div>
+    </div>
+  </div>
 {%- endmacro %}
 
 {% macro form_section(f, form) -%}

@@ -21,7 +21,6 @@ var locale = window.location.pathname.split('/')[1];
 $.fn.showShare = function (services, options) {
     var self = this,
         scripts = [],
-        output = [],
         settings = $.extend({}, options);
 
     if (this.data('share-shown') === true) {
@@ -36,16 +35,12 @@ $.fn.showShare = function (services, options) {
     for (var k = 0; k < services.length; k++) {
         var service = services[k];
         if (service in $.fn.showShare) {
-            var result = $.fn.showShare[service](settings);
+            var result = $.fn.showShare[service](settings),
+                widget = $('<div class="share-widget ' + service + '"></div>')
+                    .append(result.output);
+            this.append(widget);
             scripts.push(result.script);
-            output.push(result.output);
         }
-    }
-
-    // Enclose output in <div class="share-widget"> tags.
-    for (var k = 0; k < output.length; k++) {
-        var widget = $('<div class="share-widget"></div>').append(output[k]);
-        this.append(widget);
     }
 
     // Load scripts asynchronusly, and then show the widgets when they are
@@ -60,7 +55,10 @@ $.fn.showShare = function (services, options) {
 
 // Maps Mozilla-style locales to Facebook-style locales.
 var fbLocaleMap = {'de': 'de_DE', 'en-US': 'en_US', 'es': 'es_LA',
-                   'fr': 'fr_FR', 'pt-BR': 'pt_BR'};
+                   'fr': 'fr_FR', 'it': 'it_IT', 'ja': 'ja_JP',
+                   'nl': 'nl_NL', 'pl': 'pl_PL', 'pt-BR': 'pt_BR',
+                   'ru': 'ru_RU', 'sq': 'sq_AL', 'zh-CN': 'zh_CN',
+                   'zh-TW': 'zh_TW'};
 
 // Facebook Like Button
 $.fn.showShare.facebook = function(options) {
@@ -72,6 +70,10 @@ $.fn.showShare.facebook = function(options) {
         show_faces: 'false'
     }, ('facebook' in options ? options.facebook : {}));
 
+    // Fallback to en-US if locale is unsupported by Facebook.
+    var fbLocale = (locale in fbLocaleMap ? fbLocaleMap[locale] : 'en_US');
+
+    // Build output.
     var output =
             '<div id="fb-root"></div>'
             + '<div class="fb-like" '
@@ -82,7 +84,7 @@ $.fn.showShare.facebook = function(options) {
             + '</div>';
 
     return {
-        script: 'https://connect.facebook.net/' + fbLocaleMap[locale] +
+        script: 'https://connect.facebook.net/' + fbLocale +
             '/all.js#xfbml=1&appId=' + settings.appId,
         output: output
     };
@@ -114,7 +116,7 @@ $.fn.showShare.twitter = function(options) {
 // Flicks-specific init code.
 $('body').on('click', '.share', function() {
     var share = $(this);
-    share.next('.share-links').showShare(['facebook', 'twitter'], {
+    share.next('.share-links').showShare(['twitter', 'facebook'], {
         facebook: {appId: '198137183603911'},
         twitter: {text: share.data('tweet-text'),
                   url: share.data('video-share-link')}

@@ -10,6 +10,7 @@ from django.views.decorators.http import require_POST
 from jinja2 import Markup
 
 import commonware.log
+from django_statsd.clients import statsd
 from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import get_object_or_none, promo_video_shortlink
@@ -92,6 +93,10 @@ def ajax_add_view(request):
 
     try:
         viewcount = add_view(video_id)
+
+        # Increment graphite stats
+        statsd.incr('video_views')  # Total view count
+        statsd.incr('video_views_%s' % video_id)
     except ValueError:
         raise Http404  # video_id is not an integer
 
@@ -157,6 +162,9 @@ def upload(request):
             except socket.timeout:
                 log.warning('Timeout connecting to celery to convert video '
                             'id: %s' % video.id)
+
+            # Update statsd graph for uploads
+            statsd.incr('video_uploads')
 
             return render(request, 'videos/upload_complete.html')
     else:

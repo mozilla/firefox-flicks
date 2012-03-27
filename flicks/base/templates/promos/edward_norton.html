@@ -1,0 +1,13 @@
+<h2>{{ _('Meet a Flicks Judge') }}</h2>
+<ol class="judge">
+  <li>
+    <img src="{{ MEDIA_URL }}img/judge_edward_norton.jpg" class="judge">
+    <p>
+      {% trans judges=url('flicks.base.judges') %}
+        Actor, director, producer and activist Edward Norton has been nominated for two Academy
+        Awards and won a Golden Globe along with numerous other awards for his performances.
+        <a href="{{ judges }}" class="judge-promo">Meet them all &#187;</a>
+      {% endtrans %}
+    </p>
+  </li>
+</ol>

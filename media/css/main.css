@@ -50,6 +50,14 @@ div.field.agreement label a {
     padding-bottom: 20px;
 }
 
+.content-wrapper div.youth-contest {
+    margin-left: 230px;
+}
+
+.content-wrapper div.youth-contest label {
+    width: 300px;
+}
+
 .content-wrapper p, .content-wrapper ol, .content-wrapper ul {
     clear: both;
     color: #9eaab3;
@@ -182,7 +190,10 @@ div.field.agreement label a {
     float: left;
     margin-left: 10px;
     position: relative;
-    width: 50px;
+}
+
+.share-widget.facebook {
+    width: 120px;
 }
 
 body.form .form-wrapper, ul.errorlist, .content-wrapper .agreement {
@@ -247,6 +258,7 @@ body.form .profile-header {
 
 ol.videos li {
     float: left;
+    height: 345px;
     list-style-type: none;
     margin: 0px 15px 35px 15px;
     overflow: hidden;
@@ -284,6 +296,18 @@ ol.videos li {
     font-size: 14px;
     line-height: 20px;
     width: 200px;
+}
+
+.home .promo > p {
+    color: #788e9e;
+    display: block;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.home .promo a {
+    color: #2983c8;
+    text-decoration: none;
 }
 
 .user-details .left-col {
@@ -584,6 +608,14 @@ html[lang="tr"] #header {
         margin-left: 0px;
     }
 
+    .content-wrapper div.youth-contest {
+        margin-left: 0px;
+    }
+
+    .content-wrapper div.youth-contest label {
+        width: 200px;
+    }
+
     .errorlist li {
         margin-left: 20px;
         text-align: left;
@@ -742,6 +774,14 @@ html[lang="tr"] #header {
 
     .content-wrapper ul.errorlist {
         margin-left: 0px;
+    }
+
+    .content-wrapper div.youth-contest {
+        margin-left: 0px;
+    }
+
+    .content-wrapper div.youth-contest label {
+        width: 200px;
     }
 
     .errorlist li {
@@ -1188,6 +1228,10 @@ body.form button {
 .content-wrapper ol {
     list-style-type: disc;
     margin-left: 30px;
+}
+
+.content-wrapper ol.numbered {
+    list-style-type: decimal;
 }
 
 .content-wrapper ol li {

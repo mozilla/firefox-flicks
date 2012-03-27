@@ -25,6 +25,10 @@ MINIFY_BUNDLES = {
             'js/views.js',
             'js/share.js',
         ),
+        'promo_video': (
+            'js/libs/script.js',
+            'js/share.js',
+        ),
     }
 }
 
@@ -71,12 +75,15 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 
     'csp',
     'django_browserid',
+    'django_statsd',
     'south',
 ]
 
 MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
     'commonware.response.middleware.StrictTransportMiddleware',
     'csp.middleware.CSPMiddleware',
+    'django_statsd.middleware.GraphiteRequestTimingMiddleware',
+    'django_statsd.middleware.GraphiteMiddleware',
 ]
 
 AUTH_PROFILE_MODULE = 'flicks.UserProfile'
@@ -176,7 +183,7 @@ SESSION_COOKIE_SECURE = True
 
 # Django-CSP
 CSP_IMG_SRC = ("'self'",
-               'http://cf.cdn.vid.ly',
+               'https://d3fenhwk93s16g.cloudfront.net',
                'https://www.gravatar.com',
                'https://secure.gravatar.com',
                'https://statse.webtrendslive.com',)
@@ -190,7 +197,7 @@ CSP_SCRIPT_SRC = ("'self'",
                   'https://platform.twitter.com',
                   'https://connect.facebook.net',
                   'https://statse.webtrendslive.com',)
-CSP_FRAME_SRC = ('http://s.vid.ly',
+CSP_FRAME_SRC = ('https://vid.ly',
                  'http://platform.twitter.com',
                  'https://platform.twitter.com',
                  'https://www.facebook.com',)
@@ -199,4 +206,10 @@ CSP_OPTIONS = ('eval-script',)
 # Blacklist of unacceptable content-types for video URLs
 INVALID_VIDEO_CONTENT_TYPES = [
     'text/'
+]
+
+# Activate statsd patches to time database and cache hits.
+STATSD_PATCHES = [
+    'django_statsd.patches.db',
+    'django_statsd.patches.cache',
 ]

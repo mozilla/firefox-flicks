@@ -92,3 +92,12 @@ BITLY_API_LOGIN = ''
 BITLY_API_KEY = ''
 
 SESSION_COOKIE_SECURE = not DEV
+
+# statsd
+STATSD_HOST = 'localhost'
+STATSD_PORT = 8125
+STATSD_PREFIX = 'flicks'
+
+# Set to 'django_statsd.clients.normal' for normal statsd operation, or
+# 'django_statsd.clients.toolbar' to integrate with django-debug-toolbar
+STATSD_CLIENT = 'django_statsd.clients.null'
