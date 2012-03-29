@@ -92,7 +92,7 @@ def ajax_add_view(request):
         raise Http404
 
     try:
-        viewcount = add_view(video_id)
+        viewcount = add_view(int(video_id))
 
         # Increment graphite stats
         statsd.incr('video_views')  # Total view count

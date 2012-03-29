@@ -173,6 +173,11 @@ class AjaxAddViewTests(TestCase):
         response = self._post('asdf')
         eq_(response.status_code, 404)
 
+        # Test with control characters (bug 737564)
+        # Test cache will only raise a warning on this.
+        response = self._post(u"51 OR X='ss")
+        eq_(response.status_code, 404)
+
     def test_no_video(self):
         """If there is no video with the given ID, return a 404."""
         response = self._post(9999999)
