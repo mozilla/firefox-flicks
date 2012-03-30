@@ -27,10 +27,8 @@ def add_view(video_id):
     key = VIEWS_KEY % video_id
     viewcount = cache.incr(key)
     save_viewcount = (
-        (viewcount < 10) or
-        (viewcount < 100 and viewcount % 5 == 0) or
-        (viewcount < 1000 and viewcount % 25 == 0) or
-        (viewcount > 1000 and viewcount % 100 == 0)
+        (viewcount <= 100) or
+        (viewcount > 100 and viewcount % 10 == 0)
     )
 
     if save_viewcount:
