@@ -38,7 +38,7 @@ class AddViewTests(TestCase):
         based on the view count.
         """
         # Test each pair of (viewcount, # of view per save)
-        for viewcount, per_save in [(0, 1), (10, 5), (100, 25), (1000, 100)]:
+        for viewcount, per_save in [(0, 1), (100, 10)]:
             with build_video(self.user, views=viewcount) as video:
                 # Add per_save - 1 views and ensure each time that the DB
                 # hasn't been written to.

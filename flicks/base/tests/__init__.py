@@ -86,3 +86,6 @@ class TestCache(object):
     def incr(self, id):
         self.store[id] += 1
         return self.store[id]
+
+    def clear(self):
+        self.store = {}
