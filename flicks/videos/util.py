@@ -32,7 +32,9 @@ def add_view(video_id):
     )
 
     if save_viewcount:
-        Video.objects.filter(id=video_id).update(views=viewcount)
+        v = Video.objects.get(id=video_id)
+        v.views = viewcount
+        v.save()
 
     return viewcount
 
