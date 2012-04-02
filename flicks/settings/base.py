@@ -156,7 +156,7 @@ PROMO_VIDEOS = {
         'en-us': '6d9t7l',
         'fr': '4k0a3w',
         'de': '8n1f7u',
-        'es': '9s9c9d',
+        'es': '0y9t0e',
         'ja': '3f9o1c',
         'lij': '5i0n9p',
         'nl': '8c5a2f',
