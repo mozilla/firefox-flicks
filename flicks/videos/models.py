@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.db import models
 from django.dispatch import receiver
 
@@ -156,3 +157,10 @@ def unindex_video(sender, instance, **kwargs):
     """Update the search index when a video is deleted."""
     if not settings.ES_DISABLED:
         unindex_objects.delay(sender, [instance.id])
+
+
+@receiver(models.signals.post_save, sender=Video)
+def post_save(sender, instance, **kwargs):
+    """Invalidate VIEWS_KEY when video is saved."""
+    from flicks.videos.util import VIEWS_KEY
+    cache.delete(VIEWS_KEY % instance.id)
