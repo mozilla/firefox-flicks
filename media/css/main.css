@@ -1215,6 +1215,7 @@ div.home {
 }
 
 button {
+    cursor: pointer;
     float: left;
     line-height: 18px;
     margin-top: 20px;
