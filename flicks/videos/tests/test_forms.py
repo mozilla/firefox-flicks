@@ -55,9 +55,10 @@ class UploadFormTests(TestCase):
     def _form(self, **kwargs):
         params = {
             'title': 'Test',
-            'upload_url': 'asdf',
+            'upload_url': 'http://test.com',
             'category': 'psa',
-            'region': 'america'
+            'region': 'america',
+            'agreement': True
         }
         params.update(kwargs)
         return UploadForm(params)
@@ -65,7 +66,8 @@ class UploadFormTests(TestCase):
     def _response(self, status_code, content_type):
         response = Response()
         response.status_code = status_code
-        response.content_type = content_type
+        if content_type is not None:
+            response.headers['content-type'] = content_type
         return response
 
     @patch.object(requests, 'head')
@@ -76,6 +78,7 @@ class UploadFormTests(TestCase):
         head.side_effect = RequestException
         form = self._form()
         eq_(form.is_valid(), False)
+        eq_(form.errors.keys(), ['upload_url'])
 
     @patch.object(requests, 'head')
     def test_invalid_status_code(self, head):
@@ -83,6 +86,7 @@ class UploadFormTests(TestCase):
         head.return_value = self._response(404, '')
         form = self._form()
         eq_(form.is_valid(), False)
+        eq_(form.errors.keys(), ['upload_url'])
 
     @patch.object(requests, 'head')
     @patch.object(settings, 'INVALID_VIDEO_CONTENT_TYPES', ['invalid/type'])
@@ -93,3 +97,21 @@ class UploadFormTests(TestCase):
         head.return_value = self._response(200, 'invalid/type; charset=UTF-8')
         form = self._form();
         eq_(form.is_valid(), False)
+        eq_(form.errors.keys(), ['upload_url'])
+
+    @patch.object(requests, 'head')
+    def test_no_content_type(self, head):
+        """If the url does not return a content-type, the form is valid."""
+        head.return_value = self._response(200, None)
+        form = self._form();
+        eq_(form.is_valid(), True)
+
+    @patch.object(requests, 'head')
+    @patch.object(settings, 'INVALID_VIDEO_CONTENT_TYPES', ['invalid/type'])
+    def test_success(self, head):
+        """If the url returns a valid content-type and a 200 OK, the form is
+        valid.
+        """
+        head.return_value = self._response(200, 'video/mpeg')
+        form = self._form();
+        eq_(form.is_valid(), True)
