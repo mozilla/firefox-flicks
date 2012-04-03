@@ -1221,6 +1221,7 @@ button {
 }
 
 body.form button {
+    cursor: pointer;
     float: none;
     margin: 0 auto;
 }
