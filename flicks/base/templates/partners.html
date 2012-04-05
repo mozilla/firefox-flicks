@@ -54,5 +54,47 @@
            target="_blank">Adobe</a>
       </li>
     </ul>
+
+    <h1 id="events">{{ _('Events') }}</h1>
+
+    <h2>
+      {% trans href='http://www.bafici.gov.ar/home10/web/en/index.html' %}
+        April 19, 2012 &mdash; <a href="{{ href }}">Buenos Aires International
+        Independent Film Festival</a>
+      {% endtrans %}
+    </h2>
+    <p>
+      {% trans %}
+        A Mozilla event featuring a screening of a few early Firefox
+        Flicks entries from Latin America.
+      {% endtrans %}
+    </p>
+
+    <h2>
+      {% trans href='http://fest08.sffs.org/' %}
+        April 25, 2012 &mdash; <a href="{{ href }}">San Francisco International
+        Film Festival</a>
+      {% endtrans %}
+    </h2>
+    <p>
+      {% trans %}
+        A Mozilla event featuring a screening of a few early Firefox
+        Flicks entries from North America.
+      {% endtrans %}
+    </p>
+
+    <h2>{{ _('May 1, 2012 &mdash; Firefox Flicks Submissions Closed') }}</h2>
+
+    <h2>
+      {% trans href='http://www.festival-cannes.com/' %}
+        May 17, 2012 &mdash; <a href="{{ href }}">Cannes International Film Festival</a>
+      {% endtrans %}
+    </h2>
+    <p>
+      {% trans %}
+        Wrap Party for Firefox Flicks honoring regional winners and the
+        winner of the Panavision prize package.
+      {% endtrans %}
+    </p>
   </div>
 {% endblock %}

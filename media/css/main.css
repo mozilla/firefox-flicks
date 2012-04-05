@@ -1160,7 +1160,7 @@ body.home #header a.logo {
     width: 263px;
 }
 
-.content-wrapper p a, .content-wrapper li a {
+.content-wrapper p a, .content-wrapper li a, .content-wrapper h2 a {
     color: #398bc8;
     text-decoration: none;
 }
