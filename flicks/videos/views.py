@@ -114,6 +114,8 @@ def promo_video_noir(request):
                                      'can he help her? Get inspired for your '
                                      'Firefox Flicks entry by checking out '
                                      'our video.'),
+             tweet_text=_lazy('The fox meets a damsel in distress, but can he '
+                              'help her?'),
              page_type='videos',
              video_embed=Markup(embedCode(promo_video_shortlink('noir'),
                                           width=600, height=337)))
@@ -127,6 +129,8 @@ def promo_video_dance(request):
                                      "How far can this fox's feet take him? "
                                      "Get inspired for your Firefox Flicks "
                                      "entry by checking out our video."),
+             tweet_text=_lazy("He's got the moves. He's got ambition. How far "
+                              "can this fox's feet take him?"),
              page_type='videos',
              video_embed=Markup(embedCode(promo_video_shortlink('dance'),
                                           width=600, height=337)))
@@ -135,11 +139,11 @@ def promo_video_dance(request):
 
 def promo_video_twilight(request):
     """Twilight parody promo video."""
+    desc = _lazy('A teenage girl learns the truth about the fox. Get inspired '
+                 'for your Firefox Flicks entry by checking out our video.')
     d = dict(video_title=_lazy('Twilight'),
-             video_description=_lazy('A teenage girl learns the truth about '
-                                     'the fox. Get inspired for your Firefox '
-                                     'Flicks entry by checking out our '
-                                     'video.'),
+             video_description=desc,
+             tweet_text=desc,
              page_type='videos',
              video_embed=Markup(embedCode(promo_video_shortlink('twilight'),
                                           width=600, height=337)))
