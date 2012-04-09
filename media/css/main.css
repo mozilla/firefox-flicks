@@ -176,14 +176,19 @@ div.field.agreement label a {
     text-transform: uppercase;
     vertical-align: text-bottom;
     -moz-transition: border 0.3s ease-out 0s;
+    width: 50px;
 }
 
 .social-share.share-facebook {
-    background-position: -400px 50%;
+    background-position: -269px 50%;
 }
 
 .social-share.share-tumblr {
-    background-position: -190px 50%;
+    background-position: -130px 50%;
+}
+
+.social-share.share-flickr {
+    background-position: -425px 50%;
 }
 
 .share-links .share-widget {
@@ -264,6 +269,10 @@ ol.videos li {
     overflow: hidden;
     position: relative;
     width: 252px;
+}
+
+.home ol.videos li {
+    height: 245px;
 }
 
 .home ol.videos li p {
@@ -491,6 +500,26 @@ html[lang="tr"] #header {
         width: 600px;
     }
 
+    .home section .social-share {
+        background-position: -10px 50%;
+        display: block;
+        float: right;
+        margin-right: 0px;
+        padding: 6px 12px 6px 45px;
+    }
+
+    .home section .social-share.share-facebook {
+        background-position: -279px 50%;
+    }
+
+    .home section .social-share.share-tumblr {
+        background-position: -140px 50%;
+    }
+
+    .home section .social-share.share-flickr {
+        background-position: -435px 50%;
+    }
+
     #header ul {
         float: left;
     }
@@ -626,9 +655,17 @@ html[lang="tr"] #header {
         margin: -10px 0px 40px 0px;
     }
 
+    .home section#social {
+        text-align: left;
+    }
+
     .home section .social-share {
         display: block;
         float: right;
+    }
+
+    .home section#social h3 {
+        padding: 0px;
     }
 
     .home .contest-blurb {
@@ -749,6 +786,28 @@ html[lang="tr"] #header {
 
     .video-content, .video-content iframe {
         height: 225px;
+    }
+
+    .home section .social-share {
+        background-position: -10px;
+        font-size: 1px;
+        margin-right: 0px;
+        margin-top: 0px;
+        padding: 6px 5px 6px 40px;
+        text-indent: -9999px;
+        width: auto;
+    }
+
+    .home section .social-share.share-facebook {
+        background-position: -279px 50%;
+    }
+
+    .home section .social-share.share-tumblr {
+        background-position: -140px 50%;
+    }
+
+    .home section .social-share.share-flickr {
+        background-position: -435px 50%;
     }
 
     .sort_filter li {
@@ -940,12 +999,25 @@ html[lang="tr"] #header {
     }
 
     .home section .social-share {
+        background-position: -10px;
         font-size: 1px;
-        margin-right: 5px;
+        margin-right: 0px;
         margin-top: 20px;
-        padding-right: 5px;
+        padding: 6px 5px 6px 40px;
         text-indent: -9999px;
         width: auto;
+    }
+
+    .home section .social-share.share-facebook {
+        background-position: -279px 50%;
+    }
+
+    .home section .social-share.share-tumblr {
+        background-position: -140px 50%;
+    }
+
+    .home section .social-share.share-flickr {
+        background-position: -435px 50%;
     }
 
     .header-wrapper ul {
