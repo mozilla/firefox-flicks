@@ -101,3 +101,7 @@ STATSD_PREFIX = 'flicks'
 # Set to 'django_statsd.clients.normal' for normal statsd operation, or
 # 'django_statsd.clients.toolbar' to integrate with django-debug-toolbar
 STATSD_CLIENT = 'django_statsd.clients.null'
+
+# Secret key sent to vid.ly to ensure only they can access the
+# notification view.
+NOTIFY_KEY = ''

@@ -71,3 +71,18 @@ def send_video_complete_email(video):
     })
     mail.send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
                    [video.user.email])
+
+
+def send_video_error_email(video):
+    """Send an email to the uploader of a video that the video conversion has
+    failed.
+    """
+    subject = _lazy('There was an error uploading your Firefox Flick')
+    message = render_to_string('videos/error_email.html', {
+        'flicks_email': settings.DEFAULT_FROM_EMAIL,
+        'video': video,
+        'facebook_link': settings.FACEBOOK_LINK,
+        'twitter_link': settings.TWITTER_LINK
+    })
+    mail.send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
+                   [video.user.email])

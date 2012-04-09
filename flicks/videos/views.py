@@ -3,7 +3,7 @@ import socket
 
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -19,7 +19,8 @@ from flicks.videos.forms import SearchForm, UploadForm
 from flicks.videos.models import Video
 from flicks.videos.tasks import send_video_to_vidly
 from flicks.videos.util import (add_view, cached_viewcount,
-                                send_video_complete_email)
+                                send_video_complete_email,
+                                send_video_error_email)
 from flicks.videos.vidly import embedCode, parseNotify
 
 
@@ -92,7 +93,7 @@ def ajax_add_view(request):
         raise Http404
 
     try:
-        viewcount = add_view(video_id)
+        viewcount = add_view(int(video_id))
 
         # Increment graphite stats
         statsd.incr('video_views')  # Total view count
@@ -113,6 +114,8 @@ def promo_video_noir(request):
                                      'can he help her? Get inspired for your '
                                      'Firefox Flicks entry by checking out '
                                      'our video.'),
+             tweet_text=_lazy('The fox meets a damsel in distress, but can he '
+                              'help her?'),
              page_type='videos',
              video_embed=Markup(embedCode(promo_video_shortlink('noir'),
                                           width=600, height=337)))
@@ -126,6 +129,8 @@ def promo_video_dance(request):
                                      "How far can this fox's feet take him? "
                                      "Get inspired for your Firefox Flicks "
                                      "entry by checking out our video."),
+             tweet_text=_lazy("He's got the moves. He's got ambition. How far "
+                              "can this fox's feet take him?"),
              page_type='videos',
              video_embed=Markup(embedCode(promo_video_shortlink('dance'),
                                           width=600, height=337)))
@@ -134,11 +139,11 @@ def promo_video_dance(request):
 
 def promo_video_twilight(request):
     """Twilight parody promo video."""
+    desc = _lazy('A teenage girl learns the truth about the fox. Get inspired '
+                 'for your Firefox Flicks entry by checking out our video.')
     d = dict(video_title=_lazy('Twilight'),
-             video_description=_lazy('A teenage girl learns the truth about '
-                                     'the fox. Get inspired for your Firefox '
-                                     'Flicks entry by checking out our '
-                                     'video.'),
+             video_description=desc,
+             tweet_text=desc,
              page_type='videos',
              video_embed=Markup(embedCode(promo_video_shortlink('twilight'),
                                           width=600, height=337)))
@@ -178,20 +183,30 @@ def upload(request):
 
 @require_POST
 @csrf_exempt
-def notify(request):
+def notify(request, key):
     """Process vid.ly notification requests."""
+    # Verify key matches stored key.
+    if key != settings.NOTIFY_KEY:
+        return HttpResponseForbidden()
+
     notification = parseNotify(request)
 
-    # Verify that user id matches to avoid spoofing (kind've weak)
-    if notification and notification['user_id'] == settings.VIDLY_USER_ID:
-        try:
-            video = Video.objects.get(shortlink=notification['shortlink'])
-            video.state = 'complete'
+    # Check for finished videos.
+    for task in notification['tasks']:
+        if task.finished:
+            video = get_object_or_none(Video, shortlink=task.shortlink)
+            if video is not None:
+                video.state = 'complete'
+                video.save()
+                send_video_complete_email(video)
+
+    # Check for video errors
+    for error in notification['errors']:
+        video = get_object_or_none(Video, shortlink=error.shortlink)
+        if video is not None:
+            video.state = 'error'
             video.save()
-            send_video_complete_email(video)
-        except Video.DoesNotExist:
-            log.warning('Vid.ly notification with shortlink that does not '
-                        'exist: %s' % notification['shortlink'])
+            send_video_error_email(video)
 
     return HttpResponse()
 

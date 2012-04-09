@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from celery.decorators import task
@@ -10,8 +11,9 @@ from flicks.videos.vidly import addMedia
 @task
 def send_video_to_vidly(video):
     """Send a video to vid.ly for processing."""
-    shortlink = addMedia(video.upload_url,
-                         absolutify(reverse('flicks.videos.notify')))
+    notify_url = absolutify(reverse('flicks.videos.notify',
+                                    args=[settings.NOTIFY_KEY]))
+    shortlink = addMedia(video.upload_url, notify_url)
 
     if shortlink is None:
         video.state = 'error'

@@ -88,7 +88,7 @@
         </ol>
       </div>
       <div class="right-col promo">
-        {% include 'promos/%s.html' % ['edward_norton', 'youth', 'panavision']|random %}
+        {% include 'promos/%s.html' % ['edward_norton', 'youth', 'panavision', 'events']|random %}
       </div>
     </div>
   </div>
@@ -97,9 +97,10 @@
 {% block homefooter %}
   <section id="social">
     <h3>{{ _('Flicks News') }}</h3>
-    {# Twitter and Facebook stay as is and are not to be translated. #}
+    {# Social media text stays as is and is not to be translated. #}
     <a href="https://twitter.com/#!/FirefoxFlicks" class="social-share share-twitter">Twitter</a>
     <a href="https://www.facebook.com/FirefoxFlicks" class="social-share share-facebook">Facebook</a>
     <a href="http://firefoxflicks.tumblr.com" class="social-share share-tumblr">Tumblr</a>
+    <a href="http://www.flickr.com/photos/firefoxflicks" class="social-share share-flickr">Flickr</a>
   </section>
 {% endblock %}

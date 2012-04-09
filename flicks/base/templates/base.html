@@ -22,7 +22,7 @@
     {%- endblock %}
 
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link rel="stylesheet" media="all" href=""/>
 
@@ -89,7 +89,9 @@
               <li><a href="http://www.mozilla.org/en-US/privacy-policy.html"
                      title="{{ _('Privacy Policy') }}">{{ _('Privacy Policy') }}</a> <span>&#xa0;|</span></li>
               <li><a href="http://www.mozilla.org/about/legal.html"
-                     title="{{ _('Legal') }}">{{ _('Legal') }}</a></li>
+                     title="{{ _('Legal') }}">{{ _('Legal') }}</a> <span>&#xa0;|</span></li>
+              <li><a href="{{ url('flicks.base.partners') }}"
+                     title="{{ _('Partners') }}">{{ _('Partners') }}</a></li>
             </ul>
             <div id="language-switcher">
               <form class="languages go" method="GET">

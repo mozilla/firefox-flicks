@@ -64,34 +64,46 @@ class UploadTests(TestCase):
 
 @patch.object(settings, 'VIDLY_USER_ID', '1111')
 class NotifyTests(TestCase):
-    def _post(self, shortlink, user_id=1111):
+    def _post(self, xml, key=settings.NOTIFY_KEY):
         """Execute notify view with mock vid.ly XML."""
-        xml = """<?xml version="1.0"?>
-        <Response><Result><Task>
-          <UserID>%(user_id)s</UserID>
-          <MediaShortLink>%(shortlink)s</MediaShortLink>
-          <Status>Finished</Status>
-        </Task></Result></Response>
-        """ % {'user_id': user_id, 'shortlink': shortlink}
-
         with self.activate('en-US'):
-            response = self.client.post(reverse('flicks.videos.notify'),
-                                        {'xml': xml})
+            url = reverse('flicks.videos.notify', args=[key])
+            response = self.client.post(url, {'xml': xml})
         return response
 
     def setUp(self):
         self.user = self.build_user()
 
-    def test_invalid_user_id(self):
-        """Returning with an invalid user id fails."""
+    @patch.object(settings, 'NOTIFY_KEY', 'asdf')
+    def test_invalid_key_forbidden(self):
+        """If an invalid key is provided in the URL, return a 403 and do not
+        modify the video.
+        """
+        xml = """<?xml version="1.0"?>
+        <Response><Result><Task>
+          <MediaShortLink>%(shortlink)s</MediaShortLink>
+          <Status>Finished</Status>
+        </Task></Result></Response>
+        """
+
         with build_video(self.user, state='pending') as video:
-            self._post(video.shortlink, '9999')
+            response = self._post(xml % {'shortlink': video.shortlink},
+                                  'invalid_key')
+            video = Video.objects.get(pk=video.pk)  # Refresh
+            eq_(response.status_code, 403)
             eq_(video.state, 'pending')
 
     def test_valid_notification(self):
         """A valid notification updates a video's state."""
+        xml = """<?xml version="1.0"?>
+        <Response><Result><Task>
+          <MediaShortLink>%(shortlink)s</MediaShortLink>
+          <Status>Finished</Status>
+        </Task></Result></Response>
+        """
+
         with build_video(self.user, state='pending') as video:
-            self._post(video.shortlink)
+            self._post(xml % {'shortlink': video.shortlink})
             video = Video.objects.get(pk=video.pk)  # Refresh
             eq_(video.state, 'complete')
 
@@ -101,6 +113,26 @@ class NotifyTests(TestCase):
                 video_url = reverse('flicks.videos.details',
                                     kwargs={'video_id': video.id})
             ok_(video_url in mail.outbox[0].body)
+            eq_(mail.outbox[0].to, [self.user.email])
+
+    def test_error_notification(self):
+        """An error notification updates the video's state."""
+        xml = """<?xml version="1.0"?>
+        <Response><Errors><Error>
+          <ErrorCode>4.1</ErrorCode>
+          <ErrorName>Wrong!</ErrorName>
+          <Description>Desc</Description>
+          <MediaShortLink>%(shortlink)s</MediaShortLink>
+        </Error></Errors></Response>"""
+
+        with build_video(self.user, state='pending') as video:
+            self._post(xml % {'shortlink': video.shortlink})
+            video = Video.objects.get(pk=video.pk)  # Refresh
+            eq_(video.state, 'error')
+
+            # Check for sent notification email
+            eq_(len(mail.outbox), 1)
+            ok_('error' in mail.outbox[0].body)
             eq_(mail.outbox[0].to, [self.user.email])
 
 
@@ -171,6 +203,11 @@ class AjaxAddViewTests(TestCase):
     def test_invalid_video_id(self):
         """If video_id isn't an integer, return a 404."""
         response = self._post('asdf')
+        eq_(response.status_code, 404)
+
+        # Test with control characters (bug 737564)
+        # Test cache will only raise a warning on this.
+        response = self._post(u"51 OR X='ss")
         eq_(response.status_code, 404)
 
     def test_no_video(self):

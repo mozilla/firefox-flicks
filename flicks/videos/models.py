@@ -62,7 +62,7 @@ class Video(models.Model, SearchMixin, CachingMixin):
                                    default=datetime(2012, 2, 28))
 
     upload_url = models.URLField(verify_exists=False, blank=False, default='',
-                                 verbose_name=_lazy(u'Video URL'))
+                                 verbose_name=_lazy(u'Video File URL'))
     shortlink = models.CharField(max_length=32, blank=True)
     state = models.CharField(max_length=10, choices=STATE_CHOICES,
                              default='unsent')

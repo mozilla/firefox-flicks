@@ -1,12 +1,11 @@
-import xml.etree.ElementTree as ET
-
 import requests
-from funfactory.urlresolvers import reverse
 from mock import patch
 from nose.tools import eq_, ok_
+from requests.exceptions import RequestException
 
 from flicks.base.tests import TestCase
 from flicks.videos import vidly
+from flicks.videos.vidly import Success
 
 
 RESPONSE_XML = """<?xml version="1.0"?>
@@ -32,13 +31,12 @@ class FakePostResponse(object):
 
 
 class RequestTests(TestCase):
-    def _request(self, xml_params={}, status_code=200, **kwargs):
+    def _request(self, xml_params={}, status_code=200, side_effect=None,
+                 **kwargs):
         """Make a request to vid.ly."""
         action = 'AddMedia'
         params = {'Source': {'SourceFile': 'http://test.com/source.mov',
                              'Output': 'webm'}}
-        with self.activate('en-US'):
-            notify = reverse('flicks.videos.notify')
 
         response_params = {'message': 'Test message', 'code': '2.1',
                            'source': 'http://test.com', 'shortlink': 'asdf'}
@@ -47,13 +45,18 @@ class RequestTests(TestCase):
 
         with patch.object(requests, 'post') as post:
             post.return_value = FakePostResponse(status_code, response_xml)
-            result = vidly.request(action, params, notify, **kwargs)
+            post.side_effect = side_effect
+            result = vidly.request(action, params, 'http://test.com', **kwargs)
 
         return result
 
     def test_no_user_info(self):
         """If a user id or password isn't provided, return None."""
         eq_(self._request(user_id=None, user_key=None), None)
+
+    def test_connection_error(self):
+        """If there is an error connecting to vid.ly, return None."""
+        eq_(self._request(side_effect=RequestException), None)
 
     def test_non_200_response(self):
         """Any non-200 response from vid.ly returns None."""
@@ -63,32 +66,38 @@ class RequestTests(TestCase):
         """Test normal conditions = success."""
         result = self._request()
         ok_(result['success'] is not None)
-        eq_(result['errors'], None)
+        eq_(result['errors'], [])
 
 
 @patch('flicks.videos.vidly.ERROR_CODES', ['1'])
 class AddMediaTests(TestCase):
-    def _addMedia(self, response, source_file='file/path.mov',
+    def _addMedia(self, source_file='file/path.mov',
                   notify_url='http://test.com'):
-        """Call addMedia and mock the return value for request."""
-        with patch('flicks.videos.vidly.request') as request:
-            request.return_value = response
-            result = vidly.addMedia(source_file, notify_url)
-        return result
+        """Call addMedia."""
+        return vidly.addMedia(source_file, notify_url)
 
-    def test_connection_error(self):
+    @patch('flicks.videos.vidly.request')
+    def test_connection_error(self, request):
         """An error connecting to vidly returns None."""
-        eq_(self._addMedia(None), None)
+        request.return_value = None
+        eq_(self._addMedia(), None)
 
     @patch('flicks.videos.vidly.ERROR_CODES', ['1'])
-    def test_vidly_error_code(self):
+    @patch('flicks.videos.vidly.request')
+    def test_vidly_error_code(self, request):
         """An erroneous status code returns None."""
-        eq_(self._addMedia({'code': '1', 'errors': []}), None)
+        request.return_value = {'code': '1', 'errors': []}
+        eq_(self._addMedia(), None)
 
-    def test_success_shortlink(self):
+    @patch('flicks.videos.vidly.ERROR_CODES', ['1'])
+    @patch.object(vidly, 'request')
+    def test_success_shortlink(self, request):
         """A successful response returns the shortlink."""
-        success = ET.Element('Success')
-        media_shortlink = ET.SubElement(success, 'MediaShortLink')
-        ET.SubElement(media_shortlink, 'ShortLink').text = 'asdf'
+        request.return_value = {
+            'code': '2.1',
+            'msg': 'message',
+            'success': Success('asdf', 'asdf'),
+            'errors': []
+        }
 
-        eq_(self._addMedia({'success': success, 'code': '2'}), 'asdf')
+        eq_(self._addMedia(), 'asdf')

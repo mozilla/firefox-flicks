@@ -55,13 +55,14 @@ class UploadForm(ModelForm):
                 "accessible space."))
 
         # Validate video content type against blacklist.
-        for content_type in settings.INVALID_VIDEO_CONTENT_TYPES:
-            if response.headers['content-type'].startswith(content_type):
-                raise forms.ValidationError(_(
-                    "It looks like you're trying to upload a video from a "
-                    "video URL. Your video link must point directly at the "
-                    "video file. Please upload your video from a personal "
-                    "server or tool like Dropbox."))
+        if 'content-type' in response.headers:
+            for content_type in settings.INVALID_VIDEO_CONTENT_TYPES:
+                if response.headers['content-type'].startswith(content_type):
+                    raise forms.ValidationError(_(
+                        "It looks like you're trying to upload a video from a "
+                        "video URL. Your video link must point directly at the "
+                        "video file. Please upload your video from a personal "
+                        "server or tool like Dropbox."))
 
         return url
 
