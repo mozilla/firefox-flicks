@@ -10,10 +10,30 @@
 {% block page_title %}{{ title }}{% endblock %}
 
 {% block content %}
-  <h1>{{ title }}</h1>
+  <h1>{{ _("That's a wrap!") }}</h1>
+  <div class="headline">
+    <p class="intro-description">
+      {% trans %}
+        Thanks to everyone for the awesome flicks. Our judges are now sequestered (with
+        plenty of popcorn) to choose the winners, but you can still watch the entries and
+        share your favorites while you wait for the big announcement on May 17.
+      {% endtrans %}
+    </p>
+  </div>
   <form>
     {{ display_search_form(search_form) }}
   </form>
   
   {{ search_results(videos, show_pagination, video_pages) }}
+{% endblock %}
+
+{% block homefooter %}
+  <section id="social">
+    <h3>{{ _('Flicks News') }}</h3>
+    {# Social media text stays as is and is not to be translated. #}
+    <a href="https://twitter.com/#!/FirefoxFlicks" class="social-share share-twitter">Twitter</a>
+    <a href="https://www.facebook.com/FirefoxFlicks" class="social-share share-facebook">Facebook</a>
+    <a href="http://firefoxflicks.tumblr.com" class="social-share share-tumblr">Tumblr</a>
+    <a href="http://www.flickr.com/photos/firefoxflicks" class="social-share share-flickr">Flickr</a>
+  </section>
 {% endblock %}

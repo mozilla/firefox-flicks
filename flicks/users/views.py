@@ -53,7 +53,7 @@ def details(request, user_id=None):
         show_pagination = True
 
     d = dict(videos=videos.object_list,
-             video_pages= videos,
+             video_pages=videos,
              show_pagination=show_pagination,
              page_type=page_type,
              search_form=search_form,

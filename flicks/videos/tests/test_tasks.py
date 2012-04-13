@@ -4,7 +4,7 @@ from nose.tools import eq_
 from flicks.base.tests import TestCase
 from flicks.videos.models import Video
 from flicks.videos.tasks import add_vote, send_video_to_vidly
-from flicks.videos.tests import build_video
+from flicks.videos.tests import build_video, skip_test
 
 
 class SendVideoToVidlyTests(TestCase):
@@ -19,12 +19,14 @@ class SendVideoToVidlyTests(TestCase):
     def setUp(self):
         self.user = self.build_user()
 
+    @skip_test
     def test_error(self):
         """If there's an error, the video's state should change to error."""
         with build_video(self.user) as video:
             video = self._send(video, None)
             eq_(video.state, 'error')
 
+    @skip_test
     def test_success(self):
         """A successful upload should mark the video as pending."""
         with build_video(self.user, shortlink='') as video:

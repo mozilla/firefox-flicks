@@ -3,9 +3,8 @@ import socket
 
 from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import Http404, HttpResponse, HttpResponseForbidden
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404, render
-from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from jinja2 import Markup
 
@@ -14,14 +13,10 @@ from django_statsd.clients import statsd
 from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import get_object_or_none, promo_video_shortlink
-from flicks.users.decorators import profile_required
-from flicks.videos.forms import SearchForm, UploadForm
+from flicks.videos.forms import SearchForm
 from flicks.videos.models import Video
-from flicks.videos.tasks import send_video_to_vidly
-from flicks.videos.util import (add_view, cached_viewcount,
-                                send_video_complete_email,
-                                send_video_error_email)
-from flicks.videos.vidly import embedCode, parseNotify
+from flicks.videos.util import add_view, cached_viewcount
+from flicks.videos.vidly import embedCode
 
 
 TWEET_TEXT = _lazy("Check out '%(video_title)s' on Firefox Flicks. %(link)s")
@@ -59,7 +54,7 @@ def recent(request):
              videos=videos.object_list,
              video_pages=videos,
              show_pagination=show_pagination,
-             page_type='secondary')
+             page_type='secondary recent')
 
     return render(request, 'videos/recent.html', d)
 
@@ -148,67 +143,6 @@ def promo_video_twilight(request):
              video_embed=Markup(embedCode(promo_video_shortlink('twilight'),
                                           width=600, height=337)))
     return render(request, 'videos/promo.html', d)
-
-
-@profile_required
-def upload(request):
-    """Video upload page."""
-    if request.method == 'POST':
-        form = UploadForm(request.POST)
-        if form.is_valid():
-            video = form.save(commit=False)
-            video.user = request.user
-            video.save()
-
-            # Celery times out sometimes; we'll catch orphaned
-            # videos with a cron job.
-            try:
-                send_video_to_vidly.delay(video)
-            except socket.timeout:
-                log.warning('Timeout connecting to celery to convert video '
-                            'id: %s' % video.id)
-
-            # Update statsd graph for uploads
-            statsd.incr('video_uploads')
-
-            return render(request, 'videos/upload_complete.html')
-    else:
-        form = UploadForm()
-
-    d = dict(upload_form=form,
-             page_type='secondary form')
-
-    return render(request, 'videos/upload.html', d)
-
-
-@require_POST
-@csrf_exempt
-def notify(request, key):
-    """Process vid.ly notification requests."""
-    # Verify key matches stored key.
-    if key != settings.NOTIFY_KEY:
-        return HttpResponseForbidden()
-
-    notification = parseNotify(request)
-
-    # Check for finished videos.
-    for task in notification['tasks']:
-        if task.finished:
-            video = get_object_or_none(Video, shortlink=task.shortlink)
-            if video is not None:
-                video.state = 'complete'
-                video.save()
-                send_video_complete_email(video)
-
-    # Check for video errors
-    for error in notification['errors']:
-        video = get_object_or_none(Video, shortlink=error.shortlink)
-        if video is not None:
-            video.state = 'error'
-            video.save()
-            send_video_error_email(video)
-
-    return HttpResponse()
 
 
 @require_POST
