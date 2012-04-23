@@ -1312,3 +1312,30 @@ html[lang="ja"] body {
 p.form-errors {
     color: #ff8383;
 }
+
+.download-firefox {
+    background-image: linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -o-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -moz-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -webkit-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -ms-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.03, rgb(117,145,41)),
+        color-stop(0.52, rgb(129,162,45)),
+        color-stop(0.76, rgb(140,173,48))
+    );
+    border-radius: 3px;
+    clear: both;
+    color: #fff;
+    display: block;
+    font-size: 17px;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    width: 300px;
+}
