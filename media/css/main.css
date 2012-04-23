@@ -724,6 +724,12 @@ body.form {
     background-image: url('../img/grey-bg.jpg');
 }
 
+body.secondary.recent {
+    background-color: #000;
+    background-image: url('../img/curtains-contest-closed.png');
+    background-repeat: repeat-x;
+}
+
 h1, h2, h3, #header li, .home-link, a.title, .content-wrapper span.title,
 .headline p.intro, .headline p.flicks-description, .user-details .right-col p {
     font-family: 'Open Sans Condensed', sans-serif;
@@ -740,6 +746,10 @@ h1, h2, h3, #header li, .home-link, a.title, .content-wrapper span.title,
 
 h2, h3, #header li, .home-link, a.title, .content-wrapper span.title {
     color: #fff;
+}
+
+.headline .intro-description {
+    color: #e05f26;
 }
 
 a.user {
