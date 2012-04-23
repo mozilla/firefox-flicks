@@ -1313,6 +1313,13 @@ p.form-errors {
     color: #ff8383;
 }
 
+.button-wrapper {
+    clear: both;
+    float: left;
+    padding-top: 30px;
+    width: 100%;
+}
+
 .download-firefox {
     background-image: linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
     background-image: -o-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);

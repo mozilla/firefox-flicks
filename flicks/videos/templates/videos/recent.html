@@ -26,7 +26,9 @@
   
   {{ search_results(videos, show_pagination, video_pages) }}
 
-  <a href="https://www.mozilla.org/firefox/new/" class="download-firefox">{{ _('Download Firefox') }}</a>
+  <div class="button-wrapper">
+    <a href="https://www.mozilla.org/firefox/new/" class="download-firefox">{{ _('Download Firefox') }}</a>
+  </div>
 {% endblock %}
 
 {% block homefooter %}
