@@ -23,12 +23,8 @@
   <form>
     {{ display_search_form(search_form) }}
   </form>
-  
-  {{ search_results(videos, show_pagination, video_pages) }}
 
-  <div class="button-wrapper">
-    <a href="https://www.mozilla.org/firefox/new/" class="download-firefox">{{ _('Download Firefox') }}</a>
-  </div>
+  {{ search_results(videos, show_pagination, video_pages) }}
 {% endblock %}
 
 {% block homefooter %}

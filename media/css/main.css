@@ -147,7 +147,7 @@ div.field.error input, div.field.error select {
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
-    width: 500px;
+    width: 400px;
 }
 
 .profile-header {
@@ -209,6 +209,40 @@ ul.user-actions {
     display: block;
     float: right;
     margin-left: 10px;
+    margin-top: 3px;
+}
+
+.download-firefox {
+    background-image: linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -o-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -moz-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -webkit-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -ms-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.03, rgb(117,145,41)),
+        color-stop(0.52, rgb(129,162,45)),
+        color-stop(0.76, rgb(140,173,48))
+    );
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    float: right;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    margin-left: 15px;
+    padding: 4px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.download-firefox span {
+    background: url('../img/firefox-small.png') no-repeat;
+    padding: 18px 14px 16px 54px;
+    margin-left: -15px;
 }
 
 .user-metadata {
@@ -339,7 +373,7 @@ html[lang="tr"] #header {
     }
 
     .content-wrapper span.title {
-        width: 400px;
+        width: 300px;
     }
 
     .recent section .social-share {
@@ -502,6 +536,10 @@ html[lang="tr"] #header {
         clear: both;
         float: left;
         margin-left: 0px;
+    }
+
+    .download-firefox {
+        display: none;
     }
 
     ol.videos li {
@@ -712,6 +750,10 @@ html[lang="tr"] #header {
         margin: 10px 0px 25px;
         padding: 0px 0px 60px;
         text-align: center;
+    }
+
+    .download-firefox {
+        display: none;
     }
 }
 
@@ -1318,31 +1360,4 @@ p.form-errors {
     float: left;
     padding-top: 30px;
     width: 100%;
-}
-
-.download-firefox {
-    background-image: linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
-    background-image: -o-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
-    background-image: -moz-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
-    background-image: -webkit-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
-    background-image: -ms-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
-
-    background-image: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.03, rgb(117,145,41)),
-        color-stop(0.52, rgb(129,162,45)),
-        color-stop(0.76, rgb(140,173,48))
-    );
-    border-radius: 3px;
-    clear: both;
-    color: #fff;
-    display: block;
-    font-size: 17px;
-    margin: 0 auto;
-    padding: 10px;
-    text-align: center;
-    text-decoration: none;
-    width: 300px;
 }
