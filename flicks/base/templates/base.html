@@ -50,6 +50,10 @@
               {% endif %}
             {% endblock %}
 
+            <a href="https://www.mozilla.org/firefox" class="download-firefox">
+              <span>{{ _('Download Firefox') }}</span>
+            </a>
+
             <ul class="user-actions">
               {% if request.user.is_active %}
                 <li>
@@ -57,9 +61,6 @@
                 </li>
                 <li>
                   <a href="{{ url('flicks.users.logout') }}">{{ _('Log out') }}</a> &#xa0;|
-                </li>
-                <li>
-                  <a href="{{ url('flicks.videos.upload') }}" class="button">{{ _('Upload') }}</a>
                 </li>
               {% else %}
                 <li>

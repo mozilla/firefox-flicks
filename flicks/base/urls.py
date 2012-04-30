@@ -3,7 +3,6 @@ from django.conf.urls.defaults import patterns, url
 from flicks.base import views
 
 urlpatterns = patterns('',
-    url(r'^/?$', views.home, name='flicks.base.home'),
     url(r'^creative$', views.creative, name='flicks.base.creative'),
     url(r'^faq$', views.faq, name='flicks.base.faq'),
     url(r'^judges$', views.judges, name='flicks.base.judges'),

@@ -1,8 +1,10 @@
 from contextlib import contextmanager
+from functools import wraps
 
 from django.conf import settings
 
 from elasticutils import get_es
+from nose.plugins.skip import SkipTest
 
 from flicks.videos.models import Video
 
@@ -30,3 +32,11 @@ def build_video(user, **kwargs):
 
     yield video
     video.delete()
+
+
+def skip_test(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        raise SkipTest
+    return wrap
+skip_test.__test__ = False

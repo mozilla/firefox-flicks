@@ -41,8 +41,8 @@ ROOT_URLCONF = 'flicks.urls'
 # Authentication
 BROWSERID_CREATE_USER = True
 LOGIN_URL = '/'
-LOGIN_REDIRECT = 'flicks.videos.upload'
-LOGIN_REDIRECT_FAILURE = 'flicks.base.home'
+LOGIN_REDIRECT = 'flicks.videos.recent'
+LOGIN_REDIRECT_FAILURE = 'flicks.videos.recent'
 
 AUTHENTICATION_BACKENDS = (
     'django_browserid.auth.BrowserIDBackend',

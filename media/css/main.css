@@ -65,12 +65,6 @@ div.field.agreement label a {
     font-size: 16px;
 }
 
-.home .wrapper {
-    background-image: url('../img/curtains.jpg');
-    background-repeat: repeat-x;
-    min-height: 738px;
-}
-
 .content-wrapper, .header-wrapper, .footer-wrapper {
     margin: 0 auto;
     position: relative;
@@ -81,83 +75,6 @@ div.field.agreement label a {
     display: block;
     float: left;
     width: 480px;
-}
-
-.home section {
-    clear: both;
-    display: block;
-    margin: 10px 0px 25px 0px;
-    padding: 30px 0px 40px;
-    text-align: center;
-}
-
-.home section h3 {
-    display: inline;
-    font-size: 44px;
-    padding: 0px 20px 0px 0px;
-    text-transform: uppercase;
-    width: auto;
-}
-
-.home .video-promo {
-    display: block;
-    float: left;
-    width: 527px;
-}
-
-.home .video-promo img {
-    height: 300px;
-    width: 527px;
-}
-
-.home .contest-blurb {
-    float: left;
-    margin: -5px 20px 0px;
-    width: 325px;
-}
-
-.home .contest-blurb a#browserid {
-    float: left;
-    margin-top: 32px;
-}
-
-.home .video-wrapper .left-col, .home .video-wrapper .right-col {
-    float: left;
-}
-
-.home .video-wrapper {
-    display: block;
-    margin: 0 auto;
-    width: 896px;
-}
-
-.home .video-wrapper .left-col {
-    width: 570px;
-}
-
-.home .video-wrapper .right-col {
-    width: 320px;
-}
-
-.home .video-wrapper h2 {
-    color: #fab041;
-    text-transform: uppercase;
-}
-
-.home ol.videos {
-    display: block;
-    float: left;
-}
-
-.home ol.videos li {
-    margin: 0px 20px 0px 0px;
-}
-
-.home .video-wrapper h2 {
-    clear: both;
-    display: block;
-    float: left;
-    width: 100%;
 }
 
 .social-share {
@@ -221,13 +138,6 @@ div.field.error input, div.field.error select {
     border: 1px solid #f00;
 }
 
-.home .headline {
-    clear: both;
-    float: left;
-    position: relative;
-    width: 100%;
-}
-
 .content-wrapper span.title {
     display: block;
     float: left;
@@ -237,7 +147,7 @@ div.field.error input, div.field.error select {
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
-    width: 500px;
+    width: 400px;
 }
 
 .profile-header {
@@ -251,16 +161,6 @@ body.form .profile-header {
     background-image: url('../img/form-profile-banner.png');
 }
 
-.home .video-blob {
-    background-image: url('../img/home-black-bg.png');
-    background-repeat: repeat-x;
-    clear: both;
-    display: block;
-    float: left;
-    margin-bottom: -21px;
-    width: 100%;
-}
-
 ol.videos li {
     float: left;
     height: 345px;
@@ -269,54 +169,6 @@ ol.videos li {
     overflow: hidden;
     position: relative;
     width: 252px;
-}
-
-.home ol.videos li {
-    height: 245px;
-}
-
-.home ol.videos li p {
-    color: #c74c09;
-    font-size: 14px;
-    line-height: 20px;
-    margin: 5px 0px 20px 0px;
-}
-
-.home a.judge-promo {
-    clear: both;
-    color: #2983c8;
-    display: block;
-    margin-top: 5px;
-    text-decoration: none;
-}
-
-.home ol.judge img {
-    display: block;
-    float: left;
-    height: 97px;
-    margin-top: 0px;
-    width: 97px;
-}
-
-.home ol.judge p {
-    color: #788e9e;
-    display: block;
-    float: left;
-    font-size: 14px;
-    line-height: 20px;
-    width: 200px;
-}
-
-.home .promo > p {
-    color: #788e9e;
-    display: block;
-    font-size: 16px;
-    line-height: 20px;
-}
-
-.home .promo a {
-    color: #2983c8;
-    text-decoration: none;
 }
 
 .user-details .left-col {
@@ -357,6 +209,40 @@ ul.user-actions {
     display: block;
     float: right;
     margin-left: 10px;
+    margin-top: 3px;
+}
+
+.download-firefox {
+    background-image: linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -o-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -moz-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -webkit-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+    background-image: -ms-linear-gradient(bottom, rgb(117,145,41) 3%, rgb(129,162,45) 52%, rgb(140,173,48) 76%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.03, rgb(117,145,41)),
+        color-stop(0.52, rgb(129,162,45)),
+        color-stop(0.76, rgb(140,173,48))
+    );
+    border-radius: 3px;
+    color: #fff;
+    display: block;
+    float: right;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    margin-left: 15px;
+    padding: 4px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.download-firefox span {
+    background: url('../img/firefox-small.png') no-repeat;
+    padding: 18px 14px 16px 54px;
+    margin-left: -15px;
 }
 
 .user-metadata {
@@ -369,19 +255,6 @@ ul.user-actions {
     float: none;
     margin: 0 auto;
     width: 850px;
-}
-
-.home .headline p.intro {
-    color: #e05f26;
-    font-size: 56px;
-    line-height: 56px;
-    margin: 30px 0px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.home .headline p.intro span {
-    color: #fab041;
 }
 
 .video-content, .video-view .video-details,
@@ -460,6 +333,27 @@ html[lang="tr"] #header {
     line-height: 35px;
 }
 
+.recent #footer {
+    background-image: url('../img/footer.jpg');
+    height: 268px;
+}
+
+.recent section {
+    clear: both;
+    display: block;
+    margin: 10px 0px 25px;
+    padding: 30px 0px 40px;
+    text-align: center;
+}
+
+.recent section h3 {
+    display: inline;
+    font-size: 44px;
+    padding: 0px 20px 0px 0px;
+    text-transform: uppercase;
+    width: auto;
+}
+
 @media only screen and (min-width: 768px) and (max-width: 991px) {
     html[lang="es"] .header-wrapper ul,
     html[lang="fr"] .header-wrapper ul,
@@ -479,28 +373,10 @@ html[lang="tr"] #header {
     }
 
     .content-wrapper span.title {
-        width: 400px;
+        width: 300px;
     }
 
-    .home .video-promo {
-        float: none;
-        margin: 0 auto;
-    }
-
-    .home .contest-blurb {
-        width: 100%;
-    }
-
-    .home .contest-blurb a#browserid {
-        float: none;
-        margin: 0 auto;
-    }
-
-    .content-wrapper ol.videos {
-        width: 600px;
-    }
-
-    .home section .social-share {
+    .recent section .social-share {
         background-position: -10px 50%;
         display: block;
         float: right;
@@ -508,36 +384,20 @@ html[lang="tr"] #header {
         padding: 6px 12px 6px 45px;
     }
 
-    .home section .social-share.share-facebook {
+    .recent section .social-share.share-facebook {
         background-position: -279px 50%;
     }
 
-    .home section .social-share.share-tumblr {
+    .recent section .social-share.share-tumblr {
         background-position: -140px 50%;
     }
 
-    .home section .social-share.share-flickr {
+    .recent section .social-share.share-flickr {
         background-position: -435px 50%;
     }
 
     #header ul {
         float: left;
-    }
-
-    .home .video-blob {
-        background-image: url('../img/home-black-bg-mid.png');
-    }
-
-    .home .video-wrapper {
-        width: 650px;
-    }
-
-    .home .video-wrapper .left-col {
-        width: 300px;
-    }
-
-    .home .video-wrapper .right-col {
-        width: 350px;
     }
 
     .video-content, .video-content iframe, .video-view .video-details,
@@ -573,59 +433,6 @@ html[lang="tr"] #header {
         height: 225px;
         width: 400px;
     }
-
-    .home .contest-blurb {
-        float: left;
-        margin: 20px 0px;
-        width: 100%;
-    }
-
-    .home .contest-blurb p {
-        width: 500px;
-    }
-
-    .home .video-promo {
-        width: 427px;
-    }
-
-    .home .video-promo img {
-        height: 240px;
-        width: 427px;
-    }
-
-    .home .contest-blurb a#browserid {
-        float: none;
-        margin: 0 auto;
-    }
-
-    .home .video-wrapper {
-        display: block;
-        margin: 0 auto;
-        width: 796px;
-    }
-
-    .home .video-blob {
-        background-image: url('../img/home-black-bg-mid.png');
-    }
-
-    .home .video-wrapper {
-        width: 504px;
-    }
-
-    .home .video-wrapper .left-col {
-        clear: both;
-        width: 252px;
-    }
-
-    .home .video-wrapper .right-col {
-        clear: both;
-        padding-bottom: 20px;
-        width: 504px;
-    }
-
-    .home .video-wrapper .right-col p {
-        width: 390px;
-    }
 }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
@@ -651,55 +458,21 @@ html[lang="tr"] #header {
         width: 480px;
     }
 
-    .home section {
+    .recent section {
         margin: -10px 0px 40px 0px;
     }
 
-    .home section#social {
+    .recent section#social {
         text-align: left;
     }
 
-    .home section .social-share {
+    .recent section .social-share {
         display: block;
         float: right;
     }
 
-    .home section#social h3 {
+    .recent section#social h3 {
         padding: 0px;
-    }
-
-    .home .contest-blurb {
-        float: left;
-        margin: 20px 0px;
-        width: 100%;
-    }
-
-    .home .video-promo p {
-        width: 300px;
-    }
-
-    .home .video-promo img {
-        height: 240px;
-        width: 427px;
-    }
-
-    .home .contest-blurb {
-        float: left;
-        margin: 20px 0px;
-        width: 100%;
-    }
-
-    .home .contest-blurb p {
-        width: 500px;
-    }
-
-    .home .video-promo {
-        width: 427px;
-    }
-
-    .home .video-promo img {
-        height: 240px;
-        width: 427px;
     }
 
     .video-content, .video-content iframe {
@@ -765,6 +538,10 @@ html[lang="tr"] #header {
         margin-left: 0px;
     }
 
+    .download-firefox {
+        display: none;
+    }
+
     ol.videos li {
         margin-left: 70px;
         width: 252px;
@@ -772,11 +549,6 @@ html[lang="tr"] #header {
 
     .user-metadata {
         width: 300px;
-    }
-
-    .home .headline .blob {
-        margin: 0 auto;
-        width: 436px;
     }
 
     .video-content, .video-content iframe, .video-view .video-details,
@@ -788,7 +560,7 @@ html[lang="tr"] #header {
         height: 225px;
     }
 
-    .home section .social-share {
+    .recent section .social-share {
         background-position: -10px;
         font-size: 1px;
         margin-right: 0px;
@@ -798,15 +570,15 @@ html[lang="tr"] #header {
         width: auto;
     }
 
-    .home section .social-share.share-facebook {
+    .recent section .social-share.share-facebook {
         background-position: -279px 50%;
     }
 
-    .home section .social-share.share-tumblr {
+    .recent section .social-share.share-tumblr {
         background-position: -140px 50%;
     }
 
-    .home section .social-share.share-flickr {
+    .recent section .social-share.share-flickr {
         background-position: -435px 50%;
     }
 
@@ -849,58 +621,11 @@ html[lang="tr"] #header {
         width: 252px;
     }
 
-    .home section {
-        margin: -30px 0px 60px 0px;
-    }
-
-    .home section .social-share {
+    .recent section .social-share {
         display: block;
         float: left;
         margin-top: 3px;
         text-align: none;
-    }
-
-    .home .contest-blurb {
-        float: left;
-        margin: 20px 0px;
-        width: 100%;
-    }
-
-    .home .contest-blurb p {
-        width: 100%;
-    }
-
-    .home .video-promo {
-        width: 252px;
-    }
-
-    .home .video-promo img {
-        height: 141px;
-        width: 252px;
-    }
-
-    .home .video-promo p {
-        width: 100%;
-    }
-
-
-    .home .video-blob {
-        background-image: url('../img/home-black-bg-mobile.png');
-    }
-
-    .home .video-wrapper {
-        width: 252px;
-    }
-
-    .home .video-wrapper .right-col {
-        clear: both;
-        padding-bottom: 20px;
-        width: 252px;
-    }
-
-    .home .video-wrapper .right-col p {
-        clear: both;
-        width: 100%;
     }
 
     div.field label {
@@ -954,11 +679,6 @@ html[lang="tr"] #header {
         width: 252px;
     }
 
-    .home .headline .blob {
-        margin: 0 auto;
-        width: 236px;
-    }
-
     ol.videos li {
         margin-left: 0px;
     }
@@ -998,7 +718,7 @@ html[lang="tr"] #header {
         height: 160px;
     }
 
-    .home section .social-share {
+    .recent section .social-share {
         background-position: -10px;
         font-size: 1px;
         margin-right: 0px;
@@ -1008,20 +728,32 @@ html[lang="tr"] #header {
         width: auto;
     }
 
-    .home section .social-share.share-facebook {
+    .recent section .social-share.share-facebook {
         background-position: -279px 50%;
     }
 
-    .home section .social-share.share-tumblr {
+    .recent section .social-share.share-tumblr {
         background-position: -140px 50%;
     }
 
-    .home section .social-share.share-flickr {
+    .recent section .social-share.share-flickr {
         background-position: -435px 50%;
     }
 
     .header-wrapper ul {
         width: 255px;
+    }
+
+    .recent section {
+        clear: both;
+        display: block;
+        margin: 10px 0px 25px;
+        padding: 0px 0px 60px;
+        text-align: center;
+    }
+
+    .download-firefox {
+        display: none;
     }
 }
 
@@ -1034,30 +766,19 @@ body.form {
     background-image: url('../img/grey-bg.jpg');
 }
 
-body.home {
-    background-image: url('../img/home-back.jpg');
+body.secondary.recent {
+    background-color: #000;
+    background-image: url('../img/curtains-contest-closed.png');
+    background-repeat: repeat-x;
 }
 
 h1, h2, h3, #header li, .home-link, a.title, .content-wrapper span.title,
-.headline p.intro, .headline p.flicks-description, .user-details .right-col p,
-.home section h3 {
+.headline p.intro, .headline p.flicks-description, .user-details .right-col p {
     font-family: 'Open Sans Condensed', sans-serif;
     font-weight: normal;
 }
 
-.home .headline .blob p {
-    color: #e05f26;
-    font-size: 18px;
-    line-height: 26px;
-    margin-bottom: 25px;
-    text-align: justify;
-}
-
-.home .headline .blob p a {
-    color: #fff;
-}
-
-.home p.flicks-description {
+.recent p.flicks-description {
     color: #fff;
     font-size: 36px;
     line-height: 46px;
@@ -1067,6 +788,10 @@ h1, h2, h3, #header li, .home-link, a.title, .content-wrapper span.title,
 
 h2, h3, #header li, .home-link, a.title, .content-wrapper span.title {
     color: #fff;
+}
+
+.headline .intro-description {
+    color: #e05f26;
 }
 
 a.user {
@@ -1081,18 +806,6 @@ h1 {
 
 body.form h1 {
     color: #fff;
-}
-
-.home #header {
-    background-image: none;
-}
-
-.home .headline p {
-    clear: both;
-    display: block;
-    float: left;
-    text-align: center;
-    width: 100%;
 }
 
 .content-wrapper h1 {
@@ -1183,11 +896,6 @@ body.form #footer {
     background-image: url('../img/form-footer-mini.jpg');
 }
 
-.home #footer {
-    background-image: url('../img/footer.jpg');
-    height: 268px;
-}
-
 #footer label, #footer li a {
     color: #76838d;
     font-size: 13px;
@@ -1225,13 +933,6 @@ body.form #footer {
     width: 160px;
 }
 
-body.home #header a.logo {
-    background-image: url('../img/home-title-en-US.png');
-    height: 57px;
-    margin-top: 30px;
-    width: 263px;
-}
-
 .content-wrapper p a, .content-wrapper li a, .content-wrapper h2 a {
     color: #398bc8;
     text-decoration: none;
@@ -1252,11 +953,7 @@ body.home #header a.logo {
     width: 32px;
 }
 
-div.home {
-    margin: 20px 0px 20px 0px;
-}
-
-.home #browserid, button {
+button {
     background-image: linear-gradient(bottom, #267CC2 26%, #4590C9 63%, #70B8EB 100%);
     background-image: -o-linear-gradient(bottom, #267CC2 26%, #4590C9 63%, #70B8EB 100%);
     background-image: -moz-linear-gradient(bottom, #267CC2 26%, #4590C9 63%, #70B8EB 100%);
@@ -1656,4 +1353,11 @@ html[lang="ja"] body {
 
 p.form-errors {
     color: #ff8383;
+}
+
+.button-wrapper {
+    clear: both;
+    float: left;
+    padding-top: 30px;
+    width: 100%;
 }
