@@ -74,7 +74,7 @@ div.field.agreement label a {
 .header-wrapper ul {
     display: block;
     float: left;
-    width: 480px;
+    width: 510px;
 }
 
 .social-share {
@@ -320,9 +320,7 @@ ul.user-actions {
 }
 
 html[lang="es"] #header,
-html[lang="fr"] #header,
 html[lang="ja"] #header,
-html[lang="pl"] #header,
 html[lang="pt-BR"] #header,
 html[lang="tr"] #header {
     background-image: url('../img/sub-curtains-mid.png');
@@ -355,12 +353,22 @@ html[lang="tr"] #header {
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+    html[lang="fr"] #header,
+    html[lang="pl"] #header,
+    html[lang="de"] #header,
+    html[lang="en-US"] #header{
+    background-image: url('../img/sub-curtains-mid.png');
+    height: 86px;
+}
+
     html[lang="es"] .header-wrapper ul,
     html[lang="fr"] .header-wrapper ul,
     html[lang="ja"] .header-wrapper ul,
     html[lang="pl"] .header-wrapper ul,
     html[lang="pt-BR"] .header-wrapper ul,
-    html[lang="tr"] .header-wrapper ul {
+    html[lang="tr"] .header-wrapper ul,
+    html[lang="de"] .header-wrapper ul,
+    html[lang="en-US"] .header-wrapper ul {
         width: 400px;
     }
 
@@ -373,7 +381,9 @@ html[lang="tr"] #header {
     }
 
     .content-wrapper span.title {
-        width: 300px;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 230px;
     }
 
     .recent section .social-share {
@@ -912,6 +922,7 @@ body.form #footer {
     display: block;
     float: left;
     font-size: 18px;
+    line-height: 24px;
     margin-right: 8px;
     text-decoration: none;
     text-transform: uppercase;
