@@ -73,7 +73,8 @@
         {% if page == items.number %}
           <span>{{ page }}</span>
         {% else %}
-          <a href="{{ url|urlparams(page=page, limit=limit) }}">{{ page }}</a>
+          <a href="{{ url|urlparams(page=page, limit=limit, category=request.GET.get('category'),
+                   region=request.GET.get('region'), search=request.GET.get('search')) }}">{{ page }}</a>
         {% endif %}
       {% endfor %}
     </div>
