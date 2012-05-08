@@ -41,6 +41,14 @@ REGION_CHOICES = (
     ('asia_africa_australia', _lazy('Asia, Africa & Australia'))
 )
 
+AWARD_TYPE_CHOICES = (
+    ('grand_winner', 'Grand Prize Winner'),
+    ('category_winner', 'Category Winner'),
+    ('runner_up', 'Runner Up'),
+    ('panavision', 'Panavision Prize'),
+    ('bavc', 'Bay Area Video Coalition')
+)
+
 
 class Video(models.Model, SearchMixin, CachingMixin):
     """Users can only have one video associated with
@@ -164,3 +172,18 @@ def post_save(sender, instance, **kwargs):
     """Invalidate VIEWS_KEY when video is saved."""
     from flicks.videos.util import VIEWS_KEY
     cache.delete(VIEWS_KEY % instance.id)
+
+
+class Award(models.Model, CachingMixin):
+    """Model for contest winners."""
+    video = models.ForeignKey(Video, blank=True, null=True)
+    preview = models.ImageField(upload_to=settings.PREVIEW_PATH,
+                                max_length=settings.MAX_FILEPATH_LENGTH)
+    category = models.CharField(max_length=50, blank=True,
+                                choices=CATEGORY_CHOICES,
+                                verbose_name=_lazy(u'Category'))
+    region = models.CharField(max_length=50, blank=True,
+                              choices=REGION_CHOICES,
+                              verbose_name=_lazy(u'Region'))
+    award_type = models.CharField(max_length=50, blank=False,
+                                  choices = AWARD_TYPE_CHOICES)

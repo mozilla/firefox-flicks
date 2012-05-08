@@ -20,22 +20,22 @@
       <a href="http://mozilla.org/" id="mozilla-tag">Mozilla</a>
     </div>
   </div>
-      
+
   <div class="content-wrapper">
     <!-- new stuff starts here -->
     <header class="winners-head">
       <h1>And the <span>Awards Go To&hellip;</span></h1>
-      
+
       <div class="headline">
-        <p class="intro-description">Our illustrious judges have watched the flicks, laughed their laughs, shed 
-        their tears and they’ve made their decisions. It wasn’t easy thanks to all the 
-        amazing entries, but here they are, ladies and gentlemen, the winners of Firefox 
+        <p class="intro-description">Our illustrious judges have watched the flicks, laughed their laughs, shed
+        their tears and they’ve made their decisions. It wasn’t easy thanks to all the
+        amazing entries, but here they are, ladies and gentlemen, the winners of Firefox
         Flicks 2012.</p>
-        <p class="intro-description">Thanks to everyone who took the time to make and submit a video to help us 
+        <p class="intro-description">Thanks to everyone who took the time to make and submit a video to help us
         share the story of Firefox with the world.</p>
       </div>
     </header>
-    
+
     <nav id="nav-sections">
       <ul>
         <li><a href="#section-asia">Asia, Africa, Australia</a></li>
@@ -46,15 +46,15 @@
         <li><a href="#section-bayarea">Bay Area Video Coalition</a></li>
       </ul>
     </nav>
-    
+
     <article id="section-asia" class="section">
       <h1>Asia, Africa, &amp; Australia</h1>
-      
+
       <section class="grandprize">
         <h2 class="title"><a href="#"><img src="/media/img/promo-twilight.jpg" alt="" width="600" height="342"> Video Title</a></h2>
         <p class="credit">Submitter Name, Submitter Locale</p>
       </section>
-      
+
       <section class="category">
         <h2>Category Winners</h2>
         <ul>
@@ -80,7 +80,7 @@
           </li>
         </ul>
       </section>
-      
+
       <section class="runnerups">
         <h2>Runner Ups</h2>
         <ul>
@@ -110,12 +110,12 @@
 
     <article id="section-europe" class="section">
       <h1>Europe</h1>
-      
+
       <section class="grandprize">
         <h2 class="title"><a href="#"><img src="/media/img/promo-twilight.jpg" alt="" width="600" height="342"> Video Title</a></h2>
         <p class="credit">Submitter Name, Submitter Locale</p>
       </section>
-      
+
       <section class="category">
         <h2>Category Winners</h2>
         <ul>
@@ -141,7 +141,7 @@
           </li>
         </ul>
       </section>
-      
+
       <section class="runnerups">
         <h2>Runner Ups</h2>
         <ul>
@@ -171,12 +171,12 @@
 
     <article id="section-latam" class="section">
       <h1>Latin America</h1>
-      
+
       <section class="grandprize">
         <h2 class="title"><a href="#"><img src="/media/img/promo-twilight.jpg" alt="" width="600" height="342"> Video Title</a></h2>
         <p class="credit">Submitter Name, Submitter Locale</p>
       </section>
-      
+
       <section class="category">
         <h2>Category Winners</h2>
         <ul>
@@ -202,7 +202,7 @@
           </li>
         </ul>
       </section>
-      
+
       <section class="runnerups">
         <h2>Runner Ups</h2>
         <ul>
@@ -232,12 +232,12 @@
 
     <article id="section-northam" class="section">
       <h1>North America</h1>
-      
+
       <section class="grandprize">
         <h2 class="title"><a href="#"><img src="/media/img/promo-twilight.jpg" alt="" width="600" height="342"> Video Title</a></h2>
         <p class="credit">Submitter Name, Submitter Locale</p>
       </section>
-      
+
       <section class="category">
         <h2>Category Winners</h2>
         <ul>
@@ -263,7 +263,7 @@
           </li>
         </ul>
       </section>
-      
+
       <section class="runnerups">
         <h2>Runner Ups</h2>
         <ul>
@@ -293,7 +293,7 @@
 
     <article id="section-panavision" class="section">
       <h1>Winner: Panavision Prize</h1>
-      
+
       <section class="grandprize">
         <h2 class="title"><a href="#"><img src="/media/img/promo-twilight.jpg" alt="" width="600" height="342"> Video Title</a></h2>
         <p class="credit">Submitter Name, Submitter Locale</p>
@@ -303,17 +303,17 @@
 
     <article id="section-bayarea" class="section">
       <h1>Winner: Bay Area Video Coalition</h1>
-      
+
       <section class="grandprize">
         <h2 class="title"><a href="#"><img src="/media/img/promo-twilight.jpg" alt="" width="600" height="342"> Video Title</a></h2>
         <p class="credit">Submitter Name, Submitter Locale</p>
       </section>
     </article>
-    
-      
+
+
   </div><!-- /.content-wrapper -->
 
-<!-- Standard footer goes here -->      
+<!-- Standard footer goes here -->
 
 <!-- This script should be moved to an external file, either on its own or conglomerated -->
 <script>
@@ -329,14 +329,14 @@
     $window.scroll(function() {
 
       var scrollTop = $window.scrollTop();
-          
+
     	if( scrollTop >= navTop.top ) {
         if( !fixed ) {
           fixed = true;
           $nav.addClass("fixed");
           $content.css({ paddingTop: navHeight+24 });
         }
-      } 
+      }
       else {
         if( fixed ) {
           fixed = false;
@@ -346,7 +346,7 @@
       }
 
     });
-    
+
     $("#nav-sections a").click(function(){
       /* extract the target element's ID from the link's href */
       var target = $(this).attr("href").replace( /.*?#(.*)/g, "$1" );
@@ -355,6 +355,6 @@
       }, 1000);
       return false;
     });
-  
+
 })(jQuery);
 </script>

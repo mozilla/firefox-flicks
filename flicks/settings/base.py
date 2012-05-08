@@ -213,3 +213,7 @@ STATSD_PATCHES = [
     'django_statsd.patches.db',
     'django_statsd.patches.cache',
 ]
+
+# Video preview settings
+PREVIEW_PATH = lambda inst, filename: 'previews/%s_%s' % (inst.id, filename)
+MAX_FILEPATH_LENGTH = 100
