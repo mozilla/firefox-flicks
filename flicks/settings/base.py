@@ -77,6 +77,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'django_browserid',
     'django_statsd',
     'south',
+    'waffle',
 ]
 
 MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
@@ -84,6 +85,7 @@ MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
     'csp.middleware.CSPMiddleware',
     'django_statsd.middleware.GraphiteRequestTimingMiddleware',
     'django_statsd.middleware.GraphiteMiddleware',
+    'waffle.middleware.WaffleMiddleware',
 ]
 
 AUTH_PROFILE_MODULE = 'flicks.UserProfile'
