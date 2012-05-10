@@ -263,3 +263,7 @@ class DetailsTests(TestCase):
             eq_(Video.objects.get(pk=video.pk).judge_mark, False)
             self._post(video, admin_mark='asdf')
             eq_(Video.objects.get(pk=video.pk).judge_mark, False)
+
+
+class RecentTests(TestCase):
+

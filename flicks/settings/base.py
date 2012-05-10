@@ -21,7 +21,6 @@ MINIFY_BUNDLES = {
         ),
         'video_details': (
             'js/libs/script.js',
-            'js/vote.js',
             'js/views.js',
             'js/share.js',
         ),
@@ -29,6 +28,9 @@ MINIFY_BUNDLES = {
             'js/libs/script.js',
             'js/share.js',
         ),
+        'winners': (
+            'js/winners.js',
+        )
     }
 }
 

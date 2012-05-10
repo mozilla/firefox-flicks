@@ -3,6 +3,10 @@
     <a href="{{ url('flicks.videos.recent') }}"
        title="{{ _('Firefox Flicks') }}" class="logo">{{ _('Firefox Flicks') }}</a>
     <ul>
+      {% if waffle.flag('winners_page') %}
+        <li><a href="{{ url('flicks.videos.winners')}}"
+               title="{{ _('Winners') }}">{{ _('Winners') }}</a></li>
+      {% endif %}
       <li><a href="{{ url('flicks.videos.recent')}}"
              title="{{ _('Videos') }}">{{ _('Videos') }}</a></li>
       <li><a href="{{ url('flicks.base.creative')}}"

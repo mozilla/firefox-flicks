@@ -2,19 +2,6 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render
 
 from flicks.base.util import absolutify
-from flicks.videos.models import Award
-
-
-def winners(request):
-    awards = Award.objects.filter(award_type__in=['grand_winner',
-                                                   'category_winner',
-                                                   'runner_up'])
-    d = dict([('{0}_{1}_{2}'.format(a.award_type, a.category, a.region), a)
-              for a in awards if a.award_type not in ['panavision', 'bavc']])
-    d['panavision'] = Award.objects.get(award_type='panavision')
-    d['bavc'] = Award.objects.get(award_type='bavc')
-
-    return render(request, 'winners.html', d)
 
 
 def creative(request):

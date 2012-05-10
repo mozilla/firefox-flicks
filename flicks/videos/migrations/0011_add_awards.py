@@ -25,6 +25,7 @@ class Migration(DataMigration):
 
         # Special awards
         Award.objects.create(award_type='panavision')
+        Award.objects.create(award_type='panavision')
         Award.objects.create(award_type='bavc')
 
 

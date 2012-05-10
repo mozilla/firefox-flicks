@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% from 'shared/macros.html' import award_region, large_award with context %}
+
+{% block page_title %}{{ _('Winners') }}{% endblock %}
+
+{% block site_js %}
+  {{ super() }}
+  {{ js('winners') }}
+{% endblock %}
+
+{% block userbar %}{% endblock %}
+
+{% block content %}
+  <header class="winners-head">
+    <h1>{{ _('And the awards go to...') }}</h1>
+
+    <div class="headline">
+      <p class="intro-description">
+        {% trans %}
+          Our illustrious judges have watched the flicks, laughed
+          their laughs, shed their tears and they’ve made their
+          decisions. It wasn’t easy thanks to all the amazing entries,
+          but here they are, ladies and gentlemen, the winners of
+          Firefox Flicks 2012.
+        {% endtrans %}
+      </p>
+      <p class="intro-description">
+        {% trans %}
+          Thanks to everyone who took the time to make and submit a
+          video to help us share the story of Firefox with the world.
+        {% endtrans %}
+      </p>
+    </div>
+  </header>
+
+  <nav id="nav-sections">
+    <ul>
+      <li><a href="#section-asia">{{ _('Asia, Africa & Australia') }}</a></li>
+      <li><a href="#section-europe">{{ _('Europe') }}</a></li>
+      <li><a href="#section-latam">{{ _('Latin America') }}</a></li>
+      <li><a href="#section-northam">{{ _('North America') }}</a></li>
+      <li><a href="#section-panavision">Panavision</a></li>
+      <li><a href="#section-bayarea">Bay Area Video Coalition</a></li>
+    </ul>
+  </nav>
+
+  <article id="section-asia" class="section">
+    {{ award_region(_('Asia, African & Australia'), 'asia_africa_australia') }}
+  </article>
+
+  <article id="section-europe" class="section">
+    {{ award_region(_('Europe'), 'europe') }}
+  </article>
+
+  <article id="section-latam" class="section">
+    {{ award_region(_('Latin America'), 'latin_america') }}
+  </article>
+
+  <article id="section-northam" class="section">
+    {{ award_region(_('North America'), 'america') }}
+  </article>
+
+  <article id="section-panavision" class="section">
+    <h1>{{ _('Panavision Prize Winner') }}</h1>
+
+    {% for award in awards['panavision'] %}
+      <section class="grandprize">
+        {{ large_award(award) }}
+      </section>
+    {% endfor %}
+
+  </article>
+
+  <article id="section-bayarea" class="section">
+    <h1>{{ _('Bay Area Video Coalition Prize Winner') }}</h1>
+
+    <section class="grandprize">
+      {{ large_award(awards['bavc']) }}
+    </section>
+  </article>
+
+{% endblock %}
