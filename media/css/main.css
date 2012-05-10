@@ -394,12 +394,17 @@ body.winners #header {
 
 .winners-head {
     background: transparent url('../img/winners-header.png') center top no-repeat;
-    height: 300px;
-    margin: 70px auto -50px;
+    min-height: 350px;
+    margin: 70px auto 0;
+}
+
+.winners .winners-head p {
+    float: none;
 }
 
 .winners .winners-head h1 {
     text-align: left;
+    float: none;
     color: #e25b31;
     font-size: 72px;
     line-height: 1;
