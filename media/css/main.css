@@ -1219,6 +1219,10 @@ body.form h1 {
     margin: 46px 0px 46px 0px;
 }
 
+.youth_judges_header {
+    padding-top: 46px;
+}
+
 .user-details .right-col h1 {
     color: #fff;
     float: left;
