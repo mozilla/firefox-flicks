@@ -2,7 +2,7 @@
   <li id="slide-{{ idx }}">
     <a href="{{ video.details_href }}" class="title" title="{{ video.title }}">
       {% if video.is_winner %}
-        <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png">
+        <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
       {% endif %}
       <img src="{{ video.poster_href }}" height="141">
     </a>
@@ -96,13 +96,13 @@
     {% for f in ['category', 'region'] %}
       <li>
         <h3>{{ form[f].label }}</h3>
-        {{ form[f]|safe }}
+        {{ form[f] }}
       </li>
     {% endfor %}
     <li>
       <h3>{{ _('Search') }}</h3>
       <div class="search-wrapper">
-        {{ form.search|safe }}
+        {{ form.search }}
         <button type="submit" class="search">{{ _('Search') }}</button>
       </div>
     </li>
@@ -136,23 +136,26 @@
   <h1>{{ region_name }}</h1>
 
   <section class="grandprize">
-    {{ large_award(awards['grand_winner__%s'|format(region_key)]) }}
+    {% set key = 'grand_winner__%s'|format(region_key) %}
+    {{ large_award(awards[key]) }}
   </section>
 
   <section class="category">
     <h2>{{ _('Category Winners') }}</h2>
     <ul>
       {% for category_key, category_name in category_choices %}
-        {{ small_award(category_name, awards['category_winner__%s__%s'|format(region_key, category_key)]) }}
+        {% set key = 'category_winner__%s__%s'|format(region_key, category_key) %}
+        {{ small_award(category_name, awards[key]) }}
       {% endfor %}
     </ul>
   </section>
 
   <section class="runnerups">
-    <h2>Runner Ups</h2>
+    <h2>{{ _('Runner Ups') }}</h2>
     <ul>
       {% for category_key, category_name in category_choices %}
-        {{ small_award(category_name, awards['runner_up__%s__%s'|format(region_key, category_key)]) }}
+        {% set key = 'runner_up__%s__%s'|format(region_key, category_key) %}
+        {{ small_award(category_name, awards[key]) }}
       {% endfor %}
     </ul>
   </section>

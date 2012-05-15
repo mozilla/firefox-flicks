@@ -29,7 +29,7 @@
       <div class="video-wrapper">
         {{ video.embed_html }}
         {% if video.is_winner %}
-          <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png">
+          <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
         {% endif %}
       </div>
       <div id="judge_mark">

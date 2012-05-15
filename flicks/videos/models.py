@@ -41,6 +41,7 @@ REGION_CHOICES = (
     ('asia_africa_australia', _lazy('Asia, Africa & Australia'))
 )
 
+# Untranslated as they're only seen in the admin interface.
 AWARD_TYPE_CHOICES = (
     ('grand_winner', 'Grand Prize Winner'),
     ('category_winner', 'Category Winner'),

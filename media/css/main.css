@@ -182,7 +182,7 @@ ol.videos li {
     width: 252px;
 }
 
-ol.videos li:nth-child(3n+1) {
+.videos li:nth-child(3n+1) {
     clear: left;
 }
 
