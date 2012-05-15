@@ -5,7 +5,9 @@
     <ul>
       {% if waffle.flag('winners_page') %}
         <li><a href="{{ url('flicks.videos.winners')}}"
-               title="{{ _('Winners') }}">{{ _('Winners') }}</a></li>
+               title="{{ _('Award') }}">
+          <img class="award" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
+        </a></li>
       {% endif %}
       <li><a href="{{ url('flicks.videos.recent')}}"
              title="{{ _('Videos') }}">{{ _('Videos') }}</a></li>
