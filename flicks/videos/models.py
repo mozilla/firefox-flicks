@@ -12,7 +12,7 @@ from elasticutils.models import SearchMixin
 from elasticutils.tasks import index_objects, unindex_objects
 from funfactory.urlresolvers import reverse, split_path
 from jinja2 import Markup
-from tower import ugettext_lazy as _lazy
+from tower import ugettext as _, ugettext_lazy as _lazy
 
 from flicks.base.util import absolutify, generate_bitly_link
 from flicks.videos.tasks import add_vote
@@ -41,6 +41,21 @@ REGION_CHOICES = (
     ('asia_africa_australia', _lazy('Asia, Africa & Australia'))
 )
 
+# Untranslated as they're only seen in the admin interface.
+AWARD_TYPE_CHOICES = (
+    ('grand_winner', 'Grand Prize Winner'),
+    ('category_winner', 'Category Winner'),
+    ('runner_up', 'Runner Up'),
+    ('panavision', 'Panavision Prize'),
+    ('bavc', 'Bay Area Video Coalition')
+)
+
+WINNER_CATEGORY_TEXT = {
+    'thirty_spot': _lazy('30 Second Spot Winner'),
+    'animation': _lazy('Animation Winner'),
+    'new_technology': _lazy('New Technology Winner'),
+    'psa': _lazy('PSA Winner')
+}
 
 class Video(models.Model, SearchMixin, CachingMixin):
     """Users can only have one video associated with
@@ -119,6 +134,11 @@ class Video(models.Model, SearchMixin, CachingMixin):
             Video.objects.filter(pk=self.pk).update(bitly_link_db=bitly_link)
             return bitly_link
 
+    @property
+    def is_winner(self):
+        """Return true if this video won an award."""
+        return Award.objects.filter(video=self).exists()
+
     def upvote(self):
         """Add an upvote to this video."""
         add_vote.delay(self)
@@ -164,3 +184,72 @@ def post_save(sender, instance, **kwargs):
     """Invalidate VIEWS_KEY when video is saved."""
     from flicks.videos.util import VIEWS_KEY
     cache.delete(VIEWS_KEY % instance.id)
+
+
+class Award(models.Model, CachingMixin):
+    """Model for contest winners."""
+    video = models.ForeignKey(Video, blank=True, null=True)
+    preview = models.ImageField(blank=True, upload_to=settings.PREVIEW_PATH,
+                                max_length=settings.MAX_FILEPATH_LENGTH)
+    category = models.CharField(max_length=50, blank=True,
+                                choices=CATEGORY_CHOICES,
+                                verbose_name=_lazy(u'Category'))
+    region = models.CharField(max_length=50, blank=True,
+                              choices=REGION_CHOICES,
+                              verbose_name=_lazy(u'Region'))
+    award_type = models.CharField(max_length=50, blank=False,
+                                  choices = AWARD_TYPE_CHOICES)
+
+    objects = CachingManager()
+
+    @property
+    def award_title(self):
+        if self.award_type == 'grand_winner':
+            return _('%(winner)s for %(region)s') % {
+                'winner': _('Grand Prize Winner'),
+                'region': self.get_region_display()
+            }
+        elif self.award_type == 'bavc':
+            return _('Bay Area Video Coalition Prize Winner')
+        elif self.award_type == 'panavision':
+            return _('Panavision Prize Winner')
+        else:
+            return _('%(winner)s for %(region)s') % {
+                'winner': unicode(WINNER_CATEGORY_TEXT[self.category]),
+                'region': self.get_region_display()
+            }
+
+    @property
+    def video_title(self):
+        if self.video is None:
+            return 'Video Title'
+        else:
+            return self.video.title
+
+    @property
+    def video_href(self):
+        if self.video is None:
+            return '#'
+        else:
+            return self.video.details_href
+
+    @property
+    def video_preview(self):
+        if not self.preview:
+            return '{0}img/promo-twilight.jpg'.format(settings.MEDIA_URL)
+        else:
+            return self.preview.url
+
+    @property
+    def submitter_name(self):
+        if self.video is None:
+            return 'Submitter Name'
+        else:
+            return self.video.user.userprofile.full_name
+
+    @property
+    def submitter_country(self):
+        if self.video is None:
+            return 'Submitter Country'
+        else:
+            return self.video.user.userprofile.country

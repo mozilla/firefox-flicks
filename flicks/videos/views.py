@@ -9,18 +9,48 @@ from django.views.decorators.http import require_POST
 from jinja2 import Markup
 
 import commonware.log
+import waffle
 from django_statsd.clients import statsd
 from tower import ugettext_lazy as _lazy
 
-from flicks.base.util import get_object_or_none, promo_video_shortlink
+from flicks.base.util import get_object_or_none, promo_video_shortlink, redirect
 from flicks.videos.forms import SearchForm
-from flicks.videos.models import Video
+from flicks.videos.models import CATEGORY_CHOICES, Award, Video
 from flicks.videos.util import add_view, cached_viewcount
 from flicks.videos.vidly import embedCode
 
 
 TWEET_TEXT = _lazy("Check out '%(video_title)s' on Firefox Flicks. %(link)s")
 log = commonware.log.getLogger('f.videos')
+
+
+def winners(request):
+    """Winners page."""
+    if not waffle.flag_is_active(request, 'winners_page'):
+        return redirect('flicks.videos.recent')
+
+    d = dict(
+        awards={},
+        category_choices=CATEGORY_CHOICES,
+        page_type='winners'
+    )
+
+    # Add awards to template context
+    grand_prize_awards = Award.objects.filter(award_type='grand_winner')
+    for a in grand_prize_awards:
+        key = '{0}__{1}'.format(a.award_type, a.region)
+        d['awards'][key] = a
+
+    awards = Award.objects.filter(award_type__in=['category_winner',
+                                                  'runner_up'])
+    for a in awards:
+        key = '{0}__{1}__{2}'.format(a.award_type, a.region, a.category)
+        d['awards'][key] = a
+
+    d['awards']['panavision'] = Award.objects.filter(award_type='panavision')
+    d['awards']['bavc'] = Award.objects.get(award_type='bavc')
+
+    return render(request, 'videos/winners.html', d)
 
 
 def recent(request):
@@ -53,10 +83,16 @@ def recent(request):
              search=False,
              videos=videos.object_list,
              video_pages=videos,
-             show_pagination=show_pagination,
-             page_type='secondary recent')
+             show_pagination=show_pagination)
 
-    return render(request, 'videos/recent.html', d)
+    if waffle.flag_is_active(request, 'winners_page'):
+        template = 'videos/recent.html'
+        d['page_type'] = 'secondary recent'
+    else:
+        template = 'videos/recent_contest_over.html'
+        d['page_type'] = 'secondary recent closed'
+
+    return render(request, template, d)
 
 
 def details(request, video_id=None):

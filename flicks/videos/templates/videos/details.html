@@ -28,11 +28,9 @@
     <div class="video-content">
       <div class="video-wrapper">
         {{ video.embed_html }}
-        {# L10n: Refers to a user voting up a video. #}
-        <a id="upvote" class="vote" data-shortlink="{{ video.shortlink }}"
-           data-upvote-url="{{ url('flicks.videos.upvote', video.shortlink) }}"
-           data-token="{{ csrf_token }}" data-votes="{{ video.votes }}"
-           title="{{ _('Upvote') }}">{{ video.votes }}</a>
+        {% if video.is_winner %}
+          <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
+        {% endif %}
       </div>
       <div id="judge_mark">
         {# Do not mark for l10n: Strings are for admins only! #}

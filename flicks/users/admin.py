@@ -1,7 +1,6 @@
+from django.contrib.admin import site
 from django.contrib.auth import admin
 from django.contrib.auth.models import User
-
-from funfactory.admin import site
 
 
 class UserAdmin(admin.UserAdmin):
@@ -19,4 +18,5 @@ class UserAdmin(admin.UserAdmin):
     def youth_contest(self, user):
         return user.userprofile.youth_contest
     youth_contest.boolean = True
+site.unregister(User)
 site.register(User, UserAdmin)

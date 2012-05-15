@@ -28,3 +28,6 @@
 [submodule "vendor-local/src/django-statsd"]
 	path = vendor-local/src/django-statsd
 	url = git://github.com/andymckay/django-statsd.git
+[submodule "vendor-local/src/django-waffle"]
+	path = vendor-local/src/django-waffle
+	url = git://github.com/jsocol/django-waffle.git

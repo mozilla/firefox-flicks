@@ -21,7 +21,6 @@ MINIFY_BUNDLES = {
         ),
         'video_details': (
             'js/libs/script.js',
-            'js/vote.js',
             'js/views.js',
             'js/share.js',
         ),
@@ -29,6 +28,9 @@ MINIFY_BUNDLES = {
             'js/libs/script.js',
             'js/share.js',
         ),
+        'winners': (
+            'js/winners.js',
+        )
     }
 }
 
@@ -77,6 +79,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'django_browserid',
     'django_statsd',
     'south',
+    'waffle',
 ]
 
 MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
@@ -84,6 +87,7 @@ MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
     'csp.middleware.CSPMiddleware',
     'django_statsd.middleware.GraphiteRequestTimingMiddleware',
     'django_statsd.middleware.GraphiteMiddleware',
+    'waffle.middleware.WaffleMiddleware',
 ]
 
 AUTH_PROFILE_MODULE = 'flicks.UserProfile'
@@ -213,3 +217,7 @@ STATSD_PATCHES = [
     'django_statsd.patches.db',
     'django_statsd.patches.cache',
 ]
+
+# Video preview settings
+PREVIEW_PATH = lambda inst, filename: 'previews/%s_%s' % (inst.id, filename)
+MAX_FILEPATH_LENGTH = 100

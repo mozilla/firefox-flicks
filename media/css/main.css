@@ -99,11 +99,13 @@ div.field.agreement label a {
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 18px;
     font-weight: 300;
+    height: 24px;
+    line-height: 24px;
     margin: 0px 10px;
     padding: 4px 20px 6px 60px;
     text-decoration: none;
     text-transform: uppercase;
-    vertical-align: text-bottom;
+    vertical-align: middle;
     -moz-transition: border 0.3s ease-out 0s;
     width: 50px;
 }
@@ -175,12 +177,15 @@ body.form .profile-header {
 
 ol.videos li {
     float: left;
-    height: 345px;
     list-style-type: none;
     margin: 0px 15px 35px 15px;
     overflow: hidden;
     position: relative;
     width: 252px;
+}
+
+.videos li:nth-child(3n+1) {
+    clear: left;
 }
 
 .user-details .left-col {
@@ -353,20 +358,24 @@ html[lang="tr"] #header {
     height: 268px;
 }
 
-.recent section {
+#social {
     clear: both;
     display: block;
-    margin: 10px 0px 25px;
-    padding: 30px 0px 40px;
+    height: 110px;
+    line-height: 110px;
+    margin-bottom: 30px;
     text-align: center;
+    white-space: nowrap;
 }
 
-.recent section h3 {
-    display: inline;
+#social h3 {
+    display: inline-block;
     font-size: 44px;
     padding: 0px 20px 0px 0px;
     text-transform: uppercase;
-    width: auto;
+    vertical-align: middle;
+    width: 200px;
+    white-space: normal;
 }
 
 /* @Winners ***/
@@ -403,12 +412,13 @@ body.winners #header {
 }
 
 .winners .winners-head h1 {
-    text-align: left;
+    text-align: center;
     float: none;
-    color: #e25b31;
+    color: #fbae53;
     font-size: 72px;
+    height: 130px;
     line-height: 1;
-    padding: 30px 0 0 360px;
+    padding: 30px 120px 0 360px;
 }
 
 .winners .winners-head h1 span {
@@ -416,7 +426,19 @@ body.winners #header {
     color: #fbae53;
 }
 
-#nav-sections.fixed { 
+.winner-mark {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.winner-details {
+    color: #fbae53;
+    clear: both;
+    font-size: 14px;
+}
+
+#nav-sections.fixed {
     position: fixed;
     top: 0;
     width: 896px;
@@ -432,10 +454,10 @@ body.winners #header {
 }
 
 #nav-sections ul {
-    background-color: #fff; 
+    background-color: #fff;
     text-align: center;
-    margin: 0 -48px; 
-    padding: 0 20px; 
+    margin: 0 -48px;
+    padding: 0 20px;
     font: 16px/1.2 'Open Sans Light', sans-serif;
     -ms-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     -o-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
@@ -444,19 +466,19 @@ body.winners #header {
     list-style: none;
 }
 
-#nav-sections li { 
-    display: inline-block; 
-    padding: 12px 0; 
+#nav-sections li {
+    display: inline-block;
+    padding: 12px 0;
 }
 
-#nav-sections a:link { 
-    display: inline-block; 
-    padding: 6px 15px; 
-    border-left: 1px dotted #ccc; 
+#nav-sections a:link {
+    display: inline-block;
+    padding: 6px 15px;
+    border-left: 1px dotted #ccc;
 }
 
-#nav-sections li:first-child a { 
-    border-left: 0; 
+#nav-sections li:first-child a {
+    border-left: 0;
 }
 
 #nav-sections a:link,
@@ -506,7 +528,7 @@ body.winners #header {
 }
 
 .section h1,
-.section h2, 
+.section h2,
 .section h3 {
     float: none;
     line-height: 1.2;
@@ -530,7 +552,7 @@ body.winners #header {
 }
 
 .section .category {
-    width: 28%; 
+    width: 28%;
     float: right;
     margin: 0 0 24px;
 }
@@ -647,23 +669,21 @@ body.winners #header {
         width: 230px;
     }
 
-    .recent section .social-share {
+    .social-share {
         background-position: -10px 50%;
-        display: block;
-        float: right;
         margin-right: 0px;
         padding: 6px 12px 6px 45px;
     }
 
-    .recent section .social-share.share-facebook {
+    .social-share.share-facebook {
         background-position: -279px 50%;
     }
 
-    .recent section .social-share.share-tumblr {
+    .social-share.share-tumblr {
         background-position: -140px 50%;
     }
 
-    .recent section .social-share.share-flickr {
+    .social-share.share-flickr {
         background-position: -435px 50%;
     }
 
@@ -671,27 +691,27 @@ body.winners #header {
     .video-view p.video-info {
         width: 400px;
     }
-    
+
     body.winners #header {
         background-image: none;
     }
-    
+
     .winners .winners-head h1 {
         padding: 30px 0 0 270px;
     }
-    
-    #nav-sections.fixed { 
+
+    #nav-sections.fixed {
         width: 712px;
     }
-    
+
     #nav-sections ul {
         font-size: 14px;
     }
-    
+
     #nav-sections li {
         padding: 6px 0;
     }
-    
+
     #nav-sections a:link {
         padding: 6px 12px;
     }
@@ -712,7 +732,7 @@ body.winners #header {
     .content-wrapper, .header-wrapper, .info, .footer-wrapper {
         width: 252px;
     }
-    
+
     #header ul {
         margin: 0;
         clear: both;
@@ -731,16 +751,20 @@ body.winners #header {
         height: 225px;
         width: 400px;
     }
-    
+
     .winners .winners-head {
         background: url('../img/winner-trophy-lg.png') left top no-repeat;
     }
-    
+
     .winners .winners-head h1 {
         font-size: 48px;
         padding: 30px 0 0 180px;
     }
-    
+
+    .winners .winners-head .headline {
+        padding-top: 20px;
+    }
+
     #nav-sections,
     #nav-sections.fixed {
         width: 348px;
@@ -749,38 +773,38 @@ body.winners #header {
 
     #nav-sections ul {
         float: none;
-        list-style: none; 
-        margin: 0; 
+        list-style: none;
+        margin: 0;
     }
-    
-    #nav-sections li { 
-        display: block; 
+
+    #nav-sections li {
+        display: block;
         padding: 8px 0;
         border-left: 0;
-        border-top: 1px dotted #ccc; 
+        border-top: 1px dotted #ccc;
     }
-    
+
     #nav-sections li:first-child {
         border-top: 0;
     }
-    
+
     #nav-sections a:link,
     #nav-sections a:visited {
         border: 0;
         padding: 0;
     }
-    
+
     .grandprize {
         float: none;
         width: 100%;
     }
-    
+
     .section .category {
         float: none;
         clear: both;
         width: 100%;
     }
-    
+
     .category ul {
         list-style: none;
         width: 100%;
@@ -791,12 +815,11 @@ body.winners #header {
         float: none;
         width: auto;
     }
-    
+
     .category h3,
     .runnerups h3 {
         font-size: 20px;
     }
-
 }
 
 /* @Wide @Mobile Layout: 480px */
@@ -823,20 +846,19 @@ body.winners #header {
         width: 480px;
     }
 
-    .recent section {
+    #social {
         margin: -10px 0px 40px 0px;
     }
 
-    .recent section#social {
+    #social {
         text-align: left;
     }
 
-    .recent section .social-share {
-        display: block;
-        float: right;
+    .social-share {
+        white-space: nowrap;
     }
 
-    .recent section#social h3 {
+    #social h3 {
         padding: 0px;
     }
 
@@ -877,7 +899,7 @@ body.winners #header {
         background-image: url('../img/sub-curtains-mobile.png');
         height: 116px;
     }
-    
+
     .winners #header {
         background-image: none;
     }
@@ -929,7 +951,7 @@ body.winners #header {
         height: 225px;
     }
 
-    .recent section .social-share {
+    .social-share {
         background-position: -10px;
         font-size: 1px;
         margin-right: 0px;
@@ -939,15 +961,15 @@ body.winners #header {
         width: auto;
     }
 
-    .recent section .social-share.share-facebook {
+    .social-share.share-facebook {
         background-position: -279px 50%;
     }
 
-    .recent section .social-share.share-tumblr {
+    .social-share.share-tumblr {
         background-position: -140px 50%;
     }
 
-    .recent section .social-share.share-flickr {
+    .social-share.share-flickr {
         background-position: -435px 50%;
     }
 
@@ -955,16 +977,16 @@ body.winners #header {
         clear: both;
         text-align: left;
     }
-    
+
     #nav-sections {
         width: 532px;
     }
-    
-    #nav-sections.fixed { 
+
+    #nav-sections.fixed {
         width: 532px;
         margin-left: -48px;
     }
-    
+
     .category ul {
         list-style: none;
         width: 100%;
@@ -1012,7 +1034,7 @@ body.winners #header {
         width: 252px;
     }
 
-    .recent section .social-share {
+    .social-share {
         display: block;
         float: left;
         margin-top: 3px;
@@ -1039,7 +1061,7 @@ body.winners #header {
         background-image: url('../img/sub-curtains-mobile.png');
         height: 116px;
     }
-    
+
     .winners #header {
         background-image: none;
     }
@@ -1113,7 +1135,7 @@ body.winners #header {
         height: 160px;
     }
 
-    .recent section .social-share {
+    .social-share {
         background-position: -10px;
         font-size: 1px;
         margin-right: 0px;
@@ -1123,15 +1145,15 @@ body.winners #header {
         width: auto;
     }
 
-    .recent section .social-share.share-facebook {
+    .social-share.share-facebook {
         background-position: -279px 50%;
     }
 
-    .recent section .social-share.share-tumblr {
+    .social-share.share-tumblr {
         background-position: -140px 50%;
     }
 
-    .recent section .social-share.share-flickr {
+    .social-share.share-flickr {
         background-position: -435px 50%;
     }
 
@@ -1139,23 +1161,26 @@ body.winners #header {
         width: 255px;
     }
 
-    .recent section {
+    #social {
         clear: both;
         display: block;
+        height: 24px;
+        line-height: 24px;
         margin: 10px 0px 25px;
-        padding: 0px 0px 60px;
+        padding: 0px 0px 80px;
         text-align: center;
+        whitespace: normal;
     }
 
     .download-firefox {
         display: none;
     }
-    
+
     .winners .winners-head {
         background: transparent none;
         min-height: 0;
     }
-    
+
     .winners .winners-head h1 {
         font-size: 48px;
         padding: 0;
@@ -1172,7 +1197,7 @@ body.form {
     background-image: url('../img/grey-bg.jpg');
 }
 
-body.secondary.recent {
+body.secondary.recent.closed {
     background-color: #000;
     background-image: url('../img/curtains-contest-closed.png');
     background-repeat: repeat-x;
