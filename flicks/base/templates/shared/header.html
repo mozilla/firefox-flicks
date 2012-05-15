@@ -1,6 +1,7 @@
 <div id="header">
   <div class="header-wrapper">
-    <a href="{{ url('flicks.videos.recent') }}"
+    <a href="{{ url('flicks.videos.winners') if waffle.flag('winners_page')
+             else url('flicks.videos.recent') }}"
        title="{{ _('Firefox Flicks') }}" class="logo">{{ _('Firefox Flicks') }}</a>
     <ul>
       {% if waffle.flag('winners_page') %}

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import share_container, video_details %}
+{% from 'shared/macros.html' import share_container, video_details with context %}
 
 {% block page_title %}{{ video.title }}{% endblock %}
 
@@ -28,7 +28,7 @@
     <div class="video-content">
       <div class="video-wrapper">
         {{ video.embed_html }}
-        {% if video.is_winner %}
+        {% if waffle.flag('winners_page') and video.is_winner %}
           <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
         {% endif %}
       </div>
