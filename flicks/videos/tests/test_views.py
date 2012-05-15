@@ -144,57 +144,6 @@ class NotifyTests(TestCase):
             eq_(mail.outbox[0].to, [self.user.email])
 
 
-class UpvoteTests(TestCase):
-    def setUp(self):
-        self._build_video = build_video(self.build_user())
-        self.video = self._build_video.__enter__()
-
-    def tearDown(self):
-        self._build_video.__exit__(None, None, None)
-
-    def _post(self, shortlink):
-        with self.activate('en-US'):
-            kwargs = {'video_shortlink': shortlink}
-            response = self.client.post(reverse('flicks.videos.upvote',
-                                                kwargs=kwargs))
-        return response
-
-    def test_already_voted(self):
-        """If the user already voted, return a 403 Forbidden."""
-        self.client.cookies[self.video.shortlink] = '1'
-        response = self._post(self.video.shortlink)
-        eq_(response.status_code, 403)
-        del self.client.cookies[self.video.shortlink]
-
-    def test_video_doesnt_exist(self):
-        """If a video with the given shortlink doesn't exist, return a
-        404 Not Found.
-        """
-        response = self._post('nonexistant_shortlink')
-        eq_(response.status_code, 404)
-
-    @patch.object(Video, 'upvote')
-    def test_socket_timeout(self, video_upvote):
-        """If there is an issue connecting to celery, return a
-        500 Internal Server Error.
-        """
-        video_upvote.side_effect = socket.timeout
-        response = self._post(self.video.shortlink)
-        eq_(response.status_code, 500)
-
-    def test_successful_upvote(self):
-        """If no error occurs, the video vote count should increase, a cookie
-        should be set, and the server should return a 200 Ok.
-        """
-        votes = self.video.votes
-        response = self._post(self.video.shortlink)
-        eq_(response.status_code, 200)
-        ok_(self.video.shortlink in self.client.cookies)
-
-        self.video = Video.objects.get(pk=self.video.pk)
-        eq_(self.video.votes, votes + 1)
-
-
 class AjaxAddViewTests(TestCase):
     def _post(self, video_id=None):
         params = {'video_id': video_id} if video_id is not None else {}
