@@ -99,11 +99,13 @@ div.field.agreement label a {
     font-family: 'Open Sans Condensed', sans-serif;
     font-size: 18px;
     font-weight: 300;
+    height: 24px;
+    line-height: 24px;
     margin: 0px 10px;
     padding: 4px 20px 6px 60px;
     text-decoration: none;
     text-transform: uppercase;
-    vertical-align: text-bottom;
+    vertical-align: middle;
     -moz-transition: border 0.3s ease-out 0s;
     width: 50px;
 }
@@ -356,20 +358,24 @@ html[lang="tr"] #header {
     height: 268px;
 }
 
-.recent section {
+#social {
     clear: both;
     display: block;
-    margin: 10px 0px 25px;
-    padding: 30px 0px 40px;
+    height: 110px;
+    line-height: 110px;
+    margin-bottom: 30px;
     text-align: center;
+    white-space: nowrap;
 }
 
-.recent section h3 {
-    display: inline;
+#social h3 {
+    display: inline-block;
     font-size: 44px;
     padding: 0px 20px 0px 0px;
     text-transform: uppercase;
-    width: auto;
+    vertical-align: middle;
+    width: 200px;
+    white-space: normal;
 }
 
 /* @Winners ***/
@@ -663,23 +669,21 @@ body.winners #header {
         width: 230px;
     }
 
-    .recent section .social-share {
+    .social-share {
         background-position: -10px 50%;
-        display: block;
-        float: right;
         margin-right: 0px;
         padding: 6px 12px 6px 45px;
     }
 
-    .recent section .social-share.share-facebook {
+    .social-share.share-facebook {
         background-position: -279px 50%;
     }
 
-    .recent section .social-share.share-tumblr {
+    .social-share.share-tumblr {
         background-position: -140px 50%;
     }
 
-    .recent section .social-share.share-flickr {
+    .social-share.share-flickr {
         background-position: -435px 50%;
     }
 
@@ -816,7 +820,6 @@ body.winners #header {
     .runnerups h3 {
         font-size: 20px;
     }
-
 }
 
 /* @Wide @Mobile Layout: 480px */
@@ -843,20 +846,19 @@ body.winners #header {
         width: 480px;
     }
 
-    .recent section {
+    #social {
         margin: -10px 0px 40px 0px;
     }
 
-    .recent section#social {
+    #social {
         text-align: left;
     }
 
-    .recent section .social-share {
-        display: block;
-        float: right;
+    .social-share {
+        white-space: nowrap;
     }
 
-    .recent section#social h3 {
+    #social h3 {
         padding: 0px;
     }
 
@@ -949,7 +951,7 @@ body.winners #header {
         height: 225px;
     }
 
-    .recent section .social-share {
+    .social-share {
         background-position: -10px;
         font-size: 1px;
         margin-right: 0px;
@@ -959,15 +961,15 @@ body.winners #header {
         width: auto;
     }
 
-    .recent section .social-share.share-facebook {
+    .social-share.share-facebook {
         background-position: -279px 50%;
     }
 
-    .recent section .social-share.share-tumblr {
+    .social-share.share-tumblr {
         background-position: -140px 50%;
     }
 
-    .recent section .social-share.share-flickr {
+    .social-share.share-flickr {
         background-position: -435px 50%;
     }
 
@@ -1032,7 +1034,7 @@ body.winners #header {
         width: 252px;
     }
 
-    .recent section .social-share {
+    .social-share {
         display: block;
         float: left;
         margin-top: 3px;
@@ -1133,7 +1135,7 @@ body.winners #header {
         height: 160px;
     }
 
-    .recent section .social-share {
+    .social-share {
         background-position: -10px;
         font-size: 1px;
         margin-right: 0px;
@@ -1143,15 +1145,15 @@ body.winners #header {
         width: auto;
     }
 
-    .recent section .social-share.share-facebook {
+    .social-share.share-facebook {
         background-position: -279px 50%;
     }
 
-    .recent section .social-share.share-tumblr {
+    .social-share.share-tumblr {
         background-position: -140px 50%;
     }
 
-    .recent section .social-share.share-flickr {
+    .social-share.share-flickr {
         background-position: -435px 50%;
     }
 
@@ -1159,12 +1161,15 @@ body.winners #header {
         width: 255px;
     }
 
-    .recent section {
+    #social {
         clear: both;
         display: block;
+        height: 24px;
+        line-height: 24px;
         margin: 10px 0px 25px;
-        padding: 0px 0px 60px;
+        padding: 0px 0px 80px;
         text-align: center;
+        whitespace: normal;
     }
 
     .download-firefox {
