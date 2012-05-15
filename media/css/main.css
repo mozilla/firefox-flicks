@@ -410,6 +410,7 @@ body.winners #header {
     float: none;
     color: #fbae53;
     font-size: 72px;
+    height: 130px;
     line-height: 1;
     padding: 30px 120px 0 360px;
 }
