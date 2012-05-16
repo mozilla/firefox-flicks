@@ -1,8 +1,6 @@
 from django.contrib import admin
 
-from funfactory.admin import site
-
-from flicks.videos.models import Video
+from flicks.videos.models import Award, Video
 
 
 class VideoAdmin(admin.ModelAdmin):
@@ -11,4 +9,10 @@ class VideoAdmin(admin.ModelAdmin):
                     'region', 'shortlink', 'created']
     list_filter = ['state', 'judge_mark', 'category', 'region']
     search_fields = ['title', 'description', 'user__email']
-site.register(Video, VideoAdmin)
+admin.site.register(Video, VideoAdmin)
+
+
+class AwardAdmin(admin.ModelAdmin):
+    """Configuration for the award admin pages."""
+    list_display = ['region', 'award_type', 'category', 'video', 'preview']
+admin.site.register(Award, AwardAdmin)

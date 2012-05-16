@@ -1,6 +1,9 @@
 {% macro video_item(idx, video) -%}
   <li id="slide-{{ idx }}">
     <a href="{{ video.details_href }}" class="title" title="{{ video.title }}">
+      {% if waffle.flag('winners_page') and video.is_winner %}
+        <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
+      {% endif %}
       <img src="{{ video.poster_href }}" height="141">
     </a>
     <div class="video-details">
@@ -14,6 +17,13 @@
 {% macro video_details(video) -%}
   <a href="{{ url('flicks.users.details', user_id=video.user_id) }}"
      class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</a>
+  {% if waffle.flag('winners_page') and video.is_winner %}
+    {% for award in video.award_set.all() %}
+      <div class="winner-details">
+        {{ award.award_title }}
+      </div>
+    {% endfor %}
+  {% endif %}
   <p class="region-info">
     {% set category_link='<span class="category">{title}</span>'|fe(title=video.get_category_display()) %}
     {% set country_link='<span class="region">{title}</span>'|fe(title=video.get_region_display()) %}
@@ -120,4 +130,51 @@
       {% endtrans %}
     </p>
   {% endif %}
+{%- endmacro %}
+
+{% macro award_region(region_name, region_key) -%}
+  <h1>{{ region_name }}</h1>
+
+  <section class="grandprize">
+    {% set key = 'grand_winner__%s'|format(region_key) %}
+    {{ large_award(awards[key]) }}
+  </section>
+
+  <section class="category">
+    <h2>{{ _('Category Winners') }}</h2>
+    <ul>
+      {% for category_key, category_name in category_choices %}
+        {% set key = 'category_winner__%s__%s'|format(region_key, category_key) %}
+        {{ small_award(category_name, awards[key]) }}
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section class="runnerups">
+    <h2>{{ _('Runner Ups') }}</h2>
+    <ul>
+      {% for category_key, category_name in category_choices %}
+        {% set key = 'runner_up__%s__%s'|format(region_key, category_key) %}
+        {{ small_award(category_name, awards[key]) }}
+      {% endfor %}
+    </ul>
+  </section>
+{%- endmacro %}
+
+{% macro large_award(award) -%}
+  <h2 class="title">
+    <a href="{{ award.video_href }}">
+      <img src="{{ award.video_preview }}" alt="{{ award.video_title }}" width="600" height="342">
+      {{ award.video_title }}
+    </a>
+  </h2>
+  <p class="credit">{{ award.submitter_name }}, {{ award.submitter_country }}</p>
+{%- endmacro %}
+
+{% macro small_award(category_name, award) -%}
+  <li>
+    <h3>{{ category_name }}</h3>
+    <h4 class="title"><a href="{{ award.video_href }}">{{ award.video_title }}</a></h4>
+    <p class="credit">{{ award.submitter_name }}, {{ award.submitter_country }}</p>
+  </li>
 {%- endmacro %}

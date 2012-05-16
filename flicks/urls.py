@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.conf.urls.defaults import include, patterns, url
+from django.contrib import admin
 from django.contrib.admin import autodiscover
 from django.shortcuts import render
 
-from funfactory import admin
-
+from funfactory.monkeypatches import patch
+patch()
 
 # Autodiscover admin.py files in each app
 autodiscover()

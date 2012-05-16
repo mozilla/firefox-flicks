@@ -1,8 +1,15 @@
 <div id="header">
   <div class="header-wrapper">
-    <a href="{{ url('flicks.videos.recent') }}"
+    <a href="{{ url('flicks.videos.winners') if waffle.flag('winners_page')
+             else url('flicks.videos.recent') }}"
        title="{{ _('Firefox Flicks') }}" class="logo">{{ _('Firefox Flicks') }}</a>
     <ul>
+      {% if waffle.flag('winners_page') %}
+        <li><a href="{{ url('flicks.videos.winners')}}"
+               title="{{ _('Award') }}">
+          <img class="award" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
+        </a></li>
+      {% endif %}
       <li><a href="{{ url('flicks.videos.recent')}}"
              title="{{ _('Videos') }}">{{ _('Videos') }}</a></li>
       <li><a href="{{ url('flicks.base.creative')}}"
