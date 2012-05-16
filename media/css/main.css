@@ -414,16 +414,11 @@ body.winners #header {
 .winners .winners-head h1 {
     text-align: left;
     float: none;
-    color: #e25b31;
+    color: #fbae53;
     font-size: 72px;
     line-height: 1;
-    padding: 30px 0 0 360px;
+    padding: 30px 100px 0 360px;
     min-height: 165px;
-}
-
-.winners .winners-head h1 span {
-    display: block;
-    color: #fbae53;
 }
 
 .winner-mark {
