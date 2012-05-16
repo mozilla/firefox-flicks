@@ -219,5 +219,5 @@ STATSD_PATCHES = [
 ]
 
 # Video preview settings
-PREVIEW_PATH = lambda inst, filename: 'previews/%s_%s' % (inst.id, filename)
+PREVIEW_PATH = lambda inst, filename: 'previews/images/%s_%s' % (inst.id, filename)
 MAX_FILEPATH_LENGTH = 100
