@@ -1,9 +1,11 @@
 (function ($) {
+
+    $("body").addClass("js");
+
     var $window = $(window);
-    var $content = $('.content-wrapper');
     var $nav = $('#nav-sections');
+    var $head = $('.winners-head');
     var navTop = $nav.offset();
-    var navHeight = $nav.height() + 24;
     var fixed = false;
     var didScroll = false;
 
@@ -16,17 +18,17 @@
             didScroll = false;
             var scrollTop = $window.scrollTop();
 
-            if (scrollTop >= navTop.top) {
-                if (!fixed) {
+            if( scrollTop >= navTop.top ) {
+                if(!fixed) {
                     fixed = true;
                     $nav.addClass("fixed");
-                    $content.css({ 'padding-top': navHeight + 24 });
+                    $head.css({ "padding-bottom" : "96px" });
                 }
             } else {
-                if (fixed) {
+                if(fixed) {
                     fixed = false;
                     $nav.removeClass("fixed");
-                    $content.css({ 'padding-top': '0' });
+                    $head.css({ "padding-bottom" : "0" });
                 }
             }
         }
@@ -40,9 +42,53 @@
         e.preventDefault();
 
         // Extract the target element's ID from the link's href.
-        var target = $(this).attr("href").hash;
+        var elem = $(this).attr("href").replace( /.*?(#.*)/g, "$1" );
         $('html, body').animate({
-            scrollTop: $(target).offset().top-navHeight
+            scrollTop: $(elem).offset().top - 80
         }, 1000);
+
+        if ( $window.width() < 760 ) {
+            $("#nav-sections ul:visible").slideUp(100).attr("aria-hidden", "true");
+            $("#nav-sections h2").removeClass("open");
+        }
+
     });
+
+    // Set up nav dropdown  
+    $("#nav-sections h2").click(function() {
+        if ( $window.width() < 760 ) {
+            $(this).siblings("ul").slideToggle(150).removeAttr("aria-hidden");
+            $(this).toggleClass("open");
+            return false;
+        }
+    });
+
+    // Hide dropdowns when anything else is clicked
+    $(document).bind('click', function(e) {
+      var $clicked = $(e.target);
+      if ( ( $window.width() < 760 ) && ( !$clicked.parents().hasClass("menu") ) ) {
+        $("#nav-sections ul:visible").hide().attr("aria-hidden", "true");
+        $("#nav-sections h2").removeClass("open");
+      }
+    });
+
+    // or gets focus
+    $("a, input, textarea, button, :focus").bind('focus', function(e) {
+      var $focused = $(e.target);
+      if ( ( $window.width() < 760 ) && ( !$focused.parents().hasClass("menu") ) ) {
+        $("#nav-sections ul").hide().attr("aria-hidden", "true");
+        $("#nav-sections h2").removeClass("open");
+      }
+    });
+
+    $window.resize(function() {
+        if ( $window.width() > 760 ) {
+            $("#nav-sections ul:hidden").show();
+        }
+        else if ( $window.width() < 760 ) {
+            $("#nav-sections ul:visible").hide();
+            $("#nav-sections h2").removeClass("open");
+        }
+    });
+
 })(jQuery);
