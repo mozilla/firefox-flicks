@@ -404,7 +404,7 @@ body.winners #header {
 .winners-head {
     background: transparent url('../img/winners-header.png') center top no-repeat;
     min-height: 350px;
-    margin: 70px auto 0;
+    margin: 70px auto 48px;
 }
 
 .winners .winners-head p {
@@ -412,13 +412,13 @@ body.winners #header {
 }
 
 .winners .winners-head h1 {
-    text-align: center;
+    text-align: left;
     float: none;
-    color: #fbae53;
+    color: #e25b31;
     font-size: 72px;
-    height: 130px;
     line-height: 1;
-    padding: 30px 120px 0 360px;
+    padding: 30px 0 0 360px;
+    min-height: 165px;
 }
 
 .winners .winners-head h1 span {
@@ -448,37 +448,52 @@ body.winners #header {
 #nav-sections {
     position: relative;
     z-index: 99;
-    margin: 0 auto 48px;
-    padding: 0;
-    display: block;
+    margin: 0 0 48px;
+}
+
+#nav-sections h2 {
+    position: absolute;
+    left: -999em;
+    color: #333;
+    margin: 0;
+}
+
+#nav-sections h2:after {
+    content: "\25BC";
+    font-size: .5em;
+    vertical-align: top;
+    margin-left: 8px;
+}
+
+#nav-sections h2.open:after {
+    content: "\25B2";
 }
 
 #nav-sections ul {
     background-color: #fff;
-    text-align: center;
-    margin: 0 -48px;
-    padding: 0 20px;
-    font: 16px/1.2 'Open Sans Light', sans-serif;
     -ms-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     -o-box-shadow: 0 1px 1px rgba(0,0,0,0.1);
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    text-align: center;
+    margin: 0 -48px; 
+    font: 16px/1.2 'Open Sans Light', sans-serif;
     float: none;
     list-style: none;
 }
 
-#nav-sections li {
-    display: inline-block;
-    padding: 12px 0;
+#nav-sections li { 
+    display: inline-block; 
+    padding: 12px 0; 
 }
 
-#nav-sections a:link {
-    display: inline-block;
-    padding: 6px 15px;
-    border-left: 1px dotted #ccc;
+#nav-sections a:link { 
+    display: inline-block; 
+    padding: 6px 15px; 
+    border-left: 1px dotted #ccc; 
 }
 
-#nav-sections li:first-child a {
-    border-left: 0;
+#nav-sections li:first-child a { 
+    border-left: 0; 
 }
 
 #nav-sections a:link,
@@ -497,6 +512,11 @@ body.winners #header {
     padding: 0 48px 48px;
     margin: 0 -48px 48px;
     border-bottom: 1px dotted #906168;
+}
+
+.winners .content-wrapper .section:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
 }
 
 .section:after,
@@ -528,7 +548,7 @@ body.winners #header {
 }
 
 .section h1,
-.section h2,
+.section h2, 
 .section h3 {
     float: none;
     line-height: 1.2;
@@ -552,7 +572,7 @@ body.winners #header {
 }
 
 .section .category {
-    width: 28%;
+    width: 28%; 
     float: right;
     margin: 0 0 24px;
 }
@@ -700,6 +720,24 @@ body.winners #header {
         padding: 30px 0 0 270px;
     }
 
+    .section .grandprize,
+    .section .category {
+        float: none;
+        clear: both;
+        width: 100%;
+    }
+
+    .category ul {
+        width: 100%;
+        margin: 0 -24px 0 0;
+    }
+
+    .category li {
+        width: 22%;
+        margin: 0 3% 0 0;
+        float: left;
+    }
+
     #nav-sections.fixed {
         width: 712px;
     }
@@ -771,17 +809,40 @@ body.winners #header {
         margin-left: -48px;
     }
 
-    #nav-sections ul {
+    #nav-sections h2 {
+        position: static;
+        color: #333;
+        background: #fff;
         float: none;
-        list-style: none;
-        margin: 0;
+        padding: 0 20px;
+        cursor: pointer;
     }
 
-    #nav-sections li {
+    #nav-sections ul {
+        float: none;
+        list-style: none; 
+        margin: 0;
+        position: absolute;
+        left: -999em;
+        top: 2.25em;
+        width: 100%;
+    }
+
+    #nav-sections:hover ul {
+        left: auto;
+    }
+
+    .js #nav-sections ul {
+        display: none;
+        left: auto;
+    }
+
+    #nav-sections li { 
         display: block;
-        padding: 8px 0;
+        text-align: left;
+        padding: 0;
         border-left: 0;
-        border-top: 1px dotted #ccc;
+        border-top: 1px dotted #ccc; 
     }
 
     #nav-sections li:first-child {
@@ -791,7 +852,8 @@ body.winners #header {
     #nav-sections a:link,
     #nav-sections a:visited {
         border: 0;
-        padding: 0;
+        display: block;
+        padding: 8px 20px;
     }
 
     .grandprize {
@@ -811,23 +873,22 @@ body.winners #header {
         margin: 0 -24px 24px 0;
     }
 
+    .category li,
     .runnerups li {
         float: none;
         width: auto;
+        margin: 0 0 1em;
     }
 
     .category h3,
     .runnerups h3 {
         font-size: 20px;
     }
+
 }
 
 /* @Wide @Mobile Layout: 480px */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
-    html, body {
-        overflow-x: hidden;
-    }
-
     .content-wrapper ul.errorlist {
         margin-left: 0px;
     }
@@ -987,25 +1048,9 @@ body.winners #header {
         margin-left: -48px;
     }
 
-    .category ul {
-        list-style: none;
-        width: 100%;
-        margin: 0 -24px 24px 0;
-    }
-
-    .category li {
-        width: 22%;
-        margin: 0 3% 0 0;
-        float: left;
-    }
-
 }
 
 @media only screen and (max-width: 479px) {
-    html, body {
-        overflow-x: hidden;
-    }
-
     html[lang="es"] #header,
     html[lang="fr"] #header,
     html[lang="ja"] #header,
