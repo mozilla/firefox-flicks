@@ -644,7 +644,7 @@ body.winners #header {
 }
 
 .runnerups li {
-    width: 22%;
+    width: 30%;
     margin: 0 3% 0 0;
     float: left;
 }
@@ -728,7 +728,7 @@ body.winners #header {
     }
 
     .category li {
-        width: 22%;
+        width: 30%;
         margin: 0 3% 0 0;
         float: left;
     }
