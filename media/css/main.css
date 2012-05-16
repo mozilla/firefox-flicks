@@ -344,7 +344,7 @@ html[lang="tr"] #header {
     height: 86px;
 }
 
-.winners #header {
+body.winners #header {
   background-image: none;
 }
 
@@ -956,7 +956,7 @@ body.winners #header {
         height: 116px;
     }
 
-    .winners #header {
+    body.winners #header {
         background-image: none;
     }
 
@@ -1102,7 +1102,7 @@ body.winners #header {
         height: 116px;
     }
 
-    .winners #header {
+    body.winners #header {
         background-image: none;
     }
 
