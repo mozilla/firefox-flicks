@@ -1,7 +1,7 @@
 {% macro video_item(idx, video) -%}
   <li id="slide-{{ idx }}">
     <a href="{{ video.details_href }}" class="title" title="{{ video.title }}">
-      {% if video.is_winner %}
+      {% if waffle.flag('winners_page') and video.is_winner %}
         <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
       {% endif %}
       <img src="{{ video.poster_href }}" height="141">
@@ -17,7 +17,7 @@
 {% macro video_details(video) -%}
   <a href="{{ url('flicks.users.details', user_id=video.user_id) }}"
      class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</a>
-  {% if video.is_winner %}
+  {% if waffle.flag('winners_page') and video.is_winner %}
     {% for award in video.award_set.all() %}
       <div class="winner-details">
         {{ award.award_title }}

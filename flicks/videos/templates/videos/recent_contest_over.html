@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import paginate, display_search_form, search_results, video_item %}
+{% from 'shared/macros.html' import paginate, display_search_form, search_results, video_item  with context %}
 
 {% if search %}
   {% set title=_('Video Search Results') %}
