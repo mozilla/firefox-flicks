@@ -23,6 +23,8 @@ from flicks.videos.vidly import embedCode
 TWEET_TEXT = _lazy("Check out '%(video_title)s' on Firefox Flicks. %(link)s")
 log = commonware.log.getLogger('f.videos')
 
+WINNER_CATEGORIES = [c for c in CATEGORY_CHOICES if c[0] != 'new_technology']
+
 
 def winners(request):
     """Winners page."""
@@ -31,7 +33,7 @@ def winners(request):
 
     d = dict(
         awards={},
-        category_choices=CATEGORY_CHOICES,
+        category_choices=WINNER_CATEGORIES,
         page_type='winners'
     )
 
