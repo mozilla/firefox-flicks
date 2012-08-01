@@ -198,6 +198,8 @@ CSP_FONT_SRC = ("'self'",
 CSP_SCRIPT_SRC = ("'self'",
                   'http://browserid.org',
                   'https://browserid.org',
+                  'http://login.persona.org',
+                  'https://login.persona.org',
                   'https://platform.twitter.com',
                   'https://connect.facebook.net',
                   'https://statse.webtrendslive.com',)
