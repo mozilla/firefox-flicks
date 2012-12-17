@@ -21,3 +21,4 @@ flicks/locale/templates
 flicks/locale/.svn
 *.egg-info
 media/previews/*
+venv/*

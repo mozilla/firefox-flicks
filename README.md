@@ -1,17 +1,89 @@
-playdoh
-=======
+Firefox Flicks
+==============
+Firefox Flicks is a [playdoh][gh-playdoh]-based site that allows users to submit
+vidoes and view other entries in the Firefox Flicks contest.
 
-Mozilla's Playdoh is a web application template based on [Django][django].
-
-Patches are welcome! Feel free to fork and contribute to this project on
-[github][gh-playdoh].
-
-Full [documentation][docs] is available as well.
-
-
-[django]: http://www.djangoproject.com/
 [gh-playdoh]: https://github.com/mozilla/playdoh
-[docs]: http://playdoh.rtfd.org/
+
+
+Setup
+-----
+These instructions assume you have [git][], [python][], and `pip` installed. If
+you don't have `pip` installed, you can install it with `easy_install pip`.
+
+1. Start by getting the source:
+
+   ```sh
+   $ git clone --recursive git://github.com/mozilla/firefox-flicks.git
+   $ cd firefox-flicks
+   ```
+
+2. Create a virtualenv for Flicks. Skip the first step if you already have
+   `virtualenv` installed.
+
+   ```sh
+   $ pip install virtualenv
+   $ virtualenv venv
+   $ source venv/bin/activate
+   $ pip install -r requirements/compiled.txt
+   ```
+
+3. Set up a local MySQL database. The [MySQL Installation Documentation][mysql]
+   explains how to do this.
+
+4. Configure your local settings by copying `flicks/settings/local.py-dist` to
+   `flicks/settings/local.py` and customizing the settings in it:
+
+   ```sh
+   $ cp settings/local.py-dist settings/local.py
+   ```
+
+   The file is commented to explain what each setting does and how to customize
+   them.
+
+5. Initialize your database structure:
+
+   ```sh
+   $ python manage.py syncdb
+   $ python manage.py migrate
+   ```
+
+6. Install translations from SVN into the `firefox-flicks/locale` directory:
+
+   ```sh
+   $ git svn clone https://svn.mozilla.org/projects/l10n-misc/trunk/firefoxflicks/locale/ locale
+   # or
+   $ svn checkout https://svn.mozilla.org/projects/l10n-misc/trunk/firefoxflicks/locale/ locale
+   ```
+
+7. Compile the translations:
+
+   ```sh
+   $ python manage.py compilemessages
+   ```
+
+[git]: http://git-scm.com/
+[python]: http://www.python.org/
+[mysql]: http://dev.mysql.com/doc/refman/5.6/en/installing.html
+
+
+Running the Development Server
+------------------------------
+You can launch the development server like so:
+
+```sh
+$ python manage.py runserver
+```
+
+
+Waffle Flags
+------------
+The following [waffle][] flags are in use:
+
+* `winners_page` - Controls whether the winners page is available, as well as
+  displaying winner information on designated videos.
+
+[waffle]: https://github.com/jsocol/django-waffle
 
 
 License
