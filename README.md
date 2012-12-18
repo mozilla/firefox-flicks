@@ -56,7 +56,15 @@ you don't have `pip` installed, you can install it with `easy_install pip`.
    $ svn checkout https://svn.mozilla.org/projects/l10n-misc/trunk/firefoxflicks/locale/ locale
    ```
 
-7. Compile the translations:
+7. Install the GNU version of `gettext`. If you are on OSX, you can do this
+   using [Homebrew][]:
+
+   ```sh
+   $ brew install gettext
+   $ brew link gettext
+   ```
+
+8. Compile the translations:
 
    ```sh
    $ python manage.py compilemessages
@@ -65,6 +73,7 @@ you don't have `pip` installed, you can install it with `easy_install pip`.
 [git]: http://git-scm.com/
 [python]: http://www.python.org/
 [mysql]: http://dev.mysql.com/doc/refman/5.6/en/installing.html
+[Homebrew]: http://mxcl.github.com/homebrew/
 
 
 Running the Development Server
