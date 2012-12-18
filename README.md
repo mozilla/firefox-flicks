@@ -25,13 +25,18 @@ you don't have `pip` installed, you can install it with `easy_install pip`.
    $ pip install virtualenv
    $ virtualenv venv
    $ source venv/bin/activate
+   ```
+
+3. Install the compiled requirements:
+
+   ```sh
    $ pip install -r requirements/compiled.txt
    ```
 
-3. Set up a local MySQL database. The [MySQL Installation Documentation][mysql]
+4. Set up a local MySQL database. The [MySQL Installation Documentation][mysql]
    explains how to do this.
 
-4. Configure your local settings by copying `flicks/settings/local.py-dist` to
+5. Configure your local settings by copying `flicks/settings/local.py-dist` to
    `flicks/settings/local.py` and customizing the settings in it:
 
    ```sh
@@ -41,14 +46,14 @@ you don't have `pip` installed, you can install it with `easy_install pip`.
    The file is commented to explain what each setting does and how to customize
    them.
 
-5. Initialize your database structure:
+6. Initialize your database structure:
 
    ```sh
    $ python manage.py syncdb
    $ python manage.py migrate
    ```
 
-6. Install translations from SVN into the `firefox-flicks/locale` directory:
+7. Install translations from SVN into the `firefox-flicks/locale` directory:
 
    ```sh
    $ git svn clone https://svn.mozilla.org/projects/l10n-misc/trunk/firefoxflicks/locale/ locale
@@ -56,7 +61,7 @@ you don't have `pip` installed, you can install it with `easy_install pip`.
    $ svn checkout https://svn.mozilla.org/projects/l10n-misc/trunk/firefoxflicks/locale/ locale
    ```
 
-7. Install the GNU version of `gettext`. If you are on OSX, you can do this
+8. Install the GNU version of `gettext`. If you are on OSX, you can do this
    using [Homebrew][]:
 
    ```sh
@@ -64,7 +69,7 @@ you don't have `pip` installed, you can install it with `easy_install pip`.
    $ brew link gettext
    ```
 
-8. Compile the translations:
+9. Compile the translations:
 
    ```sh
    $ python manage.py compilemessages
