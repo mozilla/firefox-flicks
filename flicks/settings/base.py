@@ -8,8 +8,11 @@ from funfactory.settings_base import *
 MINIFY_BUNDLES = {
     'css': {
         'flicks_css': (
-            'css/less.css',
             'css/main.css',
+        ),
+        'home_css': (
+            'css/main.css',
+            'css/home.css',
         ),
     },
     'js': {
@@ -29,6 +32,9 @@ MINIFY_BUNDLES = {
         ),
         'winners': (
             'js/winners.js',
+        ),
+        'home_js': (
+            'js/home.js',
         )
     }
 }
@@ -190,11 +196,17 @@ CSP_IMG_SRC = ("'self'",
                'https://www.gravatar.com',
                'https://secure.gravatar.com',
                'http://www.google-analytics.com',
-               'https://ssl.google-analytics.com',)
+               'https://ssl.google-analytics.com',
+               'http://www.mozilla.org',
+               'https://www.mozilla.org',)
 CSP_STYLE_SRC = ("'self'",
-                 'https://fonts.googleapis.com')
+                 'https://fonts.googleapis.com',
+                 'http://www.mozilla.org',
+                 'https://www.mozilla.org',)
 CSP_FONT_SRC = ("'self'",
-                'https://themes.googleusercontent.com',)
+                'https://themes.googleusercontent.com',
+                'http://www.mozilla.org',
+                'https://www.mozilla.org',)
 CSP_SCRIPT_SRC = ("'self'",
                   'http://browserid.org',
                   'https://browserid.org',
@@ -203,7 +215,9 @@ CSP_SCRIPT_SRC = ("'self'",
                   'https://platform.twitter.com',
                   'https://connect.facebook.net',
                   'http://www.google-analytics.com',
-                  'https://ssl.google-analytics.com',)
+                  'https://ssl.google-analytics.com',
+                  'http://www.mozilla.org',
+                  'https://www.mozilla.org',)
 CSP_FRAME_SRC = ('https://vid.ly',
                  'http://platform.twitter.com',
                  'https://platform.twitter.com',

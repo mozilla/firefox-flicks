@@ -3,8 +3,7 @@ from django.conf.urls.defaults import patterns, url
 from flicks.videos import views
 
 urlpatterns = patterns('',
-    url(r'^/?$', views.winners, name='flicks.videos.winners'),
-    url(r'^winners/?$', views.winners, name='flicks.base.winners'),
+    url(r'^winners/?$', views.winners, name='flicks.videos.winners'),
     url(r'^recent/?$', views.recent, name='flicks.videos.recent'),
     url(r'^video/(?P<video_id>\d+)$', views.details,
         name='flicks.videos.details'),

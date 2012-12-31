@@ -1,29 +1,34 @@
-<div id="header">
-  <div class="header-wrapper">
-    <a href="{{ url('flicks.videos.winners') if waffle.flag('winners_page')
-             else url('flicks.videos.recent') }}"
-       title="{{ _('Firefox Flicks') }}" class="logo">{{ _('Firefox Flicks') }}</a>
-    <ul>
-      {% if waffle.flag('winners_page') %}
-        <li><a href="{{ url('flicks.videos.winners')}}"
-               title="{{ _('Award') }}">
-          <img class="award" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
-        </a></li>
-      {% endif %}
-      <li><a href="{{ url('flicks.videos.recent')}}"
-             title="{{ _('Videos') }}">{{ _('Videos') }}</a></li>
-      <li><a href="{{ url('flicks.base.judges') }}"
-             title="{{ _('Judges') }}">{{ _('Judges') }}</a></li>
-      <li><a href="{{ url('flicks.base.prizes') }}"
-             title="{{ _('Prizes') }}">{{ _('Prizes') }}</a></li>
-      <li><a href="{{ url('flicks.base.faq') }}"
-             title="{{ _('FAQ') }}">{{ _('FAQ') }}</a></li>
-      <li><a href="{{ url('flicks.base.rules') }}"
-             title="{{ _('Rules') }}">{{ _('Rules') }}</a></li>
-      <li><a href="http://firefoxflicks.tumblr.com"
-             title="{{ _('News') }}">{{ _('News') }}</a></li>
-
-    </ul>
-    <a href="http://mozilla.org" id="mozilla-tag">{{ _('Mozilla') }}</a>
+<header id="masthead">
+  <div id="head-inner">
+    <div class="wrap">
+      <h1 class="logo">
+        <a href="{{ url('flicks.base.home')}}">
+          <img src="{{ MEDIA_URL }}img/flicks-logo-sm-lt.png" alt="{{ _('Firefox Flicks') }}">
+        </a>
+      </h1>
+  
+      <nav id="page-nav">
+        <ul>
+          <li><a href="{{ url('flicks.base.home') }}#about">{{ _('About') }}</a></li>
+          <li><a href="{{ url('flicks.base.home') }}#winners2012">{{ _('2012 Winners') }}</a></li>
+          <li><a href="{{ url('flicks.base.home') }}#judges">{{ _('Judges') }}</a></li>
+          <li><a href="{{ url('flicks.base.home') }}#prizes">{{ _('Prizes') }}</a></li>
+          <li><a href="{{ url('flicks.base.home') }}#rules">{{ _('Rules') }}</a></li>
+          <li><a href="http://firefoxflicks.tumblr.com" class="go">{{ _('Blog') }}</a></li>
+        </ul>
+      </nav>
+    </div>
   </div>
-</div>
+  
+  <div class="wrap">
+    <nav id="nav-social-head" class="nav-social">
+      <ul>
+        
+        <li><a href="http://vimeo.com/firefoxflicks" title="{{ _('Vimeo') }}" class="vimeo">{{ _('Vimeo') }}</a></li>
+        <li><a href="http://facebook.com/firefoxflicks" title="{{ _('Facebook') }}" class="facebook">{{ _('Facebook') }}</a></li>
+        <li><a href="http://twitter.com/firefoxflicks" title="{{ _('Twitter') }}" class="twitter">{{ _('Twitter') }}</a></li>
+      </ul>
+    </nav>
+    <a href="https://www.mozilla.org" id="tabzilla">{{ _('Mozilla') }}</a>
+  </div>
+</header>

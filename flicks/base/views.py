@@ -3,6 +3,10 @@ from django.shortcuts import render
 
 from flicks.base.util import absolutify
 
+def home(request):
+    """Home page."""
+    return render(request, 'home.html')
+
 
 def creative(request):
     """Creative Brief page."""
