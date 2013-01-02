@@ -16,7 +16,6 @@ MINIFY_BUNDLES = {
         'flicks_js': (
             'js/libs/jquery-1.7.1.min.js',
             'js/libs/jquery.cookie.js',
-            'js/libs/webtrends.js',
             'js/init.js',
         ),
         'video_details': (
@@ -190,7 +189,8 @@ CSP_IMG_SRC = ("'self'",
                'https://d3fenhwk93s16g.cloudfront.net',
                'https://www.gravatar.com',
                'https://secure.gravatar.com',
-               'https://statse.webtrendslive.com',)
+               'http://www.google-analytics.com',
+               'https://www.google-analytics.com',)
 CSP_STYLE_SRC = ("'self'",
                  'https://fonts.googleapis.com')
 CSP_FONT_SRC = ("'self'",
@@ -202,12 +202,13 @@ CSP_SCRIPT_SRC = ("'self'",
                   'https://login.persona.org',
                   'https://platform.twitter.com',
                   'https://connect.facebook.net',
-                  'https://statse.webtrendslive.com',)
+                  'http://www.google-analytics.com',
+                  'https://www.google-analytics.com',)
 CSP_FRAME_SRC = ('https://vid.ly',
                  'http://platform.twitter.com',
                  'https://platform.twitter.com',
                  'https://www.facebook.com',)
-CSP_OPTIONS = ('eval-script',)
+CSP_OPTIONS = ('eval-script', 'inline-script')
 
 # Blacklist of unacceptable content-types for video URLs
 INVALID_VIDEO_CONTENT_TYPES = [
@@ -223,3 +224,6 @@ STATSD_PATCHES = [
 # Video preview settings
 PREVIEW_PATH = lambda inst, filename: 'previews/images/%s_%s' % (inst.id, filename)
 MAX_FILEPATH_LENGTH = 100
+
+# Google Analytics
+GA_ACCOUNT_CODE = ''

@@ -29,6 +29,25 @@
       {{ css('flicks_css') }}
     {% endblock %}
     <link rel="shortcut icon" type="image/png" href="{{ MEDIA_URL }}img/favicon.png">
+
+    {% block google_analytics %}
+      <script>
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', '{{ settings.GA_ACCOUNT_CODE }}']);
+          _gaq.push(['_trackPageview']);
+
+          {% if settings.GA_ACCOUNT_CODE %}
+          (function() {
+              var ga = document.createElement('script');
+              ga.type = 'text/javascript';
+              ga.async = true;
+              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(ga, s);
+          })();
+          {% endif %}
+      </script>
+    {% endblock %}
   </head>
   <body class="{{ page_type }}"
         data-mobile-cookie="{{ settings.MOBILE_COOKIE }}"
@@ -113,15 +132,5 @@
       {{ js('flicks_js') }}
       <script src="https://browserid.org/include.js"></script>
     {% endblock %}
-    {# Webtrends content #}
-    <noscript>
-      <div>
-        <img alt="DCSIMG"
-             id="DCSIMG"
-             width="1"
-             height="1"
-             src="//statse.webtrendslive.com/dcsipbyhuvz5bdy67sxp7uwwe_5l6z/njs.gif?dcsuri=/nojavascript&amp;WT.js=No&amp;WT.tv=9.4.0&amp;dcssip=firefoxflicks.mozilla.org">
-      </div>
-    </noscript>
   </body>
 </html>
