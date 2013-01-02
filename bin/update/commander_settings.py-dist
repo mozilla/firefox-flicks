@@ -12,3 +12,6 @@ CELERY_SERVICE = ''
 
 UPDATE_REF = 'origin/master'
 SSH_KEY = None
+
+REMOTE_WSGI = ''
+CELERY_SERVICE = ''
