@@ -203,7 +203,7 @@ CSP_SCRIPT_SRC = ("'self'",
                   'https://platform.twitter.com',
                   'https://connect.facebook.net',
                   'http://www.google-analytics.com',
-                  'https://www.google-analytics.com',)
+                  'https://ssl.google-analytics.com',)
 CSP_FRAME_SRC = ('https://vid.ly',
                  'http://platform.twitter.com',
                  'https://platform.twitter.com',
