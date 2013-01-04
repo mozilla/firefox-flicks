@@ -190,7 +190,7 @@ CSP_IMG_SRC = ("'self'",
                'https://www.gravatar.com',
                'https://secure.gravatar.com',
                'http://www.google-analytics.com',
-               'https://www.google-analytics.com',)
+               'https://ssl.google-analytics.com',)
 CSP_STYLE_SRC = ("'self'",
                  'https://fonts.googleapis.com')
 CSP_FONT_SRC = ("'self'",
