@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block page_title %}A Global Video Contest to Mobilize the Web{% endblock %}
+{% block page_title %}{{ _('A Global Video Contest to Mobilize the Web') }}{% endblock %}
 
 {% block site_css %}
   {{ css('home_css') }}
@@ -21,12 +21,12 @@
         <p>
         {% trans %}
           Mobile connects people. It’s a force for progress and change, both individually and collectively.
-          <br> 
+          <br>
           Submit your video about the power of mobile and inspire others to get mobilized.
         {% endtrans %}
         </p>
       </div>
-    
+
       <div id="slideshow" class="js">
         <ol class="slides">
           <li id="slide-one" class="slide">
@@ -43,7 +43,7 @@
           </li>
         </ol>
       </div>
-    
+
       <div class="actions">
         <ul>
           <li>
@@ -62,37 +62,37 @@
       </div>
     </div>
   </section>
-  
+
   <section id="about" class="section">
     <div class="wrap">
       <h1 class="section-title">{{ _('What is Firefox Flicks?') }}</h1>
       <div class="section-intro">
         <p>
         {% trans %}
-          It’s a video contest. It’s an opportunity to reach millions of Firefox users and 
-          inspire them to get mobilized. It’s a chance to win <a href="#prizes" class="scroll">great prizes</a> 
-          and be seen by <a href="#judges" class="scroll">celebrity judges</a> who can make 
+          It’s a video contest. It’s an opportunity to reach millions of Firefox users and
+          inspire them to get mobilized. It’s a chance to win <a href="#prizes" class="scroll">great prizes</a>
+          and be seen by <a href="#judges" class="scroll">celebrity judges</a> who can make
           your moviemaking dream come true.
         {% endtrans %}
         </p>
       </div>
-      
+
       <div class="section-detail">
         <figure class="video">
           <a href="#" class="video-play" title="{{ _('Play a short introduction video') }}">
-            <img src="/media/img/video-thumb-fpo.jpg" alt="" width="240" height="135">
+            <img src="{{ MEDIA_URL }}img/video-thumb-fpo.jpg" alt="" width="240" height="135">
           </a>
         </figure>
         <p>
         {% trans %}
-          This year there’s only one category, so whether your flick is funny or serious, animated 
-          or live action, we want to see it. It just has to be 60 seconds or less and get people 
+          This year there’s only one category, so whether your flick is funny or serious, animated
+          or live action, we want to see it. It just has to be 60 seconds or less and get people
           excited about the future of the Open Web on mobile.
         {% endtrans %}
         </p>
         <p><a href="#" class="go">{{ _('Download the creative brief to get started') }}</a></p>
       </div>
-      
+
       <div class="actions">
         <h3>
           <span>{{ _('What is Firefox OS?') }}</span>
@@ -101,57 +101,57 @@
         </h3>
         <p>
         {% trans %}
-        Learn more about Firefox OS, the open, Web-based operating system for mobile devices, 
+        Learn more about Firefox OS, the open, Web-based operating system for mobile devices,
         and get answers to all your other questions.
         {% endtrans %}
         </p>
         <p><a href="{{ url('flicks.base.faq') }}" class="button">{{ _('Read the FAQ') }}</a></p>
       </div>
-      
+
     </div>
   </section>
-  
+
   <section id="winners2012" class="section alt">
     <div class="wrap">
       <h1 class="section-title">{{ _('Views from Cannes') }}</h1>
       <div class="section-intro">
         <p>
         {% trans %}
-          Watch the Flicks that topped our judges' list in 2012 and earned their filmmakers a 
+          Watch the Flicks that topped our judges' list in 2012 and earned their filmmakers a
           trip to the Cannes Film Festival.
         {% endtrans %}
         </p>
       </div>
     </div>
   </section>
-  
+
   <section id="judges" class="section">
     <div class="wrap">
       <h1 class="section-title">{{ _('Meet the judges') }}</h1>
       <div class="section-intro">
         <p>
         {% trans %}
-          Get to know our illustrious panel of judges — led by actor, director, 
-          producer and activist Edward Norton — who will see your flick and help 
+          Get to know our illustrious panel of judges — led by actor, director,
+          producer and activist Edward Norton — who will see your flick and help
           us choose this year's winners. Click on each photo for a full bio.
         {% endtrans %}
       </div>
     </div>
   </section>
-  
+
   <section id="prizes" class="section alt">
     <div class="wrap">
       <h1 class="section-title">{{ _('Prizes') }}</h1>
       <div class="section-intro">
         <p>
         {% trans %}
-          There a number of ways to win throughout the competition. Get your flick in early 
-          for a chance at one of our Early Entry Awards. The top three entries from each early 
-          deadline automatically move on the finals to be judged by our celebrity panel. 
+          There a number of ways to win throughout the competition. Get your flick in early
+          for a chance at one of our Early Entry Awards. The top three entries from each early
+          deadline automatically move on the finals to be judged by our celebrity panel.
           And just for entering, you’ll get a little something from us to say thanks.
         {% endtrans %}
         </p>
-        
+
         <p>
         {% trans %}
           Here’s a complete look at what you could win.
@@ -167,9 +167,9 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          We want to give budding film makers the opportunity to create and  submit short 
-          videos promoting Firefox OS. The contest will run worldwide* and winners will be 
-          chosen from four regions around the world — the United States and Canada, Latin 
+          We want to give budding film makers the opportunity to create and  submit short
+          videos promoting Firefox OS. The contest will run worldwide* and winners will be
+          chosen from four regions around the world — the United States and Canada, Latin
           America, Europe, and Asia, Africa, Australia and New Zealand.
         {% endtrans %}
         </p>
@@ -177,6 +177,4 @@
     </div>
   </section>
 
-<script src="{{ MEDIA_URL }}js/tabzilla.js"></script>
-  
 {% endblock %}
