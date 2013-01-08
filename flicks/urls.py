@@ -12,7 +12,8 @@ autodiscover()
 
 
 def error_page(request, template, status=None):
-    """Render error templates, found in the root /templates directory.
+    """
+    Render error templates, found in the root /templates directory.
 
     If no status parameter is explcitedly passed, this function assumes
     your HTTP status code is the same as your template name (i.e. passing

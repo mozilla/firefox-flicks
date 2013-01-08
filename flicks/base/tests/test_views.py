@@ -1,9 +1,12 @@
+from django.utils.unittest import skip
+
 from funfactory.urlresolvers import reverse
 from nose.tools import eq_
 
 from flicks.base.tests import TestCase
 
 
+@skip
 class HomeTests(TestCase):
     def _get(self):
         with self.activate('en-US'):

@@ -2,6 +2,7 @@ import socket
 
 from django.conf import settings
 from django.core import mail
+from django.utils.unittest import skip
 
 from funfactory.urlresolvers import reverse
 from mock import patch
@@ -11,13 +12,13 @@ from flicks.base.tests import TestCache, TestCase
 from flicks.videos.forms import UploadForm
 from flicks.videos.models import Video
 from flicks.videos.tasks import send_video_to_vidly
-from flicks.videos.tests import build_video, skip_test
+from flicks.videos.tests import build_video
 from flicks.videos.util import cached_viewcount
 
 
+@skip
 @patch.object(send_video_to_vidly, 'delay')
 class UploadTests(TestCase):
-    @skip_test
     @patch.object(UploadForm, 'clean_upload_url')
     def _post(self, clean_upload_url, **kwargs):
         clean_upload_url.return_value = kwargs.get('url', 'http://test.com')
@@ -34,20 +35,17 @@ class UploadTests(TestCase):
     def setUp(self):
         self.user = self.build_user(login=True)
 
-    @skip_test
     def test_get(self, send_video_to_vidly):
         """An empty form should do nothing."""
         with self.activate('en-US'):
             self.client.get(reverse('flicks.videos.upload'))
         eq_(send_video_to_vidly.called, False)
 
-    @skip_test
     def test_invalid_post(self, send_video_to_vidly):
         """Invalid parameters should not create a video."""
         self._post(title='')
         eq_(send_video_to_vidly.called, False)
 
-    @skip_test
     def test_valid_post(self, send_video_to_vidly):
         """Valid parameters should send a video to vidly."""
         self._post()
@@ -56,7 +54,6 @@ class UploadTests(TestCase):
         video = send_video_to_vidly.call_args[0][0]
         eq_(video.user, self.user)
 
-    @skip_test
     def test_socket_timeout(self, send_video_to_vidly):
         """A socket timeout is silent to the user."""
         send_video_to_vidly.side_effect = socket.timeout
@@ -67,6 +64,7 @@ class UploadTests(TestCase):
             [t.name for t in response.templates])
 
 
+@skip
 @patch.object(settings, 'VIDLY_USER_ID', '1111')
 class NotifyTests(TestCase):
     def _post(self, xml, key=settings.NOTIFY_KEY):
@@ -79,7 +77,6 @@ class NotifyTests(TestCase):
     def setUp(self):
         self.user = self.build_user()
 
-    @skip_test
     @patch.object(settings, 'NOTIFY_KEY', 'asdf')
     def test_invalid_key_forbidden(self):
         """If an invalid key is provided in the URL, return a 403 and do not
@@ -99,7 +96,6 @@ class NotifyTests(TestCase):
             eq_(response.status_code, 403)
             eq_(video.state, 'pending')
 
-    @skip_test
     def test_valid_notification(self):
         """A valid notification updates a video's state."""
         xml = """<?xml version="1.0"?>
@@ -122,7 +118,6 @@ class NotifyTests(TestCase):
             ok_(video_url in mail.outbox[0].body)
             eq_(mail.outbox[0].to, [self.user.email])
 
-    @skip_test
     def test_error_notification(self):
         """An error notification updates the video's state."""
         xml = """<?xml version="1.0"?>
@@ -144,6 +139,7 @@ class NotifyTests(TestCase):
             eq_(mail.outbox[0].to, [self.user.email])
 
 
+@skip
 class AjaxAddViewTests(TestCase):
     def _post(self, video_id=None):
         params = {'video_id': video_id} if video_id is not None else {}
@@ -182,6 +178,7 @@ class AjaxAddViewTests(TestCase):
             eq_(cached_viewcount(video.id), 11)
 
 
+@skip
 class DetailsTests(TestCase):
     def _post(self, video, **kwargs):
         with self.activate('en-US'):

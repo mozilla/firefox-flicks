@@ -198,7 +198,7 @@ class Award(models.Model, CachingMixin):
                               choices=REGION_CHOICES,
                               verbose_name=_lazy(u'Region'))
     award_type = models.CharField(max_length=50, blank=False,
-                                  choices = AWARD_TYPE_CHOICES)
+                                  choices=AWARD_TYPE_CHOICES)
 
     objects = CachingManager()
 

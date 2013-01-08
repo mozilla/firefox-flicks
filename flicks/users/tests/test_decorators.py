@@ -1,9 +1,12 @@
+from django.utils.unittest import skip
+
 from funfactory.urlresolvers import reverse
 from nose.tools import eq_
 
 from flicks.base.tests import TestCase
 
 
+@skip
 class ProfileRequiredTests(TestCase):
     urls = 'flicks.users.tests.urls'
 
