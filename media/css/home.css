@@ -168,16 +168,151 @@
     margin: 0 auto 1em;
 }
 
+/* @Winners from 2012 *********/
+#winners2012 .section-intro {
+    width: 620px;
+}
+
+.entry-list {
+    list-style: none;
+}
+
+.entry-list .entry {
+
+}
+
 /* @Judges *********/
 #judges {
   background: url(/media/img/spot-1.png) 150% 10px no-repeat, url(/media/img/spot-2.png) -10% 200% no-repeat, url(/media/img/spot-3.png) 5% -320px no-repeat;
 }
 
-/* @Rules *********/
-#rules {
-  background: url(/media/img/spot-1.png) -50% 50% no-repeat, url(/media/img/spot-2.png) 85% 200% no-repeat, url(/media/img/spot-3.png) 120% -120px no-repeat;
+#judges .section-intro {
+  width: 620px;
 }
 
+.judges {
+  list-style: none;
+  margin: 0 -10px 2em;
+}
+
+.judges:after {
+
+}
+
+.judge {
+  width: 140px;
+  margin: 0 10px 2em;
+  float: left;
+  font-family: "Open Sans", sans-serif;
+}
+
+.judge h2 {
+  font-size: 14px;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: -.5px;
+  margin: 0 0 .5em;
+}
+
+.judge h3 {
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.judge .photo {
+  width: 130px;
+  border: 5px solid #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+.quote {
+  clear: both;
+  border-top: 1px solid #ccc;
+  width: 300px;
+  margin: 20px auto 0;
+  padding: 20px 0 0;
+  text-align: center;
+}
+
+.quote blockquote {
+  margin: 0 -50px;
+  font: italic 14px/1.3 "Open Sans", sans-serif;
+}
+
+.quote cite {
+  white-space: nowrap;
+  margin-left: 1em;
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* @Prizes *********/
+.prizes {
+  overflow: auto;
+  margin: 2em -10px 0;
+}
+
+.prize {
+  text-align: center;
+  width: 300px;
+  margin: 0 10px 2em;
+  float: left;
+}
+
+.prize h2 {
+  font-size: 22px;
+}
+
+.prize p {
+  font-family: "Open Sans", sans-serif;
+  margin: 0 10px 1em;
+}
+
+.prize h2:before {
+  content: "{ ";
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.prize h2:after {
+  content: " }";
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+.prize.grand {
+  width: 460px;
+  float: none;
+  clear: both;
+  margin: 1em auto 3em;
+}
+
+.prize.grand h2 {
+  font-size: 28px;
+}
+
+/* @Rules *********/
+#rules {
+  background: url(/media/img/spot-1.png) -50% 50% no-repeat, url(/media/img/spot-2.png) 85% 180% no-repeat, url(/media/img/spot-3.png) 120% -120px no-repeat;
+  text-align: center;
+}
+
+#rules .section-intro {
+  width: 780px;
+}
+
+.rules {
+  width: 460px;
+  margin: 0 auto;
+}
+
+.rules h2 {
+  font-size: 22px;
+}
+
+.rules p {
+  font-family: "Open Sans", sans-serif;
+}
 
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 1000px) {

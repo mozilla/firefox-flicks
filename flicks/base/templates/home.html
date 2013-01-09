@@ -20,9 +20,9 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          Mobile connects people. It’s a force for progress and change, both individually and collectively.
-          <br>
-          Submit your video about the power of mobile and inspire others to get mobilized.
+          Mobile connects people. It’s a force for progress and change, both individually
+          and collectively. Enter Firefox Flicks with your video about the power of mobile
+          and inspire others to get mobilized.
         {% endtrans %}
         </p>
       </div>
@@ -35,7 +35,7 @@
               <h2>{{ _('Get Inspired!') }}</h2>
               <p>
               {% trans %}
-                Watch the flicks we took to Cannes last year and see if you can do better.
+                Watch the flicks we took to Cannes last year before making your own.
               {% endtrans %}
               </p>
               <p class="act"><a href="#winners2012" class="go scroll">{{ _('See the 2012 winners') }}</a></p>
@@ -52,11 +52,11 @@
           </li>
           <li>
             <h3>{{ _('Submissions open February 13') }}</h3>
-            <p class="soon">{{ _('Coming soon') }}</p>
+            <p><a href="{{ url('flicks.base.faq') }}" class="go">{{ _('Learn more in the FAQ') }}</a></p>
           </li>
           <li>
             <h3>{{ _('Start thinking about your flick') }}</h3>
-            <p><a href="#" class="go">{{ _('Download the creative brief') }}</a></p>
+            <p><a href="#" class="go">{{ _('Read the creative brief') }}</a></p>
           </li>
         </ul>
       </div>
@@ -85,12 +85,12 @@
         </figure>
         <p>
         {% trans %}
-          This year there’s only one category, so whether your flick is funny or serious, animated
-          or live action, we want to see it. It just has to be 60 seconds or less and get people
-          excited about the future of the Open Web on mobile.
+          This year there’s only one category, so whether your flick is funny or serious,
+          animated or live action, we want to see it. It just has to be 60 seconds or less
+          and get people excited about the future of the Web on mobile.
         {% endtrans %}
         </p>
-        <p><a href="#" class="go">{{ _('Download the creative brief to get started') }}</a></p>
+        <p><a href="#" class="go">{{ _('Read the creative brief to get started') }}</a></p>
       </div>
 
       <div class="actions">
@@ -101,8 +101,8 @@
         </h3>
         <p>
         {% trans %}
-        Learn more about Firefox OS, the open, Web-based operating system for mobile devices,
-        and get answers to all your other questions.
+          Learn more about Firefox OS, the open, Web-based operating system for mobile devices,
+          and get answers to all your other questions.
         {% endtrans %}
         </p>
         <p><a href="{{ url('flicks.base.faq') }}" class="button">{{ _('Read the FAQ') }}</a></p>
@@ -122,6 +122,7 @@
         {% endtrans %}
         </p>
       </div>
+
     </div>
   </section>
 
@@ -131,11 +132,73 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          Get to know our illustrious panel of judges — led by actor, director,
-          producer and activist Edward Norton — who will see your flick and help
-          us choose this year's winners. Click on each photo for a full bio.
+          Get to know our illustrious panel of celebrity judges — led by actor,
+          director, producer and activist Edward Norton — who will see your flick
+          and help us choose this year’s winner.
         {% endtrans %}
+        </p>
+        <p>
+        {% trans %}
+          Click on each photo for a full bio.
+        {% endtrans %}
+        </p>
       </div>
+
+      <ul class="judges">
+        <li class="judge vcard">
+          <img src="{{ MEDIA_URL }}img/judges/judge_edward_norton.jpg" alt="" class="photo">
+          <hgroup>
+            <h2 class="fn">Edward Norton</h2>
+            <h3 class="role">{{ _('Actor, Director, Producer, Activist') }}</h3>
+          </hgroup>
+        </li>
+        <li class="judge vcard">
+          <img src="{{ MEDIA_URL }}img/judges/judge_shauna_robertson.jpg" alt="" class="photo">
+          <hgroup>
+            <h2 class="fn">Shauna Robertson</h2>
+            <h3 class="role">{{ _('Producer, Philanthropist') }}</h3>
+          </hgroup>
+        </li>
+        <li class="judge">
+          <img src="{{ MEDIA_URL }}img/judges/blank.jpg" alt="" class="photo">
+          <hgroup>
+            <h2>{{ _('To Be Announced') }}</h2>
+          </hgroup>
+        </li>
+        <li class="judge">
+          <img src="{{ MEDIA_URL }}img/judges/blank.jpg" alt="" class="photo">
+          <hgroup>
+            <h2>{{ _('To Be Announced') }}</h2>
+          </hgroup>
+        </li>
+        <li class="judge">
+          <img src="{{ MEDIA_URL }}img/judges/blank.jpg" alt="" class="photo">
+          <hgroup>
+            <h2>{{ _('To Be Announced') }}</h2>
+          </hgroup>
+        </li>
+        <li class="judge">
+          <img src="{{ MEDIA_URL }}img/judges/blank.jpg" alt="" class="photo">
+          <hgroup>
+            <h2>{{ _('To Be Announced') }}</h2>
+          </hgroup>
+        </li>
+      </ul>
+
+      <aside class="quote">
+        <blockquote>
+          <p>
+          {% trans %}
+            ”What I think is really cool about Firefox Flicks is that it marries that
+            core philosophy of liberating people to say what they want to say and connects
+            it to something that’s happening in the arts and film.“
+          {% endtrans %}
+            <cite> — Edward Norton</cite>
+          </p>
+        </blockquote>
+
+      </aside>
+
     </div>
   </section>
 
@@ -145,19 +208,56 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          There a number of ways to win throughout the competition. Get your flick in early
-          for a chance at one of our Early Entry Awards. The top three entries from each early
-          deadline automatically move on the finals to be judged by our celebrity panel.
-          And just for entering, you’ll get a little something from us to say thanks.
+          There are a number of ways to win throughout the competition. Get your
+          flick in early for a chance at one of our Early Entry Awards. The top
+          three entries from each early deadline automatically move on the finals
+          to be judged by our celebrity panel. And just for entering, you’ll get
+          a little something from us to say thanks.
         {% endtrans %}
         </p>
 
         <p>
         {% trans %}
-          Here’s a complete look at what you could win.
+          Here’s a more detailed look at what you can win, but check back for
+          prize updates throughout the contest.
         {% endtrans %}
         </p>
       </div>
+
+      <section class="prizes">
+
+        <div class="prize regional">
+          <h2>{{ _('Regional Prizes') }}</h2>
+          <p>
+          {% trans %}
+            A $5,000 top prize and $2,500 for the runner-up will go to the top two
+            flicks from each of the contest regions: Latin America, North America,
+            Europe and Asia.
+          {% endtrans %}
+          </p>
+        </div>
+
+        <div class="prize choice">
+          <h2>{{ _('People’s Choice Awards') }}</h2>
+          <p>
+          {% trans %}
+            All flicks submitted before the deadline are eligible and the 3 that
+            earn the most votes in August win a Firefox Flicks swag bag.
+          {% endtrans %}
+          </p>
+        </div>
+
+        <div class="prize early">
+          <h2>{{ _('Early Entry Awards') }}</h2>
+          <p>
+          {% trans %}
+            There will be multiple chances to win $1,000 for submitting your flick
+            early. Check back on February 13 for dates and more information.
+          {% endtrans %}
+          </p>
+        </div>
+
+      </section>
     </div>
   </section>
 
@@ -167,13 +267,54 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          We want to give budding film makers the opportunity to create and  submit short
-          videos promoting Firefox OS. The contest will run worldwide* and winners will be
-          chosen from four regions around the world — the United States and Canada, Latin
-          America, Europe, and Asia, Africa, Australia and New Zealand.
+          We want to give budding filmmakers the opportunity to create and submit short
+          videos promoting Firefox OS. The contest will run worldwide and winners will
+          be chosen from four regions around the world — North America, Latin America,
+          Europe and Asia.
         {% endtrans %}
         </p>
       </div>
+
+      <section class="rules">
+        <h2>{{ _('Sponsor') }}</h2>
+        <p>
+        {% trans %}
+          The sponsor of the contest is the Mozilla Corporation.
+        {% endtrans %}
+        </p>
+
+        <h2>{{ _('Eligibility') }}</h2>
+        <p>
+        {% trans %}
+          No purchase or fee is necessary to enter or claim any prize.
+        {% endtrans %}
+        </p>
+
+        <h2>{{ _('Contest period') }}</h2>
+        <p>
+        {% trans %}
+          The Contest begins at 3:00 p.m. Pacific Standard Time (PST) (11:00 p.m. GMT) on
+          Wednesday, February 13, 2013, and ends at 11:59 p.m. PST on Wednesday, July 31, 2013
+          (7:59 a.m. GMT on August 1, 2013).
+        {% endtrans %}
+        </p>
+
+        <h2>{{ _('Privacy') }}</h2>
+        <p>
+        {% trans %}
+          Your privacy is important to us. Check back soon for our complete official contest rules.
+        {% endtrans %}
+        </p>
+
+        <h2>{{ _('How to enter') }}</h2>
+        <p>
+        {% trans %}
+          The website will begin accepting entries on February 13, 2013, at 3:00 p.m.
+          Pacific Standard Time (PST) (11:00 p.m. GMT).
+        {% endtrans %}
+        </p>
+      </section>
+
     </div>
   </section>
 
