@@ -34,6 +34,7 @@ MINIFY_BUNDLES = {
             'js/winners.js',
         ),
         'home_js': (
+            'js/libs/jquery.waypoints.min.js',
             'js/home.js',
         )
     }
@@ -198,15 +199,23 @@ CSP_IMG_SRC = ("'self'",
                'http://www.google-analytics.com',
                'https://ssl.google-analytics.com',
                'http://www.mozilla.org',
-               'https://www.mozilla.org',)
+               'https://www.mozilla.org',
+               'http://mozcom-cdn.mozilla.net',
+               'https://mozcom-cdn.mozilla.net',)
 CSP_STYLE_SRC = ("'self'",
                  'https://fonts.googleapis.com',
                  'http://www.mozilla.org',
-                 'https://www.mozilla.org',)
+                 'https://www.mozilla.org',
+                 'http://mozcom-cdn.mozilla.net',
+                 'https://mozcom-cdn.mozilla.net',
+                 'http://*.vimeo.com',
+                 'https://*.vimeo.com',)
 CSP_FONT_SRC = ("'self'",
                 'https://themes.googleusercontent.com',
                 'http://www.mozilla.org',
-                'https://www.mozilla.org',)
+                'https://www.mozilla.org',
+                'http://mozcom-cdn.mozilla.net',
+                'https://mozcom-cdn.mozilla.net',)
 CSP_SCRIPT_SRC = ("'self'",
                   'http://browserid.org',
                   'https://browserid.org',
@@ -217,11 +226,19 @@ CSP_SCRIPT_SRC = ("'self'",
                   'http://www.google-analytics.com',
                   'https://ssl.google-analytics.com',
                   'http://www.mozilla.org',
-                  'https://www.mozilla.org',)
+                  'https://www.mozilla.org',
+                  'http://mozcom-cdn.mozilla.net',
+                  'https://mozcom-cdn.mozilla.net',
+                  'http://*.vimeo.com',
+                  'https://*.vimeo.com',
+                  'https://*.vimeocdn.com',)
 CSP_FRAME_SRC = ('https://vid.ly',
                  'http://platform.twitter.com',
                  'https://platform.twitter.com',
-                 'https://www.facebook.com',)
+                 'https://www.facebook.com',
+                 'http://*.vimeo.com',
+                 'https://*.vimeo.com',
+                 'https://*.vimeocdn.com',)
 CSP_OPTIONS = ('eval-script', 'inline-script')
 
 # Blacklist of unacceptable content-types for video URLs

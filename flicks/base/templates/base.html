@@ -78,7 +78,6 @@
               <h4>Our Sponsors</h4>
               <ul>
                 <li><a href="http://vimeo.com" rel="external"><img src="/media/img/sponsors/sponsor-vimeo.png" alt="Vimeo" width="100" height="30"></a></li>
-                <li><a href="http://panavision.com" rel="external"><img src="/media/img/sponsors/sponsor-panavision.png" alt="Panavision" width="100" height="52"></a></li>
               </ul>
             </aside>
 
@@ -86,15 +85,15 @@
               <nav id="nav-social-foot" class="nav-social">
                 <h4>{{ _('Share Firefox Flicks') }}</h4>
                 <ul>
-                  <li><a href="http://vimeo.com/firefoxflicks" title="Vimeo" class="vimeo">Vimeo</a></li>
-                  <li><a href="http://facebook.com/firefoxflicks" title="Facebook" class="facebook">Facebook</a></li>
-                  <li><a href="http://twitter.com/firefoxflicks" title="Twitter" class="twitter">Twitter</a></li>
+                  <li><a href="http://vimeo.com/firefoxflicks" title="Vimeo" class="vimeo" rel="external">Vimeo</a></li>
+                  <li><a href="http://facebook.com/firefoxflicks" title="Facebook" class="facebook" rel="external">Facebook</a></li>
+                  <li><a href="http://twitter.com/firefoxflicks" title="Twitter" class="twitter" rel="external">Twitter</a></li>
                 </ul>
               </nav>
 
               <aside class="firefoxos">
                 <h4>{{ _('Learn about Firefox OS') }}</h4>
-                <p><a href="http://www.mozilla.org/firefoxos/">{{ _('Firefox OS') }}</a></p>
+                <p><a href="http://www.mozilla.org/firefoxos/" rel="external">{{ _('Firefox OS') }}</a></p>
               </aside>
             </div>
 
@@ -102,8 +101,20 @@
               <ul>
                 <li><a href="http://www.mozilla.org/en-US/privacy-policy.html">{{ _('Privacy Policy') }}</a></li>
                 <li><a href="http://www.mozilla.org/about/legal.html">{{ _('Legal') }}</a></li>
-                <li><a href="#">{{ _('Partners') }}</a></li>
-                <li><a href="#">{{ _('Other Languages') }}</a></li>
+                <li>
+                  <form class="languages" method="GET">
+                    <label for="language">{{ _('Other languages:') }}</label>
+                    <select id="language" name="lang" dir="ltr">
+                      {% for code, name in LANGUAGES|dictsort -%}
+                        <option value="{{ code }}" {{ code|ifeq(LANG|lower, "selected") }}>
+                          {{ name }}
+                        </option>
+                      {%- endfor %}
+                    </select>
+                    {# L10N: This is a label for a form submit button #}
+                    <button type="submit">{{ _('Submit') }}</button>
+                  </form>
+                </li>
               </ul>
             </nav>
 

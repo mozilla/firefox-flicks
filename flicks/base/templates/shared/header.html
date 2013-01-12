@@ -9,12 +9,12 @@
 
       <nav id="page-nav">
         <ul>
-          <li><a href="{{ url('flicks.base.home') }}#about">{{ _('About') }}</a></li>
-          <li><a href="{{ url('flicks.base.home') }}#winners2012">{{ _('2012 Winners') }}</a></li>
-          <li><a href="{{ url('flicks.base.home') }}#judges">{{ _('Judges') }}</a></li>
-          <li><a href="{{ url('flicks.base.home') }}#prizes">{{ _('Prizes') }}</a></li>
-          <li><a href="{{ url('flicks.base.home') }}#rules">{{ _('Rules') }}</a></li>
-          <li><a href="http://firefoxflicks.tumblr.com" class="go">{{ _('Blog') }}</a></li>
+          <li id="nav-about"><a href="{{ url('flicks.base.home') }}#about">{{ _('About') }}</a></li>
+          <li id="nav-winners"><a href="{{ url('flicks.base.home') }}#winners2012">{{ _('2012 Winners') }}</a></li>
+          <li id="nav-judges"><a href="{{ url('flicks.base.home') }}#judges">{{ _('Judges') }}</a></li>
+          <li id="nav-prizes"><a href="{{ url('flicks.base.home') }}#prizes">{{ _('Prizes') }}</a></li>
+          <li id="nav-rules"><a href="{{ url('flicks.base.home') }}#rules">{{ _('Rules') }}</a></li>
+          <li id="nav-blog"><a href="http://firefoxflicks.tumblr.com" class="go" rel="external">{{ _('Blog') }}</a></li>
         </ul>
       </nav>
     </div>
@@ -24,9 +24,9 @@
     <nav id="nav-social-head" class="nav-social">
       <ul>
 
-        <li><a href="http://vimeo.com/firefoxflicks" title="Vimeo" class="vimeo">Vimeo</a></li>
-        <li><a href="http://facebook.com/firefoxflicks" title="Facebook" class="facebook">Facebook</a></li>
-        <li><a href="http://twitter.com/firefoxflicks" title="Twitter" class="twitter">Twitter</a></li>
+        <li><a href="http://vimeo.com/firefoxflicks" title="Vimeo" class="vimeo" rel="external">Vimeo</a></li>
+        <li><a href="http://facebook.com/firefoxflicks" title="Facebook" class="facebook" rel="external">Facebook</a></li>
+        <li><a href="http://twitter.com/firefoxflicks" title="Twitter" class="twitter" rel="external">Twitter</a></li>
       </ul>
     </nav>
     <a href="https://www.mozilla.org" id="tabzilla">Mozilla</a>

@@ -73,76 +73,81 @@
 
 /*** @Slides *********/
 #slideshow.js {
-    position: relative;
-    height: 300px;
-    margin: 0 0 2em;
-    padding-bottom: 17px;
-    background: url(/media/img/shadow-940.png) center bottom no-repeat;
+  position: relative;
+  height: 300px;
+  margin: 0 0 2em;
+  padding-bottom: 17px;
+  background: url(/media/img/shadow-940.png) center bottom no-repeat;
 }
 
 #slideshow ol {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 #slideshow .slide {
-    margin: 0 0 1.5em;
-    padding: 0 0 1em;
-    border-bottom: 1px solid #dbd8cd;
+  margin: 0 0 1.5em;
+  padding: 0 0 1em;
+  border-bottom: 1px solid #dbd8cd;
 }
 
 #slideshow.js .slide {
-    position: relative;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    overflow: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
 }
 
 #slideshow.js .slide-desc {
-    position: absolute;
-    top: -50px;
-    left: 30px;
-    width: 230px;
-    min-height: 140px;
-    text-align: center;
-    padding: 80px 30px 20px;
-    background-color: #444;
-    background-color: rgba(0,0,0,.75);
-    font-size: 18px;
-    line-height: 1.25;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
-    border-radius: 50%;
+  position: absolute;
+  top: -50px;
+  left: 30px;
+  width: 230px;
+  min-height: 140px;
+  text-align: center;
+  padding: 80px 30px 20px;
+  background-color: #444;
+  background-color: rgba(0,0,0,.75);
+  font-size: 18px;
+  line-height: 1.25;
+  color: #fff;
+  text-shadow: none;
+  border-radius: 50%;
 }
 
-#slideshow.js .slide-desc a { color: #1f9ee5; }
+#slideshow.js .slide-desc a {
+  color: #1f9ee5;
+}
 
-#slideshow .slide-desc .act { clear: both; }
+#slideshow .slide-desc .act {
+  clear: both;
+}
 
 
 /* @About *********/
 #about {
   background: url(/media/img/spot-1.png) -65% -40px no-repeat, url(/media/img/spot-2.png) 140% 100px no-repeat, url(/media/img/spot-3.png) 75% 220% no-repeat;
+  transition: background-position 2s ease-in-out;
 }
 
 #about .section-intro {
-    width: 740px;
+  width: 740px;
 }
 
 #about .section-detail {
-    width: 320px;
-    position: relative;
-    padding-left: 320px;
+  width: 320px;
+  position: relative;
+  padding-left: 320px;
 }
 
 #about .section-detail .video {
-    width: 240px;
-    padding-bottom: 9px;
-    background: url(/media/img/shadow-240.png) center bottom no-repeat;
-    float: left;
-    margin-left: -300px;
+  width: 240px;
+  padding-bottom: 9px;
+  background: url(/media/img/shadow-240.png) center bottom no-repeat;
+  float: left;
+  margin-left: -300px;
 }
 
 #about .section-detail .video img {
@@ -151,39 +156,78 @@
 }
 
 #about .actions {
-    width: 660px;
+  width: 660px;
 }
 
 #about .actions h3 {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 #about .actions h3 span {
-    float: left;
-    margin: 0 15px .75em;
+  float: left;
+  margin: 0 15px .75em;
 }
 
 #about .actions p {
-    width: 460px;
-    margin: 0 auto 1em;
+  width: 460px;
+  margin: 0 auto 1em;
 }
 
 /* @Winners from 2012 *********/
 #winners2012 .section-intro {
-    width: 620px;
+  width: 620px;
 }
 
 .entry-list {
-    list-style: none;
+  list-style: none;
+  overflow: auto;
+  font-family: "Open Sans", sans-serif;
+  margin: 0 -10px 1em;
 }
 
 .entry-list .entry {
-
+  width: 300px;
+  float: left;
+  margin: 0 10px 2em;
 }
+
+.entry-list .entry:nth-child(3n+1) {
+  clear: left;
+}
+
+.entry .thumbnail {
+  border: 5px solid #fff;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+.entry h2 {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.entry h3 {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.entry a:link,
+.entry a:visited {
+  color: #28333a;
+}
+
+.entry a:focus,
+.entry a:active {
+  color: #28333a;
+  outline: 0;
+}
+
+
 
 /* @Judges *********/
 #judges {
   background: url(/media/img/spot-1.png) 150% 10px no-repeat, url(/media/img/spot-2.png) -10% 200% no-repeat, url(/media/img/spot-3.png) 5% -320px no-repeat;
+  transition: background-position 2s ease-in-out;
 }
 
 #judges .section-intro {
@@ -196,7 +240,11 @@
 }
 
 .judges:after {
-
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
 }
 
 .judge {
@@ -294,6 +342,7 @@
 /* @Rules *********/
 #rules {
   background: url(/media/img/spot-1.png) -50% 50% no-repeat, url(/media/img/spot-2.png) 85% 180% no-repeat, url(/media/img/spot-3.png) 120% -120px no-repeat;
+  transition: background-position 2s ease-in-out;
   text-align: center;
 }
 
@@ -314,8 +363,71 @@
   font-family: "Open Sans", sans-serif;
 }
 
+/* Full-window overlays *********/
+body.noscroll {
+    overflow: hidden;
+}
+
+#fill {
+    background: #444;
+    background: rgba(0,0,0,.8);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    overflow: auto;
+}
+
+#inner {
+    width: 80%;
+    margin: 60px auto;
+    padding: 40px 0;
+    color: #f3f3f3;
+    text-shadow: 0 1px 1px rgba(0,0,0,.95);
+}
+
+#inner iframe {
+    max-width: 90%;
+    display: block;
+    margin: 0 auto;
+}
+
+#fill #close {
+    display: inline;
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: #000;
+    border: 1px solid #ccc;
+    color: #ccc;
+    font: 1em "Open Sans", sans-serif;
+    text-transform: uppercase;
+    padding: .2em 10px;
+    cursor: pointer;
+}
+
+#fill #close:hover,
+#fill #close:focus {
+    background: #666;
+    color: #eee;
+    border-color: #eee;
+}
+
+#close {
+    display: none;
+}
+
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
+
+  #intro .section-title {
+    width: 80%;
+    margin: 0 auto .15em;
+  }
 
   #slideshow.js {
     width: 720px;
@@ -325,6 +437,54 @@
 
   #slideshow.js .slide-desc {
     min-height: 100px;
+  }
+
+  #slideshow.js .slide-desc h2 {
+    font-size: 24px;
+  }
+
+  #about {
+    background-position: 300% 10px, -15% 250%, 5% -350px;
+    transition: background-position 2s ease-in-out;
+  }
+
+  #judges {
+    background-position: -40% 500%, 10% -100%, 165% 70%;
+    transition: background-position 2s ease-in-out;
+  }
+
+  .judges {
+    width: 480px;
+    margin: 0 auto 2em;
+  }
+
+  .judges .judge:nth-child(3n+1) {
+    clear: left;
+  }
+
+  #rules {
+    background-position: -170% -40px, 180% 100px, 75% 145%;
+    transition: background-position 2s ease-in-out;
+  }
+
+  .entry-list {
+    width: 640px;
+    margin: 0 auto 1em;
+  }
+
+  .entry-list .entry:nth-child(3n+1) {
+    clear: none;
+  }
+
+  .entry-list .entry:nth-child(2n+1) {
+    clear: left;
+  }
+
+  .prize {
+    text-align: center;
+    width: 300px;
+    margin: 0 auto 2em;
+    float: none;
   }
 
 }
@@ -340,21 +500,47 @@
   #about .section-intro,
   #about .section-detail,
   #about .section-detail .video,
-  #about .actions {
+  #about .actions,
+  #winners2012 .section-intro,
+  #judges .section-intro,
+  #rules .section-intro {
     width: auto;
   }
 
   #about .section-detail {
     padding: 0;
   }
+
   #about .section-detail .video {
     margin: 0 0 1em;
     float: none;
   }
+
   #about .actions h3 span {
     float: none;
     display: block;
     margin: 0;
+  }
+
+  .prize {
+    width: auto;
+    float: none;
+  }
+
+  .entry-list {
+    width: auto;
+  }
+
+  .entry-list .entry {
+    width: 220px;
+  }
+
+  .entry-list .entry:nth-child(3n+1) {
+    clear: none;
+  }
+
+  .entry-list .entry:nth-child(2n+1) {
+    clear: left;
   }
 
 }

@@ -16,13 +16,13 @@
 
   <section id="intro" class="section alt">
     <div class="wrap">
-      <h1 class="section-title">{{ _('Bring the small screen to the big screen') }}</h1>
+      <h1 class="section-title">{{ _('Bring the small screen<wbr> to the big screen') }}</h1>
       <div class="section-intro">
         <p>
         {% trans %}
           Mobile connects people. It’s a force for progress and change, both individually
-          and collectively. Enter Firefox Flicks with your video about the power of mobile
-          and inspire others to get mobilized.
+          and collectively. Enter Firefox Flicks, a global video contest about the power
+          of mobile, and inspire others to get mobilized.
         {% endtrans %}
         </p>
       </div>
@@ -32,7 +32,7 @@
           <li id="slide-one" class="slide">
             <img src="{{ MEDIA_URL }}img/home/promo-winners2012.jpg" alt="">
             <div class="slide-desc">
-              <h2>{{ _('Get Inspired!') }}</h2>
+              <h2>{{ _('Get inspired!') }}</h2>
               <p>
               {% trans %}
                 Watch the flicks we took to Cannes last year before making your own.
@@ -48,7 +48,7 @@
         <ul>
           <li>
             <h3>{{ _('Get seen by celebrity judges') }}</h3>
-            <p><a href="#judges" class="go scroll">{{ _('Meet our all-star cast') }}</a></p>
+            <p>{{ _('Coming soon') }}</p>
           </li>
           <li>
             <h3>{{ _('Submissions open February 13') }}</h3>
@@ -72,14 +72,14 @@
           It’s a video contest. It’s an opportunity to reach millions of Firefox users and
           inspire them to get mobilized. It’s a chance to win <a href="#prizes" class="scroll">great prizes</a>
           and be seen by <a href="#judges" class="scroll">celebrity judges</a> who can make
-          your moviemaking dream come true.
+          your moviemaking dreams come true.
         {% endtrans %}
         </p>
       </div>
 
       <div class="section-detail">
         <figure class="video">
-          <a href="#" class="video-play" title="{{ _('Play a short introduction video') }}">
+          <a href="#" class="video-play" title="{{ _('Play a short introduction video') }}" data-vimeo-id="57021741">
             <img src="{{ MEDIA_URL }}img/video-thumb-fpo.jpg" alt="" width="240" height="135">
           </a>
         </figure>
@@ -117,11 +117,87 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          Watch the Flicks that topped our judges' list in 2012 and earned their filmmakers a
+          Watch the Flicks that topped our judges‘ list in 2012 and earned their filmmakers a
           trip to the Cannes Film Festival.
         {% endtrans %}
         </p>
       </div>
+
+      <ul class="entry-list">
+        <li class="entry">
+          {# l10n: This is "watch" meaning to view a video, used in link labels #}
+          <a href="#" class="video-play" title="{% trans title='Falling in Love with Firefox' %}Watch “{{ title }}”{% endtrans %}" data-vimeo-id="57021741">
+            <img src="{{ MEDIA_URL }}img/home/vidthumb-falling.jpg" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Falling in Love with Firefox</h2>
+              <h3 class="vcard">
+                <span class="fn">Lee Sang Woo</span>,
+                <span class="country-name">Korea</span>
+              </h3>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="#" class="video-play" title="{% trans title='Be a Hero' %}Watch “{{ title }}”{% endtrans %}" data-vimeo-id="57021741">
+            <img src="{{ MEDIA_URL }}img/home/vidthumb-hero.jpg" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Be a Hero</h2>
+              <h3 class="vcard">
+                <span class="fn">Andre Felipe Mesa</span>,
+                <span class="country-name">Colombia</span>
+              </h3>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="#" class="video-play" title="{% trans title='Squares' %}Watch “{{ title }}”{% endtrans %}" data-vimeo-id="57021741">
+            <img src="{{ MEDIA_URL }}img/home/vidthumb-squares.jpg" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Squares</h2>
+              <h3 class="vcard">
+                <span class="fn">Eric Perrella</span>,
+                <span class="country-name">Canada</span>
+              </h3>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="#" class="video-play" title="{% trans title='Where the Weird Things Are Not' %}Watch “{{ title }}”{% endtrans %}" data-vimeo-id="57021741">
+            <img src="{{ MEDIA_URL }}img/home/vidthumb-weird.jpg" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Where the Weird Things Are Not</h2>
+              <h3 class="vcard">
+                <span class="fn">Ferran Brooks</span>,
+                <span class="country-name">Spain</span>
+              </h3>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="#" class="video-play" title="{% trans title='Paranoid' %}Watch “{{ title }}”{% endtrans %}" data-vimeo-id="57021741">
+            <img src="{{ MEDIA_URL }}img/home/vidthumb-paranoid.jpg" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Paranoid</h2>
+              <h3 class="vcard">
+                <span class="fn">Sean O‘Riordan</span>,
+                <span class="country-name">United Kingdom</span>
+              </h3>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="#" class="video-play" title="{% trans title='Firefox Privacy' %}Watch “{{ title }}”{% endtrans %}" data-vimeo-id="15607283">
+            <img src="{{ MEDIA_URL }}img/home/vidthumb-privacy.jpg" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Firefox Privacy</h2>
+              <h3 class="vcard">
+                <span class="fn">Anahita Gottipati</span>,
+                <span class="country-name">India</span>
+              </h3>
+            </hgroup>
+          </a>
+        </li>
+      </ul>
 
     </div>
   </section>
@@ -132,72 +208,51 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          Get to know our illustrious panel of celebrity judges — led by actor,
-          director, producer and activist Edward Norton — who will see your flick
-          and help us choose this year’s winner.
-        {% endtrans %}
-        </p>
-        <p>
-        {% trans %}
-          Click on each photo for a full bio.
+          We will be announcing our illustrious panel of celebrity judges soon.
+          Please check back to find out who will see your flick and help us
+          choose this year’s winner.
         {% endtrans %}
         </p>
       </div>
 
       <ul class="judges">
-        <li class="judge vcard">
-          <img src="{{ MEDIA_URL }}img/judges/judge_edward_norton.jpg" alt="" class="photo">
-          <hgroup>
-            <h2 class="fn">Edward Norton</h2>
-            <h3 class="role">{{ _('Actor, Director, Producer, Activist') }}</h3>
-          </hgroup>
-        </li>
-        <li class="judge vcard">
-          <img src="{{ MEDIA_URL }}img/judges/judge_shauna_robertson.jpg" alt="" class="photo">
-          <hgroup>
-            <h2 class="fn">Shauna Robertson</h2>
-            <h3 class="role">{{ _('Producer, Philanthropist') }}</h3>
-          </hgroup>
-        </li>
         <li class="judge">
-          <img src="{{ MEDIA_URL }}img/judges/blank.jpg" alt="" class="photo">
+          <img src="{{ MEDIA_URL }}img/judges/blankm.jpg" alt="" class="photo">
           <hgroup>
             <h2>{{ _('To Be Announced') }}</h2>
           </hgroup>
         </li>
         <li class="judge">
-          <img src="{{ MEDIA_URL }}img/judges/blank.jpg" alt="" class="photo">
+          <img src="{{ MEDIA_URL }}img/judges/blankf.jpg" alt="" class="photo">
           <hgroup>
             <h2>{{ _('To Be Announced') }}</h2>
           </hgroup>
         </li>
         <li class="judge">
-          <img src="{{ MEDIA_URL }}img/judges/blank.jpg" alt="" class="photo">
+          <img src="{{ MEDIA_URL }}img/judges/blankm.jpg" alt="" class="photo">
           <hgroup>
             <h2>{{ _('To Be Announced') }}</h2>
           </hgroup>
         </li>
         <li class="judge">
-          <img src="{{ MEDIA_URL }}img/judges/blank.jpg" alt="" class="photo">
+          <img src="{{ MEDIA_URL }}img/judges/blankf.jpg" alt="" class="photo">
+          <hgroup>
+            <h2>{{ _('To Be Announced') }}</h2>
+          </hgroup>
+        </li>
+        <li class="judge">
+          <img src="{{ MEDIA_URL }}img/judges/blankm.jpg" alt="" class="photo">
+          <hgroup>
+            <h2>{{ _('To Be Announced') }}</h2>
+          </hgroup>
+        </li>
+        <li class="judge">
+          <img src="{{ MEDIA_URL }}img/judges/blankf.jpg" alt="" class="photo">
           <hgroup>
             <h2>{{ _('To Be Announced') }}</h2>
           </hgroup>
         </li>
       </ul>
-
-      <aside class="quote">
-        <blockquote>
-          <p>
-          {% trans %}
-            ”What I think is really cool about Firefox Flicks is that it marries that
-            core philosophy of liberating people to say what they want to say and connects
-            it to something that’s happening in the arts and film.“
-          {% endtrans %}
-            <cite> — Edward Norton</cite>
-          </p>
-        </blockquote>
-
-      </aside>
 
     </div>
   </section>
@@ -268,9 +323,9 @@
         <p>
         {% trans %}
           We want to give budding filmmakers the opportunity to create and submit short
-          videos promoting Firefox OS. The contest will run worldwide and winners will
-          be chosen from four regions around the world — North America, Latin America,
-          Europe and Asia.
+          videos promoting Firefox OS. The contest will run worldwide and winners will be
+          chosen from four regions around the world: North America, Latin America, Europe
+          and Asia. Check back on February 13 for the complete rules.
         {% endtrans %}
         </p>
       </div>
@@ -317,5 +372,7 @@
 
     </div>
   </section>
+
+<button type="button" id="close">{{ _('Close') }}</button>
 
 {% endblock %}
