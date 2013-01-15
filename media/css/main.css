@@ -511,6 +511,10 @@ a.go:after {
   display: none;
 }
 
+#strings {
+  display: none;
+}
+
 
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 1000px) {

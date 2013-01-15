@@ -60,6 +60,10 @@
         data-mobile-cookie="{{ settings.MOBILE_COOKIE }}"
         data-token="{{ csrf_token }}"
         {% block body_data %}{% endblock %}>
+    <div id="strings"
+         data-close="{{ _('Close') }}"
+         {% block string_data %}{% endblock %}>
+    </div>
     <div id="page">
 
       {% include "shared/header.html" %}
