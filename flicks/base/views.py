@@ -44,3 +44,7 @@ def faq(request):
 def rules(request):
     """Contest Rules page."""
     return render(request, 'rules.html')
+
+def strings(request):
+    """Strings L10N page."""
+    return render(request, 'strings.html')
