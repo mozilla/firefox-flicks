@@ -9,21 +9,25 @@
 {% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}
 
 {% block content %}
-    <h1>{{ video.title }}</h1>
-    <div class="video-details">
-      <p>
-        {{ video.description }}
-      </p>
-    </div>
-    <div class="video-content">
-      <div class="video-wrapper">
-        {{ video.embed_html }}
-        {% if waffle.flag('winners_page') and video.is_winner %}
-          <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
-        {% endif %}
+  <div class="section">
+    <div class="wrap">
+      <h1>{{ video.title }}</h1>
+      <div class="video-details">
+        <p>
+          {{ video.description }}
+        </p>
+      </div>
+      <div class="video-content">
+        <div class="video-wrapper">
+          {{ video.embed_html }}
+          {% if waffle.flag('winners_page') and video.is_winner %}
+            <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
+          {% endif %}
+        </div>
+      </div>
+      <div class="video-details">
+        {{ video_details(video) }}
       </div>
     </div>
-    <div class="video-details">
-      {{ video_details(video) }}
-    </div>
+  </div>
 {% endblock %}
