@@ -3,20 +3,10 @@
 
 {% block page_title %}{{ video.title }}{% endblock %}
 
-{% block site_js %}
-  {{ super() }}
-  {{ js('video_details') }}
-{% endblock %}
-
 {% block og_title %}{{ video.title }}{% endblock %}
 {% block og_type %}article{% endblock %}
 {% block og_image %}{{ video.poster_href }}{% endblock %}
 {% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}
-
-{% block body_data %}
-  data-video-id="{{ video.id }}"
-  data-add-view-url="{{ url('flicks.videos.add_view') }}"
-{% endblock %}
 
 {% block content %}
     <h1>{{ video.title }}</h1>
@@ -32,24 +22,6 @@
           <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
         {% endif %}
       </div>
-      <div id="judge_mark">
-        {# Do not mark for l10n: Strings are for admins only! #}
-        {% if user.is_staff %}
-          <p>
-            {% if video.judge_mark %}
-              This video is marked for judging.
-            {% else %}
-              <form method="POST">
-                {{ csrf() }}
-                <button type="submit" name="admin_mark" value="mark">
-                  Mark video for judging
-                </button>
-              </form>
-            {% endif %}
-          </p>
-        {% endif %}
-      </div>
-      {{ share_container(tweet_text, video.bitly_link) }}
     </div>
     <div class="video-details">
       {{ video_details(video) }}

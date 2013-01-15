@@ -21,11 +21,6 @@ MINIFY_BUNDLES = {
             'js/libs/jquery.cookie.js',
             'js/init.js',
         ),
-        'video_details': (
-            'js/libs/script.js',
-            'js/views.js',
-            'js/share.js',
-        ),
         'promo_video': (
             'js/libs/script.js',
             'js/share.js',

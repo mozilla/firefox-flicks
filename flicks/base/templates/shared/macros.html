@@ -15,8 +15,7 @@
 {%- endmacro %}
 
 {% macro video_details(video) -%}
-  <a href="{{ url('flicks.users.details', user_id=video.user_id) }}"
-     class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</a>
+  <span class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</span>
   {% if waffle.flag('winners_page') and video.is_winner %}
     {% for award in video.award_set.all() %}
       <div class="winner-details">
