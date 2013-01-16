@@ -2,6 +2,7 @@ from django.conf import settings
 from django.conf.urls.defaults import include, patterns, url
 from django.contrib import admin
 from django.contrib.admin import autodiscover
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from funfactory.monkeypatches import patch
@@ -15,7 +16,7 @@ def error_page(request, template, status=None):
     """
     Render error templates, found in the root /templates directory.
 
-    If no status parameter is explcitedly passed, this function assumes
+    If no status parameter is explicitly passed, this function assumes
     your HTTP status code is the same as your template name (i.e. passing
     a template=404 will render 404.html with the HTTP status code 404).
     """
@@ -24,6 +25,10 @@ def error_page(request, template, status=None):
 
 handler404 = lambda r: error_page(r, 404)
 handler500 = lambda r: error_page(r, 500)
+robots_txt = lambda r: HttpResponse(
+   "User-agent: *\n%s: /" % ('Allow' if settings.ENGAGE_ROBOTS else 'Disallow'),
+   mimetype="text/plain"
+)
 
 
 urlpatterns = patterns('',
@@ -31,6 +36,9 @@ urlpatterns = patterns('',
     url(r'', include('flicks.videos.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    # Generate a robots.txt
+    (r'^robots\.txt$', robots_txt)
 )
 
 

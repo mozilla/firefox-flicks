@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.utils.unittest import skip
 
 from funfactory.urlresolvers import reverse
+from mock import patch
 from nose.tools import eq_
 
 from flicks.base.tests import TestCase
@@ -24,3 +26,14 @@ class HomeTests(TestCase):
         self.build_user(login=True)
         response = self._get()
         eq_(response.status_code, 200)
+
+
+class ViewTests(TestCase):
+    def test_robots_txt(self):
+        with patch.object(settings, 'ENGAGE_ROBOTS', True):
+            response = self.client.get('/robots.txt')
+            eq_(response.content, 'User-agent: *\nAllow: /')
+
+        with patch.object(settings, 'ENGAGE_ROBOTS', False):
+            response = self.client.get('/robots.txt')
+            eq_(response.content, 'User-agent: *\nDisallow: /')

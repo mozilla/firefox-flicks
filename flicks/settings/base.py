@@ -57,7 +57,7 @@ TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
 ]
 
 # Paths that do not need a locale
-SUPPORTED_NONLOCALES += ['notify', 'admin']
+SUPPORTED_NONLOCALES += ['notify', 'admin', 'robots.txt']
 
 # Gravatar Settings
 GRAVATAR_URL = 'https://secure.gravatar.com'
@@ -253,3 +253,6 @@ MAX_FILEPATH_LENGTH = 100
 
 # Google Analytics
 GA_ACCOUNT_CODE = ''
+
+# Allow robots to crawl the site.
+ENGAGE_ROBOTS = True
