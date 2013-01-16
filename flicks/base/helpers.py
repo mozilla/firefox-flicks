@@ -4,6 +4,7 @@ from babel.core import Locale, UnknownLocaleError
 from babel.dates import format_date
 from babel.numbers import format_number
 from jingo import register
+from product_details import product_details
 
 
 def _babel_locale():
@@ -29,3 +30,15 @@ def babel_number(number):
     """Format a number properly for the current locale."""
     locale = _babel_locale()
     return format_number(number, locale)
+
+
+@register.function
+def country_name(country_code):
+    """Return a localized version of a country's name."""
+    locale = get_language()
+
+    # product_details has no `es` regional information, so we us es-ES instead.
+    if locale == 'es':
+        locale = 'es-ES'
+
+    return product_details.get_regions(locale)[country_code]

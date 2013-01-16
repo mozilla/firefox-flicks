@@ -3,6 +3,7 @@ from django.shortcuts import render
 
 from flicks.base.util import absolutify
 
+
 def home(request):
     """Home page."""
     return render(request, 'home.html')
@@ -44,6 +45,7 @@ def faq(request):
 def rules(request):
     """Contest Rules page."""
     return render(request, 'rules.html')
+
 
 def strings(request):
     """Strings L10N page."""

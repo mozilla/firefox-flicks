@@ -1,8 +1,9 @@
 from datetime import datetime
 
+from mock import patch
 from nose.tools import eq_
 
-from flicks.base.helpers import babel_date, babel_number
+from flicks.base.helpers import babel_date, babel_number, country_name
 from flicks.base.tests import TestCase
 
 
@@ -25,3 +26,25 @@ class TestHelpers(TestCase):
         with self.activate('fr'):
             # \xa0 is a non-breaking space
             eq_(babel_number(number), u'1\xa0000\xa0000')
+
+    @patch('flicks.base.helpers.product_details')
+    def test_country_name(self, product_details):
+        product_details.get_regions.side_effect = lambda l: {'au': 'test'}
+        with self.activate('fr'):
+            name = country_name('au')
+
+        eq_(name, 'test')
+        product_details.get_regions.assert_called_with('fr')
+
+    @patch('flicks.base.helpers.product_details')
+    def test_country_name_es(self, product_details):
+        """
+        When `es` is passed as the locale, country_name should use `es-ES` as
+        the locale for product_details.
+        """
+        product_details.get_regions.side_effect = lambda l: {'fr': 'test'}
+        with self.activate('es'):
+            name = country_name('fr')
+
+        eq_(name, 'test')
+        product_details.get_regions.assert_called_with('es-ES')
