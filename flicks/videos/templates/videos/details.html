@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import share_container, video_details with context %}
 
 {% block page_title %}{{ video.title }}{% endblock %}
 
@@ -8,26 +7,51 @@
 {% block og_image %}{{ video.poster_href }}{% endblock %}
 {% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}
 
+{% block site_css %}
+  {{ super() }}
+  {{ css('archive_css') }}
+{% endblock %}
+
 {% block content %}
   <div class="section">
-    <div class="wrap">
-      <h1>{{ video.title }}</h1>
-      <div class="video-details">
-        <p>
-          {{ video.description }}
-        </p>
+    <article class="wrap archive-video">
+      <div class="video">
+        {{ video.embed_html(width='100%') }}
+        {% if video.is_winner %}
+          <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
+        {% endif %}
       </div>
-      <div class="video-content">
-        <div class="video-wrapper">
-          {{ video.embed_html }}
-          {% if waffle.flag('winners_page') and video.is_winner %}
-            <img class="winner-mark" src="{{ MEDIA_URL }}img/winner-trophy-sm.png" alt="{{ _('Award') }}">
-          {% endif %}
+      <div class="video-details">
+        {% if video.is_winner %}
+          <ul class="awards">
+            {% for award in video.award_set.all() %}
+              <li class="award">{{ award.award_title }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        <h1>{{ video.title }}</h1>
+
+        <div class="vcard">
+          {{ gravatar_img(video.user, img_class='photo', size=48) }}
+          <div class="profile">
+            <span class="fn">{{ video.user.userprofile.full_name }}</span>,
+            <span class="country-name">{{ video.user.userprofile.country }}</span>
+          </div>
+          <div class="category-region">
+            {% set category_link='<span class="category">{title}</span>'|fe(title=video.get_category_display()) %}
+            {% set country_link='<span class="region">{title}</span>'|fe(title=video.get_region_display()) %}
+
+            {# L10n: Shown below videos to indicate which category and country they were submitted under, such as ':30 Spot for Europe' #}
+            {% trans category_link=category_link, country_link=country_link %}
+              {{ category_link }} <span>for</span> {{ country_link }}
+            {% endtrans %}
+          </div>
+          <div class="date">{{ video.created|babel_date }}</div>
         </div>
+
+        <p class="description">{{ video.description }}</p>
       </div>
-      <div class="video-details">
-        {{ video_details(video) }}
-      </div>
-    </div>
+    </article>
   </div>
 {% endblock %}

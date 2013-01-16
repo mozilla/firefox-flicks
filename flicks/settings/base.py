@@ -14,6 +14,9 @@ MINIFY_BUNDLES = {
             'css/main.css',
             'css/home.css',
         ),
+        'archive_css': (
+            'css/archive.css',
+        ),
     },
     'js': {
         'flicks_js': (

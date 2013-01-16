@@ -14,37 +14,6 @@
   </li>
 {%- endmacro %}
 
-{% macro video_details(video) -%}
-  <span class="user">{{ video.user.userprofile.full_name }}, {{ video.user.userprofile.country }}</span>
-  {% if waffle.flag('winners_page') and video.is_winner %}
-    {% for award in video.award_set.all() %}
-      <div class="winner-details">
-        {{ award.award_title }}
-      </div>
-    {% endfor %}
-  {% endif %}
-  <p class="region-info">
-    {% set category_link='<span class="category">{title}</span>'|fe(title=video.get_category_display()) %}
-    {% set country_link='<span class="region">{title}</span>'|fe(title=video.get_region_display()) %}
-
-    {# L10n: Shown below videos to indicate which category and country they were submitted under, such as ':30 Spot for Europe' #}
-    {% trans category_link=category_link, country_link=country_link %}
-      {{ category_link }} <span>for</span> {{ country_link }}
-    {% endtrans %}
-  </p>
-  <p class="video-info">
-    <span class="date">{{ video.created|babel_date }}</span>
-    <span class="views">
-      {# L10n: Refers to the number of views a video received. For example, 300 views. #}
-      {% trans view_count=video.views_cached() %}
-        {{ view_count }} view
-        {% pluralize %}
-        {{ view_count }} views
-      {% endtrans %}
-    </span>
-  </p>
-{%- endmacro %}
-
 {% macro share_container(tweet_text, share_link) -%}
   <div id="share-container">
     {# L10n: Used in the share button below videos for sharing videos on social networks. #}

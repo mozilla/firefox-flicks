@@ -57,6 +57,7 @@ WINNER_CATEGORY_TEXT = {
     'psa': _lazy('PSA Winner')
 }
 
+
 class Video(models.Model, SearchMixin, CachingMixin):
     """Users can only have one video associated with
     their account.
@@ -92,10 +93,9 @@ class Video(models.Model, SearchMixin, CachingMixin):
 
     objects = CachingManager()
 
-    @property
-    def embed_html(self):
+    def embed_html(self, width=600, height=337):
         """Return the escaped HTML code to embed this video."""
-        return Markup(embedCode(self.shortlink))
+        return Markup(embedCode(self.shortlink, width, height))
 
     @property
     def poster_href(self):

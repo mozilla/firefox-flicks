@@ -155,7 +155,7 @@ def _parse_result(result_elem):
     return tasks
 
 
-def embedCode(shortlink, width=600, height=337):
+def embedCode(shortlink, width, height):
     """Generate escaped HTML code to embed a vid.ly video."""
     poster = POSTER_URL % shortlink
     return """

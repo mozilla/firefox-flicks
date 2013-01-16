@@ -1,0 +1,51 @@
+.video {
+    background: #000;
+    height: 337px;
+    position: relative;
+}
+
+.video .winner-mark {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
+.video-details {
+    border-top: none;
+    font-family: "Open Sans", sans-serif;
+    padding: 15px;
+}
+
+.video-details .awards {
+    float: right;
+    list-style-type: none;
+    margin-left: 15px;
+    width: 200px;
+}
+
+.video-details .awards li {
+    background: url('../img/winner-trophy-sm.png') no-repeat;
+    margin-bottom: 10px;
+    padding-left: 48px;
+}
+
+.video-details .vcard {
+    margin-bottom: 20px;
+    padding-left: 63px;
+}
+
+.video-details h1 {
+    font-family: Vollkorn, Georgia, sans-serif;
+    margin-bottom: 15px;
+}
+
+.video-details .profile {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: normal;
+}
+
+.video-details .photo {
+    float: left;
+    margin-left: -63px;
+}
