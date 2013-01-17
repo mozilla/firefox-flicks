@@ -89,7 +89,7 @@
     });
 
     function createVimeoModal(origin, videoId) {
-        var content = '<iframe id="video" src="https://player.vimeo.com/video/'+ videoId +'?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1" width="500" height="375" frameborder="0"></iframe>';
+        var content = '<iframe id="video" src="https://player.vimeo.com/video/'+ videoId +'?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1" width="600" height="338" frameborder="0"></iframe>';
         return createModal(origin, content);
     }
 
