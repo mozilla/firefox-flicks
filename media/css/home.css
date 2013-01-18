@@ -16,6 +16,7 @@
   line-height: 1.35;
   text-align: center;
   margin: 0 auto 2em;
+  max-width: 100%;
 }
 
 .section-detail {
@@ -108,11 +109,9 @@
   clear: both;
 }
 
-
 /* @About *********/
 #about {
-  background: url(/media/img/spot-1.png) -65% -40px no-repeat, url(/media/img/spot-2.png) 140% 100px no-repeat, url(/media/img/spot-3.png) 75% 220% no-repeat;
-  transition: background-position 2s ease-in-out;
+  background: url(/media/img/spot-1.png) -500px -40px no-repeat, url(/media/img/spot-2.png) 140% 100px no-repeat, url(/media/img/spot-3.png) 75% 220% no-repeat;
 }
 
 #about .section-intro {
@@ -181,6 +180,7 @@
 .entry .thumbnail {
   border: 5px solid #fff;
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  margin-left: -5px;
 }
 
 .entry h2 {
@@ -207,8 +207,7 @@
 
 /* @Judges *********/
 #judges {
-  background: url(/media/img/spot-1.png) 150% 10px no-repeat, url(/media/img/spot-2.png) -10% 200% no-repeat, url(/media/img/spot-3.png) 5% -320px no-repeat;
-  transition: background-position 2s ease-in-out;
+  background: url(/media/img/spot-1.png) 170% 10px no-repeat, url(/media/img/spot-2.png) -20% 200% no-repeat, url(/media/img/spot-3.png) 5% -320px no-repeat;
 }
 
 #judges .section-intro {
@@ -323,7 +322,6 @@
 /* @Rules *********/
 #rules {
   background: url(/media/img/spot-1.png) -50% 50% no-repeat, url(/media/img/spot-2.png) 85% 180% no-repeat, url(/media/img/spot-3.png) 120% -120px no-repeat;
-  transition: background-position 2s ease-in-out;
   text-align: center;
 }
 
@@ -420,16 +418,6 @@ body.noscroll {
     font-size: 24px;
   }
 
-  #about {
-    background-position: 300% 10px, -15% 250%, 5% -350px;
-    transition: background-position 2s ease-in-out;
-  }
-
-  #judges {
-    background-position: -40% 500%, 10% -100%, 165% 70%;
-    transition: background-position 2s ease-in-out;
-  }
-
   .judges {
     width: 480px;
     margin: 0 auto 2em;
@@ -437,11 +425,6 @@ body.noscroll {
 
   .judges .judge:nth-child(3n+1) {
     clear: left;
-  }
-
-  #rules {
-    background-position: -170% -40px, 180% 100px, 75% 145%;
-    transition: background-position 2s ease-in-out;
   }
 
   .entry-list {
@@ -464,24 +447,63 @@ body.noscroll {
     float: none;
   }
 
+  #about {
+    background-position: 355% 10px, -15% 250%, 5% -350px;
+  }
+
+  #judges {
+    background-position: -40% 500%, 10% -100%, 165% 70%;
+  }
+
+  #rules {
+    background-position: -460px -40px, 170% 280px, 75% 165%;
+  }
+
 }
 
 /* Mobile Layout: 320px */
 @media only screen and (max-width: 760px) {
 
-  #slideshow.js {
-    height: auto;
-    background-image: none;
-  }
-
   #about .section-intro,
   #about .section-detail,
   #about .section-detail .video,
   #about .actions,
+  #about .actions p,
   #winners2012 .section-intro,
   #judges .section-intro,
-  #rules .section-intro {
+  #rules .section-intro,
+  #rules .rules {
     width: auto;
+  }
+
+  .section-intro {
+    font-size: 18px;
+    line-height: 1.35;
+  }
+
+  #slideshow.js {
+    height: auto;
+    padding: 0;
+    background: none;
+    box-shadow: 0 3px 2px rgba(0,0,0,.25);
+  }
+
+  #slideshow.js .slide img {
+    display: block;
+    margin: 0 auto;
+    max-width: 940px;
+  }
+
+  #slideshow.js .slide-desc {
+    left: -30px;
+    top: -80px;
+    width: 100%;
+    padding-top: 110px;
+  }
+
+  #slideshow.js .slide-desc h2,
+  #slideshow.js .slide-desc p {
+    padding: 0 20px;
   }
 
   #about .section-detail {
@@ -509,7 +531,10 @@ body.noscroll {
   }
 
   .entry-list .entry {
+    float: none;
+    clear: both;
     width: 220px;
+    margin: 0 auto 2em;
   }
 
   .entry-list .entry:nth-child(3n+1) {
@@ -520,13 +545,50 @@ body.noscroll {
     clear: left;
   }
 
+  .actions li {
+    float: none;
+    width: 190px;
+    margin: 0 auto 1.6em;
+  }
+
+  #about {
+    background-position: 190px 45%, -300px -160px, -200px 150%;
+  }
+
+  #judges {
+    background-position: -260px 260%, -360px 30%, 200px -330px;
+  }
+
+  #rules {
+    background-position: 150px -340px, 190px 140%, -370px 420px;
+  }
+
 }
 
 /* Wide Mobile Layout: 480px */
 @media only screen and (min-width: 480px) and (max-width: 760px) {
 
-  .wrap {
-    width: 460px;
+  .actions li {
+    width: auto;
+  }
+
+  .entry-list .entry {
+    float: left;
+    clear: none;
+    width: 210px;
+    margin: 0 15px 2em;
+  }
+
+  #about {
+    background-position: 420px 55%, -320px -160px, -200px 170%;
+  }
+
+  #judges {
+    background-position: 300px 560%, -360px 30%, 260px -360px;
+  }
+
+  #rules {
+    background-position: 290px -430px, 320px 165%, -320px 220px;
   }
 
 }
