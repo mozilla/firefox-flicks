@@ -8,6 +8,7 @@ from flicks.videos.tests import build_video
 from flicks.videos.models import Video
 
 
+@patch.object(settings, 'LANGUAGE_URL_MAP', {'en-us': 'en-US'})
 @patch('flicks.videos.models.generate_bitly_link')
 class VideoBitlyLinkTests(TestCase):
     def setUp(self):
