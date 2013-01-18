@@ -119,7 +119,7 @@ class Video(models.Model, SearchMixin, CachingMixin):
         # to the proper locale), and finally add the domain to the URL.
         url = reverse('flicks.videos.details', kwargs={'video_id': self.id})
         locale, url = split_path(url)
-        print 'URL_MAP=', settings.LANGUAGE_URL_MAP
+        print 'URL_MAP=', unicode(settings.LANGUAGE_URL_MAP)
         url = absolutify(url)
 
         # Don't actually generate a shortlink if we're developing locally.
