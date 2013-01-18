@@ -24,6 +24,7 @@ class VideoBitlyLinkTests(TestCase):
     @patch.object(settings, 'DEV', True)
     def test_no_generate_dev(self, generate):
         """If this is a dev environment, don't generate a link."""
+        print 'DEV=', settings.DEV
         with build_video(self.user) as video:
             eq_(video.bitly_link, self.long_url % video.id)
             eq_(generate.called, False)
