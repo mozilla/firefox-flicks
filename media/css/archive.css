@@ -12,40 +12,62 @@
 
 .video-details {
     border-top: none;
-    font-family: "Open Sans", sans-serif;
-    padding: 15px;
+    padding: 30px 15px 0;
 }
 
 .video-details .awards {
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
     float: right;
     list-style-type: none;
-    margin-left: 15px;
     width: 200px;
+    padding: 10px 10px 1px;
+    background: rgba(0,0,0,.05);
+    border-radius: 6px;
+    box-shadow: 0 1px 1px rgba(255,255,255,.75), inset 0 1px 1px rgba(0,0,0,.08);
 }
 
 .video-details .awards li {
-    background: url('../img/winner-trophy-sm.png') no-repeat;
+    background: url('/media/img/winner-trophy-sm.png') no-repeat;
     margin-bottom: 10px;
-    padding-left: 48px;
+    padding: 5px 0 5px 48px;
+    min-height: 20px;
 }
 
 .video-details .vcard {
     margin-bottom: 20px;
-    padding-left: 63px;
+    padding-left: 65px;
 }
 
 .video-details h1 {
-    font-family: Vollkorn, Georgia, sans-serif;
-    margin-bottom: 15px;
+    font-size: 38px;
+    margin: 0 240px 15px 0;
 }
 
 .video-details .profile {
-    font-size: 16px;
+    font-size: 18px;
     font-style: italic;
     font-weight: normal;
 }
 
 .video-details .photo {
     float: left;
-    margin-left: -63px;
+    margin: -3px 0 .5em -68px;
+    border: 3px solid #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+/* Mobile Layout: 320px */
+@media only screen and (max-width: 760px) {
+
+  .video-details h1 {
+    font-size: 28px;
+    margin: 0 0 15px;
+  }
+
+  .video-details .awards {
+    float: none;
+    width: auto;
+  }
+
 }

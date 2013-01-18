@@ -83,12 +83,16 @@ img, video, object, embed { max-width: 100%; height: auto; }
 /* @General styles *********/
 html, body {
   height: 100%;
+  background: #30373a;
 }
 
 body {
-  background: #f5f5f5 url(/media/img/bg-grain.png) fixed;
   font: 16px/1.428 Vollkorn, Georgia, sans-serif;
   color: #212a2f;
+}
+
+#page {
+  background: #f5f5f5 url(/media/img/bg-grain.png) fixed;
 }
 
 .prose li {
@@ -355,6 +359,11 @@ a.go:after {
   color: #fff;
 }
 
+#page-nav .toggle {
+  display: none; /* Hidden in non-mobile views */
+}
+
+
 #tabzilla {
   position: absolute;
   right: 0;
@@ -558,7 +567,7 @@ a.go:after {
   .wrap {
     width: 720px;
   }
-  
+
   .wrap.info {
     width: 460px;
     padding: 0 120px;
@@ -573,6 +582,10 @@ a.go:after {
     max-width: 300px;
   }
 
+  #footer .sponsors {
+    width: 480px;
+  }
+
 }
 
 /* Mobile Layout: 320px */
@@ -581,10 +594,104 @@ a.go:after {
   .wrap {
     width: 300px;
   }
-  
+
   .wrap.info {
     width: 300px;
     padding: 0 10px;
+  }
+
+  h1,
+  .page-title,
+  .section-title {
+    font-size: 38px;
+    letter-spacing: -.5px;
+  }
+
+  h2 {
+    font-size: 24px;
+    letter-spacing: normal;
+  }
+
+  .logo {
+    left: auto;
+    right: 170px;
+    width: 60px;
+    overflow: hidden;
+  }
+
+  .logo img {
+    max-width: 300px;
+  }
+
+  #page-nav {
+    left: 20px;
+    z-index: 99;
+    width: 32px;
+  }
+
+  #page-nav .toggle {
+    display: block;
+    width: 32px;
+    height: 32px;
+    margin: 0;
+    background: url(/media/img/icn-toggle.png) center 0 no-repeat;
+    text-indent: -999em;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  #page-nav .toggle.open {
+    background-position: center -100px;
+  }
+
+  #page-nav-list {
+    background: #2d3438;
+    background: rgba(27,34,38,.975);
+    width: 200px;
+    padding: 10px;
+    margin-left: -10px;
+    border-radius: 6px;
+    position: absolute;
+    left: -999em;
+  }
+
+  #page-nav:hover #page-nav-list,
+  #page-nav #page-nav-list:target {
+    left: auto;
+  }
+
+  .js #page-nav-list {
+    left: auto;
+    display: none;
+  }
+
+  #page-nav-list li {
+    display: block;
+    float: none;
+    margin: 0 0 2px;
+  }
+
+  #page-nav-list a:link {
+    display: block;
+    padding: 6px 10px;
+  }
+
+  #footer .sponsors,
+  #footer .util {
+    width: auto;
+    float: none;
+  }
+
+  #nav-fineprint {
+    margin-top: 3em;
+  }
+
+  #nav-fineprint li {
+    text-align: left;
+    display: block;
+    padding: 0;
+    margin: 0 0 .5em;
+    border: 0;
   }
 
 }
@@ -595,10 +702,15 @@ a.go:after {
   .wrap {
     width: 460px;
   }
-  
+
   .wrap.info {
     width: 460px;
     padding: 0 10px;
+  }
+
+  #masthead .logo {
+    left: auto;
+    right: 150px;
   }
 
 }
