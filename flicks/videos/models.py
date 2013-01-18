@@ -118,12 +118,9 @@ class Video(models.Model, SearchMixin, CachingMixin):
         # Generate a URL, remove the locale (let the site handle redirecting
         # to the proper locale), and finally add the domain to the URL.
         url = reverse('flicks.videos.details', kwargs={'video_id': self.id})
-        print 'URL=', url
         locale, url = split_path(url)
-        print 'LOCALE=', locale
-        print 'URL=', url
+        print 'URL_MAP=', settings.LANGUAGE_URL_MAP
         url = absolutify(url)
-        print 'ABS_URL=', url
 
         # Don't actually generate a shortlink if we're developing locally.
         if settings.DEV:
