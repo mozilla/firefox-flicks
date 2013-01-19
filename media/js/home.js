@@ -14,9 +14,13 @@
     // Sticky navigation
     var navFixed = false;
     var didScroll = false;
+    var scrollTime = 1000;
 
     $window.scroll(function() {
         didScroll = true;
+        if ($window.scrollTop() >= 1){
+            $head.addClass('fixed');
+        }
     });
 
     $document.ready(function() {
@@ -30,12 +34,13 @@
             if (scrollTop > 0) {
                 if (!navFixed) {
                     navFixed = true;
-                    $head.addClass("fixed");
+                    $head.addClass('fixed');
                 }
             } else {
                 if (navFixed) {
                     navFixed = false;
-                    $head.removeAttr("class");
+                    $head.removeClass('fixed');
+                    $pageNav.find("li.current").removeClass('current');
                 }
             }
         }
@@ -50,12 +55,12 @@
             if (navFixed) {
                 if (direction === 'down') {
                     $pageNav.attr('class', 'fixed ' + current);
-                    $pageNav.find("li").removeClass();
-                    $("#" + current).addClass("current");
+                    $pageNav.find("li.current").removeClass('current');
+                    $("#" + current).addClass('current');
                 } else {
                     $pageNav.attr('class', 'fixed ' + previous);
-                    $pageNav.find("li").removeClass();
-                    $("#" + previous).addClass("current");
+                    $pageNav.find("li.current").removeClass('current');
+                    $("#" + previous).addClass('current');
                 }
             }
         };
@@ -75,9 +80,16 @@
         e.preventDefault();
         // Extract the target element's ID from the link's href.
         var elem = $(this).attr('href').replace(/.*?(#.*)/g, '$1');
+        // Determine how far we have to scroll
+        var scrollDistance = ($(elem).offset().top - $document.scrollTop());
+        // Slower scrolling for further targets
+        if ((scrollDistance > 1200) || (scrollDistance < -1200)) {
+          scrollTime = 2500;
+        }
+
         $('html, body').animate({
             scrollTop: $(elem).offset().top
-        }, 1000, function() {
+        }, scrollTime, function() {
             $(elem).attr('tabindex','100').focus().removeAttr('tabindex');
         });
     });

@@ -126,7 +126,7 @@
 
 #about .section-detail .video {
   width: 240px;
-  padding-bottom: 9px;
+  padding-bottom: 8px;
   background: url(/media/img/shadow-240.png) center bottom no-repeat;
   float: left;
   margin-left: -300px;
@@ -345,6 +345,11 @@
 /* Full-window overlays *********/
 body.noscroll {
   overflow: hidden;
+  padding-right: 15px;
+}
+
+body.noscroll .fixed #head-inner {
+  left: -10px;
 }
 
 #modal {

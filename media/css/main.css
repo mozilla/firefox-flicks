@@ -91,6 +91,10 @@ body {
   color: #212a2f;
 }
 
+html.pl body {
+  font-family: Georgia, sans-serif;
+}
+
 #page {
   background: #f5f5f5 url(/media/img/bg-grain.png) fixed;
 }
@@ -285,9 +289,6 @@ a.go:after {
 
 .fixed #head-inner {
   position: fixed;
-  z-index: 90;
-  top: 0;
-  left: 0;
 }
 
 #head-inner:after {
@@ -708,7 +709,8 @@ a.go:after {
     padding: 0 10px;
   }
 
-  #masthead .logo {
+  .logo {
+    width: auto;
     left: auto;
     right: 150px;
   }
