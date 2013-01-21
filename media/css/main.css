@@ -91,7 +91,9 @@ body {
   color: #212a2f;
 }
 
-html.pl body {
+.pl body,
+.ru body,
+.cs body {
   font-family: Georgia, sans-serif;
 }
 
