@@ -82,6 +82,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'csp',
     'django_browserid',
     'django_statsd',
+    'jingo_minify',
     'south',
     'waffle',
 ]

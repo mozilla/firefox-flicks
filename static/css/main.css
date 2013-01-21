@@ -103,7 +103,7 @@ body {
 }
 
 #page {
-  background: #f5f5f5 url(/media/img/bg-grain.png) fixed;
+  background: #f5f5f5 url(../img/bg-grain.png) fixed;
 }
 
 .prose li {
@@ -273,7 +273,7 @@ a.go:after {
   height: 6px;
   position: absolute;
   bottom: -6px;
-  background: url(/media/img/div-shadow.png) center top no-repeat;
+  background: url(../img/div-shadow.png) center top no-repeat;
   z-index: 10;
 }
 
@@ -301,7 +301,7 @@ a.go:after {
 #head-inner:after {
   content: "";
   display: block;
-  background: url(/media/img/div-shadow.png) center bottom no-repeat;
+  background: url(../img/div-shadow.png) center bottom no-repeat;
   width: 100%;
   height: 6px;
   position: absolute;
@@ -411,7 +411,7 @@ a.go:after {
   overflow: hidden;
   text-indent: -99em;
   background-repeat: no-repeat;
-  background-image: url(/media/img/social-icons.png);
+  background-image: url(../img/social-icons.png);
 }
 
 .nav-social .blog {
@@ -476,7 +476,7 @@ a.go:after {
 
 #footer:before {
   content: "";
-  background: url(/media/img/div-shadow-up.png) center top no-repeat;
+  background: url(../img/div-shadow-up.png) center top no-repeat;
   width: 100%;
   height: 6px;
   display: block;
@@ -521,7 +521,7 @@ a.go:after {
   height: 30px;
   text-indent: -99em;
   overflow: hidden;
-  background: url(/media/img/firefoxos-logo.png) 0 0 no-repeat;
+  background: url(../img/firefoxos-logo.png) 0 0 no-repeat;
 }
 
 #footer .firefoxos a:hover,
@@ -642,7 +642,7 @@ a.go:after {
     width: 32px;
     height: 32px;
     margin: 0;
-    background: url(/media/img/icn-toggle.png) center 0 no-repeat;
+    background: url(../img/icn-toggle.png) center 0 no-repeat;
     text-indent: -999em;
     overflow: hidden;
     cursor: pointer;

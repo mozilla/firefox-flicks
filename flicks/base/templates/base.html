@@ -27,7 +27,7 @@
     {%- endblock %}
 
     <!--[if lt IE 9]>
-      <script src="{{ MEDIA_URL }}js/libs/html5.js"></script>
+      <script src="{{ static('js/libs/html5.js') }}"></script>
     <![endif]-->
 
     <link rel="stylesheet" media="all" type="text/css" href="//www.mozilla.org/tabzilla/media/css/tabzilla.css">
@@ -35,7 +35,7 @@
     {% block site_css %}
       {{ css('flicks_css') }}
     {% endblock %}
-    <link rel="shortcut icon" type="image/png" href="{{ MEDIA_URL }}img/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="{{ static('img/favicon.png') }}">
 
     {% block google_analytics %}
       <script>
@@ -81,7 +81,7 @@
             <aside class="sponsors">
               <h4>{{ _('Our Sponsors') }}</h4>
               <ul>
-                <li><a href="http://vimeo.com" rel="external"><img src="/media/img/sponsors/sponsor-vimeo.png" alt="Vimeo" width="100" height="30"></a></li>
+                <li><a href="http://vimeo.com" rel="external"><img src="{{ static('img/sponsors/sponsor-vimeo.png') }}" alt="Vimeo" width="100" height="30"></a></li>
               </ul>
             </aside>
 
