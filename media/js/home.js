@@ -81,12 +81,14 @@
         // Extract the target element's ID from the link's href.
         var elem = $(this).attr('href').replace(/.*?(#.*)/g, '$1');
         // Determine how far we have to scroll
-        var scrollDistance = ($(elem).offset().top - $document.scrollTop());
+        var scrollDistance = Math.abs($(elem).offset().top - $document.scrollTop());
         // Slower scrolling for further targets
-        if ((scrollDistance > 1200) || (scrollDistance < -1200)) {
-          scrollTime = 2500;
+        if (scrollDistance > 1200) {
+            scrollTime = 2500;
         }
-
+        else {
+            scrollTime = 1000;
+        }
         $('html, body').animate({
             scrollTop: $(elem).offset().top
         }, scrollTime, function() {
