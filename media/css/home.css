@@ -146,8 +146,8 @@
 }
 
 #about .actions h3 span {
-  float: left;
-  margin: 0 15px .75em;
+  display: inline-block;
+  margin: 0 10px .25em;
 }
 
 #about .actions p {
