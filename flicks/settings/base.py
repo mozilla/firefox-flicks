@@ -3,32 +3,6 @@
 
 from funfactory.settings_base import *
 
-# Bundles is a dictionary of two dictionaries, css and js, which list css files
-# and js files that can be bundled together by the minify app.
-MINIFY_BUNDLES = {
-    'css': {
-        'flicks_css': (
-            'css/main.css',
-        ),
-        'home_css': (
-            'css/main.css',
-            'css/home.css',
-        ),
-        'archive_css': (
-            'css/archive.css',
-        ),
-    },
-    'js': {
-        'flicks_js': (
-            'js/libs/jquery-1.7.1.min.js',
-            'js/init.js',
-        ),
-        'home_js': (
-            'js/libs/jquery.waypoints.min.js',
-            'js/home.js',
-        )
-    }
-}
 
 PROD_LANGUAGES = ('de', 'en-US', 'es', 'fr', 'nl', 'pl', 'pt-BR', 'sl', 'sq',
                   'zh-TW')
@@ -50,7 +24,9 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 
     'django.contrib.admin',
 
+    'compressor',
     'csp',
+    'jingo_offline_compressor',
     'django_statsd',
     'jingo_minify',
     'south',

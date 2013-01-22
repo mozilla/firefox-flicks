@@ -3,12 +3,18 @@
 {% block page_title %}{{ _('A Global Video Contest to Mobilize the Web') }}{% endblock %}
 
 {% block site_css %}
-  {{ css('home_css') }}
+  {{ super() }}
+  {% compress css %}
+     <link href="{{ static('css/home.css') }}" rel="stylesheet">
+  {% endcompress %}
 {% endblock %}
 
 {% block site_js %}
   {{ super() }}
-  {{ js('home_js') }}
+  {% compress js %}
+    <script src="{{ static('js/libs/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ static('js/home.js') }}"></script>
+  {% endcompress %}
 {% endblock %}
 
 
@@ -80,7 +86,7 @@
       <div class="section-detail">
         <figure class="video">
           <a href="https://vimeo.com/57743653" class="video-play" title="{{ _('Play a short introduction video') }}" data-vimeo-id="57743653">
-            <img src="{{ static('img/home/vidthumb-promo.png') }}" alt="{{ _('Play a short introduction video') }}" width="240" height="135">
+            <img src="{{ static('img/home/vidthumb-promo.jpg') }}" alt="{{ _('Play a short introduction video') }}" width="240" height="135">
           </a>
         </figure>
         <p>

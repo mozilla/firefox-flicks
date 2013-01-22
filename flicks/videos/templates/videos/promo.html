@@ -11,7 +11,9 @@
 
 {% block site_css %}
   {{ super() }}
-  {{ css('archive_css') }}
+  {% compress css %}
+    <link rel="stylesheet" href="{{ static('css/archive.css') }}">
+  {% endcompress %}
 {% endblock %}
 
 {% block content %}

@@ -27,13 +27,16 @@
     {%- endblock %}
 
     <!--[if lt IE 9]>
-      <script src="{{ static('js/libs/html5.js') }}"></script>
+      {% compress js %}
+        <script src="{{ static('js/libs/html5.js') }}"></script>
+      {% endcompress %}
     <![endif]-->
 
-    <link rel="stylesheet" media="all" type="text/css" href="//www.mozilla.org/tabzilla/media/css/tabzilla.css">
-
     {% block site_css %}
-      {{ css('flicks_css') }}
+      <link rel="stylesheet" media="all" type="text/css" href="//www.mozilla.org/tabzilla/media/css/tabzilla.css">
+      {% compress css %}
+        <link rel="stylesheet" href="{{ static('css/main.css') }}">
+      {% endcompress %}
     {% endblock %}
     <link rel="shortcut icon" type="image/png" href="{{ static('img/favicon.png') }}">
 
@@ -64,8 +67,8 @@
          data-close="{{ _('Close') }}"
          {% block string_data %}{% endblock %}>
     </div>
-    <div id="page">
 
+    <div id="page">
       {% include "shared/header.html" %}
 
       <div class="content-wrapper">
@@ -129,7 +132,10 @@
     </div>{# close #page #}
 
     {% block site_js %}
-      {{ js('flicks_js') }}
+      {% compress js %}
+        <script src="{{ static('js/libs/jquery-1.7.1.min.js') }}"></script>
+        <script src="{{ static('js/init.js') }}"></script>
+      {% endcompress %}
       <script src="//www.mozilla.org/tabzilla/media/js/tabzilla.js"></script>
     {% endblock %}
   </body>
