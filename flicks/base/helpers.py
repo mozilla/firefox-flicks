@@ -2,7 +2,6 @@ from django.utils.translation import get_language
 
 from babel.core import Locale, UnknownLocaleError
 from babel.dates import format_date
-from babel.numbers import format_number
 from jingo import register
 from product_details import product_details
 
@@ -23,13 +22,6 @@ def babel_date(date, format='long'):
     """
     locale = _babel_locale()
     return format_date(date, format, locale)
-
-
-@register.filter
-def babel_number(number):
-    """Format a number properly for the current locale."""
-    locale = _babel_locale()
-    return format_number(number, locale)
 
 
 @register.function

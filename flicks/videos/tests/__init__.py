@@ -1,10 +1,5 @@
 from contextlib import contextmanager
 
-from django.conf import settings
-
-from elasticutils import get_es
-
-
 from flicks.videos.models import Video
 
 
@@ -24,10 +19,5 @@ def build_video(user, **kwargs):
     args.update(kwargs)
 
     video = Video.objects.create(**args)
-
-    # Refresh ES if possible.
-    if not settings.ES_DISABLED:
-        get_es().refresh(settings.ES_INDEXES['default'], timesleep=0)
-
     yield video
     video.delete()

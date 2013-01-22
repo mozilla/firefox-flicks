@@ -3,14 +3,12 @@ from functools import partial
 
 from django.conf import settings
 
-import requests
 from mock import patch
 from nose.tools import eq_
 
 from flicks.base.tests import TestCase
-from flicks.base.util import (absolutify, generate_bitly_link,
-                              get_object_or_none, promo_video_shortlink,
-                              redirect)
+from flicks.base.util import (absolutify, get_object_or_none,
+                              promo_video_shortlink, redirect)
 from flicks.videos.models import Video
 from flicks.videos.tests import build_video
 
@@ -63,20 +61,6 @@ class TestGetObjectOrNone(TestCase):
         with build_video(self.user, title='exists') as video:
             value = get_object_or_none(Video, title='exists')
             eq_(value, video)
-
-
-class GenerateBitlyLinkTests(TestCase):
-    @patch.object(requests, 'get')
-    def test_error_return_none(self, get):
-        """If requests throws an exception, return None."""
-        # Test a non-200 status code
-        get.return_value = requests.Response()
-        get.return_value.status_code = 500
-        eq_(generate_bitly_link('test'), None)
-
-        # Test an exception
-        get.side_effect = requests.exceptions.RequestException
-        eq_(generate_bitly_link('test'), None)
 
 
 promo_videos = {

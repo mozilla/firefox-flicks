@@ -4,7 +4,5 @@ src/django-csp
 src/django-south
 src/django-statsd
 src/django-waffle
-src/elasticutils
 src/happyforms
-src/pyes
 src/pystatsd

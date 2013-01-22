@@ -1,12 +1,6 @@
 {% extends 'base.html' %}
-{% from 'shared/macros.html' import share_container %}
 
 {% block page_title %}{{ video_title }}{% endblock %}
-
-{% block site_js %}
-  {{ super() }}
-  {{ js('promo_video') }}
-{% endblock %}
 
 {% block og_title %}{{ video_title }}{% endblock %}
 {% block og_type %}article{% endblock %}
@@ -15,17 +9,21 @@
   <meta property="og:description" content="{{ video_description }}">
 {%- endblock %}
 
+{% block site_css %}
+  {{ super() }}
+  {{ css('archive_css') }}
+{% endblock %}
+
 {% block content %}
-  <h1>{{ video_title }}</h1>
-  <div class="video-details">
-    <p>
-      {{ video_description }}
-    </p>
-  </div>
-  <div class="video-content">
-    <div class="video-wrapper">
-      {{ video_embed }}
-    </div>
-    {{ share_container(tweet_text, request.build_absolute_uri()) }}
+  <div class="section">
+    <article class="wrap archive-video">
+      <div class="video">
+        {{ video_embed }}
+      </div>
+      <div class="video-details">
+        <h1>{{ video_title }}</h1>
+        <p class="description">{{ video_description }}</p>
+      </div>
+    </article>
   </div>
 {% endblock %}

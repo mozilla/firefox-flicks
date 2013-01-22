@@ -2,21 +2,12 @@ from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.cache import cache
 from django.db import models
-from django.dispatch import receiver
+from django.template.loader import render_to_string
 
+import jinja2
 from caching.base import CachingManager, CachingMixin
-from django_statsd.clients import statsd
-from elasticutils.models import SearchMixin
-from elasticutils.tasks import index_objects, unindex_objects
-from funfactory.urlresolvers import reverse, split_path
-from jinja2 import Markup
 from tower import ugettext as _, ugettext_lazy as _lazy
-
-from flicks.base.util import absolutify, generate_bitly_link
-from flicks.videos.tasks import add_vote
-from flicks.videos.vidly import POSTER_URL, embedCode
 
 
 # Untranslated as they're only seen in the admin interface.
@@ -58,10 +49,7 @@ WINNER_CATEGORY_TEXT = {
 }
 
 
-class Video(models.Model, SearchMixin, CachingMixin):
-    """Users can only have one video associated with
-    their account.
-    """
+class Video(models.Model, CachingMixin):
     # L10n: Title refers to the title of a video.
     title = models.CharField(max_length=100, blank=False,
                              verbose_name=_lazy(u'Title'))
@@ -95,95 +83,23 @@ class Video(models.Model, SearchMixin, CachingMixin):
 
     def embed_html(self, width=600, height=337):
         """Return the escaped HTML code to embed this video."""
-        return Markup(embedCode(self.shortlink, width, height))
-
-    @property
-    def poster_href(self):
-        """Return the url for this video's poster."""
-        return POSTER_URL % self.shortlink
-
-    @property
-    def details_href(self):
-        """Return the url for this video's details page."""
-        return reverse('flicks.videos.details', kwargs={'video_id': self.id})
-
-    @property
-    def bitly_link(self):
-        """Returns a mzl.la shortlink for this video, generating one if one
-        doesn't exist.
-        """
-        if self.bitly_link_db:
-            return self.bitly_link_db
-
-        # Generate a URL, remove the locale (let the site handle redirecting
-        # to the proper locale), and finally add the domain to the URL.
-        url = reverse('flicks.videos.details', kwargs={'video_id': self.id})
-        locale, url = split_path(url)
-        url = absolutify(url)
-
-        # Don't actually generate a shortlink if we're developing locally.
-        if settings.DEV:
-            bitly_link = None
-        else:
-            bitly_link = generate_bitly_link(url)
-
-        # Fallback to long URL if needed.
-        if bitly_link is None:
-            return url
-        else:
-            Video.objects.filter(pk=self.pk).update(bitly_link_db=bitly_link)
-            return bitly_link
+        poster = ('https://d3fenhwk93s16g.cloudfront.net/%s/poster.jpg' %
+                  self.shortlink)
+        html = render_to_string('videos/vidly_embed.html', {
+            'shortlink': self.shortlink,
+            'poster': poster,
+            'width': width,
+            'height': height
+        })
+        return jinja2.Markup(html)
 
     @property
     def is_winner(self):
         """Return true if this video won an award."""
         return Award.objects.filter(video=self).exists()
 
-    def upvote(self):
-        """Add an upvote to this video."""
-        add_vote.delay(self)
-        statsd.incr('video_upvotes')  # Add to graphite stats display
-
-    def views_cached(self):
-        """Retrieve the viewcount for this video from the cache."""
-        from flicks.videos.util import cached_viewcount
-        return cached_viewcount(self.id)
-
-    def fields(self):
-        """Serialize video for search indexing."""
-        return {'pk': self.pk,
-                'title': self.title,
-                'category': self.category,
-                'region': self.region,
-                'votes': self.votes,
-                'views': self.views,
-                'created': self.created,
-                'user_id': self.user.id,
-                'state': self.state}
-
     def __unicode__(self):
         return '%s: %s %s' % (self.id, self.shortlink, self.title)
-
-
-@receiver(models.signals.post_save, sender=Video)
-def index_video(sender, instance, **kwargs):
-    """Update the search index when a video is saved."""
-    if instance.state == 'complete' and not settings.ES_DISABLED:
-        index_objects.delay(sender, [instance.id])
-
-
-@receiver(models.signals.post_delete, sender=Video)
-def unindex_video(sender, instance, **kwargs):
-    """Update the search index when a video is deleted."""
-    if not settings.ES_DISABLED:
-        unindex_objects.delay(sender, [instance.id])
-
-
-@receiver(models.signals.post_save, sender=Video)
-def post_save(sender, instance, **kwargs):
-    """Invalidate VIEWS_KEY when video is saved."""
-    from flicks.videos.util import VIEWS_KEY
-    cache.delete(VIEWS_KEY % instance.id)
 
 
 class Award(models.Model, CachingMixin):

@@ -21,15 +21,7 @@ MINIFY_BUNDLES = {
     'js': {
         'flicks_js': (
             'js/libs/jquery-1.7.1.min.js',
-            'js/libs/jquery.cookie.js',
             'js/init.js',
-        ),
-        'promo_video': (
-            'js/libs/script.js',
-            'js/share.js',
-        ),
-        'winners': (
-            'js/winners.js',
         ),
         'home_js': (
             'js/libs/jquery.waypoints.min.js',
@@ -44,33 +36,12 @@ PROD_LANGUAGES = ('de', 'en-US', 'es', 'fr', 'nl', 'pl', 'pt-BR', 'sl', 'sq',
 # Defines the views served for root URLs.
 ROOT_URLCONF = 'flicks.urls'
 
-# Authentication
-BROWSERID_CREATE_USER = True
-LOGIN_URL = '/'
-LOGIN_REDIRECT = 'flicks.videos.recent'
-LOGIN_REDIRECT_FAILURE = 'flicks.videos.recent'
-
 AUTHENTICATION_BACKENDS = (
-    'django_browserid.auth.BrowserIDBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
-    'django_browserid.context_processors.browserid_form',
-]
-
 # Paths that do not need a locale
-SUPPORTED_NONLOCALES += ['notify', 'admin', 'robots.txt']
-
-# Gravatar Settings
-GRAVATAR_URL = 'https://secure.gravatar.com'
-DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
-
-# Vote settings
-VOTE_COOKIE_AGE = 157680000  # 5 years
-
-# Elasticutils
-ES_DISABLED = True
+SUPPORTED_NONLOCALES += ['admin', 'robots.txt']
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     'flicks.base',
@@ -80,7 +51,6 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
     'django.contrib.admin',
 
     'csp',
-    'django_browserid',
     'django_statsd',
     'jingo_minify',
     'south',
@@ -131,61 +101,8 @@ DOMAIN_METHODS = {
 # Always generate a CSRF token for anonymous users
 ANON_ALWAYS = True
 
-# Promo video shortlinks
-PROMO_VIDEOS = {
-    'noir': {
-        'en-us': '3q4s0q',
-        'fr': '9j6k9j',
-        'de': '7r0d1f',
-        'es': '5m9i4w',
-        'ja': '8r9w3d',
-        'lij': '8y4r4v',
-        'nl': '8d0f4b',
-        'pl': '8u7s6j',
-        'sl': '6e3t9x',
-        'sq': '7c9p0d',
-        'zh-cn': '0i8v1n',
-        'zh-tw': '3r1o8k'
-    },
-    'dance': {
-        'en-us': '3x8n2e',
-        'fr': '2s8o4r',
-        'de': '5i1u9r',
-        'es': '8r3y6e',
-        'ja': '5o7b0l',
-        'lij': '7a8r6a',
-        'nl': '0m4s3u',
-        'pl': '4v1w8v',
-        'sl': '6v3h2g',
-        'sq': '0o5k7n',
-        'zh-cn': '9w8d4k',
-        'zh-tw': '5q2v4y'
-    },
-    'twilight': {
-        'en-us': '6d9t7l',
-        'fr': '4k0a3w',
-        'de': '8n1f7u',
-        'es': '0y9t0e',
-        'ja': '3f9o1c',
-        'lij': '5i0n9p',
-        'nl': '8c5a2f',
-        'pl': '3d8u9p',
-        'sl': '9e2i0u',
-        'sq': '3c8y0t',
-        'zh-cn': '4w9f9x',
-        'zh-tw': '3m0y4x'
-    }
-}
-
 # Email Settings
 DEFAULT_FROM_EMAIL = 'firefoxflicks@mozilla.com'
-FACEBOOK_LINK = 'http://www.facebook.com/FirefoxFlicks'
-TWITTER_LINK = 'https://twitter.com/#!/firefoxflicks'
-
-# Bit.ly API settings
-BITLY_API_SHORTEN = 'https://api-ssl.bitly.com/v3/shorten'
-BITLY_API_KEY = ''
-BITLY_API_LOGIN = ''
 
 # Secure Cookies
 SESSION_COOKIE_SECURE = True
@@ -241,11 +158,6 @@ CSP_FRAME_SRC = ('https://vid.ly',
                  'https://*.vimeocdn.com',)
 CSP_OPTIONS = ('eval-script', 'inline-script')
 
-# Blacklist of unacceptable content-types for video URLs
-INVALID_VIDEO_CONTENT_TYPES = [
-    'text/'
-]
-
 # Activate statsd patches to time database and cache hits.
 STATSD_PATCHES = [
     'django_statsd.patches.db',
@@ -261,3 +173,53 @@ GA_ACCOUNT_CODE = ''
 
 # Allow robots to crawl the site.
 ENGAGE_ROBOTS = True
+
+# Gravatar Settings
+GRAVATAR_URL = 'https://secure.gravatar.com'
+DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
+
+# Promo video shortlinks
+PROMO_VIDEOS = {
+    'noir': {
+        'en-us': '3q4s0q',
+        'fr': '9j6k9j',
+        'de': '7r0d1f',
+        'es': '5m9i4w',
+        'ja': '8r9w3d',
+        'lij': '8y4r4v',
+        'nl': '8d0f4b',
+        'pl': '8u7s6j',
+        'sl': '6e3t9x',
+        'sq': '7c9p0d',
+        'zh-cn': '0i8v1n',
+        'zh-tw': '3r1o8k'
+    },
+    'dance': {
+        'en-us': '3x8n2e',
+        'fr': '2s8o4r',
+        'de': '5i1u9r',
+        'es': '8r3y6e',
+        'ja': '5o7b0l',
+        'lij': '7a8r6a',
+        'nl': '0m4s3u',
+        'pl': '4v1w8v',
+        'sl': '6v3h2g',
+        'sq': '0o5k7n',
+        'zh-cn': '9w8d4k',
+        'zh-tw': '5q2v4y'
+    },
+    'twilight': {
+        'en-us': '6d9t7l',
+        'fr': '4k0a3w',
+        'de': '8n1f7u',
+        'es': '0y9t0e',
+        'ja': '3f9o1c',
+        'lij': '5i0n9p',
+        'nl': '8c5a2f',
+        'pl': '3d8u9p',
+        'sl': '9e2i0u',
+        'sq': '3c8y0t',
+        'zh-cn': '4w9f9x',
+        'zh-tw': '3m0y4x'
+    }
+}
