@@ -98,6 +98,11 @@ body {
   font-family: Georgia, sans-serif;
 }
 
+.zh-CN body,
+.zh-TW body {
+  font-family: Vollkorn, Georgia, "Heiti TC", "LiHei Pro", "微軟正黑體", "WenQuanYi - Micro Hei", sans-serif;
+}
+
 #page {
   background: #f5f5f5 url(/media/img/bg-grain.png) fixed;
 }
