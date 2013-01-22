@@ -11,6 +11,7 @@ PROD_LANGUAGES = ('de', 'en-US', 'es', 'fr', 'nl', 'pl', 'pt-BR', 'sl', 'sq',
 ROOT_URLCONF = 'flicks.urls'
 
 AUTHENTICATION_BACKENDS = (
+    'django_browserid.auth.BrowserIDBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -26,6 +27,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 
     'compressor',
     'csp',
+    'django_browserid',
     'jingo_offline_compressor',
     'django_statsd',
     'jingo_minify',
@@ -41,12 +43,22 @@ MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
     'waffle.middleware.WaffleMiddleware',
 ]
 
+TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
+   'django_browserid.context_processors.browserid',
+]
+
 AUTH_PROFILE_MODULE = 'flicks.UserProfile'
+
+# django-browserid
+LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL_FAILURE = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Because Jinja2 is the default template loader, add any non-Jinja templated
 # apps here:
 JINGO_EXCLUDE_APPS = [
     'admin',
+    'browserid',
     'registration',
 ]
 

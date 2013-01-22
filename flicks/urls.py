@@ -35,6 +35,7 @@ robots_txt = lambda r: HttpResponse(
 urlpatterns = patterns('',
     url(r'', include('flicks.base.urls')),
     url(r'', include('flicks.videos.urls')),
+    url(r'', include('flicks.users.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
 
