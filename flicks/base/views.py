@@ -18,10 +18,21 @@ LINK_PDWIKI = {
     'zh-TW': 'https://zh.wikipedia.org/wiki/%E5%85%AC%E6%9C%89%E9%A2%86%E5%9F%9F ',
 }
 
+LINK_BRIEF = {
+    'en-US': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_en-US.pdf',
+    'de': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_de.pdf',
+    'es': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_es-ES.pdf',
+    'nl': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_nl.pdf',
+    'pl': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_pl.pdf',
+    'sl': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_sl.pdf',
+}
+
 
 def home(request):
     """Home page."""
-    return render(request, 'home.html')
+    return render(request, 'home.html', {
+        'link_brief': LINK_BRIEF.get(request.locale, LINK_BRIEF['en-US'])
+    })
 
 
 def creative(request):
@@ -55,7 +66,8 @@ def partners(request):
 def faq(request):
     """FAQ page."""
     return render(request, 'faq.html', {
-        'link_pdwiki': LINK_PDWIKI.get(request.locale, LINK_PDWIKI['en-US'])
+        'link_pdwiki': LINK_PDWIKI.get(request.locale, LINK_PDWIKI['en-US']),
+        'link_brief': LINK_BRIEF.get(request.locale, LINK_BRIEF['en-US'])
     })
 
 
