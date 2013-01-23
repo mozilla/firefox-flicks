@@ -20,11 +20,11 @@ LINK_PDWIKI = {
 
 LINK_BRIEF = {
     'en-US': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_en-US.pdf',
-    'de': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_de.pdf',
-    'es': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_es-ES.pdf',
-    'nl': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_nl.pdf',
-    'pl': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_pl.pdf',
-    'sl': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_sl.pdf',
+    #'de': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_de.pdf',
+    #'es': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_es-ES.pdf',
+    #'nl': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_nl.pdf',
+    #'pl': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_pl.pdf',
+    #'sl': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_sl.pdf',
 }
 
 
