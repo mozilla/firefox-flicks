@@ -35,10 +35,10 @@
         <h1>{{ video.title }}</h1>
 
         <div class="vcard">
-          {{ gravatar_img(video.user, img_class='photo', size=48) }}
+          {{ gravatar_img(video.user_email, img_class='photo', size=48) }}
           <div class="profile">
-            <span class="fn">{{ video.user.userprofile.full_name }}</span>,
-            <span class="country-name">{{ video.user.userprofile.country }}</span>
+            <span class="fn">{{ video.user_name }}</span>,
+            <span class="country-name">{{ video.user_country }}</span>
           </div>
           <div class="category-region">
             {% set category_link='<span class="category">{title}</span>'|fe(title=video.get_category_display()) %}

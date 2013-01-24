@@ -1,6 +1,3 @@
-from contextlib import nested
-from functools import partial
-
 from django.conf import settings
 
 from mock import patch
@@ -10,7 +7,7 @@ from flicks.base.tests import TestCase
 from flicks.base.util import (absolutify, get_object_or_none,
                               promo_video_shortlink, redirect)
 from flicks.videos.models import Video
-from flicks.videos.tests import build_video
+from flicks.videos.tests import VideoFactory
 
 
 @patch.object(settings, 'SITE_URL', 'http://test.com')
@@ -41,9 +38,6 @@ class TestRedirect(TestCase):
 
 
 class TestGetObjectOrNone(TestCase):
-    def setUp(self):
-        self.user = self.build_user()
-
     def test_does_not_exist(self):
         """Return None if no matching video exists."""
         value = get_object_or_none(Video, title='Does not exist')
@@ -51,16 +45,16 @@ class TestGetObjectOrNone(TestCase):
 
     def test_multiple_objects_returned(self):
         """Return None if multiple objects are returned."""
-        mkvideo = partial(build_video, self.user, title='multiple')
-        with nested(mkvideo(), mkvideo()):
-            value = get_object_or_none(Video, title='multiple')
-            eq_(value, None)
+        VideoFactory.create(title='multiple')
+        VideoFactory.create(title='multiple')
+        value = get_object_or_none(Video, title='multiple')
+        eq_(value, None)
 
     def test_exists(self):
         """If no exceptions occur, return the matched object."""
-        with build_video(self.user, title='exists') as video:
-            value = get_object_or_none(Video, title='exists')
-            eq_(value, video)
+        video = VideoFactory.create(title='exists')
+        value = get_object_or_none(Video, title='exists')
+        eq_(value, video)
 
 
 promo_videos = {

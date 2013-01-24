@@ -55,7 +55,12 @@ class Video(models.Model, CachingMixin):
                              verbose_name=_lazy(u'Title'))
     description = models.TextField(blank=True,
                                    verbose_name=_lazy(u'Description'))
-    user = models.ForeignKey(User, blank=False)
+
+    user_name = models.CharField(max_length=100, blank=False,
+                                 default='')
+    user_email = models.EmailField(blank=True)
+    user_country = models.CharField(max_length=100, blank=True)
+
     category = models.CharField(max_length=50, blank=False,
                                 choices=CATEGORY_CHOICES,
                                 verbose_name=_lazy(u'Category'))
