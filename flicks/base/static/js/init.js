@@ -56,9 +56,55 @@
         window.open(this.href);
     });
 
-    // Create text translation function using #strings element.
+    // Store common functions on flicks global.
     var $strings = $('#strings');
-    window.trans = function trans(stringId){
-        return $strings.data(stringId);
+    var flicks = {
+        'trans': function(stringId){
+            return $strings.data(stringId);
+        },
+        'createModal': function(origin, content) {
+            // Clear existing modal, if necessary,
+            $('#modal').remove();
+            $('.modalOrigin').removeClass('modalOrigin');
+
+            // Create new modal
+            var html = (
+                '<div id="modal">' +
+                '  <div class="inner">' +
+                '    <button type="button" class="close">' +
+                '      ' + flicks.trans('close') +
+                '    </button>' +
+                '  </div>' +
+                '</div>'
+            );
+
+            // Add it to the page.
+            $('body').addClass("noscroll").append(html);
+            $("#modal .inner").append(content);
+            $(origin).addClass('modalOrigin');
+        },
+        'closeModal': function() {
+            $('#modal').remove();
+            $('body').removeClass('noscroll');
+            $('.modalOrigin').focus().remove('modalOrigin');
+        },
+        'notification': function(text) {
+            // TODO: Implement notification popup here.
+        },
+        'isUserAuthenticated': function() {
+            return !!$('#browserid-info').data('userEmail');
+        }
     };
+    window.flicks = flicks;
+
+    // Close modal on clicking close button or background.
+    $document.on('click', '#modal .close', flicks.closeModal);
+    $document.on('click', "#modal, #modal .inner", flicks.closeModal);
+
+    // Close on escape
+    $document.on('keyup', function(e) {
+        if (e.keyCode === 27) { // esc
+            flicks.closeModal();
+        }
+    });
 })(jQuery);
