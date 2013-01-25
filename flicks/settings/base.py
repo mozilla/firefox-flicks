@@ -154,6 +154,9 @@ ENGAGE_ROBOTS = True
 GRAVATAR_URL = 'https://secure.gravatar.com'
 DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
 
+# django-compressor
+COMPRESS_PARSER = 'compressor.parser.HtmlParser'
+
 # Promo video shortlinks
 PROMO_VIDEOS = {
     'noir': {
