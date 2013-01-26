@@ -3,11 +3,11 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
-from django.template.loader import render_to_string
 
-import jinja2
 from caching.base import CachingManager, CachingMixin
 from tower import ugettext as _, ugettext_lazy as _lazy
+
+from flicks.videos.util import vidly_embed_code
 
 
 # Untranslated as they're only seen in the admin interface.
@@ -83,15 +83,7 @@ class Video(models.Model, CachingMixin):
 
     def embed_html(self, width=600, height=337):
         """Return the escaped HTML code to embed this video."""
-        poster = ('https://d3fenhwk93s16g.cloudfront.net/%s/poster.jpg' %
-                  self.shortlink)
-        html = render_to_string('videos/vidly_embed.html', {
-            'shortlink': self.shortlink,
-            'poster': poster,
-            'width': width,
-            'height': height
-        })
-        return jinja2.Markup(html)
+        return vidly_embed_code(self.shortlink, width=width, height=height)
 
     @property
     def is_winner(self):

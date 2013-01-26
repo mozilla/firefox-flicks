@@ -1,11 +1,10 @@
 from django.shortcuts import get_object_or_404, render
-from jinja2 import Markup
 
 from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import promo_video_shortlink
 from flicks.videos.models import Video
-from flicks.videos.vidly import embedCode
+from flicks.videos.util import vidly_embed_code
 
 
 def details(request, video_id=None):
@@ -24,8 +23,8 @@ def promo_video_noir(request):
              tweet_text=_lazy('The fox meets a damsel in distress, but can he '
                               'help her?'),
              page_type='videos',
-             video_embed=Markup(embedCode(promo_video_shortlink('noir'),
-                                          width='100%', height=337)))
+             video_embed=vidly_embed_code(promo_video_shortlink('noir'),
+                                          width='100%', height=337))
     return render(request, 'videos/promo.html', d)
 
 
@@ -39,8 +38,8 @@ def promo_video_dance(request):
              tweet_text=_lazy("He's got the moves. He's got ambition. How far "
                               "can this fox's feet take him?"),
              page_type='videos',
-             video_embed=Markup(embedCode(promo_video_shortlink('dance'),
-                                          width='100%', height=337)))
+             video_embed=vidly_embed_code(promo_video_shortlink('dance'),
+                                          width='100%', height=337))
     return render(request, 'videos/promo.html', d)
 
 
@@ -52,6 +51,6 @@ def promo_video_twilight(request):
              video_description=desc,
              tweet_text=desc,
              page_type='videos',
-             video_embed=Markup(embedCode(promo_video_shortlink('twilight'),
-                                          width='100%', height=337)))
+             video_embed=vidly_embed_code(promo_video_shortlink('twilight'),
+                                          width='100%', height=337))
     return render(request, 'videos/promo.html', d)
