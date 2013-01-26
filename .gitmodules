@@ -28,3 +28,6 @@
 [submodule "vendor-local/src/django-jingo-offline-compressor"]
 	path = vendor-local/src/django-jingo-offline-compressor
 	url = git://github.com/peterbe/django-jingo-offline-compressor.git
+[submodule "vendor-local/src/django-compressor"]
+	path = vendor-local/src/django-compressor
+	url = git://github.com/jezdez/django_compressor.git
