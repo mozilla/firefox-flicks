@@ -28,7 +28,7 @@
 }
 
 .video-details .awards li {
-    background: url('../img/winner-trophy-sm.png') no-repeat;
+    background: url('/static/img/winner-trophy-sm.png') no-repeat;
     margin-bottom: 10px;
     padding: 5px 0 5px 48px;
     min-height: 20px;
