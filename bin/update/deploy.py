@@ -53,6 +53,7 @@ def update_assets(ctx):
     with ctx.lcd(settings.SRC_DIR):
         # LANG=en_US.UTF-8 is sometimes necessary for the YUICompressor.
         ctx.local('LANG=en_US.UTF8 python2.6 manage.py compress_jingo')
+        ctx.local('python2.6 manage.py collectstatic --noinput')
 
 
 @task
@@ -63,8 +64,8 @@ def update_db(ctx):
     Uses schematic by default. Change to south if you need to.
     """
     with ctx.lcd(settings.SRC_DIR):
-        ctx.local('python2.6 manage.py syncdb')
-        ctx.local('python2.6 manage.py migrate')
+        ctx.local('python2.6 manage.py syncdb --noinput')
+        ctx.local('python2.6 manage.py migrate --noinput')
         ctx.local('python2.6 manage.py migrate --list')
 
 
