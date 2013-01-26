@@ -58,6 +58,9 @@ INSTALLED_APPS += ('django_nose',)
 CELERY_ALWAYS_EAGER = True
 SECRET_KEY = 'asdf'
 SESSION_COOKIE_SECURE = True
+HMAC_KEYS = {
+    '2012-06-06': 'some secret',
+}
 
 SETTINGS
 
