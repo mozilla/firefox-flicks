@@ -4,17 +4,12 @@
 
 {% block site_css %}
   {{ super() }}
-  {% compress css %}
-     <link href="{{ static('css/home.css') }}" rel="stylesheet">
-  {% endcompress %}
+  {{ css('home_css') }}
 {% endblock %}
 
 {% block site_js %}
   {{ super() }}
-  {% compress js %}
-    <script src="{{ static('js/libs/jquery.waypoints.min.js') }}"></script>
-    <script src="{{ static('js/home.js') }}"></script>
-  {% endcompress %}
+  {{ js('home_js') }}
 {% endblock %}
 
 

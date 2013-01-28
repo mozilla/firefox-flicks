@@ -26,10 +26,8 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 
     'django.contrib.admin',
 
-    'compressor',
     'csp',
     'django_browserid',
-    'jingo_offline_compressor',
     'django_statsd',
     'jingo_minify',
     'south',
@@ -167,23 +165,34 @@ ENGAGE_ROBOTS = True
 GRAVATAR_URL = 'https://secure.gravatar.com'
 DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
 
-# django-compressor
-COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 
-
-def lazy_compress_offline_context():
-    """
-    Add browserid_js to context used during minification, as context processors
-    aren't used during this process, breaking the browserid JS embed.
-    """
-    from functools import partial
-    from django_browserid.context_processors import browserid_js
-    from django_browserid.forms import BrowserIDForm
-
-    return {
-        'browserid_js': partial(browserid_js, BrowserIDForm())
+# jingo-minify
+JINGO_MINIFY_USE_STATIC = True
+MINIFY_BUNDLES = {
+    'css': {
+        'flicks_css': (
+            'css/main.css',
+        ),
+        'home_css': (
+            'css/main.css',
+            'css/home.css',
+        ),
+        'archive_css': (
+            'css/archive.css',
+        ),
+    },
+    'js': {
+        'flicks_js': (
+            'js/libs/jquery-1.7.1.min.js',
+            'browserid/browserid.js',
+            'js/init.js',
+        ),
+        'home_js': (
+            'js/libs/jquery.waypoints.min.js',
+            'js/home.js',
+        )
     }
-COMPRESS_OFFLINE_CONTEXT = lazy(lazy_compress_offline_context, dict)()
+}
 
 
 # Promo video shortlinks

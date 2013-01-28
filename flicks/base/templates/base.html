@@ -34,9 +34,7 @@
 
     {% block site_css %}
       <link rel="stylesheet" media="all" type="text/css" href="//www.mozilla.org/tabzilla/media/css/tabzilla.css">
-      {% compress css %}
-        <link rel="stylesheet" href="{{ static('css/main.css') }}">
-      {% endcompress %}
+      {{ css('flicks_css') }}
     {% endblock %}
     <link rel="shortcut icon" type="image/png" href="{{ static('img/favicon.png') }}">
 
@@ -134,12 +132,8 @@
     </div>{# close #page #}
 
     {% block site_js %}
-      {% compress js %}
-        <script src="{{ static('js/libs/jquery-1.7.1.min.js') }}"></script>
-        {{ browserid_js(include_shim=False) }}
-        <script src="{{ static('js/init.js') }}"></script>
-      {% endcompress %}
       <script src="https://login.persona.org/include.js"></script>
+      {{ js('flicks_js') }}
       <script src="//www.mozilla.org/tabzilla/media/js/tabzilla.js"></script>
     {% endblock %}
   </body>
