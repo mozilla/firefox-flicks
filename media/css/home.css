@@ -101,6 +101,18 @@
   border-radius: 50%;
 }
 
+.pt-BR #slideshow.js .slide-desc,
+.fr #slideshow.js .slide-desc,
+.nl #slideshow.js .slide-desc,
+.de #slideshow.js .slide-desc {
+  width: 260px;
+  padding: 80px 40px 20px;
+}
+
+#slideshow.js .slide-desc h2 {
+  text-shadow: none;
+}
+
 #slideshow.js .slide-desc a {
   color: #1f9ee5;
 }
