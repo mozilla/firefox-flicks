@@ -54,3 +54,8 @@ def promo_video_twilight(request):
              video_embed=vidly_embed_code(promo_video_shortlink('twilight'),
                                           width='100%', height=337))
     return render(request, 'videos/promo.html', d)
+
+
+def recent(request):
+    """Recent videos page."""
+    return render(request, 'videos/recent.html')

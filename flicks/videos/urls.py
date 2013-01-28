@@ -11,4 +11,5 @@ urlpatterns = patterns('',
         name='flicks.videos.promo_video_dance'),
     url(r'^video/twilight/$', views.promo_video_twilight,
         name='flicks.videos.promo_video_twilight'),
+    url(r'^videos/recent/$', views.recent, name='flicks.videos.recent')
 )

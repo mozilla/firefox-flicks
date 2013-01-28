@@ -11,14 +11,6 @@
   background: #e9e9e9 url(/static/img/bg-grid.png);
 }
 
-.section-intro {
-  font-size: 20px;
-  line-height: 1.35;
-  text-align: center;
-  margin: 0 auto 2em;
-  max-width: 100%;
-}
-
 .section-detail {
   font: 14px "Open Sans", Helvetica, Arial, sans-serif;
   margin: 0 auto 3em;
@@ -88,10 +80,10 @@
   position: absolute;
   top: -50px;
   left: 30px;
-  width: 230px;
-  min-height: 140px;
+  width: 260px;
+  min-height: 210px;
   text-align: center;
-  padding: 80px 30px 20px;
+  padding: 80px 40px 20px;
   background-color: #444;
   background-color: rgba(0,0,0,.75);
   font-size: 18px;
@@ -99,11 +91,6 @@
   color: #fff;
   text-shadow: none;
   border-radius: 50%;
-}
-
-.de #slideshow.js .slide-desc {
-  width: 260px;
-  padding: 80px 40px 20px;
 }
 
 #slideshow.js .slide-desc h2 {
@@ -169,50 +156,6 @@
   width: 620px;
 }
 
-.entry-list {
-  list-style: none;
-  overflow: auto;
-  font-family: "Open Sans", sans-serif;
-  margin: 0 -10px 1em;
-}
-
-.entry-list .entry {
-  width: 300px;
-  float: left;
-  margin: 0 10px 2em;
-}
-
-.entry-list .entry:nth-child(3n+1) {
-  clear: left;
-}
-
-.entry .thumbnail {
-  border: 5px solid #fff;
-  box-shadow: 0 1px 1px rgba(0,0,0,.1);
-  margin-left: -5px;
-}
-
-.entry h2 {
-  font-size: 16px;
-  font-weight: normal;
-}
-
-.entry h3 {
-  font-size: 14px;
-  font-weight: normal;
-  font-style: italic;
-}
-
-.entry a:link,
-.entry a:visited {
-  color: #28333a;
-}
-
-.entry a:focus,
-.entry a:active {
-  color: #28333a;
-  outline: 0;
-}
 
 /* @Judges *********/
 #judges {
@@ -441,19 +384,6 @@ body.noscroll .fixed #head-inner {
     clear: left;
   }
 
-  .entry-list {
-    width: 640px;
-    margin: 0 auto 1em;
-  }
-
-  .entry-list .entry:nth-child(3n+1) {
-    clear: none;
-  }
-
-  .entry-list .entry:nth-child(2n+1) {
-    clear: left;
-  }
-
   .prize {
     text-align: center;
     width: 300px;
@@ -540,25 +470,6 @@ body.noscroll .fixed #head-inner {
     float: none;
   }
 
-  .entry-list {
-    width: auto;
-  }
-
-  .entry-list .entry {
-    float: none;
-    clear: both;
-    width: 220px;
-    margin: 0 auto 2em;
-  }
-
-  .entry-list .entry:nth-child(3n+1) {
-    clear: none;
-  }
-
-  .entry-list .entry:nth-child(2n+1) {
-    clear: left;
-  }
-
   .actions li {
     float: none;
     width: 190px;
@@ -584,13 +495,6 @@ body.noscroll .fixed #head-inner {
 
   .actions li {
     width: auto;
-  }
-
-  .entry-list .entry {
-    float: left;
-    clear: none;
-    width: 210px;
-    margin: 0 15px 2em;
   }
 
   #about {

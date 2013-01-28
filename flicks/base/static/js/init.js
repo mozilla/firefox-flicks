@@ -22,7 +22,7 @@
             $navList.attr('aria-hidden', 'true');
         } else {
             $body.removeClass('thin-mode');
-            $navList.removeAttr('aria-hidden');
+            $navList.removeAttr('aria-hidden').css({ display: 'block' });
         }
     }
     $(doneResizing);  // Call once when done loading the page to initialize.
