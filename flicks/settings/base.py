@@ -1,5 +1,6 @@
 # This is your project's main settings file that can be committed to your
 # repo. If you need to override a setting locally, use settings_local.py
+from django.utils.functional import lazy
 
 from funfactory.settings_base import *
 
@@ -168,6 +169,22 @@ DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
 
 # django-compressor
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
+
+
+def lazy_compress_offline_context():
+    """
+    Add browserid_js to context used during minification, as context processors
+    aren't used during this process, breaking the browserid JS embed.
+    """
+    from functools import partial
+    from django_browserid.context_processors import browserid_js
+    from django_browserid.forms import BrowserIDForm
+
+    return {
+        'browserid_js': partial(browserid_js, BrowserIDForm())
+    }
+COMPRESS_OFFLINE_CONTEXT = lazy(lazy_compress_offline_context, dict)()
+
 
 # Promo video shortlinks
 PROMO_VIDEOS = {
