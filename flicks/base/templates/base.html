@@ -15,7 +15,7 @@
     {# OpenGraph Metadata #}
     <meta property="og:title" content="{% block og_title %}{{ _('Firefox Flicks') }}{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}http://mozcom-cdn.mozilla.net/img/firefox-100.jpg{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ MEDIA_URL }}img/flicks-logo-180.png{% endblock %}">
     <meta property="og:url" content="{% block og_url %}http://www.mozilla.org/firefoxflicks/{% endblock %}">
     <meta property="og:site_name" content="{{ _('Firefox Flicks') }}">
     {% block meta_description -%}
