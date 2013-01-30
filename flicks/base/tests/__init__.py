@@ -3,16 +3,30 @@ import hashlib
 from contextlib import contextmanager
 
 from django.contrib.auth.models import User
+from django.contrib.sessions.middleware import SessionMiddleware
+from django.test.client import RequestFactory
 from django.utils.translation import get_language
 
 import test_utils
+from django_browserid.tests import mock_browserid
 from funfactory.urlresolvers import (get_url_prefix, Prefixer, reverse,
                                      set_url_prefix)
 from nose.tools import ok_
 from tower import activate
 
 from flicks.users.models import UserProfile
-from flicks.users.tests import mock_browserid
+
+
+class SessionRequestFactory(RequestFactory):
+    """RequestFactory that adds session data to requests."""
+    def __init__(self, *args, **kwargs):
+        super(SessionRequestFactory, self).__init__(*args, **kwargs)
+        self.session_middleware = SessionMiddleware()
+
+    def request(self, *args, **kwargs):
+        request = super(SessionRequestFactory, self).request(*args, **kwargs)
+        self.session_middleware.process_request(request)
+        return request
 
 
 class TestCase(test_utils.TestCase):
@@ -28,6 +42,14 @@ class TestCase(test_utils.TestCase):
         yield
         set_url_prefix(old_prefix)
         activate(old_locale)
+
+    def browserid_login(self, email):
+        """Logs the test client in using BrowserID."""
+        factory = SessionRequestFactory()
+        with self.activate('en-US'):
+            request = factory.get('/')
+        with mock_browserid(email):
+            self.client.login(request=request, assertion='asdf')
 
     def build_user(self, email=None, salt=None, login=False,
                    profile=True, **kwargs):

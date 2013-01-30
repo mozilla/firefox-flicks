@@ -1,37 +1,20 @@
-from django.utils.functional import wraps
+from django.contrib.auth.models import User
 
-from mock import patch
+from factory import Factory, Sequence, SubFactory
+
+from flicks.users.models import UserProfile
 
 
-class mock_browserid(object):
-    """
-    Mocks django_browserid verification. Can be used as a context manager or
-    as a decorator:
+class UserFactory(Factory):
+    FACTORY_FOR = User
 
-    with mock_browserid('a@b.com'):
-        django_browserid.verify('random-token')  # = {'status': 'okay',
-                                                 #    'email': 'a@b.com'}
+    username = Sequence(lambda n: 'test{0}'.format(n))
 
-    @mock_browserid(None)
-    def browserid_test():
-        django_browserid.verify('random-token')  # = False
-    """
-    def __init__(self, email=None):
-        self.patcher = patch('django_browserid.base._verify_http_request')
-        if email is not None:
-            self.return_value = {'status': 'okay', 'email': email}
-        else:
-            self.return_value = {'status': 'failure'}
 
-    def __enter__(self):
-        self.patcher.start().return_value = self.return_value
+class UserProfileFactory(Factory):
+    FACTORY_FOR = UserProfile
 
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.patcher.stop()
-
-    def __call__(self, func):
-        @wraps(func)
-        def inner(*args, **kwargs):
-            with self:
-                return func(*args, **kwargs)
-        return inner
+    user = SubFactory(UserFactory)
+    full_name = Sequence(lambda n: 'test{0}'.format(n))
+    nickname = Sequence(lambda n: 'test{0}'.format(n))
+    country = 'us'
