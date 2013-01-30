@@ -1,138 +1,77 @@
-{# Substitute in an empty settings object if it is not available (error handlers
-   during tests).  #}
-{% if not settings %}
-  {% set settings = {} %}
-{% endif %}
+{% extends 'bare.html' %}
 
-<!DOCTYPE html>
-<html lang="{{ LANG }}" dir="{{ DIR }}" class="{{ LANG }} {{ DIR }}">
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ _('Firefox Flicks') }} : {% block page_title %}{% endblock %}</title>
+{% block site_css %}
+  <link rel="stylesheet" media="all" type="text/css" href="//www.mozilla.org/tabzilla/media/css/tabzilla.css">
+  {{ css('flicks_css') }}
+{% endblock %}
 
-    {# OpenGraph Metadata #}
-    <meta property="og:title" content="{% block og_title %}{{ _('Firefox Flicks') }}{% endblock %}">
-    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{{ static('img/flicks-logo-180.png') }}{% endblock %}">
-    <meta property="og:url" content="{% block og_url %}http://www.mozilla.org/firefoxflicks/{% endblock %}">
-    <meta property="og:site_name" content="{{ _('Firefox Flicks') }}">
-    {% block meta_description -%}
-      <meta property="og:description" content="{% trans %}
-        Firefox Flicks is a contest that invites Firefox fans and filmmakers
-        from all over the world to create short videos (or &#34;flicks&#34;) to help
-        tell the Firefox story.
-      {% endtrans %}">
-    {%- endblock %}
+{% block body %}
+  <div id="page">
+    {% include "shared/header.html" %}
 
-    <!--[if lt IE 9]>
-      <script src="{{ static('js/libs/html5.js') }}"></script>
-    <![endif]-->
+    <main class="content-wrapper" role="main">
+      {% block content %}{% endblock %}
+    </main>
 
-    {% block site_css %}
-      <link rel="stylesheet" media="all" type="text/css" href="//www.mozilla.org/tabzilla/media/css/tabzilla.css">
-      {{ css('flicks_css') }}
-    {% endblock %}
-    <link rel="shortcut icon" type="image/png" href="{{ static('img/favicon.png') }}">
+    {% block videocontent %}{% endblock %}
 
-    {% block google_analytics %}
-      <script>
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', '{{ settings.GA_ACCOUNT_CODE }}']);
-          _gaq.push(['_trackPageview']);
+    {% block footer %}
+      <footer id="footer">
+        <div class="wrap">
 
-          {% if settings.GA_ACCOUNT_CODE %}
-          (function() {
-              var ga = document.createElement('script');
-              ga.type = 'text/javascript';
-              ga.async = true;
-              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-              var s = document.getElementsByTagName('script')[0];
-              s.parentNode.insertBefore(ga, s);
-          })();
-          {% endif %}
-      </script>
-    {% endblock %}
-  </head>
-  <body class="{{ page_type }}"
-        data-mobile-cookie="{{ settings.MOBILE_COOKIE }}"
-        data-token="{{ csrf_token }}"
-        {% block body_data %}{% endblock %}>
+          <aside class="sponsors">
+            <h4>{{ _('Our Sponsors') }}</h4>
+            <ul>
+              <li><a href="http://vimeo.com" rel="external"><img src="{{ static('img/sponsors/sponsor-vimeo.png') }}" alt="Vimeo" width="100" height="30"></a></li>
+            </ul>
+          </aside>
 
-    {{ browserid_info }}
-    <div id="strings"
-         data-close="{{ _('Close') }}"
-         {% block string_data %}{% endblock %}>
-    </div>
-
-    <div id="page">
-      {% include "shared/header.html" %}
-
-      <main class="content-wrapper" role="main">
-        {% block content %}{% endblock %}
-      </main>
-
-      {% block videocontent %}{% endblock %}
-
-      {% block footer %}
-        <footer id="footer">
-          <div class="wrap">
-
-            <aside class="sponsors">
-              <h4>{{ _('Our Sponsors') }}</h4>
+          <div class="util">
+            <nav id="nav-social-foot" class="nav-social">
+              <h4>{{ _('Share Firefox Flicks') }}</h4>
               <ul>
-                <li><a href="http://vimeo.com" rel="external"><img src="{{ static('img/sponsors/sponsor-vimeo.png') }}" alt="Vimeo" width="100" height="30"></a></li>
-              </ul>
-            </aside>
-
-            <div class="util">
-              <nav id="nav-social-foot" class="nav-social">
-                <h4>{{ _('Share Firefox Flicks') }}</h4>
-                <ul>
-                  <li><a href="http://vimeo.com/firefoxflicks" title="Vimeo" class="vimeo" rel="external">Vimeo</a></li>
-                  <li><a href="http://facebook.com/firefoxflicks" title="Facebook" class="facebook" rel="external">Facebook</a></li>
-                  <li><a href="http://twitter.com/firefoxflicks" title="Twitter" class="twitter" rel="external">Twitter</a></li>
-                </ul>
-              </nav>
-
-              <aside class="firefoxos">
-                <h4>{{ _('Learn about Firefox OS') }}</h4>
-                <p><a href="http://www.mozilla.org/firefoxos/" rel="external">{{ _('Firefox OS') }}</a></p>
-              </aside>
-            </div>
-
-            <nav id="nav-fineprint">
-              <ul>
-                <li><a href="http://www.mozilla.org/en-US/privacy-policy.html" rel="external">{{ _('Privacy Policy') }}</a></li>
-                <li><a href="http://www.mozilla.org/about/legal.html" rel="external">{{ _('Legal') }}</a></li>
-                <li>
-                  <form class="languages" method="GET">
-                    <label for="language">{{ _('Other languages:') }}</label>
-                    <select id="language" name="lang" dir="ltr">
-                      {% for code, name in LANGUAGES|dictsort -%}
-                        <option value="{{ code }}" {{ code|ifeq(LANG|lower, "selected") }}>
-                          {{ name }}
-                        </option>
-                      {%- endfor %}
-                    </select>
-                    {# L10N: This is a label for a form submit button #}
-                    <button type="submit">{{ _('Submit') }}</button>
-                  </form>
-                </li>
+                <li><a href="http://vimeo.com/firefoxflicks" title="Vimeo" class="vimeo" rel="external">Vimeo</a></li>
+                <li><a href="http://facebook.com/firefoxflicks" title="Facebook" class="facebook" rel="external">Facebook</a></li>
+                <li><a href="http://twitter.com/firefoxflicks" title="Twitter" class="twitter" rel="external">Twitter</a></li>
               </ul>
             </nav>
 
+            <aside class="firefoxos">
+              <h4>{{ _('Learn about Firefox OS') }}</h4>
+              <p><a href="http://www.mozilla.org/firefoxos/" rel="external">{{ _('Firefox OS') }}</a></p>
+            </aside>
           </div>
-        </footer>
-      {% endblock %}
 
-    </div>{# close #page #}
+          <nav id="nav-fineprint">
+            <ul>
+              <li><a href="http://www.mozilla.org/en-US/privacy-policy.html" rel="external">{{ _('Privacy Policy') }}</a></li>
+              <li><a href="http://www.mozilla.org/about/legal.html" rel="external">{{ _('Legal') }}</a></li>
+              <li>
+                <form class="languages" method="GET">
+                  <label for="language">{{ _('Other languages:') }}</label>
+                  <select id="language" name="lang" dir="ltr">
+                    {% for code, name in LANGUAGES|dictsort -%}
+                      <option value="{{ code }}" {{ code|ifeq(LANG|lower, "selected") }}>
+                        {{ name }}
+                      </option>
+                    {%- endfor %}
+                  </select>
+                  {# L10N: This is a label for a form submit button #}
+                  <button type="submit">{{ _('Submit') }}</button>
+                </form>
+              </li>
+            </ul>
+          </nav>
 
-    {% block site_js %}
-      <script src="https://login.persona.org/include.js"></script>
-      {{ js('flicks_js') }}
-      <script src="//www.mozilla.org/tabzilla/media/js/tabzilla.js"></script>
+        </div>
+      </footer>
     {% endblock %}
-  </body>
-</html>
+
+  </div>{# close #page #}
+{% endblock %}
+
+{% block site_js %}
+  <script src="https://login.persona.org/include.js"></script>
+  {{ js('flicks_js') }}
+  <script src="//www.mozilla.org/tabzilla/media/js/tabzilla.js"></script>
+{% endblock %}
