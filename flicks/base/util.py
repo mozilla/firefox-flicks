@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
+from django.utils.functional import lazy
 from django.utils.translation import get_language
 
 import commonware.log
@@ -33,6 +34,15 @@ def redirect(to, permanent=False, anchor=None, **kwargs):
         url = '#'.join([url, anchor])
 
     return redirect_class(url)
+
+
+def _reverse_lazy(*args, **kwargs):
+    # We have to force this to be a string because Django's urlparse function
+    # chokes on __proxy__ objects that don't resolve to a str and funfactory
+    # returns unicode. See https://github.com/mozilla/funfactory/pull/47 for
+    # details.
+    return str(reverse(*args, **kwargs))
+reverse_lazy = lazy(_reverse_lazy, str)
 
 
 def get_object_or_none(model_class, **filters):

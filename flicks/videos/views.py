@@ -1,10 +1,18 @@
 from django.shortcuts import get_object_or_404, render
 
+from commonware.response.decorators import xframe_sameorigin
 from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import promo_video_shortlink
 from flicks.videos.models import Video
 from flicks.videos.util import vidly_embed_code
+from flicks.users.decorators import profile_required
+
+
+@profile_required
+@xframe_sameorigin
+def submit(request):
+    return render(request, 'videos/submit.html')
 
 
 def details(request, video_id=None):

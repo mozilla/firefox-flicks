@@ -1,0 +1,27 @@
+{% extends 'bare.html' %}
+
+{% from 'macros.html' import input_in_label %}
+
+{% block body %}
+  <section id="user-profile" class="section alt">
+    <div class="wrap">
+      <form action='POST'>
+        <ul>
+          <li>{{ form.full_name.label_tag(_('Full Name')) }} {{ form.full_name }}</li>
+          <li>{{ form.nickname.label_tag(_('Nickname')) }} {{ form.nickname }}</li>
+          <li>{{ form.country.label_tag(_('Country')) }} {{ form.country }}</li>
+          <li>{{ form.address1.label_tag(_('Address line 1')) }} {{ form.address1 }}</li>
+          <li>{{ form.address2.label_tag(_('Address line 2')) }} {{ form.address2 }}</li>
+          <li>{{ form.city.label_tag(_('City')) }} {{ form.city }}</li>
+          <li>{{ form.mailing_country.label_tag(_('Country')) }} {{ form.mailing_country }}</li>
+          <li>{{ form.state.label_tag(_('State/Province')) }} {{ form.state }}</li>
+          <li>{{ form.postal_code.label_tag(_('Postal Code')) }} {{ form.postal_code }}</li>
+          <li>
+            {{ input_in_label(form.privacy_policy_agree,
+                              _('I agree to the privacy policy.')) }}
+          </li>
+        </ul>
+      </form>
+    </div>
+  </section>
+{% endblock %}

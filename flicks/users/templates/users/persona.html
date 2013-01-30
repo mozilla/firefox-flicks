@@ -1,0 +1,12 @@
+{% extends 'bare.html' %}
+
+{% block body %}
+  {{ browserid_info }}
+  {{ browserid_button(form_extras={'next': next}) }}
+{% endblock %}
+
+{% block site_js %}
+  <script src="https://login.persona.org/include.js"></script>
+  {{ js('flicks_js') }}
+  {{ js('persona_js') }}
+{% endblock %}

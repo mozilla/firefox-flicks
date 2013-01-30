@@ -1,0 +1,3 @@
+{% macro input_in_label(input, label) -%}
+    {{ input.label_tag(' '.join((input|string, label))) }}
+{%- endmacro %}

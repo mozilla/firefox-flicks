@@ -1,8 +1,8 @@
 # This is your project's main settings file that can be committed to your
 # repo. If you need to override a setting locally, use settings_local.py
-from django.utils.functional import lazy
-
 from funfactory.settings_base import *
+
+from flicks.base.util import reverse_lazy
 
 
 PROD_LANGUAGES = ('de', 'en-US', 'es', 'fr', 'nl', 'pl', 'pt-BR', 'sl', 'sq',
@@ -46,12 +46,11 @@ TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
    'django_browserid.context_processors.browserid',
 ]
 
-AUTH_PROFILE_MODULE = 'flicks.UserProfile'
-
-# django-browserid
-LOGIN_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL_FAILURE = '/'
-LOGOUT_REDIRECT_URL = '/'
+# Authentication settings
+LOGIN_URL = reverse_lazy('flicks.users.persona')
+LOGIN_REDIRECT_URL = reverse_lazy('flicks.base.home')
+LOGIN_REDIRECT_URL_FAILURE = reverse_lazy('flicks.base.home')
+LOGOUT_REDIRECT_URL = reverse_lazy('flicks.base.home')
 
 # Because Jinja2 is the default template loader, add any non-Jinja templated
 # apps here:
@@ -136,7 +135,8 @@ CSP_SCRIPT_SRC = ("'self'",
                   'http://*.vimeo.com',
                   'https://*.vimeo.com',
                   'https://*.vimeocdn.com',)
-CSP_FRAME_SRC = ('https://vid.ly',
+CSP_FRAME_SRC = ("'self'",
+                 'https://vid.ly',
                  'http://platform.twitter.com',
                  'https://platform.twitter.com',
                  'https://www.facebook.com',
@@ -190,7 +190,10 @@ MINIFY_BUNDLES = {
         'home_js': (
             'js/libs/jquery.waypoints.min.js',
             'js/home.js',
-        )
+        ),
+        'persona_js': (
+            'js/persona.js',
+        ),
     }
 }
 
