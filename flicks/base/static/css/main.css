@@ -736,6 +736,14 @@ a.go:after {
   .logo img {
     max-width: 300px;
   }
+  
+  #page-nav {
+    margin-left: 70px;
+  }
+
+  #page-nav {
+    margin-left: 70px;
+  }
 
   .entry-list {
     width: 640px;
@@ -792,9 +800,12 @@ a.go:after {
   }
 
   #page-nav {
+    position: absolute;
     left: 20px;
     z-index: 99;
     width: 32px;
+    margin: 0;
+    text-align: left;
   }
 
   #page-nav .toggle {
@@ -842,6 +853,13 @@ a.go:after {
   #page-nav-list a:link {
     display: block;
     padding: 6px 10px;
+  }
+  
+  #page-nav #nav-auth {
+    font-size: 100%;
+    text-transform: uppercase;
+    text-align: left;
+    margin: 0 0 2px;
   }
 
   #footer .sponsors,

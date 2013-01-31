@@ -58,4 +58,4 @@ def promo_video_twilight(request):
 
 def recent(request):
     """Recent videos page."""
-    return render(request, 'videos/recent.html')
+    return render(request, 'videos/recent.html', {'page_type': 'archive'})

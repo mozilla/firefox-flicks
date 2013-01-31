@@ -13,16 +13,16 @@
     // 768 pixels.
     $window.resize(function() {
         clearTimeout(this.resizeTimeoutId);
-        this.resizeTimeoutId = setTimeout(doneResizing, 500);
+        this.resizeTimeoutId = setTimeout(doneResizing, 200);
     });
 
     function doneResizing() {
         if ($window.width() < 768) {
             $body.addClass('thin-mode');
-            $navList.attr('aria-hidden', 'true');
+            $navList.attr('aria-hidden', 'true').hide();
         } else {
             $body.removeClass('thin-mode');
-            $navList.removeAttr('aria-hidden').css({ display: 'block' });
+            $navList.removeAttr('aria-hidden').show();
         }
     }
     $(doneResizing);  // Call once when done loading the page to initialize.
