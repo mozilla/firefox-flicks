@@ -5,9 +5,9 @@ from flicks.videos import views
 urlpatterns = patterns('',
     url(r'^submit/$', views.submit, name='flicks.videos.submit'),
 
-    # Archive pages
-    url(r'^(?P<video_id>\d+)$', views.details,
-        name='flicks.videos.details'),
+    # 2012 Archive pages
+    url(r'^(?P<video_id>\d+)$', views.details_2012,
+        name='flicks.videos.2012.details'),
     url(r'^noir/$', views.promo_video_noir,
         name='flicks.videos.promo_video_noir'),
     url(r'^dance/$', views.promo_video_dance,

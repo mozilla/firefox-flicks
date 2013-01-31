@@ -4,9 +4,12 @@ from commonware.response.decorators import xframe_sameorigin
 from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import promo_video_shortlink
-from flicks.videos.models import Video
+from flicks.videos.models import Video2012
 from flicks.videos.util import vidly_embed_code
 from flicks.users.decorators import profile_required
+
+
+# 2013 Contest
 
 
 @profile_required
@@ -15,10 +18,18 @@ def submit(request):
     return render(request, 'videos/submit.html')
 
 
-def details(request, video_id=None):
+def recent(request):
+    """Recent videos page."""
+    return render(request, 'videos/recent.html', {'page_type': 'archive'})
+
+
+# 2012 Archive
+
+
+def details_2012(request, video_id=None):
     """Landing page for video details."""
-    video = get_object_or_404(Video, pk=video_id, state='complete')
-    return render(request, 'videos/details.html', {'video': video})
+    video = get_object_or_404(Video2012, pk=video_id, state='complete')
+    return render(request, 'videos/2012/details.html', {'video': video})
 
 
 def promo_video_noir(request):
@@ -33,7 +44,7 @@ def promo_video_noir(request):
              page_type='videos',
              video_embed=vidly_embed_code(promo_video_shortlink('noir'),
                                           width='100%', height=337))
-    return render(request, 'videos/promo.html', d)
+    return render(request, 'videos/2012/promo.html', d)
 
 
 def promo_video_dance(request):
@@ -48,7 +59,7 @@ def promo_video_dance(request):
              page_type='videos',
              video_embed=vidly_embed_code(promo_video_shortlink('dance'),
                                           width='100%', height=337))
-    return render(request, 'videos/promo.html', d)
+    return render(request, 'videos/2012/promo.html', d)
 
 
 def promo_video_twilight(request):
@@ -61,9 +72,4 @@ def promo_video_twilight(request):
              page_type='videos',
              video_embed=vidly_embed_code(promo_video_shortlink('twilight'),
                                           width='100%', height=337))
-    return render(request, 'videos/promo.html', d)
-
-
-def recent(request):
-    """Recent videos page."""
-    return render(request, 'videos/recent.html', {'page_type': 'archive'})
+    return render(request, 'videos/2012/promo.html', d)

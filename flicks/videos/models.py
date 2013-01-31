@@ -49,7 +49,7 @@ WINNER_CATEGORY_TEXT = {
 }
 
 
-class Video(models.Model, CachingMixin):
+class Video2012(models.Model, CachingMixin):
     # L10n: Title refers to the title of a video.
     title = models.CharField(max_length=100, blank=False,
                              verbose_name=_lazy(u'Title'))
@@ -101,7 +101,7 @@ class Video(models.Model, CachingMixin):
 
 class Award(models.Model, CachingMixin):
     """Model for contest winners."""
-    video = models.ForeignKey(Video, blank=True, null=True)
+    video = models.ForeignKey(Video2012, blank=True, null=True)
     preview = models.ImageField(blank=True, upload_to=settings.PREVIEW_PATH,
                                 max_length=settings.MAX_FILEPATH_LENGTH)
     category = models.CharField(max_length=50, blank=True,

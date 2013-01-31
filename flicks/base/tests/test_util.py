@@ -6,8 +6,8 @@ from nose.tools import eq_
 from flicks.base.tests import TestCase
 from flicks.base.util import (absolutify, get_object_or_none,
                               promo_video_shortlink, redirect)
-from flicks.videos.models import Video
-from flicks.videos.tests import VideoFactory
+from flicks.videos.models import Video2012
+from flicks.videos.tests import Video2012Factory
 
 
 @patch.object(settings, 'SITE_URL', 'http://test.com')
@@ -40,20 +40,20 @@ class TestRedirect(TestCase):
 class TestGetObjectOrNone(TestCase):
     def test_does_not_exist(self):
         """Return None if no matching video exists."""
-        value = get_object_or_none(Video, title='Does not exist')
+        value = get_object_or_none(Video2012, title='Does not exist')
         eq_(value, None)
 
     def test_multiple_objects_returned(self):
         """Return None if multiple objects are returned."""
-        VideoFactory.create(title='multiple')
-        VideoFactory.create(title='multiple')
-        value = get_object_or_none(Video, title='multiple')
+        Video2012Factory.create(title='multiple')
+        Video2012Factory.create(title='multiple')
+        value = get_object_or_none(Video2012, title='multiple')
         eq_(value, None)
 
     def test_exists(self):
         """If no exceptions occur, return the matched object."""
-        video = VideoFactory.create(title='exists')
-        value = get_object_or_none(Video, title='exists')
+        video = Video2012Factory.create(title='exists')
+        value = get_object_or_none(Video2012, title='exists')
         eq_(value, video)
 
 

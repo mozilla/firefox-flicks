@@ -6,7 +6,7 @@ import jinja2
 def vidly_embed_code(shortlink, width=600, height=337):
     """Return embed HTML for a vid.ly video."""
     poster = 'https://d3fenhwk93s16g.cloudfront.net/%s/poster.jpg' % shortlink
-    html = render_to_string('videos/vidly_embed.html', {
+    html = render_to_string('videos/2012/vidly_embed.html', {
         'shortlink': shortlink,
         'poster': poster,
         'width': width,

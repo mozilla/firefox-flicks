@@ -3,8 +3,8 @@ from factory import Factory
 from flicks.videos import models
 
 
-class VideoFactory(Factory):
-    FACTORY_FOR = models.Video
+class Video2012Factory(Factory):
+    FACTORY_FOR = models.Video2012
 
     title = 'Test'
     description = 'Test description'
