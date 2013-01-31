@@ -287,7 +287,7 @@ a.go:after {
   background: rgba(27,34,38,.9);
   border-top: 2px solid #fff;
   width: 100%;
-  height: 60px;
+  min-height: 60px;
   position: absolute;
   top: 0;
   left: 0;
@@ -301,7 +301,7 @@ a.go:after {
 #head-inner:after {
   content: "";
   display: block;
-  background: url(/media/img/div-shadow.png) center bottom no-repeat;
+  background: url(/media/img/bg-scallop-down.png) center bottom repeat-x;
   width: 100%;
   height: 6px;
   position: absolute;
@@ -320,17 +320,18 @@ a.go:after {
   list-style: none;
 }
 
+/* @Navigation *********/
 #page-nav {
   font: 14px/1 'Open Sans', sans-serif;
   text-transform: uppercase;
   letter-spacing: -.25px;
-  position: absolute;
-  right: 160px;
-  top: 14px;
+  text-align: right;
+  padding-top: 12px;
+  margin: 0 150px 0 200px;
 }
 
 #page-nav li {
-  display: inline;
+  display: inline-block;
   margin-left: 12px;
 }
 
@@ -370,7 +371,6 @@ a.go:after {
 #page-nav .toggle {
   display: none; /* Hidden in non-mobile views */
 }
-
 
 #tabzilla {
   position: absolute;
@@ -476,7 +476,7 @@ a.go:after {
 
 #footer:before {
   content: "";
-  background: url(/media/img/div-shadow-up.png) center top no-repeat;
+  background: url(/media/img/bg-scallop-up.png) center top no-repeat;
   width: 100%;
   height: 6px;
   display: block;
@@ -589,6 +589,10 @@ a.go:after {
   .logo img {
     max-width: 300px;
   }
+  
+  #page-nav {
+    margin-left: 70px;
+  }
 
   #footer .sponsors {
     width: 480px;
@@ -632,9 +636,12 @@ a.go:after {
   }
 
   #page-nav {
+    position: absolute;
     left: 20px;
     z-index: 99;
     width: 32px;
+    margin: 0;
+    text-align: left;
   }
 
   #page-nav .toggle {
