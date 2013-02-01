@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
-{% block page_title %}{{ _('Latest Submissions') }}{% endblock %}
+{% block page_title %}{{ _('2013 gallery') }}{% endblock %}
 
-{% block og_title %}{{ _('Latest Submissions') }}{% endblock %}
+{% block og_title %}{{ _('2013 gallery') }}{% endblock %}
 {% block og_type %}article{% endblock %}
 {% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}
 
@@ -11,51 +11,28 @@
   {{ css('archive_css') }}
 {% endblock %}
 
+{% block site_js %}
+  {{ super() }}
+  {{ js('gallery_js') }}
+{% endblock %}
+
 {% block content %}
   <div class="section wrap">
-    <h1 class="page-title">Page Title</h1>
+    <h1 class="page-title">{{ _('Welcome to the<br> Firefox Flicks 2013 gallery') }}</h1>
     <div class="section-intro">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-      ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit
-      in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-      
-      <div class="samples">
-        <ul class="entry-list">
-          <li class="entry">
-            <a href="/video/ID" class="video-play" data-vimeo-id="57627458">
-              <img src="{{ static('img/home/vidthumb-fenwick.jpg') }}" alt="" class="thumbnail">
-              <hgroup>
-                <h2>Example One</h2>
-              </hgroup>
-            </a>
-          </li>
-          <li class="entry">
-            <a href="/video/ID" class="video-play" data-vimeo-id="57627458">
-              <img src="{{ static('img/home/vidthumb-weird.jpg') }}" alt="" class="thumbnail">
-              <hgroup>
-                <h2>Example Two</h2>
-              </hgroup>
-            </a>
-          </li>
-          <li class="entry">
-            <a href="/video/ID" class="video-play" data-vimeo-id="57627458">
-              <img src="{{ static('img/home/vidthumb-paranoid.jpg') }}" alt="" class="thumbnail">
-              <hgroup>
-                <h2>Example Three</h2>
-              </hgroup>
-            </a>
-          </li>
-        </ul>
-      </div>
- 
+      <p>
+      {% trans %}
+        This year we're asking filmmakers and Firefox fans to inspire 
+        others to get mobilized by telling the world about the power and 
+        potential of mobile. Have a look at the entries and be sure to 
+        share you favorites with your friends.
+      {% endtrans %}
+      </p>
     </div>
     
-    <h2 class="section-title">2013 Submissions</h2>
     <ul class="entry-list">
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-falling.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>Video Title</h2>
@@ -69,7 +46,7 @@
         <p>23 votes</p>
       </li>
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-hero.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>Twenty Years to Midnight</h2>
@@ -83,7 +60,7 @@
         <p>77 votes</p>
       </li>
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-squares.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>Troglodytes Aedon</h2>
@@ -97,7 +74,7 @@
       </li>
 
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-weird.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>Return to the Pyramids of Androzani - Part 3: Mummy Dearest</h2>
@@ -111,7 +88,7 @@
         <p>1 vote</p>
       </li>
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-fenwick.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>Return to the Pyramids of Androzani - Part 2: Anubis' Colony</h2>
@@ -124,7 +101,7 @@
         <p>Submitted <time datetime="2013-01-21">January 20, 2013</time></p>
       </li>
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-hero.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>Eggshells</h2>
@@ -139,7 +116,7 @@
       </li>
 
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-paranoid.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>Return to the Pyramids of Androzani - Part 1: Asp and Ye Shall Recieve</h2>
@@ -153,7 +130,7 @@
         <p>13 votes</p>
       </li>
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-falling.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>Hermitology</h2>
@@ -167,7 +144,7 @@
         <p>601 votes</p>
       </li>
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-weird.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>The Kraken's Revenge</h2>
@@ -182,7 +159,7 @@
       </li>
 
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-fenwick.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>Bagashin</h2>
@@ -196,7 +173,7 @@
         <p>17 votes</p>
       </li>
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-squares.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>Tooth and Claw</h2>
@@ -209,7 +186,7 @@
         <p>Submitted <time datetime="2013-01-21">January 11, 2013</time></p>
       </li>
       <li class="entry">
-        <a href="/video/ID" class="video-play">
+        <a href="/video/ID">
           <img src="{{ static('img/home/vidthumb-paranoid.jpg') }}" alt="" class="thumbnail">
           <hgroup>
             <h2>The Plunge</h2>
@@ -239,6 +216,43 @@
         <li class="next"><a href="/4">Next page</a></li>
       </ol>
     </div>
+    
+    <aside id="trailers" class="samples">
+      <h2>{{ _('Flicks trailers') }}</h2>
+      <p>
+      {% trans %}
+        If you're thinking about entering, you can also watch our promos 
+        to get inspired and learn more about making your winning flick.
+      {% endtrans %}
+      </p>
+    
+      <ul class="entry-list">
+        <li class="entry">
+          <a href="/video/ID" class="video-play" data-vimeo-id="57743653">
+            <img src="{{ static('img/home/vidthumb-fenwick.jpg') }}" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Example One</h2>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="/video/ID" class="video-play" data-vimeo-id="57743653">
+            <img src="{{ static('img/home/vidthumb-weird.jpg') }}" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Example Two</h2>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="/video/ID" class="video-play" data-vimeo-id="57743653">
+            <img src="{{ static('img/home/vidthumb-paranoid.jpg') }}" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Example Three</h2>
+            </hgroup>
+          </a>
+        </li>
+      </ul>
+    </aside>
 
   </div>
 {% endblock %}
