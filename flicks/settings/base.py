@@ -194,9 +194,6 @@ MINIFY_BUNDLES = {
         'persona_js': (
             'js/persona.js',
         ),
-        'gallery_js': (
-            'js/gallery.js',
-        ),
     }
 }
 

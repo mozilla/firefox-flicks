@@ -96,17 +96,6 @@
         });
     });
 
-    // Load videos in a full-page modal
-    $("a.video-play").click(function(e) {
-        e.preventDefault();
-        createVimeoModal(this, $(this).data('vimeoId'));
-    });
-
-    function createVimeoModal(origin, videoId) {
-        var content = '<iframe id="video" src="https://player.vimeo.com/video/'+ videoId +'?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1" width="600" height="338" frameborder="0"></iframe>';
-        return flicks.createModal(origin, content);
-    }
-
     // Launch video submission modal when the submit link is clicked.
     var SUBMIT_URL = '/video/submit/';
     $document.on('click', '.submit', function(e) {

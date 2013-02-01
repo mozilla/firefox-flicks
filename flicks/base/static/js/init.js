@@ -9,6 +9,7 @@
     // Add a class to use as a style hook when JavaScript is available
     $body.addClass('js');
 
+
     // Trigger the .thin-mode class on <body> when the screen is thinner than
     // 768 pixels.
     $window.resize(function() {
@@ -27,6 +28,7 @@
     }
     $(doneResizing);  // Call once when done loading the page to initialize.
 
+
     // Show/hide the navigation in small viewports
     $document.on('click', 'body.thin-mode #page-nav .toggle', expandPageNav);
     $document.on('click', 'body.thin-mode .toggle.open', collapsePageNav);
@@ -42,19 +44,23 @@
         $("#page-nav .toggle").removeClass("open");
     }
 
+
     // Dummy console for IE7
     if (window.console === undefined) window.console = {log: function() {}};
+
 
     // Submit on locale selector choice
     $('form.languages select').change(function(){
         this.form.submit();
     });
 
+
     // Load external links in new tab/window
     $('a[rel="external"]').click(function(e){
         e.preventDefault();
         window.open(this.href);
     });
+
 
     // Store common functions on flicks global.
     var $strings = $('#strings');
@@ -105,6 +111,17 @@
     $document.on('keyup', function(e) {
         if (e.keyCode === 27) { // esc
             flicks.closeModal();
+        }
+    });
+
+
+    // Load videos in a full-page modal
+    $('a.video-play').click(function(e) {
+        var vimeoId = $(this).data('vimeoId');
+        if (vimeoId !== undefined) {
+            e.preventDefault();
+            var content = '<iframe id="video" src="https://player.vimeo.com/video/'+ vimeoId +'?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1" width="600" height="338" frameborder="0"></iframe>';
+            return flicks.createModal(this, content);
         }
     });
 })(jQuery);
