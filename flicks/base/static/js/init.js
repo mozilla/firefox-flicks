@@ -85,12 +85,13 @@
             );
 
             // Add it to the page.
-            $('body').addClass("noscroll").append(html);
-            $("#modal .inner").append(content);
+            $('body').addClass('noscroll').append(html);
+            $('#modal .inner').append(content);
+            $('#modal').fadeIn(100);
             $(origin).addClass('modalOrigin');
         },
         'closeModal': function() {
-            $('#modal').remove();
+            $('#modal').fadeOut(100, function(){ $(this).remove() } );
             $('body').removeClass('noscroll');
             $('.modalOrigin').focus().remove('modalOrigin');
         },
@@ -105,7 +106,7 @@
 
     // Close modal on clicking close button or background.
     $document.on('click', '#modal .close', flicks.closeModal);
-    $document.on('click', "#modal, #modal .inner", flicks.closeModal);
+    $document.on('click', '#modal', flicks.closeModal);
 
     // Close on escape
     $document.on('keyup', function(e) {

@@ -212,6 +212,8 @@ MINIFY_BUNDLES = {
         ),
         'home_js': (
             'js/libs/jquery.waypoints.min.js',
+            'js/libs/jquery.cycle.js',
+            'js/libs/slideshow.js',
             'js/home.js',
         ),
         'persona_js': (

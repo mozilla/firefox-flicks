@@ -17,7 +17,7 @@
 
   <section id="intro" class="section alt">
     <div class="wrap">
-      <h1 class="section-title">{{ _('You\'re the director.<wbr> Mobile is the star.') }}</h1>
+      <h1 class="section-title">{{ _('You&#8217;re the director. Mobile is the star.') }}</h1>
       <div class="section-intro">
         <p>
         {% trans %}
@@ -28,8 +28,13 @@
         </p>
       </div>
 
-      <div id="slideshow" class="js">
-        <ol class="slides">
+      <div id="slideshow">
+        <ol id="slide-control">
+          <li id="slide-control-one" class="on"><a href="#slide-one">{{ _('Get inspired!') }}</a></li>
+          <li id="slide-control-two"><a href="#slide-two">{{ _('Two') }}</a></li>
+          <li id="slide-control-three"><a href="#slide-three">{{ _('Three') }}</a></li>
+        </ol>
+        <ol id="slides">
           <li id="slide-one" class="slide">
             <img src="{{ static('img/home/promo-winners2012.jpg') }}" alt="">
             <div class="slide-desc">
@@ -41,6 +46,31 @@
               </p>
               <p class="act"><a href="#winners2012" class="go scroll">{{ _('See the 2012 winners') }}</a></p>
             </div>
+
+          </li>
+          <li id="slide-two" class="slide">
+            <img src="{{ static('img/home/promo-winners2012.jpg') }}" alt="">
+            <div class="slide-desc">
+              <h2>{{ _('The Second Promo') }}</h2>
+              <p>
+              {% trans %}
+                Some blurb about this promo.
+              {% endtrans %}
+              </p>
+              <p class="act"><a href="#" class="go">{{ _('A call to action') }}</a></p>
+            </div>
+          </li>
+          <li id="slide-three" class="slide">
+            <img src="{{ static('img/home/promo-winners2012.jpg') }}" alt="">
+            <div class="slide-desc">
+              <h2>{{ _('The Third Promo') }}</h2>
+              <p>
+              {% trans %}
+                Some blurb about this promo. This one is a bit longer.
+              {% endtrans %}
+              </p>
+              <p class="act"><a href="#" class="go">{{ _('A call to action') }}</a></p>
+            </div>
           </li>
         </ol>
       </div>
@@ -49,12 +79,11 @@
         <ul>
           <li>
             <h3>{{ _('Get seen by celebrity judges') }}</h3>
-            <p>{{ _('Coming soon') }}</p>
+            <p><a href="#judges" class="go scroll">{{ _('Meet our all-star cast') }}</a></p>
           </li>
-          <li>
-            <h3>{{ _('Submissions open February 13') }}</h3>
-            <p><a href="{{ url('flicks.base.faq') }}" class="go">{{ _('Learn more in the FAQ') }}</a></p>
-            <p><a href="#" class="go submit">{{ _('Submit') }}</a></p>
+          <li class="submit">
+            <h3>{{ _('Submit your flick today') }}</h3>
+            <p><a href="#" class="go button">{{ _('Start here') }}</a></p>
           </li>
           <li>
             <h3>{{ _('Start thinking about your flick') }}</h3>
@@ -72,7 +101,7 @@
         <p>
         {% trans %}
           It's a video contest. It's an opportunity to reach millions of Firefox users and
-          inspire them to get mobilized. It's a chance to win <a href="#prizes" class="scroll">great prizes</a>
+          inspire them to get mobilized. It’s a chance to win <a href="#prizes" class="scroll">great prizes</a>
           and be seen by <a href="#judges" class="scroll">celebrity judges</a> who can make
           your moviemaking dreams come true.
         {% endtrans %}
@@ -80,11 +109,6 @@
       </div>
 
       <div class="section-detail">
-        <figure class="video">
-          <a href="https://vimeo.com/57743653" class="video-play" title="{{ _('Play a short introduction video') }}" data-vimeo-id="57743653">
-            <img src="{{ static('img/home/vidthumb-promo.jpg') }}" alt="{{ _('Play a short introduction video') }}" width="240" height="135">
-          </a>
-        </figure>
         <p>
         {% trans %}
           This year there's only one category, so whether your flick is funny or serious,
@@ -92,22 +116,22 @@
           and get people excited about the future of the Web on mobile.
         {% endtrans %}
         </p>
-        <p><a href="{{ link_brief }}" class="go" rel="external">{{ _('Read the creative brief to get started') }}</a></p>
+
+        <h3>{{ _('Use the materials below to help you make your flick.') }}</h3>
+        <ul class="info">
+          <li><a href="{{ link_faq }}" class="go">{{ _('See the FAQ') }}</a></li>
+          <li><a href="{{ link_brief }}" class="go" rel="external">{{ _('Read the creative brief') }}</a></li>
+          <li><a href="{{ link_assets }}" class="go" rel="external">{{ _('Download the creative assets') }}</a></li>
+        </ul>
       </div>
 
-      <div class="actions">
-        <h3>
-          <span>{{ _('What is Firefox OS?') }}</span>
-          <span>{{ _('How do I enter?') }}</span>
-          <span>{{ _('What is the deadline?') }}</span>
-        </h3>
+      <div class="intro-videos">
+        [videos go here]
         <p>
         {% trans %}
-          Learn more about Firefox OS, the open, Web-based operating system for mobile devices,
-          and get answers to all your other questions.
+          See what last year's winners have to say about their experience and get advice on making your flick stand out.
         {% endtrans %}
         </p>
-        <p><a href="{{ url('flicks.base.faq') }}" class="button">{{ _('Read the FAQ') }}</a></p>
       </div>
 
     </div>
@@ -210,44 +234,104 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          We will be announcing our illustrious panel of celebrity judges soon.
-          Please check back to find out who will see your flick and help us
-          choose this year's winner.
+          Get to know our illustrious panel of celebrity judges &ndash; led by actor,
+          director, producer and activist Edward Norton &ndash; who will see your flick
+          and help us choose this year’s winner.
+        {% endtrans %}
+        </p>
+
+        <p>
+        {% trans %}
+          Click on each photo for a full bio.
         {% endtrans %}
         </p>
       </div>
 
       <ul class="judges">
-        <li class="judge">
-          <img src="{{ static('img/judges/blankm.jpg') }}" alt="" class="photo">
-          <hgroup>
-            <h2>{{ _('To Be Announced') }}</h2>
-          </hgroup>
+        <li id="enorton" class="judge vcard">
+          <a href="/judges#enorton" class="bio">
+            <img src="{{ static('img/judges/judge-enorton.jpg') }}" alt="" class="photo">
+            <hgroup>
+              <h2 class="fn">Edward Norton</h2>
+              <h3 class="role">{{ _('Actor, Director, Producer, Activist') }}</h3>
+            </hgroup>
+          </a>
+          <figure class="quote">
+            <blockquote>
+              <p>
+              &ldquo;
+              {% trans %}
+                What I think is really cool about Firefox Flicks is that it marries that
+                core philosophy of liberating people to say what they want to say and connects
+                it to something that's happening in the arts and film.
+              {% endtrans %}
+              &rdquo;
+              </p>
+            </blockquote>
+            <figcaption>
+              &mdash; <cite>Edward Norton</cite>
+            </figcaption>
+          </figure>
         </li>
-        <li class="judge">
-          <img src="{{ static('img/judges/blankf.jpg') }}" alt="" class="photo">
-          <hgroup>
-            <h2>{{ _('To Be Announced') }}</h2>
-          </hgroup>
+
+        <li id="srobertson" class="judge vcard">
+          <a href="/judges#srobertson" class="bio">
+            <img src="{{ static('img/judges/judge-srobertson.jpg') }}" alt="" class="photo">
+            <hgroup>
+              <h2 class="fn">Shauna Robertson</h2>
+              <h3 class="role">{{ _('Producer') }}</h3>
+            </hgroup>
+          </a>
+          <figure class="quote">
+            <blockquote>
+              <p>
+              &ldquo;
+              {% trans %}
+                I'm a firm believer that if you have the talent and you work hard all you
+                need to succeed is the right forum. That's what excites me about Firefox Flicks.
+                It gives aspiring film students and filmmakers a forum that showcases their
+                talent to millions of people around the globe and gives them access to folks
+                that can change the trajectory of their careers.
+              {% endtrans %}
+              &rdquo;
+              </p>
+            </blockquote>
+            <figcaption>
+              &mdash; <cite>Shauna Robertson</cite>
+            </figcaption>
+          </figure>
         </li>
-        <li class="judge">
-          <img src="{{ static('img/judges/blankm.jpg') }}" alt="" class="photo">
-          <hgroup>
-            <h2>{{ _('To Be Announced') }}</h2>
-          </hgroup>
+
+        <li id="csamuelson" class="judge vcard">
+          <a href="/judges#csamuelson" class="bio">
+            <img src="{{ static('img/judges/judge-csamuelson.jpg') }}" alt="" class="photo">
+            <hgroup>
+              <h2 class="fn">Couper Samuelson</h2>
+              <h3 class="role">{{ _('Producer') }}</h3>
+            </hgroup>
+          </a>
         </li>
-        <li class="judge">
-          <img src="{{ static('img/judges/blankf.jpg') }}" alt="" class="photo">
-          <hgroup>
-            <h2>{{ _('To Be Announced') }}</h2>
-          </hgroup>
+
+        <li id="rharvey" class="judge vcard">
+          <a href="/judges#rharvey" class="bio">
+            <img src="{{ static('img/judges/judge-rharvey.jpg') }}" alt="" class="photo">
+            <hgroup>
+              <h2 class="fn">Robert "Bob" Harvey</h2>
+              <h3 class="role">{{ _('<abbr title="Executive Vice President">EVP</abbr>, Global Sales and Marketing, Panavision') }}</h3>
+            </hgroup>
+          </a>
         </li>
-        <li class="judge">
-          <img src="{{ static('img/judges/blankm.jpg') }}" alt="" class="photo">
-          <hgroup>
-            <h2>{{ _('To Be Announced') }}</h2>
-          </hgroup>
+
+        <li id="fleonard" class="judge vcard">
+          <a href="/judges#fleonard" class="bio">
+            <img src="{{ static('img/judges/judge-fleonard.jpg') }}" alt="" class="photo">
+            <hgroup>
+              <h2 class="fn">Franklin Leonard</h2>
+              <h3 class="role">{{ _('Founder, Black List') }}</h3>
+            </hgroup>
+          </a>
         </li>
+
         <li class="judge">
           <img src="{{ static('img/judges/blankf.jpg') }}" alt="" class="photo">
           <hgroup>
@@ -255,6 +339,8 @@
           </hgroup>
         </li>
       </ul>
+
+
 
     </div>
   </section>
@@ -265,23 +351,32 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          There are a number of ways to win throughout the competition. Get your
-          flick in early for a chance at one of our Early Entry Awards. The top
-          three entries from each early deadline automatically move on to the finals
-          to be judged by our celebrity panel. And just for entering, you'll get
-          a little something from us to say thanks.
-        {% endtrans %}
-        </p>
-
-        <p>
-        {% trans %}
-          Here's a more detailed look at what you can win, but check back for
-          prize updates throughout the contest.
+          There are many chances and ways to win throughout the competition. That
+          means you're not just in the running for the Grand Prize, but you could
+          win a Regional Prize, People's Choice Award and Early Entry Award as well.
+          Plus, the top three entries from each film festival automatically move on
+          to the finals and a chance at the top prize (so get your flick in early).
+          And just for entering, everyone gets a little something from us to say thanks.
         {% endtrans %}
         </p>
       </div>
 
       <section class="prizes">
+        <p>
+        {% trans %}
+          Here's a more detailed look at what you can win, but check back for prize
+          updates throughout the contest.
+        {% endtrans %}
+        </p>
+        <div class="prize grand">
+          <h2>{{ _('Grand Prize') }}</h2>
+          <p>
+          {% trans %}
+            The winner (or winning team) will fly to Los Angeles to work with producer
+            (and Flicks judge) Couper Samuelson and representatives from Panavision to
+            professionally produce their winning entry using professional equipment.
+          {% endtrans %}
+        </div>
 
         <div class="prize regional">
           <h2>{{ _('Regional Prizes') }}</h2>
@@ -289,7 +384,7 @@
           {% trans %}
             A $5,000 top prize and $2,500 for the runner-up will go to the top two
             flicks from each of the contest regions: Latin America, North America,
-            Europe and Asia.
+            Asia Pacific and Europe, the Middle East and Africa.
           {% endtrans %}
           </p>
         </div>
@@ -298,9 +393,9 @@
           <h2>{{ _('People\'s Choice Awards') }}</h2>
           <p>
           {% trans %}
-            All flicks submitted before the deadline are eligible. The 3 that
-            earn the most votes in August win a Firefox Flicks swag bag and will
-            be posted on our channels for millions to see.
+            All flicks submitted by July 31 are eligible. The 3 that earn the most
+            votes in August win a Firefox Flicks swag bag and will be posted on our
+            channels for millions to see.
           {% endtrans %}
           </p>
         </div>
@@ -310,9 +405,15 @@
           <p>
           {% trans %}
             There will be multiple chances to win $1,000 for submitting your flick
-            early. Check back on February 13 for dates and more information.
+            early. Enter in time for the film festival deadlines listed below to be
+            eligible:
           {% endtrans %}
           </p>
+          <ul class="prose">
+            <li><time datetime="2013-04-03">{{ _('April 3') }}</time> &ndash; {{ _('BAFICI, Buenos Aires, Argentina') }}</li>
+            <li><time datetime="2013-07-05">{{ _('July 5') }}</time> &ndash; {{ _('Nowe Horyzonty, Wrocław, Poland') }}</li>
+            <li><time datetime="2013-07-05">{{ _('July 5') }}</time> &ndash; {{ _('Cinemalaya, Manila, Philippines') }}</li>
+          </ul>
         </div>
 
       </section>

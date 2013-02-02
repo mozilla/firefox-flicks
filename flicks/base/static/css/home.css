@@ -31,6 +31,7 @@
   text-align: center;
   margin: 0 auto;
 }
+
 .actions:after {
   content: "";
   display: block;
@@ -54,12 +55,21 @@
   font: 14px/1.2 "Open Sans", Helvetica, Arial, sans-serif;
 }
 
+.actions .submit {
+  width: 30%;
+  margin: 0 1.5%;
+}
+
+.actions .submit h3 {
+  font-size: 22px;
+}
+
 .actions .soon {
   color: #999;
 }
 
 /*** @Slides *********/
-#slideshow.js {
+.js #slideshow {
   position: relative;
   height: 300px;
   margin: 0 0 2em;
@@ -79,41 +89,84 @@
   border-bottom: 1px solid #dbd8cd;
 }
 
-#slideshow.js .slide {
+.js #slideshow .slide {
+  display: none;
+  height: 300px;
   position: relative;
-  margin: 0;
+  margin: 0 0 20px;
   padding: 0;
   border: 0;
   overflow: hidden;
 }
 
-#slideshow.js .slide-desc {
+.js #slideshow #slide-one {
+  display: block;
+}
+
+.js .slide-desc {
   position: absolute;
   top: -50px;
   left: 30px;
-  width: 260px;
-  min-height: 210px;
-  text-align: center;
-  padding: 80px 40px 20px;
+  width: 280px;
+  text-align: left;
+  padding: 80px 30px 20px;
   background-color: #444;
   background-color: rgba(0,0,0,.75);
   font-size: 18px;
   line-height: 1.25;
   color: #fff;
   text-shadow: none;
-  border-radius: 50%;
 }
 
-#slideshow.js .slide-desc h2 {
+.js .slide-desc h2 {
   text-shadow: none;
 }
 
-#slideshow.js .slide-desc a {
+.js .slide-desc a {
   color: #1f9ee5;
 }
 
 #slideshow .slide-desc .act {
   clear: both;
+}
+
+#slide-control li {
+  display: inline-block;
+  margin: 0 5px 1em;
+}
+
+.js #slide-control li {
+  margin: 0 6px;
+}
+
+.js #slide-control {
+  position: absolute;
+  left: 50%;
+  bottom: -22px;
+  width: 200px;
+  margin-left: -100px;
+  z-index: 99;
+  text-align: center;
+}
+
+.js #slide-control a {
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  text-indent: -999em;
+  overflow: hidden;
+  background: #ccc;
+}
+
+.js #slide-control a:hover,
+.js #slide-control a:focus,
+.js #slide-control a:active {
+  background: #bbb;
+}
+
+.js #slide-control li.on a {
+  background: #aaa;
 }
 
 /* @About *********/
@@ -126,47 +179,42 @@
 }
 
 #about .section-detail {
-  width: 320px;
-  position: relative;
-  padding-left: 320px;
+  width: 660px;
+  text-align: center;
 }
 
-#about .section-detail .video {
-  width: 240px;
-  padding-bottom: 8px;
-  background: url(/static/img/shadow-240.png) center bottom no-repeat;
+#about .section-detail h3 {
+  font-family: Vollkorn, Georgia, "Heiti TC", "LiHei Pro", "微軟正黑體", "WenQuanYi - Micro Hei", sans-serif;
+}
+
+#about .info {
+  list-style: none;
+  overflow: hidden;
+  margin: 0 -80px 2em;
+}
+
+#about .info li {
+  display: inline-block;
+  width: 30%;
+  margin: 0 1.49% 1em;
   float: left;
-  margin-left: -300px;
 }
 
-#about .section-detail .video img {
-  display: block;
+#about .intro-videos {
+  width: 660px;
   margin: 0 auto;
 }
 
-#about .actions {
-  width: 660px;
+#about .intro-videos p {
+  font-weight: bold;
+  text-align: center;
 }
 
-#about .actions h3 {
-  overflow: hidden;
-}
-
-#about .actions h3 span {
-  display: inline-block;
-  margin: 0 10px .25em;
-}
-
-#about .actions p {
-  width: 460px;
-  margin: 0 auto 1em;
-}
 
 /* @Winners from 2012 *********/
 #winners2012 .section-intro {
   width: 620px;
 }
-
 
 /* @Judges *********/
 #judges {
@@ -191,10 +239,15 @@
 }
 
 .judge {
-  width: 140px;
+  width: 135px;
+  padding-left: 5px;
   margin: 0 10px 2em;
   float: left;
   font-family: "Open Sans", sans-serif;
+}
+
+.judge .quote {
+  display: none;
 }
 
 .judge h2 {
@@ -210,51 +263,75 @@
   font-weight: normal;
 }
 
+.judge a {
+  color: #212a2f;
+}
+
 .judge .photo {
   width: 130px;
+  margin: 0 0 .5em -5px;
   border: 5px solid #fff;
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
 }
 
-.quote {
+#judge-quote {
   clear: both;
   border-top: 1px solid #ccc;
   width: 300px;
+  height: 8em;
   margin: 20px auto 0;
   padding: 20px 0 0;
   text-align: center;
-}
-
-.quote blockquote {
-  margin: 0 -50px;
   font: italic 14px/1.3 "Open Sans", sans-serif;
 }
 
-.quote cite {
-  white-space: nowrap;
-  margin-left: 1em;
+#judge-quote .quote {
+  margin: 0 -50px;
+}
+
+.quote figcaption {
+  margin: -1em 0 1em;
   font-style: normal;
   font-weight: bold;
+  text-align: right;
+}
+
+.quote cite {
+  font-style: normal;
+}
+
+#modal .judge-bio {
+  max-width: 620px;
+  padding: 30px;
+  margin: 0 auto;
+  background: rgba(0,0,0,.5);
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+  font: 14px "Open Sans", sans-serif;
+  border: 0;
+}
+
+#modal .judge-bio h2 {
+  font-size: 20px;
 }
 
 /* @Prizes *********/
 .prizes {
+  text-align: center;
   overflow: auto;
   margin: 2em -10px 0;
 }
 
 .prize {
-  text-align: center;
   width: 300px;
   margin: 0 10px 2em;
   float: left;
 }
 
-.prize h2 {
+.prizes h2 {
   font-size: 22px;
 }
 
-.prize p {
+.prizes p {
   font-family: "Open Sans", sans-serif;
   margin: 0 10px 1em;
 }
@@ -275,11 +352,16 @@
   width: 460px;
   float: none;
   clear: both;
-  margin: 1em auto 3em;
+  margin: 2em auto 3em;
 }
 
 .prize.grand h2 {
   font-size: 28px;
+}
+
+.prize ul.prose {
+  text-align: left;
+  font: 14px "Open Sans", sans-serif;
 }
 
 /* @Rules *********/
@@ -422,10 +504,19 @@
     float: none;
   }
 
-  .actions li {
+  .actions li,
+  .actions .submit {
     float: none;
-    width: 190px;
+    width: auto;
     margin: 0 auto 1.6em;
+  }
+
+  .judges .judge:nth-child(3n+1) {
+    clear: none;
+  }
+
+  .judges .judge:nth-child(2n+1) {
+    clear: left;
   }
 
   #about {
@@ -438,6 +529,10 @@
 
   #rules {
     background-position: 150px -340px, 190px 140%, -370px 420px;
+  }
+
+  #modal .judge-bio {
+    max-width: 300px;
   }
 
 }
@@ -459,6 +554,18 @@
 
   #rules {
     background-position: 290px -430px, 320px 165%, -320px 220px;
+  }
+
+  .judges .judge:nth-child(3n+1) {
+    clear: left;
+  }
+
+  .judges .judge:nth-child(2n+1) {
+    clear: none;
+  }
+
+  #modal .judge-bio {
+    max-width: 400px;
   }
 
 }

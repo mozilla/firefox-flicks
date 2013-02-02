@@ -95,6 +95,7 @@
             $(elem).attr('tabindex','100').focus().removeAttr('tabindex');
         });
     });
+    
 
     // Launch video submission modal when the submit link is clicked.
     var SUBMIT_URL = '/video/upload/';
@@ -103,5 +104,42 @@
         flicks.createModal(this, '<iframe class="submit-frame" src="' +
                            SUBMIT_URL + '"></iframe>');
     });
+    
+    // Change judge quotes on hover
+    var quoteWrapper = '<aside id="judge-quote"><figure class="quote"></figure></aside>';
+    $(quoteWrapper).insertAfter('ul.judges');
+
+    $('.judge').each(function(){
+          var quote = $(this).children('.quote').html();
+          $(this).hover(
+              function(){
+                  $('#judge-quote .quote').fadeOut(200,function(){
+                      $(this).html(quote).fadeIn(200);
+                  });
+              },
+              function(){
+                  $('#judge-quote .quote').fadeOut(200);
+              }
+          );
+    });
+    
+    // Open judge bios in a modal
+    $('.judge a.bio').click(function(e){
+        e.preventDefault();
+        var sourcedoc = this.href;
+        var bio = $(this).attr('href').replace(/.*?(#.*)/g, '$1');
+      
+        $.ajax({
+            url: sourcedoc,
+            success: function(data){
+                var content = $(data).find(bio);
+                return flicks.createModal(this, content);
+            },
+            dataType: 'html'
+        });
+
+    });
+
+    
 })(jQuery, window.flicks);
 

@@ -657,6 +657,37 @@ a.go:after {
   outline: 0;
 }
 
+/* Judge bios *********/
+.judge-bio {
+  padding-bottom: 40px;
+  margin-bottom: 50px;
+  border-bottom: 1px solid #ccc;
+}
+
+.judge-bio header:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+.judge-bio h2 {
+  font-size: 24px;
+}
+
+.judge-bio h3 {
+  font-size: 16px;
+  font-style: italic;
+}
+
+.judge-bio .photo {
+  float: left;
+  border: 5px solid #fff;
+  margin: 0 20px 20px -5px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
 /* @Pagination *********/
 .pagination {
   font: 14px/1.1 "Open Sans", sans-serif;
@@ -759,13 +790,20 @@ body.noscroll .fixed #head-inner {
   left: 0;
   z-index: 9999;
   overflow: auto;
+  display: none;
 }
 
 #modal .inner {
   width: 80%;
-  margin: 60px auto;
+  margin: 40px auto;
   padding: 40px 0;
   color: #f3f3f3;
+  text-shadow: 0 1px 1px rgba(0,0,0,.95);
+}
+
+#modal h1,
+#modal h2,
+#modal h3 {
   text-shadow: 0 1px 1px rgba(0,0,0,.95);
 }
 
@@ -778,23 +816,24 @@ body.noscroll .fixed #head-inner {
 #modal .close {
   display: inline;
   position: fixed;
+  z-index: 99;
   top: 30px;
   right: 30px;
-  background: #000;
-  border: 1px solid #ccc;
   color: #ccc;
-  font: 1em "Open Sans", sans-serif;
+  font: bold 12px/1 "Open Sans", sans-serif;
   text-transform: uppercase;
-  padding: .2em 10px;
+  padding-right: 22px;
   cursor: pointer;
+  border: 0;
+  background: transparent url(/static/img/closex.png) right center no-repeat;
 }
 
 #modal .close:hover,
 #modal .close:focus {
-  background: #666;
+  text-decoration: underline;
   color: #eee;
-  border-color: #eee;
 }
+
 
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
