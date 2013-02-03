@@ -1,5 +1,5 @@
 # urllib3/response.py
-# Copyright 2008-2011 Andrey Petrov and contributors (see CONTRIBUTORS.txt)
+# Copyright 2008-2012 Andrey Petrov and contributors (see CONTRIBUTORS.txt)
 #
 # This module is part of urllib3 and is released under
 # the MIT License: http://www.opensource.org/licenses/mit-license.php
@@ -8,21 +8,17 @@ import gzip
 import logging
 import zlib
 
+from io import BytesIO
 
-try:
-    from cStringIO import StringIO
-except ImportError:
-    from StringIO import StringIO # pylint: disable-msg=W0404
-
-
-from .exceptions import HTTPError
+from .exceptions import DecodeError
+from .packages.six import string_types as basestring
 
 
 log = logging.getLogger(__name__)
 
 
 def decode_gzip(data):
-    gzipper = gzip.GzipFile(fileobj=StringIO(data))
+    gzipper = gzip.GzipFile(fileobj=BytesIO(data))
     return gzipper.read()
 
 
@@ -71,7 +67,7 @@ class HTTPResponse(object):
         self.strict = strict
 
         self._decode_content = decode_content
-        self._body = None
+        self._body = body if body and isinstance(body, basestring) else None
         self._fp = None
         self._original_response = original_response
 
@@ -81,8 +77,21 @@ class HTTPResponse(object):
         if hasattr(body, 'read'):
             self._fp = body
 
-        if preload_content:
+        if preload_content and not self._body:
             self._body = self.read(decode_content=decode_content)
+
+    def get_redirect_location(self):
+        """
+        Should we redirect and where to?
+
+        :returns: Truthy redirect location string if we got a redirect status
+            code and valid location. ``None`` if redirect status and no
+            location. ``False`` if not a redirect status code.
+        """
+        if self.status in [301, 302, 303, 307]:
+            return self.headers.get('location')
+
+        return False
 
     def release_conn(self):
         if not self._pool or not self._connection:
@@ -98,10 +107,9 @@ class HTTPResponse(object):
             return self._body
 
         if self._fp:
-            return self.read(decode_content=self._decode_content,
-                             cache_content=True)
+            return self.read(cache_content=True)
 
-    def read(self, amt=None, decode_content=True, cache_content=False):
+    def read(self, amt=None, decode_content=None, cache_content=False):
         """
         Similar to :meth:`httplib.HTTPResponse.read`, but with two additional
         parameters: ``decode_content`` and ``cache_content``.
@@ -122,27 +130,29 @@ class HTTPResponse(object):
             after having ``.read()`` the file object. (Overridden if ``amt`` is
             set.)
         """
-        content_encoding = self.headers.get('content-encoding')
+        # Note: content-encoding value should be case-insensitive, per RFC 2616
+        # Section 3.5
+        content_encoding = self.headers.get('content-encoding', '').lower()
         decoder = self.CONTENT_DECODERS.get(content_encoding)
+        if decode_content is None:
+            decode_content = self._decode_content
 
-        data = self._fp and self._fp.read(amt)
+        if self._fp is None:
+            return
 
         try:
-
-            if amt:
-                return data
-
-            if not decode_content or not decoder:
-                if cache_content:
-                    self._body = data
-
-                return data
+            if amt is None:
+                # cStringIO doesn't like amt=None
+                data = self._fp.read()
+            else:
+                return self._fp.read(amt)
 
             try:
-                data = decoder(data)
-            except IOError:
-                raise HTTPError("Received response with content-encoding: %s, but "
-                                "failed to decode it." % content_encoding)
+                if decode_content and decoder:
+                    data = decoder(data)
+            except (IOError, zlib.error):
+                raise DecodeError("Received response with content-encoding: %s, but "
+                                  "failed to decode it." % content_encoding)
 
             if cache_content:
                 self._body = data
@@ -150,12 +160,11 @@ class HTTPResponse(object):
             return data
 
         finally:
-
             if self._original_response and self._original_response.isclosed():
                 self.release_conn()
 
-    @staticmethod
-    def from_httplib(r, **response_kw):
+    @classmethod
+    def from_httplib(ResponseCls, r, **response_kw):
         """
         Given an :class:`httplib.HTTPResponse` instance ``r``, return a
         corresponding :class:`urllib3.response.HTTPResponse` object.
@@ -164,14 +173,28 @@ class HTTPResponse(object):
         with ``original_response=r``.
         """
 
-        return HTTPResponse(body=r,
-                            headers=dict(r.getheaders()),
-                            status=r.status,
-                            version=r.version,
-                            reason=r.reason,
-                            strict=r.strict,
-                            original_response=r,
-                            **response_kw)
+        # Normalize headers between different versions of Python
+        headers = {}
+        for k, v in r.getheaders():
+            # Python 3: Header keys are returned capitalised
+            k = k.lower()
+
+            has_value = headers.get(k)
+            if has_value: # Python 3: Repeating header keys are unmerged.
+                v = ', '.join([has_value, v])
+
+            headers[k] = v
+
+        # HTTPResponse objects in Python 3 don't have a .strict attribute
+        strict = getattr(r, 'strict', 0)
+        return ResponseCls(body=r,
+                           headers=headers,
+                           status=r.status,
+                           version=r.version,
+                           reason=r.reason,
+                           strict=strict,
+                           original_response=r,
+                           **response_kw)
 
     # Backwards-compatibility methods for httplib.HTTPResponse
     def getheaders(self):
