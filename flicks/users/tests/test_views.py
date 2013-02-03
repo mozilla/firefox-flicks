@@ -36,9 +36,9 @@ class TestProfile(TestCase):
     def test_post_valid(self):
         """
         If POSTed with valid values, create a profile and redirect to
-        flicks.videos.submit.
+        flicks.videos.upload.
         """
         response = self._profile('post', full_name='blah', nickname='blah',
                                  country='us', privacy_policy_agree=True)
-        redirects_(response, 'flicks.videos.submit')
+        redirects_(response, 'flicks.videos.upload')
         ok_(UserProfile.objects.filter(user=self.user).exists())

@@ -1,0 +1,33 @@
+{% extends 'bare.html' %}
+
+{% block site_css %}
+  {{ css('upload') }}
+{% endblock %}
+
+{% block site_js %}
+  {{ js('jquery') }}
+  {{ js('upload') }}
+{% endblock %}
+
+{% block body %}
+  <form id="vimeo-file-upload" action="{{ ticket['endpoint_secure'] }}">
+    <input type="file" name="file_data">
+  </form>
+
+  <form id="video-form" method="POST">
+    {{ csrf() }}
+    <div class="video-info">
+      <span class="filename"></span>
+      <a href="#" class="remove">Remove</a>
+    </div>
+    <div class="progress">
+      <div class="bar" style="width: 0%;"></div>
+    </div>
+    <ul class="fields">
+      <li>{{ form.title.label_tag('Title') }} {{ form.title }}</li>
+      <li>{{ form.description.label_tag('Description') }} {{ form.description }}</li>
+    </ul>
+    {{ form.filename }}
+    <button type="submit" disabled>Submit Video</button>
+  </form>
+{% endblock %}

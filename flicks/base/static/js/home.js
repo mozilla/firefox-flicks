@@ -97,7 +97,7 @@
     });
 
     // Launch video submission modal when the submit link is clicked.
-    var SUBMIT_URL = '/video/submit/';
+    var SUBMIT_URL = '/video/upload/';
     $document.on('click', '.submit', function(e) {
         e.preventDefault();
         flicks.createModal(this, '<iframe class="submit-frame" src="' +

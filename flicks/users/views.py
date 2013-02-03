@@ -16,7 +16,7 @@ def profile(request):
         profile = form.save(commit=False)
         profile.user = request.user
         profile.save()
-        return redirect('flicks.videos.submit')
+        return redirect('flicks.videos.upload')
 
     return render(request, 'users/profile.html', {'form': form})
 

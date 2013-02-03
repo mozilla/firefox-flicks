@@ -1,9 +1,11 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from commonware.response.decorators import xframe_sameorigin
 from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import promo_video_shortlink
+from flicks.videos import vimeo
+from flicks.videos.forms import Video2013Form
 from flicks.videos.models import Video2012
 from flicks.videos.util import vidly_embed_code
 from flicks.users.decorators import profile_required
@@ -14,8 +16,34 @@ from flicks.users.decorators import profile_required
 
 @profile_required
 @xframe_sameorigin
-def submit(request):
-    return render(request, 'videos/submit.html')
+def upload(request):
+    ticket = request.session.get('vimeo_ticket', None)
+    form = Video2013Form(request.POST or None)
+    if ticket and request.method == 'POST' and form.is_valid():
+        ticket = vimeo.complete_upload(ticket['id'], request.POST['filename'])
+
+        video = form.save(commit=False)
+        video.user = request.user
+        video.vimeo_id = ticket['video_id']
+        video.save()
+
+        del request.session['vimeo_ticket']
+        return redirect('flicks.videos.upload_complete')
+
+    # Generate an upload token if one doesn't exist or isn't valid.
+    if not ticket or not vimeo.is_ticket_valid(ticket['id']):
+        ticket = vimeo.get_new_ticket()
+        request.session['vimeo_ticket'] = ticket
+
+    return render(request, 'videos/upload.html', {
+        'ticket': ticket,
+        'form': form
+    })
+
+
+@xframe_sameorigin
+def upload_complete(request):
+    return render(request, 'videos/upload_complete.html')
 
 
 def recent(request):

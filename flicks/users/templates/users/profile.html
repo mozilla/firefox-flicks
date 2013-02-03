@@ -5,7 +5,8 @@
 {% block body %}
   <section id="user-profile" class="section alt">
     <div class="wrap">
-      <form action='POST'>
+      <form method='POST'>
+        {{ csrf() }}
         <ul>
           <li>{{ form.full_name.label_tag(_('Full Name')) }} {{ form.full_name }}</li>
           <li>{{ form.nickname.label_tag(_('Nickname')) }} {{ form.nickname }}</li>
@@ -21,6 +22,7 @@
                               _('I agree to the privacy policy.')) }}
           </li>
         </ul>
+        <button type="submit">Create</button>
       </form>
     </div>
   </section>

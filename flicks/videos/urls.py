@@ -3,7 +3,9 @@ from django.conf.urls.defaults import patterns, url
 from flicks.videos import views
 
 urlpatterns = patterns('',
-    url(r'^submit/$', views.submit, name='flicks.videos.submit'),
+    url(r'^upload/$', views.upload, name='flicks.videos.upload'),
+    url(r'^upload/complete/$', views.upload_complete,
+        name='flicks.videos.upload_complete'),
 
     # 2012 Archive pages
     url(r'^(?P<video_id>\d+)$', views.details_2012,

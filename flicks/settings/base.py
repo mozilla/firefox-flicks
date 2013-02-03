@@ -120,8 +120,6 @@ CSP_FONT_SRC = ("'self'",
                 'http://*.mozilla.net',
                 'https://*.mozilla.net',)
 CSP_SCRIPT_SRC = ("'self'",
-                  'http://browserid.org',
-                  'https://browserid.org',
                   'http://login.persona.org',
                   'https://login.persona.org',
                   'https://platform.twitter.com',
@@ -143,6 +141,8 @@ CSP_FRAME_SRC = ("'self'",
                  'http://*.vimeo.com',
                  'https://*.vimeo.com',
                  'https://*.vimeocdn.com',)
+CSP_ALLOW = ("'self'",
+             'https://*.vimeo.com')
 CSP_OPTIONS = ('eval-script', 'inline-script')
 
 # Activate statsd patches to time database and cache hits.
@@ -165,6 +165,12 @@ ENGAGE_ROBOTS = True
 GRAVATAR_URL = 'https://secure.gravatar.com'
 DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
 
+# Vimeo API
+VIMEO_CLIENT_KEY = u''
+VIMEO_CLIENT_SECRET = u''
+VIMEO_RESOURCE_OWNER_KEY = u''
+VIMEO_RESOURCE_OWNER_SECRET = u''
+
 
 # jingo-minify
 JINGO_MINIFY_USE_STATIC = True
@@ -174,16 +180,20 @@ MINIFY_BUNDLES = {
             'css/main.css',
         ),
         'home_css': (
-            'css/main.css',
             'css/home.css',
         ),
         'archive_css': (
             'css/archive.css',
         ),
+        'upload': (
+            'css/upload.css',
+        ),
     },
     'js': {
-        'flicks_js': (
+        'jquery': (
             'js/libs/jquery-1.7.1.min.js',
+        ),
+        'flicks_js': (
             'browserid/browserid.js',
             'js/init.js',
         ),
@@ -193,6 +203,12 @@ MINIFY_BUNDLES = {
         ),
         'persona_js': (
             'js/persona.js',
+        ),
+        'upload': (
+            'js/libs/jquery.ui.widget.js',
+            'js/libs/jquery.iframe-transport.js',
+            'js/libs/jquery.fileupload.js',
+            'js/upload.js',
         ),
     }
 }
