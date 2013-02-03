@@ -49,6 +49,17 @@ WINNER_CATEGORY_TEXT = {
 }
 
 
+class Video2013(models.Model, CachingMixin):
+    title = models.CharField(max_length=255, blank=False)
+    description = models.TextField(blank=True)
+    user = models.ForeignKey(User)
+
+    vimeo_id = models.IntegerField()
+    filename = models.CharField(max_length=255, blank=False)
+
+    objects = CachingManager()
+
+
 class Video2012(models.Model, CachingMixin):
     # L10n: Title refers to the title of a video.
     title = models.CharField(max_length=100, blank=False,
