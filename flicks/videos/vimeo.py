@@ -59,9 +59,9 @@ def get_new_ticket():
                               upload_method='post')
     if response['stat'] == 'fail':
         err = response['err']
-        logger.error('Error retrieving upload ticket: <{1} {2}> {3}'
-                     .format(err.get('code', ''), err.get('msg', ''),
-                             err.get('expl', '')))
+        logger.error('Error retrieving upload ticket: <{code} {msg}> {expl}'
+                     .format(code=err.get('code', ''), msg=err.get('msg', ''),
+                             expl=err.get('expl', '')))
         return False
     return response['ticket']
 

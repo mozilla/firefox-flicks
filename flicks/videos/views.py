@@ -5,7 +5,7 @@ from tower import ugettext_lazy as _lazy
 from flicks.base.util import promo_video_shortlink
 from flicks.videos import vimeo
 from flicks.videos.decorators import in_overlay
-from flicks.videos.forms import Video2013Form
+from flicks.videos.forms import VideoForm
 from flicks.videos.models import Video2012
 from flicks.videos.util import vidly_embed_code
 from flicks.users.decorators import profile_required
@@ -17,13 +17,14 @@ from flicks.users.decorators import profile_required
 @in_overlay
 def upload(request):
     ticket = request.session.get('vimeo_ticket', None)
-    form = Video2013Form(request.POST or None)
+    form = VideoForm(request.POST or None)
     if ticket and request.method == 'POST' and form.is_valid():
         # Verify that the filesize from the client matches what vimeo received.
         if not vimeo.verify_chunks(ticket['id'], form.cleaned_data['filesize']):
             return render(request, 'videos/upload_error.html', status=500)
 
-        ticket = vimeo.complete_upload(ticket['id'], request.POST['filename'])
+        ticket = vimeo.complete_upload(ticket['id'],
+                                       form.cleaned_data['filename'])
 
         video = form.save(commit=False)
         video.user = request.user

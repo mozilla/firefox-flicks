@@ -110,6 +110,10 @@ class Video2012(models.Model, CachingMixin):
         return '%s: %s %s' % (self.id, self.shortlink, self.title)
 
 
+# Assign the alias "Video" to the model for the current year's contest.
+Video = Video2013
+
+
 class Award(models.Model, CachingMixin):
     """Model for contest winners."""
     video = models.ForeignKey(Video2012, blank=True, null=True)

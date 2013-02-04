@@ -1,34 +1,17 @@
 from django.conf import settings
-from django.utils.unittest import skip
+from django.test.client import RequestFactory
 
-from funfactory.urlresolvers import reverse
 from mock import patch
 from nose.tools import eq_
 
 from flicks.base.tests import TestCase
-
-
-@skip
-class HomeTests(TestCase):
-    def _get(self):
-        with self.activate('en-US'):
-            return self.client.get(reverse('flicks.videos.recent'))
-
-    def test_home_redirect(self):
-        """If the current user isn't logged in, show the recent videos page.
-        If they are, also validate that land on the recent videos page.
-        """
-        # Test not logged in
-        response = self._get()
-        eq_(response.status_code, 200)
-
-        # Test logged in
-        self.build_user(login=True)
-        response = self._get()
-        eq_(response.status_code, 200)
+from flicks.urls import handler500
 
 
 class ViewTests(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+
     def test_robots_txt(self):
         with patch.object(settings, 'ENGAGE_ROBOTS', True):
             response = self.client.get('/robots.txt')
@@ -37,3 +20,15 @@ class ViewTests(TestCase):
         with patch.object(settings, 'ENGAGE_ROBOTS', False):
             response = self.client.get('/robots.txt')
             eq_(response.content, 'User-agent: *\nDisallow: /')
+
+    @patch('flicks.urls.render')
+    def test_handler500(self, render):
+        request = self.factory.get('/')
+        request.in_overlay = True
+        handler500(request)
+        render.assert_called_with(request, 'videos/upload_error.html',
+                                  status=500)
+
+        request.in_overlay = False
+        handler500(request)
+        render.assert_called_with(request, '500.html', status=500)
