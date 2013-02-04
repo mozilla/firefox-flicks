@@ -2,6 +2,7 @@
 # repo. If you need to override a setting locally, use settings_local.py
 from funfactory.settings_base import *
 
+from flicks.base import regions
 from flicks.base.util import reverse_lazy
 
 
@@ -170,6 +171,12 @@ VIMEO_CLIENT_KEY = u''
 VIMEO_CLIENT_SECRET = u''
 VIMEO_RESOURCE_OWNER_KEY = u''
 VIMEO_RESOURCE_OWNER_SECRET = u''
+VIMEO_REGION_CHANNELS = {
+    regions.NORTH_AMERICA: None,
+    regions.LATIN_AMERICA: None,
+    regions.EMEA: None,
+    regions.APAC: None,
+}
 
 
 # jingo-minify

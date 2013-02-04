@@ -1,6 +1,17 @@
-from factory import Factory
+from factory import Factory, Sequence, SubFactory
 
+from flicks.users.tests import UserFactory
 from flicks.videos import models
+
+
+class VideoFactory(Factory):
+    FACTORY_FOR = models.Video
+
+    user = SubFactory(UserFactory)
+    title = 'Test title'
+    description = 'Test desc'
+    vimeo_id = Sequence(lambda n: n)
+    filename = Sequence(lambda n: '{0}.mp4'.format(n))
 
 
 class Video2012Factory(Factory):

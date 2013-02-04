@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import promo_video_shortlink
-from flicks.videos import vimeo
+from flicks.videos import tasks, vimeo
 from flicks.videos.decorators import in_overlay
 from flicks.videos.forms import VideoForm
 from flicks.videos.models import Video2012
@@ -26,10 +26,12 @@ def upload(request):
         ticket = vimeo.complete_upload(ticket['id'],
                                        form.cleaned_data['filename'])
 
+        # Create video and schedule it for processing.
         video = form.save(commit=False)
         video.user = request.user
         video.vimeo_id = ticket['video_id']
         video.save()
+        tasks.process_video.delay(video.id)
 
         del request.session['vimeo_ticket']
         return redirect('flicks.videos.upload_complete')

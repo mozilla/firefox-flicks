@@ -117,3 +117,15 @@ class TestVimeo(TestCase):
         """Return the ticket given by Vimeo after completing the upload."""
         _ticket_request.return_value = {'stat': 'ok', 'ticket': {'some': 'dat'}}
         eq_(vimeo.complete_upload('id', 'filename'), {'some': 'dat'})
+
+    @patch('flicks.videos.vimeo._vimeo_request')
+    def test_video_request(self, _vimeo_request):
+        _vimeo_request.return_value = {
+            'stat': 'fail',
+            'err': {'code': 'tcode', 'msg': 'tmsg', 'expl': 'texpl'}
+        }
+
+        with self.assertRaises(vimeo.VimeoServiceError) as cm:
+            vimeo._video_request('method', 'POST', video_id='id',
+                                 error_msg='{video_id} {code} {msg} {expl}')
+        eq_(cm.exception.args, ('id tcode tmsg texpl',))

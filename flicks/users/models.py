@@ -3,6 +3,7 @@ from django.db import models
 
 from caching.base import CachingManager, CachingMixin
 
+from flicks.base import regions
 from flicks.base.models import CountryField, LocaleField
 
 
@@ -30,7 +31,7 @@ class UserProfile(models.Model, CachingMixin):
 
     # Profile info
     full_name = models.CharField(max_length=255, blank=False)
-    nickname = models.CharField(max_length=255, blank=False)
+    nickname = models.CharField(max_length=255, blank=True)
     country = CountryField(blank=False)
 
     # Mailing address
@@ -42,3 +43,11 @@ class UserProfile(models.Model, CachingMixin):
     postal_code = models.CharField(max_length=255, blank=True)
 
     objects = CachingManager()
+
+    @property
+    def display_name(self):
+        return self.nickname or self.full_name
+
+    @property
+    def region(self):
+        return regions.get_region(self.country)

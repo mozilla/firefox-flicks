@@ -53,6 +53,19 @@ def _ticket_request(vimeo_method, request_method, error_msg=None, **data):
     return response
 
 
+def _video_request(vimeo_method, request_method, error_msg=None, **data):
+    response = _vimeo_request(vimeo_method, request_method, **data)
+    if response['stat'] == 'fail':
+        err = response['err']
+        video_id = data.get('video_id', '')
+        msg = error_msg.format(video_id=video_id,
+                               code=err.get('code', ''),
+                               msg=err.get('msg', ''),
+                               expl=err.get('expl', ''))
+        raise VimeoServiceError(msg)
+    return response
+
+
 def get_new_ticket():
     """Request a new upload ticket from Vimeo."""
     response = _vimeo_request('vimeo.videos.upload.getTicket', 'POST',
@@ -104,3 +117,35 @@ def complete_upload(ticket_id, filename):
         error_msg='Error completing upload for ticket `{ticket_id}`: '
                   '<{code} {msg}> {expl}')
     return response['ticket']
+
+
+def setTitle(video_id, title):
+    """Set the title of a video."""
+    _video_request('vimeo.videos.setTitle', 'POST', video_id=video_id,
+                   title=title,
+                   error_msg='Error setting title for video {video_id}: '
+                             '<{code} {msg}> {expl}')
+
+
+def setDescription(video_id, description):
+    """Set the description of a video."""
+    _video_request('vimeo.videos.setDescription', 'POST', video_id=video_id,
+                   description=description,
+                   error_msg='Error setting description for video {video_id}: '
+                             '<{code} {msg}> {expl}')
+
+
+def addToChannel(video_id, channel_id):
+    """Add a video to a channel."""
+    _video_request('vimeo.channels.addVideo', 'POST', video_id=video_id,
+                   channel_id=channel_id,
+                   error_msg='Error setting channel for video {video_id}: '
+                             '<{code} {msg}> {expl}')
+
+
+def addTags(video_id, tags):
+    """Add tags to a video."""
+    _video_request('vimeo.videos.addTags', 'POST', video_id=video_id,
+                   tags=','.join(tags),
+                   error_msg='Error adding tags for video {video_id}: '
+                             '<{code} {msg}> {expl}')

@@ -57,6 +57,8 @@ class Video2013(models.Model, CachingMixin):
     vimeo_id = models.IntegerField()
     filename = models.CharField(max_length=255, blank=False)
 
+    processed = models.BooleanField(default=False)
+
     objects = CachingManager()
 
 

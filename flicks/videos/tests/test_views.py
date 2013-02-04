@@ -77,13 +77,15 @@ class TestUpload(TestCase):
         eq_(response.status_code, 500)
         self.assertTemplateUsed(response, 'videos/upload_error.html')
 
+    @patch('flicks.videos.tasks.process_video')
     @patch('flicks.videos.views.vimeo')
-    def test_post_success(self, vimeo):
+    def test_post_success(self, vimeo, process_video):
         """
         If a valid form is POSTed and the upload checks out, create a new video,
         remove the upload ticket from the session, and return a redirect to the
         upload complete page.
         """
+
         vimeo.verify_chunks.return_value = True
         vimeo.complete_upload.return_value = {'video_id': '563'}
         response = self._upload('post', ticket={'id': 'asdf'}, title='qwer',
@@ -93,5 +95,6 @@ class TestUpload(TestCase):
         videos = Video.objects.filter(title='qwer', filename='qwer.mp4',
                                       vimeo_id=563, user=self.user)
         eq_(len(videos), 1)
+        process_video.delay.assert_called_with(videos[0].id)
         ok_('vimeo_id' not in response.client.session)
         redirects_(response, 'flicks.videos.upload_complete')
