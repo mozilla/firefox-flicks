@@ -29,6 +29,7 @@
                 $uploadForm.fadeOut(500, function() {
                     $videoForm.find('.filename').text(file.name);
                     $videoForm.find('input[name="filename"]').val(file.name);
+                    $videoForm.find('input[name="filesize"]').val(file.size);
                     $videoForm.fadeIn(500);
                 });
             }

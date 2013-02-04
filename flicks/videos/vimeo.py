@@ -85,14 +85,16 @@ def verify_chunks(ticket_id, expected_size):
     :param ticket_id:
         ID for the upload ticket.
     :param expected_size:
-        Expected video file size, in bytes."""
+        Expected video file size, in bytes.
+    """
     response = _ticket_request(
         'vimeo.videos.upload.verifyChunks', 'POST', ticket_id=ticket_id,
         error_msg='Error verifying chunks for ticket`{ticket_id}`: '
                   '<{code} {msg}> {expl}')
-
-    size = sum(chunk['size'] for chunk in response['chunks'])
-    return expected_size != size
+    # Apparently verifyChunks doesn't give a list of chunks if there's only
+    # one chunk, and there's no reference online to show otherwise.
+    size = int(response['ticket']['chunks']['chunk']['size'])
+    return size == int(expected_size)
 
 
 def complete_upload(ticket_id, filename):
