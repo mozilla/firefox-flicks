@@ -1,21 +1,20 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
-from commonware.response.decorators import xframe_sameorigin
 from tower import ugettext_lazy as _lazy
 
 from flicks.base.util import promo_video_shortlink
 from flicks.videos import vimeo
+from flicks.videos.decorators import in_overlay
 from flicks.videos.forms import Video2013Form
 from flicks.videos.models import Video2012
 from flicks.videos.util import vidly_embed_code
 from flicks.users.decorators import profile_required
 
 
-# 2013 Contest
-
-
+### 2013 Contest ###
+# Upload process
 @profile_required
-@xframe_sameorigin
+@in_overlay
 def upload(request):
     ticket = request.session.get('vimeo_ticket', None)
     form = Video2013Form(request.POST or None)
@@ -41,19 +40,23 @@ def upload(request):
     })
 
 
-@xframe_sameorigin
+@in_overlay
 def upload_complete(request):
     return render(request, 'videos/upload_complete.html')
 
 
+@in_overlay
+def upload_error(request):
+    return render(request, 'videos/upload_error.html', status=500)
+
+
+# Video pages
 def recent(request):
     """Recent videos page."""
     return render(request, 'videos/recent.html', {'page_type': 'archive'})
 
 
-# 2012 Archive
-
-
+### 2012 Archive ###
 def details_2012(request, video_id=None):
     """Landing page for video details."""
     video = get_object_or_404(Video2012, pk=video_id, state='complete')

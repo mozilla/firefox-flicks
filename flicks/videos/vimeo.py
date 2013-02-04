@@ -37,14 +37,16 @@ def _ticket_request(vimeo_method, request_method, error_msg=None, **data):
     response = _vimeo_request(vimeo_method, request_method, **data)
     if response['stat'] == 'fail':
         err = response['err']
-        ticket_id = data.get('ticket_id', None)
+        ticket_id = data.get('ticket_id', '')
 
         # Log failure if it is not because the ticket is invalid (code 702)
         if err['code'] == '702':
             raise VimeoTicketInvalid('Invalid ticket `{0}`'.format(ticket_id))
         else:
-            msg = error_msg.format({'ticket_id': ticket_id, 'code': err['code'],
-                                   'msg': err['msg'], 'desc': err['desc']})
+            msg = error_msg.format(ticket_id=ticket_id,
+                                   code=err.get('code', ''),
+                                   msg=err.get('msg', ''),
+                                   expl=err.get('expl', ''))
             logger.error(msg)
             raise VimeoServiceError(msg)
 
@@ -58,7 +60,8 @@ def get_new_ticket():
     if response['stat'] == 'fail':
         err = response['err']
         logger.error('Error retrieving upload ticket: <{1} {2}> {3}'
-                     .format(err['code'], err['msg'], err['desc']))
+                     .format(err.get('code', ''), err.get('msg', ''),
+                             err.get('expl', '')))
         return False
     return response['ticket']
 
@@ -69,7 +72,7 @@ def is_ticket_valid(ticket_id):
         _ticket_request(
             'vimeo.videos.upload.checkTicket', 'POST', ticket_id=ticket_id,
             error_msg='Error checking if ticket `{ticket_id}` is valid: '
-                      '<{code} {msg}> {desc}')
+                      '<{code} {msg}> {expl}')
         return True
     except VimeoTicketInvalid:
         return False
@@ -86,7 +89,7 @@ def verify_chunks(ticket_id, expected_size):
     response = _ticket_request(
         'vimeo.videos.upload.verifyChunks', 'POST', ticket_id=ticket_id,
         error_msg='Error verifying chunks for ticket`{ticket_id}`: '
-                  '<{code} {msg}> {desc}')
+                  '<{code} {msg}> {expl}')
 
     size = sum(chunk['size'] for chunk in response['chunks'])
     return expected_size != size
@@ -97,5 +100,5 @@ def complete_upload(ticket_id, filename):
     response = _ticket_request('vimeo.videos.upload.complete', 'POST',
         ticket_id=ticket_id, filename=filename,
         error_msg='Error completing upload for ticket `{ticket_id}`: '
-                  '<{code} {msg}> {desc}')
+                  '<{code} {msg}> {expl}')
     return response['ticket']

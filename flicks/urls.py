@@ -6,30 +6,33 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from commonware.response.decorators import xframe_sameorigin
 from funfactory.monkeypatches import patch
+
+
+# Funfactory monkeypatches
 patch()
 
 # Autodiscover admin.py files in each app
 autodiscover()
 
 
-def error_page(request, template, status=None):
-    """
-    Render error templates, found in the root /templates directory.
-
-    If no status parameter is explicitly passed, this function assumes
-    your HTTP status code is the same as your template name (i.e. passing
-    a template=404 will render 404.html with the HTTP status code 404).
-    """
-    return render(request, '%d.html' % template, status=(status or template))
+@xframe_sameorigin
+def handler500(request):
+    in_overlay = getattr(request, 'in_overlay', False)
+    template = 'videos/upload_error.html' if in_overlay else '500.html'
+    return render(request, template, status=500)
 
 
-handler404 = lambda r: error_page(r, 404)
-handler500 = lambda r: error_page(r, 500)
-robots_txt = lambda r: HttpResponse(
-   "User-agent: *\n%s: /" % ('Allow' if settings.ENGAGE_ROBOTS else 'Disallow'),
-   mimetype="text/plain"
-)
+@xframe_sameorigin
+def handler404(request):
+    return render(request, '404.html', status=404)
+
+
+def robots_txt(request):
+    permission = 'Allow' if settings.ENGAGE_ROBOTS else 'Disallow'
+    return HttpResponse('User-agent: *\n{0}: /'.format(permission),
+                        mimetype='text/plain')
 
 
 urlpatterns = patterns('',

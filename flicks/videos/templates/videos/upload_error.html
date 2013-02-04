@@ -1,0 +1,15 @@
+{% extends 'bare.html' %}
+
+{% block body %}
+  {# Not final copy, no need to mark up for l10n yet. #}
+  <h1>Oh noes! There's been an error!</h1>
+  <p>Something has gone wrong with the upload process. This may have been caused by:</p>
+  <ul>
+    <li>Attempting to upload an incorrect file. Please check out list of supported file formats.</li>
+    <li>Our video upload system may be experiencing issues currently.</li>
+  </ul>
+  <p>
+    Please <a href="{{ url('flicks.videos.upload') }}">try again</a>.
+    If you continue to see this message, please wait and try again later.
+  </p>
+{% endblock %}
