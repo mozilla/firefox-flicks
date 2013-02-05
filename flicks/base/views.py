@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.template import TemplateDoesNotExist
+from jinja2 import TemplateNotFound
 
 
 LINK_PDWIKI = {
@@ -39,6 +41,12 @@ def faq(request):
         'link_brief': LINK_BRIEF.get(request.locale, LINK_BRIEF['en-US'])
     })
 
+def rules(request):
+    """Rules page. If template does not exist default to us."""
+    try:
+        return render(request, 'rules/{0}.html'.format(request.locale))
+    except (TemplateNotFound, TemplateDoesNotExist), e:
+        return render(request, 'rules/en-US.html')
 
 def strings(request):
     """Strings L10N page."""
