@@ -71,19 +71,27 @@
     {% endtrans %}
     </p>
 
-{# Hiding this question until we open for submissions
     <h2 id="q5">{{ _('How do I submit my flick to Firefox Flicks and enter the contest?') }}</h2>
     <p>
     {% trans link_submit='TBD' %}
       Fill out your filmmaker profile and submit your video <a href="{{ link_submit }}">here.</a>
       All flicks will be posted to the Firefox Flicks website using the Vimeo API.
-      You'll need to provide your contact information, title your flick and select
-      your region and country.
+      You'll need to provide your contact information, including your email, title your flick and select
+      your country and region.
     {% endtrans %}
     </p>
-#}
 
-    <h2 id="q6">{{ _('What are the judging criteria?') }}</h2>
+    <h2 id="q6">{{ _('How does Flicks get and use my email address?') }}</h2>
+    <p>
+    {% trans %}
+      Flicks receives your email address through Persona, our site registration system. We will use your
+      email address for contest administration purposes, such eligibility feedback, sign in and
+      voting. You can also opt in to receive additional email updates about Firefox Flicks.
+    {% endtrans %}
+    </p>
+
+
+    <h2 id="q7">{{ _('What are the judging criteria?') }}</h2>
     <p>
     {% trans %}
       Videos will be judged on quality of shooting, editing and how closely
@@ -99,7 +107,7 @@
     {% endtrans %}
     </p>
 
-    <h2 id="q7">{{ _('Are there any requirements?') }}</h2>
+    <h2 id="q8">{{ _('Are there any requirements?') }}</h2>
     <p>
     {% trans %}
       Yes, there are some. You'll be able to find a full list under
@@ -148,34 +156,37 @@
         Please keep it clean
       {% endtrans %}
       </li>
+      <li>
+      {% trans %}
+        You must be at least 18 years old, or the age of majority in your country of residence
+      {% endtrans %}
+      </li>
     </ul>
 
-{# Hiding this question until we can announce judges
-    <h2 id="q8">{{ _('Who are the judges?') }}</h2>
+    <h2 id="q9">{{ _('Who are the judges?') }}</h2>
     <p>
     {% trans link_home=url('flicks.base.home') %}
       See our <a href="{{ link_home }}#judges">Judges page</a> for a complete list.
     {% endtrans %}
     </p>
-#}
 
-    <h2 id="q9">{{ _('Can I submit more than one flick?') }}</h2>
+    <h2 id="q10">{{ _('Can I submit more than one flick?') }}</h2>
     <p>
     {% trans %}
       You can submit as many as you like, but you have to submit a new entry each time.
     {% endtrans %}
     </p>
 
-    <h2 id="q10">{{ _('Can a team develop the flick?') }}</h2>
+    <h2 id="q11">{{ _('Can a team develop the flick?') }}</h2>
     <p>
     {% trans %}
-      Of course! Teams can be up to 10 people, but please appoint a team leader.
+      Of course! Teams can be up to 3 people, but please appoint a team leader.
       All communication will be with this person and only one prize will be awarded
       per entry.
     {% endtrans %}
     </p>
 
-    <h2 id="q11">{{ _('Is the contest open to international entries?') }}</h2>
+    <h2 id="q12">{{ _('Is the contest open to international entries?') }}</h2>
     <p>
     {% trans %}
       Yes. This is an international film competition and entries can be submitted
@@ -185,7 +196,7 @@
     {% endtrans %}
     </p>
 
-    <h2 id="q12">{{ _('What can I win?') }}</h2>
+    <h2 id="q13">{{ _('What can I win?') }}</h2>
     <p>
     {% trans %}
       Your flick will be seen and voted on by millions of Firefox fans around the
@@ -228,6 +239,29 @@
     {% endtrans %}
     </p>
 
+    <ul class="prose">
+      <li>
+      {% trans %}
+        The U.S. and Canada
+      {% endtrans %}
+      </li>
+      <li>
+      {% trans %}
+        Latin America
+      {% endtrans %}
+      </li>
+      <li>
+      {% trans %}
+        Europe, Middle East and Africa (EMEA)
+      {% endtrans %}
+      </li>
+      <li>
+      {% trans %}
+        Asia, Australia and New Zealand (APAC)
+      {% endtrans %}
+      </li>
+    </ul>
+
     <p>
     {% trans %}
       Additionally, just for entering, everyone will get a little something from us
@@ -250,13 +284,24 @@
     </p>
 #}
 
-    <h2 id="q13">{{ _('What are the deadlines for the Early Entry Awards?') }}</h2>
-    <p>
-    {% trans %}
-      Check the website for upcoming announcements and updates about our film
-      festival events.
-    {% endtrans %}
-    </p>
+    <h2 id="q14">{{ _('What are the deadlines for the Early Entry Awards?') }}</h2>
+    <ul class="prose">
+      <li>
+      {% trans %}
+        April 3 — BAFICI, Buenos Aires, Argentina
+      {% endtrans %}
+      </li>
+      <li>
+      {% trans %}
+        July 5 — Nowe Horyzonty, Wrocław, Poland
+      {% endtrans %}
+      </li>
+      <li>
+      {% trans %}
+        July 5 — Cinemalaya, Manila, Philippines
+      {% endtrans %}
+      </li>
+    </ul>
 
 {# Hide this until we have the mailing list set up
     <p>
@@ -266,7 +311,7 @@
     </p>
 #}
 
-    <h2 id="q14">{{ _('What is the deadline to submit my flick?') }}</h2>
+    <h2 id="q15">{{ _('What is the deadline to submit my flick?') }}</h2>
     <p>
     {% trans %}
       You can submit your flick to be eligible for our Early Entry Awards (above),
@@ -275,7 +320,7 @@
     {% endtrans %}
     </p>
 
-    <h2 id="q15">{{ _('How will the winners be announced?') }}</h2>
+    <h2 id="q16">{{ _('How will the winners be announced?') }}</h2>
     <p>
     {% trans %}
       The winners will be notified by email and phone (if contact information is
@@ -284,14 +329,14 @@
     {% endtrans %}
     </p>
 
-    <h2 id="q16">{{ _('Is there a maximum video length?') }}</h2>
+    <h2 id="q17">{{ _('Is there a maximum video length?') }}</h2>
     <p>
     {% trans %}
       All videos must be no longer than 60 seconds.
     {% endtrans %}
     </p>
 
-    <h2 id="q17">{{ _('Can I submit an entry as a university project?') }}</h2>
+    <h2 id="q18">{{ _('Can I submit an entry as a university project?') }}</h2>
     <p>
     {% trans %}
       Absolutely! We think that Firefox Flicks is a great opportunity for students
@@ -301,7 +346,7 @@
     {% endtrans %}
     </p>
 
-    <h2 id="q18">{{ _('Can I use the Firefox wordmark and logo in my flick?') }}</h2>
+    <h2 id="q19">{{ _('Can I use the Firefox wordmark and logo in my flick?') }}</h2>
     <p>
     {% trans link_fxbrand='http://www.mozilla.org/styleguide/identity/firefox/branding/' ,
       link_fxosbrand='http://www.mozilla.org/en-US/styleguide/identity/firefoxos/branding/' ,
@@ -314,7 +359,7 @@
     {% endtrans %}
     </p>
 
-    <h2 id="q19">{{ _('How do I get high resolution Firefox name and logo artwork?') }}</h2>
+    <h2 id="q20">{{ _('How do I get high resolution Firefox name and logo artwork?') }}</h2>
     <p>
     {% trans link_styleguide='http://www.mozilla.org/styleguide/' %}
       To get high resolution copies of the Firefox and Firefox OS name and logo
@@ -323,7 +368,7 @@
     {% endtrans %}
     </p>
 
-    <h2 id="q20">{{ _('Where can I find music or other materials to include in my flick?') }}</h2>
+    <h2 id="q21">{{ _('Where can I find music or other materials to include in my flick?') }}</h2>
     <p>
     {% trans link_ccommons='http://search.creativecommons.org',
              link_pdwiki=link_pdwiki %}
@@ -335,14 +380,14 @@
     {% endtrans %}
     </p>
 
-    <h2 id="q21">{{ _('Can I use third-party trademarks or copyrighted materials in my flick?') }}</h2>
+    <h2 id="q22">{{ _('Can I use third-party trademarks or copyrighted materials in my flick?') }}</h2>
     <p>
     {% trans %}
       No, not without permission from the owner of those materials.
     {% endtrans %}
     </p>
 
-    <h2 id="q22">{{ _('Can I submit a flick in a language other than English?') }}</h2>
+    <h2 id="q23">{{ _('Can I submit a flick in a language other than English?') }}</h2>
     <p>
     {% trans link_flicksemail='mailto:firefoxflicks@mozilla.org' %}
       Yes. For non-English entries, you will need to submit a full and accurate
@@ -351,7 +396,7 @@
     {% endtrans %}
     </p>
 
-    <h2 id="q23">{{ _('What if I want to withdraw my submission?') }}</h2>
+    <h2 id="q24">{{ _('What if I want to withdraw my submission?') }}</h2>
     <p>
     {% trans link_flicksemail='mailto:firefoxflicks@mozilla.org' %}
       If you would like to withdraw your submission, please contact us at
@@ -360,23 +405,24 @@
     {% endtrans %}
     </p>
 
-    <h2 id="q24">{{ _('What aspect ratio should I use for my entry?') }}</h2>
+    <h2 id="q25">{{ _('What aspect ratio should I use for my entry?') }}</h2>
     <p>
     {% trans %}
       All aspect ratios will be accepted, but 16:9 is recommended and preferred.
     {% endtrans %}
     </p>
 
-    <h2 id="q25">{{ _('Will entries be available to the general public?') }}</h2>
+    <h2 id="q26">{{ _('Will entries be available to the general public?') }}</h2>
     <p>
     {% trans %}
       Your flick will be posted to the Flicks gallery and the voting site, as well
       as the Firefox Flicks channel on Vimeo so that people can watch during the
       contest period and vote for their favorite flicks during the voting period.
+      Your name will be displayed publicly along with your video.
     {% endtrans %}
     </p>
 
-    <h2 id="q26">{{ _('What is Firefox OS?') }}</h2>
+    <h2 id="q27">{{ _('What is Firefox OS?') }}</h2>
     <p>
     {% trans link_firefoxos='https://www.mozilla.org/firefoxos' %}
       <a href="{{ link_firefoxos }}" rel="external">Firefox OS</a> is an operating
