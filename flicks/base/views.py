@@ -34,8 +34,8 @@ LINK_CCLICENSE = {
     'pt-BR': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.pt_BR',
     'sl': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.sl',
     'sq': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.sq',
-    'zh-CN': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.zh.CN',
-    'zh-TW': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.zh.TW',
+    'zh-CN': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.zh_CN',
+    'zh-TW': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.zh_TW',
 }
 
 
