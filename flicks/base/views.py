@@ -24,6 +24,20 @@ LINK_BRIEF = {
     #'sl': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_sl.pdf',
 }
 
+LINK_CCLICENSE = {
+    'en-US': 'http://creativecommons.org/licenses/by-nc-sa/2.5/',
+    'de': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.de',
+    'fr': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.fr',
+    'es': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.es',
+    'nl': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.nl',
+    'pl': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.pl',
+    'pt-BR': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.pt_BR',
+    'sl': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.sl',
+    'sq': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.sq',
+    'zh-CN': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.zh_CN',
+    'zh-TW': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.zh_TW',
+}
+
 
 def home(request):
     """Home page."""
@@ -36,7 +50,8 @@ def faq(request):
     """FAQ page."""
     return render(request, 'faq.html', {
         'link_pdwiki': LINK_PDWIKI.get(request.locale, LINK_PDWIKI['en-US']),
-        'link_brief': LINK_BRIEF.get(request.locale, LINK_BRIEF['en-US'])
+        'link_brief': LINK_BRIEF.get(request.locale, LINK_BRIEF['en-US']),
+        'link_cclicense': LINK_CCLICENSE.get(request.locale, LINK_CCLICENSE['en-US'])
     })
 
 
