@@ -1,3 +1,5 @@
+from locale import strcoll as locale_strcoll
+
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.utils.functional import lazy
@@ -69,3 +71,20 @@ def promo_video_shortlink(promo_name):
         video = videos.get('en-us', None)
 
     return video
+
+
+def unicode_choice_sorted(choices):
+    """
+    Sorts a list of 2-tuples by the second value, using a unicode-safe sort.
+    """
+    return sorted(choices, cmp=lambda x, y: locale_strcoll(x[1], y[1]))
+
+
+def country_choices(allow_empty=True):
+    """Return a localized, sorted list of tuples of country names and values."""
+    from product_details import product_details
+
+    items = product_details.get_regions(get_language()).items()
+    if allow_empty:
+        items.append(('', '---'))
+    return unicode_choice_sorted(items)

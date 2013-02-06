@@ -3,6 +3,7 @@
 {% block page_title %}{{ _('Enter your information') }}{% endblock %}
 
 {% block site_css %}
+  {{ css('flicks_css') }}
   {{ css('upload') }}
 {% endblock %}
 
@@ -38,11 +39,13 @@
               {{ form.nickname.label_tag(_('Nickname')) }} {{ form.nickname }}
             </li>
             <li class="col1">
-              <em class="note">* {{ _('Some prizes are awarded by region, so let us know what part of the world your flick is representing.') }}</em>
+              <em class="note">
+                {{ _('Some prizes are awarded by region, so let us know what part of the world your flick is representing.') }}
+              </em>
               {{ form.country.label_tag(_('Country')) }} {{ form.country }}
             </li>
             <li class="col2 region">
-              {{ _('Region') }}: <span id="region">[region goes here]</span>
+              {{ _('Region') }}: <span id="region"></span>
             </li>
           </ul>
         </fieldset>
@@ -55,7 +58,9 @@
           </p>
           <ul>
             <li class="col1">
-              <em class="note">* {{ _('Provide your address to receive a special thank-you gift for entering.') }}</em>
+              <em class="note">
+                {{ _('Provide your address to receive a special thank-you gift for entering.') }}
+              </em>
               {{ form.address1.label_tag(_('Address line 1')) }} {{ form.address1 }}
             </li>
             <li class="col2">
@@ -78,17 +83,21 @@
           <ul>
             <li class="col1 check">
               {{ input_in_label(form.privacy_policy_agree,
-                              _('I\'m okay with you handling my info as you explain in your privacy policy')) }}
+                 _('I\'m okay with you handling my info as you explain in your privacy policy')) }}
             </li>
-            <li class="col2 check">
-              <label for="subscribe"><input type="checkbox" id="subscribe" name="subscribe">{{ _('I want to receive email updates about Firefox Flicks (English only)') }}</label>
-            </li>
+            {% if LANG.startswith('en') %}
+              <li class="col2 check">
+                <label for="subscribe"><input type="checkbox" id="subscribe" name="subscribe">
+                  {{ _('I want to receive email updates about Firefox Flicks') }}
+                </label>
+              </li>
+            {% endif %}
           </ul>
         </fieldset>
       </ul>
 
       <p class="form-submit">
-        <button type="submit" class="button go">Next</button>
+        <button type="submit" class="button go">{{ _('Next') }}</button>
       </p>
     </form>
 
