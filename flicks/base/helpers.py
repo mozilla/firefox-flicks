@@ -5,6 +5,8 @@ from babel.dates import format_date
 from jingo import register
 from product_details import product_details
 
+from flicks.base.util import absolutify as real_absolutify
+
 
 def _babel_locale():
     """Return the current locale in Babel's format."""
@@ -34,3 +36,8 @@ def country_name(country_code):
         locale = 'es-ES'
 
     return product_details.get_regions(locale)[country_code]
+
+
+@register.function
+def absolutify(url):
+    return real_absolutify(url)

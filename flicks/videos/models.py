@@ -7,8 +7,55 @@ from django.db import models
 from caching.base import CachingManager, CachingMixin
 from tower import ugettext as _, ugettext_lazy as _lazy
 
-from flicks.videos.util import vidly_embed_code
+from flicks.videos import vimeo
+from flicks.videos.util import (send_approval_email, vidly_embed_code,
+                                vimeo_embed_code)
 
+
+class Video2013(models.Model, CachingMixin):
+    title = models.CharField(max_length=255, blank=False)
+    description = models.TextField(blank=True)
+    user = models.ForeignKey(User)
+    created = models.DateTimeField(auto_now_add=True,
+                                   default=datetime(2013, 2, 5))
+
+    vimeo_id = models.IntegerField()
+    filename = models.CharField(max_length=255, blank=False)
+
+    approved = models.BooleanField(default=False)
+    processed = models.BooleanField(default=False)
+    user_notified = models.BooleanField(default=False)
+
+    objects = CachingManager()
+
+    def save(self, *args, **kwargs):
+        """
+        Prior to saving, set the video's privacy on Vimeo depending on if it is
+        approved.
+        """
+        if self.approved:
+            vimeo.set_privacy.delay(self.vimeo_id, 'anybody')
+
+            # Send an email out if the user hasn't been notified.
+            if not self.user_notified:
+                send_approval_email(self)
+                self.user_notified = True
+        else:
+            vimeo.set_privacy.delay(self.vimeo_id, 'password',
+                                    password=settings.VIMEO_VIDEO_PASSWORD)
+
+        return super(Video2013, self).save(*args, **kwargs)
+
+    def embed_html(self, **kwargs):
+        """Return the HTML code to embed this video."""
+        return vimeo_embed_code(self.vimeo_id, **kwargs)
+
+
+# Assign the alias "Video" to the model for the current year's contest.
+Video = Video2013
+
+
+### 2012 Models ###
 
 # Untranslated as they're only seen in the admin interface.
 STATE_CHOICES = (
@@ -47,19 +94,6 @@ WINNER_CATEGORY_TEXT = {
     'new_technology': _lazy('New Technology Winner'),
     'psa': _lazy('PSA Winner')
 }
-
-
-class Video2013(models.Model, CachingMixin):
-    title = models.CharField(max_length=255, blank=False)
-    description = models.TextField(blank=True)
-    user = models.ForeignKey(User)
-
-    vimeo_id = models.IntegerField()
-    filename = models.CharField(max_length=255, blank=False)
-
-    processed = models.BooleanField(default=False)
-
-    objects = CachingManager()
 
 
 class Video2012(models.Model, CachingMixin):
@@ -110,10 +144,6 @@ class Video2012(models.Model, CachingMixin):
 
     def __unicode__(self):
         return '%s: %s %s' % (self.id, self.shortlink, self.title)
-
-
-# Assign the alias "Video" to the model for the current year's contest.
-Video = Video2013
 
 
 class Award(models.Model, CachingMixin):

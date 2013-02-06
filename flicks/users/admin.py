@@ -5,18 +5,13 @@ from django.contrib.auth.models import User
 
 class UserAdmin(admin.UserAdmin):
     """Configuration for the user admin pages."""
-    list_display = ['email', 'full_name', 'country', 'is_staff',
-                    'youth_contest']
+    list_display = ['email', 'full_name', 'country', 'is_staff']
     search_fields = ['email', 'userprofile__full_name', 'bio']
 
     def full_name(self, user):
-        return user.userprofile.full_name
+        return user.profile.full_name
 
     def country(self, user):
-        return user.userprofile.country
-
-    def youth_contest(self, user):
-        return user.userprofile.youth_contest
-    youth_contest.boolean = True
+        return user.profile.country
 site.unregister(User)
 site.register(User, UserAdmin)

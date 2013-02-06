@@ -2,6 +2,7 @@ from django.conf import settings
 
 import commonware
 import requests
+from celery.decorators import task
 from requests_oauthlib import OAuth1
 
 
@@ -119,7 +120,7 @@ def complete_upload(ticket_id, filename):
     return response['ticket']
 
 
-def setTitle(video_id, title):
+def set_title(video_id, title):
     """Set the title of a video."""
     _video_request('vimeo.videos.setTitle', 'POST', video_id=video_id,
                    title=title,
@@ -127,7 +128,7 @@ def setTitle(video_id, title):
                              '<{code} {msg}> {expl}')
 
 
-def setDescription(video_id, description):
+def set_description(video_id, description):
     """Set the description of a video."""
     _video_request('vimeo.videos.setDescription', 'POST', video_id=video_id,
                    description=description,
@@ -135,7 +136,7 @@ def setDescription(video_id, description):
                              '<{code} {msg}> {expl}')
 
 
-def addToChannel(video_id, channel_id):
+def add_to_channel(video_id, channel_id):
     """Add a video to a channel."""
     _video_request('vimeo.channels.addVideo', 'POST', video_id=video_id,
                    channel_id=channel_id,
@@ -143,9 +144,18 @@ def addToChannel(video_id, channel_id):
                              '<{code} {msg}> {expl}')
 
 
-def addTags(video_id, tags):
+def add_tags(video_id, tags):
     """Add tags to a video."""
     _video_request('vimeo.videos.addTags', 'POST', video_id=video_id,
                    tags=','.join(tags),
                    error_msg='Error adding tags for video {video_id}: '
                              '<{code} {msg}> {expl}')
+
+
+@task
+def set_privacy(video_id, privacy, password=None):
+    """Set privacy options on a video."""
+    _video_request('vimeo.videos.setPrivacy', 'POST', video_id=video_id,
+                   privacy=privacy, password=password,
+                   error_msg=('Error setting privacy for video {video_id}: '
+                              '<{code} {msg}> {expl}'))

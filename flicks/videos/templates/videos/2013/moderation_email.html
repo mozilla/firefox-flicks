@@ -1,0 +1,21 @@
+Hello moderator!
+
+The following flick has been uploaded and processed and is ready* for
+moderation!
+
+Title: {{ video.title }}
+Author: {{ video.user.profile.display_name }}
+Admin URL: {{ absolutify(url('admin:videos_video2013_change', video.id)) }}
+Description:
+
+{{ video.description }}
+
+Please visit the admin interface, inspect the video, title, description, etc.
+and, if there are no issues, mark the "Approved" checkbox and click the "Save"
+button at the bottom of the screen.
+
+*NOTE: Vimeo may still be processing the video on their side. If the video does
+not show up on the admin site, please wait a bit and then try again (and if
+this continues to happen, please alert Ben Sternthal about the issue).
+
+{{ admin_email_signature() }}
