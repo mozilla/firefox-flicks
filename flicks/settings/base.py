@@ -186,6 +186,7 @@ MINIFY_BUNDLES = {
             'css/archive.css',
         ),
         'upload': (
+            'css/main.css',
             'css/upload.css',
         ),
     },

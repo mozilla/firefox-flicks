@@ -197,6 +197,7 @@ a.go:after {
   background-image: -webkit-linear-gradient(#3c88cc, #276195);
   background-image: -o-linear-gradient(#3c88cc, #276195);
   background-image: linear-gradient(#3c88cc, #276195);
+  cursor: pointer;
   color: #fff;
   text-align: center;
   font-size: 14px;
@@ -240,6 +241,23 @@ a.go:after {
   -o-transition: all linear .25s;
   -ms-transition: all linear .25s;
   transition: all linear .25s;
+}
+input.button.go,
+button.button.go {
+  position: relative;
+  padding-right: 50px;
+}
+input.button.go:after,
+button.button.go:after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin-top: -10px;
+  width: 20px;
+  height: 20px;
+  background: url(/static/img/arrow-go-r.png) no-repeat;
 }
 
 /* @Layout *********/

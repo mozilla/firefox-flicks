@@ -27,3 +27,9 @@ def persona(request):
     return render(request, 'users/persona.html', {
         'next': request.GET.get('next', reverse('flicks.base.home'))
     })
+
+    
+def profile_static(request):
+    """Static mock template for profile creation form."""
+    return render(request, 'users/profile_static.html')
+

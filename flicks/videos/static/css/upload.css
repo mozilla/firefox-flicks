@@ -1,3 +1,128 @@
+html {
+  background: #f5f5f5;
+}
+
+body {
+  background: url(/static/img/spot-1.png) -550px -400px no-repeat, url(/static/img/spot-2.png) 730px -360px no-repeat, url(/static/img/spot-3.png) 75% 680px no-repeat, #f5f5f5 url(/static/img/bg-grain.png) 0 0 fixed;
+}
+
+#page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 30px;
+  background: transparent none;
+}
+
+.page-title {
+  text-align: left;
+  margin: 20px;
+}
+
+.steps {
+  margin: 0 20px -12px;
+  list-style: none;
+  font-size: 22px;
+  position: relative;
+  z-index: 6;
+}
+
+.steps li {
+  display: inline-block;
+  margin-right: 20px;
+  padding: 2px 0 30px 30px;
+}
+
+.steps .done {
+  color: #2a821e;
+  background: url(/static/img/check.png) left .25em no-repeat;
+}
+
+.steps .current {
+  background: url(/static/img/point.png) 55% bottom no-repeat;
+}
+
+.user-input {
+  position: relative;
+}
+
+.upload-form {
+  max-width: 840px;
+  padding: 19px;
+  border: 1px solid #d0e7f9;
+  background: #dff0f5;
+  font: 14px "Open Sans", sans-serif;
+  text-shadow: 0 1px 0 rgba(255,255,255,.25);
+}
+
+.upload-form fieldset {
+  width: 540px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #c1d9ed;
+  box-shadow: 0 1px 0 #fff;
+}
+
+.upload-form li {
+  width: 240px;
+  margin: 0 30px 10px 0;
+  float: left;
+  position: relative;
+}
+
+.upload-form .col1 {
+  clear: left;
+}
+
+.upload-form label {
+  display: block;
+  margin: 0 0 .25em;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.upload-form .check label {
+  display: inline-block;
+  margin: 0;
+  padding-left: 30px;
+  text-transform: none;
+}
+
+.upload-form input {
+  width: 230px;
+  padding: 4px;
+  border: 1px solid #91b4bf;
+  border-radius: 5px;
+}
+
+.upload-form select {
+  width: 100%;
+}
+
+.upload-form .check input {
+  width: 16px;
+  height: 16px;
+  float: left;
+  margin-left: -30px;
+}
+
+.upload-form .note {
+  font-size: 12px;
+  width: 240px;
+  position: absolute;
+  left: 540px;
+}
+
+.form-submit {
+  clear: both;
+  text-align: right;
+  margin: 20px 0;
+}
+
+#user-info li.region {
+  font-size: 13px;
+  padding-top: 1.75em;
+}
+
 #video-form {
     display: none;
 }
@@ -5,3 +130,87 @@
 .bar {
     background: #FF0000;
 }
+
+
+/* Tablet Layout: 760px */
+@media only screen and (min-width: 760px) and (max-width: 880px) {
+  
+  .steps {
+    font-size: 18px;
+  }
+  
+  .upload-form fieldset {
+    width: 460px;
+  }
+  
+  .upload-form li {
+    width: 200px;
+  }
+  
+  .upload-form input {
+    width: 190px;
+  }
+
+  .upload-form .note {
+    width: 190px;
+    left: 460px;
+  }
+
+
+}
+
+/* Mobile Layout: 320px */
+@media only screen and (max-width: 760px) {
+
+  body {
+    height: auto;
+    background-position: -550px -400px, 140px -360px, 75% 1200px, 0 0;
+  }
+  
+  #page {
+    padding: 10px;
+  }
+
+  .steps {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .steps li {
+    display: block;
+    padding-bottom: 0;
+  }
+  
+  .steps .current {
+    background: none;
+  }
+  
+  .upload-form fieldset {
+    width: auto;
+  }
+  
+  .upload-form li {
+    width: auto;
+    margin-right: 0;
+    float: none;
+  }
+  
+  .upload-form input,
+  .upload-form select {
+    width: 240px;
+  }
+
+  .upload-form .note {
+    width: auto;
+    position: static;
+    margin: 0 0 1em;
+  }
+
+}
+
+/* Wide Mobile Layout: 480px */
+@media only screen and (min-width: 480px) and (max-width: 760px) {
+
+
+}
+
