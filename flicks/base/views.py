@@ -56,12 +56,14 @@ def faq(request):
         'link_cclicense': LINK_CCLICENSE.get(request.locale, LINK_CCLICENSE['en-US'])
     })
 
+
 def rules(request):
     """Rules page. If template does not exist default to us."""
     try:
         return render(request, 'rules/{0}.html'.format(request.locale))
-    except (TemplateNotFound, TemplateDoesNotExist), e:
+    except (TemplateNotFound, TemplateDoesNotExist):
         return render(request, 'rules/en-US.html')
+
 
 def strings(request):
     """Strings L10N page."""

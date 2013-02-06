@@ -2,7 +2,7 @@
 NORTH_AMERICA = 0
 LATIN_AMERICA = 1
 EMEA = 2  # Europe, Middle East, Africa
-APAC = 3  # Australia, Pacific
+APAC = 3  # Asia Pacific
 
 
 # Map region values to countries.

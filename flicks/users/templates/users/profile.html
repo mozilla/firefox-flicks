@@ -7,7 +7,28 @@
   {{ css('upload') }}
 {% endblock %}
 
+{% block site_js %}
+  {{ js('jquery') }}
+  {{ js('flicks_js') }}
+  {{ js('profile') }}
+{% endblock %}
+
 {% from 'macros.html' import input_in_label %}
+
+{% block body_data %}
+  data-region-map="{{ regions.countries|json }}"
+{% endblock %}
+
+{% block string_data %}
+  {# L10n: Label for the contest region in North America. #}
+  data-region-{{ regions.NORTH_AMERICA }}="{{ _('North America') }}"
+  {# L10n: Label for the contest region in Latin America. #}
+  data-region-{{ regions.LATIN_AMERICA }}="{{ _('Latin America') }}"
+  {# L10n: Label for the contest region in Europe, the Middle East, and Africa. #}
+  data-region-{{ regions.EMEA }}="{{ _('Europe, Middle East, Africa') }}"
+  {# L10n: Label for the contest region in Asia and the Pacific region. #}
+  data-region-{{ regions.APAC }}="{{ _('Asia Pacific') }}"
+{% endblock %}
 
 {% block body %}
   <main id="page" role="main">

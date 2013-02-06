@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render
 from commonware.response.decorators import xframe_sameorigin
 from funfactory.urlresolvers import reverse
 
+from flicks.base import regions
 from flicks.users.forms import UserProfileForm
 
 
@@ -18,7 +19,10 @@ def profile(request):
         profile.save()
         return redirect('flicks.videos.upload')
 
-    return render(request, 'users/profile.html', {'form': form})
+    return render(request, 'users/profile.html', {
+        'form': form,
+        'regions': regions,
+    })
 
 
 @xframe_sameorigin

@@ -1,10 +1,11 @@
 from django.conf import settings
 
+import product_details
 from mock import patch
 from nose.tools import eq_
 
 from flicks.base.tests import TestCase
-from flicks.base.util import (absolutify, get_object_or_none,
+from flicks.base.util import (absolutify, country_choices, get_object_or_none,
                               promo_video_shortlink, redirect)
 from flicks.videos.models import Video2012
 from flicks.videos.tests import Video2012Factory
@@ -92,3 +93,27 @@ class TestPromoVideoShortlin(TestCase):
         """If a video for the current locale exists, return it's shortlink."""
         with self.activate('fr'):
             eq_(promo_video_shortlink('noir'), 'french')
+
+
+@patch.object(product_details, 'product_details')
+class CountryChoicesTests(TestCase):
+    def test_basic(self, product_details):
+        product_details.get_regions.return_value = ({'us': 'United States',
+                                                     'fr': 'France'})
+        with self.settings(INELIGIBLE_COUNTRIES=['fr']):
+            with self.activate('en-US'):
+                choices = country_choices(allow_empty=True)
+
+        eq_(choices, [('', '---'), ('us', 'United States')])
+        product_details.get_regions.assert_called_with('en-us')
+
+    def test_dont_allow_empty(self, product_details):
+        product_details.get_regions.return_value = ({'us': 'United States',
+                                                     'fr': 'France'})
+        with self.settings(INELIGIBLE_COUNTRIES=['us']):
+            with self.activate('fr'):
+                choices = country_choices(allow_empty=False)
+
+        eq_(choices, [('fr', 'France')])
+        product_details.get_regions.assert_called_with('fr')
+
