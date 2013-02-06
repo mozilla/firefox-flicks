@@ -38,7 +38,8 @@ def vimeo_embed_code(vimeo_id, width=600, height=338, elem_class='video'):
                 height="{height}"
                 frameborder="0">
         </iframe>
-    """.format(url=url, width=width, height=height, elem_class=elem_class)
+    """.strip().format(url=url, width=width, height=height,
+                       elem_class=elem_class)
 
 
 def send_approval_email(video):

@@ -9,6 +9,7 @@ from flicks.users.tests import UserFactory
 
 class TestProfile(TestCase):
     def setUp(self):
+        super(TestProfile, self).setUp()
         self.user = UserFactory.create()
         self.browserid_login(self.user.email)
 

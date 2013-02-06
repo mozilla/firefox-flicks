@@ -10,6 +10,7 @@ from flicks.urls import handler500
 
 class ViewTests(TestCase):
     def setUp(self):
+        super(ViewTests, self).setUp()
         self.factory = RequestFactory()
 
     def test_robots_txt(self):

@@ -9,6 +9,7 @@ from flicks.videos.decorators import in_overlay
 
 class TestInOverlay(TestCase):
     def setUp(self):
+        super(TestInOverlay, self).setUp()
         self.factory = RequestFactory()
 
     def test_basic(self):

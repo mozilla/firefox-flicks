@@ -10,6 +10,7 @@ from flicks.users.tests import UserFactory, UserProfileFactory
 
 class TestProfileRequired(TestCase):
     def setUp(self):
+        super(TestProfileRequired, self).setUp()
         self.factory = RequestFactory()
 
     def test_no_user(self):

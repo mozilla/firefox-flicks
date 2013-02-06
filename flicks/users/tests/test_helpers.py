@@ -6,6 +6,8 @@ from flicks.users.helpers import gravatar_url
 
 class TestGravatars(TestCase):
     def setUp(self):
+        super(TestGravatars, self).setUp()
+
         # Gravatar hash for this email is b642b4217b34b1e8d3bd915fc65c4452
         self.user = self.build_user('test@test.com')
 

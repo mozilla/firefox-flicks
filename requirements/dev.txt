@@ -12,6 +12,8 @@ Sphinx==1.0.7
 
 # Testing
 nose==1.0.0
+mock>=1.0.1
+pyquery>=1.2.4
 -e git://github.com/jbalogh/django-nose.git#egg=django_nose
 -e git://github.com/jbalogh/test-utils.git#egg=test-utils
 
@@ -19,4 +21,3 @@ nose==1.0.0
 translate-toolkit==1.8.0
 
 
-mock>=1.0.1

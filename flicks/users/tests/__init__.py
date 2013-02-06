@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import Group, User
 
 from factory import Factory, Sequence, SubFactory
 
@@ -9,6 +9,12 @@ class UserFactory(Factory):
     FACTORY_FOR = User
 
     username = Sequence(lambda n: 'test{0}'.format(n))
+
+
+class GroupFactory(Factory):
+    FACTORY_FOR = Group
+
+    name = Sequence(lambda n: 'test{0}'.format(n))
 
 
 class UserProfileFactory(Factory):

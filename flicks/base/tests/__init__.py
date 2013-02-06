@@ -12,6 +12,7 @@ from django_browserid.tests import mock_browserid
 from funfactory.urlresolvers import (get_url_prefix, Prefixer, reverse,
                                      set_url_prefix)
 from nose.tools import ok_
+from mock import patch
 from tower import activate
 
 from flicks.users.models import UserProfile
@@ -31,6 +32,13 @@ class SessionRequestFactory(RequestFactory):
 
 class TestCase(test_utils.TestCase):
     """Base class for Flicks test cases."""
+    def setUp(self):
+        self.video_privacy_patch = patch('flicks.videos.models.vimeo')
+        self.video_privacy_patch.start()
+
+    def tearDown(self):
+        self.video_privacy_patch.stop()
+
     @contextmanager
     def activate(self, locale):
         """Context manager that temporarily activates a locale."""

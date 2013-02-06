@@ -38,3 +38,21 @@ def redirects_(response, to, request=None, permanent=False):
 
     eq_(expected.status_code, response.status_code)
     eq_(expected['Location'], response['Location'])
+
+
+class CONTAINS(object):
+    """
+    Helper object that checks for equalness by checking if the compared object
+    contains elements passed in the constructor.
+    """
+    def __init__(self, *args):
+        self.values = args
+
+    def __eq__(self, other):
+        return all(value in other for value in self.values)
+
+    def __ne__(self, other):
+        return any(value not in other for value in self.values)
+
+    def __repr__(self):
+        return '<CONTAINS {0}>'.format(self.values)

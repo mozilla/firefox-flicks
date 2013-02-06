@@ -10,6 +10,7 @@ from flicks.videos.models import Video
 
 class TestUpload(TestCase):
     def setUp(self):
+        super(TestUpload, self).setUp()
         self.user = UserProfileFactory.create(user__email='a@b.com').user
         self.browserid_login(self.user.email)
 
