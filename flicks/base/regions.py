@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
+
 NORTH_AMERICA = 0
 LATIN_AMERICA = 1
 EMEA = 2  # Europe, Middle East, Africa
@@ -267,3 +269,7 @@ for region in regions:
 
 def get_region(country):
     return countries.get(country, None)
+
+
+def get_countries(region):
+    return regions.get(region, None)

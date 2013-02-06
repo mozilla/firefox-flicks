@@ -3,6 +3,8 @@ from django.conf.urls.defaults import patterns, url
 from flicks.videos import views
 
 urlpatterns = patterns('',
+    url(r'^$', views.video_list, name='flicks.videos.list'),
+    url(r'^(?P<page>\d+)/$', views.video_list, name='flicks.videos.list'),
     url(r'^upload/$', views.upload, name='flicks.videos.upload'),
     url(r'^upload/complete/$', views.upload_complete,
         name='flicks.videos.upload_complete'),
@@ -16,5 +18,4 @@ urlpatterns = patterns('',
         name='flicks.videos.promo_video_dance'),
     url(r'^twilight/$', views.promo_video_twilight,
         name='flicks.videos.promo_video_twilight'),
-    url(r'^videos/recent/$', views.recent, name='flicks.videos.recent')
 )

@@ -167,6 +167,7 @@ GRAVATAR_URL = 'https://secure.gravatar.com'
 DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
 
 # Vimeo API
+VIMEO_USER_ID = ''
 VIMEO_CLIENT_KEY = u''
 VIMEO_CLIENT_SECRET = u''
 VIMEO_RESOURCE_OWNER_KEY = u''

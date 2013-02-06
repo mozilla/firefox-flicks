@@ -1,3 +1,72 @@
 {% macro input_in_label(input, label) -%}
     {{ input.label_tag(' '.join((input|string, label))) }}
 {%- endmacro %}
+
+{% macro pagination(page, url_name) -%}
+  <nav class="pagination" role="navigation">
+      <ol>
+        {% if page.has_previous() %}
+          <li class="prev">
+            <a href="{{ url(url_name, page=page.previous_page_number()) }}">
+              {{ _('Previous page') }}
+            </a>
+          </li>
+        {% endif %}
+
+        {% if page.number - 3 > 1 %}
+          <li>
+            <a href="{{ url(url_name, page=1) }}">
+              {% trans page_number=1 %}
+                <span>Go to page</span> {{ page_number }}
+              {% endtrans %}
+            </a>
+          </li>
+
+          {% if page.number - 4 > 1 %}
+            <li class="gap">&hellip;</li>
+          {% endif %}
+        {% endif %}
+
+        {% set page_range = range(page.number - 3, page.number + 4) %}
+        {% for number in page_range if number > 0 and number <= page.paginator.num_pages %}
+           {% if number == page.number %}
+             <li class="current">
+              {% trans page_number=number %}
+                <span>You're on page</span> {{ page_number }}
+              {% endtrans %}
+            </li>
+           {% else %}
+             <li>
+               <a href="{{ url(url_name, page=number) }}">
+                {% trans page_number=number %}
+                  <span>Go to page</span> {{ page_number }}
+                {% endtrans %}
+              </a>
+            </li>
+           {% endif %}
+        {% endfor %}
+
+        {% if page.number + 3 < page.paginator.num_pages %}
+          {% if page.number + 4 < page.paginator.num_pages %}
+            <li class="gap">&hellip;</li>
+          {% endif %}
+
+          <li>
+            <a href="{{ url(url_name, page=page.paginator.num_pages) }}">
+              {% trans page_number=page.paginator.num_pages %}
+                <span>Go to page</span> {{ page_number }}
+              {% endtrans %}
+            </a>
+          </li>
+        {% endif %}
+
+        {% if page.has_next() %}
+          <li class="next">
+            <a href="{{ url(url_name, page=page.next_page_number()) }}">
+              {{ _('Next page') }}
+            </a>
+          </li>
+        {% endif %}
+      </ol>
+    </nav>
+{%- endmacro %}

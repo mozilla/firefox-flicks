@@ -1,17 +1,38 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
 from tower import ugettext_lazy as _lazy
 
+from flicks.base import regions
 from flicks.base.util import promo_video_shortlink
 from flicks.videos import tasks, vimeo
 from flicks.videos.decorators import in_overlay
 from flicks.videos.forms import VideoForm
-from flicks.videos.models import Video2012
+from flicks.videos.models import Video, Video2012
 from flicks.videos.util import vidly_embed_code
 from flicks.users.decorators import profile_required
 
 
 ### 2013 Contest ###
+# Video pages
+def video_list(request, page=1):
+    """Show a list of recent videos, optionally filtered by region or search."""
+    region = request.GET.get('region', None)
+    videos = Video.objects.filter(approved=True).order_by('-created')
+    if region:
+        videos = videos.filter(user__country__in=regions.get_countries(region))
+
+    paginator = Paginator(videos, 12, allow_empty_first_page=True)
+    try:
+        videos = paginator.page(page)
+    except PageNotAnInteger:
+        videos = paginator.page(1)  # Default to first page
+    except EmptyPage:
+        videos = paginator.page(paginator.num_pages)  # Out of range = last
+
+    return render(request, 'videos/list.html', {'videos': videos})
+
+
 # Upload process
 @profile_required
 @in_overlay
@@ -55,12 +76,6 @@ def upload_complete(request):
 @in_overlay
 def upload_error(request):
     return render(request, 'videos/upload_error.html', status=500)
-
-
-# Video pages
-def recent(request):
-    """Recent videos page."""
-    return render(request, 'videos/recent.html', {'page_type': 'archive'})
 
 
 ### 2012 Archive ###

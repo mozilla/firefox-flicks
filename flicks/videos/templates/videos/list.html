@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% from 'macros.html' import pagination %}
+
+{% block page_title %}{{ _('2013 gallery') }}{% endblock %}
+
+{% block og_title %}{{ _('2013 gallery') }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}
+
+{% block site_css %}
+  {{ super() }}
+  {{ css('archive_css') }}
+{% endblock %}
+
+{% block content %}
+  <div class="section wrap">
+    <h1 class="page-title">{{ _('Welcome to the<br> Firefox Flicks 2013 gallery') }}</h1>
+    <div class="section-intro">
+      <p>
+      {% trans %}
+        This year we're asking filmmakers and Firefox fans to inspire
+        others to get mobilized by telling the world about the power and
+        potential of mobile. Have a look at the entries and be sure to
+        share you favorites with your friends.
+      {% endtrans %}
+      </p>
+    </div>
+
+    {# TODO: Hook up thumbnail and link #}
+    <ul class="entry-list">
+      {% for video in videos %}
+        <li class="entry">
+          <a href="/video/ID">
+            <img src="{{ static('img/home/vidthumb-falling.jpg') }}" alt="" class="thumbnail">
+            <hgroup>
+              <h2>{{ video.title }}</h2>
+              <h3 class="vcard">
+                <span class="fn">{{ video.user.profile.display_name }}</span>,
+                <span class="country-name">{{ country_name(video.user.profile.country) }}</span>
+              </h3>
+            </hgroup>
+          </a>
+          <p>
+            {% trans datetime=video.created.strftime('%Y-%m-%d'),
+                     date=video.created|babel_date %}
+              Submitted <time datetime="{{ datetime }}">{{ date }}</time>
+            {% endtrans %}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {{ pagination(videos, 'flicks.videos.list')}}
+
+    <aside id="trailers" class="samples">
+      <h2>{{ _('Flicks trailers') }}</h2>
+      <p>
+      {% trans %}
+        If you're thinking about entering, you can also watch our promos
+        to get inspired and learn more about making your winning flick.
+      {% endtrans %}
+      </p>
+
+      <ul class="entry-list">
+        <li class="entry">
+          <a href="/video/ID" class="video-play" data-vimeo-id="57743653">
+            <img src="{{ static('img/home/vidthumb-fenwick.jpg') }}" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Example One</h2>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="/video/ID" class="video-play" data-vimeo-id="57743653">
+            <img src="{{ static('img/home/vidthumb-weird.jpg') }}" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Example Two</h2>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="/video/ID" class="video-play" data-vimeo-id="57743653">
+            <img src="{{ static('img/home/vidthumb-paranoid.jpg') }}" alt="" class="thumbnail">
+            <hgroup>
+              <h2>Example Three</h2>
+            </hgroup>
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+  </div>
+{% endblock %}
