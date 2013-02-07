@@ -2,7 +2,6 @@ from django.conf import settings
 
 import commonware
 import requests
-from celery.decorators import task
 from requests_oauthlib import OAuth1
 
 from flicks.videos.decorators import vimeo_task

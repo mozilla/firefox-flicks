@@ -1,6 +1,6 @@
 from functools import wraps
 
-from celery.decorators import task
+from celery import task
 from commonware.response.decorators import xframe_sameorigin
 
 
