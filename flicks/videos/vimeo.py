@@ -5,6 +5,8 @@ import requests
 from celery.decorators import task
 from requests_oauthlib import OAuth1
 
+from flicks.videos.decorators import vimeo_task
+
 
 logger = commonware.log.getLogger('f.videos.vimeo')
 
@@ -67,6 +69,7 @@ def _video_request(vimeo_method, request_method, error_msg=None, **data):
     return response
 
 
+@vimeo_task
 def get_new_ticket():
     """Request a new upload ticket from Vimeo."""
     response = _vimeo_request('vimeo.videos.upload.getTicket', 'POST',
@@ -80,6 +83,7 @@ def get_new_ticket():
     return response['ticket']
 
 
+@vimeo_task
 def is_ticket_valid(ticket_id):
     """Check if an upload ticket is still valid."""
     try:
@@ -92,6 +96,7 @@ def is_ticket_valid(ticket_id):
         return False
 
 
+@vimeo_task
 def verify_chunks(ticket_id, expected_size):
     """
     Verify that the entire video file made it to Vimeo.
@@ -111,6 +116,7 @@ def verify_chunks(ticket_id, expected_size):
     return size == int(expected_size)
 
 
+@vimeo_task
 def complete_upload(ticket_id, filename):
     """Mark an upload as complete and submit it for processing."""
     response = _ticket_request('vimeo.videos.upload.complete', 'POST',
@@ -120,6 +126,7 @@ def complete_upload(ticket_id, filename):
     return response['ticket']
 
 
+@vimeo_task
 def set_title(video_id, title):
     """Set the title of a video."""
     _video_request('vimeo.videos.setTitle', 'POST', video_id=video_id,
@@ -128,6 +135,7 @@ def set_title(video_id, title):
                              '<{code} {msg}> {expl}')
 
 
+@vimeo_task
 def set_description(video_id, description):
     """Set the description of a video."""
     _video_request('vimeo.videos.setDescription', 'POST', video_id=video_id,
@@ -136,6 +144,7 @@ def set_description(video_id, description):
                              '<{code} {msg}> {expl}')
 
 
+@vimeo_task
 def add_to_channel(video_id, channel_id):
     """Add a video to a channel."""
     _video_request('vimeo.channels.addVideo', 'POST', video_id=video_id,
@@ -144,6 +153,7 @@ def add_to_channel(video_id, channel_id):
                              '<{code} {msg}> {expl}')
 
 
+@vimeo_task
 def add_tags(video_id, tags):
     """Add tags to a video."""
     _video_request('vimeo.videos.addTags', 'POST', video_id=video_id,
@@ -152,7 +162,7 @@ def add_tags(video_id, tags):
                              '<{code} {msg}> {expl}')
 
 
-@task
+@vimeo_task
 def set_privacy(video_id, privacy, password=None):
     """Set privacy options on a video."""
     _video_request('vimeo.videos.setPrivacy', 'POST', video_id=video_id,

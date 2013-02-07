@@ -16,8 +16,7 @@ class Video2013(models.Model, CachingMixin):
     title = models.CharField(max_length=255, blank=False)
     description = models.TextField(blank=True)
     user = models.ForeignKey(User)
-    created = models.DateTimeField(auto_now_add=True,
-                                   default=datetime(2013, 2, 5))
+    created = models.DateTimeField(default=datetime.now)
 
     vimeo_id = models.IntegerField()
     filename = models.CharField(max_length=255, blank=False)
@@ -114,8 +113,7 @@ class Video2012(models.Model, CachingMixin):
     region = models.CharField(max_length=50, blank=False,
                               choices=REGION_CHOICES,
                               verbose_name=_lazy(u'Region'))
-    created = models.DateTimeField(auto_now_add=True,
-                                   default=datetime(2012, 2, 28))
+    created = models.DateTimeField(default=datetime.now)
 
     upload_url = models.URLField(verify_exists=False, blank=False, default='',
                                  verbose_name=_lazy(u'Video File URL'))

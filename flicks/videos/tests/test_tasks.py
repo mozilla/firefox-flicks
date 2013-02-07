@@ -56,21 +56,3 @@ class TestProcessVideo(TestCase):
         send_mail.assert_called_with(ANY, ANY, 'blah@test.com',
                                      CONTAINS('test1@test.com',
                                               'test2@test.com'))
-
-    @patch('flicks.videos.tasks.process_video.retry', wraps=process_video.retry)
-    def test_retry(self, retry, mock_vimeo):
-        """
-        If a vimeo command fails due to a VimeoServiceError, raise a retry
-        exception for celery to retry later.
-        """
-        mock_vimeo.set_title.side_effect = vimeo.VimeoServiceError
-        mock_vimeo.VimeoServiceError = vimeo.VimeoServiceError
-
-        user = UserProfileFactory.create().user
-        video = VideoFactory.create(user=user)
-        ok_(not retry.called)
-
-        # When not being executed in a worker, retry just raises the exception.
-        with self.assertRaises(vimeo.VimeoServiceError):
-            process_video(video.id)
-        ok_(retry.called)
