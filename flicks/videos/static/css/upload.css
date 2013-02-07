@@ -203,7 +203,7 @@ body {
   top: 6px;
 }
 
-.file-button input {
+.file-button input[type=file] {
   border: 0;
   margin: 0;
   width: auto;
@@ -220,8 +220,11 @@ body {
   overflow: hidden;
 }
 
-#video-form fieldset {
+#video-form {
   display: none;
+}
+
+#video-form fieldset {
   border: 0;
   padding: 0;
   box-shadow: none;
@@ -372,7 +375,7 @@ body {
   .video-info .col2 {
     width: 490px;
   }
-  
+
   .video-info .note {
     width: 100%;
   }
@@ -431,7 +434,7 @@ body {
   .video-data {
     padding-left: 0;
   }
-  
+
   .video-data h2 {
     width: auto;
     float: none;
@@ -445,16 +448,16 @@ body {
   .video-info .col2 {
     width: auto;
   }
-  
+
   .video-info .col2 textarea {
     width: 98%;
   }
-  
+
   .video-info .note {
     width: 100%;
     margin: .25em 0;
   }
-  
+
   .file-button {
     width: 240px;
     height: auto;
@@ -462,12 +465,12 @@ body {
     left: auto;
     margin: 0 auto;
   }
-  
+
   .file-button .button {
     font-size: 16px;
     width: auto;
   }
-  
+
   .video-info textarea {
     width: auto;
   }
@@ -475,12 +478,12 @@ body {
   .video-info .col2 {
     width: auto;
   }
-  
+
   .progress {
     width: auto;
     height: auto;
   }
-  
+
   .progress .filename,
   .progress .filesize {
     width: auto;

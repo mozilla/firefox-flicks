@@ -53,14 +53,14 @@
               <i>4</i>
             {% trans %}
               Your video will be posted to both the Firefox Flicks website and
-              the Vimeo website under a FirefoxFlicks account.
+              the Vimeo website under a Firefox Flicks account.
             {% endtrans %}
             </li>
           </ol>
 
           <p>
           {% trans link_rules=url('flicks.base.rules') %}
-            Please read the <a href="{{ linke_rules }}">official contest rules</a> before submitting your video.
+            Please read the <a href="{{ link_rules }}">official contest rules</a> before submitting your video.
           {% endtrans %}
           </p>
         </div>
@@ -81,8 +81,8 @@
             <h2>{{ _('Your flick') }}</h2>
 
             <div class="progress">
-              <span class="filename">{{ form.filename }}</span>
-              <span class="filesize">{{ form.filesize }}</span>
+              <span class="filename"></span>
+              <span class="filesize"></span>
               <button type="button" class="remove">{{ _('Remove') }}</button>
               <div class="bar" style="width: 50%;"></div>
             </div>
@@ -94,14 +94,17 @@
               <em class="note">{{ _('Be concise, yet unique') }}</em>
             </p>
             <p class="col2">
-              {{ form.description.label_tag('Describe your flick') }} {{ form.description }}
+              {{ form.description.label_tag('Describe your flick') }}
+              {{ form.description }}
               <em class="note">{{ _('In 1-3 sentences. This is what people will see when they view or share your video.') }}</em>
             </p>
           </div>
+
+          {{ form.filename }}
+          {{ form.filesize }}
         </fieldset>
 
         <div class="form-control">
-          <a href="#" class="button prev">{{ _('Back') }}</a>
           <button type="submit" disabled class="button next disabled">{{ _('Next') }}</button>
         </div>
       </form>

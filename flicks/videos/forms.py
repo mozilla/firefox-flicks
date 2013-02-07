@@ -11,5 +11,6 @@ class VideoForm(forms.ModelForm):
         fields = ('title', 'description', 'filename')
         widgets = {
             'title': forms.TextInput(attrs={'required': 'required'}),
+            'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
             'filename': forms.HiddenInput
         }

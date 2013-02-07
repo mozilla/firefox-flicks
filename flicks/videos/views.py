@@ -57,11 +57,6 @@ def upload_error(request):
     return render(request, 'videos/upload_error.html', status=500)
 
 
-def upload_static(request):
-    """Static mock template for video upload form."""
-    return render(request, 'videos/upload_static.html')
-
-
 # Video pages
 def recent(request):
     """Recent videos page."""

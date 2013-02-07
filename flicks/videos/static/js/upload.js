@@ -3,7 +3,7 @@
         var ERROR_URL = '/video/upload/error/';
 
         var $uploadForm = $('#vimeo-file-upload');
-        var $videoForm = $('#video-form fieldset');
+        var $videoForm = $('#video-form');
         var $progress = $videoForm.find('.progress');
 
         var uploadXHR = null;
