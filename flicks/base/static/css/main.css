@@ -242,13 +242,12 @@ a.go:after {
   -ms-transition: all linear .25s;
   transition: all linear .25s;
 }
-input.button.go,
-button.button.go {
+
+.button.next {
   position: relative;
   padding-right: 50px;
 }
-input.button.go:after,
-button.button.go:after {
+.button.next:after {
   content: "";
   display: block;
   position: absolute;
@@ -258,6 +257,23 @@ button.button.go:after {
   width: 20px;
   height: 20px;
   background: url(/static/img/arrow-go-r.png) no-repeat;
+}
+
+.button.prev {
+  display: inline-block;
+  position: relative;
+  padding-left: 50px;
+}
+.button.prev:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  margin-top: -10px;
+  width: 20px;
+  height: 20px;
+  background: url(/static/img/arrow-go-l.png) no-repeat;
 }
 
 /* @Layout *********/

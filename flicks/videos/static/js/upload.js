@@ -3,7 +3,7 @@
         var ERROR_URL = '/video/upload/error/';
 
         var $uploadForm = $('#vimeo-file-upload');
-        var $videoForm = $('#video-form');
+        var $videoForm = $('#video-form fieldset');
         var $progress = $videoForm.find('.progress');
 
         var uploadXHR = null;
@@ -11,7 +11,7 @@
         $uploadForm.fileupload({
             dataType: 'text',
             done: function(e, data) {
-                $videoForm.find('button').removeAttr('disabled');
+                $videoForm.find('button').removeAttr('disabled').removeClass('disabled');
             },
             fail: function(e, data) {
                 if (data.textStatus !== 'abort') {
@@ -39,7 +39,7 @@
             e.preventDefault();
             if (uploadXHR !== null) {
                 uploadXHR.abort();
-                $videoForm.find('button').attr('disabled', 'disabled');
+                $videoForm.find('button').attr('disabled', 'disabled').addClass('disabled');
                 $videoForm.fadeOut(500, function() {
                     $uploadForm.fadeIn(500);
                 });

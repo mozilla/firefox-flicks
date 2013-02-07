@@ -20,35 +20,36 @@
     </ol>
 
     <form class="user-input" id="user-info" method='POST'>
-      <fieldset class="upload-form">
+      <fieldset id="account">
+        <p class="legend">
+        {% trans %}
+          Thanks for entering Firefox Flicks, the global video contest 
+          about the power of mobile. To submit your flick, please tell us 
+          who you are and where you're from.
+        {% endtrans %}
+        </p>
         {{ csrf() }}
-        <fieldset id="account">
-          <p class="legend">
-          {% trans %}
-            Thanks for entering Firefox Flicks, the global video contest
-            about the power of mobile. To submit your flick, please tell us
-            who you are and where you're from.
-          {% endtrans %}
-          </p>
-
-          <ul>
-            <li class="col1">
-              {{ form.full_name.label_tag(_('Full Name')) }} {{ form.full_name }}
-            </li>
-            <li class="col2">
-              {{ form.nickname.label_tag(_('Nickname')) }} {{ form.nickname }}
-            </li>
-            <li class="col1">
-              <em class="note">
-                {{ _('Some prizes are awarded by region, so let us know what part of the world your flick is representing.') }}
-              </em>
-              {{ form.country.label_tag(_('Country')) }} {{ form.country }}
-            </li>
-            <li class="col2 region">
-              {{ _('Region') }}: <span id="region"></span>
-            </li>
-          </ul>
-        </fieldset>
+        <ul>
+          <li class="col1">
+            <em class="note">
+              {{ _('Your name will be displayed publicly with your video.') }}
+            </em>
+            {{ form.full_name.label_tag(_('Full Name')) }} {{ form.full_name }}
+          </li>
+          <li class="col2">
+            {{ form.nickname.label_tag(_('Nickname')) }} {{ form.nickname }}
+          </li>
+          <li class="col1">
+            <em class="note">
+              {{ _('Some prizes are awarded by region, so let us know what part of the world your flick is representing.') }}
+            </em>
+            {{ form.country.label_tag(_('Country')) }} {{ form.country }}
+          </li>
+          <li class="col2 region">
+            {{ _('Region') }}: <span id="region"></span>
+          </li>
+        </ul>
+      </fieldset>
 
         <fieldset id="address">
           <p class="legend">
@@ -59,7 +60,7 @@
           <ul>
             <li class="col1">
               <em class="note">
-                {{ _('Provide your address to receive a special thank-you gift for entering.') }}
+                {{ _('We ask for your address so we can send you an awesome gift for participating. Providing it is completely optional and we won\'t use it or keep it for any other purpose.') }}
               </em>
               {{ form.address1.label_tag(_('Address line 1')) }} {{ form.address1 }}
             </li>
@@ -96,9 +97,9 @@
         </fieldset>
       </ul>
 
-      <p class="form-submit">
-        <button type="submit" class="button go">{{ _('Next') }}</button>
-      </p>
+      <div class="form-control">
+        <button type="submit" class="button next">{{ _('Next') }}</button>
+      </div>
     </form>
 
   </main>

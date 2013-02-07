@@ -18,6 +18,7 @@ body {
   margin: 20px;
 }
 
+/* @Steps *********/
 .steps {
   margin: 0 20px -12px;
   list-style: none;
@@ -41,20 +42,17 @@ body {
   background: url(/static/img/point.png) 55% bottom no-repeat;
 }
 
+/* @Form styles *********/
 .user-input {
   position: relative;
-}
-
-.upload-form {
   max-width: 840px;
   padding: 19px;
   border: 1px solid #d0e7f9;
   background: #dff0f5;
-  font: 14px "Open Sans", sans-serif;
   text-shadow: 0 1px 0 rgba(255,255,255,.25);
 }
 
-.upload-form fieldset {
+.user-input fieldset {
   width: 540px;
   padding-bottom: 20px;
   margin-bottom: 20px;
@@ -62,60 +60,87 @@ body {
   box-shadow: 0 1px 0 #fff;
 }
 
-.upload-form li {
+#submit-video fieldset {
+  width: auto;
+}
+
+.user-input h2 {
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px;
+}
+
+.user-input ul,
+.user-input ol {
+  margin: 0;
+}
+
+.user-input ul:after,
+.user-input ol:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+.user-input p,
+.user-input li {
+  font: 14px "Open Sans", sans-serif;
+}
+
+.user-input .col1,
+.user-input .col2 {
   width: 240px;
   margin: 0 30px 10px 0;
   float: left;
   position: relative;
 }
 
-.upload-form .col1 {
+.user-input .col1 {
   clear: left;
 }
 
-.upload-form label {
+.user-input label {
   display: block;
   margin: 0 0 .25em;
   font-size: 12px;
   text-transform: uppercase;
 }
 
-.upload-form .check label {
+.user-input .check label {
   display: inline-block;
   margin: 0;
   padding-left: 30px;
   text-transform: none;
 }
 
-.upload-form input {
+.user-input input,
+.user-input textarea {
   width: 230px;
   padding: 4px;
+  margin-left: -2px;
   border: 1px solid #91b4bf;
   border-radius: 5px;
 }
 
-.upload-form select {
+.user-input select {
   width: 100%;
+  margin-left: -2px;
 }
 
-.upload-form .check input {
+.user-input .check input {
   width: 16px;
   height: 16px;
   float: left;
   margin-left: -30px;
 }
 
-.upload-form .note {
+.user-input .note {
   font-size: 12px;
   width: 240px;
   position: absolute;
   left: 540px;
-}
-
-.form-submit {
-  clear: both;
-  text-align: right;
-  margin: 20px 0;
 }
 
 #user-info li.region {
@@ -123,39 +148,234 @@ body {
   padding-top: 1.75em;
 }
 
-#video-form {
-    display: none;
+/*** @Rules *********/
+.user-input .rules {
+  margin: 0 0 40px;
+  border-bottom: 1px solid #c1d9ed;
+  box-shadow: 0 1px 0 #fff;
 }
 
-.bar {
-    background: #FF0000;
+.user-input .rules li {
+  position: relative;
+  margin: 0 30px 1em;
 }
 
+.user-input .rules i {
+  font-size: 22px;
+  font-style: normal;
+  position: absolute;
+  left: -30px;
+  top: -.25em;
+}
+
+/* @File button *********/
+#file-select {
+  height: 70px;
+  text-align: center;
+  position: relative;
+}
+
+.file-button {
+  display: block;
+  width: 340px;
+  height: 2.65em;
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  margin-left: -160px;
+}
+
+.file-button .button {
+  font-weight: normal;
+  font-size: 18px;
+  width: 280px;
+  padding: 8px 20px 8px 40px;
+}
+
+.file-button .button:before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 32px;
+  background: url(/static/img/icn-upload.png) no-repeat;
+  position: absolute;
+  left: 25px;
+  top: 6px;
+}
+
+.file-button input {
+  border: 0;
+  margin: 0;
+  width: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  font-size: 80px;
+  opacity: 0;
+}
+
+#file-select {
+  display: block;
+  overflow: hidden;
+}
+
+#video-form fieldset {
+  display: none;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+}
+
+.video-data {
+  padding-left: 230px;
+  margin: 0 0 20px;
+  overflow: hidden;
+}
+
+.video-data h2 {
+  width: 190px;
+  float: left;
+  margin: .15em 0 0 -230px;
+}
+
+.progress {
+  position: relative;
+  width: 510px;
+  height: 1.5em;
+  padding: 8px 40px 8px 20px;
+  background: #fff;
+  font: 14px "Open Sans", sans-serif;
+  border-bottom: 8px solid #e8ebec;
+}
+
+.progress:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+}
+
+.progress .filename {
+  width: 65%;
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress .filesize {
+  width: 25%;
+  float: right;
+  text-align: right;
+  margin-right: 20px;
+}
+
+.progress .remove {
+  width: 20px;
+  height: 20px;
+  border: 0;
+  text-indent: -999em;
+  overflow: hidden;
+  background: url(/static/img/remove-x.png) center center no-repeat;
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 15px;
+}
+
+.progress .bar {
+  height: 8px;
+  border-right: 2px solid #dcdfe0;
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  background: #7db2e9;
+  background: -moz-linear-gradient(#b9dafc 0%, #7db2e9 100%);
+  background: -webkit-linear-gradient(#b9dafc 0%, #7db2e9 100%);
+  background: linear-gradient(#b9dafc 0%, #7db2e9 100%);
+}
+
+.video-info .col2 {
+  width: 460px;
+}
+
+.video-info textarea {
+  width: 98%;
+}
+
+.video-info .note {
+  display: block;
+  width: 100%;
+  position: static;
+  margin: .75em 0;
+}
+
+/* @Buttons *********/
+.form-control {
+  clear: both;
+  overflow: hidden;
+  margin: 20px 0;
+  width: 100%;
+  padding: 20px 0 30px;
+  position: absolute;
+  bottom: -120px;
+  left: 0;
+}
+
+.form-control .button {
+  min-width: 0;
+}
+
+.form-control .next {
+  float: right;
+}
+
+.form-control .prev {
+  float: left;
+}
+
+.button.disabled {
+  opacity: .5;
+  cursor: default;
+}
 
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 880px) {
-  
+
   .steps {
     font-size: 18px;
   }
-  
-  .upload-form fieldset {
+
+  .user-input fieldset {
     width: 460px;
   }
-  
-  .upload-form li {
+
+  .user-input .col1,
+  .user-input .col2 {
     width: 200px;
   }
-  
-  .upload-form input {
+
+  .user-input input {
     width: 190px;
   }
 
-  .upload-form .note {
+  .user-input .note {
     width: 190px;
     left: 460px;
   }
 
+  .progress {
+    width: 470px;
+  }
+
+  .video-info .col2 {
+    width: 490px;
+  }
+  
+  .video-info .note {
+    width: 100%;
+  }
 
 }
 
@@ -166,7 +386,7 @@ body {
     height: auto;
     background-position: -550px -400px, 140px -360px, 75% 1200px, 0 0;
   }
-  
+
   #page {
     padding: 10px;
   }
@@ -180,30 +400,93 @@ body {
     display: block;
     padding-bottom: 0;
   }
-  
+
   .steps .current {
     background: none;
   }
-  
-  .upload-form fieldset {
+
+  .user-input fieldset {
     width: auto;
   }
-  
-  .upload-form li {
+
+  .user-input .col1,
+  .user-input .col2 {
     width: auto;
     margin-right: 0;
     float: none;
   }
-  
-  .upload-form input,
-  .upload-form select {
+
+  .user-input input,
+  .user-input select,
+  .user-input textarea {
     width: 240px;
   }
 
-  .upload-form .note {
+  .user-input .note {
     width: auto;
     position: static;
     margin: 0 0 1em;
+  }
+
+  .video-data {
+    padding-left: 0;
+  }
+  
+  .video-data h2 {
+    width: auto;
+    float: none;
+    margin: 0 0 .25em;
+  }
+
+  .progress {
+    width: auto;
+  }
+
+  .video-info .col2 {
+    width: auto;
+  }
+  
+  .video-info .col2 textarea {
+    width: 98%;
+  }
+  
+  .video-info .note {
+    width: 100%;
+    margin: .25em 0;
+  }
+  
+  .file-button {
+    width: 240px;
+    height: auto;
+    position: relative;
+    left: auto;
+    margin: 0 auto;
+  }
+  
+  .file-button .button {
+    font-size: 16px;
+    width: auto;
+  }
+  
+  .video-info textarea {
+    width: auto;
+  }
+
+  .video-info .col2 {
+    width: auto;
+  }
+  
+  .progress {
+    width: auto;
+    height: auto;
+  }
+  
+  .progress .filename,
+  .progress .filesize {
+    width: auto;
+    float: none;
+    display: block;
+    text-align: left;
   }
 
 }
