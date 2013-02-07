@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from flicks.base.util import get_object_or_none
 from flicks.videos.decorators import vimeo_task
 from flicks.videos.models import Video
+from flicks.videos.util import send_approval_email
 
 
 # We explicitly import flicks.videos.vimeo here in order to register the Vimeo
@@ -51,3 +52,34 @@ def process_video(video_id):
                                    {'video': video})
         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL,
                   [u.email for u in moderators])
+
+
+@vimeo_task
+def process_approval(video_id):
+    """Update privacy and gather more metadata once a video is approved."""
+    video = get_object_or_none(Video, id=video_id)
+    if video:
+        if video.approved:
+            vimeo.set_privacy(video.vimeo_id, 'anybody')
+
+            # Send an email out if the user hasn't been notified.
+            if not video.user_notified:
+                send_approval_email(video)
+                video.user_notified = True
+
+            # Pull the thumbnail url for the video. We pull it here instead of
+            # during processing to give Vimeo a chance to finish encoding and
+            # processing the video on their side.
+            thumbnails = vimeo.get_thumbnail_urls(video.vimeo_id)
+            for thumbnail in thumbnails:
+                if thumbnail['height'] == '75':
+                    video.small_thumbnail_url = thumbnail['_content']
+                elif thumbnail['height'] == '150':
+                    video.medium_thumbnail_url = thumbnail['_content']
+                elif thumbnail['height'] == '480':
+                    video.large_thumbnail_url = thumbnail['_content']
+
+            video.save()
+        else:
+            vimeo.set_privacy(video.vimeo_id, 'password',
+                              password=settings.VIMEO_VIDEO_PASSWORD)

@@ -27,31 +27,33 @@
       </p>
     </div>
 
-    {# TODO: Hook up thumbnail and link #}
-    <ul class="entry-list">
-      {% for video in videos %}
-        <li class="entry">
-          <a href="/video/ID">
-            <img src="{{ static('img/home/vidthumb-falling.jpg') }}" alt="" class="thumbnail">
-            <hgroup>
-              <h2>{{ video.title }}</h2>
-              <h3 class="vcard">
-                <span class="fn">{{ video.user.profile.display_name }}</span>,
-                <span class="country-name">{{ country_name(video.user.profile.country) }}</span>
-              </h3>
-            </hgroup>
-          </a>
-          <p>
-            {% trans datetime=video.created.strftime('%Y-%m-%d'),
-                     date=video.created|babel_date %}
-              Submitted <time datetime="{{ datetime }}">{{ date }}</time>
-            {% endtrans %}
-          </p>
-        </li>
-      {% endfor %}
-    </ul>
+    {% block results %}
+      <ul class="entry-list">
+        {% for video in videos %}
+          <li class="entry">
+            <a href="{{ url('flicks.videos.detail', video.id) }}">
+              <img src="{{ video.thumbnail('medium') }}" alt="" class="thumbnail">
+              <hgroup>
+                <h2>{{ video.title }}</h2>
+                <h3 class="vcard">
+                  <span class="fn">{{ video.user.profile.display_name }}</span>,
+                  <span class="country-name">{{ country_name(video.user.profile.country) }}</span>
+                </h3>
+              </hgroup>
+            </a>
+            <p>
+              {% trans datetime=video.created.strftime('%Y-%m-%d'),
+                       date=video.created|babel_date %}
+                Submitted <time datetime="{{ datetime }}">{{ date }}</time>
+              {% endtrans %}
+            </p>
+          </li>
+        {% endfor %}
+      </ul>
 
-    {{ pagination(videos, 'flicks.videos.list')}}
+      {{ pagination(videos, url('flicks.videos.list'),
+                    region=request.GET.get('region', None)) }}
+    {% endblock %}
 
     <aside id="trailers" class="samples">
       <h2>{{ _('Flicks trailers') }}</h2>

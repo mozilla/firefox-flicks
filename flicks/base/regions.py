@@ -272,4 +272,7 @@ def get_region(country):
 
 
 def get_countries(region):
-    return regions.get(region, None)
+    try:
+        return regions[int(region)]
+    except (ValueError, KeyError):
+        return None

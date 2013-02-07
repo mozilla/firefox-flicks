@@ -7,9 +7,7 @@ from django.db import models
 from caching.base import CachingManager, CachingMixin
 from tower import ugettext as _, ugettext_lazy as _lazy
 
-from flicks.videos import vimeo
-from flicks.videos.util import (send_approval_email, vidly_embed_code,
-                                vimeo_embed_code)
+from flicks.videos.util import vidly_embed_code, vimeo_embed_code
 
 
 class Video2013(models.Model, CachingMixin):
@@ -25,6 +23,10 @@ class Video2013(models.Model, CachingMixin):
     processed = models.BooleanField(default=False)
     user_notified = models.BooleanField(default=False)
 
+    small_thumbnail_url = models.URLField(blank=True)
+    medium_thumbnail_url = models.URLField(blank=True)
+    large_thumbnail_url = models.URLField(blank=True)
+
     objects = CachingManager()
 
     def save(self, *args, **kwargs):
@@ -32,22 +34,23 @@ class Video2013(models.Model, CachingMixin):
         Prior to saving, set the video's privacy on Vimeo depending on if it is
         approved.
         """
-        if self.approved:
-            vimeo.set_privacy.delay(self.vimeo_id, 'anybody')
+        from flicks.videos.tasks import process_approval
 
-            # Send an email out if the user hasn't been notified.
-            if not self.user_notified:
-                send_approval_email(self)
-                self.user_notified = True
-        else:
-            vimeo.set_privacy.delay(self.vimeo_id, 'password',
-                                    password=settings.VIMEO_VIDEO_PASSWORD)
+        original = Video2013.objects.get(id=self.id)
+        return_value = super(Video2013, self).save(*args, **kwargs)
 
-        return super(Video2013, self).save(*args, **kwargs)
+        # Only process approval if the value changed.
+        if original.approved != self.approved:
+            process_approval.delay(self.id)
+
+        return return_value
 
     def embed_html(self, **kwargs):
         """Return the HTML code to embed this video."""
         return vimeo_embed_code(self.vimeo_id, **kwargs)
+
+    def thumbnail(self, size):
+        return getattr(self, '{0}_thumbnail_url'.format(size), '')
 
 
 # Assign the alias "Video" to the model for the current year's contest.
