@@ -1,3 +1,5 @@
+import json as json_mod
+
 from django.utils.translation import get_language
 
 from babel.core import Locale, UnknownLocaleError
@@ -24,6 +26,11 @@ def babel_date(date, format='long'):
     """
     locale = _babel_locale()
     return format_date(date, format, locale)
+
+
+@register.filter
+def json(data):
+    return json_mod.dumps(data)
 
 
 @register.function

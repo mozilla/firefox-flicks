@@ -179,6 +179,9 @@ VIMEO_REGION_CHANNELS = {
     regions.APAC: None,
 }
 
+# Countries that aren't eligible for Flicks
+INELIGIBLE_COUNTRIES = ('cu', 'ir', 'kp', 'sd', 'sy')
+
 
 # jingo-minify
 JINGO_MINIFY_USE_STATIC = True
@@ -201,8 +204,10 @@ MINIFY_BUNDLES = {
         'jquery': (
             'js/libs/jquery-1.7.1.min.js',
         ),
-        'flicks_js': (
+        'browserid': (
             'browserid/browserid.js',
+        ),
+        'flicks_js': (
             'js/init.js',
         ),
         'home_js': (
@@ -217,6 +222,9 @@ MINIFY_BUNDLES = {
             'js/libs/jquery.iframe-transport.js',
             'js/libs/jquery.fileupload.js',
             'js/upload.js',
+        ),
+        'profile': (
+            'js/profile.js',
         ),
     }
 }

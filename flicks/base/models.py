@@ -11,7 +11,8 @@ ENGLISH_LANGUAGE_CHOICES = sorted(
 
 ENGLISH_COUNTRY_CHOICES = sorted(
     [(code, u'{0} ({1})'.format(code, name)) for code, name in
-     product_details.get_regions('en-US').items()]
+     product_details.get_regions('en-US').items()
+     if code not in settings.INELIGIBLE_COUNTRIES]
 )
 
 

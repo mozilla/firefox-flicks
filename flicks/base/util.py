@@ -84,7 +84,15 @@ def country_choices(allow_empty=True):
     """Return a localized, sorted list of tuples of country names and values."""
     from product_details import product_details
 
-    items = product_details.get_regions(get_language()).items()
+    regions = product_details.get_regions(get_language())
+
+    # Filter out ineligible countries.
+    for country in settings.INELIGIBLE_COUNTRIES:
+        if country in regions:
+            del regions[country]
+
+    items = regions.items()
     if allow_empty:
         items.append(('', '---'))
+
     return unicode_choice_sorted(items)
