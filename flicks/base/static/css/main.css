@@ -99,7 +99,7 @@ body {
 }
 
 .zh-TW body {
-  font-family: Vollkorn, Georgia, "Heiti TC", "LiHei Pro", "微軟正黑體", "WenQuanYi - Micro Hei", sans-serif;
+  font-family: Vollkorn, Georgia, "Heiti TC", "LiHei Pro", "微軟正黑體", "WenQuanYi - Micro Hei", serif;
 }
 
 #page {
@@ -834,6 +834,14 @@ body.noscroll .fixed #head-inner {
   color: #eee;
 }
 
+.submit-frame {
+  width: 880px;
+  height: 90%;
+  min-height: 600px;
+  background: #fff;
+  border: 0;
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+}
 
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
@@ -855,10 +863,6 @@ body.noscroll .fixed #head-inner {
   .logo img {
     max-width: 300px;
   }
-  
-  #page-nav {
-    margin-left: 70px;
-  }
 
   #page-nav {
     margin-left: 70px;
@@ -879,6 +883,10 @@ body.noscroll .fixed #head-inner {
 
   #footer .sponsors {
     width: 480px;
+  }
+
+  .submit-frame {
+    width: 720px;
   }
 
 }
@@ -973,7 +981,7 @@ body.noscroll .fixed #head-inner {
     display: block;
     padding: 6px 10px;
   }
-  
+
   #page-nav #nav-auth {
     font-size: 100%;
     text-transform: uppercase;
@@ -1017,13 +1025,17 @@ body.noscroll .fixed #head-inner {
   .entry-list .entry:nth-child(2n+1) {
     clear: left;
   }
-  
+
   .pagination .prev,
   .pagination .next {
     display: block;
     float: none;
     clear: both;
     margin: .5em 0;
+  }
+
+  .submit-frame {
+    width: 290px;
   }
 
 }
@@ -1052,6 +1064,11 @@ body.noscroll .fixed #head-inner {
     width: 210px;
     margin: 0 15px 2em;
   }
+
+  .submit-frame {
+    width: 400px;
+  }
+
 
 }
 

@@ -343,6 +343,50 @@ body {
   cursor: default;
 }
 
+/* @Complete *********/
+#upload-complete {
+  text-align: center;
+  padding: 80px;
+}
+
+#upload-complete h2 {
+  font-size: 34px;
+  font-weight: bold;  
+}
+
+#upload-complete .bonus {
+  font: 28px/1.2 Vollkorn, Georgia, "Heiti TC", "LiHei Pro", "微軟正黑體", "WenQuanYi - Micro Hei", serif;
+}
+
+.share {
+  list-style: none;
+  font-size: 16px;
+  margin: 20px 0;
+}
+
+.share li {
+  display: inline-block;
+  margin: 0 25px .5em;
+}
+
+.share a {
+  display: inline-block;
+  padding: 8px 5px 8px 45px;
+  background: url(/static/img/social-icons-dark.png) no-repeat;
+}
+
+.share .facebook {
+  background-position: 0 -98px;
+}
+
+.share .twitter {
+  background-position: 0 -198px;
+}
+
+.share .tumblr {
+  background-position: 0 -298px;
+}
+
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 880px) {
 

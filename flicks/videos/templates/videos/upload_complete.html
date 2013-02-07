@@ -1,5 +1,51 @@
-{% extends 'base.html' %}
+{% extends 'bare.html' %}
+
+{% block page_title %}{{ _('Submit your flick') }}{% endblock %}
+
+{% block site_css %}
+  {{ css('flicks_css') }}
+  {{ css('upload') }}
+{% endblock %}
+
+{% block site_js %}
+  {{ js('jquery') }}
+  {{ js('upload') }}
+{% endblock %}
 
 {% block body %}
-  <p>Yay!</p>
+  <main id="page" role="main">
+    <h1 class="page-title">{{ _('Submit your flick') }}</h1>
+
+    <ol class="steps">
+      <li class="done">{{ _('Sign in to Flicks') }}</li>
+      <li class="done">{{ _('Enter your information') }}</li>
+      <li class="done">{{ _('Submit your flick') }}</li>
+    </ol>
+
+    <div id="upload-complete" class="user-input">
+      <h2>{{ _('Hooray! Your upload is complete.') }}</h2>
+      <p class="bonus">
+      {% trans link_home='flicks.base.home' %}
+        Bonus: For getting your flick in early, you're eligible for an Early Entry
+        Award and a chance to automatically qualify for the Grand Prize finals.
+        <a href="{{ link_home }}#prizes" rel="external">Learn more</a>.
+      {% endtrans %}
+      </p>
+      
+      <p>
+      {% trans %}
+        Your video is now processing. Once it's reviewed, we'll send you an email 
+        to let you know where to find it. Until then, spread the word about Firefox Flicks!
+      {% endtrans %}
+      </p>
+      
+      <ul class="share">
+        <li><a href="http://facebook.com/firefoxflicks" class="facebook" rel="external">Facebook</a></li>
+        <li><a href="http://twitter.com/firefoxflicks" class="twitter" rel="external">Twitter</a></li>
+        <li><a href="http://firefoxflicks.tumblr.com" class="tumblr" rel="external">Tumblr</a></li>
+      </ul>
+
+    </div>
+
+  </main>
 {% endblock %}
