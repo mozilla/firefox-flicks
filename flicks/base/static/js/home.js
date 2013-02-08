@@ -106,9 +106,6 @@
     });
     
     // Change judge quotes on hover
-    var quoteWrapper = '<aside id="judge-quote"><figure class="quote"></figure></aside>';
-    $(quoteWrapper).insertAfter('ul.judges');
-
     $('.judge').each(function(){
           var quote = $(this).children('.quote').html();
           $(this).hover(
