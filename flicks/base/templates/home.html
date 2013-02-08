@@ -31,14 +31,14 @@
       <div id="slideshow">
         <ol id="slide-control">
           <li id="slide-control-one" class="on"><a href="#slide-one">{{ _('Flicks trailers') }}</a></li>
-          <li id="slide-control-two"><a href="#slide-two">{{ _('Two') }}</a></li>
-          <li id="slide-control-three"><a href="#slide-three">{{ _('Three') }}</a></li>
+          <li id="slide-control-two"><a href="#slide-two">{{ _('Early entry') }}</a></li>
+          <li id="slide-control-three"><a href="#slide-three">{{ _('Directors\' cuts) }}</a></li>
         </ol>
         <ol id="slides">
           <li id="slide-one" class="slide">
             <img src="{{ static('img/home/promo-backdrop1.jpg') }}" alt="">
             <div class="slide-desc">
-              <h2>{{ _('Now playing: <br>Flicks trailers') }}</h2>
+              <h2>{{ _('Now playing') }}: <br>{{ _('Flicks trailers') }}</h2>
               <p>
               {% trans %}
                 Get inspired and learn more about making your winning flick.
@@ -53,7 +53,9 @@
               <h2>{{ _('Enter by April 3') }}</h2>
               <p>
               {% trans %}
-                Submit your flick in time for the BAFICI film festival in Buenos Aires and you could win a $1000 Early Entry Award and be automatically qualified for the Grand Prize.
+                Submit your flick in time for the BAFICI film festival in Buenos Aires and 
+                you could win a $1000 Early Entry Award and be automatically qualified for 
+                the Grand Prize.
               {% endtrans %}
               </p>
               <p class="act"><a href="#" class="go" rel="external">{{ _('Get the creative brief') }}</a></p>
@@ -62,7 +64,7 @@
           <li id="slide-three" class="slide">
             <img src="{{ static('img/home/promo-backdrop1.jpg') }}" alt="">
             <div class="slide-desc">
-              <h2>{{ _('Now playing: <br>Directors&#8217; cuts') }}</h2>
+              <h2>{{ _('Now playing') }}: <br>{{ _('Directors&#8217; cuts') }}</h2>
               <p>
               {% trans %}
                 Learn more about last year's winners and get some advice on making your own winning flick.
@@ -99,7 +101,7 @@
         <p>
         {% trans %}
           It's a video contest. It's an opportunity to reach millions of Firefox users and
-          inspire them to get mobilized. It’s a chance to win <a href="#prizes" class="scroll">great prizes</a>
+          inspire them to get mobilized. It's a chance to win <a href="#prizes" class="scroll">great prizes</a>
           and be seen by <a href="#judges" class="scroll">celebrity judges</a> who can make
           your moviemaking dreams come true.
         {% endtrans %}
