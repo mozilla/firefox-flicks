@@ -30,46 +30,44 @@
 
       <div id="slideshow">
         <ol id="slide-control">
-          <li id="slide-control-one" class="on"><a href="#slide-one">{{ _('Get inspired!') }}</a></li>
+          <li id="slide-control-one" class="on"><a href="#slide-one">{{ _('Flicks trailers') }}</a></li>
           <li id="slide-control-two"><a href="#slide-two">{{ _('Two') }}</a></li>
           <li id="slide-control-three"><a href="#slide-three">{{ _('Three') }}</a></li>
         </ol>
         <ol id="slides">
           <li id="slide-one" class="slide">
-            <img src="{{ static('img/home/promo-winners2012.jpg') }}" alt="">
+            <img src="{{ static('img/home/promo-backdrop1.jpg') }}" alt="">
             <div class="slide-desc">
-              <h2>{{ _('Get inspired!') }}</h2>
+              <h2>{{ _('Now playing: <br>Flicks trailers') }}</h2>
               <p>
               {% trans %}
-                Watch the flicks we took to Cannes last year before making your own.
+                Get inspired and learn more about making your winning flick.
               {% endtrans %}
               </p>
-              <p class="act"><a href="#winners2012" class="go scroll">{{ _('See the 2012 winners') }}</a></p>
             </div>
 
           </li>
           <li id="slide-two" class="slide">
-            <img src="{{ static('img/home/promo-winners2012.jpg') }}" alt="">
+            <img src="{{ static('img/home/promo-backdrop2.jpg') }}" alt="">
             <div class="slide-desc">
-              <h2>{{ _('The Second Promo') }}</h2>
+              <h2>{{ _('Enter by April 3') }}</h2>
               <p>
               {% trans %}
-                Some blurb about this promo.
+                Submit your flick in time for the BAFICI film festival in Buenos Aires and you could win a $1000 Early Entry Award and be automatically qualified for the Grand Prize.
               {% endtrans %}
               </p>
-              <p class="act"><a href="#" class="go">{{ _('A call to action') }}</a></p>
+              <p class="act"><a href="#" class="go" rel="external">{{ _('Get the creative brief') }}</a></p>
             </div>
           </li>
           <li id="slide-three" class="slide">
-            <img src="{{ static('img/home/promo-winners2012.jpg') }}" alt="">
+            <img src="{{ static('img/home/promo-backdrop1.jpg') }}" alt="">
             <div class="slide-desc">
-              <h2>{{ _('The Third Promo') }}</h2>
+              <h2>{{ _('Now playing: <br>Directors&#8217; cuts') }}</h2>
               <p>
               {% trans %}
-                Some blurb about this promo. This one is a bit longer.
+                Learn more about last year's winners and get some advice on making your own winning flick.
               {% endtrans %}
               </p>
-              <p class="act"><a href="#" class="go">{{ _('A call to action') }}</a></p>
             </div>
           </li>
         </ol>
