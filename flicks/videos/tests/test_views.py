@@ -1,3 +1,5 @@
+from urllib import urlencode
+
 from funfactory.urlresolvers import reverse
 from mock import patch
 from nose.tools import eq_, ok_
@@ -6,6 +8,7 @@ from flicks.base.tests import TestCase
 from flicks.base.tests.tools import redirects_
 from flicks.users.tests import UserProfileFactory
 from flicks.videos.models import Video
+from flicks.videos.tests import VideoFactory
 
 
 class TestUpload(TestCase):
@@ -99,3 +102,80 @@ class TestUpload(TestCase):
         process_video.delay.assert_called_with(videos[0].id)
         ok_('vimeo_id' not in response.client.session)
         redirects_(response, 'flicks.videos.upload_complete')
+
+
+class VideoListTests(TestCase):
+    def setUp(self):
+        super(VideoListTests, self).setUp()
+        self.us_user = UserProfileFactory.create(country='us').user
+        self.fr_user = UserProfileFactory.create(country='fr').user
+
+        self.v1 = VideoFactory.create(user=self.us_user, approved=True)
+        self.v2 = VideoFactory.create(user=self.fr_user, approved=True)
+
+    def _video_list(self, **kwargs):
+        with self.activate('en-US'):
+            url = '?'.join([reverse('flicks.videos.list'), urlencode(kwargs)])
+            return self.client.get(url)
+
+    @patch('flicks.videos.views.regions.get_countries')
+    def test_region(self, get_countries):
+        """
+        If region is specified, filter the returned videos to only ones
+        available in that region.
+        """
+        get_countries.return_value = ['us', 'pt']
+
+        response = self._video_list(region=1)
+        videos = response.context['videos']
+        ok_(self.v1 in videos)
+        ok_(self.v2 not in videos)
+        get_countries.assert_called_with('1')
+
+    @patch('flicks.videos.views.regions.get_countries')
+    def test_region_invalid(self, get_countries):
+        """If region is invalid or empty, do not filter the returned videos."""
+        # Region empty.
+        get_countries.return_value = ['us', 'pt']
+        response = self._video_list()
+
+        videos = response.context['videos']
+        ok_(self.v1 in videos)
+        ok_(self.v2 in videos)
+        ok_(not get_countries.called)
+
+        # Region invalid.
+        get_countries.return_value = None
+        response = self._video_list(region='asdf')
+
+        videos = response.context['videos']
+        ok_(self.v1 in videos)
+        ok_(self.v2 in videos)
+        get_countries.assert_called_with('asdf')
+
+    def test_invalid_page(self):
+        """
+        Invalid or missing page numbers default to the first page. Pages beyond
+        the last page go to the last page.
+        """
+        response = self._video_list(page='asdf')
+        eq_(response.context['videos'].number, 1)
+
+        response = self._video_list(page=-1)
+        eq_(response.context['videos'].number, 1)
+
+        # Create more videos to get past 12
+        for _ in range(12):
+            VideoFactory.create(user=self.us_user, approved=True)
+
+        # Pages beyond the max go to the last page
+        response = self._video_list(page=5555)
+        eq_(response.context['videos'].number, 2)
+
+    def test_valid_page(self):
+        # Create more videos to get past 12
+        for _ in range(12):
+            VideoFactory.create(user=self.us_user, approved=True)
+
+        response = self._video_list(page=2)
+        eq_(response.context['videos'].number, 2)

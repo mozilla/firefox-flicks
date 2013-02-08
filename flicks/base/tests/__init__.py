@@ -33,11 +33,11 @@ class SessionRequestFactory(RequestFactory):
 class TestCase(test_utils.TestCase):
     """Base class for Flicks test cases."""
     def setUp(self):
-        self.video_privacy_patch = patch('flicks.videos.models.vimeo')
-        self.video_privacy_patch.start()
+        self.approval_patch = patch('flicks.videos.models.process_approval')
+        self.approval_patch.start()
 
     def tearDown(self):
-        self.video_privacy_patch.stop()
+        self.approval_patch.stop()
 
     @contextmanager
     def activate(self, locale):

@@ -25,13 +25,13 @@ def video_list(request):
         if countries:
             videos = videos.filter(user__userprofile__country__in=countries)
 
-    paginator = Paginator(videos, 12, allow_empty_first_page=False)
+    paginator = Paginator(videos, 12)
     try:
         videos = paginator.page(page)
     except PageNotAnInteger:
         videos = paginator.page(1)  # Default to first page
     except EmptyPage:
-        return render(request, 'videos/2013/list_empty.html')
+        videos = paginator.page(paginator.num_pages)  # Empty page goes to last
 
     return render(request, 'videos/2013/list.html', {'videos': videos})
 

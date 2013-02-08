@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from django.conf import settings
-
 NORTH_AMERICA = 0
 LATIN_AMERICA = 1
 EMEA = 2  # Europe, Middle East, Africa

@@ -7,6 +7,8 @@ from django.db import models
 from caching.base import CachingManager, CachingMixin
 from tower import ugettext as _, ugettext_lazy as _lazy
 
+from flicks.base.util import get_object_or_none
+from flicks.videos.tasks import process_approval
 from flicks.videos.util import vidly_embed_code, vimeo_embed_code
 
 
@@ -34,13 +36,11 @@ class Video2013(models.Model, CachingMixin):
         Prior to saving, set the video's privacy on Vimeo depending on if it is
         approved.
         """
-        from flicks.videos.tasks import process_approval
-
-        original = Video2013.objects.get(id=self.id)
+        original = get_object_or_none(Video2013, id=self.id)
         return_value = super(Video2013, self).save(*args, **kwargs)
 
         # Only process approval if the value changed.
-        if original.approved != self.approved:
+        if not original or original.approved != self.approved:
             process_approval.delay(self.id)
 
         return return_value

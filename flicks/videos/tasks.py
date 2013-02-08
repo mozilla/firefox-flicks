@@ -6,7 +6,6 @@ from django.template.loader import render_to_string
 
 from flicks.base.util import get_object_or_none
 from flicks.videos.decorators import vimeo_task
-from flicks.videos.models import Video
 from flicks.videos.util import send_approval_email
 
 
@@ -18,6 +17,8 @@ from flicks.videos import vimeo
 @vimeo_task
 def process_video(video_id):
     """Update metadata about the given video on Vimeo."""
+    from flicks.videos.models import Video
+
     video = get_object_or_none(Video, id=video_id)
     if video:
         vimeo.set_title(video.vimeo_id, video.title)
@@ -57,6 +58,8 @@ def process_video(video_id):
 @vimeo_task
 def process_approval(video_id):
     """Update privacy and gather more metadata once a video is approved."""
+    from flicks.videos.models import Video
+
     video = get_object_or_none(Video, id=video_id)
     if video:
         if video.approved:

@@ -10,7 +10,7 @@ class VideoFactory(Factory):
     user = SubFactory(UserFactory)
     title = 'Test title'
     description = 'Test desc'
-    vimeo_id = Sequence(lambda n: n)
+    vimeo_id = Sequence(lambda n: int(n))
     filename = Sequence(lambda n: '{0}.mp4'.format(n))
 
 

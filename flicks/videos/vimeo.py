@@ -172,7 +172,7 @@ def set_privacy(video_id, privacy, password=None):
 
 @vimeo_task
 def get_thumbnail_urls(video_id):
-    """Set privacy options on a video."""
+    """Get thumbnail urls for a video."""
     response = _video_request('vimeo.videos.getThumbnailUrls', 'POST',
                               video_id=video_id,
                               error_msg=('Error getting thumbnails for video '
