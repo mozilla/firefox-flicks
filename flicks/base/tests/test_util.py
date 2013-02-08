@@ -1,12 +1,14 @@
 from django.conf import settings
+from django.utils.translation import get_language
 
 import product_details
 from mock import patch
-from nose.tools import eq_
+from nose.tools import eq_, ok_
+from tower import activate
 
 from flicks.base.tests import TestCase
 from flicks.base.util import (absolutify, country_choices, get_object_or_none,
-                              promo_video_shortlink, redirect)
+                              promo_video_shortlink, redirect, use_lang)
 from flicks.videos.models import Video2012
 from flicks.videos.tests import Video2012Factory
 
@@ -36,6 +38,12 @@ class TestRedirect(TestCase):
             response = redirect('mock_view', permanent=True)
         eq_(response.status_code, 301)
         eq_(response['Location'], '/en-US/mock_view')
+
+    def test_url(self):
+        with self.activate('en-US'):
+            response = redirect('/some/url')
+        eq_(response.status_code, 302)
+        eq_(response['Location'], '/some/url')
 
 
 class TestGetObjectOrNone(TestCase):
@@ -117,3 +125,21 @@ class CountryChoicesTests(TestCase):
         eq_(choices, [('fr', 'France')])
         product_details.get_regions.assert_called_with('fr')
 
+
+class UseLangTests(TestCase):
+    def test_basic(self):
+        activate('fr')
+        eq_(get_language(), 'fr')
+        with use_lang('en-us'):
+            eq_(get_language(), 'en-us')
+        eq_(get_language(), 'fr')
+
+    @patch('flicks.base.util.activate')
+    def test_no_activate(self, mock_activate):
+        """If lang is Falsy, do not call activate."""
+        activate('fr')
+        eq_(get_language(), 'fr')
+        with use_lang(None):
+            eq_(get_language(), 'fr')
+        eq_(get_language(), 'fr')
+        ok_(not mock_activate.called)

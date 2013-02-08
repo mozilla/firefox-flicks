@@ -33,7 +33,7 @@
                   <br /><br />
                   <div style="font-size: 38px; color:#f15b34; line-height: 1.3;">
                     {# L10n: Greeting in an email. #}
-                    {% trans name=name %}
+                    {% trans name=user.profile.display_name %}
                       Hi {{ name }},
                     {% endtrans %}
                   </div>

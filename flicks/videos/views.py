@@ -1,10 +1,10 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, render
 
 from tower import ugettext_lazy as _lazy
 
 from flicks.base import regions
-from flicks.base.util import promo_video_shortlink
+from flicks.base.util import promo_video_shortlink, redirect
 from flicks.videos import tasks, vimeo
 from flicks.videos.decorators import in_overlay
 from flicks.videos.forms import VideoForm

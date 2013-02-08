@@ -51,7 +51,7 @@ def send_approval_email(video):
     """
     with use_lang(video.user.profile.locale):
         body = render_to_string('videos/2013/approval_email.html', {
-            'name': video.user.profile.display_name,
+            'user': video.user,
             'video': video
         })
     send_mail(EMAIL_SUBJECT, body, settings.DEFAULT_FROM_EMAIL,
@@ -65,7 +65,7 @@ def send_rejection_email(video):
     """
     with use_lang(video.user.profile.locale):
         body = render_to_string('videos/2013/rejection_email.html', {
-            'name': video.user.profile.display_name
+            'user': video.user
         })
     send_mail(EMAIL_SUBJECT, body, settings.DEFAULT_FROM_EMAIL,
               [video.user.email])

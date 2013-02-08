@@ -1,5 +1,5 @@
 from funfactory.urlresolvers import reverse
-from nose.tools import ok_
+from nose.tools import eq_, ok_
 
 from flicks.base.tests import TestCase
 from flicks.base.tests.tools import redirects_
@@ -13,8 +13,8 @@ class TestProfile(TestCase):
         self.user = UserFactory.create()
         self.browserid_login(self.user.email)
 
-    def _profile(self, method, **kwargs):
-        with self.activate('en-US'):
+    def _profile(self, method, locale='en-US', **kwargs):
+        with self.activate(locale):
             func = self.client.post if method == 'post' else self.client.get
             response = func(reverse('flicks.users.profile'), kwargs)
         return response
@@ -39,7 +39,9 @@ class TestProfile(TestCase):
         If POSTed with valid values, create a profile and redirect to
         flicks.videos.upload.
         """
-        response = self._profile('post', full_name='blah', nickname='blah',
-                                 country='us', privacy_policy_agree=True)
-        redirects_(response, 'flicks.videos.upload')
+        response = self._profile('post', locale='fr', full_name='blah',
+                                 nickname='blah', country='fr',
+                                 privacy_policy_agree=True)
+        redirects_(response, 'flicks.videos.upload', locale='fr')
         ok_(UserProfile.objects.filter(user=self.user).exists())
+        eq_(UserProfile.objects.get(user=self.user).locale, 'fr')

@@ -122,7 +122,8 @@ class ProcessApprovalTests(TestCase):
             {'height': '7532', '_content': 'http://test4.com'},
         ]
 
-        video = VideoFactory.create(approved=True)
+        user = UserProfileFactory.create().user
+        video = VideoFactory.create(approved=True, user=user)
         vimeo.get_thumbnail_urls.reset_mock()
         ok_(not vimeo.get_thumbnail_urls.called)
 

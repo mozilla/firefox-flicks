@@ -2,6 +2,7 @@ from contextlib import contextmanager
 from locale import strcoll as locale_strcoll
 
 from django.conf import settings
+from django.core.urlresolvers import NoReverseMatch
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.utils.functional import lazy
 from django.utils.translation import get_language
@@ -33,7 +34,12 @@ def redirect(to, permanent=False, anchor=None, **kwargs):
     else:
         redirect_class = HttpResponseRedirect
 
-    url = reverse(to, **kwargs)
+    try:
+        url = reverse(to, **kwargs)
+    except NoReverseMatch:
+        # Assume to is a url
+        url = to
+
     if anchor:
         url = '#'.join([url, anchor])
 
@@ -103,7 +109,10 @@ def country_choices(allow_empty=True):
 @contextmanager
 def use_lang(lang):
     """Temporarily use another language for translation."""
-    current_lang = get_language()
-    activate(lang)
-    yield
-    activate(current_lang)
+    if not lang:
+        yield
+    else:
+        current_lang = get_language()
+        activate(lang)
+        yield
+        activate(current_lang)

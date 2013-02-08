@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.utils.translation import get_language
 
 from commonware.response.decorators import xframe_sameorigin
 from funfactory.urlresolvers import reverse
 
 from flicks.base import regions
+from flicks.base.util import redirect
 from flicks.users.forms import UserProfileForm
 
 

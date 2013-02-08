@@ -5,16 +5,14 @@ from contextlib import contextmanager
 from django.contrib.auth.models import User
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.test.client import RequestFactory
-from django.utils.translation import get_language
 
 import test_utils
 from django_browserid.tests import mock_browserid
-from funfactory.urlresolvers import (get_url_prefix, Prefixer, reverse,
-                                     set_url_prefix)
+from funfactory.urlresolvers import reverse
 from nose.tools import ok_
 from mock import patch
-from tower import activate
 
+from flicks.base.tests.tools import lang_activate
 from flicks.users.models import UserProfile
 
 
@@ -41,15 +39,8 @@ class TestCase(test_utils.TestCase):
 
     @contextmanager
     def activate(self, locale):
-        """Context manager that temporarily activates a locale."""
-        old_prefix = get_url_prefix()
-        old_locale = get_language()
-        rf = test_utils.RequestFactory()
-        set_url_prefix(Prefixer(rf.get('/%s/' % (locale,))))
-        activate(locale)
-        yield
-        set_url_prefix(old_prefix)
-        activate(old_locale)
+        with lang_activate(locale):
+            yield
 
     def browserid_login(self, email):
         """Logs the test client in using BrowserID."""

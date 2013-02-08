@@ -6,8 +6,10 @@
   </div>
   <br/>
   <div style="font-size: 22px; color:#212a2f; line-height: 1.3;">
+    {# HACK: Add the user's locale as a urlparam to force a redirect to the correct locale. #}
+    {% set details_link = absolutify(url('flicks.videos.detail', video.id))|urlparams(lang=user.profile.locale) %}
     {# L10n: Please don't change the HTML, this string is in an email and the HTML is very fragile. #}
-    {% trans link=absolutify(url('flicks.videos.details', args=(video.id,))), title=video.title %}
+    {% trans link=details_link, title=video.title %}
       You can find your flick on the gallery and share it using this link: <a href="{{ link }}" style="color: #1677b9; text-decoration: none;">{{ title }}</a>
     {% endtrans %}
   </div>
