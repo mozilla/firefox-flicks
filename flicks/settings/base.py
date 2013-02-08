@@ -183,6 +183,10 @@ VIMEO_REGION_CHANNELS = {
 # Countries that aren't eligible for Flicks
 INELIGIBLE_COUNTRIES = ('cu', 'ir', 'kp', 'sd', 'sy')
 
+# Basket (mailing list signups)
+BASKET_URL = 'https://basket.mozilla.com'
+BASKET_FLICKS_LIST = 'firefox-flicks'
+
 
 # jingo-minify
 JINGO_MINIFY_USE_STATIC = True

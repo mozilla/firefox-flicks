@@ -6,6 +6,7 @@ from flicks.users.models import UserProfile
 
 class UserProfileForm(forms.ModelForm):
     privacy_policy_agree = forms.BooleanField(required=True)
+    mailing_list_signup = forms.BooleanField(required=False)
 
     class Meta:
         model = UserProfile

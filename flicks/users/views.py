@@ -8,6 +8,7 @@ from funfactory.urlresolvers import reverse
 from flicks.base import regions
 from flicks.base.util import redirect
 from flicks.users.forms import UserProfileForm
+from flicks.users.tasks import newsletter_subscribe
 
 
 @login_required
@@ -20,6 +21,11 @@ def profile(request):
         profile.user = request.user
         profile.locale = get_language()
         profile.save()
+
+        if form.cleaned_data['mailing_list_signup']:
+            newsletter_subscribe.delay(request.user.email,
+                                       source_url=request.build_absolute_uri())
+
         return redirect('flicks.videos.upload')
 
     return render(request, 'users/profile.html', {

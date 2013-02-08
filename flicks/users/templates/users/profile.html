@@ -105,9 +105,8 @@
             </li>
             {% if LANG.startswith('en') %}
               <li class="col2 check">
-                <label for="subscribe"><input type="checkbox" id="subscribe" name="subscribe">
-                  {{ _('I want to receive email updates about Firefox Flicks') }}
-                </label>
+                {{ input_in_label(form.mailing_list_signup,
+                                  _('I want to receive email updates about Firefox Flicks')) }}
               </li>
             {% endif %}
           </ul>

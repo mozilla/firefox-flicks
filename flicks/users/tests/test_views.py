@@ -1,4 +1,5 @@
 from funfactory.urlresolvers import reverse
+from mock import ANY, patch
 from nose.tools import eq_, ok_
 
 from flicks.base.tests import TestCase
@@ -45,3 +46,15 @@ class TestProfile(TestCase):
         redirects_(response, 'flicks.videos.upload', locale='fr')
         ok_(UserProfile.objects.filter(user=self.user).exists())
         eq_(UserProfile.objects.get(user=self.user).locale, 'fr')
+
+    @patch('flicks.users.views.newsletter_subscribe')
+    def test_mailing_list_signup(self, newsletter_subscribe):
+        """
+        If the user has checked the mailing_list_signup checkbox, trigger the
+        newsletter_subscribe task.
+        """
+        self._profile('post', locale='fr', full_name='blah', nickname='blah',
+                      country='fr', privacy_policy_agree=True,
+                      mailing_list_signup=True)
+        newsletter_subscribe.delay.assert_called_with(self.user.email,
+                                                      source_url=ANY)
