@@ -105,7 +105,7 @@
           <ul>
             <li class="col1 check">
               {{ input_in_label(form.privacy_policy_agree,
-                 _('I\'m okay with you handling my info as you explain in your <a href="http://www.mozilla.org/en-US/privacy-policy.html" rel="external">privacy policy</a>')) }}
+                 _('I\'m okay with you handling my info as you explain in your <a href="{link}" rel="external">privacy policy</a>')|fe(link='http://www.mozilla.org/en-US/privacy-policy.html')) }}
             </li>
             {% if LANG.startswith('en') %}
               <li class="col2 check">

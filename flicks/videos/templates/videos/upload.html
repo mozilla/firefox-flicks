@@ -9,6 +9,7 @@
 
 {% block site_js %}
   {{ js('jquery') }}
+  {{ js('flicks_js') }}
   {{ js('upload') }}
 {% endblock %}
 
@@ -60,7 +61,7 @@
 
           <p>
           {% trans link_rules=url('flicks.base.rules') %}
-            Please read the <a href="{{ link_rules }}" target="_blank">official contest rules</a> before submitting your video.
+            Please read the <a href="{{ link_rules }}" rel="external">official contest rules</a> before submitting your video.
           {% endtrans %}
           </p>
         </div>
