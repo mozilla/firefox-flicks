@@ -18,19 +18,19 @@
     <div id="upload-complete" class="user-input">
       <h2>{{ _('Oh no, something went wrong!') }}</h2>
       <p>
-      {% trans link_vimeoformat='http://vimeo.com/help/compression'
-        link_upload='flicks.videos.upload' %}
-        There was an error in the upload process. Please <a href="{{ link_upload }}">try again</a>, 
-        and be sure you're uploading a video in <a href="{{ link_vimeoformat }}" rel="external">one of our supported file formats</a>. 
+      {% trans link_vimeoformat='http://vimeo.com/help/compression',
+               link_upload=url('flicks.videos.upload') %}
+        There was an error in the upload process. Please <a href="{{ link_upload }}">try again</a>,
+        and be sure you're uploading a video in <a href="{{ link_vimeoformat }}" rel="external">one of our supported file formats</a>.
       {% endtrans %}
       </p>
-      
+
       <p>
       {% trans %}
         If you continue to see this message, please wait and try again later.
       {% endtrans %}
       </p>
-      
+
     </div>
 
   </main>
