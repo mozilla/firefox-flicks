@@ -1,57 +1,45 @@
-{% extends 'base.html' %}
+{% extends 'videos/details_base.html' %}
 
 {% block page_title %}{{ video.title }}{% endblock %}
 
 {% block og_title %}{{ video.title }}{% endblock %}
-{% block og_type %}article{% endblock %}
 {% block og_image %}{{ video.poster_href }}{% endblock %}
-{% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}
 
-{% block site_css %}
-  {{ super() }}
-  {{ css('archive_css') }}
+{% block video_embed %}
+  {{ video.embed_html(width='100%') }}
+  {% if video.is_winner %}
+    <img class="winner-mark" src="{{ static('img/winner-trophy-sm.png') }}" alt="{{ _('Award') }}">
+  {% endif %}
 {% endblock %}
 
-{% block content %}
-  <div class="section">
-    <article class="wrap archive-video">
-      <div class="video">
-        {{ video.embed_html(width='100%') }}
-        {% if video.is_winner %}
-          <img class="winner-mark" src="{{ static('img/winner-trophy-sm.png') }}" alt="{{ _('Award') }}">
-        {% endif %}
-      </div>
-      <div class="video-details">
-        {% if video.is_winner %}
-          <ul class="awards">
-            {% for award in video.award_set.all() %}
-              <li class="award">{{ award.award_title }}</li>
-            {% endfor %}
-          </ul>
-        {% endif %}
+{% block video_details %}
+  {% if video.is_winner %}
+    <ul class="awards">
+      {% for award in video.award_set.all() %}
+        <li class="award">{{ award.award_title }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 
-        <h1>{{ video.title }}</h1>
+  <h1>{{ video.title }}</h1>
 
-        <div class="vcard">
-          {{ gravatar_img(video.user_email, img_class='photo', size=48) }}
-          <div class="profile">
-            <span class="fn">{{ video.user_name }}</span>,
-            <span class="country-name">{{ video.user_country }}</span>
-          </div>
-          <div class="category-region">
-            {% set category_link='<span class="category">{title}</span>'|fe(title=video.get_category_display()) %}
-            {% set country_link='<span class="region">{title}</span>'|fe(title=video.get_region_display()) %}
+  <div class="vcard">
+    {{ gravatar_img(video.user_email, img_class='photo', size=48) }}
+    <div class="profile">
+      <span class="fn">{{ video.user_name }}</span>,
+      <span class="country-name">{{ video.user_country }}</span>
+    </div>
+    <div class="category-region">
+      {% set category_link='<span class="category">{title}</span>'|fe(title=video.get_category_display()) %}
+      {% set country_link='<span class="region">{title}</span>'|fe(title=video.get_region_display()) %}
 
-            {# L10n: Shown below videos to indicate which category and country they were submitted under, such as ':30 Spot for Europe' #}
-            {% trans category_link=category_link, country_link=country_link %}
-              {{ category_link }} <span>for</span> {{ country_link }}
-            {% endtrans %}
-          </div>
-          <div class="date">{{ video.created|babel_date }}</div>
-        </div>
-
-        <p class="description">{{ video.description }}</p>
-      </div>
-    </article>
+      {# L10n: Shown below videos to indicate which category and country they were submitted under, such as ':30 Spot for Europe' #}
+      {% trans category_link=category_link, country_link=country_link %}
+        {{ category_link }} <span>for</span> {{ country_link }}
+      {% endtrans %}
+    </div>
+    <div class="date">{{ video.created|babel_date }}</div>
   </div>
+
+  <p class="description">{{ video.description }}</p>
 {% endblock %}

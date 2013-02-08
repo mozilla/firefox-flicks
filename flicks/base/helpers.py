@@ -7,6 +7,7 @@ from babel.dates import format_date
 from jingo import register
 from product_details import product_details
 
+from flicks.base import regions
 from flicks.base.util import absolutify as real_absolutify
 
 
@@ -48,3 +49,8 @@ def country_name(country_code):
 @register.function
 def absolutify(url):
     return real_absolutify(url)
+
+
+@register.function
+def region_name(region):
+    return regions.get_region_name(region)

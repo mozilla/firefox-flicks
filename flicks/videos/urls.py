@@ -5,7 +5,7 @@ from flicks.videos import views
 urlpatterns = patterns('',
     # Video pages
     url(r'^$', views.video_list, name='flicks.videos.list'),
-    url(r'^(\d+)/$', views.video_detail, name='flicks.videos.detail'),
+    url(r'^2013/(\d+)/$', views.video_detail, name='flicks.videos.detail'),
 
     # Upload pages
     url(r'^upload/$', views.upload, name='flicks.videos.upload'),

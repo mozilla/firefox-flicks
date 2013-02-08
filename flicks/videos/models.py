@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 
+import jinja2
 from caching.base import CachingManager, CachingMixin
 from tower import ugettext as _, ugettext_lazy as _lazy
 
@@ -31,6 +32,10 @@ class Video2013(models.Model, CachingMixin):
 
     objects = CachingManager()
 
+    @property
+    def region(self):
+        return self.user.userprofile.region
+
     def save(self, *args, **kwargs):
         """
         Prior to saving, set the video's privacy on Vimeo depending on if it is
@@ -47,7 +52,7 @@ class Video2013(models.Model, CachingMixin):
 
     def embed_html(self, **kwargs):
         """Return the HTML code to embed this video."""
-        return vimeo_embed_code(self.vimeo_id, **kwargs)
+        return jinja2.Markup(vimeo_embed_code(self.vimeo_id, **kwargs))
 
     def thumbnail(self, size):
         return getattr(self, '{0}_thumbnail_url'.format(size), '')

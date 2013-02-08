@@ -57,17 +57,7 @@
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
 }
 
-/* Video Archive *********/
-.archive .samples {
-  text-align: center;
-  position: relative;
-  padding: 20px 20px 0;
-  margin: 0 -21px 2em;
-  background: #fff url(/static/img/spot-2.png) 140% 160px no-repeat;
-  background: url(/static/img/spot-1.png) -580px -400px no-repeat, #fff url(/static/img/spot-2.png) 140% 120px no-repeat;
-  border: 1px solid #f3f3f3;
-}
-
+/* Video List *********/
 .samples:after {
   content: "";
   display: block;
@@ -91,7 +81,6 @@
 
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
-
   .samples .entry-list {
     width: auto;
     margin: 0 auto 1em;
@@ -109,7 +98,6 @@
 
 /* Mobile Layout: 320px */
 @media only screen and (max-width: 760px) {
-
   .video-details h1 {
     font-size: 28px;
     margin: 0 0 15px;
@@ -119,17 +107,13 @@
     float: none;
     width: auto;
   }
-  
-  .archive .samples {
-    background-position: -580px -400px, -130% 360%;
-  }
-  
+
   .samples .entry-list .entry {
     float: none;
     width: 220px;
     margin: 0 auto 1em;
   }
-  
+
   .samples .entry-list .entry:nth-child(3n+1),
   .samples .entry-list .entry:nth-child(2n+1) {
     clear: none;
@@ -139,11 +123,6 @@
 
 /* Wide Mobile Layout: 480px */
 @media only screen and (min-width: 480px) and (max-width: 760px) {
-
-  .archive .samples {
-    background-position: -580px -400px, 300px 60px;
-  }
-
   .samples .entry-list .entry {
     float: left;
     width: 28%;

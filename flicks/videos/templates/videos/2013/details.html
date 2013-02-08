@@ -1,1 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'videos/details_base.html' %}
+
+{% block page_title %}{{ video.title }}{% endblock %}
+
+{% block og_title %}{{ video.title }}{% endblock %}
+{% block og_image %}{{ video.thumbnail('medium') }}{% endblock %}
+
+{% block video_embed %}
+  {{ video.embed_html(width='100%') }}
+{% endblock %}
+
+{% block video_details %}
+  <h1>{{ video.title }}</h1>
+
+  <div class="vcard">
+    {{ gravatar_img(video.user.email, img_class='photo', size=48) }}
+    <div class="profile">
+      <span class="fn">{{ video.user.profile.display_name }}</span>,
+      <span class="country-name">{{ country_name(video.user.profile.country) }}</span>
+    </div>
+    <div class="region">
+      <a href="{{ url('flicks.videos.list')|urlparams(region=video.region) }}">
+        {{ region_name(video.region) }}
+      </a>
+    </div>
+    <div class="date">{{ video.created|babel_date }}</div>
+  </div>
+
+  <p class="description">{{ video.description }}</p>
+{% endblock %}

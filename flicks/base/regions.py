@@ -1,8 +1,23 @@
 # -*- coding: utf-8 -*-
+from tower import ugettext_lazy as _lazy
+
+
 NORTH_AMERICA = 0
 LATIN_AMERICA = 1
 EMEA = 2  # Europe, Middle East, Africa
 APAC = 3  # Asia Pacific
+
+
+region_names = {
+    # L10n: Label for the contest region in North America.
+    NORTH_AMERICA: _lazy('North America'),
+    # L10n: Label for the contest region in Latin America.
+    LATIN_AMERICA: _lazy('Latin America'),
+    # L10n: Label for the contest region in Europe, the Middle East, and Africa.
+    EMEA: _lazy('Europe, Middle East, Africa'),
+    # L10n: Label for the contest region in Asia and the Pacific region.
+    APAC: _lazy('Asia Pacific'),
+}
 
 
 # Map region values to countries.
@@ -274,3 +289,7 @@ def get_countries(region):
         return regions[int(region)]
     except (ValueError, KeyError):
         return None
+
+
+def get_region_name(region):
+    return region_names.get(region, '')

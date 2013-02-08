@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block og_type %}article{% endblock %}
+{% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}
+
+{% block site_css %}
+  {{ super() }}
+  {{ css('videos') }}
+{% endblock %}
+
+{% block content %}
+  <div class="section">
+    <article class="wrap">
+      <div class="video">
+        {% block video_embed %}{% endblock %}
+      </div>
+      <div class="video-details">
+        {% block video_details %}{% endblock %}
+      </div>
+    </article>
+  </div>
+{% endblock %}

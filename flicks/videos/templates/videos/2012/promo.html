@@ -1,29 +1,17 @@
-{% extends 'base.html' %}
+{% extends 'videos/details_base.html' %}
 
 {% block page_title %}{{ video_title }}{% endblock %}
 
 {% block og_title %}{{ video_title }}{% endblock %}
-{% block og_type %}article{% endblock %}
-{% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}
 {% block meta_description -%}
   <meta property="og:description" content="{{ video_description }}">
 {%- endblock %}
 
-{% block site_css %}
-  {{ super() }}
-  {{ css('archive_css') }}
+{% block video_embed %}
+  {{ video_embed }}
 {% endblock %}
 
-{% block content %}
-  <div class="section">
-    <article class="wrap archive-video">
-      <div class="video">
-        {{ video_embed }}
-      </div>
-      <div class="video-details">
-        <h1>{{ video_title }}</h1>
-        <p class="description">{{ video_description }}</p>
-      </div>
-    </article>
-  </div>
+{% block video_details %}
+  <h1>{{ video_title }}</h1>
+  <p class="description">{{ video_description }}</p>
 {% endblock %}

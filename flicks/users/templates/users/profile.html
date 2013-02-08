@@ -20,14 +20,10 @@
 {% endblock %}
 
 {% block string_data %}
-  {# L10n: Label for the contest region in North America. #}
-  data-region-{{ regions.NORTH_AMERICA }}="{{ _('North America') }}"
-  {# L10n: Label for the contest region in Latin America. #}
-  data-region-{{ regions.LATIN_AMERICA }}="{{ _('Latin America') }}"
-  {# L10n: Label for the contest region in Europe, the Middle East, and Africa. #}
-  data-region-{{ regions.EMEA }}="{{ _('Europe, Middle East, Africa') }}"
-  {# L10n: Label for the contest region in Asia and the Pacific region. #}
-  data-region-{{ regions.APAC }}="{{ _('Asia Pacific') }}"
+  data-region-{{ regions.NORTH_AMERICA }}="{{ region_name(regions.NORTH_AMERICA) }}"
+  data-region-{{ regions.LATIN_AMERICA }}="{{ region_name(regions.LATIN_AMERICA) }}"
+  data-region-{{ regions.EMEA }}="{{ region_name(regions.EMEA) }}"
+  data-region-{{ regions.APAC }}="{{ region_name(regions.APAC) }}"
 {% endblock %}
 
 {% block body %}

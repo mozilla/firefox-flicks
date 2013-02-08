@@ -194,8 +194,8 @@ MINIFY_BUNDLES = {
         'home_css': (
             'css/home.css',
         ),
-        'archive_css': (
-            'css/archive.css',
+        'videos': (
+            'css/videos.css',
         ),
         'upload': (
             'css/upload.css',
