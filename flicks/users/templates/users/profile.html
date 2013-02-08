@@ -44,8 +44,8 @@
       <fieldset id="account">
         <p class="legend">
         {% trans %}
-          Thanks for entering Firefox Flicks, the global video contest 
-          about the power of mobile. To submit your flick, please tell us 
+          Thanks for entering Firefox Flicks, the global video contest
+          about the power of mobile. To submit your flick, please tell us
           who you are and where you're from.
         {% endtrans %}
         </p>
@@ -105,7 +105,7 @@
           <ul>
             <li class="col1 check">
               {{ input_in_label(form.privacy_policy_agree,
-                 _('I\'m okay with you handling my info as you explain in your privacy policy')) }}
+                 _('I\'m okay with you handling my info as you explain in your <a href="http://www.mozilla.org/en-US/privacy-policy.html" rel="external">privacy policy</a>')) }}
             </li>
             {% if LANG.startswith('en') %}
               <li class="col2 check">

@@ -429,12 +429,12 @@
       <h1 class="section-title">{{ _('Rules') }}</h1>
       <div class="section-intro">
         <p>
-        {% trans %}
-          We want to give budding filmmakers the opportunity to create and submit short
-          videos about letting people discover, access and enjoy more content that matters
-          most to them and their future. The contest will run worldwide and winners will be
-          chosen from four regions around the world: North America, Latin America, Europe
-          and Asia. Check back on February 13 for the complete rules.
+        {% trans rules_link = url('flicks.base.rules') %}
+          We want to give budding filmmakers the opportunity to create and submit short videos about
+          letting people discover, access and enjoy more content that matters most to them and their
+          future. The contest will run worldwide and winners will be chosen from four regions around
+          the world: North America, Latin America, Asia Pacific and Europe, the Middle East and Africa.
+          <a href="{{ rules_link }}">Read the complete official contest rules to learn more.</a>
         {% endtrans %}
         </p>
       </div>
@@ -465,16 +465,20 @@
 
         <h2>{{ _('Privacy') }}</h2>
         <p>
-        {% trans %}
-          Your privacy is important to us. Check back soon for our complete official contest rules.
+        {% trans rules_link = url('flicks.base.rules') %}
+          In order to enter, you’ll have to provide your name, email address and country
+          of residence (to determine your contest region). Your name and region will be
+          posted along with your flick in the public galleries, where they can be viewed,
+          liked and shared by everyone.
+          <a href="{{ rules_link }}">Read the complete contest rules to learn more.</a>
         {% endtrans %}
         </p>
 
         <h2>{{ _('How to enter') }}</h2>
         <p>
-        {% trans %}
-          The website will begin accepting entries on February 13, 2013, at 3:00 p.m.
-          Pacific Standard Time (PST) (11:00 p.m. GMT).
+        {% trans rules_link = url('flicks.base.rules') %}
+          Nice work! You made it all the way to the end. When you’re ready,
+          <a href="#" class="submit">start here to submit your flick.</a>
         {% endtrans %}
         </p>
       </section>
