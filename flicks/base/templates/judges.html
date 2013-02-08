@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% import 'judge_macros.html' as judge_bio %}
+
 {% block page_title %}{{ _('Judges') }}{% endblock %}
 
 
@@ -14,159 +16,11 @@
 <div class="section">
   <div class="wrap info">
     <h1 class="page-title">{{ _('Meet the judges') }}</h1>
-
-    <article class="judge-bio vcard" id="rharvey">
-      <header>
-        <img src="{{ static('img/judges/judge-rharvey.jpg') }}" alt="" class="photo">
-        <hgroup>
-          <h2 class="fn">Robert &ldquo;Bob&rdquo; Harvey</h2>
-          <h3 class="role">{{ _('<abbr title="Executive Vice President">EVP</abbr>, Global Sales and Marketing, Panavision') }}</h3>
-        </hgroup>
-      </header>
-      <p>
-      {% trans %}
-        Bob Harvey, EVP Global Sales and Marketing for Panavision, the premier supplier
-        of cinematography equipment to the motion picture industry for the second half of
-        the 20th century, has been in the business for over 30 years. While working for Atari
-        as Director of Sales for the coin op division, owned by Warner Communications, he became
-        friendly with Clint Eastwood who helped him secure his SAG card in 1982. Warner
-        transferred him to Panavision in 1984 where he started as Director of Marketing.
-        He became very involved with production from start to finish of principal photography.
-        He is a member of the American Society of Cinematographers, a charter member of the
-        IFP for independent films, a recipient of a FINDI award for his work with new and
-        independent filmmakers and is thought of as a mentor to many successful filmmakers
-        today.
-      {% endtrans %}
-      </p>
-    </article>
-
-    <article class="judge-bio vcard" id="fleonard">
-      <header>
-        <img src="{{ static('img/judges/judge-fleonard.jpg') }}" alt="" class="photo">
-        <hgroup>
-          <h2 class="fn">Franklin Leonard</h2>
-          <h3 class="role">{{ _('Founder, Black List') }}</h3>
-        </hgroup>
-      </header>
-      <p>
-      {% trans %}
-        Franklin Leonard is the founder of the Black List, the yearly publication
-        highlighting Hollywood's most popular unproduced screenplays and the startup
-        birthed to continue its mission. Over 200 Black List scripts have been produced
-        as feature films earning more than 140 Academy Award nominations including two
-        of the last four Best Pictures and five of the last ten screenwriting Oscars.
-        Franklin has worked in development at Universal Pictures and the production
-        companies of Will Smith, Sydney Pollack and Anthony Minghella, Leonardo DiCaprio,
-        and John Goldwyn. Before Los Angeles and all things film related, Franklin was
-        &ndash; at different times &ndash; a business analyst at McKinsey & Co., a weekly
-        columnist for the Trinidad Guardian in Port-au-Spain, Trinidad, and the communications
-        director for John Cranley's 2000 campaign for the U.S. House of Representatives
-        in Ohio's first district.  Since 2010, he has been named one of Hollywood
-        Reporter's 30 Under 30, Black Enterprise magazine's "40 Emerging Leaders for
-        Our Future," AOL Black Voices "30 Black Hollywood Game Changers"" and Fast
-        Company's "100 Most Creative People in Business."
-      {% endtrans %}
-      </p>
-    </article>
-
-    <article class="judge-bio vcard" id="enorton">
-      <header>
-        <img src="{{ static('img/judges/judge-enorton.jpg') }}" alt="" class="photo">
-        <hgroup>
-          <h2 class="fn">Edward Norton</h2>
-          <h3 class="role">{{ _('Actor, Director, Producer, Activist') }}</h3>
-        </hgroup>
-      </header>
-
-      <p>
-      {% trans %}
-        Edward Norton has acted in the films <cite>Primal Fear</cite>, <cite>Everyone
-        Says I Love You</cite>, <cite>The People vs Larry Flynt</cite>, <cite>American
-        History X</cite>, <cite>Rounders</cite>, <cite>Fight Club</cite>, <cite>Keeping
-        the Faith</cite>, <cite>The Score</cite>, <cite>Death to Smoochy</cite>,
-        <cite>Frida</cite>, <cite>Red Dragon</cite>, <cite>The 25th Hour</cite>,
-        <cite>The Italian Job</cite>, <cite>Down in the Valley</cite>, <cite>The Kingdom
-        of Heaven</cite>, <cite>The Illusionist</cite>, <cite>The Painted Veil</cite>,
-        <cite>The Incredible Hulk</cite>, <cite>Pride &amp; Glory</cite>, <cite>Leaves of
-        Grass</cite>, <cite>Stone</cite> and <cite>Moonrise Kingdom</cite>.
-      {% endtrans %}
-      </p>
-
-      <p>
-      {% trans %}
-        He has been nominated for two Academy Awards &ndash; for <cite>Primal Fear</cite>
-        and <cite>American History X</cite> &ndash; and won a Golden Globe along with
-        numerous other awards for his performances. He produced and directed <cite>Keeping
-        the Faith</cite> and also produced <cite>Down in the Valley</cite> (Cannes Film
-        Festival selection), <cite>The Painted Veil</cite>, <cite>Leaves of Grass</cite>
-        and the documentary <cite>By The People: The Election of Barack Obama</cite>.
-      {% endtrans %}
-      </p>
-
-      <p>
-      {% trans %}
-        Norton is also a committed social and environmental activist, supporting the UN
-        Convention on Biological Diversity, the President’s Committee for the Arts and
-        Humanities, Enterprise Community Partners, the Maasai Wilderness Conservation Trust,
-        the Libby Rouse Fund for Peace, the Signature Theater Company and Friends of the
-        High Line. Recently Norton founded CrowdRise, an innovative new web platform that
-        brings the power of crowd-sourcing and the fun of social networking to fundraising
-        and volunteerism.
-      {% endtrans %}
-      </p>
-    </article>
-
-    <article class="judge-bio vcard" id="srobertson">
-      <header>
-        <img src="{{ static('img/judges/judge-srobertson.jpg') }}" alt="" class="photo">
-        <h2 class="fn">Shauna Robertson</h2>
-        <h3 class="role">{{ _('Producer') }}</h3>
-      </header>
-
-      <p>
-      {% trans %}
-        Shauna Robertson has produced some of the best comedies of the last decade. Her
-        list of credits include <cite>Meet the Parents</cite>, <cite>Elf</cite>, <cite>Anchorman</cite>,
-        <cite>The Forty Year Old Virgin</cite>, <cite>Knocked Up</cite>, <cite>Superbad</cite>,
-        <cite>Pineapple Express</cite> and <cite>Forgetting Sarah Marshall</cite>. Shauna is a
-        Canadian who moved to Hollywood to start working in the movies at age 17.
-      {% endtrans %}
-      </p>
-
-      <p>
-      {% trans %}
-        Last year she left the movie business to pursue her dreams of working in the non
-        profit sector. In March 2010 she and her boyfriend, Edward Norton, launched the
-        new web based company Crowdrise that helps individuals and charities make fundraising
-        impactful and fun.
-      {% endtrans %}
-      </p>
-    </article>
-
-    <article class="judge-bio vcard" id="csamuelson">
-      <header>
-        <img src="{{ static('img/judges/judge-csamuelson.jpg') }}" alt="" class="photo">
-        <hgroup>
-          <h2 class="fn">Couper Samuelson</h2>
-          <h3 class="role">{{ _('Producer') }}</h3>
-        </hgroup>
-      </header>
-      <p>
-      {# L10N: Note: The French "Palm d'Or" is a proper name and should not be translated. #}
-      {% trans %}
-        Couper Samuelson runs Jason Blum's Universal-based production company
-        Blumhouse, which in the last year has produced the horror hit <cite>Sinister</cite>,
-        the fourth <cite>Paranormal Activity</cite> movie, and a sequel to the 2011 hit
-        <cite>Insidious</cite>, due in the theaters this August. Prior to Blumhouse,
-        Samuelson produced the forthcoming Paramount release, <cite>Destination Wedding</cite>.
-        Made for $100,000, that film will be the lowest-budget feature produced and released
-        theatrically by a major studio in the modern era. Samuelson began his career at
-        Mark Cuban's 2929, where he co-produced movies including James Gray's <cite>We Own the Night</cite>
-        and <cite>Two Lovers</cite>, both of which were nominated for the Cannes <i>Palme d'Or</i>.
-      {% endtrans %}
-      </p>
-    </article>
-
+    {{ judge_bio.rharvey() }}
+    {{ judge_bio.fleonard() }}
+    {{ judge_bio.enorton() }}
+    {{ judge_bio.srobertson() }}
+    {{ judge_bio.csamuelson() }}
   </div>
 </div>
 {% endblock %}

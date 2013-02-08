@@ -5,138 +5,130 @@
 (function($, flicks) {
     'use strict';
 
-    var $window = $(window);
-    var $document = $(document);
-    var $pageNav = $('#page-nav');
-    var $head = $('#masthead');
-    var headOffset = $head.height() + 10;
+    $(function() {
+        var $window = $(window);
+        var $document = $(document);
+        var $pageNav = $('#page-nav');
+        var $head = $('#masthead');
+        var headOffset = $head.height() + 10;
 
-    // Sticky navigation
-    var navFixed = false;
-    var didScroll = false;
-    var scrollTime = 1000;
+        // Sticky navigation
+        var navFixed = false;
+        var didScroll = false;
+        var scrollTime = 1000;
 
-    $window.scroll(function() {
-        didScroll = true;
-        if ($window.scrollTop() >= 1){
-            $head.addClass('fixed');
-        }
-    });
-
-    $document.ready(function() {
-        didScroll = $window.scrollTop() > 0;
-    });
-
-    function adjustScrollbar() {
-        if (didScroll) {
-            didScroll = false;
-            var scrollTop = $window.scrollTop();
-            if (scrollTop > 0) {
-                if (!navFixed) {
-                    navFixed = true;
-                    $head.addClass('fixed');
-                }
-            } else {
-                if (navFixed) {
-                    navFixed = false;
-                    $head.removeClass('fixed');
-                    $pageNav.find("li.current").removeClass('current');
-                }
+        $window.scroll(function() {
+            didScroll = true;
+            if ($window.scrollTop() >= 1){
+                $head.addClass('fixed');
             }
-        }
-    }
+        });
 
-    // Check for an adjusted scrollbar every 100ms.
-    setInterval(adjustScrollbar, 100);
+        $document.ready(function() {
+            didScroll = $window.scrollTop() > 0;
+        });
 
-    // Change the navbar color and current item to match the section waypoint
-    function waypointCallback(current, previous) {
-        return function(event, direction) {
-            if (navFixed) {
-                if (direction === 'down') {
-                    $pageNav.attr('class', 'fixed ' + current);
-                    $pageNav.find("li.current").removeClass('current');
-                    $("#" + current).addClass('current');
+        function adjustScrollbar() {
+            if (didScroll) {
+                didScroll = false;
+                var scrollTop = $window.scrollTop();
+                if (scrollTop > 0) {
+                    if (!navFixed) {
+                        navFixed = true;
+                        $head.addClass('fixed');
+                    }
                 } else {
-                    $pageNav.attr('class', 'fixed ' + previous);
-                    $pageNav.find("li.current").removeClass('current');
-                    $("#" + previous).addClass('current');
+                    if (navFixed) {
+                        navFixed = false;
+                        $head.removeClass('fixed');
+                        $pageNav.find("li.current").removeClass('current');
+                    }
                 }
             }
-        };
-    }
-
-    // Fire the waypoints for each section, passing classes for the current and previous sections
-    // Uses jQuery Waypoints http://imakewebthings.com/jquery-waypoints/
-    $('#intro').waypoint(waypointCallback('',''), {offset: headOffset});
-    $('#about').waypoint(waypointCallback('nav-about', ''), {offset: headOffset});
-    $('#winners2012').waypoint(waypointCallback('nav-winners', 'nav-about'), {offset: headOffset});
-    $('#judges').waypoint(waypointCallback('nav-judges', 'nav-winners'), {offset: headOffset});
-    $('#prizes').waypoint(waypointCallback('nav-prizes', 'nav-judges'), {offset: headOffset});
-    $('#rules').waypoint(waypointCallback('nav-rules', 'nav-prizes'), {offset: headOffset});
-
-    // Scroll to the linked section
-    $window.on('click', '#page-nav a[href*="#"], a.scroll', function(e) {
-        e.preventDefault();
-        // Extract the target element's ID from the link's href.
-        var elem = $(this).attr('href').replace(/.*?(#.*)/g, '$1');
-        // Determine how far we have to scroll
-        var scrollDistance = Math.abs($(elem).offset().top - $document.scrollTop());
-        // Slower scrolling for further targets
-        if (scrollDistance > 1200) {
-            scrollTime = 2500;
         }
-        else {
-            scrollTime = 1000;
-        }
-        $('html, body').animate({
-            scrollTop: $(elem).offset().top
-        }, scrollTime, function() {
-            $(elem).attr('tabindex','100').focus().removeAttr('tabindex');
-        });
-    });
-    
 
-    // Launch video submission modal when the submit link is clicked.
-    var SUBMIT_URL = '/video/upload/';
-    $document.on('click', '.submit', function(e) {
-        e.preventDefault();
-        flicks.createModal(this, '<iframe class="submit-frame" src="' +
-                           SUBMIT_URL + '"></iframe>');
-    });
-    
-    // Change judge quotes on hover
-    $('.judge').each(function(){
-          var quote = $(this).children('.quote').html();
-          $(this).hover(
-              function(){
-                  $('#judge-quote .quote').fadeOut(200,function(){
-                      $(this).html(quote).fadeIn(200);
-                  });
-              },
-              function(){
-                  $('#judge-quote .quote').fadeOut(200);
-              }
-          );
-    });
-    
-    // Open judge bios in a modal
-    $('.judge a.bio').click(function(e){
-        e.preventDefault();
-        var sourcedoc = this.href;
-        var bio = $(this).attr('href').replace(/.*?(#.*)/g, '$1');
-      
-        $.ajax({
-            url: sourcedoc,
-            success: function(data){
-                var content = $(data).find(bio);
-                return flicks.createModal(this, content);
-            },
-            dataType: 'html'
+        // Check for an adjusted scrollbar every 100ms.
+        setInterval(adjustScrollbar, 100);
+
+        // Change the navbar color and current item to match the section
+        // waypoint
+        function waypointCallback(current, previous) {
+            return function(event, direction) {
+                if (navFixed) {
+                    if (direction === 'down') {
+                        $pageNav.attr('class', 'fixed ' + current);
+                        $pageNav.find("li.current").removeClass('current');
+                        $("#" + current).addClass('current');
+                    } else {
+                        $pageNav.attr('class', 'fixed ' + previous);
+                        $pageNav.find("li.current").removeClass('current');
+                        $("#" + previous).addClass('current');
+                    }
+                }
+            };
+        }
+
+        // Fire the waypoints for each section, passing classes for the current
+        // and previous sections.
+        // Uses jQuery Waypoints http://imakewebthings.com/jquery-waypoints/
+        $('#intro').waypoint(waypointCallback('',''), {offset: headOffset});
+        $('#about').waypoint(waypointCallback('nav-about', ''), {offset: headOffset});
+        $('#winners2012').waypoint(waypointCallback('nav-winners', 'nav-about'), {offset: headOffset});
+        $('#judges').waypoint(waypointCallback('nav-judges', 'nav-winners'), {offset: headOffset});
+        $('#prizes').waypoint(waypointCallback('nav-prizes', 'nav-judges'), {offset: headOffset});
+        $('#rules').waypoint(waypointCallback('nav-rules', 'nav-prizes'), {offset: headOffset});
+
+        // Scroll to the linked section
+        $window.on('click', '#page-nav a[href*="#"], a.scroll', function(e) {
+            e.preventDefault();
+            // Extract the target element's ID from the link's href.
+            var elem = $(this).attr('href').replace(/.*?(#.*)/g, '$1');
+            // Determine how far we have to scroll
+            var scrollDistance = Math.abs($(elem).offset().top -
+                                          $document.scrollTop());
+            // Slower scrolling for further targets
+            if (scrollDistance > 1200) {
+                scrollTime = 2500;
+            }
+            else {
+                scrollTime = 1000;
+            }
+            $('html, body').animate({
+                scrollTop: $(elem).offset().top
+            }, scrollTime, function() {
+                $(elem).attr('tabindex','100').focus().removeAttr('tabindex');
+            });
         });
 
+        // Launch video submission modal when the submit link is clicked.
+        var SUBMIT_URL = '/video/upload/';
+        $document.on('click', '.submit', function(e) {
+            e.preventDefault();
+            flicks.createModal(this, '<iframe class="submit-frame" src="' +
+                               SUBMIT_URL + '"></iframe>');
+        });
+
+
+        // Judge quotes
+        var $quote = $('#judge-quote .quote');
+        $('.judge').each(function() {
+            var $judge = $(this);
+            var quote = $judge.children('.quote').html();
+            $judge.hover(function() {
+                if (quote) {
+                    $quote.fadeOut(200, function() {
+                        $quote.html(quote).fadeIn(200);
+                    });
+                }
+            }, function() {});
+        });
+
+        // Open judge bios in a modal
+        $('.judge a.bio').click(function(e){
+            e.preventDefault();
+            flicks.createModal(this, $(this).data('bio'));
+        });
     });
 
-    
 })(jQuery, window.flicks);
 

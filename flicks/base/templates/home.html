@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% import 'judge_macros.html' as judge_bio %}
+
 {% block page_title %}{{ _('A Global Video Contest to Mobilize the Web') }}{% endblock %}
 
 {% block site_css %}
@@ -32,7 +34,7 @@
         <ol id="slide-control">
           <li id="slide-control-one" class="on"><a href="#slide-one">{{ _('Flicks trailers') }}</a></li>
           <li id="slide-control-two"><a href="#slide-two">{{ _('Early entry') }}</a></li>
-          <li id="slide-control-three"><a href="#slide-three">{{ _('Directors\' cuts) }}</a></li>
+          <li id="slide-control-three"><a href="#slide-three">{{ _('Directors\' cuts') }}</a></li>
         </ol>
         <ol id="slides">
           <li id="slide-one" class="slide">
@@ -53,8 +55,8 @@
               <h2>{{ _('Enter by April 3') }}</h2>
               <p>
               {% trans %}
-                Submit your flick in time for the BAFICI film festival in Buenos Aires and 
-                you could win a $1000 Early Entry Award and be automatically qualified for 
+                Submit your flick in time for the BAFICI film festival in Buenos Aires and
+                you could win a $1000 Early Entry Award and be automatically qualified for
                 the Grand Prize.
               {% endtrans %}
               </p>
@@ -249,7 +251,7 @@
 
       <ul class="judges">
         <li id="rharvey" class="judge vcard">
-          <a href="/judges#rharvey" class="bio">
+          <a href="/judges#rharvey" class="bio" data-bio="{{ judge_bio.rharvey()|forceescape }}">
             <img src="{{ static('img/judges/judge-rharvey.jpg') }}" alt="" class="photo">
             <hgroup>
               <h2 class="fn">Robert "Bob" Harvey</h2>
@@ -259,7 +261,7 @@
         </li>
 
         <li id="fleonard" class="judge vcard">
-          <a href="/judges#fleonard" class="bio">
+          <a href="/judges#fleonard" class="bio" data-bio="{{ judge_bio.fleonard()|forceescape }}">
             <img src="{{ static('img/judges/judge-fleonard.jpg') }}" alt="" class="photo">
             <hgroup>
               <h2 class="fn">Franklin Leonard</h2>
@@ -269,7 +271,7 @@
         </li>
 
         <li id="enorton" class="judge vcard">
-          <a href="/judges#enorton" class="bio">
+          <a href="/judges#enorton" class="bio" data-bio="{{ judge_bio.enorton()|forceescape }}">
             <img src="{{ static('img/judges/judge-enorton.jpg') }}" alt="" class="photo">
             <hgroup>
               <h2 class="fn">Edward Norton</h2>
@@ -295,7 +297,7 @@
         </li>
 
         <li id="srobertson" class="judge vcard">
-          <a href="/judges#srobertson" class="bio">
+          <a href="/judges#srobertson" class="bio" data-bio="{{ judge_bio.srobertson()|forceescape }}">
             <img src="{{ static('img/judges/judge-srobertson.jpg') }}" alt="" class="photo">
             <hgroup>
               <h2 class="fn">Shauna Robertson</h2>
@@ -323,7 +325,7 @@
         </li>
 
         <li id="csamuelson" class="judge vcard">
-          <a href="/judges#csamuelson" class="bio">
+          <a href="/judges#csamuelson" class="bio" data-bio="{{ judge_bio.csamuelson()|forceescape }}">
             <img src="{{ static('img/judges/judge-csamuelson.jpg') }}" alt="" class="photo">
             <hgroup>
               <h2 class="fn">Couper Samuelson</h2>
@@ -339,7 +341,7 @@
           </hgroup>
         </li>
       </ul>
-      
+
       <aside id="judge-quote">
         <figure class="quote"></figure>
       </aside>
