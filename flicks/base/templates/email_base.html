@@ -1,0 +1,107 @@
+<html>
+<head>
+  <title>Mozilla Firefox | {{ _('Firefox Flicks') }}</title>
+</head>
+<body bgcolor="212b30" style="background: #212b30; font-family: Georgia, serif; font-size: 13px; color: #212b30; padding: 0; margin: 0;">
+  <table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" style="table-layout:fixed">
+    <tbody>
+      <tr>
+        <td valign="top" bgcolor="212b30">
+          <!-- START HEADER -->
+          <table width="600" cellspacing="0" cellpadding="0" border="0" align="center">
+            <tbody>
+              <tr>
+                <td width="231">
+                  <img border="0" style="display: block; font-size: 20px; font-weight: bold; color: #fff;" alt="{{ _('Firefox Flicks') }}" src="{{ static('email/FlicksTitle.jpg') }}" height="68" width="225"/>
+                </td>
+                <td width="369" align="right" style="font-family: 'Gill Sans','Gill Sans MT',Calibri,sans-serif; font-size: 11px; font-family: georgia, serif; color: #849096;">
+                  <br /><br />
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <!-- END HEADER -->
+          <!-- START CONTENT -->
+          <table width="598" cellspacing="0" cellpadding="0" border="0" bgcolor="ffffff" align="center" style="background: #fff; border-collapse:collapse">
+            <tbody>
+              <tr>
+                <td align="left" valign="top" width="72">
+                  <img border="0" style="display: block;" alt="" src="{{ static('email/FlicksTL.jpg') }}" height="162" width="72">
+                </td>
+                <td width="491" style="font-family: georgia,serif; font-size: 13px; color: #666; font-weight: normal; font-style: normal; line-height: 1.5;">
+                  <br /><br />
+                  <div style="font-size: 38px; color:#f15b34; line-height: 1.3;">
+                    {# L10n: Greeting in an email. #}
+                    {% trans name=name %}
+                      Hi {{ name }},
+                    {% endtrans %}
+                  </div>
+                  <br/>
+                  {% block message %}{% endblock %}
+                  {# L10n: Part of the signature on an email. #}
+                  {{ _('Sincerely,') }}
+                  <br /><br />
+                  {# L10n: Part of the signature on an email. #}
+                  {{ _('The Firefox Flicks Team') }}
+                  <br /><br />
+                </td>
+                <td align="right" valign="top" width="56">
+                  <img border="0" style="display: block;" alt="" src="{{ static('email/FlicksTR.jpg') }}" height="234" width="56">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table width="600" cellspacing="0" cellpadding="0" border="0" align="center">
+            <tbody>
+              <tr>
+                <td width="600"><img border="0" style="display: block;" alt="" src="{{ static('email/FlicksBottom.jpg') }}" height="312" width="600" /></td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- END CONTENT -->
+          <!-- START FOOTER -->
+          <table width="600" cellspacing="0" cellpadding="0" border="0" align="center">
+            <tbody>
+              <tr>
+                <td width="10">&#160;</td>
+              </tr>
+            </tbody>
+          </table>
+          <table width="600" cellspacing="0" cellpadding="0" border="0" align="center">
+            <tbody>
+              <tr>
+                <td width="10">&#160;</td>
+                <td width="370" valign="top" style="color: #849096; font-family: georgia, serif; font-size: 12px; line-height: 1.4;">
+                  &#160;
+                </td>
+                <td width="40">&#160;</td>
+                <td width="170" valign="top" style="color: #849096; font-family: georgia, serif; font-size: 11px; line-height: 1.3;">
+                  <p style="margin: 0 0 10px 0; color: #849096; font-family: georgia, serif; font-size: 11px; line-height: 1.3;">
+                    <b>Mozilla</b><br />
+                    650 Castro St., Ste 300<br />
+                    Mountain View CA 94041-2021
+                  </p>
+                  <p style="margin: 0 0 10px 0; color: #849096; font-family: georgia, serif; font-size: 11px; line-height: 1.3;">
+                    {# L10n: Please don't change the HTML, this string is in an email and the HTML is very fragile. #}
+                    {% trans link='http://www.mozilla.com/en-US/privacy-policy.html' %}
+                      Read the <a href="{{ link }}" target="_blank" style="color: #349cd7; text-decoration: none; font-size: 11px; font-family: georgia, serif;">Mozilla Privacy Policy</a>.
+                    {% endtrans %}
+                  </p>
+                  &#160;</td>
+                  <td width="10">&#160;</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- END FOOTER -->
+            <p></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p></p>
+
+  </body>
+
+  </html>

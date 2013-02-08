@@ -1,6 +1,19 @@
-{# TODO: Update with final design + copy #}
-Hi!
+{% extends 'email_base.html' %}
 
-Your thing got approved, yay!
-
-Bye!
+{% block message %}
+  <div style="font-size: 22px; color:#212a2f; line-height: 1.3;">
+    {{ _('Your flick has been accepted and successfully added to the competition!') }}
+  </div>
+  <br/>
+  <div style="font-size: 22px; color:#212a2f; line-height: 1.3;">
+    {# L10n: Please don't change the HTML, this string is in an email and the HTML is very fragile. #}
+    {% trans link=absolutify(url('flicks.videos.details', args=(video.id,))), title=video.title %}
+      You can find your flick on the gallery and share it using this link: <a href="{{ link }}" style="color: #1677b9; text-decoration: none;">{{ title }}</a>
+    {% endtrans %}
+  </div>
+  <br />
+  {{ _('Voting for the People\'s Choice Award starts on July 31, so be sure to let your friends know that you need their support.') }}
+  <br /><br />
+  {{ _('Thanks again for taking the time to help us share the power of mobile with the world.') }}
+  <br /><br />
+{% endblock %}

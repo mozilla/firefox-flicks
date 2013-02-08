@@ -3,14 +3,17 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.dispatch import receiver
 
 import jinja2
 from caching.base import CachingManager, CachingMixin
 from tower import ugettext as _, ugettext_lazy as _lazy
 
 from flicks.base.util import get_object_or_none
+from flicks.videos import vimeo
 from flicks.videos.tasks import process_approval
-from flicks.videos.util import vidly_embed_code, vimeo_embed_code
+from flicks.videos.util import (send_decline_email, vidly_embed_code,
+                                vimeo_embed_code)
 
 
 class Video2013(models.Model, CachingMixin):
@@ -56,6 +59,18 @@ class Video2013(models.Model, CachingMixin):
 
     def thumbnail(self, size):
         return getattr(self, '{0}_thumbnail_url'.format(size), '')
+
+
+@receiver(models.signals.post_delete, sender=Video2013)
+def remove_video(sender, **kwargs):
+    """
+    Remove the deleted video from vimeo and notify the user that it has been
+    declined.
+    """
+    video = kwargs['instance']
+    vimeo.delete_video.delay(video.vimeo_id)
+    send_decline_email(video)
+
 
 
 # Assign the alias "Video" to the model for the current year's contest.

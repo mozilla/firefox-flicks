@@ -43,5 +43,23 @@ def send_approval_email(video):
     """
     # TODO: Add final copy.
     subject = 'Your video has been approved!'
-    body = render_to_string('videos/2013/approval_email.html', {'video': video})
+    body = render_to_string('videos/2013/approval_email.html', {
+        'name': video.user.profile.display_name,
+        'video': video
+    })
     send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [video.user.email])
+
+
+def send_decline_email(video):
+    """
+    Send email to the video's creator telling them that their video has been
+    declined.
+    """
+    # TODO: Add final copy.
+    subject = 'Your video has been declined'
+    body = render_to_string('videos/2013/decline_email.html', {
+        'name': video.user.profile.display_name
+    })
+    send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [video.user.email])
+
+

@@ -171,6 +171,14 @@ def set_privacy(video_id, privacy, password=None):
 
 
 @vimeo_task
+def delete_video(video_id):
+    """Permanently delete a video."""
+    _video_request('vimeo.videos.delete', 'POST', video_id=video_id,
+                   error_msg=('Error deleting video {video_id}: <{code} {msg}> '
+                              '{expl}'))
+
+
+@vimeo_task
 def get_thumbnail_urls(video_id):
     """Get thumbnail urls for a video."""
     response = _video_request('vimeo.videos.getThumbnailUrls', 'POST',
