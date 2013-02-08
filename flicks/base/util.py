@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 from locale import strcoll as locale_strcoll
 
 from django.conf import settings
@@ -7,6 +8,7 @@ from django.utils.translation import get_language
 
 import commonware.log
 from funfactory.urlresolvers import reverse
+from tower import activate
 
 
 log = commonware.log.getLogger('f.base')
@@ -96,3 +98,12 @@ def country_choices(allow_empty=True):
         items.append(('', '---'))
 
     return unicode_choice_sorted(items)
+
+
+@contextmanager
+def use_lang(lang):
+    """Temporarily use another language for translation."""
+    current_lang = get_language()
+    activate(lang)
+    yield
+    activate(current_lang)

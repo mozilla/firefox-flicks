@@ -27,7 +27,7 @@ User.add_to_class('profile', user_profile)
 class UserProfile(models.Model, CachingMixin):
     """Additional fields required for a user."""
     user = models.OneToOneField(User, primary_key=True)
-    locale = LocaleField(blank=True)
+    locale = LocaleField(blank=False, default='en-us')
 
     # Profile info
     full_name = models.CharField(max_length=255, blank=False)

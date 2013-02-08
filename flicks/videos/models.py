@@ -12,7 +12,7 @@ from tower import ugettext as _, ugettext_lazy as _lazy
 from flicks.base.util import get_object_or_none
 from flicks.videos import vimeo
 from flicks.videos.tasks import process_approval
-from flicks.videos.util import (send_decline_email, vidly_embed_code,
+from flicks.videos.util import (send_rejection_email, vidly_embed_code,
                                 vimeo_embed_code)
 
 
@@ -69,8 +69,7 @@ def remove_video(sender, **kwargs):
     """
     video = kwargs['instance']
     vimeo.delete_video.delay(video.vimeo_id)
-    send_decline_email(video)
-
+    send_rejection_email(video)
 
 
 # Assign the alias "Video" to the model for the current year's contest.

@@ -5,6 +5,9 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
 import jinja2
+from tower import ugettext_lazy as _lazy
+
+from flicks.base.util import use_lang
 
 
 def vidly_embed_code(shortlink, width=600, height=337):
@@ -36,30 +39,35 @@ def vimeo_embed_code(vimeo_id, width=600, height=338, elem_class='video'):
             url=url, width=width, height=height, elem_class=elem_class))
 
 
+# L10n: Subject line for emails sent to users after their video has been moderated.
+# L10n: Used for both approval and rejection emails.
+EMAIL_SUBJECT = _lazy('Firefox Flicks: Your Recent Submission')
+
+
 def send_approval_email(video):
     """
     Send email to the video's creator telling them that their video has been
     approved.
     """
-    # TODO: Add final copy.
-    subject = 'Your video has been approved!'
-    body = render_to_string('videos/2013/approval_email.html', {
-        'name': video.user.profile.display_name,
-        'video': video
-    })
-    send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [video.user.email])
+    with use_lang(video.user.profile.locale):
+        body = render_to_string('videos/2013/approval_email.html', {
+            'name': video.user.profile.display_name,
+            'video': video
+        })
+    send_mail(EMAIL_SUBJECT, body, settings.DEFAULT_FROM_EMAIL,
+              [video.user.email])
 
 
-def send_decline_email(video):
+def send_rejection_email(video):
     """
     Send email to the video's creator telling them that their video has been
-    declined.
+    rejected.
     """
-    # TODO: Add final copy.
-    subject = 'Your video has been declined'
-    body = render_to_string('videos/2013/decline_email.html', {
-        'name': video.user.profile.display_name
-    })
-    send_mail(subject, body, settings.DEFAULT_FROM_EMAIL, [video.user.email])
+    with use_lang(video.user.profile.locale):
+        body = render_to_string('videos/2013/rejection_email.html', {
+            'name': video.user.profile.display_name
+        })
+    send_mail(EMAIL_SUBJECT, body, settings.DEFAULT_FROM_EMAIL,
+              [video.user.email])
 
 

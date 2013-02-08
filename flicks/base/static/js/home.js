@@ -8,6 +8,7 @@
     $(function() {
         var $window = $(window);
         var $document = $(document);
+        var $html = $('html');
         var $pageNav = $('#page-nav');
         var $head = $('#masthead');
         var headOffset = $head.height() + 10;
@@ -104,8 +105,9 @@
         var SUBMIT_URL = '/video/upload/';
         $document.on('click', '.submit', function(e) {
             e.preventDefault();
-            flicks.createModal(this, '<iframe class="submit-frame" src="' +
-                               SUBMIT_URL + '"></iframe>');
+            var lang = $html.attr('lang');
+            flicks.createModal(this, '<iframe class="submit-frame" src="/' +
+                               lang + SUBMIT_URL + '"></iframe>');
         });
 
 

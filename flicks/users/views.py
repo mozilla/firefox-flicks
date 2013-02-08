@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.utils.translation import get_language
 
 from commonware.response.decorators import xframe_sameorigin
 from funfactory.urlresolvers import reverse
@@ -16,6 +17,7 @@ def profile(request):
     if request.method == 'POST' and form.is_valid():
         profile = form.save(commit=False)
         profile.user = request.user
+        profile.locale = get_language()
         profile.save()
         return redirect('flicks.videos.upload')
 

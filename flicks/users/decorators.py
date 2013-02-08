@@ -1,7 +1,8 @@
 from functools import partial, wraps
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+
+from flicks.base.util import redirect
 
 
 def profile_required(func=None, login_url=None):

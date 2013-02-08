@@ -14,7 +14,8 @@ class Video2013Admin(admin.ModelAdmin):
     readonly_fields = ['filename', 'processed', 'user_notified', 'created']
     fieldsets = (
         (None, {
-            'fields': ('title', 'user', 'created', 'vimeo_id', 'filename')
+            'fields': ('title', 'user', 'created', 'vimeo_id', 'filename',
+                       'description')
         }),
         ('Moderation', {
             'fields': ('processed', 'approved')
