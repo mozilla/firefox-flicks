@@ -8,6 +8,11 @@
   {{ css('videos') }}
 {% endblock %}
 
+{% block site_js %}
+  {{ super() }}
+  {{ js('share_js') }}
+{% endblock %}
+
 {% block content %}
   <div class="section">
     <article class="wrap">

@@ -4,6 +4,9 @@
 
 {% block og_title %}{{ video.title }}{% endblock %}
 {% block og_image %}{{ video.thumbnail('medium') }}{% endblock %}
+{% block meta_description %}
+<meta property="og:description" content="An entry for Firefox Flicks 2013, a global video contest about the power of mobile.">
+{% endblock %}
 
 {% block video_embed %}
   {{ video.embed_html(width='100%') }}
@@ -13,7 +16,9 @@
   <h1>{{ video.title }}</h1>
 
   <div class="vcard">
+
     {{ gravatar_img(video.user.email, img_class='photo', size=48) }}
+
     <div class="profile">
       <span class="fn">{{ video.user.profile.display_name }}</span>,
       <span class="country-name">{{ country_name(video.user.profile.country) }}</span>
@@ -24,7 +29,31 @@
       </a>
     </div>
     <div class="date">{{ video.created|babel_date }}</div>
+    <ul>
+        <li class="share">
+            <a href="#share-opts" id="sharetoggle" title="{{_('Share this video with your social network')}}">{{_('Share Video')}}</a>
+            <ul id="share-opts">
+                <li class="twitter"><a href="{{ 'http://twitter.com/share'|urlparams(url=request.build_absolute_uri(),
+                                                                                     text=video.user.profile.display_name.encode('utf-8'),
+                                                                                     via="firefoxflicks") }}">{{_('Share on Twitter')}}</a></li>
+                <li class="facebook"><a href="{{ 'http://www.facebook.com/sharer.php'|urlparams(u=request.build_absolute_uri(),
+                                                                                                t=video.user.profile.display_name.encode('utf-8')) }}">{{_('Share on Facebook')}}</a></li>
+                <li class="tumblr"><a href="{{ 'http://www.tumblr.com/share'|urlparams(v=3,
+                                                                                       u=request.build_absolute_uri(),
+                                                                                       t=video.user.profile.display_name.encode('utf-8')) }}">{{_('Share on Tumblr')}}</a></li>
+                <li class="embed">
+                  {{_('Embed')}}
+                  <textarea id="embed-code" readonly="readonly">
+                    {{ video.embed_html(width='100%') }}
+                  </textarea>
+                </li>
+            </ul>
+        </li>
+    </ul>
   </div>
 
   <p class="description">{{ video.description }}</p>
 {% endblock %}
+
+
+
