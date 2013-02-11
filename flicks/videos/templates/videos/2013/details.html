@@ -7,12 +7,12 @@
 {% block og_title %}{{ video.title }}{% endblock %}
 {% block og_image %}{{ video.thumbnail('medium') }}{% endblock %}
 {% block meta_description %}
-    {% if video.description %}
-        <meta property="og:description" content="{{ video.description }}">
-    {% else %}
-        <meta property="og:description" content="An entry for Firefox Flicks 2013, a global video contest about the power of mobile.">
-    {% endif %}
-{% endblock %}
+  {% if video.description %}
+    <meta property="og:description" content="{{ video.description }}">
+  {% else %}
+    <meta property="og:description" content="{{ _('An entry for Firefox Flicks 2013, a global video contest about the power of mobile.') }}">
+  {% endif %}
+{% endblock %}>
 
 {% block video_embed %}
   {{ video.embed_html(width='100%') }}
