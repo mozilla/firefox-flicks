@@ -55,6 +55,7 @@ class TestProfile(TestCase):
         """
         self._profile('post', locale='fr', full_name='blah', nickname='blah',
                       country='fr', privacy_policy_agree=True,
-                      mailing_list_signup=True)
+                      mailing_list_signup=True, mailing_list_format='html')
         newsletter_subscribe.delay.assert_called_with(self.user.email,
-                                                      source_url=ANY)
+                                                      source_url=ANY,
+                                                      format='html')

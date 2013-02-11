@@ -13,7 +13,8 @@ class UserProfileForm(forms.ModelForm):
 
     privacy_policy_agree = forms.BooleanField(required=True)
     mailing_list_signup = forms.BooleanField(required=False)
-    mailing_list_format = forms.ChoiceField(choices=NEWSLETTER_FORMATS,
+    mailing_list_format = forms.ChoiceField(required=False,
+                                            choices=NEWSLETTER_FORMATS,
                                             initial='html')
 
     class Meta:
@@ -21,7 +22,9 @@ class UserProfileForm(forms.ModelForm):
         fields = ('full_name', 'nickname', 'country', 'address1', 'address2',
                   'city', 'mailing_country', 'state', 'postal_code')
         widgets = {
-            'full_name': forms.TextInput(attrs={'required': 'required'})
+            'full_name': forms.TextInput(attrs={'required': 'required'}),
+            'privacy_policy_agree': forms.CheckboxInput(
+                attrs={'required': 'required'}),
         }
 
     def __init__(self, *args, **kwargs):

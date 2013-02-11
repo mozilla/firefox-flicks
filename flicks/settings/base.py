@@ -141,7 +141,9 @@ CSP_FRAME_SRC = ("'self'",
                  'https://www.facebook.com',
                  'http://*.vimeo.com',
                  'https://*.vimeo.com',
-                 'https://*.vimeocdn.com',)
+                 'https://*.vimeocdn.com',
+                 'http://login.persona.org',
+                 'https://login.persona.org',)
 CSP_ALLOW = ("'self'",
              'https://*.vimeo.com')
 CSP_OPTIONS = ('eval-script', 'inline-script')

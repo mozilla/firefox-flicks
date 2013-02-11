@@ -36,11 +36,11 @@
             }
         });
 
-        // Disable submit button once video is submitted to allow for backend to
-        // take time to contact Vimeo.
+        // Disable submit button and cancel button once video is submitted to
+        // allow for backend to take time to contact Vimeo.
         $videoForm.on('submit', function(e) {
-            $videoForm.find('button').attr('disabled', 'disabled')
-                      .addClass('disabled');
+            $buttons = $videoForm.find('button');
+            $buttons.attr('disabled', 'disabled').addClass('disabled');
         });
 
         // When the remove link is clicked, cancel the ongoing upload and go
@@ -49,7 +49,10 @@
             e.preventDefault();
             if (uploadXHR !== null) {
                 uploadXHR.abort();
-                $videoForm.find('button').attr('disabled', 'disabled').addClass('disabled');
+
+                var $next = $videoForm.find('button.next');
+                $next.attr('disabled', 'disabled').addClass('disabled');
+
                 $videoForm.fadeOut(500, function() {
                     $uploadForm.fadeIn(500);
                 });
