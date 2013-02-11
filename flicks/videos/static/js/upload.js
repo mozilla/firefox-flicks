@@ -1,6 +1,6 @@
 ;(function($) {
     $(function() {
-        var ERROR_URL = '/video/upload/error/';
+        var ERROR_URL = '/' + $('html').attr('lang') + '/video/upload/error/';
 
         var $uploadForm = $('#vimeo-file-upload');
         var $videoForm = $('#video-form');
@@ -11,7 +11,8 @@
         $uploadForm.fileupload({
             dataType: 'text',
             done: function(e, data) {
-                $videoForm.find('button').removeAttr('disabled').removeClass('disabled');
+                $videoForm.find('button').removeAttr('disabled')
+                          .removeClass('disabled');
             },
             fail: function(e, data) {
                 if (data.textStatus !== 'abort') {
@@ -35,6 +36,15 @@
             }
         });
 
+        // Disable submit button once video is submitted to allow for backend to
+        // take time to contact Vimeo.
+        $videoForm.on('submit', function(e) {
+            $videoForm.find('button').attr('disabled', 'disabled')
+                      .addClass('disabled');
+        });
+
+        // When the remove link is clicked, cancel the ongoing upload and go
+        // back to the file selection screen.
         $videoForm.on('click', '.remove', function(e) {
             e.preventDefault();
             if (uploadXHR !== null) {

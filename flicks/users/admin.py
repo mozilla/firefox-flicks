@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class UserAdmin(admin.UserAdmin):
     """Configuration for the user admin pages."""
     list_display = ['email', 'full_name', 'country', 'is_staff']
-    search_fields = ['email', 'userprofile__full_name', 'bio']
+    search_fields = ['email', 'userprofile__full_name', 'userprofile__nickname']
 
     def full_name(self, user):
         return user.profile.full_name

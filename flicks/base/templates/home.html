@@ -121,7 +121,7 @@
 
         <h3>{{ _('Use the materials below to help you make your flick.') }}</h3>
         <ul class="info">
-          <li><a href="{{ link_faq }}" class="go">{{ _('See the FAQ') }}</a></li>
+          <li><a href="{{ url('flicks.base.faq') }}" class="go">{{ _('See the FAQ') }}</a></li>
           <li><a href="{{ link_brief }}" class="go" rel="external">{{ _('Read the creative brief') }}</a></li>
           <li><a href="{{ link_assets }}" class="go" rel="external">{{ _('Download the creative assets') }}</a></li>
         </ul>
@@ -238,7 +238,7 @@
         {% trans %}
           Get to know our illustrious panel of celebrity judges &ndash; led by actor,
           director, producer and activist Edward Norton &ndash; who will see your flick
-          and help us choose this year’s winner.
+          and help us choose this year's winner.
         {% endtrans %}
         </p>
 
@@ -415,7 +415,7 @@
           </p>
           <ul class="prose">
             <li><time datetime="2013-04-03">{{ _('April 3') }}</time> &ndash; {{ _('BAFICI, Buenos Aires, Argentina') }}</li>
-            <li><time datetime="2013-07-05">{{ _('July 5') }}</time> &ndash; {{ _('Nowe Horyzonty, Wrocław, Poland') }}</li>
+            <li><time datetime="2013-07-05">{{ _('July 5') }}</time> &ndash; {{ _('Nowe Horyzonty, Wroc&#322;aw, Poland') }}</li>
             <li><time datetime="2013-07-05">{{ _('July 5') }}</time> &ndash; {{ _('Cinemalaya, Manila, Philippines') }}</li>
           </ul>
         </div>
@@ -466,7 +466,7 @@
         <h2>{{ _('Privacy') }}</h2>
         <p>
         {% trans rules_link=url('flicks.base.rules') %}
-          In order to enter, you’ll have to provide your name, email address and country
+          In order to enter, you'll have to provide your name, email address and country
           of residence (to determine your contest region). Your name and region will be
           posted along with your flick in the public galleries, where they can be viewed,
           liked and shared by everyone.
@@ -477,7 +477,7 @@
         <h2>{{ _('How to enter') }}</h2>
         <p>
         {% trans rules_link=url('flicks.base.rules') %}
-          Nice work! You made it all the way to the end. When you’re ready,
+          Nice work! You made it all the way to the end. When you're ready,
           <a href="#" class="submit">start here to submit your flick.</a>
         {% endtrans %}
         </p>

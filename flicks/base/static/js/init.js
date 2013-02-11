@@ -58,7 +58,12 @@
     // Load external links in new tab/window
     $('a[rel="external"]').click(function(e){
         e.preventDefault();
-        window.open(this.href, '_blank', $(this).data('windowOpts'));
+        var opts = $(this).data('windowOpts');
+        if (opts) {
+            window.open(this.href, '_blank', $(this).data('windowOpts'));
+        } else {
+            window.open(this.href);
+        }
     });
 
 
@@ -68,14 +73,21 @@
         'trans': function(stringId){
             return $strings.data(stringId);
         },
-        'createModal': function(origin, content) {
+        'createModal': function(origin, content, bg_close) {
             // Clear existing modal, if necessary,
             $('#modal').remove();
             $('.modalOrigin').removeClass('modalOrigin');
 
+            // If bg_close is false, we disable being able to close the modal
+            // just by clicking the background.
+            var modal_class = 'bg_close';
+            if (!bg_close && bg_close !== undefined) {
+                modal_class = '';
+            }
+
             // Create new modal
             var html = (
-                '<div id="modal">' +
+                '<div id="modal" class="' + modal_class + '">' +
                 '  <div class="inner">' +
                 '    <button type="button" class="close">' +
                 '      ' + flicks.trans('close') +
@@ -91,7 +103,9 @@
             $(origin).addClass('modalOrigin');
         },
         'closeModal': function() {
-            $('#modal').fadeOut(100, function(){ $(this).remove() } );
+            $('#modal').fadeOut(100, function(){
+                $(this).remove();
+            });
             $('body').removeClass('noscroll');
             $('.modalOrigin').focus().remove('modalOrigin');
         },
@@ -106,7 +120,7 @@
 
     // Close modal on clicking close button or background.
     $document.on('click', '#modal .close', flicks.closeModal);
-    $document.on('click', '#modal', flicks.closeModal);
+    $document.on('click', '#modal.bg_close', flicks.closeModal);
 
     // Close on escape
     $document.on('keyup', function(e) {

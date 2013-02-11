@@ -102,12 +102,11 @@
         });
 
         // Launch video submission modal when the submit link is clicked.
-        var SUBMIT_URL = '/video/upload/';
+        var SUBMIT_URL = '/' + $('html').attr('lang') + '/video/upload/';
         $document.on('click', '.submit', function(e) {
             e.preventDefault();
-            var lang = $html.attr('lang');
-            flicks.createModal(this, '<iframe class="submit-frame" src="/' +
-                               lang + SUBMIT_URL + '"></iframe>');
+            flicks.createModal(this, '<iframe class="submit-frame" src="' +
+                               SUBMIT_URL + '"></iframe>', false);
         });
 
 
