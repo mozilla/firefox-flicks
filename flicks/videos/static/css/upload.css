@@ -431,7 +431,7 @@ body {
 
   body {
     height: auto;
-    background-position: -550px -400px, 140px -360px, 75% 1200px, 0 0;
+    background-position: -550px -400px, 340px -360px, 75% 1200px, 0 0;
   }
 
   #page {
@@ -439,13 +439,7 @@ body {
   }
 
   .steps {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-
-  .steps li {
-    display: block;
-    padding-bottom: 0;
+    font-size: 16px;
   }
 
   .steps .current {
@@ -538,9 +532,15 @@ body {
 
 }
 
-/* Wide Mobile Layout: 480px */
-@media only screen and (min-width: 480px) and (max-width: 760px) {
-
+@media only screen and (max-width: 650px) {
+  
+  .steps {
+    margin-bottom: 20px;
+  }
+  
+  .steps li {
+    display: block;
+    padding-bottom: 0;
+  }
 
 }
-

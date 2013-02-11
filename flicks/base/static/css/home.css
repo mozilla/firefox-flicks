@@ -71,16 +71,12 @@
 /*** @Slides *********/
 .js #slideshow {
   position: relative;
+  z-index: 10;
   height: 300px;
-  margin: 0 0 2em;
-  padding-bottom: 17px;
-  background: url(/static/img/shadow-940.png) center bottom no-repeat;
-}
-
-#slideshow ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  overflow: hidden;
+  margin: 0 0 1em;
+  padding-bottom: 35px;
+  background: url(/static/img/shadow-940.png) center 300px no-repeat;
 }
 
 #slideshow .slide {
@@ -93,10 +89,10 @@
   display: none;
   height: 300px;
   position: relative;
+  z-index: 10;
   margin: 0 0 20px;
   padding: 0;
   border: 0;
-  overflow: hidden;
 }
 
 .js #slideshow #slide-one {
@@ -105,69 +101,83 @@
 
 .js .slide-desc {
   position: absolute;
-  top: -50px;
-  left: 30px;
-  width: 280px;
-  text-align: left;
-  padding: 80px 30px 20px;
-  background-color: #444;
-  background-color: rgba(0,0,0,.75);
-  font-size: 18px;
-  line-height: 1.25;
+  top: 0;
+  left: 0;
   color: #fff;
+  font-size: 18px;
   text-shadow: none;
 }
 
 .js .slide-desc h2 {
   text-shadow: none;
+  font-size: 42px;
+  line-height: 1.05;
+  margin: 0 0 4px;
 }
 
 .js .slide-desc a {
   color: #1f9ee5;
 }
 
-#slideshow .slide-desc .act {
-  clear: both;
-}
-
-#slide-control li {
-  display: inline-block;
-  margin: 0 5px 1em;
-}
-
-.js #slide-control li {
-  margin: 0 6px;
-}
-
-.js #slide-control {
-  position: absolute;
-  left: 50%;
-  bottom: -22px;
-  width: 200px;
-  margin-left: -100px;
-  z-index: 99;
+.js .cycle-pager {
+  margin: 10px 0 0;
   text-align: center;
 }
 
-.js #slide-control a {
-  display: block;
+.js .cycle-pager span {
+  display: inline-block;
+  margin: 0 6px;
   width: 11px;
   height: 11px;
   border-radius: 50%;
   text-indent: -999em;
   overflow: hidden;
   background: #ccc;
+  cursor: pointer;
 }
 
-.js #slide-control a:hover,
-.js #slide-control a:focus,
-.js #slide-control a:active {
+.js .cycle-pager span:hover {
   background: #bbb;
 }
 
-.js #slide-control li.on a {
+.js .cycle-pager .cycle-pager-active {
   background: #aaa;
 }
+
+/*** Slide One: Flicks trailers *********/
+/*** Slide Three: Directors' cuts *********/
+.js #slide-one .slide-desc,
+.js #slide-three .slide-desc {
+  width: 440px;
+  height: 180px;
+  left: 0;
+  top: 0;
+  padding: 90px 440px 0 60px;
+}
+
+.js #slide-one p,
+.js #slide-three p {
+  color: #ff592c;
+}
+
+.js #slide-one .thumbnail,
+.js #slide-three .thumbnail {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+
+/*** Slide Two: April early entry *********/
+.js #slide-two .slide-desc {
+  width: 500px;
+  left: 60px;
+  top: 50px;
+}
+
+.js #slide-two .go {
+  font-size: 22px;
+}
+
 
 /* @About *********/
 #about {
@@ -395,18 +405,46 @@
     margin: 0 auto .15em;
   }
 
-  #slideshow.js {
+  .js #slideshow {
     width: 720px;
     height: 230px;
-    background-image: url(/static/img/shadow-720.png);
+    background: url(/static/img/shadow-720.png) center 230px no-repeat;
+  }
+  
+  .slide .backdrop {
+    max-width: 720px;
+    height: 230px;
+    height: auto;
   }
 
-  #slideshow.js .slide-desc {
-    min-height: 100px;
+  #slide-one .slide-desc,
+  #slide-three .slide-desc {
+    width: 360px;
+    left: 0;
+    top: 0;
+    padding: 50px 320px 0 40px;
+  }
+  
+  .js .slide-desc h2 {
+    font-size: 36px;
   }
 
-  #slideshow.js .slide-desc h2 {
-    font-size: 24px;
+  #slide-one .thumbnail,
+  #slide-three .thumbnail {
+    width: 260px;
+    top: 40px;
+    right: 40px;
+  }
+
+  #slide-two .slide-desc {
+    width: 400px;
+    left: 40px;
+    top: 40px;
+    font-size: 15px;
+  }
+  
+  .js .slide-desc {
+    font-size: 16px;
   }
 
   .judges {
@@ -459,29 +497,67 @@
     line-height: 1.35;
   }
 
-  #slideshow.js {
-    height: auto;
-    padding: 0;
-    background: none;
-    box-shadow: 0 3px 2px rgba(0,0,0,.25);
-  }
-
-  #slideshow.js .slide img {
-    display: block;
-    margin: 0 auto;
-    max-width: 940px;
-  }
-
-  #slideshow.js .slide-desc {
-    left: -30px;
-    top: -80px;
+  .js .slide .backdrop {
     width: 100%;
-    padding-top: 110px;
+    display: block;
   }
 
-  #slideshow.js .slide-desc h2,
-  #slideshow.js .slide-desc p {
-    padding: 0 20px;
+  .js .slide-desc {
+    position: static;
+    color: inherit;
+  }
+
+  .js .slide-desc h2 {
+    font-size: 36px;
+  }
+
+  #slideshow {
+    height: auto;
+  }
+
+  .js #slideshow {
+    height: auto;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto 2em;
+    background: #fff none;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  }
+  
+  .js #slideshow .slide,
+  .cycle-sentinel {
+    width: 100%;
+    height: auto;
+  }
+
+  .js .slide .backdrop,
+  .cycle-sentinel .backdrop {
+    display: block;
+    margin: -80px auto 0;
+    width: 100%;
+    height: auto;
+  }
+
+  .js .slide-desc,
+  .js #slideshow .slide-desc,
+  .js #slide-one .slide-desc,
+  .js #slide-three .slide-desc {
+    position: static;
+    width: auto;
+    padding: 20px 20px 0;
+    text-align: center;
+  }
+  
+  .js .slide-desc h2 {
+    font-size: 28px;
+  }
+
+  .js #slide-one .thumbnail,
+  .js #slide-three .thumbnail {
+    position: static;
+    display: block;
+    margin: 1em auto;
+    width: 260px;
   }
 
   #about .section-detail {

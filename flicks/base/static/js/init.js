@@ -101,6 +101,7 @@
             $('#modal .inner').append(content);
             $('#modal').fadeIn(100);
             $(origin).addClass('modalOrigin');
+            $('.cycle-slideshow').cycle('pause');
         },
         'closeModal': function() {
             $('#modal').fadeOut(100, function(){
@@ -108,6 +109,7 @@
             });
             $('body').removeClass('noscroll');
             $('.modalOrigin').focus().remove('modalOrigin');
+            $('.cycle-slideshow').cycle('resume');
         },
         'notification': function(text) {
             // TODO: Implement notification popup here.

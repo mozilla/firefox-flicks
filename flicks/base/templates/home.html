@@ -29,52 +29,53 @@
         {% endtrans %}
         </p>
       </div>
-
-      <div id="slideshow">
-        <ol id="slide-control">
-          <li id="slide-control-one" class="on"><a href="#slide-one">{{ _('Flicks trailers') }}</a></li>
-          <li id="slide-control-two"><a href="#slide-two">{{ _('Early entry') }}</a></li>
-          <li id="slide-control-three"><a href="#slide-three">{{ _('Directors\' cuts') }}</a></li>
-        </ol>
-        <ol id="slides">
-          <li id="slide-one" class="slide">
-            <img src="{{ static('img/home/promo-backdrop1.jpg') }}" alt="">
-            <div class="slide-desc">
-              <h2>{{ _('Now playing') }}: <br>{{ _('Flicks trailers') }}</h2>
-              <p>
-              {% trans %}
-                Get inspired and learn more about making your winning flick.
-              {% endtrans %}
-              </p>
-            </div>
-
-          </li>
-          <li id="slide-two" class="slide">
-            <img src="{{ static('img/home/promo-backdrop2.jpg') }}" alt="">
-            <div class="slide-desc">
-              <h2>{{ _('Enter by April 3') }}</h2>
-              <p>
-              {% trans %}
-                Submit your flick in time for the BAFICI film festival in Buenos Aires and
-                you could win a $1000 Early Entry Award and be automatically qualified for
-                the Grand Prize.
-              {% endtrans %}
-              </p>
-              <p class="act"><a href="#" class="go" rel="external">{{ _('Get the creative brief') }}</a></p>
-            </div>
-          </li>
-          <li id="slide-three" class="slide">
-            <img src="{{ static('img/home/promo-backdrop1.jpg') }}" alt="">
-            <div class="slide-desc">
-              <h2>{{ _('Now playing') }}: <br>{{ _('Directors&#8217; cuts') }}</h2>
-              <p>
-              {% trans %}
-                Learn more about last year's winners and get some advice on making your own winning flick.
-              {% endtrans %}
-              </p>
-            </div>
-          </li>
-        </ol>
+      
+      <div id="slideshow" class="cycle-slideshow" data-cycle-speed="750" data-cycle-timeout="6000" data-cycle-slides="> .slide" data-cycle-fx="scrollHorz" data-cycle-pause-on-hover="true">
+        <div id="slide-one" class="slide">
+          <img class="backdrop" src="{{ static('img/home/promo-backdrop1.jpg') }}" alt="">
+          <div class="slide-desc">
+            <h2>{{ _('Now playing') }}: <br>{{ _('Flicks trailers') }}</h2>
+            <p>
+            {% trans %}
+              Get inspired and learn more about making your winning flick.
+            {% endtrans %}
+            </p>
+            <a href="https://vimeo.com/59415650" class="video-play" data-vimeo-id="59415650">
+              <img src="{{ static('img/home/vidthumb-promo-heroic.jpg') }}" alt="" class="thumbnail">
+            </a>
+          </div>
+        </div>
+        
+        <div id="slide-two" class="slide">
+          <img class="backdrop" src="{{ static('img/home/promo-backdrop2.jpg') }}" alt="">
+          <div class="slide-desc">
+            <h2>{{ _('Enter by April 3') }}</h2>
+            <p>
+            {% trans %}
+              Submit your flick in time for the BAFICI film festival in Buenos Aires and
+              you could win a $1000 Early Entry Award and be automatically qualified for
+              the Grand Prize.
+            {% endtrans %}
+            </p>
+            <p class="act"><a href="{{ link_brief }}" class="go" rel="external">{{ _('Get the creative brief') }}</a></p>
+          </div>
+        </div>
+        
+        <div id="slide-three" class="slide">
+          <img class="backdrop" src="{{ static('img/home/promo-backdrop1.jpg') }}" alt="">
+          <div class="slide-desc">
+            <h2>{{ _('Now playing') }}: <br>{{ _('Directors&#8217; cuts') }}</h2>
+            <p>
+            {% trans %}
+              Learn more about last year's winners and get some advice on making your own winning flick.
+            {% endtrans %}
+            </p>
+            <a href="https://vimeo.com/59439701" class="video-play" data-vimeo-id="59439701">
+              <img src="{{ static('img/home/vidthumb-promo-falling.jpg') }}" alt="" class="thumbnail">
+            </a>
+          </div>
+        </div>
+        <div class="cycle-pager"></div>
       </div>
 
       <div class="actions">
@@ -123,7 +124,7 @@
         <ul class="info">
           <li><a href="{{ url('flicks.base.faq') }}" class="go">{{ _('See the FAQ') }}</a></li>
           <li><a href="{{ link_brief }}" class="go" rel="external">{{ _('Read the creative brief') }}</a></li>
-          <li><a href="{{ link_assets }}" class="go" rel="external">{{ _('Download the creative assets') }}</a></li>
+          <li><a href="http://mzl.la/XootKF" class="go" rel="external">{{ _('Download the creative assets') }}</a></li>
         </ul>
       </div>
 
