@@ -1,5 +1,7 @@
 {% extends 'videos/details_base.html' %}
 
+{% from 'macros.html' import shareWidget with context %}
+
 {% block page_title %}{{ video.title }}{% endblock %}
 
 {% block og_title %}{{ video.title }}{% endblock %}
@@ -29,27 +31,7 @@
       </a>
     </div>
     <div class="date">{{ video.created|babel_date }}</div>
-    <ul>
-        <li class="share">
-            <a href="#share-opts" id="sharetoggle" title="{{_('Share this video with your social network')}}">{{_('Share Video')}}</a>
-            <ul id="share-opts">
-                <li class="twitter"><a href="{{ 'http://twitter.com/share'|urlparams(url=request.build_absolute_uri(),
-                                                                                     text=video.user.profile.display_name.encode('utf-8'),
-                                                                                     via="firefoxflicks") }}">{{_('Share on Twitter')}}</a></li>
-                <li class="facebook"><a href="{{ 'http://www.facebook.com/sharer.php'|urlparams(u=request.build_absolute_uri(),
-                                                                                                t=video.user.profile.display_name.encode('utf-8')) }}">{{_('Share on Facebook')}}</a></li>
-                <li class="tumblr"><a href="{{ 'http://www.tumblr.com/share'|urlparams(v=3,
-                                                                                       u=request.build_absolute_uri(),
-                                                                                       t=video.user.profile.display_name.encode('utf-8')) }}">{{_('Share on Tumblr')}}</a></li>
-                <li class="embed">
-                  {{_('Embed')}}
-                  <textarea id="embed-code" readonly="readonly">
-                    {{ video.embed_html(width='100%') }}
-                  </textarea>
-                </li>
-            </ul>
-        </li>
-    </ul>
+    {{ shareWidget(video) }}
   </div>
 
   <p class="description">{{ video.description }}</p>

@@ -58,7 +58,7 @@
     // Load external links in new tab/window
     $('a[rel="external"]').click(function(e){
         e.preventDefault();
-        window.open(this.href);
+        window.open(this.href, '_blank', $(this).data('windowOpts'));
     });
 
 
@@ -124,5 +124,22 @@
             var content = '<iframe id="video" src="https://player.vimeo.com/video/'+ vimeoId +'?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1" width="600" height="338" frameborder="0"></iframe>';
             return flicks.createModal(this, content);
         }
+    });
+
+    $(function() {
+        /* Share Widget *******/
+        var $share = $('.share');
+        var $popup = $share.find('.popup');
+
+        // Toggle the popup when the button is clicked.
+        $share.find('.toggle').click(function(e) {
+            e.preventDefault();
+            $(this).siblings('.popup').fadeIn(200);
+        });
+
+        // Hide the popup when the mouse moves away.
+        $share.hover(null, function() {
+            $(this).find('.popup').fadeOut(200);
+        });
     });
 })(jQuery);

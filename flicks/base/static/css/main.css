@@ -606,6 +606,63 @@ a.go:after {
   display: none;
 }
 
+/* @Share Button *********/
+.share {
+  position: relative;
+  margin-top: 8px;
+}
+
+.share .toggle {
+  cursor: pointer;
+}
+
+.share .popup {
+  background: #212A2F;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  -moz-box-shadow: 0 2px 6px rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 2px 6px rgba(0,0,0,.5);
+  box-shadow: 0 2px 6px rgba(0,0,0,.5);
+  color: #B7BCC0;
+  display: none;
+  font-size: 16px;
+  left: -6px;
+  list-style: none;
+  margin: 0;
+  padding: 11px 15px;
+  position: absolute;
+  top: 1.5em;
+  width: 200px;
+  z-index: 999;
+}
+
+.share .popup li {
+  margin-bottom: 3px;
+}
+
+.share .embed {
+  margin-top: 15px;
+  display: block;
+}
+
+.share .embed textarea {
+  background: #B7BCC0;
+  font: normal 10px "Open Sans", sans-serif;
+  height: 100px;
+  width: 200px;
+}
+
+.share .popup a {
+  background: url(/static/img/social-icons-sm.png) no-repeat;
+  padding-left: 24px;
+}
+
+.share .twitter a { background-position: 0 -91px; }
+.share .facebook a { background-position: 0 -44px; }
+.share .tumblr a { background-position: 0 -138px; }
+
+
 /* @Video @listings *********/
 .entry-list {
   list-style: none;

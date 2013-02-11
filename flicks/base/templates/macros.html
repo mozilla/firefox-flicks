@@ -71,3 +71,59 @@
     </ol>
   </nav>
 {%- endmacro %}
+
+{% macro twitterShare(url, text, via=None) -%}
+    {{ 'http://twitter.com/share'|urlparams(url=url, text=text, via=via) }}
+{%- endmacro %}
+
+{% macro facebookShare(url) -%}
+    {{ 'http://www.facebook.com/sharer.php'|urlparams(u=url) }}
+{%- endmacro %}
+
+{% macro tumblrShareUrl(url, title=None, description=None) -%}
+    {{ 'http://www.tumblr.com/share/link'|urlparams(url=url, title=title, description=description) }}
+{%- endmacro %}
+
+{% macro tumblrShareVideo(embed, caption=None) -%}
+    {{ 'http://www.tumblr.com/share/video'|urlparams(embed=embed|e, caption=caption) }}
+{%- endmacro %}
+
+{% macro shareWidget(video=None) -%}
+  {% set url = request.build_absolute_uri() %}
+  {% if video %}
+    {% set text = _('Watch "%s" on Firefox Flicks')|format(video.title|truncate(90)) %}
+    {% set tumblrUrl = tumblrShareVideo(video.embed_html(width='100%'), caption=' '.join([text, url])) %}
+  {% else %}
+    {% set text = _('You\'re the director. Mobile is the star.') %}
+    {% set tumblrUrl = tumblrShareLink(url, title=text, description=video.description) %}
+  {% endif %}
+
+  <div class="share">
+    <a href="#" class="toggle" title="{{ _('Share this video with your social network') }}">
+      {{ _('Share Video') }}
+    </a>
+    <ul class="popup">
+      <li class="twitter">
+        <a href="{{ twitterShare(url, text, via='firefoxflicks') }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+          {{ _('Share on Twitter') }}
+        </a>
+      </li>
+      <li class="facebook">
+        <a href="{{ facebookShare(url) }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+          {{ _('Share on Facebook') }}
+        </a>
+      </li>
+      <li class="tumblr">
+        <a href="{{ tumblrUrl }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+          {{ _('Share on Tumblr') }}
+        </a>
+      </li>
+      <li class="embed">
+        <span>{{ _('Embed') }}</span>
+        <textarea readonly="readonly">
+          {{- video.embed_html(width='100%')|e -}}
+        </textarea>
+      </li>
+    </ul>
+  </div>
+{%- endmacro %}

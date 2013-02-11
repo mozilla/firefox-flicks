@@ -229,9 +229,6 @@ MINIFY_BUNDLES = {
         'profile': (
             'js/profile.js',
         ),
-        'share_js': (
-            'js/share.js',
-        ),
     }
 }
 
