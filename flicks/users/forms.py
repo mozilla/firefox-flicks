@@ -1,12 +1,20 @@
 from django import forms
 
+from tower import ugettext_lazy as _lazy
+
 from flicks.base.util import country_choices
 from flicks.users.models import UserProfile
 
 
 class UserProfileForm(forms.ModelForm):
+    # L10n: Used in a choice field where users can choose between receiving
+    # L10n: HTML-based or Text-only newsletter emails.
+    NEWSLETTER_FORMATS = (('html', 'HTML'), ('text', _lazy('Text')))
+
     privacy_policy_agree = forms.BooleanField(required=True)
     mailing_list_signup = forms.BooleanField(required=False)
+    mailing_list_format = forms.ChoiceField(choices=NEWSLETTER_FORMATS,
+                                            initial='html')
 
     class Meta:
         model = UserProfile
