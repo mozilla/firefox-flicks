@@ -34,8 +34,12 @@ class TestCase(test_utils.TestCase):
         self.approval_patch = patch('flicks.videos.models.process_approval')
         self.approval_patch.start()
 
+        self.deletion_patch = patch('flicks.videos.models.process_deletion')
+        self.deletion_patch.start()
+
     def tearDown(self):
         self.approval_patch.stop()
+        self.deletion_patch.stop()
 
     @contextmanager
     def activate(self, locale):

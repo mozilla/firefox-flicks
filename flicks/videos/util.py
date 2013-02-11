@@ -1,13 +1,14 @@
 from urllib import urlencode
 
 from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 
 import jinja2
 from tower import ugettext_lazy as _lazy
 
-from flicks.base.util import use_lang
+from flicks.base.util import get_object_or_none, use_lang
 
 
 def vidly_embed_code(shortlink, width=600, height=337):
@@ -54,20 +55,24 @@ def send_approval_email(video):
             'user': video.user,
             'video': video
         })
-    send_mail(EMAIL_SUBJECT, body, settings.DEFAULT_FROM_EMAIL,
-              [video.user.email])
+    _send_mail(EMAIL_SUBJECT, body, [video.user.email])
 
 
-def send_rejection_email(video):
+def send_rejection_email(user_id):
     """
     Send email to the video's creator telling them that their video has been
     rejected.
     """
-    with use_lang(video.user.profile.locale):
-        body = render_to_string('videos/2013/rejection_email.html', {
-            'user': video.user
-        })
-    send_mail(EMAIL_SUBJECT, body, settings.DEFAULT_FROM_EMAIL,
-              [video.user.email])
+    user = get_object_or_none(User, id=user_id)
+    if user:
+        with use_lang(user.profile.locale):
+            body = render_to_string('videos/2013/rejection_email.html', {
+                'user': user
+            })
+        _send_mail(EMAIL_SUBJECT, body, [user.email])
 
 
+def _send_mail(subject, body, recipients):
+    msg = EmailMessage(subject, body, settings.DEFAULT_FROM_EMAIL, recipients)
+    msg.content_subtype = 'html'
+    msg.send()

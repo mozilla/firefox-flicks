@@ -134,7 +134,7 @@ class UseLangTests(TestCase):
             eq_(get_language(), 'en-us')
         eq_(get_language(), 'fr')
 
-    @patch('flicks.base.util.activate')
+    @patch('flicks.base.util.activate', wraps=activate)
     def test_no_activate(self, mock_activate):
         """If lang is Falsy, do not call activate."""
         activate('fr')

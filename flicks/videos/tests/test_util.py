@@ -1,8 +1,13 @@
+from django.core import mail
+
 from nose.tools import eq_, ok_
 from pyquery import PyQuery as pq
 
 from flicks.base.tests import TestCase
-from flicks.videos.util import vimeo_embed_code
+from flicks.users.tests import UserProfileFactory
+from flicks.videos.tests import VideoFactory
+from flicks.videos.util import (send_approval_email, send_rejection_email,
+                                vimeo_embed_code)
 
 
 class TestVimeoEmbedCode(TestCase):
@@ -15,3 +20,26 @@ class TestVimeoEmbedCode(TestCase):
         ok_(iframe.attr.src.startswith('https://player.vimeo.com/video/id'))
         eq_(iframe.attr.width, '5')
         eq_(iframe.attr.height, '2')
+
+
+class SendApprovalEmailTests(TestCase):
+    def test_basic(self):
+        user = UserProfileFactory.create(user__email='boo@example.com').user
+        video = VideoFactory.create(user=user)
+        send_approval_email(video)
+        eq_(len(mail.outbox), 1)
+        eq_(mail.outbox[0].to, ['boo@example.com'])
+
+
+class SendRejectionEmailTests(TestCase):
+    def test_invalid_user_id(self):
+        """If the given user_id is invalid, do not send mail."""
+        send_rejection_email(999999999999)
+        eq_(len(mail.outbox), 0)
+
+    def test_valid_user_id(self):
+        """If a valid user_id is given, send a rejection email."""
+        user = UserProfileFactory.create(user__email='blah@example.com').user
+        send_rejection_email(user.id)
+        eq_(len(mail.outbox), 1)
+        eq_(mail.outbox[0].to, ['blah@example.com'])

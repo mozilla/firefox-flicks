@@ -50,3 +50,15 @@ class Video2013Tests(TestCase):
         video.title = 'new_title'
         video.save()
         ok_(not process_approval.delay.called)
+
+    @patch('flicks.videos.models.process_deletion')
+    def test_delete_process(self, process_deletion):
+        """
+        When a video is deleted, the process_deletion task should be triggered.
+        """
+        user = UserProfileFactory.create().user
+        video = VideoFactory.create(user=user, vimeo_id=123456)
+        ok_(not process_deletion.delay.called)
+
+        video.delete()
+        process_deletion.delay.assert_called_with(123456, user.id)

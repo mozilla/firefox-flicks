@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 
 from flicks.base.util import get_object_or_none
 from flicks.videos.decorators import vimeo_task
-from flicks.videos.util import send_approval_email
+from flicks.videos.util import send_approval_email, send_rejection_email
 
 
 # We explicitly import flicks.videos.vimeo here in order to register the Vimeo
@@ -86,3 +86,9 @@ def process_approval(video_id):
         else:
             vimeo.set_privacy(video.vimeo_id, 'password',
                               password=settings.VIMEO_VIDEO_PASSWORD)
+
+
+@vimeo_task
+def process_deletion(vimeo_id, user_id):
+    vimeo.delete_video(vimeo_id)
+    send_rejection_email(user_id)
