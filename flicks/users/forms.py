@@ -11,7 +11,10 @@ class UserProfileForm(forms.ModelForm):
     # L10n: HTML-based or Text-only newsletter emails.
     NEWSLETTER_FORMATS = (('html', 'HTML'), ('text', _lazy('Text')))
 
-    privacy_policy_agree = forms.BooleanField(required=True)
+    privacy_policy_agree = forms.BooleanField(
+        required=True,
+        widget=forms.CheckboxInput(attrs={'required': 'required'}))
+
     mailing_list_signup = forms.BooleanField(required=False)
     mailing_list_format = forms.ChoiceField(required=False,
                                             choices=NEWSLETTER_FORMATS,
@@ -23,8 +26,6 @@ class UserProfileForm(forms.ModelForm):
                   'city', 'mailing_country', 'state', 'postal_code')
         widgets = {
             'full_name': forms.TextInput(attrs={'required': 'required'}),
-            'privacy_policy_agree': forms.CheckboxInput(
-                attrs={'required': 'required'}),
         }
 
     def __init__(self, *args, **kwargs):
