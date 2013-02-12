@@ -132,14 +132,19 @@
 
 
         // Load director videos on stage
-        $window.on('click', '.videos-list a', function(e) {
+        var $directorVideoFrame = $('#video-frame');
+        $('.videos-list a').click(function(e) {
             var vimeoId = $(this).data('vimeoId');
-            var $embedFrame = $('#video-frame');
             if (vimeoId !== undefined) {
                 e.preventDefault();
-                var frameSrc = 'https://player.vimeo.com/video/'+ vimeoId +'?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1&amp;api=1';
-                $embedFrame.attr('src', frameSrc);
-            // TODO: Begin playing the new video when the src changes
+                var url = 'https://player.vimeo.com/video/' + vimeoId;
+                var frameSrc = (url + '?title=0&byline=0&portrait=0&' +
+                                'color=ffffff&autoplay=1&api=1');
+                $directorVideoFrame.attr('src', frameSrc);
+
+                // Auto-play video.
+                var cmd = JSON.stringify({method: 'play'});
+                $directorVideoFrame[0].contentWindow.postMessage(cmd, url);
             }
         });
 
