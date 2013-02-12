@@ -49,11 +49,19 @@ LINK_CCLICENSE = {
     'zh-TW': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.zh_TW',
 }
 
+VIDEO_IC = {
+    'en-US': '59415650',
+    'de': '59416761',
+    'es': '59418049',
+    'fr': '59419952',
+    'pt-BR': '59421007',
+} 
 
 def home(request):
     """Home page."""
     return render(request, 'home.html', {
-        'link_brief': LINK_BRIEF.get(request.locale, LINK_BRIEF['en-US'])
+        'link_brief': LINK_BRIEF.get(request.locale, LINK_BRIEF['en-US']),
+        'video_ic': VIDEO_IC.get(request.locale, VIDEO_IC['en-US']),
     })
 
 
