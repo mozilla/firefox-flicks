@@ -956,7 +956,7 @@ body.noscroll .fixed #head-inner {
   }
 
   .wrap.info {
-    width: 300px;
+    width: 290px;
     padding: 0 10px;
   }
 
@@ -1066,6 +1066,7 @@ body.noscroll .fixed #head-inner {
 
   .entry-list {
     width: auto;
+    margin: 0;
   }
 
   .entry-list .entry {

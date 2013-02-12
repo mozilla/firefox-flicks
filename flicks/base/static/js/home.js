@@ -129,6 +129,20 @@
             e.preventDefault();
             flicks.createModal(this, $(this).data('bio'));
         });
+
+
+        // Load director videos on stage
+        $window.on('click', '.videos-list a', function(e) {
+            var vimeoId = $(this).data('vimeoId');
+            var $embedFrame = $('#video-frame');
+            if (vimeoId !== undefined) {
+                e.preventDefault();
+                var frameSrc = 'https://player.vimeo.com/video/'+ vimeoId +'?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1&amp;api=1';
+                $embedFrame.attr('src', frameSrc);
+            // TODO: Begin playing the new video when the src changes
+            }
+        });
+
     });
 
 })(jQuery, window.flicks);

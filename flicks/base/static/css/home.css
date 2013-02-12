@@ -210,16 +210,40 @@
   float: left;
 }
 
-#about .intro-videos {
-  width: 660px;
+#about .director-videos {
+  width: 710px;
   margin: 0 auto;
 }
 
-#about .intro-videos p {
-  font-weight: bold;
-  text-align: center;
+#video-stage {
+  float: left;
+  margin: 0 0 1em;
+  padding: 0 0 8px;
+  position: relative;
+  background: url(/static/img/shadow-520.png) center bottom no-repeat;
 }
 
+#about .videos-list {
+  list-style: none;
+  margin: 0 0 1em;
+  width: 145px;
+  float: right;
+}
+
+#about .videos-list li {
+  margin-top: 18px;
+}
+
+#about .videos-list li:first-child {
+  margin-top: 0;
+}
+
+.director-videos .caption {
+  clear: both;
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+  padding: 0 80px;
+}
 
 /* @Winners from 2012 *********/
 #winners2012 .section-intro {
@@ -410,39 +434,38 @@
     height: 230px;
     background: url(/static/img/shadow-720.png) center 230px no-repeat;
   }
-  
+
   .slide .backdrop {
     max-width: 720px;
-    height: 230px;
     height: auto;
   }
 
-  #slide-one .slide-desc,
-  #slide-three .slide-desc {
+  .js #slide-one .slide-desc,
+  .js #slide-three .slide-desc {
     width: 360px;
     left: 0;
     top: 0;
     padding: 50px 320px 0 40px;
   }
-  
+
   .js .slide-desc h2 {
     font-size: 36px;
   }
 
-  #slide-one .thumbnail,
-  #slide-three .thumbnail {
+  .js #slide-one .thumbnail,
+  .js #slide-three .thumbnail {
     width: 260px;
     top: 40px;
     right: 40px;
   }
 
-  #slide-two .slide-desc {
+  .js #slide-two .slide-desc {
     width: 400px;
     left: 40px;
     top: 40px;
     font-size: 15px;
   }
-  
+
   .js .slide-desc {
     font-size: 16px;
   }
@@ -464,7 +487,7 @@
   }
 
   #about {
-    background-position: 355% 10px, -15% 250%, 5% -350px;
+    background-position: 720px 10px, -15% 180%, 5% -350px;
   }
 
   #judges {
@@ -511,10 +534,6 @@
     font-size: 36px;
   }
 
-  #slideshow {
-    height: auto;
-  }
-
   .js #slideshow {
     height: auto;
     width: 100%;
@@ -523,7 +542,7 @@
     background: #fff none;
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
   }
-  
+
   .js #slideshow .slide,
   .cycle-sentinel {
     width: 100%;
@@ -547,7 +566,7 @@
     padding: 20px 20px 0;
     text-align: center;
   }
-  
+
   .js .slide-desc h2 {
     font-size: 28px;
   }
@@ -564,18 +583,55 @@
     padding: 0;
   }
 
-  #about .section-detail .video {
-    margin: 0 0 1em;
-    float: none;
-  }
-
   #about .actions h3 span {
     float: none;
     display: block;
     margin: 0;
   }
 
-  .prize {
+  #about .info {
+    text-align: center;
+    margin: 0 0 2em;
+  }
+
+  #about .info li {
+    width: auto;
+    float: none;
+    display: block;
+  }
+
+  #video-frame {
+    width: 300px;
+    height: 169px;
+  }
+
+  #video-stage {
+    background: none;
+  }
+
+  #about .director-videos,
+  #about .videos-list {
+    width: auto;
+    float: none;
+    clear: both;
+  }
+
+  #about .videos-list li {
+    width: 30%;
+    float: left;
+    margin: 0 1.5% 1em;
+  }
+
+  .director-videos .caption {
+    padding: 0;
+  }
+
+  .prizes {
+    margin: 0;
+  }
+
+  .prize,
+  .prize.grand {
     width: auto;
     float: none;
   }
@@ -587,12 +643,28 @@
     margin: 0 auto 1.6em;
   }
 
+  .judges {
+    margin: 0 0 1em;
+  }
+
+  .judge {
+    width: 125px;
+  }
+
   .judges .judge:nth-child(3n+1) {
     clear: none;
   }
 
   .judges .judge:nth-child(2n+1) {
     clear: left;
+  }
+
+  #judge-quote {
+    height: 12em;
+  }
+
+  #judge-quote .quote {
+    margin: 0 10px;
   }
 
   #about {
@@ -618,6 +690,11 @@
 
   .actions li {
     width: auto;
+  }
+
+  #video-frame {
+    width: 460px;
+    height: 258px;
   }
 
   #about {
