@@ -6,8 +6,7 @@ from flicks.base import regions
 from flicks.base.util import reverse_lazy
 
 
-PROD_LANGUAGES = ('de', 'en-US', 'es', 'fr', 'nl', 'pl', 'pt-BR', 'sl', 'sq',
-                  'zh-TW')
+PROD_LANGUAGES = ('en-US',)
 
 # Defines the views served for root URLs.
 ROOT_URLCONF = 'flicks.urls'
