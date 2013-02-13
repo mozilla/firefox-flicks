@@ -38,7 +38,7 @@ def update_info(ctx):
             ctx.local('svn info')
             ctx.local('svn status')
 
-        ctx.local('git rev-parse HEAD > media/revision')
+        ctx.local('git rev-parse HEAD > static/revision')
 
 
 @task
