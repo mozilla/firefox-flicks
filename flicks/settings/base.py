@@ -164,10 +164,6 @@ GA_ACCOUNT_CODE = ''
 # Allow robots to crawl the site.
 ENGAGE_ROBOTS = True
 
-# Gravatar Settings
-GRAVATAR_URL = 'https://secure.gravatar.com'
-DEFAULT_GRAVATAR = MEDIA_URL + 'img/anon_user.png'
-
 # Vimeo API
 VIMEO_USER_ID = ''
 VIMEO_CLIENT_KEY = u''

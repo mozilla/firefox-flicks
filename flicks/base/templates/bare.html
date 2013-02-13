@@ -16,7 +16,7 @@
     <meta property="og:title" content="{% block og_title %}{{ _('Firefox Flicks') }}{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:image" content="{% block og_image %}{{ static('img/flicks-logo-180.png') }}{% endblock %}">
-    <meta property="og:url" content="{% block og_url %}http://firefoxflicks.mozilla.org/{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}">
     <meta property="og:site_name" content="{{ _('Firefox Flicks') }}">
     {% block meta_description -%}
       <meta property="og:description" content="{% trans %}

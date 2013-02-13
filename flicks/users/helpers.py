@@ -2,6 +2,7 @@ import urllib
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.staticfiles.storage import staticfiles_storage
 from django.utils.hashcompat import md5_constructor
 
 from jingo import register
@@ -12,7 +13,7 @@ from flicks.users.models import UserProfile
 
 
 GRAVATAR_URL = getattr(settings, 'GRAVATAR_URL', 'https://secure.gravatar.com')
-DEFAULT_GRAVATAR = absolutify(settings.DEFAULT_GRAVATAR)
+DEFAULT_GRAVATAR = absolutify(staticfiles_storage.url('img/avatar.png'))
 
 
 @register.function
