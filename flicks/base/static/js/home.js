@@ -131,7 +131,11 @@
                         $quote.html(quote).fadeIn(200);
                     });
                 }
-            }, function() {});
+            }, function() {
+                if (quote) {
+                    $quote.delay(200).fadeOut(200);
+                }
+            });
         });
 
         // Open judge bios in a modal
