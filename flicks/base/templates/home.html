@@ -40,8 +40,8 @@
               Get inspired and learn more about making your winning flick.
             {% endtrans %}
             </p>
-            <a href="https://vimeo.com/{{ video_ic }}" class="video-play" data-vimeo-id="{{ video_ic }}">
-              <img src="{{ static('img/home/vidthumb-promo-heroic.jpg') }}" alt="" class="thumbnail">
+            <a href="https://vimeo.com/{{ settings.VIDEO_IC[request.locale] }}" class="video-play" data-vimeo-id="{{ settings.VIDEO_IC[request.locale] }}">
+              <img src="{{ static('img/home/vidthumb-promo-heroic.jpg') }}" alt="{{ _('Flicks trailers') }}" class="thumbnail">
             </a>
           </div>
         </div>
@@ -57,7 +57,7 @@
               the Grand Prize.
             {% endtrans %}
             </p>
-            <p class="act"><a href="{{ link_brief }}" class="go" rel="external">{{ _('Get the creative brief') }}</a></p>
+            <p class="act"><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go" rel="external">{{ _('Get the creative brief') }}</a></p>
           </div>
         </div>
 
@@ -71,7 +71,7 @@
             {% endtrans %}
             </p>
             <a href="https://vimeo.com/59439701" class="video-play" data-vimeo-id="59439701">
-              <img src="{{ static('img/home/vidthumb-promo-falling.jpg') }}" alt="" class="thumbnail">
+              <img src="{{ static('img/home/vidthumb-promo-falling.jpg') }}" alt="{{ _('Directors&#8217; cuts') }}" class="thumbnail">
             </a>
           </div>
         </div>
@@ -83,6 +83,10 @@
           <li>
             <h3>{{ _('Get seen by celebrity judges') }}</h3>
             <p><a href="#judges" class="go scroll">{{ _('Meet our all-star cast') }}</a></p>
+          </li>
+          <li>
+            <h3>{{ _('Start thinking about your flick') }}</h3>
+            <p><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go" rel="external">{{ _('Read the creative brief') }}</a></p>
           </li>
           <li class="{{ user.is_authenticated()|ifeq(True, 'submit') }}">
             <h3>{{ _('Submit your flick today') }}</h3>
@@ -101,10 +105,6 @@
                 }}
               {% endif %}
             </div>
-          </li>
-          <li>
-            <h3>{{ _('Start thinking about your flick') }}</h3>
-            <p><a href="{{ link_brief }}" class="go" rel="external">{{ _('Read the creative brief') }}</a></p>
           </li>
         </ul>
       </div>
@@ -142,7 +142,7 @@
         </p>
         <ul class="info">
           <li><a href="{{ url('flicks.base.faq') }}" class="go">{{ _('See the FAQ') }}</a></li>
-          <li><a href="{{ link_brief }}" class="dl" rel="external">{{ _('Read the creative brief') }}</a></li>
+          <li><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="dl" rel="external">{{ _('Read the creative brief') }}</a></li>
           <li><a href="http://mzl.la/XootKF" class="dl" rel="external">{{ _('Download the creative assets') }}</a></li>
         </ul>
       </div>
@@ -153,9 +153,21 @@
         </div>
 
         <ul class="videos-list">
-          <li><a href="https://vimeo.com/59439701" data-vimeo-id="59439701"><img src="{{ static('img/home/vidthumb-direct-falling.jpg') }}" alt="" class="thumbnail"></a></li>
-          <li><a href="https://vimeo.com/59440900" data-vimeo-id="59440900"><img src="{{ static('img/home/vidthumb-direct-squares.jpg') }}" alt="" class="thumbnail"></a></li>
-          <li><a href="https://vimeo.com/59440608" data-vimeo-id="59440608"><img src="{{ static('img/home/vidthumb-direct-weird.jpg') }}" alt="" class="thumbnail"></a></li>
+          <li>
+            <a href="https://vimeo.com/59439701" data-vimeo-id="59439701">
+              <img src="{{ static('img/home/vidthumb-direct-falling.jpg') }}" alt="Lee Sang Woo" class="thumbnail">
+            </a>
+          </li>
+          <li>
+            <a href="https://vimeo.com/59440900" data-vimeo-id="59440900">
+              <img src="{{ static('img/home/vidthumb-direct-squares.jpg') }}" alt="Eric Perrella" class="thumbnail">
+            </a>
+          </li>
+          <li>
+            <a href="https://vimeo.com/59440608" data-vimeo-id="59440608">
+              <img src="{{ static('img/home/vidthumb-direct-weird.jpg') }}" alt="Ferran Brooks" class="thumbnail">
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -180,7 +192,7 @@
           <a href="https://vimeo.com/57627458" class="video-play" title='{% trans title='Falling in Love with Firefox' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627458">
             <img src="{{ static('img/home/vidthumb-falling.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2>Falling in Love with Firefox</h2>
+              <h2 class="title">Falling in Love with Firefox</h2>
               <h3 class="vcard">
                 <span class="fn">Lee Sang Woo</span>,
                 <span class="country-name">{{ country_name('kr') }}</span>
@@ -192,7 +204,7 @@
           <a href="https://vimeo.com/57627456" class="video-play" title='{% trans title='Be a Hero' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627456">
             <img src="{{ static('img/home/vidthumb-hero.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2>Be a Hero</h2>
+              <h2 class="title">Be a Hero</h2>
               <h3 class="vcard">
                 <span class="fn">Andres Felipe Mesa</span>,
                 <span class="country-name">{{ country_name('co') }}</span>
@@ -204,7 +216,7 @@
           <a href="https://vimeo.com/57627464" class="video-play" title='{% trans title='Squares' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627464">
             <img src="{{ static('img/home/vidthumb-squares.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2>Squares</h2>
+              <h2 class="title">Squares</h2>
               <h3 class="vcard">
                 <span class="fn">Eric Perrella</span>,
                 <span class="country-name">{{ country_name('ca') }}</span>
@@ -216,7 +228,7 @@
           <a href="https://vimeo.com/57627933" class="video-play" title='{% trans title='Where the Weird Things Are Not' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627933">
             <img src="{{ static('img/home/vidthumb-weird.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2>Where the Weird Things Are Not</h2>
+              <h2 class="title">Where the Weird Things Are Not</h2>
               <h3 class="vcard">
                 <span class="fn">Ferran Brooks</span>,
                 <span class="country-name">{{ country_name('es') }}</span>
@@ -228,7 +240,7 @@
           <a href="https://vimeo.com/57627455" class="video-play" title='{% trans title='Paranoid' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627455">
             <img src="{{ static('img/home/vidthumb-paranoid.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2>Paranoid</h2>
+              <h2 class="title">Paranoid</h2>
               <h3 class="vcard">
                 <span class="fn">Sean O‘Riordan</span>,
                 <span class="country-name">{{ country_name('gb') }}</span>
@@ -240,7 +252,7 @@
           <a href="https://vimeo.com/57627454" class="video-play" title='{% trans title='Fenwick & Candy' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627454">
             <img src="{{ static('img/home/vidthumb-fenwick.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2>Fenwick & Candy</h2>
+              <h2 class="title">Fenwick & Candy</h2>
               <h3 class="vcard">
                 <span class="fn">Gavin Fenwick Christensen</span>,
                 <span class="country-name">{{ country_name('au') }}</span>
@@ -499,7 +511,7 @@
 
         <h2>{{ _('How to enter') }}</h2>
         <p>
-        {% trans rules_link=url('flicks.base.rules') %}
+        {% trans %}
           Nice work! You made it all the way to the end. When you're ready,
           <a href="#" class="submit">start here to submit your flick.</a>
         {% endtrans %}

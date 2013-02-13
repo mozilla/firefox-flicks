@@ -30,13 +30,14 @@
     {% block results %}
       {# Only show results if at least 1 video is found. #}
       {% if videos.paginator.count > 1 %}
+      <div id="gallery" class="main">
         <ul class="entry-list">
           {% for video in videos %}
             <li class="entry">
               <a href="{{ url('flicks.videos.detail', video.id) }}">
                 <img src="{{ video.thumbnail('medium') }}" alt="" class="thumbnail">
                 <hgroup>
-                  <h2>{{ video.title }}</h2>
+                  <h2 class="title">{{ video.title }}</h2>
                   <h3 class="vcard">
                     <span class="fn">{{ video.user.profile.display_name }}</span>,
                     <span class="country-name">{{ country_name(video.user.profile.country) }}</span>
@@ -53,13 +54,13 @@
           {% endfor %}
         </ul>
 
-        {{ pagination(videos, url('flicks.videos.list'),
-                      region=request.GET.get('region', None)) }}
+      {{ pagination(videos, url('flicks.videos.list'),
+                    region=request.GET.get('region', None)) }}
+      </div>
       {% endif %}
     {% endblock %}
 
-    <aside id="trailers" class="samples">
-      <h2>{{ _('Flicks trailers') }}</h2>
+    <aside id="trailers" class="samples aside">
       <p>
       {% trans %}
         If you're thinking about entering, you can also watch our promos
@@ -67,16 +68,13 @@
       {% endtrans %}
       </p>
 
+      <h3>{{ _('Directors&#8217; cuts') }}</h3>
       <ul class="entry-list">
         <li class="entry">
           <a href="https://vimeo.com/59439701" class="video-play" data-vimeo-id="59439701">
             <img src="{{ static('img/home/vidthumb-direct-falling.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2>Falling in Love with Firefox</h2>
-              <h3 class="vcard">
-                <span class="fn">Lee Sang Woo</span>,
-                <span class="country-name">{{ country_name('kr') }}</span>
-              </h3>
+              <h4 class="title">Lee Sang Woo, <cite>Falling in Love with Firefox</cite></h4>
             </hgroup>
           </a>
         </li>
@@ -84,11 +82,7 @@
           <a href="https://vimeo.com/59440900" class="video-play" data-vimeo-id="59440900">
             <img src="{{ static('img/home/vidthumb-direct-squares.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2>Squares</h2>
-              <h3 class="vcard">
-                <span class="fn">Eric Perrella</span>,
-                <span class="country-name">{{ country_name('ca') }}</span>
-              </h3>
+              <h4 class="title">Eric Perrella, <cite>Squares</cite></h4>
             </hgroup>
           </a>
         </li>
@@ -96,11 +90,35 @@
           <a href="https://vimeo.com/59440608" class="video-play" data-vimeo-id="59440608">
             <img src="{{ static('img/home/vidthumb-direct-weird.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2>Where the Weird Things Are Not</h2>
-              <h3 class="vcard">
-                <span class="fn">Ferran Brooks</span>,
-                <span class="country-name">{{ country_name('es') }}</span>
-              </h3>
+              <h4 class="title">Ferran Brooks, <cite>Where the Weird Things Are Not</cite></h4>
+            </hgroup>
+          </a>
+        </li>
+      </ul>
+
+      <h3>{{ _('Flicks trailers') }}</h3>
+      <ul class="entry-list">
+        <li class="entry">
+          <a href="https://vimeo.com/{{ settings.VIDEO_IC[request.locale] }}" class="video-play" data-vimeo-id="{{ settings.VIDEO_IC[request.locale] }}">
+            <img src="{{ static('img/home/vidthumb-trailer-ic.jpg') }}" alt="" class="thumbnail">
+            <hgroup>
+              <h4 class="title">ic</h4>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="https://vimeo.com/{{ settings.VIDEO_SLAPSTICK[request.locale] }}" class="video-play" data-vimeo-id="{{ settings.VIDEO_SLAPSTICK[request.locale] }}">
+            <img src="{{ static('img/home/vidthumb-trailer-slapstick.jpg') }}" alt="" class="thumbnail">
+            <hgroup>
+              <h4 class="title">Slapstick</h4>
+            </hgroup>
+          </a>
+        </li>
+        <li class="entry">
+          <a href="https://vimeo.com/{{ settings.VIDEO_ALLTHREE[request.locale] }}" class="video-play" data-vimeo-id="{{ settings.VIDEO_ALLTHREE[request.locale] }}">
+            <img src="{{ static('img/home/vidthumb-trailer-three.jpg') }}" alt="" class="thumbnail">
+            <hgroup>
+              <h4 class="title">All Three</h4>
             </hgroup>
           </a>
         </li>

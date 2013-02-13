@@ -108,7 +108,7 @@
         }
 
         // Launch video submission modal when the submit link is clicked.
-        $('#submit-button').click(function(e) {
+        $('#submit-button, #rules a.submit').click(function(e) {
             e.preventDefault();
             showSubmit();
         });

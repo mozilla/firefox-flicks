@@ -244,6 +244,16 @@
   width: 620px;
 }
 
+#winners2012 .entry-list {
+  margin: 0 auto;
+}
+
+#winners2012 .entry {
+  width: 282px;
+  float: left;
+  margin: 0 15px 2em;
+}
+
 /* @Judges *********/
 #judges {
   background: url(/static/img/spot-1.png) 170% 10px no-repeat, url(/static/img/spot-2.png) -20% 200% no-repeat, url(/static/img/spot-3.png) 5% -320px no-repeat;
@@ -464,6 +474,10 @@
     font-size: 16px;
   }
 
+  #winners2012 .entry {
+    width: 205px;
+  }
+
   .judges {
     width: 480px;
     margin: 0 auto 2em;
@@ -620,6 +634,12 @@
     padding: 0;
   }
 
+  #winners2012 .entry {
+    width: 260px;
+    float: none;
+    margin: 0 auto 1.5em;
+  }
+
   .prizes {
     margin: 0;
   }
@@ -689,6 +709,20 @@
   #video-frame {
     width: 460px;
     height: 258px;
+  }
+
+  #winners2012 .entry {
+    width: 200px;
+    float: left;
+    margin: 0 15px 1.5em;
+  }
+
+  #winners2012 .entry:nth-child(3n+1) {
+    clear: none;
+  }
+
+  #winners2012 .entry:nth-child(2n+1) {
+    clear: left;
   }
 
   #about {

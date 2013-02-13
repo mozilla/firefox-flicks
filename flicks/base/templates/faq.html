@@ -37,7 +37,7 @@
     </p>
 
     <p>
-    {% trans link_brief=link_brief %}
+    {% trans link_brief=settings.LINK_BRIEF[request.locale] %}
       With that in mind, the 2013 Firefox Flicks theme is "Get Mobilized."
       That's where you come in: help us inspire people to get mobilized for
       individual and collective progress. <a href="{{ link_brief }}">Read the creative brief</a>.
@@ -46,7 +46,7 @@
 
     <h2 id="q2">{{ _('Where can I find out more about this year\'s theme and requirements?') }}</h2>
     <p>
-    {% trans link_brief=link_brief %}
+    {% trans link_brief=settings.LINK_BRIEF[request.locale] %}
       Everything you need to know about creating a flick for the contest
       can be found in the filmmakers' <a href="{{ link_brief }}">creative brief</a>.
     {% endtrans %}
@@ -73,7 +73,7 @@
 
     <h2 id="q5">{{ _('How do I submit my flick to Firefox Flicks and enter the contest?') }}</h2>
     <p>
-    {% trans link_submit='TBD' %}
+    {% trans link_submit=url('flicks.base.home')+'#submit' %}
       Fill out your filmmaker profile and submit your video <a href="{{ link_submit }}">here.</a>
       All flicks will be posted to the Firefox Flicks website using the Vimeo API.
       You'll need to provide your contact information, including your email, title your flick and select
@@ -122,7 +122,7 @@
       {% endtrans %}
       </li>
       <li>
-      {% trans %}
+      {% trans link_cclicense=settings.LINK_CCLICENSE[request.locale] %}
         Your flick must be submitted under a <a href="{{ link_cclicense }}" rel="external">Creative Commons - NonCommercial-ShareAlike license</a>
       {% endtrans %}
       </li>
@@ -376,7 +376,7 @@
     <h2 id="q21">{{ _('Where can I find music or other materials to include in my flick?') }}</h2>
     <p>
     {% trans link_ccommons='http://search.creativecommons.org',
-             link_pdwiki=link_pdwiki %}
+             link_pdwiki=settings.LINK_PDWIKI[request.locale] %}
       If you're looking for additional materials - whether music, video footage,
       artwork or graphics - we suggest you investigate public domain media.
       <a href="{{ link_ccommons }}" rel="external">Creative Commons</a> has a nice search

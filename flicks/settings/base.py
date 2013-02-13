@@ -5,6 +5,8 @@ from funfactory.settings_base import *
 from flicks.base import regions
 from flicks.base.util import reverse_lazy
 
+# Import locale-sensitive settings
+from .locale import *
 
 PROD_LANGUAGES = ('de', 'en-US', 'fr', 'it', 'ja', 'nl', 'pt-BR', 'ru')
 
