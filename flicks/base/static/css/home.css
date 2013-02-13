@@ -193,14 +193,14 @@
   text-align: center;
 }
 
-#about .section-detail h3 {
-  font-family: Vollkorn, Georgia, "Heiti TC", "LiHei Pro", "微軟正黑體", "WenQuanYi - Micro Hei", sans-serif;
+#about .section-detail .caption {
+  font: bold 18px Vollkorn, Georgia, serif;
 }
 
 #about .info {
   list-style: none;
   overflow: hidden;
-  margin: 0 -80px 2em;
+  margin: 0 -80px 1em;
 }
 
 #about .info li {
@@ -213,6 +213,7 @@
 #about .director-videos {
   width: 710px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 #video-stage {
@@ -236,13 +237,6 @@
 
 #about .videos-list li:first-child {
   margin-top: 0;
-}
-
-.director-videos .caption {
-  clear: both;
-  font-family: "Open Sans", sans-serif;
-  text-align: center;
-  padding: 0 80px;
 }
 
 /* @Winners from 2012 *********/

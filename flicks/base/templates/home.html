@@ -134,11 +134,16 @@
         {% endtrans %}
         </p>
 
-        <h3>{{ _('Use the materials below to help you make your flick.') }}</h3>
+        <p class="caption">
+        {% trans %}
+          See what last year's winners have to say about their experience and use 
+          the materials below to help you make your flick.
+        {% endtrans %}
+        </p>
         <ul class="info">
           <li><a href="{{ url('flicks.base.faq') }}" class="go">{{ _('See the FAQ') }}</a></li>
-          <li><a href="{{ link_brief }}" class="go" rel="external">{{ _('Read the creative brief') }}</a></li>
-          <li><a href="http://mzl.la/XootKF" class="go" rel="external">{{ _('Download the creative assets') }}</a></li>
+          <li><a href="{{ link_brief }}" class="dl" rel="external">{{ _('Read the creative brief') }}</a></li>
+          <li><a href="http://mzl.la/XootKF" class="dl" rel="external">{{ _('Download the creative assets') }}</a></li>
         </ul>
       </div>
 
@@ -152,12 +157,6 @@
           <li><a href="https://vimeo.com/59440900" data-vimeo-id="59440900"><img src="{{ static('img/home/vidthumb-squares.jpg') }}" alt="" class="thumbnail"></a></li>
           <li><a href="https://vimeo.com/59440608" data-vimeo-id="59440608"><img src="{{ static('img/home/vidthumb-weird.jpg') }}" alt="" class="thumbnail"></a></li>
         </ul>
-
-        <p class="caption">
-        {% trans %}
-          See what last year's winners have to say about their experience and get advice on making your flick stand out.
-        {% endtrans %}
-        </p>
       </div>
 
     </div>
