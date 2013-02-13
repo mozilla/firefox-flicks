@@ -27,7 +27,7 @@ def gravatar_url(arg, size=80):
         'url': GRAVATAR_URL,
         'email_hash': md5_constructor(email.lower()).hexdigest(),
         'options': urllib.urlencode({'s': str(size),
-                                     'default': DEFAULT_GRAVATAR})
+                                     'd': 'mm'})
     }
 
     return url
