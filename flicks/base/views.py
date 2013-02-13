@@ -55,7 +55,8 @@ VIDEO_IC = {
     'es': '59418049',
     'fr': '59419952',
     'pt-BR': '59421007',
-} 
+}
+
 
 def home(request):
     """Home page."""

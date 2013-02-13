@@ -4,7 +4,7 @@ from flicks.videos.models import Video
 
 
 class VideoForm(forms.ModelForm):
-    filesize = forms.IntegerField(widget=forms.HiddenInput)
+    filesize = forms.IntegerField(required=False, widget=forms.HiddenInput)
 
     class Meta:
         model = Video

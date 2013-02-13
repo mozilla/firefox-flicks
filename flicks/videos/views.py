@@ -49,7 +49,9 @@ def upload(request):
     form = VideoForm(request.POST or None)
     if ticket and request.method == 'POST' and form.is_valid():
         # Verify that the filesize from the client matches what vimeo received.
-        if not vimeo.verify_chunks(ticket['id'], form.cleaned_data['filesize']):
+        # Some browsers don't provide this number, so we can't really verify.
+        filesize = form.cleaned_data['filesize']
+        if filesize and not vimeo.verify_chunks(ticket['id'], filesize):
             return upload_error(request)
 
         ticket = vimeo.complete_upload(ticket['id'],
