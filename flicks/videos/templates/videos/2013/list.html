@@ -28,31 +28,34 @@
     </div>
 
     {% block results %}
-      <ul class="entry-list">
-        {% for video in videos %}
-          <li class="entry">
-            <a href="{{ url('flicks.videos.detail', video.id) }}">
-              <img src="{{ video.thumbnail('medium') }}" alt="" class="thumbnail">
-              <hgroup>
-                <h2>{{ video.title }}</h2>
-                <h3 class="vcard">
-                  <span class="fn">{{ video.user.profile.display_name }}</span>,
-                  <span class="country-name">{{ country_name(video.user.profile.country) }}</span>
-                </h3>
-              </hgroup>
-            </a>
-            <p>
-              {% trans datetime=video.created.strftime('%Y-%m-%d'),
-                       date=video.created|babel_date %}
-                Submitted <time datetime="{{ datetime }}">{{ date }}</time>
-              {% endtrans %}
-            </p>
-          </li>
-        {% endfor %}
-      </ul>
+      {# Only show results if at least 1 video is found. #}
+      {% if videos.paginator.count > 1 %}
+        <ul class="entry-list">
+          {% for video in videos %}
+            <li class="entry">
+              <a href="{{ url('flicks.videos.detail', video.id) }}">
+                <img src="{{ video.thumbnail('medium') }}" alt="" class="thumbnail">
+                <hgroup>
+                  <h2>{{ video.title }}</h2>
+                  <h3 class="vcard">
+                    <span class="fn">{{ video.user.profile.display_name }}</span>,
+                    <span class="country-name">{{ country_name(video.user.profile.country) }}</span>
+                  </h3>
+                </hgroup>
+              </a>
+              <p>
+                {% trans datetime=video.created.strftime('%Y-%m-%d'),
+                         date=video.created|babel_date %}
+                  Submitted <time datetime="{{ datetime }}">{{ date }}</time>
+                {% endtrans %}
+              </p>
+            </li>
+          {% endfor %}
+        </ul>
 
-      {{ pagination(videos, url('flicks.videos.list'),
-                    region=request.GET.get('region', None)) }}
+        {{ pagination(videos, url('flicks.videos.list'),
+                      region=request.GET.get('region', None)) }}
+      {% endif %}
     {% endblock %}
 
     <aside id="trailers" class="samples">
