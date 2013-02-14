@@ -19,7 +19,7 @@ def vimeo_task(func):
     Mark a function as a celery task and automatically retry if any
     VimeoServiceErrors are raised.
     """
-    @task(default_retry_delay=30 * 60)  # Retry once every 30 minutes.
+    @task(default_retry_delay=5 * 60)  # Retry once every 5 minutes.
     @wraps(func)
     def wrapped(*args, **kwargs):
         from flicks.videos import vimeo
