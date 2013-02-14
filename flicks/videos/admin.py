@@ -1,10 +1,11 @@
 from django.contrib import admin
 
+from flicks.base.admin import BaseModelAdmin
 from flicks.videos.models import Award, Video2012, Video2013
 from flicks.videos.tasks import process_video
 
 
-class Video2013Admin(admin.ModelAdmin):
+class Video2013Admin(BaseModelAdmin):
     list_display = ['title', 'user_full_name', 'user_email', 'created',
                     'vimeo_id', 'filename', 'processed', 'approved']
     list_filter = ['processed', 'approved']
@@ -46,7 +47,7 @@ class Video2013Admin(admin.ModelAdmin):
 admin.site.register(Video2013, Video2013Admin)
 
 
-class Video2012Admin(admin.ModelAdmin):
+class Video2012Admin(BaseModelAdmin):
     """Configuration for the video admin pages."""
     list_display = ['title', 'user_email', 'state', 'judge_mark', 'category',
                     'region', 'shortlink', 'created']
@@ -55,7 +56,7 @@ class Video2012Admin(admin.ModelAdmin):
 admin.site.register(Video2012, Video2012Admin)
 
 
-class AwardAdmin(admin.ModelAdmin):
+class AwardAdmin(BaseModelAdmin):
     """Configuration for the award admin pages."""
     list_display = ['region', 'award_type', 'category', 'video', 'preview']
 admin.site.register(Award, AwardAdmin)
