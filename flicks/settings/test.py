@@ -13,3 +13,5 @@ CACHES = {
 }
 
 NOTIFY_KEY = 'asdf'
+
+PROD_LANGUAGES = ('en-US', 'fr', 'es', 'de', 'pt-BR')
