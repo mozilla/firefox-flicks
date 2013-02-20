@@ -58,6 +58,11 @@ class Video2013(models.Model, CachingMixin):
     def thumbnail(self, size):
         return getattr(self, '{0}_thumbnail_url'.format(size), '')
 
+    def __unicode__(self):
+        profile = self.user.profile
+        name = profile.display_name if profile else self.user.email
+        return '`{0}` - {1}'.format(self.title, name)
+
 
 @receiver(models.signals.post_delete, sender=Video2013)
 def remove_video(sender, **kwargs):
