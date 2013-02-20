@@ -73,7 +73,7 @@
 
     <h2 id="q5">{{ _('How do I submit my flick to Firefox Flicks and enter the contest?') }}</h2>
     <p>
-    {% trans link_submit=url('flicks.base.home')+'#submit' %}
+    {% trans link_submit=url('flicks.base.home')|urlparams(hash='submit') %}
       Fill out your filmmaker profile and submit your video <a href="{{ link_submit }}">here.</a>
       All flicks will be posted to the Firefox Flicks website using the Vimeo API.
       You'll need to provide your contact information, including your email, title your flick and select
