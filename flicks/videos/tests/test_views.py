@@ -65,8 +65,11 @@ class TestUpload(TestCase):
         eq_(vimeo.get_new_ticket.called, False)
         self.assertTemplateUsed(response, 'videos/upload.html')
 
-    def test_post_invalid_form(self):
+    @patch('flicks.videos.views.vimeo')
+    def test_post_invalid_form(self, vimeo):
         """If the POSTed form is invalid, redisplay the page."""
+        vimeo.is_ticket_valid.return_value = False
+        vimeo.get_new_ticket.return_value = {'id': 'qwer'}
         response = self._upload('post', title=None)
         self.assertTemplateUsed(response, 'videos/upload.html')
 

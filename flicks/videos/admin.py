@@ -17,14 +17,14 @@ class Video2013Admin(BaseModelAdmin):
     fieldsets = (
         (None, {
             'fields': ('title', 'user', 'created', 'vimeo_id', 'filename',
-                       'description')
+                       'description', 'thumbnail')
         }),
         ('Moderation', {
             'fields': ('processed', 'approved')
         })
     )
 
-    actions = ['process_videos']
+    actions = ['process_videos', 'download_thumbnails']
     change_form_template = 'admin/video2013_change_form.html'
 
     def user_full_name(self, instance):
@@ -38,11 +38,30 @@ class Video2013Admin(BaseModelAdmin):
         for video in queryset:
             process_video(video.id)
 
-        count = len(queryset)
-        count_string = '1 video' if count == 1 else '{0} videos'.format(count)
-        self.message_user(request,
-                          '{0} processed successfully.'.format(count_string))
+        msg = '{0} videos processed successfully.'
+        self.message_user(request, msg.format(len(queryset)))
     process_videos.short_description = 'Manually run video processing'
+
+    def download_thumbnails(self, request, queryset):
+        """Attempt to download thumbnails for the selected videos."""
+        errors = []
+        for video in queryset:
+            try:
+                video.download_thumbnail()
+            except Exception, e:
+                msg = 'Error downloading thumbnail for "{0}": {1}'
+                errors.append(msg.format(video, e))
+
+        # Notify user of results.
+        count = len(queryset) - len(errors)
+        if count > 0:
+            msg = '{0} videos updated successfully.'
+            self.message_user(request, msg.format(count))
+
+        for error in errors:
+            self.message_user_error(request, error)
+    download_thumbnails.short_description = 'Download thumbnails from Vimeo'
+
 
 admin.site.register(Video2013, Video2013Admin)
 

@@ -28,14 +28,12 @@
     </div>
 
     {% block results %}
-      {# Only show results if at least 1 video is found. #}
-      {% if videos.paginator.count > 1 %}
       <div id="gallery" class="main">
         <ul class="entry-list">
           {% for video in videos %}
             <li class="entry">
               <a href="{{ url('flicks.videos.detail', video.id) }}">
-                <img src="{{ video.thumbnail('medium') }}" alt="" class="thumbnail">
+                <img src="{{ video.thumbnail_url }}" alt="" class="thumbnail">
                 <hgroup>
                   <h2 class="title">{{ video.title }}</h2>
                   <h3 class="vcard">
@@ -54,10 +52,12 @@
           {% endfor %}
         </ul>
 
-      {{ pagination(videos, url('flicks.videos.list'),
-                    region=request.GET.get('region', None)) }}
+        {# Only show pagination if there is more than one page of results. #}
+        {% if videos.paginator.num_pages > 1 %}
+          {{ pagination(videos, url('flicks.videos.list'),
+                        region=request.GET.get('region', None)) }}
+        {% endif %}
       </div>
-      {% endif %}
     {% endblock %}
 
     <aside id="trailers" class="samples aside">

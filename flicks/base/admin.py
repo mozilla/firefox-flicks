@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.contrib.admin.models import LogEntry, DELETION
 from django.core.urlresolvers import NoReverseMatch, reverse
 from django.utils.html import escape
@@ -19,6 +19,9 @@ class BaseModelAdmin(admin.ModelAdmin):
         if isinstance(qs, CachingQuerySet):
             qs = qs.no_cache()
         return qs
+
+    def message_user_error(self, request, msg):
+        messages.error(request, msg)
 
 
 class LogEntryAdmin(admin.ModelAdmin):

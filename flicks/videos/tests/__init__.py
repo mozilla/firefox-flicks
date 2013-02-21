@@ -4,7 +4,7 @@ from flicks.users.tests import UserFactory
 from flicks.videos import models
 
 
-class VideoFactory(Factory):
+class Video2013Factory(Factory):
     FACTORY_FOR = models.Video
 
     user = SubFactory(UserFactory)
@@ -12,6 +12,7 @@ class VideoFactory(Factory):
     description = 'Test desc'
     vimeo_id = Sequence(lambda n: int(n))
     filename = Sequence(lambda n: '{0}.mp4'.format(n))
+VideoFactory = Video2013Factory
 
 
 class Video2012Factory(Factory):

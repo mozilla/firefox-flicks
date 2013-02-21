@@ -50,7 +50,8 @@ def send_approval_email(video):
     Send email to the video's creator telling them that their video has been
     approved.
     """
-    with use_lang(video.user.profile.locale):
+    profile = video.user.profile
+    with use_lang(profile.locale if profile else settings.LANGUAGE_CODE):
         body = render_to_string('videos/2013/approval_email.html', {
             'user': video.user,
             'video': video

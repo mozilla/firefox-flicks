@@ -1,10 +1,12 @@
 from django.core import mail
+from django.test.utils import override_settings
 
+from mock import patch
 from nose.tools import eq_, ok_
 from pyquery import PyQuery as pq
 
 from flicks.base.tests import TestCase
-from flicks.users.tests import UserProfileFactory
+from flicks.users.tests import UserFactory, UserProfileFactory
 from flicks.videos.tests import VideoFactory
 from flicks.videos.util import (send_approval_email, send_rejection_email,
                                 vimeo_embed_code)
@@ -29,6 +31,20 @@ class SendApprovalEmailTests(TestCase):
         send_approval_email(video)
         eq_(len(mail.outbox), 1)
         eq_(mail.outbox[0].to, ['boo@example.com'])
+
+    @patch('flicks.videos.util.use_lang')
+    @override_settings(LANGUAGE_CODE='fr')
+    def test_no_profile(self, use_lang):
+        """
+        If the user has no profile, use the installation's default language
+        code for the email locale.
+        """
+        user = UserFactory.create(email='bar@example.com')
+        video = VideoFactory.create(user=user)
+        send_approval_email(video)
+        eq_(len(mail.outbox), 1)
+        eq_(mail.outbox[0].to, ['bar@example.com'])
+        use_lang.assert_called_with('fr')
 
 
 class SendRejectionEmailTests(TestCase):

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.sessions.middleware import SessionMiddleware
 from django.test.client import RequestFactory
 
+import requests
 import test_utils
 from django_browserid.tests import mock_browserid
 from funfactory.urlresolvers import reverse
@@ -31,15 +32,12 @@ class SessionRequestFactory(RequestFactory):
 class TestCase(test_utils.TestCase):
     """Base class for Flicks test cases."""
     def setUp(self):
-        self.approval_patch = patch('flicks.videos.models.process_approval')
-        self.approval_patch.start()
-
-        self.deletion_patch = patch('flicks.videos.models.process_deletion')
-        self.deletion_patch.start()
+        self.requests_patch = patch.object(requests, 'request',
+                                           spec=requests.Response)
+        self.requests_patch.start()
 
     def tearDown(self):
-        self.approval_patch.stop()
-        self.deletion_patch.stop()
+        self.requests_patch.stop()
 
     @contextmanager
     def activate(self, locale):

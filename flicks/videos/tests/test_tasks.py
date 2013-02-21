@@ -1,15 +1,14 @@
 from django.contrib.auth.models import Permission
 
 from mock import ANY, patch
-from nose.tools import eq_, ok_
+from nose.tools import ok_
 
 from flicks.base import regions
 from flicks.base.tests import TestCase
 from flicks.base.tests.tools import CONTAINS
 from flicks.users.tests import GroupFactory, UserFactory, UserProfileFactory
 
-from flicks.videos.models import Video
-from flicks.videos.tasks import process_approval, process_video
+from flicks.videos.tasks import process_video
 from flicks.videos.tests import VideoFactory
 
 
@@ -56,81 +55,3 @@ class TestProcessVideo(TestCase):
         send_mail.assert_called_with(ANY, ANY, 'blah@test.com',
                                      CONTAINS('test1@test.com',
                                               'test2@test.com'))
-
-
-class ProcessApprovalTests(TestCase):
-    @patch('flicks.videos.tasks.vimeo')
-    @patch('flicks.videos.tasks.send_approval_email')
-    def test_approved_not_notified(self, send_approval_email, vimeo):
-        """
-        If the video is approved, reset the privacy on vimeo to 'anybody',
-        and if the user hasn't been notified, send an approval email.
-        """
-        video = VideoFactory.create(approved=True, user_notified=False)
-        vimeo.set_privacy.reset_mock()
-        send_approval_email.reset_mock()
-        ok_(not vimeo.set_privacy.called)
-        ok_(not send_approval_email.called)
-
-        process_approval(video.id)
-        vimeo.set_privacy.assert_called_with(video.vimeo_id, 'anybody')
-        send_approval_email.assert_called_with(video)
-
-    @patch('flicks.videos.tasks.vimeo')
-    @patch('flicks.videos.tasks.send_approval_email')
-    def test_approved_notified(self, send_approval_email, vimeo):
-        """
-        If the video is approved, reset the privacy on vimeo to 'anybody', and
-        if the user has already been notified, don't send a new email.
-        """
-        video = VideoFactory.create(user__email='blah@test.com', approved=True,
-                                    user_notified=True)
-        vimeo.set_privacy.reset_mock()
-        send_approval_email.reset_mock()
-        ok_(not vimeo.set_privacy.called)
-        ok_(not send_approval_email.called)
-
-        process_approval(video.id)
-        vimeo.set_privacy.assert_called_with(video.vimeo_id, 'anybody')
-        ok_(not send_approval_email.called)
-
-    @patch('flicks.videos.tasks.vimeo')
-    @patch('flicks.videos.tasks.send_approval_email')
-    def test_unapproved(self, send_approval_email, vimeo):
-        """
-        If the video is not approved, reset the privacy on vimeo to 'password'.
-        """
-        video = VideoFactory.create(user__email='blah@test.com', approved=False)
-        vimeo.set_privacy.reset_mock()
-        send_approval_email.reset_mock()
-        ok_(not vimeo.set_privacy.called)
-        ok_(not send_approval_email.called)
-
-        with self.settings(VIMEO_VIDEO_PASSWORD='testpass'):
-            process_approval(video.id)
-        vimeo.set_privacy.assert_called_with(video.vimeo_id, 'password',
-                                                   password='testpass')
-        ok_(not send_approval_email.called)
-
-    @patch('flicks.videos.tasks.vimeo')
-    def test_thumbnails(self, vimeo):
-        """If a video is approved, pull the latest thumbnails from Vimeo."""
-        vimeo.get_thumbnail_urls.return_value = [
-            {'height': '75', '_content': 'http://test1.com'},
-            {'height': '150', '_content': 'http://test2.com'},
-            {'height': '480', '_content': 'http://test3.com'},
-            {'height': '7532', '_content': 'http://test4.com'},
-        ]
-
-        user = UserProfileFactory.create().user
-        video = VideoFactory.create(approved=True, user=user)
-        vimeo.get_thumbnail_urls.reset_mock()
-        ok_(not vimeo.get_thumbnail_urls.called)
-
-        process_approval(video.id)
-
-        vimeo.get_thumbnail_urls.assert_called_with(video.vimeo_id)
-        video = Video.objects.get(id=video.id)
-        eq_(video.small_thumbnail_url, 'http://test1.com')
-        eq_(video.medium_thumbnail_url, 'http://test2.com')
-        eq_(video.large_thumbnail_url, 'http://test3.com')

@@ -1,17 +1,24 @@
+import os
 from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.files.base import ContentFile
 from django.db import models
 from django.dispatch import receiver
 
 import jinja2
+import requests
 from caching.base import CachingManager, CachingMixin
+from funfactory.helpers import static
+from requests.exceptions import RequestException
 from tower import ugettext as _, ugettext_lazy as _lazy
 
 from flicks.base.util import get_object_or_none
-from flicks.videos.tasks import process_approval, process_deletion
-from flicks.videos.util import vidly_embed_code, vimeo_embed_code
+from flicks.videos import vimeo
+from flicks.videos.tasks import process_deletion
+from flicks.videos.util import (send_approval_email, vidly_embed_code,
+                                vimeo_embed_code)
 
 
 class Video2013(models.Model, CachingMixin):
@@ -27,9 +34,11 @@ class Video2013(models.Model, CachingMixin):
     processed = models.BooleanField(default=False)
     user_notified = models.BooleanField(default=False)
 
-    small_thumbnail_url = models.URLField(blank=True)
-    medium_thumbnail_url = models.URLField(blank=True)
-    large_thumbnail_url = models.URLField(blank=True)
+    def _thumbnail_path(self, filename):
+        root, ext = os.path.splitext(filename)
+        return 'vimeo_thumbs/{0}{1}'.format(self.vimeo_id, ext)
+    thumbnail = models.ImageField(blank=True, upload_to=_thumbnail_path,
+                                  max_length=settings.MAX_FILEPATH_LENGTH)
 
     objects = CachingManager()
 
@@ -37,17 +46,32 @@ class Video2013(models.Model, CachingMixin):
     def region(self):
         return self.user.userprofile.region
 
+    @property
+    def thumbnail_url(self):
+        return (self.thumbnail.url if self.thumbnail else
+                static('img/video-blank.jpg'))
+
     def save(self, *args, **kwargs):
         """
-        Prior to saving, set the video's privacy on Vimeo depending on if it is
-        approved.
+        Prior to saving, trigger approval processing if approval status has
+        changed.
         """
         original = get_object_or_none(Video2013, id=self.id)
-        return_value = super(Video2013, self).save(*args, **kwargs)
 
         # Only process approval if the value changed.
-        if not original or original.approved != self.approved:
-            process_approval.delay(self.id)
+        if original and original.approved != self.approved:
+            self.process_approval()
+
+        # Save after processing to prevent making the video public until
+        # processing is complete.
+        return_value = super(Video2013, self).save(*args, **kwargs)
+
+        # Send an email out if the user hasn't been notified and re-save.
+        # Don't send an email out if this is a new, already-approved video.
+        if original and self.approved and not self.user_notified:
+            send_approval_email(self)
+            self.user_notified = True
+            return_value = super(Video2013, self).save(*args, **kwargs)
 
         return return_value
 
@@ -55,8 +79,37 @@ class Video2013(models.Model, CachingMixin):
         """Return the HTML code to embed this video."""
         return jinja2.Markup(vimeo_embed_code(self.vimeo_id, **kwargs))
 
-    def thumbnail(self, size):
-        return getattr(self, '{0}_thumbnail_url'.format(size), '')
+    def process_approval(self):
+        """Update privacy and gather more metadata based on approval status."""
+        if self.approved:
+            # Fetch the medium-sized thumbail from Vimeo. If it isn't available,
+            # ignore and continue; a default thumbnail will be used.
+            try:
+                self.download_thumbnail(commit=False)
+            except (RequestException, vimeo.VimeoServiceError):
+                pass
+
+            vimeo.set_privacy(self.vimeo_id, 'anybody')
+        else:
+            vimeo.set_privacy(self.vimeo_id, 'password',
+                              password=settings.VIMEO_VIDEO_PASSWORD)
+
+    def download_thumbnail(self, commit=True):
+        """Download the thumbnail for the given video and save it."""
+        thumbnails = vimeo.get_thumbnail_urls(self.vimeo_id)
+        try:
+            thumbnail = next(t for t in thumbnails if t['height'] == '150')
+        except StopIteration:
+            raise vimeo.VimeoServiceError('No medium thumbnail found.')
+
+        response = requests.get(thumbnail['_content'])
+
+        filename = response.url.rsplit('/')[-1]
+        content_file = ContentFile(response.content)
+        self.thumbnail.save(filename, content_file, save=False)
+
+        if commit:
+            self.save()
 
     def __unicode__(self):
         profile = self.user.profile
