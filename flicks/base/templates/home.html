@@ -94,7 +94,7 @@
               {# Show a login button or submit button depending on if the user
                  is authenticated. #}
               {% if user.is_authenticated() %}
-                <a href="#" id="submit-button" class="go button">
+                <a href="#" class="go button">
                   {{ _('Start here') }}
                 </a>
               {% else %}
@@ -136,7 +136,7 @@
 
         <p class="caption">
         {% trans %}
-          See what last year's winners have to say about their experience and use 
+          See what last year's winners have to say about their experience and use
           the materials below to help you make your flick.
         {% endtrans %}
         </p>
