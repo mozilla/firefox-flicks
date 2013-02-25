@@ -1,3 +1,5 @@
+{% from 'macros.html' import flicks_browserid_button with context -%}
+
 <header id="masthead">
   <div id="head-inner">
     <div class="wrap">
@@ -17,8 +19,8 @@
           <li id="nav-rules"><a href="{{ url('flicks.base.home') }}#rules">{{ _('Rules') }}</a></li>
           <li id="nav-blog"><a href="http://firefoxflicks.tumblr.com" class="go" rel="external">{{ _('Blog') }}</a></li>
           <li id="nav-auth">
-            {{ browserid_button(request_args={'returnTo': request.path},
-                                form_extras={'next': request.path}) }}
+            {{ flicks_browserid_button(request_args={'returnTo': request.path},
+                                       form_extras={'next': request.path}) }}
           </li>
         </ul>
       </nav>

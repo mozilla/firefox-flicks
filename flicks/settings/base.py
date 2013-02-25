@@ -47,6 +47,7 @@ MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
 
 TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
    'django_browserid.context_processors.browserid',
+   'flicks.base.context_processors.browserid_request_args',
 ]
 
 # Authentication settings

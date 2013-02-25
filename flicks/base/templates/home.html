@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% import 'judge_macros.html' as judge_bio %}
+{% from 'macros.html' import flicks_browserid_button with context %}
 
 {% block page_title %}{{ _('A Global Video Contest to Mobilize the Web') }}{% endblock %}
 
@@ -98,11 +99,10 @@
                   {{ _('Start here') }}
                 </a>
               {% else %}
-                {{
-                  browserid_button(sign_in=_('Start here'), link_class='go button', form_extras={
-                    'next': url('flicks.base.home')|urlparams(hash='submit')
-                  })
-                }}
+                {% set form_extras = {'next': url('flicks.base.home')|urlparams(hash='submit')} %}
+                {{ flicks_browserid_button(sign_in=_('Start here'),
+                                           link_class='go button',
+                                           form_extras=form_extras) }}
               {% endif %}
             </div>
           </li>
