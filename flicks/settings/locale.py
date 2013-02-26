@@ -31,6 +31,7 @@ LINK_BRIEF = defaultdict(lambda: 'http://static.mozilla.com/firefoxflicks/pdf/Fi
     'it': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_it.pdf',
     'lij': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_lij.pdf',
     'ja': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_ja.pdf',
+    'sq': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_sq.pdf',
 })
 
 LINK_CCLICENSE = defaultdict(lambda: 'http://creativecommons.org/licenses/by-nc-sa/2.5/', **{
