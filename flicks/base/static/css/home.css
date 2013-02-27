@@ -47,22 +47,14 @@
 
 .actions li {
   float: left;
-  width: 20%;
-  margin: 0 6.6%;
-}
-
-.actions p {
-  font: 14px/1.2 "Open Sans", Helvetica, Arial, sans-serif;
-}
-
-.actions .submit {
   width: 30%;
   margin: 0 1.5%;
 }
 
-.actions .submit h3 {
-  font-size: 22px;
+.actions a {
+  font: 14px/1.2 "Open Sans", Helvetica, Arial, sans-serif;
 }
+
 
 .actions .soon {
   color: #999;
