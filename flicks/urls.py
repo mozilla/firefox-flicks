@@ -35,10 +35,15 @@ def robots_txt(request):
                         mimetype='text/plain')
 
 
+def temp(request):
+    return HttpResponse('asdf: {0}'.format(5 / 0))
+
+
 urlpatterns = patterns('',
     url(r'', include('flicks.base.urls')),
     url(r'video/', include('flicks.videos.urls')),
     url(r'user/', include('flicks.users.urls')),
+    url(r'temp/', temp),
 
     url(r'^admin/', include(admin.site.urls)),
 
