@@ -5,7 +5,7 @@
 {% block page_title %}{{ video.title }}{% endblock %}
 
 {% block og_title %}{{ video.title }}{% endblock %}
-{% block og_image %}{{ video.thumbnail('medium') }}{% endblock %}
+{% block og_image %}{{ absolutify(video.thumbnail_url) }}{% endblock %}
 {% block meta_description %}
   {% if video.description %}
     <meta property="og:description" content="{{ video.description }}">
