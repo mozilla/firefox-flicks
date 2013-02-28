@@ -97,6 +97,16 @@ DEFAULT_FROM_EMAIL = 'firefoxflicks@mozilla.com'
 # Secure Cookies
 SESSION_COOKIE_SECURE = True
 
+# Set ALLOWED_HOSTS based on SITE_URL.
+def _allowed_hosts():
+    from django.conf import settings
+    from urlparse import urlparse
+
+    host = urlparse(settings.SITE_URL).netloc  # Remove protocol and path
+    host = host.rsplit(':', 1)[0]  # Remove port
+    return [host]
+ALLOWED_HOSTS = lazy(_allowed_hosts, list)()
+
 # Django-CSP
 CSP_IMG_SRC = ("'self'",
                'data:',
