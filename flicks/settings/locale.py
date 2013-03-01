@@ -1,4 +1,7 @@
-LINK_PDWIKI = {
+from collections import defaultdict
+
+
+LINK_PDWIKI = defaultdict(lambda: 'https://en.wikipedia.org/wiki/Public_domain', **{
     'en-US': 'https://en.wikipedia.org/wiki/Public_domain',
     'de': 'https://de.wikipedia.org/wiki/Gemeinfreiheit',
     'fr': 'https://fr.wikipedia.org/wiki/Domaine_public_%28propri%C3%A9t%C3%A9_intellectuelle%29',
@@ -13,9 +16,9 @@ LINK_PDWIKI = {
     'it': 'https://it.wikipedia.org/wiki/Pubblico_dominio',
     'lij': 'https://it.wikipedia.org/wiki/Pubblico_dominio',
     'ja': 'https://ja.wikipedia.org/wiki/%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%AF%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3',
-}
+})
 
-LINK_BRIEF = {
+LINK_BRIEF = defaultdict(lambda: 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_en-US.pdf', **{
     'en-US': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_en-US.pdf',
     'de': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_de.pdf',
     'es': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_es-ES.pdf',
@@ -28,9 +31,9 @@ LINK_BRIEF = {
     'it': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_it.pdf',
     'lij': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_lij.pdf',
     'ja': 'http://static.mozilla.com/firefoxflicks/pdf/Filmmakers_Creative_Brief_ja.pdf',
-}
+})
 
-LINK_CCLICENSE = {
+LINK_CCLICENSE = defaultdict(lambda: 'http://creativecommons.org/licenses/by-nc-sa/2.5/', **{
     'en-US': 'http://creativecommons.org/licenses/by-nc-sa/2.5/',
     'de': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.de',
     'fr': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.fr',
@@ -42,28 +45,28 @@ LINK_CCLICENSE = {
     'sq': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.sq',
     'zh-CN': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.zh_CN',
     'zh-TW': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.zh_TW',
-}
+})
 
-VIDEO_IC = {
+VIDEO_IC = defaultdict(lambda: '59415650', **{
     'en-US': '59415650',
     'de': '59416761',
     'es': '59418049',
     'fr': '59419952',
     'pt-BR': '59421007',
-}
+})
 
-VIDEO_SLAPSTICK = {
+VIDEO_SLAPSTICK = defaultdict(lambda: '59415651', **{
     'en-US': '59415651',
     'de': '59416762',
     'es': '59418050',
     'fr': '59419953',
     'pt-BR': '59421008',
-}
+})
 
-VIDEO_ALLTHREE = {
+VIDEO_ALLTHREE = defaultdict(lambda: '59415649', **{
     'en-US': '59415649',
     'de': '59416760',
     'es': '59418048',
     'fr': '59419955',
     'pt-BR': '59421006',
-}
+})
