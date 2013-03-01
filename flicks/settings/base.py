@@ -8,8 +8,8 @@ from flicks.base.util import reverse_lazy
 # Import locale-sensitive settings
 from .locale import *
 
-PROD_LANGUAGES = ('de', 'en-US', 'fr', 'it', 'ja', 'nl', 'pt-BR', 'ru', 'sl',
-                  'sq')
+PROD_LANGUAGES = ('de', 'en-US', 'es', 'fr', 'it', 'ja', 'lij', 'nl', 'pt-BR',
+                  'ru', 'sl', 'sq', 'zh-CN', 'zh-TW')
 
 # Defines the views served for root URLs.
 ROOT_URLCONF = 'flicks.urls'
