@@ -55,9 +55,35 @@
   font: 14px/1.2 "Open Sans", Helvetica, Arial, sans-serif;
 }
 
-
 .actions .soon {
   color: #999;
+}
+
+.actions .submit .go {
+  font-size: 18px;
+  padding: 2px 20px;
+  background: #fff none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.1);
+  -moz-transition: all .125s ease-out;
+  -ms-transition: all .125s ease-out;
+  -o-transition: all .125s ease-out;
+  -webkit-transition: all .125s ease-out;
+  transition: all .125s ease-out;
+}
+
+.actions .submit .go:hover,
+.actions .submit .go:focus,
+.actions .submit .go:active {
+  background-color: rgba(255,255,255,.75);
+  border-color: #bbb;
+  color: #1287d7;
+  -moz-transition: all .125s ease-in;
+  -ms-transition: all .125s ease-in;
+  -o-transition: all .125s ease-in;
+  -webkit-transition: all .125s ease-in;
+  transition: all .125s ease-in;
 }
 
 /*** @Slides *********/
@@ -181,69 +207,65 @@
 }
 
 #about .section-detail {
-  width: 660px;
-  text-align: center;
-}
-
-#about .section-detail .caption {
-  font: bold 18px Vollkorn, Georgia, serif;
-}
-
-#about .info {
-  list-style: none;
-  overflow: hidden;
-  margin: 0 -80px 1em;
-}
-
-#about .info li {
-  display: inline-block;
-  width: 30%;
-  margin: 0 1.49% 1em;
-  float: left;
-}
-
-#about .director-videos {
-  width: 710px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-#video-stage {
-  float: left;
-  margin: 0 0 1em;
-  padding: 0 0 8px;
+  width: 320px;
   position: relative;
-  background: url(/static/img/shadow-520.png) center bottom no-repeat;
+  padding-left: 320px;
 }
 
-#about .videos-list {
-  list-style: none;
-  margin: 0 0 1em;
-  width: 145px;
-  float: right;
+#about .section-detail .video {
+  width: 240px;
+  padding-bottom: 8px;
+  background: url(/static/img/shadow-240.png) center bottom no-repeat;
+  float: left;
+  margin-left: -300px;
 }
 
-#about .videos-list li {
-  margin-top: 18px;
-}
-
-#about .videos-list li:first-child {
-  margin-top: 0;
-}
-
-/* @Winners from 2012 *********/
-#winners2012 .section-intro {
-  width: 620px;
-}
-
-#winners2012 .entry-list {
+#about .section-detail .video img {
+  display: block;
   margin: 0 auto;
 }
 
-#winners2012 .entry {
+#about .section-detail h2 {
+  text-align: center;
+  font: bold 18px Vollkorn, serif;
+  overflow: hidden;
+  margin: 0 0 .75em -300px;
+}
+
+#about .section-detail h2 span {
+  display: inline-block;
+  margin: 0 10px .25em;
+}
+
+/* @2013 @Flicks *********/
+#flicks2013 .section-intro {
+  width: 760px;
+}
+
+#flicks2013 .entry-list {
+  margin: 0 auto 20px;
+}
+
+#flicks2013 .entry {
   width: 282px;
   float: left;
   margin: 0 15px 2em;
+}
+
+#flicks2013 .info {
+  list-style: none;
+  width: 75%;
+  margin: 0 auto 1em;
+  font-size: 18px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
+
+#flicks2013 .info li {
+  width: 40%;
+  margin: 0 4.5% 1em;
+  display: inline-block;
+  text-align: center;
 }
 
 /* @Judges *********/
@@ -466,7 +488,7 @@
     font-size: 16px;
   }
 
-  #winners2012 .entry {
+  #films .entry {
     width: 205px;
   }
 
@@ -508,7 +530,7 @@
   #about .section-detail .video,
   #about .actions,
   #about .actions p,
-  #winners2012 .section-intro,
+  #films .section-intro,
   #judges .section-intro,
   #rules .section-intro,
   #rules .rules {
@@ -583,50 +605,18 @@
     padding: 0;
   }
 
+  #about .section-detail .video {
+    margin: 0 0 1em;
+    float: none;
+  }
+
   #about .actions h3 span {
     float: none;
     display: block;
     margin: 0;
   }
 
-  #about .info {
-    text-align: center;
-    margin: 0 0 2em;
-  }
-
-  #about .info li {
-    width: auto;
-    float: none;
-    display: block;
-  }
-
-  #video-frame {
-    width: 300px;
-    height: 169px;
-  }
-
-  #video-stage {
-    background: none;
-  }
-
-  #about .director-videos,
-  #about .videos-list {
-    width: auto;
-    float: none;
-    clear: both;
-  }
-
-  #about .videos-list li {
-    width: 30%;
-    float: left;
-    margin: 0 1.5% 1em;
-  }
-
-  .director-videos .caption {
-    padding: 0;
-  }
-
-  #winners2012 .entry {
+  #films .entry {
     width: 260px;
     float: none;
     margin: 0 auto 1.5em;
@@ -703,17 +693,17 @@
     height: 258px;
   }
 
-  #winners2012 .entry {
+  #films .entry {
     width: 200px;
     float: left;
     margin: 0 15px 1.5em;
   }
 
-  #winners2012 .entry:nth-child(3n+1) {
+  #films .entry:nth-child(3n+1) {
     clear: none;
   }
 
-  #winners2012 .entry:nth-child(2n+1) {
+  #films .entry:nth-child(2n+1) {
     clear: left;
   }
 

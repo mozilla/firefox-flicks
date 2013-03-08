@@ -74,8 +74,8 @@
         // Uses jQuery Waypoints http://imakewebthings.com/jquery-waypoints/
         $('#intro').waypoint(waypointCallback('',''), {offset: headOffset});
         $('#about').waypoint(waypointCallback('nav-about', ''), {offset: headOffset});
-        $('#winners2012').waypoint(waypointCallback('nav-winners', 'nav-about'), {offset: headOffset});
-        $('#judges').waypoint(waypointCallback('nav-judges', 'nav-winners'), {offset: headOffset});
+        $('#flicks2013').waypoint(waypointCallback('nav-flicks', 'nav-about'), {offset: headOffset});
+        $('#judges').waypoint(waypointCallback('nav-judges', 'nav-flicks'), {offset: headOffset});
         $('#prizes').waypoint(waypointCallback('nav-prizes', 'nav-judges'), {offset: headOffset});
         $('#rules').waypoint(waypointCallback('nav-rules', 'nav-prizes'), {offset: headOffset});
 

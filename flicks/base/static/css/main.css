@@ -421,14 +421,6 @@ a.dl {
   display: none; /* Hidden in non-mobile views */
 }
 
-#page-nav #nav-auth {
-  display: block;
-  text-transform: none;
-  font-size: 11px;
-  text-align: right;
-  margin: 9px 12px -10px 0;
-}
-
 #tabzilla {
   position: absolute;
   right: 0;
@@ -519,6 +511,47 @@ a.dl {
 .nav-social .twitter:focus,
 .nav-social .twitter:active {
   background-position: -150px -100px;
+}
+
+.nav-social #nav-auth {
+  margin-right: 15px;
+}
+
+.nav-social #nav-auth a {
+  width: auto;
+  height: auto;
+  line-height: 1;
+  text-indent: 0;
+  text-transform: none;
+  padding: 6px 20px;
+  margin: 0 0 .25em;
+  background: #fff none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.1);
+  -moz-transition: all .125s ease-out;
+  -ms-transition: all .125s ease-out;
+  -o-transition: all .125s ease-out;
+  -webkit-transition: all .125s ease-out;
+  transition: all .125s ease-out;
+}
+
+.nav-social #nav-auth a:hover, 
+.nav-social #nav-auth a:focus,
+.nav-social #nav-auth a:active {
+  background-color: rgba(255,255,255,.75);
+  border-color: #bbb;
+  color: #1287d7;
+  -moz-transition: all .125s ease-in;
+  -ms-transition: all .125s ease-in;
+  -o-transition: all .125s ease-in;
+  -webkit-transition: all .125s ease-in;
+  transition: all .125s ease-in;
+}
+
+.nav-social #nav-auth a:after {
+  content: " »";
+  white-space: nowrap;
 }
 
 /* @Footer *********/
