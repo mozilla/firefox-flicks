@@ -107,7 +107,7 @@ def deploy_app(ctx):
 def update_celery(ctx):
     """Update and restart Celery."""
     ctx.remote(settings.REMOTE_UPDATE_SCRIPT)
-    ctx.remote('service %s restart' % settings.CELERY_SERVICE)
+    ctx.remote('supervisorctl restart %s' % settings.CELERY_SERVICE)
 
 
 @task
