@@ -7,7 +7,6 @@ from django.core.files.base import ContentFile
 from django.db import models
 from django.dispatch import receiver
 
-import jinja2
 import requests
 from caching.base import CachingManager, CachingMixin
 from funfactory.helpers import static
@@ -77,7 +76,7 @@ class Video2013(models.Model, CachingMixin):
 
     def embed_html(self, **kwargs):
         """Return the HTML code to embed this video."""
-        return jinja2.Markup(vimeo_embed_code(self.vimeo_id, **kwargs))
+        return vimeo_embed_code(self.vimeo_id, **kwargs)
 
     def process_approval(self):
         """Update privacy and gather more metadata based on approval status."""

@@ -35,9 +35,10 @@ def vimeo_embed_code(vimeo_id, width=600, height=338, elem_class='video'):
         'autoplay': 0
     })])
 
-    return ('<iframe class="{elem_class}" src="{url}" width="{width}" '
+    html = ('<iframe class="{elem_class}" src="{url}" width="{width}" '
             'height="{height}" frameborder="0"></iframe>'.strip().format(
             url=url, width=width, height=height, elem_class=elem_class))
+    return jinja2.Markup(html)
 
 
 # L10n: Subject line for emails sent to users after their video has been moderated.
