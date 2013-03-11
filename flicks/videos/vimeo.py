@@ -118,10 +118,11 @@ def verify_chunks(ticket_id, expected_size):
 @vimeo_task
 def complete_upload(ticket_id, filename):
     """Mark an upload as complete and submit it for processing."""
+    msg = ('Error completing upload for ticket `{ticket_id}`: <{code} {msg}> '
+           '{expl}')
     response = _ticket_request('vimeo.videos.upload.complete', 'POST',
-        ticket_id=ticket_id, filename=filename,
-        error_msg='Error completing upload for ticket `{ticket_id}`: '
-                  '<{code} {msg}> {expl}')
+                               ticket_id=ticket_id, filename=filename,
+                               error_msg=msg)
     return response['ticket']
 
 
@@ -129,7 +130,7 @@ def complete_upload(ticket_id, filename):
 def set_title(video_id, title):
     """Set the title of a video."""
     _video_request('vimeo.videos.setTitle', 'POST', video_id=video_id,
-                   title=title,
+                   title=title.encode('ascii', 'xmlcharrefreplace'),
                    error_msg='Error setting title for video {video_id}: '
                              '<{code} {msg}> {expl}')
 
@@ -138,7 +139,7 @@ def set_title(video_id, title):
 def set_description(video_id, description):
     """Set the description of a video."""
     _video_request('vimeo.videos.setDescription', 'POST', video_id=video_id,
-                   description=description,
+                   description=description.encode('ascii', 'xmlcharrefreplace'),
                    error_msg='Error setting description for video {video_id}: '
                              '<{code} {msg}> {expl}')
 

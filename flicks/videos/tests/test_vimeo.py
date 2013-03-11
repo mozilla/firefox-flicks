@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 from mock import ANY, Mock, patch
 from nose.tools import eq_, ok_
@@ -129,3 +130,27 @@ class TestVimeo(TestCase):
             vimeo._video_request('method', 'POST', video_id='id',
                                  error_msg='{video_id} {code} {msg} {expl}')
         eq_(cm.exception.args, ('id tcode tmsg texpl',))
+
+    @patch('flicks.videos.vimeo._video_request')
+    def test_set_title_unicode(self, _video_request):
+        """
+        Titles passed to set_title should be encoded in ASCII, with non-ASCII
+        being encoded using HTML/XML entities.
+        """
+        vimeo.set_title('1234', u'Basket ball à')
+        _video_request.assert_called_with('vimeo.videos.setTitle', 'POST',
+                                          video_id='1234',
+                                          title='Basket ball &#224;',
+                                          error_msg=ANY)
+
+    @patch('flicks.videos.vimeo._video_request')
+    def test_set_description_unicode(self, _video_request):
+        """
+        Descriptions passed to set_description should be encoded in ASCII, with
+        non-ASCII being encoded using HTML/XML entities.
+        """
+        vimeo.set_description('1234', u'Basket ball à')
+        _video_request.assert_called_with('vimeo.videos.setDescription', 'POST',
+                                          video_id='1234',
+                                          description='Basket ball &#224;',
+                                          error_msg=ANY)

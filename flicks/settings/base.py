@@ -29,7 +29,6 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 
     'django.contrib.admin',
 
-    'csp',
     'django_browserid',
     'django_statsd',
     'jingo_minify',
@@ -131,6 +130,8 @@ CSP_FRAME_SRC = ("'self'",
                  'https://*.vimeo.com',
                  'https://*.vimeocdn.com',
                  'https://login.persona.org',)
+CSP_DEFAULT_SRC = ("'self'",
+                   'https://*.vimeo.com',)
 
 # Activate statsd patches to time database and cache hits.
 STATSD_PATCHES = [

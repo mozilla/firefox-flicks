@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^upload/$', views.upload, name='flicks.videos.upload'),
     url(r'^upload/complete/$', views.upload_complete,
         name='flicks.videos.upload_complete'),
+    url(r'^upload/error/$', views.upload_error,
+        name='flicks.videos.upload_error'),
 
     # 2012 Archive pages
     url(r'^(?P<video_id>\d+)$', views.details_2012,

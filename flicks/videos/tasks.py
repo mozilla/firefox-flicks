@@ -24,7 +24,7 @@ def process_video(video_id):
         vimeo.set_title(video.vimeo_id, video.title)
 
         # Set description to title + author + description.
-        description = '{title} by {author}\n\n{description}'.format(
+        description = u'{title} by {author}\n\n{description}'.format(
             title=video.title, author=video.user.profile.display_name,
             description=video.description)
         vimeo.set_description(video.vimeo_id, description)
@@ -47,7 +47,7 @@ def process_video(video_id):
         moderators = User.objects.filter(Q(groups__permissions=perm) |
                                          Q(user_permissions=perm)).distinct()
 
-        subject = ('[flicks-moderation] `{0}` is ready for review'
+        subject = (u'[flicks-moderation] `{0}` is ready for review'
                    .format(video.title))
         message = render_to_string('videos/2013/moderation_email.html',
                                    {'video': video})
