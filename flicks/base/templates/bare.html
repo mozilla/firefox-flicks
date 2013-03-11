@@ -5,7 +5,7 @@
 {% endif %}
 
 <!DOCTYPE html>
-<html lang="{{ LANG }}" dir="{{ DIR }}" class="{{ LANG }} {{ DIR }}">
+<html lang="{{ LANG }}" dir="{{ DIR }}" class="{{ LANG }} {{ DIR }}" data-ga-code="{{ settings.GA_ACCOUNT_CODE }}">
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -34,22 +34,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ static('img/favicon.png') }}">
 
     {% block google_analytics %}
-      <script>
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', '{{ settings.GA_ACCOUNT_CODE }}']);
-          _gaq.push(['_trackPageview']);
-
-          {% if settings.GA_ACCOUNT_CODE %}
-          (function() {
-              var ga = document.createElement('script');
-              ga.type = 'text/javascript';
-              ga.async = true;
-              ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-              var s = document.getElementsByTagName('script')[0];
-              s.parentNode.insertBefore(ga, s);
-          })();
-          {% endif %}
-      </script>
+      {{ js('google_analytics') }}
     {% endblock %}
   </head>
   <body class="{{ page_type }}"{% block body_data %}{% endblock %}>

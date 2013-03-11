@@ -110,56 +110,27 @@ ALLOWED_HOSTS = lazy(_allowed_hosts, list)()
 # Django-CSP
 CSP_IMG_SRC = ("'self'",
                'data:',
-               'https://d3fenhwk93s16g.cloudfront.net',
-               'https://www.gravatar.com',
-               'https://secure.gravatar.com',
-               'http://www.google-analytics.com',
-               'https://ssl.google-analytics.com',
-               'http://*.mozilla.org',
+               'https://*.gravatar.com',
+               'https://*.google-analytics.com',
                'https://*.mozilla.org',
-               'http://*.mozilla.net',
                'https://*.mozilla.net',)
 CSP_STYLE_SRC = ("'self'",
-                 'https://fonts.googleapis.com',
-                 'http://*.mozilla.org',
                  'https://*.mozilla.org',
-                 'http://*.mozilla.net',
                  'https://*.mozilla.net',
-                 'http://*.vimeo.com',
                  'https://*.vimeo.com',)
 CSP_FONT_SRC = ("'self'",
-                'https://themes.googleusercontent.com',
-                'http://*.mozilla.org',
                 'https://*.mozilla.org',
-                'http://*.mozilla.net',
                 'https://*.mozilla.net',)
 CSP_SCRIPT_SRC = ("'self'",
-                  'http://login.persona.org',
                   'https://login.persona.org',
-                  'https://platform.twitter.com',
-                  'https://connect.facebook.net',
-                  'http://www.google-analytics.com',
-                  'https://ssl.google-analytics.com',
-                  'http://*.mozilla.org',
+                  'https://*.google-analytics.com',
                   'https://*.mozilla.org',
-                  'http://*.mozilla.net',
-                  'https://*.mozilla.net',
-                  'http://*.vimeo.com',
-                  'https://*.vimeo.com',
-                  'https://*.vimeocdn.com',)
+                  'https://*.mozilla.net',)
 CSP_FRAME_SRC = ("'self'",
                  'https://vid.ly',
-                 'http://platform.twitter.com',
-                 'https://platform.twitter.com',
-                 'https://www.facebook.com',
-                 'http://*.vimeo.com',
                  'https://*.vimeo.com',
                  'https://*.vimeocdn.com',
-                 'http://login.persona.org',
                  'https://login.persona.org',)
-CSP_ALLOW = ("'self'",
-             'https://*.vimeo.com')
-CSP_OPTIONS = ('eval-script', 'inline-script')
 
 # Activate statsd patches to time database and cache hits.
 STATSD_PATCHES = [
@@ -219,6 +190,9 @@ MINIFY_BUNDLES = {
     'js': {
         'jquery': (
             'js/libs/jquery-1.7.1.min.js',
+        ),
+        'google_analytics': (
+            'js/ga.js',
         ),
         'browserid': (
             'browserid/browserid.js',
