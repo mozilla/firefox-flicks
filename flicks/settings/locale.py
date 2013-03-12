@@ -39,6 +39,7 @@ LINK_CCLICENSE = defaultdict(lambda: 'http://creativecommons.org/licenses/by-nc-
     'de': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.de',
     'fr': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.fr',
     'es': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.es',
+    'ja': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.ja',
     'nl': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.nl',
     'pl': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.pl',
     'pt-BR': 'http://creativecommons.org/licenses/by-nc-sa/2.5/deed.pt_BR',
