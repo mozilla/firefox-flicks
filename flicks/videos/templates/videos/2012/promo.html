@@ -3,9 +3,8 @@
 {% block page_title %}{{ video_title }}{% endblock %}
 
 {% block og_title %}{{ video_title }}{% endblock %}
-{% block meta_description -%}
-  <meta property="og:description" content="{{ video_description }}">
-{%- endblock %}
+
+{% set meta_description = video_description %}
 
 {% block video_embed %}
   {{ video_embed }}

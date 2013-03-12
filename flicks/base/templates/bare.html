@@ -12,19 +12,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ _('Firefox Flicks') }} : {% block page_title %}{% endblock %}</title>
 
+    {# Meta Description - used for page description and og:description #}
+    {% set meta_description =  meta_description or _('Firefox Flicks is a contest that invites Firefox fans and filmmakers
+        from all over the world to create short videos (or &#34;flicks&#34;) to help
+        tell the Firefox story.') %}
+    <meta name="description" content="{{ meta_description }}">
+    <meta name="robots" content="noodp">
+
     {# OpenGraph Metadata #}
     <meta property="og:title" content="{% block og_title %}{{ _('Firefox Flicks') }}{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:image" content="{% block og_image %}{{ absolutify(static('img/flicks-logo-180.png')) }}{% endblock %}">
     <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri() }}{% endblock %}">
     <meta property="og:site_name" content="{{ _('Firefox Flicks') }}">
-    {% block meta_description -%}
-      <meta property="og:description" content="{% trans %}
-        Firefox Flicks is a contest that invites Firefox fans and filmmakers
-        from all over the world to create short videos (or &#34;flicks&#34;) to help
-        tell the Firefox story.
-      {% endtrans %}">
-    {%- endblock %}
+    <meta property="og:description" content="{{ meta_description }}">
 
     <!--[if lt IE 9]>
       <script src="{{ static('js/libs/html5.js') }}"></script>

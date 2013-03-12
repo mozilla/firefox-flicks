@@ -2,15 +2,8 @@
 
 {% block page_title %}{{ _('FAQ') }}{% endblock %}
 
-
-{% block meta_description -%}
-  <meta property="og:description" content="{% trans %}
-
-  Firefox Flicks FAQ &#8212; Your questions answered. Our FAQ covers all the details on
-  how to enter the video contest and win prizes.
-
-  {% endtrans %}">
-{%- endblock %}
+{% set meta_description = _('Firefox Flicks FAQ &#8212; Your questions answered. Our FAQ covers all the details on
+  how to enter the video contest and win prizes.') %}
 
 {% block content %}
 <div class="section">
