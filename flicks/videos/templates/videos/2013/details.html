@@ -9,7 +9,10 @@
 {% if video.description %}
   {% set meta_description = video.description %}
 {% else %}
-  {% set meta_description = _('An entry for Firefox Flicks 2013, a global video contest about the power of mobile.') %}
+  {% set meta_description = _(
+    'An entry for Firefox Flicks 2013, a global video contest about the power '
+    'of mobile.'
+  ) %}
 {% endif %}
 
 {% block video_embed %}

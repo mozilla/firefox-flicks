@@ -12,10 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ _('Firefox Flicks') }} : {% block page_title %}{% endblock %}</title>
 
-    {# Meta Description - used for page description and og:description #}
-    {% set meta_description =  meta_description or _('Firefox Flicks is a contest that invites Firefox fans and filmmakers
-        from all over the world to create short videos (or &#34;flicks&#34;) to help
-        tell the Firefox story.') %}
+    {# L10n: Meta Description - used for page description and og:description #}
+    {% set meta_description =  meta_description or _(
+      'Firefox Flicks is a contest that invites Firefox fans and filmmakers '
+      'from all over the world to create short videos (or &#34;flicks&#34;) to '
+      'help tell the Firefox story.'
+    ) %}
     <meta name="description" content="{{ meta_description }}">
     <meta name="robots" content="noodp">
 
