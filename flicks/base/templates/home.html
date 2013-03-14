@@ -89,7 +89,7 @@
             <h3>{{ _('Start thinking about your flick') }}</h3>
             <p><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go" rel="external">{{ _('Read the creative brief') }}</a></p>
           </li>
-          <li class="submit">
+          <li class="submit-link {{ user.is_authenticated()|ifeq(True, 'submit') }}">
             <h3>{{ _('Submit your flick today') }}</h3>
             <div>
               {# Show a login button or submit button depending on if the user
