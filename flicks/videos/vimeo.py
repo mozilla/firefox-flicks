@@ -118,8 +118,8 @@ def verify_chunks(ticket_id, expected_size):
 @vimeo_task
 def complete_upload(ticket_id, filename):
     """Mark an upload as complete and submit it for processing."""
-    msg = ('Error completing upload for ticket `{ticket_id}`: <{code} {msg}> '
-           '{expl}')
+    msg = ('Error completing upload for ticket `{{ticket_id}}` with filename '
+           '`{0}`: <{{code}} {{msg}}> {{expl}}'.format(filename))
     response = _ticket_request('vimeo.videos.upload.complete', 'POST',
                                ticket_id=ticket_id, filename=filename,
                                error_msg=msg)

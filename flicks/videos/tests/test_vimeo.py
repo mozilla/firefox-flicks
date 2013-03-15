@@ -117,7 +117,10 @@ class TestVimeo(TestCase):
     def test_complete_upload(self, _ticket_request):
         """Return the ticket given by Vimeo after completing the upload."""
         _ticket_request.return_value = {'stat': 'ok', 'ticket': {'some': 'dat'}}
-        eq_(vimeo.complete_upload('id', 'filename'), {'some': 'dat'})
+        eq_(vimeo.complete_upload('id', 'some_filename.png'), {'some': 'dat'})
+
+        error_msg = _ticket_request.call_args[1]['error_msg']
+        ok_('some_filename.png' in error_msg)
 
     @patch('flicks.videos.vimeo._vimeo_request')
     def test_video_request(self, _vimeo_request):
