@@ -27,7 +27,8 @@
     <nav id="nav-social-head" class="nav-social">
       <ul>
         <li id="nav-auth">
-            {{ flicks_browserid_button(request_args={'returnTo': request.path},
+            {{ flicks_browserid_button(sign_in=_('Sign in'), sign_out=_('Sign out'),
+                                       request_args={'returnTo': request.path},
                                        form_extras={'next': request.path}) }}
         </li>
         <li><a href="http://vimeo.com/firefoxflicks" title="Vimeo" class="vimeo" rel="external">Vimeo</a></li>

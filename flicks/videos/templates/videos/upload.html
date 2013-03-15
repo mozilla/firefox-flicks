@@ -91,11 +91,11 @@
 
           <div class="video-info">
             <p class="col1">
-              {{ form.title.label_tag('Name your flick') }} {{ form.title }}
+              {{ form.title.label_tag(_('Name your flick')) }} {{ form.title }}
               <em class="note">{{ _('Be concise, yet unique') }}</em>
             </p>
             <p class="col2">
-              {{ form.description.label_tag('Describe your flick') }}
+              {{ form.description.label_tag(_('Describe your flick')) }}
               {{ form.description }}
               <em class="note">{{ _('In 1-3 sentences. This is what people will see when they view or share your video.') }}</em>
             </p>
