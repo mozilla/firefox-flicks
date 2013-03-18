@@ -1,0 +1,12 @@
+{% extends 'email_base.ltxt' %}
+
+{% block message %}
+{# HACK: Add the user's locale as a urlparam to force a redirect to the correct locale. -#}
+{% trans link=absolutify(url('flicks.base.rules'))|urlparams(lang=user.profile.locale) %}
+  Unfortunately, your flick does not meet one or more of the contest criteria and was not accepted to be part of the competition. Please refer to our contest rules for more information: {{ link }}
+{% endtrans %}
+
+
+{{ _('All decisions regarding submissions are final.') }}
+{% endblock %}
+

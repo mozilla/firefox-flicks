@@ -1,0 +1,12 @@
+{# L10n: Greeting in an email. #}
+{%- trans name=user.profile.display_name %}
+  Hi {{ name }},
+{% endtrans %}
+
+
+{% block message %}{% endblock %}
+
+{# L10n: Part of the signature on an email. -#}
+{{ _('Sincerely,') }}
+{# L10n: Part of the signature on an email. -#}
+{{ _('The Firefox Flicks Team') }}

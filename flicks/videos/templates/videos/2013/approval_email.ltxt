@@ -1,0 +1,16 @@
+{% extends 'email_base.ltxt' %}
+
+{% block message %}
+{{ _('Your flick has been accepted and successfully added to the competition!') }}
+
+{# HACK: Add the user's locale as a urlparam to force a redirect to the correct locale. -#}
+{% set details_link = absolutify(url('flicks.videos.detail', video.id))|urlparams(lang=user.profile.locale) -%}
+{% trans link=details_link %}
+  You can find your flick on the gallery and share it using this link: {{ link }}
+{% endtrans %}
+
+
+{{ _('Voting for the People\'s Choice Award starts on July 31, so be sure to let your friends know that you need their support.') }}
+
+{{ _('Thanks again for taking the time to help us share the power of mobile with the world.') }}
+{% endblock %}

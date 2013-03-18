@@ -70,22 +70,11 @@ DOMAIN_METHODS = {
         ('**/flicks/**.py',
             'tower.management.commands.extract.extract_tower_python'),
         ('**/flicks/**/templates/**.html',
-            'tower.management.commands.extract.extract_tower_template')
+            'tower.management.commands.extract.extract_tower_template'),
+        ('**/flicks/**/templates/**.ltxt',
+            'tower.management.commands.extract.extract_tower_template'),
     ],
 }
-
-# # Use this if you have localizable HTML files:
-# DOMAIN_METHODS['lhtml'] = [
-#    ('**/templates/**.lhtml',
-#        'tower.management.commands.extract.extract_tower_template'),
-# ]
-
-# # Use this if you have localizable HTML files:
-# DOMAIN_METHODS['javascript'] = [
-#    # Make sure that this won't pull in strings from external libraries you
-#    # may use.
-#    ('media/js/**.js', 'javascript'),
-# ]
 
 # Always generate a CSRF token for anonymous users
 ANON_ALWAYS = True

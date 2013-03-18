@@ -1,7 +1,7 @@
 from urllib import urlencode
 
 from django.conf import settings
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 
@@ -53,11 +53,15 @@ def send_approval_email(video):
     """
     profile = video.user.profile
     with use_lang(profile.locale if profile else settings.LANGUAGE_CODE):
-        body = render_to_string('videos/2013/approval_email.html', {
+        text_body = render_to_string('videos/2013/approval_email.ltxt', {
             'user': video.user,
             'video': video
         })
-    _send_mail(EMAIL_SUBJECT, body, [video.user.email])
+        html_body = render_to_string('videos/2013/approval_email.html', {
+            'user': video.user,
+            'video': video
+        })
+    _send_mail(EMAIL_SUBJECT, text_body, html_body, [video.user.email])
 
 
 def send_rejection_email(user_id):
@@ -68,13 +72,17 @@ def send_rejection_email(user_id):
     user = get_object_or_none(User, id=user_id)
     if user:
         with use_lang(user.profile.locale):
-            body = render_to_string('videos/2013/rejection_email.html', {
+            text_body = render_to_string('videos/2013/rejection_email.ltxt', {
                 'user': user
             })
-        _send_mail(EMAIL_SUBJECT, body, [user.email])
+            html_body = render_to_string('videos/2013/rejection_email.html', {
+                'user': user
+            })
+        _send_mail(EMAIL_SUBJECT, text_body, html_body, [user.email])
 
 
-def _send_mail(subject, body, recipients):
-    msg = EmailMessage(subject, body, settings.DEFAULT_FROM_EMAIL, recipients)
-    msg.content_subtype = 'html'
+def _send_mail(subject, text_body, html_body, recipients):
+    msg = EmailMultiAlternatives(subject, text_body,
+                                 settings.DEFAULT_FROM_EMAIL, recipients)
+    msg.attach_alternative(html_body, 'text/html')
     msg.send()
