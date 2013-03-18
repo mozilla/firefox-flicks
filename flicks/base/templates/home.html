@@ -95,13 +95,12 @@
               {# Show a login button or submit button depending on if the user
                  is authenticated. #}
               {% if user.is_authenticated() %}
-                <a href="#" class="go">
+                <a href="#">
                   {{ _('Start here') }}
                 </a>
               {% else %}
                 {% set form_extras = {'next': url('flicks.base.home')|urlparams(hash='submit')} %}
                 {{ flicks_browserid_button(sign_in=_('Start here'),
-                                           link_class='go',
                                            form_extras=form_extras) }}
               {% endif %}
             </div>
@@ -165,75 +164,50 @@
 
       <ul class="entry-list">
         <li class="entry">
-          {# l10n: This is "watch" meaning to view a video, used in link labels. #}
-          <a href="https://vimeo.com/57627458" class="video-play" title='{% trans title='Falling in Love with Firefox' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627458">
-            <img src="{{ static('img/home/vidthumb-falling.jpg') }}" alt="" class="thumbnail">
+          <a href="https://vimeo.com/59439701" class="video-play" data-vimeo-id="59439701">
+            <img src="{{ static('img/home/vidthumb-direct-falling.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2 class="title">Falling in Love with Firefox</h2>
-              <h3 class="vcard">
-                <span class="fn">Lee Sang Woo</span>,
-                <span class="country-name">{{ country_name('kr') }}</span>
-              </h3>
+              <h4 class="title">Lee Sang Woo, <cite>Falling in Love with Firefox</cite></h4>
             </hgroup>
           </a>
         </li>
         <li class="entry">
-          <a href="https://vimeo.com/57627456" class="video-play" title='{% trans title='Be a Hero' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627456">
-            <img src="{{ static('img/home/vidthumb-hero.jpg') }}" alt="" class="thumbnail">
+          <a href="https://vimeo.com/59440900" class="video-play" data-vimeo-id="59440900">
+            <img src="{{ static('img/home/vidthumb-direct-squares.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2 class="title">Be a Hero</h2>
-              <h3 class="vcard">
-                <span class="fn">Andres Felipe Mesa</span>,
-                <span class="country-name">{{ country_name('co') }}</span>
-              </h3>
+              <h4 class="title">Eric Perrella, <cite>Squares</cite></h4>
             </hgroup>
           </a>
         </li>
         <li class="entry">
-          <a href="https://vimeo.com/57627464" class="video-play" title='{% trans title='Squares' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627464">
-            <img src="{{ static('img/home/vidthumb-squares.jpg') }}" alt="" class="thumbnail">
+          <a href="https://vimeo.com/59440608" class="video-play" data-vimeo-id="59440608">
+            <img src="{{ static('img/home/vidthumb-direct-weird.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2 class="title">Squares</h2>
-              <h3 class="vcard">
-                <span class="fn">Eric Perrella</span>,
-                <span class="country-name">{{ country_name('ca') }}</span>
-              </h3>
+              <h4 class="title">Ferran Brooks, <cite>Where the Weird Things Are Not</cite></h4>
             </hgroup>
           </a>
         </li>
         <li class="entry">
-          <a href="https://vimeo.com/57627933" class="video-play" title='{% trans title='Where the Weird Things Are Not' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627933">
-            <img src="{{ static('img/home/vidthumb-weird.jpg') }}" alt="" class="thumbnail">
+          <a href="https://vimeo.com/{{ settings.VIDEO_IC[request.locale] }}" class="video-play" data-vimeo-id="{{ settings.VIDEO_IC[request.locale] }}">
+            <img src="{{ static('img/home/vidthumb-trailer-ic.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2 class="title">Where the Weird Things Are Not</h2>
-              <h3 class="vcard">
-                <span class="fn">Ferran Brooks</span>,
-                <span class="country-name">{{ country_name('es') }}</span>
-              </h3>
+              <h4 class="title">ic</h4>
             </hgroup>
           </a>
         </li>
         <li class="entry">
-          <a href="https://vimeo.com/57627455" class="video-play" title='{% trans title='Paranoid' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627455">
-            <img src="{{ static('img/home/vidthumb-paranoid.jpg') }}" alt="" class="thumbnail">
+          <a href="https://vimeo.com/{{ settings.VIDEO_SLAPSTICK[request.locale] }}" class="video-play" data-vimeo-id="{{ settings.VIDEO_SLAPSTICK[request.locale] }}">
+            <img src="{{ static('img/home/vidthumb-trailer-slapstick.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2 class="title">Paranoid</h2>
-              <h3 class="vcard">
-                <span class="fn">Sean O‘Riordan</span>,
-                <span class="country-name">{{ country_name('gb') }}</span>
-              </h3>
+              <h4 class="title">Slapstick</h4>
             </hgroup>
           </a>
         </li>
         <li class="entry">
-          <a href="https://vimeo.com/57627454" class="video-play" title='{% trans title='Fenwick & Candy' %}Watch "{{ title }}"{% endtrans %}' data-vimeo-id="57627454">
-            <img src="{{ static('img/home/vidthumb-fenwick.jpg') }}" alt="" class="thumbnail">
+          <a href="https://vimeo.com/{{ settings.VIDEO_ALLTHREE[request.locale] }}" class="video-play" data-vimeo-id="{{ settings.VIDEO_ALLTHREE[request.locale] }}">
+            <img src="{{ static('img/home/vidthumb-trailer-three.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h2 class="title">Fenwick & Candy</h2>
-              <h3 class="vcard">
-                <span class="fn">Gavin Fenwick Christensen</span>,
-                <span class="country-name">{{ country_name('au') }}</span>
-              </h3>
+              <h4 class="title">All Three</h4>
             </hgroup>
           </a>
         </li>

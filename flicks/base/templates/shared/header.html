@@ -26,10 +26,11 @@
   <div class="wrap">
     <nav id="nav-social-head" class="nav-social">
       <ul>
-        <li id="nav-auth">
-            {{ flicks_browserid_button(sign_in=_('Sign in'), sign_out=_('Sign out'),
-                                       request_args={'returnTo': request.path},
-                                       form_extras={'next': request.path}) }}
+        <li id="nav-submit" {% if user.is_authenticated() %}class="logged-in"{% endif %}>
+          {% set form_extras = {'next': url('flicks.base.home')|urlparams(hash='submit')} %}
+          {{ flicks_browserid_button(sign_in=_('Submit your flick'), 
+                                     sign_out=_('Sign out'),
+                                     form_extras=form_extras) }}
         </li>
         <li><a href="http://vimeo.com/firefoxflicks" title="Vimeo" class="vimeo" rel="external">Vimeo</a></li>
         <li><a href="http://facebook.com/firefoxflicks" title="Facebook" class="facebook" rel="external">Facebook</a></li>
