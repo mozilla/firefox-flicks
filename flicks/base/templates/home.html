@@ -141,7 +141,7 @@
           and get answers to all your other questions.
         {% endtrans %}
         </p>
-        <p><a href="{{ url('flicks.base.faq') }}" class="button">{{ _('Read the FAQ') }}</a></p>
+        <p><a href="{{ url('flicks.base.faq') }}" class="button-light go">{{ _('Read the FAQ') }}</a></p>
       </div>
 
     </div>
@@ -157,10 +157,13 @@
           the materials below to help you make your flick.
         {% endtrans %}
         </p>
-        <p class="gallery-link">
-          <a href="{{ url('flicks.videos.list') }}" class="go">{{ _('View the gallery of entries') }}</a>
-        </p>
       </div>
+      
+      <ul class="info">
+        <li><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="button-light dl" rel="external">{{ _('Read the creative brief') }}</a></li>
+        <li><a href="http://mzl.la/XootKF" class="button-light dl" rel="external">{{ _('Download the creative assets') }}</a></li>
+        <li class="gallery-link"><a href="{{ url('flicks.videos.list') }}" class="button-light go">{{ _('View the gallery of entries') }}</a></li>
+      </ul>
 
       <ul class="entry-list">
         <li class="entry">
@@ -211,11 +214,6 @@
             </hgroup>
           </a>
         </li>
-      </ul>
-
-      <ul class="info">
-        <li><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="dl" rel="external">{{ _('Read the creative brief') }}</a></li>
-        <li><a href="http://mzl.la/XootKF" class="dl" rel="external">{{ _('Download the creative assets') }}</a></li>
       </ul>
 
     </div>

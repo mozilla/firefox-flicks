@@ -178,9 +178,14 @@ a.go:after {
   white-space: nowrap;
 }
 
-a.dl {
-  padding-right: 20px;
-  background: url(/static/img/arrow-down.png) right center no-repeat;
+a.dl:after {
+  content: "";
+  white-space: nowrap;
+  display: inline-block;
+  margin: 3px 0 0 10px;
+  width: 11px;
+  height: 12px;
+  background: url(/static/img/arrow-down.png) center center no-repeat;
 }
 
 /*** @Buttons *********/
@@ -275,6 +280,40 @@ a.dl {
   width: 20px;
   height: 20px;
   background: url(/static/img/arrow-go-l.png) no-repeat;
+}
+
+.button-light,
+.button-light:link,
+.button-light:visited {
+  display: inline-block;
+  font-family: "Open Sans", sans-serif;
+  padding: 4px 10px;
+  margin: 0 0 .25em;
+  color: #1677b9;
+  background: #f3f3f3;
+  background: rgba(255,255,255,.5);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.1);
+  -moz-transition: all .125s ease-out;
+  -ms-transition: all .125s ease-out;
+  -o-transition: all .125s ease-out;
+  -webkit-transition: all .125s ease-out;
+  transition: all .125s ease-out;
+}
+
+.button-light:hover, 
+.button-light:focus,
+.button-light:active {
+  background-color: #fff;
+  background-color: rgba(255,255,255,.75);
+  border-color: #bbb;
+  color: #1287d7;
+  -moz-transition: all .125s ease-in;
+  -ms-transition: all .125s ease-in;
+  -o-transition: all .125s ease-in;
+  -webkit-transition: all .125s ease-in;
+  transition: all .125s ease-in;
 }
 
 /* @Layout *********/
@@ -430,7 +469,6 @@ a.dl {
 
 /*** @Social links *********/
 #nav-social-head {
-  width: 600px;
   height: 30px;
   position: absolute;
   right: 10px;
@@ -1117,12 +1155,21 @@ body.noscroll .fixed #head-inner {
     display: block;
     padding: 6px 10px;
   }
-
-  #page-nav #nav-auth {
-    font-size: 100%;
-    text-transform: uppercase;
-    text-align: left;
-    margin: 0 0 2px;
+  
+  #nav-social-head {
+    height: auto;
+    position: relative;
+    text-align: center;
+    margin-bottom: -40px;
+  }
+  
+  #nav-submit {
+    text-align: right;
+    display: block;
+    margin-right: 0;
+    margin-bottom: .5em;
+    border-right: 0;
+    padding-right: 0;
   }
 
   #footer .sponsors,
@@ -1207,6 +1254,21 @@ body.noscroll .fixed #head-inner {
 
   .submit-frame {
     width: 400px;
+  }
+  
+  #nav-social-head {
+    height: 30px;
+    position: absolute;
+    margin-bottom: 0;
+  }
+  
+  #nav-submit {
+    text-align: right;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 10px;
+    padding-right: 20px;
+    border-right: 1px solid #ccc;
   }
 
 

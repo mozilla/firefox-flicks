@@ -249,34 +249,20 @@
   width: 760px;
 }
 
-#flicks2013 .section-intro .go {
-  padding: 6px 20px;
-  margin: 0 0 .25em;
-  background: #fff none;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: inset 0 -2px 0 rgba(0,0,0,.1);
-  -moz-transition: all .125s ease-out;
-  -ms-transition: all .125s ease-out;
-  -o-transition: all .125s ease-out;
-  -webkit-transition: all .125s ease-out;
-  transition: all .125s ease-out;
+#flicks2013 .info {
+  list-style: none;
+  width: 100%;
+  margin: -10px auto 2em;
+  border-top: 1px solid #ccc;
+  padding-top: 30px;
 }
 
-#flicks2013 .section-intro .go:hover, 
-#flicks2013 .section-intro .go:focus,
-#flicks2013 .section-intro .go:active {
-  background-color: #f3f3f3;
-  background-color: rgba(255,255,255,.75);
-  border-color: #bbb;
-  color: #1287d7;
-  -moz-transition: all .125s ease-in;
-  -ms-transition: all .125s ease-in;
-  -o-transition: all .125s ease-in;
-  -webkit-transition: all .125s ease-in;
-  transition: all .125s ease-in;
+#flicks2013 .info li {
+  width: 30%;
+  margin: 0 1.5% 1em;
+  display: inline-block;
+  text-align: center;
 }
-
 
 #flicks2013 .entry-list {
   margin: 0 auto 20px;
@@ -288,21 +274,6 @@
   margin: 0 15px 2em;
 }
 
-#flicks2013 .info {
-  list-style: none;
-  width: 75%;
-  margin: 0 auto 1em;
-  font-size: 18px;
-  border-top: 1px solid #ccc;
-  padding-top: 20px;
-}
-
-#flicks2013 .info li {
-  width: 40%;
-  margin: 0 4.5% 1em;
-  display: inline-block;
-  text-align: center;
-}
 
 /* @Judges *********/
 #judges {
@@ -527,6 +498,15 @@
   #flicks2013 .entry {
     width: 205px;
   }
+  
+  #flicks2013 .info {
+    list-style: none;
+    width: 100%;
+    margin: -10px auto 2em;
+    border-top: 1px solid #ccc;
+    padding-top: 30px;
+  }
+
 
   .judges {
     width: 480px;
@@ -639,6 +619,7 @@
 
   #about .section-detail {
     padding: 0;
+    text-align: center;
   }
 
   #about .section-detail .video {
@@ -646,10 +627,19 @@
     float: none;
   }
 
+  #about .section-detail h2 {
+    margin-left: 0;
+  }
+
   #about .actions h3 span {
     float: none;
     display: block;
     margin: 0;
+  }
+
+  #flicks2013 .info li {
+    display: block;
+    width: auto;
   }
 
   #flicks2013 .entry {
