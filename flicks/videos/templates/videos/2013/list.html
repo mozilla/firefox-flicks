@@ -61,14 +61,14 @@
     {% endblock %}
 
     <aside id="trailers" class="samples aside">
+      <h3>{{ _('Directors&#8217; cuts') }}</h3>
       <p>
       {% trans %}
-        If you're thinking about entering, you can also watch our promos
-        to get inspired and learn more about making your winning flick.
+        See what last year's winners have to say about their experience and use
+        the materials below to help you make your flick.
       {% endtrans %}
       </p>
 
-      <h3>{{ _('Directors&#8217; cuts') }}</h3>
       <ul class="entry-list">
         <li class="entry">
           <a href="https://vimeo.com/59439701" class="video-play" data-vimeo-id="59439701">
@@ -94,31 +94,27 @@
             </hgroup>
           </a>
         </li>
-      </ul>
-
-      <h3>{{ _('Flicks trailers') }}</h3>
-      <ul class="entry-list">
         <li class="entry">
-          <a href="https://vimeo.com/{{ settings.VIDEO_IC[request.locale] }}" class="video-play" data-vimeo-id="{{ settings.VIDEO_IC[request.locale] }}">
-            <img src="{{ static('img/home/vidthumb-trailer-ic.jpg') }}" alt="" class="thumbnail">
+          <a href="https://vimeo.com/62131492" class="video-play" data-vimeo-id="62131492">
+            <img src="{{ static('img/home/vidthumb-direct-hero.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h4 class="title">ic</h4>
+              <h4 class="title">Andres Felipe &amp; Mesa Rincon, <cite>Be a Hero</cite></h4>
             </hgroup>
           </a>
         </li>
         <li class="entry">
-          <a href="https://vimeo.com/{{ settings.VIDEO_SLAPSTICK[request.locale] }}" class="video-play" data-vimeo-id="{{ settings.VIDEO_SLAPSTICK[request.locale] }}">
-            <img src="{{ static('img/home/vidthumb-trailer-slapstick.jpg') }}" alt="" class="thumbnail">
+          <a href="https://vimeo.com/62131490" class="video-play" data-vimeo-id="62131490">
+            <img src="{{ static('img/home/vidthumb-direct-firefoxandyou.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h4 class="title">Slapstick</h4>
+              <h4 class="title">Girin Studio, <cite>Firefox and You</cite></h4>
             </hgroup>
           </a>
         </li>
         <li class="entry">
-          <a href="https://vimeo.com/{{ settings.VIDEO_ALLTHREE[request.locale] }}" class="video-play" data-vimeo-id="{{ settings.VIDEO_ALLTHREE[request.locale] }}">
-            <img src="{{ static('img/home/vidthumb-trailer-three.jpg') }}" alt="" class="thumbnail">
+          <a href="https://vimeo.com/62131493" class="video-play" data-vimeo-id="62131493">
+            <img src="{{ static('img/home/vidthumb-direct-priority.jpg') }}" alt="" class="thumbnail">
             <hgroup>
-              <h4 class="title">All Three</h4>
+              <h4 class="title">Valeriy Cherevatenko, <cite>Priority</cite></h4>
             </hgroup>
           </a>
         </li>
