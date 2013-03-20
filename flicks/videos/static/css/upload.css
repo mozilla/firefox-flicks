@@ -179,7 +179,6 @@ body {
   display: block;
   width: 340px;
   height: 2.65em;
-  overflow: hidden;
   position: absolute;
   left: 50%;
   margin-left: -160px;
@@ -189,7 +188,8 @@ body {
   font-weight: normal;
   font-size: 18px;
   width: 280px;
-  padding: 8px 20px 8px 40px;
+  display: inline-block;
+  padding: 8px 20px 8px 60px;
 }
 
 .file-button .button:before {
@@ -199,7 +199,7 @@ body {
   height: 32px;
   background: url(/static/img/icn-upload.png) no-repeat;
   position: absolute;
-  left: 25px;
+  left: 22px;
   top: 6px;
 }
 
