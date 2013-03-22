@@ -185,6 +185,9 @@ MINIFY_BUNDLES = {
         'google_analytics': (
             'js/ga.js',
         ),
+        'google_analytics_events': (
+            'js/ga_event-tracking.js',
+        ),        
         'browserid': (
             'browserid/browserid.js',
         ),

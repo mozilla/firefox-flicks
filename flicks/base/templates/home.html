@@ -44,7 +44,7 @@
               the Grand Prize.
             {% endtrans %}
             </p>
-            <p class="act"><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go" rel="external">{{ _('Get the creative brief') }}</a></p>
+            <p class="act"><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go ga_brief-dl" rel="external">{{ _('Get the creative brief') }}</a></p>
           </div>
         </div>
 
@@ -73,7 +73,7 @@
           </li>
           <li>
             <h3>{{ _('Start thinking about your flick') }}</h3>
-            <p><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go" rel="external">{{ _('Read the creative brief') }}</a></p>
+            <p><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go ga_brief-dl" rel="external">{{ _('Read the creative brief') }}</a></p>
           </li>
           <li class="submit-link {{ user.is_authenticated()|ifeq(True, 'submit') }}">
             <h3>{{ _('Submit your flick today') }}</h3>
@@ -146,7 +146,7 @@
       </div>
       
       <ul class="info">
-        <li><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="button-light dl" rel="external">{{ _('Read the creative brief') }}</a></li>
+        <li><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="button-light dl ga_brief-dl" rel="external">{{ _('Read the creative brief') }}</a></li>
         <li><a href="http://mzl.la/XootKF" class="button-light dl" rel="external">{{ _('Download the creative assets') }}</a></li>
         <li class="gallery-link"><a href="{{ url('flicks.videos.list') }}" class="button-light go">{{ _('View the gallery of entries') }}</a></li>
       </ul>
