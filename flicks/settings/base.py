@@ -114,6 +114,7 @@ CSP_IMG_SRC = ("'self'",
                'https://*.mozilla.org',
                'https://*.mozilla.net',)
 CSP_STYLE_SRC = ("'self'",
+                 "'unsafe-inline'",
                  'https://*.mozilla.org',
                  'https://*.mozilla.net',
                  'https://*.vimeo.com',)
