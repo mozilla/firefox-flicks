@@ -38,7 +38,7 @@ INSTALLED_APPS = list(INSTALLED_APPS) + [
 
 MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
     'commonware.response.middleware.StrictTransportMiddleware',
-    #'csp.middleware.CSPMiddleware',
+    'csp.middleware.CSPMiddleware',
     'django_statsd.middleware.GraphiteRequestTimingMiddleware',
     'django_statsd.middleware.GraphiteMiddleware',
     'waffle.middleware.WaffleMiddleware',
