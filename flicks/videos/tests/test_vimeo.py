@@ -157,3 +157,16 @@ class TestVimeo(TestCase):
                                           video_id='1234',
                                           description='Basket ball &#224;',
                                           error_msg=ANY)
+
+    @patch('flicks.videos.vimeo._ticket_request')
+    def test_complete_upload_unicode(self, _ticket_request):
+        """
+        Filenames passed to complete_upload should be encoded in ASCII, with
+        non-ASCII being encoded using HTML/XML entities.
+        """
+        vimeo.complete_upload('1234', u'Basket ball à')
+        _ticket_request.assert_called_with('vimeo.videos.upload.complete',
+                                           'POST',
+                                           ticket_id='1234',
+                                           filename='Basket ball &#224;',
+                                           error_msg=ANY)

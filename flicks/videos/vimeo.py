@@ -29,7 +29,7 @@ def _vimeo_request(vimeo_method, request_method, **data):
     try:
         response = requests.request(request_method, url, auth=oauth, data=data)
     except requests.RequestException, e:
-        logger.error('Error connecting to Vimeo: {0}'.format(e))
+        logger.error(u'Error connecting to Vimeo: {0}'.format(e))
         raise VimeoServiceError(e)
 
     return response.json()
@@ -43,12 +43,12 @@ def _ticket_request(vimeo_method, request_method, error_msg=None, **data):
 
         # Log failure if it is not because the ticket is invalid (code 702)
         if err['code'] == '702':
-            raise VimeoTicketInvalid('Invalid ticket `{0}`'.format(ticket_id))
+            raise VimeoTicketInvalid(u'Invalid ticket `{0}`'.format(ticket_id))
         else:
-            msg = error_msg.format(ticket_id=ticket_id,
-                                   code=err.get('code', ''),
-                                   msg=err.get('msg', ''),
-                                   expl=err.get('expl', ''))
+            msg = unicode(error_msg).format(ticket_id=ticket_id,
+                                            code=err.get('code', ''),
+                                            msg=err.get('msg', ''),
+                                            expl=err.get('expl', ''))
             logger.error(msg)
             raise VimeoServiceError(msg)
 
@@ -60,10 +60,10 @@ def _video_request(vimeo_method, request_method, error_msg=None, **data):
     if response['stat'] == 'fail':
         err = response['err']
         video_id = data.get('video_id', '')
-        msg = error_msg.format(video_id=video_id,
-                               code=err.get('code', ''),
-                               msg=err.get('msg', ''),
-                               expl=err.get('expl', ''))
+        msg = unicode(error_msg).format(video_id=video_id,
+                                        code=err.get('code', ''),
+                                        msg=err.get('msg', ''),
+                                        expl=err.get('expl', ''))
         raise VimeoServiceError(msg)
     return response
 
@@ -75,7 +75,7 @@ def get_new_ticket():
                               upload_method='post')
     if response['stat'] == 'fail':
         err = response['err']
-        logger.error('Error retrieving upload ticket: <{code} {msg}> {expl}'
+        logger.error(u'Error retrieving upload ticket: <{code} {msg}> {expl}'
                      .format(code=err.get('code', ''), msg=err.get('msg', ''),
                              expl=err.get('expl', '')))
         return False
@@ -118,11 +118,13 @@ def verify_chunks(ticket_id, expected_size):
 @vimeo_task
 def complete_upload(ticket_id, filename):
     """Mark an upload as complete and submit it for processing."""
-    msg = ('Error completing upload for ticket `{{ticket_id}}` with filename '
+    msg = (u'Error completing upload for ticket `{{ticket_id}}` with filename '
            '`{0}`: <{{code}} {{msg}}> {{expl}}'.format(filename))
-    response = _ticket_request('vimeo.videos.upload.complete', 'POST',
-                               ticket_id=ticket_id, filename=filename,
-                               error_msg=msg)
+    response = _ticket_request(
+        'vimeo.videos.upload.complete', 'POST',
+        ticket_id=ticket_id,
+        filename=filename.encode('ascii', 'xmlcharrefreplace'),
+        error_msg=msg)
     return response['ticket']
 
 
