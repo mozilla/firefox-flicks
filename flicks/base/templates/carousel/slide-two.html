@@ -1,0 +1,14 @@
+<div id="slide-two" class="slide">
+  <img class="backdrop" src="{{ static('img/home/promo-backdrop2.jpg') }}" alt="">
+  <div class="slide-desc">
+    <h2>{{ _('Enter by April 3') }}</h2>
+    <p>
+      {% trans %}
+        Submit your flick in time for the BAFICI film festival in Buenos Aires and
+        you could win a $1000 Early Entry Award and be automatically qualified for
+        the Grand Prize.
+      {% endtrans %}
+    </p>
+    <p class="act"><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go ga_brief-dl" rel="external">{{ _('Get the creative brief') }}</a></p>
+  </div>
+</div>

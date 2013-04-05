@@ -2,10 +2,14 @@ from django.shortcuts import render
 from django.template import TemplateDoesNotExist
 from jinja2 import TemplateNotFound
 
+from flicks.base import carousel
+
 
 def home(request):
     """Home page."""
-    return render(request, 'home.html')
+    return render(request, 'home.html', {
+        'slides': carousel.get_slides()
+    })
 
 
 def faq(request):

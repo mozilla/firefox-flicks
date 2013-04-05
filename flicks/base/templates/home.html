@@ -32,36 +32,9 @@
       </div>
 
       <div id="slideshow" class="cycle-slideshow" data-cycle-speed="750" data-cycle-timeout="6000" data-cycle-slides="> .slide" data-cycle-fx="scrollHorz" data-cycle-pause-on-hover="true">
-
-        <div id="slide-two" class="slide">
-          <img class="backdrop" src="{{ static('img/home/promo-backdrop2.jpg') }}" alt="">
-          <div class="slide-desc">
-            <h2>{{ _('Enter by April 3') }}</h2>
-            <p>
-            {% trans %}
-              Submit your flick in time for the BAFICI film festival in Buenos Aires and
-              you could win a $1000 Early Entry Award and be automatically qualified for
-              the Grand Prize.
-            {% endtrans %}
-            </p>
-            <p class="act"><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go ga_brief-dl" rel="external">{{ _('Get the creative brief') }}</a></p>
-          </div>
-        </div>
-
-        <div id="slide-three" class="slide">
-          <img class="backdrop" src="{{ static('img/home/promo-backdrop1.jpg') }}" alt="">
-          <div class="slide-desc">
-            <h2>{{ _('Now playing') }}: <br>{{ _('Directors&#8217; cuts') }}</h2>
-            <p>
-            {% trans %}
-              Learn more about last year's winners and get some advice on making your own winning flick.
-            {% endtrans %}
-            </p>
-            <a href="https://vimeo.com/59439701" class="video-play" data-vimeo-id="59439701">
-              <img src="{{ static('img/home/vidthumb-promo-falling.jpg') }}" alt="{{ _('Directors&#8217; cuts') }}" class="thumbnail">
-            </a>
-          </div>
-        </div>
+        {% for slide in slides %}
+          {% include slide %}
+        {% endfor %}
         <div class="cycle-pager"></div>
       </div>
 
@@ -144,7 +117,7 @@
         {% endtrans %}
         </p>
       </div>
-      
+
       <ul class="info">
         <li><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="button-light dl ga_brief-dl" rel="external">{{ _('Read the creative brief') }}</a></li>
         <li><a href="http://mzl.la/XootKF" class="button-light dl" rel="external">{{ _('Download the creative assets') }}</a></li>
