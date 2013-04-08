@@ -1,6 +1,19 @@
 import os
 import site
 
+try:
+    import newrelic.agent
+except ImportError:
+    newrelic = False
+
+
+if newrelic:
+    newrelic_ini = os.getenv('NEWRELIC_PYTHON_INI_FILE', False)
+    if newrelic_ini:
+        newrelic.agent.initialize(newrelic_ini)
+    else:
+        newrelic = False
+
 os.environ.setdefault('CELERY_LOADER', 'django')
 # NOTE: you can also set DJANGO_SETTINGS_MODULE in your environment to override
 # the default value in manage.py
@@ -17,9 +30,5 @@ import manage
 import django.core.handlers.wsgi
 application = django.core.handlers.wsgi.WSGIHandler()
 
-# Uncomment this to figure out what's going on with the mod_wsgi environment.
-#def application(env, start_response):
-#    start_response('200 OK', [('Content-Type', 'text/plain')])
-#    return '\n'.join('%r: %r' % item for item in sorted(env.items()))
-
-# vim: ft=python
+if newrelic:
+    application = newrelic.agent.wsgi_application()(application)
