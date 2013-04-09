@@ -15,19 +15,11 @@
     <h2 id="q1">{{ _('What is Firefox Flicks?') }}</h2>
     <p>
     {% trans %}
-      Firefox Flicks is an international film competition that invites
-      Firefox fans and filmmakers to create short videos (or "flicks")
-      to help tell the world about the power of mobile.
-    {% endtrans %}
-    </p>
-
-    <p>
-    {% trans %}
-      The world's gone mobile. Getting mobilized means getting more
-      connected to one another - so we can all go further. We're bringing
-      the values that Firefox has always championed in the browser to the
-      devices that the next billion people will use as their primary
-      gateway to the Web.
+      Firefox Flicks is a global video competition encouraging filmmakers to educate 
+      people about the issues that affect our online lives. This year, we're focusing 
+      on the power that having access to the Web through mobile devices gives 
+      people and how that power can change the way you see the world and the way 
+      you function within it.
     {% endtrans %}
     </p>
 
@@ -38,6 +30,23 @@
       individual and collective progress. <a href="{{ link_brief }}" class="ga_brief-dl">Read the creative brief</a>.
     {% endtrans %}
     </p>
+
+    <h2 id="q-get-mobilized">{{ _('What does Get Mobilized mean?') }}</h2>
+    <p>
+    {% trans %}
+      It's about harnessing the power of the Web to discover new content; 
+      how that content connects you to new ideas; and how those ideas can enrich your life.  
+    {% endtrans %}
+    </p>
+
+    <h2 id="q-want-filmakers">{{ _('What do we want filmmakers to do?') }}</h2>
+    <p>
+    {% trans %}
+      Write, produce and edit a video of no more than 60 seconds that demonstrates 
+      how mobile helps people discover content that connects them to new ideas and 
+      enriches their lives.    
+    {% endtrans %}
+    </p>    
 
     <h2 id="q2">{{ _('Where can I find out more about this year\'s theme and requirements?') }}</h2>
     <p>
@@ -371,12 +380,17 @@
     <h2 id="q21">{{ _('Where can I find music or other materials to include in my flick?') }}</h2>
     <p>
     {% trans link_ccommons='http://search.creativecommons.org',
-             link_pdwiki=settings.LINK_PDWIKI[request.locale] %}
-      If you're looking for additional materials - whether music, video footage,
-      artwork or graphics - we suggest you investigate public domain media.
-      <a href="{{ link_ccommons }}" rel="external">Creative Commons</a> has a nice search
-      service for locating public domain work. You can
-      <a href="{{ link_pdwiki }}">read more about the public domain at Wikipedia</a>.
+             link_pdwiki=settings.LINK_PDWIKI[request.locale],
+             link_tumblr_resources='http://firefoxflicks.tumblr.com/post/46250829262/creative-resources-to-help-make-your-firefox-flicks' %}
+
+      If you're looking for additional materials - music, video footage, 
+      artwork or graphics - we suggest you investigate public domain media. 
+      <a href="{{ link_ccommons }}" rel="external">Creative Commons</a>  has a nice 
+      search service for locating public domain work 
+      (<a href="{{ link_pdwiki }}">Read more about the public domain at Wikipedia</a>). 
+      You can also check out this list of 
+      <a href="{{ link_tumblr_resources }}" rel="external">creative resources on the 
+      Flicks blog</a>.
     {% endtrans %}
     </p>
 

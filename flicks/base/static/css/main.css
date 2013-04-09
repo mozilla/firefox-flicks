@@ -352,7 +352,7 @@ a.dl:after {
   line-height: 1.35;
   text-align: center;
   margin: 0 auto 2em;
-  max-width: 100%;
+  max-width: 80%;
 }
 
 .main {

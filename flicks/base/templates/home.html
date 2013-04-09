@@ -24,9 +24,8 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          Mobile connects people. It's a force for progress and change, both individually
-          and collectively. Enter Firefox Flicks, a global video contest about the power
-          of mobile, and inspire others to get mobilized.
+          Enter Firefox Flicks, a global video contest about the power of the Web on 
+          mobile devices, and get your film seen by millions.
         {% endtrans %}
         </p>
       </div>
@@ -75,10 +74,10 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          It's a video contest. It's an opportunity to reach millions of Firefox users and
-          inspire them to get mobilized. It's a chance to win <a href="#prizes" class="scroll">great prizes</a>
-          and be seen by <a href="#judges" class="scroll">celebrity judges</a> who can make
-          your moviemaking dreams come true.
+          We're looking for videos that tell the story of how having access to the Web through a mobile device can 
+          change the way you see the world and how you function within it. You could win some 
+          <a href="#prizes" class="scroll">great prizes</a> and be seen by 
+          <a href="#judges" class="scroll">celebrity judges</a> who can make your moviemaking dreams come true.
         {% endtrans %}
         </p>
       </div>
@@ -324,9 +323,10 @@
           <h2>{{ _('Grand Prize') }}</h2>
           <p>
           {% trans %}
-            The winner (or winning team) will fly to Los Angeles to work with producer
-            (and Flicks judge) Couper Samuelson and representatives from Panavision to
-            professionally produce their winning entry using professional equipment.
+            The winner (or winning team) will fly to Los Angeles to work with producers 
+            (and Flicks judges) Franklin Leonard and Couper Samuelson, and representatives 
+            from Panavision to professionally produce their winning entry using 
+            professional equipment.
           {% endtrans %}
         </div>
 
@@ -357,14 +357,14 @@
           <p>
           {% trans %}
             There will be multiple chances to win $1,000 for submitting your flick
-            early. Enter in time for the film festival deadlines listed below to be
+            early. Enter before the deadlines listed below to be
             eligible:
           {% endtrans %}
           </p>
           <ul class="prose">
-            <li><time datetime="2013-04-03">{{ _('April 3') }}</time> &ndash; {{ _('BAFICI, Buenos Aires, Argentina') }}</li>
-            <li><time datetime="2013-07-05">{{ _('July 5') }}</time> &ndash; {{ _('Nowe Horyzonty, Wroc&#322;aw, Poland') }}</li>
-            <li><time datetime="2013-07-05">{{ _('July 5') }}</time> &ndash; {{ _('Cinemalaya, Manila, Philippines') }}</li>
+            <li><time datetime="2013-04-03">{{ _('April 3') }}</time> &ndash; {{ _('1st Early Entry Award') }}</li>
+            <li><time datetime="2013-07-05">{{ _('May 29') }}</time> &ndash; {{ _('2nd Early Entry Award') }}</li>
+            <li><time datetime="2013-07-05">{{ _('July 3') }}</time> &ndash; {{ _('3rd Early Entry Award') }}</li>
           </ul>
         </div>
 
@@ -377,12 +377,14 @@
       <h1 class="section-title">{{ _('Rules') }}</h1>
       <div class="section-intro">
         <p>
-        {% trans rules_link=url('flicks.base.rules') %}
+        {% trans rules_link=url('flicks.base.rules'),
+                 link_cclicense=settings.LINK_CCLICENSE[request.locale] %}
           We want to give budding filmmakers the opportunity to create and submit short videos about
           letting people discover, access and enjoy more content that matters most to them and their
           future. The contest will run worldwide and winners will be chosen from four regions around
           the world: North America, Latin America, Asia Pacific and Europe, the Middle East and Africa.
-          <a href="{{ rules_link }}">Read the complete official contest rules to learn more.</a>
+          <a href="{{ rules_link }}">Read the complete official contest rules to learn more</a>. 
+          Your flick must be submitted under a <a href="{{ link_cclicense }}" rel="external">Creative Commons - NonCommercial-ShareAlike license</a>
         {% endtrans %}
         </p>
       </div>
@@ -417,8 +419,7 @@
           In order to enter, you'll have to provide your name, email address and country
           of residence (to determine your contest region). Your name and region will be
           posted along with your flick in the public galleries, where they can be viewed,
-          liked and shared by everyone.
-          <a href="{{ rules_link }}">Read the complete contest rules to learn more.</a>
+          liked and shared by everyone. <a href="{{ rules_link }}">Read the complete contest rules to learn more.</a>
         {% endtrans %}
         </p>
 
