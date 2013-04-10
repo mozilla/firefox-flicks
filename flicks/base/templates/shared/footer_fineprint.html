@@ -1,0 +1,20 @@
+    <nav id="nav-fineprint">
+      <ul>
+        <li><a href="http://www.mozilla.org/en-US/privacy-policy.html" rel="external">{{ _('Privacy Policy') }}</a></li>
+        <li><a href="http://www.mozilla.org/about/legal.html" rel="external">{{ _('Legal') }}</a></li>
+        <li>
+          <form class="languages" method="GET">
+            <label for="language">{{ _('Other languages:') }}</label>
+            <select id="language" name="lang" dir="ltr">
+              {% for code, name in LANGUAGES|dictsort -%}
+                <option value="{{ code }}" {{ code|ifeq(LANG|lower, "selected") }}>
+                  {{ name }}
+                </option>
+              {%- endfor %}
+            </select>
+            {# L10N: This is a label for a form submit button #}
+            <button type="submit">{{ _('Submit') }}</button>
+          </form>
+        </li>
+      </ul>
+    </nav>
