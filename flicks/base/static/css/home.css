@@ -172,7 +172,8 @@
 /*** Slide One: Flicks trailers *********/
 /*** Slide Three: Directors' cuts *********/
 .js #slide-one .slide-desc,
-.js #slide-three .slide-desc {
+.js #slide-three .slide-desc,
+.js .slide-generic .slide-desc {
   width: 440px;
   height: 180px;
   left: 0;
@@ -181,12 +182,15 @@
 }
 
 .js #slide-one p,
-.js #slide-three p {
+.js #slide-three p,
+.js .slide-generic p {
   color: #ff592c;
 }
 
 .js #slide-one .thumbnail,
-.js #slide-three .thumbnail {
+.js #slide-three .thumbnail,
+.js .slide-generic .thumbnail
+ {
   position: absolute;
   top: 50px;
   right: 50px;
@@ -202,6 +206,43 @@
 .js #slide-two .go {
   font-size: 22px;
 }
+
+
+/*** Per Slide Overrides *********/
+.js .slide-generic .act span {
+  font-size: 11px;
+  display: block;
+  color: #1F9EE5;
+}
+
+.js .slide-generic .go {
+  font-size: 22px;
+}
+
+.js .slide-judges .slide-desc {
+  padding: 70px 440px 0 60px; 
+  width: 400px; 
+}
+
+.js .slide-winner .slide-desc {
+  padding: 38px 440px 0 60px; 
+  width: 400px; 
+}
+
+.js .slide-creative .slide-desc {
+  padding: 38px 440px 0 60px; 
+  width: 400px; 
+}
+
+.js .slide-schwartzberg .slide-desc {
+  padding: 53px 440px 0 60px; 
+  width: 440px; 
+}
+
+.js .slide-schwartzberg .slide-desc p {
+  color:#FFFFFF; 
+}
+
 
 
 /* @About *********/
