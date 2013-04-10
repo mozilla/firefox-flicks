@@ -1,21 +1,12 @@
-html {
-  background: #f5f5f5;
-}
-
-body {
-  background: url(/static/img/spot-1.png) -550px -400px no-repeat, url(/static/img/spot-2.png) 730px -360px no-repeat, url(/static/img/spot-3.png) 75% 680px no-repeat, #f5f5f5 url(/static/img/bg-grain.png) 0 0 fixed;
-}
-
-#page {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 30px;
-  background: transparent none;
-}
-
 .page-title {
   text-align: left;
   margin: 20px;
+}
+
+.section {
+  background: url(/static/img/spot-1.png) 170% 10px no-repeat, 
+    url(/static/img/spot-2.png) -20% 170% no-repeat, 
+    url(/static/img/spot-3.png) 5% -320px no-repeat;
 }
 
 /* @Steps *********/
@@ -50,6 +41,7 @@ body {
   border: 1px solid #d0e7f9;
   background: #dff0f5;
   text-shadow: 0 1px 0 rgba(255,255,255,.25);
+  margin-bottom: 60px;
 }
 
 .user-input fieldset {
@@ -387,11 +379,24 @@ body {
   background-position: 0 -298px;
 }
 
+#upload-complete .back {
+  margin: 40px auto 0;
+}
+
+
 /* Tablet Layout: 760px */
-@media only screen and (min-width: 760px) and (max-width: 880px) {
+@media only screen and (min-width: 760px) and (max-width: 1000px) {
+
+  .section {
+    background-position: 340% 10px, -20% 170%, 5% -320px;
+  }
+
+  .wrap {
+    width: 720px;
+  }
 
   .steps {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .user-input fieldset {
@@ -429,17 +434,17 @@ body {
 /* Mobile Layout: 320px */
 @media only screen and (max-width: 760px) {
 
-  body {
-    height: auto;
-    background-position: -550px -400px, 340px -360px, 75% 1200px, 0 0;
-  }
-
-  #page {
-    padding: 10px;
+  .section {
+    background-position: 370px 10px, -20% 170%, 5% -320px;
   }
 
   .steps {
-    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .steps li {
+    display: block;
+    padding-bottom: 0;
   }
 
   .steps .current {
@@ -497,11 +502,11 @@ body {
   }
 
   .file-button {
-    width: 240px;
+    width: auto;
     height: auto;
     position: relative;
     left: auto;
-    margin: 0 auto;
+    margin: 0 5%;
   }
 
   .file-button .button {
@@ -529,18 +534,19 @@ body {
     display: block;
     text-align: left;
   }
+  
+  #upload-complete {
+    padding: 40px;
+  }
+
+  #upload-complete .bonus {
+    font-size: 18px;
+  }
 
 }
 
-@media only screen and (max-width: 650px) {
+/* Wide Mobile Layout: 480px */
+@media only screen and (min-width: 480px) and (max-width: 760px) {
   
-  .steps {
-    margin-bottom: 20px;
-  }
-  
-  .steps li {
-    display: block;
-    padding-bottom: 0;
-  }
 
 }

@@ -15,8 +15,9 @@
   {{ js('upload') }}
 {% endblock %}
 
-{% block body %}
-  <main id="page" role="main">
+{% block content %}
+  <div class="section">
+    <div class="wrap">
     <h1 class="page-title">{{ _('Submit your flick') }}</h1>
 
     <ol class="steps">
@@ -62,10 +63,9 @@
         </li>
       </ul>
 
-{# Hide this until we finish demodalizing the upload process, bug 848000
-      <p class="back"><a href="{{ url('flicks.base.home') }}">{{ _('Back to Flicks') }}</a></p>
-#}
+      <p class="back"><a class="button go" href="{{ url('flicks.base.home') }}">{{ _('Back to Flicks') }}</a></p>
     </div>
 
-  </main>
+    </div>
+  </div>
 {% endblock %}

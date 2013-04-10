@@ -1,0 +1,56 @@
+{% extends 'bare.html' %}
+
+{% block site_css %}
+  <link rel="stylesheet" media="all" type="text/css" href="https://www.mozilla.org/tabzilla/media/css/tabzilla.css">
+  {{ css('flicks_css') }}
+{% endblock %}
+
+{% block body %}
+  <div id="page">
+    {% include "shared/header_minimal.html" %}
+
+    <main class="content-wrapper" role="main">
+      {% block content %}{% endblock %}
+    </main>
+
+    {% block videocontent %}{% endblock %}
+
+    {% block footer %}
+      <footer id="footer">
+        <div class="wrap">
+          <nav id="nav-fineprint">
+            <ul>
+              <li><a href="http://www.mozilla.org/en-US/privacy-policy.html" rel="external">{{ _('Privacy Policy') }}</a></li>
+              <li><a href="http://www.mozilla.org/about/legal.html" rel="external">{{ _('Legal') }}</a></li>
+              <li>
+                <form class="languages" method="GET">
+                  <label for="language">{{ _('Other languages:') }}</label>
+                  <select id="language" name="lang" dir="ltr">
+                    {% for code, name in LANGUAGES|dictsort -%}
+                      <option value="{{ code }}" {{ code|ifeq(LANG|lower, "selected") }}>
+                        {{ name }}
+                      </option>
+                    {%- endfor %}
+                  </select>
+                  {# L10N: This is a label for a form submit button #}
+                  <button type="submit">{{ _('Submit') }}</button>
+                </form>
+              </li>
+            </ul>
+          </nav>
+
+        </div>
+      </footer>
+    {% endblock %}
+
+  </div>{# close #page #}
+{% endblock %}
+
+{% block site_js %}
+  <script src="https://login.persona.org/include.js"></script>
+  {{ js('jquery') }}
+  {{ js('browserid') }}
+  {{ js('flicks_js') }}
+  {{ js('google_analytics_events') }}  
+  <script src="https://www.mozilla.org/tabzilla/media/js/tabzilla.js"></script>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'bare.html' %}
+{% extends 'minimal.html' %}
 
 {% block page_title %}{{ _('Submit your flick') }}{% endblock %}
 
@@ -12,8 +12,9 @@
   {{ js('flicks_js') }}
 {% endblock %}
 
-{% block body %}
-  <main id="page" role="main">
+{% block content %}
+  <div class="section">
+    <div class="wrap">
 
     <div id="upload-complete" class="user-input">
       <h2>{{ _('Oh no, something went wrong!') }}</h2>
@@ -32,6 +33,6 @@
       </p>
 
     </div>
-
-  </main>
+    </div>
+  </div>
 {% endblock %}
