@@ -8,7 +8,7 @@ from tower import ugettext as _
 from flicks.base import regions
 from flicks.base.util import promo_video_shortlink, redirect
 from flicks.videos import tasks, vimeo
-from flicks.videos.decorators import in_overlay
+from flicks.videos.decorators import upload_process
 from flicks.videos.forms import VideoForm
 from flicks.videos.models import Video, Video2012
 from flicks.videos.util import vidly_embed_code
@@ -49,7 +49,7 @@ def winners(request):
 
 # Upload process
 @profile_required
-@in_overlay
+@upload_process
 def upload(request):
     ticket = request.session.get('vimeo_ticket', None)
     form = VideoForm(request.POST or None)
@@ -84,12 +84,12 @@ def upload(request):
     })
 
 
-@in_overlay
+@upload_process
 def upload_complete(request):
     return render(request, 'videos/upload_complete.html')
 
 
-@in_overlay
+@upload_process
 def upload_error(request):
     return render(request, 'videos/upload_error.html', status=500)
 

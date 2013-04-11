@@ -3,13 +3,8 @@
 {% block page_title %}{{ _('Submit your flick') }}{% endblock %}
 
 {% block site_css %}
-  {{ css('flicks_css') }}
+  {{ super() }}
   {{ css('upload') }}
-{% endblock %}
-
-{% block site_js %}
-  {{ js('jquery') }}
-  {{ js('flicks_js') }}
 {% endblock %}
 
 {% block content %}

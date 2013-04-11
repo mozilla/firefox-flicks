@@ -1,18 +1,12 @@
-{% extends 'bare.html' %}
+{% extends 'minimal.html' %}
 
 {% from 'macros.html' import facebookShare, twitterShare, tumblrShareUrl %}
 
 {% block page_title %}{{ _('Submit your flick') }}{% endblock %}
 
 {% block site_css %}
-  {{ css('flicks_css') }}
+  {{ super() }}
   {{ css('upload') }}
-{% endblock %}
-
-{% block site_js %}
-  {{ js('jquery') }}
-  {{ js('flicks_js') }}
-  {{ js('upload') }}
 {% endblock %}
 
 {% block content %}
@@ -44,20 +38,20 @@
       </p>
 
       <ul class="share">
-        {% set url = absolutify(url('flicks.base.home')) %}
+        {% set share_url = absolutify(url('flicks.base.home')) %}
         {% set text = _('You\'re the director. Mobile is the star.') %}
         <li>
-          <a href="{{ facebookShare(url) }}" class="facebook" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+          <a href="{{ facebookShare(share_url) }}" class="facebook" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
             Facebook
           </a>
         </li>
         <li>
-          <a href="{{ twitterShare(url, text, via='firefoxflicks') }}" class="twitter" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+          <a href="{{ twitterShare(share_url, text, via='firefoxflicks') }}" class="twitter" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
             Twitter
           </a>
         </li>
         <li>
-          <a href="{{ tumblrShareUrl(url, title=_('Firefox Flicks'), description=text) }}" class="tumblr" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+          <a href="{{ tumblrShareUrl(share_url, title=_('Firefox Flicks'), description=text) }}" class="tumblr" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
             Tumblr
           </a>
         </li>

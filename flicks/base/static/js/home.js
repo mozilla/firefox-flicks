@@ -101,25 +101,6 @@
             });
         });
 
-        var SUBMIT_URL = '/' + $('html').attr('lang') + '/video/upload/';
-        function showSubmit() {
-            flicks.createModal(null, '<iframe class="submit-frame" src="' +
-                               SUBMIT_URL + '"></iframe>', false);
-        }
-
-        // Launch video submission modal when the submit link is clicked.
-        $('.submit').click(function(e) {
-            e.preventDefault();
-            showSubmit();
-        });
-
-        // Launch video submission modal if the #submit hash is in the current
-        // URL.
-        if (window.location.hash === '#submit') {
-            showSubmit();
-        }
-
-
         // Judge quotes
         var $quote = $('#judge-quote .quote');
         $('.judge').each(function() {

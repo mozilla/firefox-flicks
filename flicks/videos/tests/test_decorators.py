@@ -6,16 +6,16 @@ from nose.tools import eq_, ok_
 
 from flicks.base.tests import TestCase
 from flicks.videos import vimeo
-from flicks.videos.decorators import in_overlay, vimeo_task
+from flicks.videos.decorators import upload_process, vimeo_task
 
 
-class TestInOverlay(TestCase):
+class UploadProcessTests(TestCase):
     def setUp(self):
-        super(TestInOverlay, self).setUp()
+        super(UploadProcessTests, self).setUp()
         self.factory = RequestFactory()
 
     def test_basic(self):
-        @in_overlay
+        @upload_process
         def blah(request, text):
             return HttpResponse(text)
 
@@ -23,7 +23,7 @@ class TestInOverlay(TestCase):
         response = blah(request, 'asdf')
 
         eq_(response.content, 'asdf')
-        eq_(request.in_overlay, True)
+        eq_(request.upload_process, True)
 
 
 class VimeoTaskTests(TestCase):

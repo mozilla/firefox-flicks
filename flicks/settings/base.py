@@ -45,15 +45,34 @@ MIDDLEWARE_CLASSES = list(MIDDLEWARE_CLASSES) + [
 ]
 
 TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS) + [
-   'django_browserid.context_processors.browserid',
-   'flicks.base.context_processors.browserid_request_args',
+    'django_browserid.context_processors.browserid',
 ]
 
 # Authentication settings
-LOGIN_URL = reverse_lazy('flicks.users.persona')
+LOGIN_URL = reverse_lazy('flicks.base.home')
 LOGIN_REDIRECT_URL = reverse_lazy('flicks.base.home')
 LOGIN_REDIRECT_URL_FAILURE = reverse_lazy('flicks.base.home')
 LOGOUT_REDIRECT_URL = reverse_lazy('flicks.base.home')
+
+
+# Lazy-load request args since they depend on certain settings.
+def _request_args():
+    from django.conf import settings
+
+    from funfactory.helpers import static
+    from tower import ugettext_lazy as _lazy
+
+    args = {
+        'privacyPolicy': 'http://www.mozilla.org/en-US/privacy-policy.html',
+        'siteName': _lazy('Firefox Flicks'),
+        'termsOfService': reverse_lazy('flicks.base.rules'),
+    }
+
+    if settings.SITE_URL.startswith('https'):
+        args['siteLogo'] = static('img/flicks-logo-180.png')
+
+    return args
+BROWSERID_REQUEST_ARGS = lazy(_request_args, dict)()
 
 # Because Jinja2 is the default template loader, add any non-Jinja templated
 # apps here:
@@ -187,7 +206,7 @@ MINIFY_BUNDLES = {
         ),
         'google_analytics_events': (
             'js/ga_event-tracking.js',
-        ),        
+        ),
         'browserid': (
             'browserid/browserid.js',
         ),

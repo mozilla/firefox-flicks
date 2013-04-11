@@ -1,15 +1,13 @@
 from functools import wraps
 
 from celery import task
-from commonware.response.decorators import xframe_sameorigin
 
 
-def in_overlay(func):
-    """Mark a view as being intended for display in an iframe overlay."""
+def upload_process(func):
+    """Mark a view as being part of the upload process."""
     @wraps(func)
-    @xframe_sameorigin
     def wrapped(request, *args, **kwargs):
-        request.in_overlay = True
+        request.upload_process = True
         return func(request, *args, **kwargs)
     return wrapped
 

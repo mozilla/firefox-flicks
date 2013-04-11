@@ -25,11 +25,11 @@ class ViewTests(TestCase):
     @patch('flicks.urls.render')
     def test_handler500(self, render):
         request = self.factory.get('/')
-        request.in_overlay = True
+        request.upload_process = True
         handler500(request)
         render.assert_called_with(request, 'videos/upload_error.html',
                                   status=500)
 
-        request.in_overlay = False
+        request.upload_process = False
         handler500(request)
         render.assert_called_with(request, '500.html', status=500)

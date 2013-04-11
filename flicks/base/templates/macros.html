@@ -129,12 +129,3 @@
     </ul>
   </div>
 {%- endmacro %}
-
-{# Calls browserid_button, using default values for request_args if they are not
-   specified. #}
-{% macro flicks_browserid_button() -%}
-  {% set request_args = kwargs.pop('request_args', {}) %}
-  {% do request_args.update(browserid_request_args) %}
-
-  {{ browserid_button(request_args=request_args, **kwargs) }}
-{%- endmacro %}

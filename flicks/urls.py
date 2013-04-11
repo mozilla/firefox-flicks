@@ -6,7 +6,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from commonware.response.decorators import xframe_sameorigin
 from funfactory.monkeypatches import patch
 
 
@@ -17,14 +16,16 @@ patch()
 autodiscover()
 
 
-@xframe_sameorigin
 def handler500(request):
-    in_overlay = getattr(request, 'in_overlay', False)
-    template = 'videos/upload_error.html' if in_overlay else '500.html'
-    return render(request, template, status=500)
+    if getattr(request, 'upload_process', False):
+        return handler500_upload(request)
+    return render(request, '500.html', status=500)
 
 
-@xframe_sameorigin
+def handler500_upload(request):
+    return render(request, 'videos/upload_error.html', status=500)
+
+
 def handler404(request):
     return render(request, '404.html', status=404)
 
@@ -52,6 +53,7 @@ if settings.DEBUG:
     urlpatterns += patterns('',
         (r'^404$', handler404),
         (r'^500$', handler500),
+        (r'^500_upload$', handler500_upload),
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
             'document_root': settings.MEDIA_ROOT,
         }),

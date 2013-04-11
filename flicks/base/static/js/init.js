@@ -1,4 +1,4 @@
-(function($) {
+(function($, django_browserid) {
     'use strict';
     var $window = $(window);
     var $document = $(document);
@@ -164,6 +164,22 @@
         });
     });
 
+    // Trigger a Persona login prompt on links that require auth if the user
+    // isn't currently authed.
+    $document.on('click', 'a.requires-auth', function(e) {
+        // If django-browserid isn't loaded, do nothing.
+        if (django_browserid) {
+            e.preventDefault();
+
+            var href = $(this).attr('href');
+            if (!django_browserid.isUserAuthenticated()) {
+                django_browserid.login(href);
+            } else {
+                window.location = href;
+            }
+        }
+    });
+
     // Open share widget on click, close on hover off.
     $document.on('click', '.share .toggle', function(e) {
         e.preventDefault();
@@ -174,4 +190,4 @@
     $document.on('mouseleave', '.share', function(e) {
         $(this).find('.popup').fadeOut(200);
     });
-})(jQuery);
+})(jQuery, window.django_browserid);

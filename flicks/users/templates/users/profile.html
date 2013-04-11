@@ -16,6 +16,7 @@
 {% from 'macros.html' import input_in_label %}
 
 {% block body_data %}
+  {{ super() }}
   data-region-map="{{ regions.countries|json }}"
 {% endblock %}
 

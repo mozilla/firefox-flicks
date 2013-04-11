@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% import 'judge_macros.html' as judge_bio %}
-{% from 'macros.html' import flicks_browserid_button with context %}
 
 {% block page_title %}{{ _('A Global Video Contest to Mobilize the Web') }}{% endblock %}
 
@@ -47,20 +46,12 @@
             <h3>{{ _('Start thinking about your flick') }}</h3>
             <p><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go ga_brief-dl" rel="external">{{ _('Read the creative brief') }}</a></p>
           </li>
-          <li class="submit-link {{ user.is_authenticated()|ifeq(True, 'submit') }}">
+          <li class="submit-link">
             <h3>{{ _('Submit your flick today') }}</h3>
             <div>
-              {# Show a login button or submit button depending on if the user
-                 is authenticated. #}
-              {% if user.is_authenticated() %}
-                <a href="#">
-                  {{ _('Start here') }}
-                </a>
-              {% else %}
-                {% set form_extras = {'next': url('flicks.base.home')|urlparams(hash='submit')} %}
-                {{ flicks_browserid_button(sign_in=_('Start here'),
-                                           form_extras=form_extras) }}
-              {% endif %}
+              <a href="{{ url('flicks.videos.upload') }}" class="requires-auth">
+                {{ _('Start here') }}
+              </a>
             </div>
           </li>
         </ul>
@@ -556,9 +547,9 @@
 
         <h2>{{ _('How to enter') }}</h2>
         <p>
-        {% trans %}
+        {% trans submit_url=url('flicks.videos.upload') %}
           Nice work! You made it all the way to the end. When you're ready,
-          <a href="#" class="submit">start here to submit your flick.</a>
+          <a href="{{ submit_url }}" class="requires-auth">start here to submit your flick.</a>
         {% endtrans %}
         </p>
       </section>
