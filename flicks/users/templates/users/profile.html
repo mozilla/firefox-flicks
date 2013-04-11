@@ -101,7 +101,7 @@
             </li>
           </ul>
 
-          <ul>
+          <ul class="prefs">
             <li class="col1 check">
               {{ input_in_label(form.privacy_policy_agree,
                  _('I\'m okay with you handling my info as you explain in your <a href="{link}" rel="external">privacy policy</a>')|fe(link='http://www.mozilla.org/en-US/privacy-policy.html')) }}
@@ -111,7 +111,7 @@
                 {{ input_in_label(form.mailing_list_signup,
                                   _('I want to receive email updates about Firefox Flicks')) }}
               </li>
-              <li class="col2">
+              <li class="col2 format">
                 {# L10n: Refers to the format of an email, either HTML or Text. #}
                 {{ form.mailing_list_format.label_tag(_('Format')) }} {{ form.mailing_list_format }}
               </li>

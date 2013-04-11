@@ -3,7 +3,6 @@
     var $window = $(window);
     var $document = $(document);
     var $body = $('body');
-    var $nav = $('#page-nav');
     var $navList = $('#page-nav-list');
 
     // Add a class to use as a style hook when JavaScript is available
@@ -34,19 +33,21 @@
     $document.on('click', 'body.thin-mode .toggle.open', collapsePageNav);
     $document.on('mouseleave', 'body.thin-mode #page-nav', collapsePageNav);
 
-    function expandPageNav(){
+    function expandPageNav() {
         $navList.slideDown('fast').removeAttr('aria-hidden').attr('aria-expanded', 'true');
         $("#page-nav .toggle").addClass("open");
     }
 
-    function collapsePageNav(){
+    function collapsePageNav() {
         $navList.slideUp('fast').attr('aria-hidden', 'true').removeAttr('aria-expanded');
         $("#page-nav .toggle").removeClass("open");
     }
 
 
     // Dummy console for IE7
-    if (window.console === undefined) window.console = {log: function() {}};
+    if (window.console === undefined) {
+        window.console = {log: function() {}};
+    }
 
 
     // Submit on locale selector choice
@@ -101,7 +102,7 @@
             $('#modal .inner').append(content);
             $('#modal').fadeIn(100);
             $(origin).addClass('modalOrigin');
-            if (typeof cycle == 'function') {
+            if (typeof cycle === 'function') {
                 $('.cycle-slideshow').cycle('pause');
             }
         },
@@ -111,7 +112,7 @@
             });
             $('body').removeClass('noscroll');
             $('.modalOrigin').focus().remove('modalOrigin');
-            if (typeof cycle == 'function') {
+            if (typeof cycle === 'function') {
                 $('.cycle-slideshow').cycle('resume');
             }
         },
@@ -127,7 +128,7 @@
     // Close modal on clicking close button or background.
     $document.on('click', '#modal .close', flicks.closeModal);
     $document.on('click', '#modal.bg_close, #modal > .inner', function(e) {
-        if (e.target == this) {
+        if (e.target === this) {
             flicks.closeModal();
         }
     });
@@ -187,7 +188,46 @@
         $(this).siblings('.popup').fadeIn(200);
     });
 
-    $document.on('mouseleave', '.share', function(e) {
+    $document.on('mouseleave', '.share', function() {
         $(this).find('.popup').fadeOut(200);
     });
+
+    // JS Shim for HTML5 form `requires` attribute.
+    var testInput = document.createElement('input');
+    if (!('required' in testInput)) {
+        $document.on('submit', 'form', validateForm);
+    }
+
+    /* jshint validthis:true */
+    function validateForm(e) {
+        var $inputs = $(this).find('input');
+        for (var k = 0; k < $inputs.length; k++) {
+            var input = $inputs[k];
+            var $input = $(input);
+            var $label = $('label[for="' + input.id + '"]');
+
+            $input.removeClass('error');
+            $label.find('strong.err').remove();
+            if (!isInputValid(input)) {
+                e.preventDefault();
+
+                var errorMsg = document.createElement('strong');
+                errorMsg.className = 'err';
+                errorMsg.innerHTML = flicks.trans('inputRequired');
+                $label.append(errorMsg);
+                $input.addClass('error');
+            }
+        }
+    }
+
+    function isInputValid(input) {
+        var isFilled = null;
+        if ((input.type === 'checkbox' || input.type === 'radio')) {
+            isFilled = input.checked;
+        } else {
+            isFilled = input.value !== '';
+        }
+
+        return input.getAttribute('required') === null || isFilled;
+    }
 })(jQuery, window.django_browserid);

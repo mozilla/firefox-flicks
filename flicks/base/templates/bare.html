@@ -43,6 +43,7 @@
   <body class="{{ page_type }}" {% block body_data %}{% endblock %}>
     <div id="strings"
          data-close="{{ _('Close') }}"
+         data-input-required="{{ _('This field is required.') }}"
          {% block string_data %}{% endblock %}>
     </div>
     {{ browserid_info() }}

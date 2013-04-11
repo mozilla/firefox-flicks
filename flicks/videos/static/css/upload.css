@@ -4,8 +4,8 @@
 }
 
 .section {
-  background: url(/static/img/spot-1.png) 170% 10px no-repeat, 
-    url(/static/img/spot-2.png) -20% 170% no-repeat, 
+  background: url(/static/img/spot-1.png) 170% 10px no-repeat,
+    url(/static/img/spot-2.png) -20% 170% no-repeat,
     url(/static/img/spot-3.png) 5% -320px no-repeat;
 }
 
@@ -52,6 +52,13 @@
   box-shadow: 0 1px 0 #fff;
 }
 
+.user-input fieldset#address {
+  border-bottom: 0;
+  box-shadow: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 #submit-video fieldset {
   width: auto;
 }
@@ -76,6 +83,13 @@
   visibility: hidden;
 }
 
+.user-input ul.prefs {
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #fff;
+  box-shadow: 0 -1px 0 #c1d9ed;
+}
+
 .user-input p,
 .user-input li {
   font: 14px "Open Sans", sans-serif;
@@ -93,9 +107,14 @@
   clear: left;
 }
 
+.user-input .prefs .format {
+  clear: left;
+  margin-left: 270px;
+}
+
 .user-input label {
   display: block;
-  margin: 0 0 .25em;
+  margin: 0 0 3em;
   font-size: 12px;
   text-transform: uppercase;
 }
@@ -114,11 +133,15 @@
   margin-left: -2px;
   border: 1px solid #91b4bf;
   border-radius: 5px;
+  position: absolute;
+  top: 1.5em;
 }
 
 .user-input select {
   width: 100%;
   margin-left: -2px;
+  position: absolute;
+  top: 1.5em;
 }
 
 .user-input .check input {
@@ -126,6 +149,7 @@
   height: 16px;
   float: left;
   margin-left: -30px;
+  position: static;
 }
 
 .user-input .note {
@@ -133,6 +157,32 @@
   width: 240px;
   position: absolute;
   left: 540px;
+}
+
+.user-input .errorlist {
+  margin: 0 0 1.5em;
+  padding: 10px 20px;
+  list-style: disc inside;
+  color: #900;
+  background: #ffe;
+  border: 1px solid #dedabb;
+  border-radius: 6px;
+}
+
+.user-input input.error {
+  border-color: #900;
+}
+
+.user-input label .err {
+  font-weight: normal;
+  color: #900;
+  text-transform: none;
+  display: block;
+  margin: 3.25em 0 -3em;
+}
+
+.user-input .check label .err {
+  margin-top: 0;
 }
 
 #user-info li.region {
@@ -343,7 +393,7 @@
 
 #upload-complete h2 {
   font-size: 34px;
-  font-weight: bold;  
+  font-weight: bold;
 }
 
 #upload-complete .bonus {
@@ -441,7 +491,7 @@
   .steps {
     margin-bottom: 20px;
   }
-  
+
   .steps li {
     display: block;
     padding-bottom: 0;
@@ -466,12 +516,27 @@
   .user-input select,
   .user-input textarea {
     width: 240px;
+    position: static;
   }
 
   .user-input .note {
     width: auto;
+    display: block;
+    margin: 1.5em 0 .5em;
     position: static;
-    margin: 0 0 1em;
+  }
+
+  .user-input label {
+    margin: 0 0 .25em;
+  }
+
+  .user-input label .err {
+    margin: 0 0 .25em;
+  }
+
+  .user-input .prefs .format {
+    clear: none;
+    margin-left: 0;
   }
 
   .video-data {
@@ -534,7 +599,7 @@
     display: block;
     text-align: left;
   }
-  
+
   #upload-complete {
     padding: 40px;
   }
@@ -547,6 +612,6 @@
 
 /* Wide Mobile Layout: 480px */
 @media only screen and (min-width: 480px) and (max-width: 760px) {
-  
+
 
 }
