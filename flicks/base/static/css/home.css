@@ -189,8 +189,7 @@
 
 .js #slide-one .thumbnail,
 .js #slide-three .thumbnail,
-.js .slide-generic .thumbnail
- {
+.js .slide-generic .thumbnail {
   position: absolute;
   top: 50px;
   right: 50px;
@@ -615,11 +614,19 @@
 
   .js #slideshow {
     height: auto;
+    min-height: 350px;
     width: 100%;
     padding: 0;
     margin: 0 auto 2em;
     background: #fff none;
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  }
+  
+  .js .cycle-pager {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
   }
 
   .js #slideshow .slide,
@@ -639,10 +646,12 @@
   .js .slide-desc,
   .js #slideshow .slide-desc,
   .js #slide-one .slide-desc,
-  .js #slide-three .slide-desc {
+  .js #slide-three .slide-desc,
+  .js .slide-generic .slide-desc {
     position: static;
     width: auto;
-    padding: 20px 20px 0;
+    height: auto;
+    padding: 20px 20px 40px;
     text-align: center;
   }
 
