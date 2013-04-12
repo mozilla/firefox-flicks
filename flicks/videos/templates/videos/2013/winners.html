@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block page_title %}{{ _('2013 Flicks Winners') }}{% endblock %}
+{% block og_title %}{{ _('2013 Flicks Winners') }}{% endblock %}
+
+{% block site_css %}
+  {{ super() }}
+  {{ css('videos') }}
+{% endblock %}
+
+{% block content %}
+  <div class="section wrap winners-page">
+    <h1 class="page-title">{{ _('2013 Flicks Winners') }}</h1>
+    <div class="section-intro">
+      <p>
+      {% trans %}
+        Submit your flick by July 31, 2013 and add your name to the growing list of Flicks winners.
+      {% endtrans %}
+      </p>
+    </div>
+
+      <div id="gallery" class="main">
+        <section class="period">
+          <header>
+            <h2>{{ _('BAFICI') }} <span>{{ _('April 22, 2013') }}</span></h2>
+          </header>
+          
+          <ul class="entry-list">
+            <li class="entry winner first-place">
+              <a href="{{ url('flicks.videos.detail', 260) }}" class="detail-play" data-vimeo-id="63166600">
+                <h3 class="placing">{{ _('First Place') }}</h3>
+                <img src="{{ static('img/thumbnails/63166600.jpg') }}" alt="" class="thumbnail">
+                <hgroup>
+                  <h3 class="title">Huba - Huba</h3>
+                  <h4 class="vcard">
+                    <span class="fn">Arman</span>,
+                    <span class="country-name">{{ country_name('in') }}</span>
+                  </h3>
+                </hgroup>
+              </a>
+              <p>
+              {% set submit_time = datetime(2013, 4, 2) %}
+              {# L10n: Describes the date that a video was submitted to the contest. #}
+              {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                Submitted {{ date }}
+              {% endtrans %}
+              </p>
+            </li>
+            
+            <li class="entry winner second-place">
+              <a href="{{ url('flicks.videos.detail', 41) }}" class="detail-play" data-vimeo-id="60739100">
+                <h3 class="placing">{{ _('Second Place') }}</h3>
+                <img src="{{ static('img/thumbnails/60739100.jpg') }}" alt="" class="thumbnail">
+                <hgroup>
+                  <h3 class="title">The Ripple Effect</h3>
+                  <h4 class="vcard">
+                    <span class="fn">fujes</span>,
+                    <span class="country-name">{{ country_name('ke') }}</span>
+                  </h3>
+                </hgroup>
+              </a>
+              <p>
+              {% set submit_time = datetime(2013, 2, 28) %}
+              {# L10n: Describes the date that a video was submitted to the contest. #}
+              {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                Submitted {{ date }}
+              {% endtrans %}
+              </p>
+            </li>
+            
+            <li class="entry winner third-place">
+              <a href="{{ url('flicks.videos.detail', 30) }}" class="detail-play" data-vimeo-id="59994222">
+                <h3 class="placing">{{ _('Third Place') }}</h3>
+                <img src="{{ static('img/thumbnails/59994222.jpg') }}" alt="" class="thumbnail">
+                <hgroup>
+                  <h3 class="title">Anyone, Anywhere</h3>
+                  <h4 class="vcard">
+                    <span class="fn">Jaibin</span>,
+                    <span class="country-name">{{ country_name('tw') }}</span>
+                  </h3>
+                </hgroup>
+              </a>
+              <p>
+              {% set submit_time = datetime(2013, 2, 19) %}
+              {# L10n: Describes the date that a video was submitted to the contest. #}
+              {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                Submitted {{ date }}
+              {% endtrans %}
+              </p>
+            </li>
+          </ul>
+        </section>
+      </div>
+      
+      <aside id="upcoming" class="sidebar aside">
+        <h2>Don’t miss your chance to win one of many upcoming awards</h2>
+        
+        <h3>Early Entry Awards Announcements</h3>
+        <ul>
+          <li>April 24</li>
+          <li>June 12</li>
+          <li>July 16</li>
+        </ul>
+        
+        <h3>People’s Choice Award</h3>
+        <ul>
+          <li>August 31</li>
+        </ul>
+
+        <h3>Flicks Grand Prize and Regional awards</h3>
+        <ul>
+          <li>September - Announced during Toronto International Film Festival</li>
+        </ul>
+
+        <p><a href="{{ url('flicks.base.home')|urlparams(hash='prizes') }}" class="go">Learn more about Flicks prizes</a></p>
+
+        <p><a href="{{ url('flicks.base.home')|urlparams(hash='submit') }}" class="submit-link">Submit Your Flick Today!</a></p>
+
+      </aside>
+
+  </div>
+{% endblock %}

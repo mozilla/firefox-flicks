@@ -64,29 +64,17 @@
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
 }
 
-/* Video List *********/
-#trailers {
-  background: #ececec;
-  background: rgba(0,0,0,.05);
-  border-radius: 6px;
-  box-shadow: inset 0 0 3px rgba(0,0,0,.05);
-  width: 190px;
-  padding: 20px 20px 0;
-  margin-right: -20px;
+#modal .video {
+    width: 600px;
+    height: 338px;
+    margin: 0 auto;
 }
-
-#trailers h3 {
-  margin: 0 0 1em;
+#modal .video-details {
+    width: 600px;
+    margin: 0 auto;
 }
-
-#trailers .entry {
-  width: 190px;
-  float: none;
-  margin: 0 10px 1.5em;
-}
-
-#trailers .title {
-  font-size: 14px;
+#modal .video-details h1 {
+    font-size: 24px;
 }
 
 #gallery .thumbnail {
@@ -94,6 +82,57 @@
   height: 150px;
 }
 
+/* Award winners */
+.winners-page .section-intro {
+    width: 60%;
+}
+
+.winners-page .entry-list {
+    margin: 0 0 2em;
+    margin-left: -10px;
+}
+
+
+.period header h2 {
+    margin: 0 auto .5em;
+}
+.period header h2 span {
+    display: block;
+    font-size: .823em;
+}
+
+.winner {
+    position: relative;
+}
+
+.winner .placing {
+    font-size: 14px;
+    text-transform: uppercase;
+    background: #eee;
+    border: 1px outset rgba(0,0,0,.1);
+    width: 70%;
+    padding: 3px 14px;
+    position: absolute;
+    left: -7px;
+    top: 14px;
+    z-index: 10;
+    box-shadow: 2px 2px 1px rgba(0,0,0,.2);
+}
+
+.first-place .placing {
+    background-color: #ffd745;
+    background-image: linear-gradient(150deg, #ffdf69 0%, #fff5d2 35%, #ebb217 100%);
+}
+
+.second-place .placing {
+    background-color: #d2dedf;
+    background-image: linear-gradient(150deg, #c6d0d2 0%, #edf0f2 35%, #b0b7bd 100%);
+}
+
+.third-place .placing {
+    background-color: #e2ab75;
+    background-image: linear-gradient(150deg, #c0a665 0%, #ffe8d0 35%, #9f7d38 100%);
+}
 
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
@@ -119,6 +158,10 @@
   #trailers .entry {
     float: left;
     margin: 0 15px 1.5em;
+  }
+  
+  .winners-page .section-intro {
+      width: auto;
   }
 
 }
@@ -159,6 +202,10 @@
     margin: 0 auto 1.5em;
   }
 
+  .winners-page .section-intro,
+  .winners-page .entry-list {
+    width: auto;
+  }
 
 }
 
@@ -182,6 +229,13 @@
 
   #trailers .entry:nth-child(2n+1) {
     clear: none;
+  }
+  
+  .winners-page .entry-list .third-place {
+    float: none;
+    clear: both;
+    display: block;
+    margin: 0 auto 1.5em;
   }
 
 }

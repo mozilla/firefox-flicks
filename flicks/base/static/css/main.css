@@ -173,6 +173,20 @@ a:active {
   text-decoration: underline;
 }
 
+#modal a:link {
+  color: #a6dbff;
+}
+
+#modal a:visited {
+  color: #74c5ff;
+}
+
+#modal a:hover,
+#modal a:focus,
+#modal a:active {
+  color: #c1e6ff;
+}
+
 a.go:after {
   content: " »";
   white-space: nowrap;
@@ -316,6 +330,73 @@ a.dl:after {
   transition: all .125s ease-in;
 }
 
+.section-intro .button-light {
+  font-size: 16px;
+}
+
+.actions .submit-link a,
+a.submit-link {
+  display: inline-block;
+  margin: .25em 0 0;
+  font-size: 18px;
+  padding: 8px 20px 8px 50px;
+  color: #1677b9;
+  background: #fff url(/static/img/icn-arrow.png) 10px center no-repeat;
+  background: url(/static/img/icn-arrow.png) 10px center no-repeat, #fff -moz-linear-gradient(rgba(255,255,255,0), rgba(0,0,0,.1));
+  background: url(/static/img/icn-arrow.png) 10px center no-repeat, #fff -webkit-linear-gradient(rgba(255,255,255,0), rgba(0,0,0,.1));
+  background: url(/static/img/icn-arrow.png) 10px center no-repeat, #fff linear-gradient(rgba(255,255,255,0), rgba(0,0,0,.1));
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.1);
+  -moz-transition: all .125s ease-out;
+  -ms-transition: all .125s ease-out;
+  -o-transition: all .125s ease-out;
+  -webkit-transition: all .125s ease-out;
+  transition: all .125s ease-out;
+}
+
+.actions .submit-link a:hover,
+.actions .submit-link a:focus,
+.actions .submit-link a:active,
+a.submit-link:hover,
+a.submit-link:focus,
+a.submit-link:active {
+  background-color: #f3f3f3;
+  background-color: rgba(255,255,255,.75);
+  border-color: #bbb;
+  color: #1287d7;
+  -moz-transition: all .125s ease-in;
+  -ms-transition: all .125s ease-in;
+  -o-transition: all .125s ease-in;
+  -webkit-transition: all .125s ease-in;
+  transition: all .125s ease-in;
+}
+
+.share .toggle {
+  display: inline-block;
+  font: 13px/1 "Open Sans", sans-serif;
+  padding: 4px 10px;
+  margin: 0 0 .25em;
+  color: #1677b9;
+  background: #f3f3f3;
+  background: rgba(255,255,255,.5);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.1);
+  -moz-transition: all .125s ease-out;
+  -ms-transition: all .125s ease-out;
+  -o-transition: all .125s ease-out;
+  -webkit-transition: all .125s ease-out;
+  transition: all .125s ease-out;
+}
+
+#modal .share .toggle {
+  background: #999;
+  background: rgba(0,0,0,.65);
+  border-color: #000;
+  color: #eee;
+}
+
 /* @Layout *********/
 .wrap {
   width: 940px;
@@ -363,6 +444,53 @@ a.dl:after {
 .aside {
   width: 220px;
   float: right;
+}
+
+/* Video List *********/
+.sidebar {
+  background: #ececec;
+  background: rgba(0,0,0,.05);
+  border-radius: 6px;
+  box-shadow: inset 0 0 3px rgba(0,0,0,.05);
+  width: 190px;
+  padding: 20px 20px 0;
+  margin-right: -20px;
+  float: right;
+}
+
+.sidebar .winners {
+  text-align: center;
+}
+
+.sidebar h2 {
+  text-align: center;
+  font-size: 1.25rem;
+  margin: 0 0 1em;
+}
+
+.sidebar h3 {
+  text-align: center;
+  font-size: 1rem;
+  margin: 0 0 .5em;
+}
+
+.sidebar ul {
+  margin: 0 20px 1.5em;
+}
+
+.sidebar .entry-list {
+  margin: 0 0 1.5em;
+}
+
+.sidebar .entry-list .entry {
+  width: 180px;
+  padding: 0 5px;
+  float: none;
+  margin: 0 0 1.5em;
+}
+
+.sidebar .entry-list .title {
+  font-size: 14px;
 }
 
 /* @Header *********/
@@ -759,10 +887,12 @@ a.dl:after {
 }
 
 .share .embed textarea {
-  background: #B7BCC0;
+  background: #b7bcc0;
   font: normal 10px "Open Sans", sans-serif;
-  height: 100px;
-  width: 200px;
+  height: 90px;
+  width: 190px;
+  padding: 5px;
+  border: 1px solid;
 }
 
 .share .popup a {
@@ -1197,7 +1327,7 @@ body.noscroll .fixed #head-inner {
   .entry-list .entry {
     float: none;
     clear: both;
-    width: 220px;
+    width: 200px;
     margin: 0 auto 2em;
   }
 
@@ -1248,7 +1378,6 @@ body.noscroll .fixed #head-inner {
   .entry-list .entry {
     float: left;
     clear: none;
-    width: 210px;
     margin: 0 15px 2em;
   }
 

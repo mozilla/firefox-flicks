@@ -59,40 +59,6 @@
   color: #999;
 }
 
-.actions .submit-link a {
-  display: inline-block;
-  margin: .25em 0 0;
-  font-size: 18px;
-  padding: 8px 20px 8px 50px;
-  color: #1677b9;
-  background: #fff url(/static/img/icn-arrow.png) 10px center no-repeat;
-  background: url(/static/img/icn-arrow.png) 10px center no-repeat, #fff -moz-linear-gradient(rgba(255,255,255,0), rgba(0,0,0,.1));
-  background: url(/static/img/icn-arrow.png) 10px center no-repeat, #fff -webkit-linear-gradient(rgba(255,255,255,0), rgba(0,0,0,.1));
-  background: url(/static/img/icn-arrow.png) 10px center no-repeat, #fff linear-gradient(rgba(255,255,255,0), rgba(0,0,0,.1));
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: inset 0 -2px 0 rgba(0,0,0,.1);
-  -moz-transition: all .125s ease-out;
-  -ms-transition: all .125s ease-out;
-  -o-transition: all .125s ease-out;
-  -webkit-transition: all .125s ease-out;
-  transition: all .125s ease-out;
-}
-
-.actions .submit-link a:hover,
-.actions .submit-link a:focus,
-.actions .submit-link a:active {
-  background-color: #f3f3f3;
-  background-color: rgba(255,255,255,.75);
-  border-color: #bbb;
-  color: #1287d7;
-  -moz-transition: all .125s ease-in;
-  -ms-transition: all .125s ease-in;
-  -o-transition: all .125s ease-in;
-  -webkit-transition: all .125s ease-in;
-  transition: all .125s ease-in;
-}
-
 /*** @Slides *********/
 .js #slideshow {
   position: relative;
