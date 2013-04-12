@@ -105,7 +105,7 @@ def promo_video_noir(request):
                           'her?'),
              page_type='videos',
              video_embed=vidly_embed_code(promo_video_shortlink('noir'),
-                                          width='100%', height=337))
+                                          width='100%'))
     return render(request, 'videos/2012/promo.html', d)
 
 
@@ -120,7 +120,7 @@ def promo_video_dance(request):
                           "this fox's feet take him?"),
              page_type='videos',
              video_embed=vidly_embed_code(promo_video_shortlink('dance'),
-                                          width='100%', height=337))
+                                          width='100%'))
     return render(request, 'videos/2012/promo.html', d)
 
 
@@ -133,5 +133,5 @@ def promo_video_twilight(request):
              tweet_text=desc,
              page_type='videos',
              video_embed=vidly_embed_code(promo_video_shortlink('twilight'),
-                                          width='100%', height=337))
+                                          width='100%'))
     return render(request, 'videos/2012/promo.html', d)

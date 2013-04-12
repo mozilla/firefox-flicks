@@ -1,7 +1,14 @@
 .video {
     background: #000;
-    height: 529px;
     position: relative;
+}
+
+.video iframe {
+    height: 529px;
+}
+
+.video iframe.vidly {
+    height: 337px;
 }
 
 .video .winner-mark {
@@ -91,7 +98,7 @@
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
 
-  .video {
+  .video iframe {
     height: 405px;
   }
 
@@ -119,8 +126,9 @@
 /* Mobile Layout: 320px */
 @media only screen and (max-width: 760px) {
 
-  .video {
-    height: 259px;
+  .video iframe,
+  .video iframe.vidly {
+    height: 169px;
   }
 
   .video-details h1 {
@@ -156,6 +164,11 @@
 
 /* Wide Mobile Layout: 480px */
 @media only screen and (min-width: 480px) and (max-width: 760px) {
+
+  .video iframe,
+  .video iframe.vidly {
+    height: 259px;
+  }
 
   #trailers .entry {
     width: 28%;

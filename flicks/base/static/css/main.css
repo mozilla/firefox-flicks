@@ -72,7 +72,7 @@ p, pre, blockquote, ul, ol, dl, table, figure { margin: 0 0 1.4em; padding: 0; }
 blockquote:before, blockquote:after, q:before, q:after { content: ""; }
 blockquote, q { quotes: "" ""; }
 table { border-collapse: collapse; border-spacing: 0; }
-fieldset { border: 0; }
+fieldset, iframe { border: 0; }
 legend { color: inherit; } /* For IE */
 form ul, form ol { list-style: none; }
 a img { border: 0; }
