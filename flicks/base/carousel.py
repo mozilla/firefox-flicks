@@ -6,7 +6,7 @@ ScheduleItem = namedtuple('ScheduleItem', ['start', 'end', 'slides'])
 slide_schedule = (
     # EX: ScheduleItem(datetime(2013, 4, 5), datetime(2013, 4, 22), ['slide-two.html', 'slide-three.html']),
     ScheduleItem(datetime(2013, 4, 9), datetime(2013, 4, 21), ['blogpost_judges.html', 'blogpost_makeyourflickawinner.html', 'blogpost_getcreative.html']),
-    ScheduleItem(datetime(2013, 4, 22), datetime(2013, 4, 30), ['blogpost_makeyourflickawinner.html', 'blogpost_schwartzberg.html']),
+    ScheduleItem(datetime(2013, 4, 22), datetime(2013, 4, 30), ['blogpost_baficiwinner.html', 'blogpost_schwartzberg.html', 'blogpost_makeyourflickawinner.html']),
 )
 
 

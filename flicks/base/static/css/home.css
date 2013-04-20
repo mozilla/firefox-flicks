@@ -239,8 +239,34 @@
 }
 
 .js .slide-schwartzberg .slide-desc p {
-  color:#FFFFFF; 
+  color: #fff; 
 }
+
+.js .slide-bafici .slide-desc {
+  padding: 45px 440px 0 60px; 
+  width: 440px; 
+}
+
+.js .slide-bafici .slide-desc p {
+  color: #fff; 
+}
+
+/* one off thumb */
+.js .slide-bafici .video-play div {
+  position: absolute;
+  top: 220px;
+  right: 140px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.js .slide-bafici .video-play div:after {
+  content: " »";
+  white-space: nowrap;
+}
+
+
+
 
 
 
@@ -506,22 +532,32 @@
   }
 
   .js #slide-one .slide-desc,
-  .js #slide-three .slide-desc {
+  .js #slide-three .slide-desc,
+  .js .slide-generic .slide-desc {
     width: 360px;
     left: 0;
     top: 0;
-    padding: 50px 320px 0 40px;
+    padding: 20px 320px 0 40px;
   }
 
   .js .slide-desc h2 {
-    font-size: 36px;
+    font-size: 30px;
   }
 
   .js #slide-one .thumbnail,
-  .js #slide-three .thumbnail {
+  .js #slide-three .thumbnail, 
+  .js .slide-generic .thumbnail {
     width: 260px;
     top: 40px;
     right: 40px;
+  }
+
+  .js .slide-bafici .video-play div {
+    position: absolute;
+    top: 165px;
+    right: 80px;
+    color: #fff;
+    font-size: 16px;
   }
 
   .js #slide-two .slide-desc {
@@ -534,6 +570,7 @@
   .js .slide-desc {
     font-size: 16px;
   }
+
 
   #flicks2013 .entry {
     width: 205px;
@@ -608,6 +645,10 @@
     color: inherit;
   }
 
+  .js .slide-generic .slide-desc p {
+    color: inherit; 
+  }  
+
   .js .slide-desc h2 {
     font-size: 36px;
   }
@@ -660,11 +701,26 @@
   }
 
   .js #slide-one .thumbnail,
-  .js #slide-three .thumbnail {
+  .js #slide-three .thumbnail,
+  .js .slide-generic .thumbnail {
     position: static;
     display: block;
     margin: 1em auto;
     width: 260px;
+  }
+
+  /* Bafici One off */
+  .js .slide-bafici .video-play div  {
+    position: static;
+    display: block;
+    margin: 1em auto;
+    width: 260px;
+    color: inherit;
+  }
+
+  .js .slide-bafici .slide-desc {
+    position: static;
+    color: ;
   }
 
   #about .section-detail {
