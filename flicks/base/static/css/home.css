@@ -212,6 +212,7 @@
   font-size: 11px;
   display: block;
   color: #1F9EE5;
+  margin: -.25em 0 0;
 }
 
 .js .slide-generic .go {
@@ -542,6 +543,14 @@
 
   .js .slide-desc h2 {
     font-size: 30px;
+  }
+  
+  .js .slide-desc p {
+    margin: 0 0 1em;
+  }
+  
+  .js .slide-desc .act {
+    margin-top: -.25em;
   }
 
   .js #slide-one .thumbnail,
