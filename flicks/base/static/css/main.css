@@ -622,6 +622,7 @@ a.dl:after {
   width: 100%;
   padding: 30px 0;
   position: relative;
+  font: 14px "Open Sans", sans-serif;
 }
 
 #footer:before {
@@ -635,18 +636,28 @@ a.dl:after {
 }
 
 #footer h4 {
-  font: normal 14px "Open Sans", sans-serif;
+  font-size: 1em;
+  font-weight: normal;
   text-transform: uppercase;
   text-shadow: none;
+  margin: 0 0 .75em;
 }
 
-#footer .sponsors {
+#footer a {
+  color: #b7bcc0;
+}
+
+#footer .partners {
   width: 640px;
   float: left;
 }
 
-.sponsors li {
+#footer .partners ul {
+  margin: 0;
   list-style: none;
+}
+
+#footer .partners li {
   display: inline-block;
   margin: 0 10px 10px 0;
   vertical-align: top;
@@ -662,7 +673,7 @@ a.dl:after {
 }
 
 #nav-social-foot li {
-  margin: 0 10px 0 0;
+  margin: 0 10px 20px 0;
 }
 
 #footer .firefoxos a {
@@ -698,10 +709,6 @@ a.dl:after {
   border: 0;
   padding: 0;
   margin-left: 0;
-}
-
-#nav-fineprint a {
-  color: #b7bcc0;
 }
 
 .languages select {
@@ -855,6 +862,30 @@ a.dl:after {
   border: 5px solid #fff;
   margin: 0 20px 20px -5px;
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+/* @Partners *********/
+.partners-page .section-intro {
+  width: 60%;
+}
+
+.partners-page h2 {
+  text-align: center;
+  margin: .5em 0 .25em;
+}
+
+.partners-list {
+  list-style: none;
+  text-align: center;
+  margin: 0 auto 2em;
+}
+
+.partners-list li {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 10px 20px;
+  margin: 0 5px 20px;
+  max-width: 100%;
 }
 
 /* @Pagination *********/
@@ -1049,12 +1080,16 @@ body.noscroll .fixed #head-inner {
     margin: 0 auto 1em;
   }
 
-  #footer .sponsors {
+  #footer .partners {
     width: 480px;
   }
 
   .submit-frame {
     width: 720px;
+  }
+  
+  .partners-page .section-intro {
+    width: auto;
   }
 
 }
@@ -1172,7 +1207,7 @@ body.noscroll .fixed #head-inner {
     padding-right: 0;
   }
 
-  #footer .sponsors,
+  #footer .partners,
   #footer .util {
     width: auto;
     float: none;
@@ -1223,6 +1258,14 @@ body.noscroll .fixed #head-inner {
 
   body.noscroll {
     padding-right: 0;
+  }
+  
+  .partners-page .section-intro {
+    width: auto;
+  }
+  
+  .partners-list li {
+    margin: 0 0 20px;
   }
 
 }

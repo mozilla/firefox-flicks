@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^faq/?$', views.faq, name='flicks.base.faq'),
     url(r'^rules/?$', views.rules, name='flicks.base.rules'),
     url(r'^judges/?$', views.judges, name='flicks.base.judges'),
+    url(r'^partners/?$', views.partners, name='flicks.base.partners'),
     url(r'^strings/?$', views.strings, name='flicks.base.strings'),
 
     # Temporarily redirect all invalid locales to the home page.
