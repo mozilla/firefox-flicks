@@ -30,6 +30,11 @@ def judges(request):
     return render(request, 'judges.html', {'page_type': 'judges'})
 
 
+def partners(request):
+    """Partners page."""
+    return render(request, 'partners.html', {'page_type': 'partners'})
+
+
 def strings(request):
     """Strings L10N page."""
     return render(request, 'strings.html')
