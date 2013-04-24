@@ -22,7 +22,7 @@
       <div id="winners" class="main">
         <section class="period">
           <header>
-            <h2>{{ _('BAFICI') }} <span>{{ _('April 22, 2013') }}</span></h2>
+            <h2>{{ _('Early Entry Award') }} | {{ _('April 24') }}</h2>
           </header>
           
           <ul class="entry-list">
@@ -93,28 +93,28 @@
       </div>
       
       <aside id="upcoming" class="sidebar aside">
-        <h2>Don’t miss your chance to win one of many upcoming awards</h2>
+        <h2>{{ _('Don’t miss your chance to win one of many upcoming awards') }}</h2>
         
-        <h3>Early Entry Awards Announcements</h3>
+        <h3>{{ _('Early Entry Awards Deadlines') }}</h3>
         <ul>
-          <li>April 24</li>
-          <li>June 12</li>
-          <li>July 16</li>
+          <li>{{ _('April 3') }}</li>
+          <li>{{ _('May 29') }}</li>
+          <li>{{ _('July 3') }}</li>
         </ul>
         
-        <h3>People’s Choice Award</h3>
+        <h3>{{ _('People’s Choice Award') }}</h3>
         <ul>
-          <li>August 31</li>
+          <li>{{ _('Submit by July 31') }}</li>
         </ul>
 
-        <h3>Flicks Grand Prize and Regional awards</h3>
+        <h3>{{ _('Flicks Grand Prize and Regional awards') }}</h3>
         <ul>
-          <li>September - Announced during Toronto International Film Festival</li>
+          <li>{{ _('Submit by July 31') }}</li>
         </ul>
 
-        <p><a href="{{ url('flicks.base.home')|urlparams(hash='prizes') }}" class="go">Learn more about Flicks prizes</a></p>
+        <p><a href="{{ url('flicks.base.home')|urlparams(hash='prizes') }}" class="go">{{ _('Learn more about Flicks prizes') }}</a></p>
 
-        <p><a href="{{ url('flicks.base.home')|urlparams(hash='submit') }}" class="submit-link">Submit Your Flick Today!</a></p>
+        <p><a href="{{ url('flicks.base.home')|urlparams(hash='submit') }}" class="submit-link">{{ _('Submit Your Flick Today!') }}</a></p>
 
       </aside>
 

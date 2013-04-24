@@ -1014,8 +1014,13 @@ a.submit-link:active {
 }
 
 .partners-page h2 {
+  width: 60%;
+  margin: .75em auto .25em;
+  padding-top: 1em;
+  border-top: 1px solid #cecece;
+  font-size: 22px;
+  color: #777;
   text-align: center;
-  margin: .75em 0 .25em;
 }
 
 .partners-list {
