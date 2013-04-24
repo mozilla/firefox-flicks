@@ -999,15 +999,23 @@ a.submit-link:active {
   width: 60%;
 }
 
+.partners-page hr {
+  margin: 0 auto 2em;
+  width: 60%;
+  background: #cecece;
+  color: transparent;
+  height: 1px;
+}
+
 .partners-page h2 {
   text-align: center;
-  margin: .5em 0 .25em;
+  margin: .75em 0 .25em;
 }
 
 .partners-list {
   list-style: none;
   text-align: center;
-  margin: 0 auto 2em;
+  margin: 0 auto 1em;
 }
 
 .partners-list li {
