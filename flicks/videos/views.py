@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import get_object_or_404, render
 
@@ -39,6 +41,10 @@ def video_list(request):
 def video_detail(request, video_id):
     video = get_object_or_404(Video, id=video_id)
     return render(request, 'videos/2013/details.html', {'video': video})
+    
+    
+def winners(request):
+    return render(request, 'videos/2013/winners.html', {'datetime': datetime})
 
 
 # Upload process

@@ -56,7 +56,7 @@
 
 
     // Load external links in new tab/window
-    $('a[rel="external"]').click(function(e){
+    $document.on('click', 'a[rel="external"]', function(e){
         e.preventDefault();
         var opts = $(this).data('windowOpts');
         if (opts) {
@@ -101,7 +101,9 @@
             $('#modal .inner').append(content);
             $('#modal').fadeIn(100);
             $(origin).addClass('modalOrigin');
-            $('.cycle-slideshow').cycle('pause');
+            if (typeof cycle == 'function') {
+                $('.cycle-slideshow').cycle('pause');
+            }
         },
         'closeModal': function() {
             $('#modal').fadeOut(100, function(){
@@ -109,7 +111,9 @@
             });
             $('body').removeClass('noscroll');
             $('.modalOrigin').focus().remove('modalOrigin');
-            $('.cycle-slideshow').cycle('resume');
+            if (typeof cycle == 'function') {
+                $('.cycle-slideshow').cycle('resume');
+            }
         },
         'notification': function(text) {
             // TODO: Implement notification popup here.
@@ -122,7 +126,11 @@
 
     // Close modal on clicking close button or background.
     $document.on('click', '#modal .close', flicks.closeModal);
-    $document.on('click', '#modal.bg_close', flicks.closeModal);
+    $document.on('click', '#modal.bg_close, #modal > .inner', function(e) {
+        if (e.target == this) {
+            flicks.closeModal();
+        }
+    });
 
     // Close on escape
     $document.on('keyup', function(e) {
@@ -142,20 +150,28 @@
         }
     });
 
-    $(function() {
-        /* Share Widget *******/
-        var $share = $('.share');
-        var $popup = $share.find('.popup');
-
-        // Toggle the popup when the button is clicked.
-        $share.find('.toggle').click(function(e) {
-            e.preventDefault();
-            $(this).siblings('.popup').fadeIn(200);
+    // Load video details in a modal
+    $('a.detail-play').click(function(e){
+        e.preventDefault();
+        var sourcedoc = this.href;
+        $.ajax({
+            url: sourcedoc,
+            success: function(data){
+                var content = $(data).find('article.wrap');
+                return flicks.createModal(this, content);
+            },
+            dataType: 'html'
         });
+    });
 
-        // Hide the popup when the mouse moves away.
-        $share.hover(null, function() {
-            $(this).find('.popup').fadeOut(200);
-        });
+    // Open share widget on click, close on hover off.
+    $document.on('click', '.share .toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $(this).siblings('.popup').fadeIn(200);
+    });
+
+    $document.on('mouseleave', '.share', function(e) {
+        $(this).find('.popup').fadeOut(200);
     });
 })(jQuery);

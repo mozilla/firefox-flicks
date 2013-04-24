@@ -60,7 +60,9 @@
       </div>
     {% endblock %}
 
-    <aside id="trailers" class="samples aside">
+    <aside id="trailers" class="sidebar aside">
+      <p class="winners"><a href="{{ url('flicks.videos.winners') }}" class="button-light go">{{ _('See 2013 Flicks Winners') }}</a></p>
+    
       <h3>{{ _('Directors&#8217; cuts') }}</h3>
       <p>
       {% trans %}
