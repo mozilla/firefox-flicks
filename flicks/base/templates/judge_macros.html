@@ -1,11 +1,30 @@
+{% macro hestabrook() -%}
+  <article class="judge-bio vcard" id="hestabrook">
+    <header>
+      <img src="{{ static('img/judges/judge-hestabrook.jpg') }}" alt="" class="photo">
+      <h2 class="fn">Helen Estabrook</h2>
+      <p class="role">{{ _('Producer') }}</p>
+    </header>
+    <p>
+    {% trans %}
+      Helen Estabrook is the producing partner of director Jason Reitman and runs their production
+      company, Right of Way Films. She most recently produced Reitman's upcoming film, <cite>Labor Day</cite>,
+      starring Josh Brolin and Kate Winslet. Currently, they are producing a pilot for HBO written
+      by Bruce Eric Kaplan, for Reitman to direct, as well as a feature adaptation of the
+      Sundance-winning short <cite>Whiplash</cite>, directed by Damien Chazelle. Helen also served as an
+      executive producer on the Duplass Brothers' film <cite>Jeff, Who Lives at Home</cite> and Reitman's
+      previous feature, <cite>Young Adult</cite>.
+    {% endtrans %}
+    </p>
+  </article>
+{%- endmacro %}
+
 {% macro rharvey() -%}
   <article class="judge-bio vcard" id="rharvey">
     <header>
       <img src="{{ static('img/judges/judge-rharvey.jpg') }}" alt="" class="photo">
-      <hgroup>
-        <h2 class="fn">Robert &ldquo;Bob&rdquo; Harvey</h2>
-        <h3 class="role">{{ _('<abbr title="Exectuve Vice President">EVP</abbr>, Global Sales and Marketing, Panavision') }}</h3>
-      </hgroup>
+      <h2 class="fn">Robert &ldquo;Bob&rdquo; Harvey</h2>
+      <p class="role">{{ _('<abbr title="Exectuve Vice President">EVP</abbr>, Global Sales and Marketing, Panavision') }}</p>
     </header>
     <p>
     {% trans %}
@@ -29,10 +48,8 @@
   <article class="judge-bio vcard" id="fleonard">
     <header>
       <img src="{{ static('img/judges/judge-fleonard.jpg') }}" alt="" class="photo">
-      <hgroup>
-        <h2 class="fn">Franklin Leonard</h2>
-        <h3 class="role">{{ _('Founder, Black List') }}</h3>
-      </hgroup>
+      <h2 class="fn">Franklin Leonard</h2>
+      <p class="role">{{ _('Founder, Black List') }}</p>
     </header>
     <p>
     {% trans %}
@@ -60,10 +77,8 @@
   <article class="judge-bio vcard" id="enorton">
     <header>
       <img src="{{ static('img/judges/judge-enorton.jpg') }}" alt="" class="photo">
-      <hgroup>
-        <h2 class="fn">Edward Norton</h2>
-        <h3 class="role">{{ _('Actor, Director, Producer, Activist') }}</h3>
-      </hgroup>
+      <h2 class="fn">Edward Norton</h2>
+      <p class="role">{{ _('Actor, Director, Producer, Activist') }}</p>
     </header>
 
     <p>
@@ -105,14 +120,56 @@
   </article>
 {%- endmacro %}
 
+{% macro cogilvie() -%}
+  <article class="judge-bio vcard" id="cogilvie">
+    <header>
+      <img src="{{ static('img/judges/judge-cogilvie.jpg') }}" alt="" class="photo">
+      <h2 class="fn">Catherine Ogilvie</h2>
+      <p class="role">{{ _('General Manager, <abbr title="Europe, the Middle East, and Africa">EMEA</abbr> Marketing, Dolby') }}</p>
+    </header>
+    <p>
+    {% trans %}
+      As General Manager, EMEA Marketing, Catherine Ogilvie is responsible for brand, product,
+      and partner marketing throughout Europe, the Middle East, and Africa (<abbr>EMEA</abbr>). Catherine joined
+      Dolby in 2009 as Vice President, Global Corporate Communications.
+    {% endtrans %}
+    </p>
+
+    <p>
+    {% trans %}
+      Prior to starting at Dolby, Catherine was Executive Vice President and General Manager at Edelman,
+      the world's largest independent PR agency, where she led the San Francisco office, building
+      award-winning integrated communications programs for clients.
+    {% endtrans %}
+    </p>
+
+    <p>
+    {% trans %}
+      Previously, Catherine served as Director, Global Marketing and Communications, for the
+      Almond Board of California, and as Senior Director, Marketing, for Napster, the original
+      peer-to-peer music service. Catherine has also worked as a management consultant based in Munich,
+      Germany, working with international media clients such as Bertelsmann, Kirch Gruppe, and
+      Universal Studios.
+    {% endtrans %}
+    </p>
+
+    <p>
+    {% trans %}
+      Catherine studied theatre at Dartington College of Arts in Devon, England, and pursued
+      post-graduate business studies at the University of London earning a Master's degree in
+      Marketing and Communication.
+    {% endtrans %}
+    </p>
+  </article>
+{%- endmacro %}
+
 {% macro srobertson() -%}
   <article class="judge-bio vcard" id="srobertson">
     <header>
       <img src="{{ static('img/judges/judge-srobertson.jpg') }}" alt="" class="photo">
       <h2 class="fn">Shauna Robertson</h2>
-      <h3 class="role">{{ _('Producer') }}</h3>
+      <p class="role">{{ _('Producer') }}</p>
     </header>
-
     <p>
     {% trans %}
       Shauna Robertson has produced some of the best comedies of the last decade. Her
@@ -134,14 +191,56 @@
   </article>
 {%- endmacro %}
 
+{% macro grodriguez() -%}
+  <article class="judge-bio vcard" id="grodriguez">
+    <header>
+      <img src="{{ static('img/judges/judge-grodriguez.jpg') }}" alt="" class="photo">
+      <h2 class="fn">Gina Rodriguez</h2>
+      <p class="role">{{ _('Actor') }}</p>
+    </header>
+    <p>
+    {% trans %}
+      Named the "next big thing" and one of the "top 35 Latinos under 35," by <cite>The Hollywood
+      Reporter</cite>, Gina Rodriguez's profile has been rising steadily since her breakout performance
+      as the titular character in <cite>Filly Brown</cite> during the 2012 Sundance Film Festival. A 2012
+      Imagen award winner for "Best Actress in a Feature Film: <cite>Filly Brown</cite>," Gina is steadily
+      noticed by the public and entertainment industry due to her incredible acting chops and
+      infectiously joyful personality.
+    {% endtrans %}
+    </p>
+
+    <p>
+    {% trans %}
+      Growing up in Chicago, Gina Rodriguez started performing at age seven with the salsa
+      dance company <i>Fantasia Juvenil</i>. At sixteen, Gina was one of thirteen teens to be accepted
+      into Columbia University New York - Theatrical Collaboration, taught by Richard Niles. She was
+      accepted into the Tisch School of the Arts, and the calling was clear; theatre was it.
+      After the years of success in New York, Gina booked a lead role in a feature film <cite>Go For It</cite>
+      (Lionsgate) in which she received a 2011 Imagen Awards nomination. After this, Gina
+      booked her first co-star TV role on CBS' <cite>Eleventh Hour</cite>. She went on to book series
+      regular roles on web series <cite>Eden's Court</cite> and <cite>No Names</cite>; her first studio film
+      <cite>Our Family Wedding</cite> with America Ferrera; and a lead in film <cite>Superchicas</cite>. It
+      was also recently announced that Gina has been cast in the highly coveted lead role of Pilar "Maytag"
+      Robles in the Fox Navy drama pilot <cite>Wild Blue</cite>.
+    {% endtrans %}
+    </p>
+
+    <p>
+    {% trans %}
+      Gina is a supporter of Inspira, an organization that works to spotlight Latino leaders who
+      shape their communities. She also works with the National Hispanic Foundation for the Arts
+      and the Boyle Heights Learning Collaborative. She lives in Los Angeles, California.
+    {% endtrans %}
+    </p>
+  </article>
+{%- endmacro %}
+
 {% macro csamuelson() -%}
   <article class="judge-bio vcard" id="csamuelson">
     <header>
       <img src="{{ static('img/judges/judge-csamuelson.jpg') }}" alt="" class="photo">
-      <hgroup>
-        <h2 class="fn">Couper Samuelson</h2>
-        <h3 class="role">{{ _('Producer') }}</h3>
-      </hgroup>
+      <h2 class="fn">Couper Samuelson</h2>
+      <p class="role">{{ _('Producer') }}</p>
     </header>
     <p>
     {# L10N: Note: The French "Palm d'Or" is a proper name and should not be translated. #}
@@ -155,6 +254,76 @@
       theatrically by a major studio in the modern era. Samuelson began his career at
       Mark Cuban's 2929, where he co-produced movies including James Gray's <cite>We Own the Night</cite>
       and <cite>Two Lovers</cite>, both of which were nominated for the Cannes <i>Palme d'Or</i>.
+    {% endtrans %}
+    </p>
+  </article>
+{%- endmacro %}
+
+{% macro lschwartzberg() -%}
+  <article class="judge-bio vcard" id="lschwartzberg">
+    <header>
+      <img src="{{ static('img/judges/judge-lschwartzberg.jpg') }}" alt="" class="photo">
+      <h2 class="fn">Louie Schwartzberg</h2>
+      <p class="role">{{ _('Cinematographer') }}</p>
+    </header>
+    <p>
+    {% trans %}
+      Louie Schwartzberg is an award-winning producer, director, and cinematographer whose notable
+      career spans more than three decades providing breathtaking imagery for feature films, television
+      shows, documentaries and commercials.
+    {% endtrans %}
+    </p>
+
+    <p>
+    {% trans %}
+      As a visual artist, Louie has created some of the most iconic and memorable film moments of our
+      time. He is an innovator in the world of nature, aerial and "slice-of-life" photography &ndash;
+      the only cinematographer in the world who has literally been shooting time-lapse 24 hours a day,
+      7 days a week continuously for more than 30 years.
+    {% endtrans %}
+    </p>
+
+    <p>
+    {% trans %}
+      He recently completed <cite>Wings of Life</cite>, a documentary feature for Disneynature, narrated by Meryl
+      Streep. It won Best Theatrical Program at the Jackson Hole Science Media Awards 2012, a Best
+      Cinematography Roscar Award, and the Best Cinematography Award at the 2013 Waimea Ocean Film Festival.
+      The film reveals the fragile relationship between flowers, and their pollination partners. It
+      is a love story that feeds the earth. The film will be released April 16 on Blu Ray. As a director,
+      he is completing <cite>Mysteries of the Unseen World</cite>, a 3D-IMAX film with National Geographic, that is
+      targeted for an October 2013 release. The film is a journey into invisible worlds that are too slow,
+      too fast, too small and too vast for the human eye to see. He has received Clio Awards for Best
+      Environmental PSA, an Emmy nomination for Best Cinematography for <cite>Oceans of Air</cite> on the Discovery
+      Channel, and recognized as one of the top 70 Cinematographers for the On Film Kodak Salute Series.
+    {% endtrans %}
+    </p>
+  </article>
+{%- endmacro %}
+
+{% macro aszajna() -%}
+  <article class="judge-bio vcard" id="aszajna">
+    <header>
+      <img src="{{ static('img/judges/judge-aszajna.jpg') }}" alt="" class="photo">
+      <h2 class="fn">Andrzej Szajna</h2>
+      <p class="role">{{ _('Producer, Director') }}</p>
+    </header>
+    <p>
+    {% trans %}
+      Andrzej Szajna has been in and out of the film and TV industry for 19 years. He started his
+      career as an assistant director on low budget action movies such as <cite>Avalon</cite>,
+      <cite>Derailed</cite>, and <cite>Out of Reach</cite> and worked for Independent producers
+      such as Nu Image and Lucky 7 productions. At this point, Andrzej delved into stockbroking and
+      entrepreneurship for 3 years. He went on to produce <cite>Snow White Russian Red</cite> which
+      won best film in 2010 at the Polish Eagle awards, as well as the Polish Hollywood Eagle awards.
+      Afterwards, he produced <cite>Londoners</cite>, a Polish TV series with a 13 million euro budget,
+      which was nominated for Prix Europa and other awards internationally.
+    {% endtrans %}
+    </p>
+      
+    <p>
+    {% trans %}
+      Andrzej has spent the last couple of years fund raising for non profit organizations and is currently developing a
+      slate of new projects for 2014.
     {% endtrans %}
     </p>
   </article>

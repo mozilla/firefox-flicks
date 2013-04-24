@@ -198,33 +198,35 @@
       </div>
 
       <ul class="judges">
+        <li id="hestabrook" class="judge vcard">
+          <a href="{{ url('flicks.base.judges')|urlparams(hash='hestabrook') }}" class="bio" data-bio="{{ judge_bio.hestabrook()|forceescape }}">
+            <img src="{{ static('img/judges/judge-hestabrook.jpg') }}" alt="" class="photo">
+            <h2 class="fn">Helen Estabrook</h2>
+            <p class="role">{{ _('Producer') }}</p>
+          </a>
+        </li>
+        
         <li id="rharvey" class="judge vcard">
-          <a href="/judges#rharvey" class="bio" data-bio="{{ judge_bio.rharvey()|forceescape }}">
+          <a href="{{ url('flicks.base.judges')|urlparams(hash='rharvey') }}" class="bio" data-bio="{{ judge_bio.rharvey()|forceescape }}">
             <img src="{{ static('img/judges/judge-rharvey.jpg') }}" alt="" class="photo">
-            <hgroup>
-              <h2 class="fn">Robert "Bob" Harvey</h2>
-              <h3 class="role">{{ _('<abbr title="Executive Vice President">EVP</abbr>, Global Sales and Marketing, Panavision') }}</h3>
-            </hgroup>
+            <h2 class="fn">Robert "Bob" Harvey</h2>
+            <p class="role">{{ _('<abbr title="Executive Vice President">EVP</abbr>, Global Sales and Marketing, Panavision') }}</p>
           </a>
         </li>
 
         <li id="fleonard" class="judge vcard">
-          <a href="/judges#fleonard" class="bio" data-bio="{{ judge_bio.fleonard()|forceescape }}">
+          <a href="{{ url('flicks.base.judges')|urlparams(hash='fleonard') }}" class="bio" data-bio="{{ judge_bio.fleonard()|forceescape }}">
             <img src="{{ static('img/judges/judge-fleonard.jpg') }}" alt="" class="photo">
-            <hgroup>
-              <h2 class="fn">Franklin Leonard</h2>
-              <h3 class="role">{{ _('Founder, Black List') }}</h3>
-            </hgroup>
+            <h2 class="fn">Franklin Leonard</h2>
+            <p class="role">{{ _('Founder, Black List') }}</p>
           </a>
         </li>
 
         <li id="enorton" class="judge vcard">
-          <a href="/judges#enorton" class="bio" data-bio="{{ judge_bio.enorton()|forceescape }}">
+          <a href="{{ url('flicks.base.judges')|urlparams(hash='enorton') }}" class="bio" data-bio="{{ judge_bio.enorton()|forceescape }}">
             <img src="{{ static('img/judges/judge-enorton.jpg') }}" alt="" class="photo">
-            <hgroup>
-              <h2 class="fn">Edward Norton</h2>
-              <h3 class="role">{{ _('Actor, Director, Producer, Activist') }}</h3>
-            </hgroup>
+            <h2 class="fn">Edward Norton</h2>
+            <p class="role">{{ _('Actor, Director, Producer, Activist') }}</p>
           </a>
           <figure class="quote">
             <blockquote>
@@ -244,13 +246,37 @@
           </figure>
         </li>
 
+        <li id="cogilvie" class="judge vcard">
+          <a href="{{ url('flicks.base.judges')|urlparams(hash='cogilvie') }}" class="bio" data-bio="{{ judge_bio.cogilvie()|forceescape }}">
+            <img src="{{ static('img/judges/judge-cogilvie.jpg') }}" alt="" class="photo">
+            <h2 class="fn">Catherine Ogilvie</h2>
+            <p class="role">{{ _('General Manager, <abbr title="Europe, the Middle East, and Africa">EMEA</abbr> Marketing, Dolby') }}</p>
+          </a>
+          <figure class="quote">
+            <blockquote>
+              <p>
+              &ldquo;
+              {% trans %}
+                Sound and cinema have been inextricably linked since the movies started talking to us. 
+                Partnering with Firefox Flicks is a natural fit for Dolby as we're passionate about 
+                using sound to tell great stories through the medium of film. We're looking forward 
+                to helping young filmmakers capture the power of sound to deliver unforgettable 
+                experiences in their films.
+              {% endtrans %}
+              &rdquo;
+              </p>
+            </blockquote>
+            <figcaption>
+              &mdash; <cite>Catherine Ogilvie</cite>
+            </figcaption>
+          </figure>
+        </li>
+
         <li id="srobertson" class="judge vcard">
-          <a href="/judges#srobertson" class="bio" data-bio="{{ judge_bio.srobertson()|forceescape }}">
+          <a href="{{ url('flicks.base.judges')|urlparams(hash='srobertson') }}" class="bio" data-bio="{{ judge_bio.srobertson()|forceescape }}">
             <img src="{{ static('img/judges/judge-srobertson.jpg') }}" alt="" class="photo">
-            <hgroup>
-              <h2 class="fn">Shauna Robertson</h2>
-              <h3 class="role">{{ _('Producer') }}</h3>
-            </hgroup>
+            <h2 class="fn">Shauna Robertson</h2>
+            <p class="role">{{ _('Producer') }}</p>
           </a>
           <figure class="quote">
             <blockquote>
@@ -271,22 +297,71 @@
             </figcaption>
           </figure>
         </li>
+        
+        <li id="grodriguez" class="judge vcard">
+          <a href="{{ url('flicks.base.judges')|urlparams(hash='grodriguez') }}" class="bio" data-bio="{{ judge_bio.grodriguez()|forceescape }}">
+            <img src="{{ static('img/judges/judge-grodriguez.jpg') }}" alt="" class="photo">
+            <h2 class="fn">Gina Rodriguez</h2>
+            <p class="role">{{ _('Actor') }}</p>
+          </a>
+          <figure class="quote">
+            <blockquote>
+              <p>
+              &ldquo;
+              {% trans %}
+                I love working with companies that give opportunities to independent artist, 
+                by combining technology and art Firefox is doing just that! Thank you Firefox Flicks 
+                for opening doors and allowing me to be a part of the process!
+              {% endtrans %}
+              &rdquo;
+              </p>
+            </blockquote>
+            <figcaption>
+              &mdash; <cite>Gina Rodriguez</cite>
+            </figcaption>
+          </figure>
+        </li>
 
         <li id="csamuelson" class="judge vcard">
-          <a href="/judges#csamuelson" class="bio" data-bio="{{ judge_bio.csamuelson()|forceescape }}">
+          <a href="{{ url('flicks.base.judges')|urlparams(hash='csamuelson') }}" class="bio" data-bio="{{ judge_bio.csamuelson()|forceescape }}">
             <img src="{{ static('img/judges/judge-csamuelson.jpg') }}" alt="" class="photo">
-            <hgroup>
-              <h2 class="fn">Couper Samuelson</h2>
-              <h3 class="role">{{ _('Producer') }}</h3>
-            </hgroup>
+            <h2 class="fn">Couper Samuelson</h2>
+            <p class="role">{{ _('Producer') }}</p>
           </a>
         </li>
 
-        <li class="judge">
-          <img src="{{ static('img/judges/blankf.jpg') }}" alt="" class="photo">
-          <hgroup>
-            <h2>{{ _('To Be Announced') }}</h2>
-          </hgroup>
+        <li id="lschwartzberg" class="judge vcard">
+          <a href="{{ url('flicks.base.judges')|urlparams(hash='lschwartzberg') }}" class="bio" data-bio="{{ judge_bio.lschwartzberg()|forceescape }}">
+            <img src="{{ static('img/judges/judge-lschwartzberg.jpg') }}" alt="" class="photo">
+            <h2 class="fn">Louie Schwartzberg</h2>
+            <p class="role">{{ _('Cinematographer') }}</p>
+          </a>
+          <figure class="quote">
+            <blockquote>
+              <p>
+              &ldquo;
+              {% trans %}
+                For over 30 years, I have been constantly engaged in filming the connections we all 
+                share, as humans, with the rest of our planet. The moments that make us inspired and 
+                connect us to the universe through the celebration of life. Firefox Flicks is all about 
+                connecting people through the mobile web and I'm more than happy to share my perspective 
+                with the filmmakers of tomorrow in this pursuit.
+              {% endtrans %}
+              &rdquo;
+              </p>
+            </blockquote>
+            <figcaption>
+              &mdash; <cite>Louie Schwartzberg</cite>
+            </figcaption>
+          </figure>
+        </li>
+        
+        <li id="aszajna" class="judge vcard">
+          <a href="{{ url('flicks.base.judges')|urlparams(hash='aszajna') }}" class="bio" data-bio="{{ judge_bio.aszajna()|forceescape }}">
+            <img src="{{ static('img/judges/judge-aszajna.jpg') }}" alt="" class="photo">
+            <h2 class="fn">Andrzej Szajna</h2>
+            <p class="role">{{ _('Producer, Director') }}</p>
+          </a>
         </li>
       </ul>
 

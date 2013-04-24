@@ -172,7 +172,6 @@
   font-size: 22px;
 }
 
-
 /*** Per Slide Overrides *********/
 .js .slide-generic .act span {
   font-size: 11px;
@@ -231,11 +230,6 @@
   content: " »";
   white-space: nowrap;
 }
-
-
-
-
-
 
 /* @About *********/
 #about {
@@ -319,7 +313,8 @@
 
 .judges {
   list-style: none;
-  margin: 0 -10px 2em;
+  width: 800px;
+  margin: 0 auto 2em;
 }
 
 .judges:after {
@@ -338,11 +333,15 @@
   font-family: "Open Sans", sans-serif;
 }
 
+.judge:nth-child(5n+1) {
+  clear: left;
+}
+
 .judge .quote {
   display: none;
 }
 
-.judge h2 {
+.judge .fn {
   font-size: 14px;
   font-weight: normal;
   text-transform: uppercase;
@@ -350,13 +349,18 @@
   margin: 0 0 .5em;
 }
 
-.judge h3 {
+.judge .role {
   font-size: 12px;
   font-weight: normal;
 }
 
 .judge a {
   color: #212a2f;
+  display: block;
+}
+
+.judge a:focus {
+  outline: 0;
 }
 
 .judge .photo {
@@ -559,14 +563,23 @@
     padding-top: 30px;
   }
 
-
   .judges {
     width: 480px;
     margin: 0 auto 2em;
   }
 
+  .judges .judge:nth-child(5n+1) {
+    clear: none;
+  }
+
   .judges .judge:nth-child(3n+1) {
     clear: left;
+  }
+  
+  .judges .judge:nth-child(10) {
+    clear: both;
+    float: none;
+    margin: 0 auto;
   }
 
   .prize {
@@ -747,19 +760,26 @@
   }
 
   .judges {
+    width: auto;
     margin: 0 0 1em;
   }
-
+ 
   .judge {
     width: 125px;
   }
-
-  .judges .judge:nth-child(3n+1) {
+ 
+  .judges .judge:nth-child(3n+1),
+  .judges .judge:nth-child(5n+1) {
     clear: none;
   }
-
+ 
   .judges .judge:nth-child(2n+1) {
     clear: left;
+  }
+  
+  .judges .judge:nth-child(10) {
+    clear: none;
+    float: left;
   }
 
   #judge-quote {
@@ -826,12 +846,23 @@
     background-position: 290px -430px, 320px 165%, -320px 220px;
   }
 
+  .judges {
+    width: 480px;
+    margin: 0 auto 2em;
+  }
+
+  .judges .judge:nth-child(5n+1) {
+    clear: none;
+  }
+
   .judges .judge:nth-child(3n+1) {
     clear: left;
   }
-
-  .judges .judge:nth-child(2n+1) {
-    clear: none;
+  
+  .judges .judge:nth-child(10) {
+    clear: both;
+    float: none;
+    margin: 0 auto;
   }
 
   #modal .judge-bio {
