@@ -92,6 +92,14 @@
     margin-left: -10px;
 }
 
+.period {
+    margin: 0 -10px 2em;
+    padding: 19px 19px 0;
+    background: rgba(255,255,255,.35);
+    border: 1px solid #dbdbdb;
+    border-radius: 6px;
+    box-shadow: inset 0 0 3px rgba(0,0,0,.1);
+}
 
 .period header h2 {
     margin: 0 auto .5em;
@@ -99,6 +107,14 @@
 .period header h2 span {
     display: block;
     font-size: .823em;
+}
+
+.period .entry-list {
+  margin: 0 -20px 0 0;
+}
+
+.period .entry-list .entry {
+    width: 210px;
 }
 
 .winner {
@@ -163,6 +179,11 @@
   .winners-page .section-intro {
       width: auto;
   }
+  
+  .period {
+      margin: 0 -20px 2em 0;
+      width: auto;
+  }
 
 }
 
@@ -206,6 +227,10 @@
   .winners-page .entry-list {
     width: auto;
   }
+  
+  .period {
+    margin: 0 0 2em;
+  }
 
 }
 
@@ -231,7 +256,15 @@
     clear: none;
   }
   
-  .winners-page .entry-list .third-place {
+  .period .entry-list {
+    margin-left: -10px;
+  }
+  
+  .period .entry-list .entry {
+      width: 190px;
+  }
+  
+  .period .entry-list .third-place {
     float: none;
     clear: both;
     display: block;
