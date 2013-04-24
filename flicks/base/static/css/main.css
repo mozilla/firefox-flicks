@@ -453,7 +453,7 @@ a.submit-link:active {
   border-radius: 6px;
   box-shadow: inset 0 0 3px rgba(0,0,0,.05);
   width: 190px;
-  padding: 20px 20px 0;
+  padding: 20px 20px 1px;
   margin-right: -20px;
   float: right;
 }
@@ -469,13 +469,19 @@ a.submit-link:active {
 }
 
 .sidebar h3 {
-  text-align: center;
   font-size: 1rem;
   margin: 0 0 .5em;
 }
 
 .sidebar ul {
-  margin: 0 20px 1.5em;
+  list-style: none;
+  font-size: .875rem;
+  margin: 0 0 1.5em;
+}
+
+.sidebar ul li:before {
+  content: "\27A4\0020";
+  color: #1677b9;
 }
 
 .sidebar .entry-list {
@@ -1243,6 +1249,10 @@ body.noscroll .fixed #head-inner {
   .aside {
     width: auto;
     float: none;
+  }
+  
+  .sidebar {
+    margin: 0 0 2em;
   }
 
   .wrap.info {
