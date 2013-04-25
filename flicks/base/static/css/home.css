@@ -766,6 +766,7 @@
  
   .judge {
     width: 125px;
+    margin-bottom: 1em;
   }
  
   .judges .judge:nth-child(3n+1),
@@ -847,22 +848,8 @@
   }
 
   .judges {
-    width: 480px;
+    width: 305px;
     margin: 0 auto 2em;
-  }
-
-  .judges .judge:nth-child(5n+1) {
-    clear: none;
-  }
-
-  .judges .judge:nth-child(3n+1) {
-    clear: left;
-  }
-  
-  .judges .judge:nth-child(10) {
-    clear: both;
-    float: none;
-    margin: 0 auto;
   }
 
   #modal .judge-bio {
