@@ -7,6 +7,7 @@ slide_schedule = (
     # EX: ScheduleItem(date(2013, 4, 5), date(2013, 4, 22), ['slide-two.html', 'slide-three.html']),
     ScheduleItem(date(2013, 4, 9), date(2013, 4, 21), ['blogpost_judges.html', 'blogpost_makeyourflickawinner.html', 'blogpost_getcreative.html']),
     ScheduleItem(date(2013, 4, 22), date(2013, 4, 30), ['blogpost_baficiwinner.html', 'blogpost_schwartzberg.html', 'blogpost_makeyourflickawinner.html']),
+    ScheduleItem(date(2013, 5, 1), date(2013, 5, 8), ['blogpost_shootingpeople.html', 'blogpost_baficiwinner.html', 'blogpost_makeyourflickawinner.html']),
 )
 
 
