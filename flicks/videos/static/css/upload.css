@@ -46,8 +46,11 @@
 
 .user-input fieldset {
   width: 540px;
-  padding-bottom: 20px;
+  padding-bottom: 36px;
   margin-bottom: 20px;
+}
+
+.user-input .bottom-rule {
   border-bottom: 1px solid #c1d9ed;
   box-shadow: 0 1px 0 #fff;
 }
@@ -86,8 +89,6 @@
 .user-input ul.prefs {
   padding-top: 20px;
   margin-top: 20px;
-  border-top: 1px solid #fff;
-  box-shadow: 0 -1px 0 #c1d9ed;
 }
 
 .user-input p,
@@ -157,6 +158,7 @@
   width: 240px;
   position: absolute;
   left: 540px;
+  top: 18px;
 }
 
 .user-input .errorlist {
@@ -188,6 +190,11 @@
 #user-info li.region {
   font-size: 13px;
   padding-top: 1.75em;
+}
+
+.user-input .address-fields {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 /*** @Rules *********/

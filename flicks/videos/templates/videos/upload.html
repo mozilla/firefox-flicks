@@ -12,6 +12,12 @@
   {{ js('upload') }}
 {% endblock %}
 
+{% block string_data %}
+  {{ super() }}
+  data-upload-bad-extension="{{ _('The file you\'ve chosen doesn\'t look like a video file. Are you sure you want to upload it?') }}"
+  data-upload-exit="{{ _('You haven\'t completed uploading your flick yet. Are you sure you want to quit?') }}"
+{% endblock %}
+
 {% block content %}
   <div class="section">
     <div class="wrap">

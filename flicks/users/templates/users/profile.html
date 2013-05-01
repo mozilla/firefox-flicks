@@ -40,7 +40,7 @@
     </ol>
 
     <form class="user-input" id="user-info" method='POST'>
-      <fieldset id="account">
+      <fieldset id="account" class="bottom-rule">
         <p class="legend">
         {% trans %}
           Thanks for entering Firefox Flicks, the global video contest
@@ -57,7 +57,8 @@
             {{ form.full_name.label_tag(_('Full Name')) }} {{ form.full_name }}
           </li>
           <li class="col2">
-            {{ form.nickname.label_tag(_('Nickname')) }} {{ form.nickname }}
+            {# L10n: Form label for the nickname field. It is optional for users to fill out. #}
+            {{ form.nickname.label_tag(_('Nickname (optional)')) }} {{ form.nickname }}
           </li>
           <li class="col1">
             <em class="note">
@@ -71,54 +72,53 @@
         </ul>
       </fieldset>
 
-        <fieldset id="address">
-          <p class="legend">
-          {% trans %}
-            Mailing address (optional)
-          {% endtrans %}
-          </p>
-          <ul>
-            <li class="col1">
-              <em class="note">
-                {{ _('We ask for your address so we can send you an awesome gift for participating. Providing it is completely optional and we won\'t use it or keep it for any other purpose.') }}
-              </em>
-              {{ form.address1.label_tag(_('Address line 1')) }} {{ form.address1 }}
-            </li>
-            <li class="col2">
-              {{ form.address2.label_tag(_('Address line 2')) }} {{ form.address2 }}
-            </li>
-            <li class="col1">
-              {{ form.city.label_tag(_('City')) }} {{ form.city }}
-            </li>
-            <li class="col2">
-              {{ form.mailing_country.label_tag(_('Country')) }} {{ form.mailing_country }}
-            </li>
-            <li class="col1">
-              {{ form.state.label_tag(_('State/Province')) }} {{ form.state }}
-            </li>
-            <li class="col2">
-              {{ form.postal_code.label_tag(_('Postal Code')) }} {{ form.postal_code }}
-            </li>
-          </ul>
+      <fieldset id="address">
+        <p class="legend">
+        {% trans %}
+          Mailing address (optional)
+        {% endtrans %}
+        </p>
+        <ul class="address-fields bottom-rule">
+          <li class="col1">
+            <em class="note">
+              {{ _('We ask for your address so we can send you an awesome gift for participating. Providing it is completely optional and we won\'t use it or keep it for any other purpose.') }}
+            </em>
+            {{ form.address1.label_tag(_('Address line 1')) }} {{ form.address1 }}
+          </li>
+          <li class="col2">
+            {{ form.address2.label_tag(_('Address line 2')) }} {{ form.address2 }}
+          </li>
+          <li class="col1">
+            {{ form.city.label_tag(_('City')) }} {{ form.city }}
+          </li>
+          <li class="col2">
+            {{ form.mailing_country.label_tag(_('Country')) }} {{ form.mailing_country }}
+          </li>
+          <li class="col1">
+            {{ form.state.label_tag(_('State/Province')) }} {{ form.state }}
+          </li>
+          <li class="col2">
+            {{ form.postal_code.label_tag(_('Postal Code')) }} {{ form.postal_code }}
+          </li>
+        </ul>
 
-          <ul class="prefs">
-            <li class="col1 check">
-              {{ input_in_label(form.privacy_policy_agree,
-                 _('I\'m okay with you handling my info as you explain in your <a href="{link}" rel="external">privacy policy</a>')|fe(link='http://www.mozilla.org/en-US/privacy-policy.html')) }}
+        <ul class="prefs">
+          <li class="col1 check">
+            {{ input_in_label(form.privacy_policy_agree,
+               _('I\'m okay with you handling my info as you explain in your <a href="{link}" rel="external">privacy policy</a>')|fe(link='http://www.mozilla.org/en-US/privacy-policy.html')) }}
+          </li>
+          {% if LANG.startswith('en') %}
+            <li class="col2 check">
+              {{ input_in_label(form.mailing_list_signup,
+                                _('I want to receive email updates about Firefox Flicks')) }}
             </li>
-            {% if LANG.startswith('en') %}
-              <li class="col2 check">
-                {{ input_in_label(form.mailing_list_signup,
-                                  _('I want to receive email updates about Firefox Flicks')) }}
-              </li>
-              <li class="col2 format">
-                {# L10n: Refers to the format of an email, either HTML or Text. #}
-                {{ form.mailing_list_format.label_tag(_('Format')) }} {{ form.mailing_list_format }}
-              </li>
-            {% endif %}
-          </ul>
-        </fieldset>
-      </ul>
+            <li class="col2 format">
+              {# L10n: Refers to the format of an email, either HTML or Text. #}
+              {{ form.mailing_list_format.label_tag(_('Email Format')) }} {{ form.mailing_list_format }}
+            </li>
+          {% endif %}
+        </ul>
+      </fieldset>
 
       <div class="form-control">
         <button type="submit" class="button next">{{ _('Next') }}</button>
