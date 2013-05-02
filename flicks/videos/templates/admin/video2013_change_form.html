@@ -2,10 +2,12 @@
 {% load video_util %}
 
 {% block after_field_sets %}
-  <div class="module">
-    <h2>Video Preview</h2>
-    <div style="text-align: center; padding: 5px;">
-      {{ original|embed_html }}
+  {% if original %}
+    <div class="module">
+      <h2>Video Preview</h2>
+      <div style="text-align: center; padding: 5px;">
+        {{ original|embed_html }}
+      </div>
     </div>
-  </div>
+  {% endif %}
 {% endblock %}
