@@ -102,18 +102,27 @@
       <div class="section-intro">
         <p>
         {% trans %}
-          See what last year's winners have to say about their experience and use
-          the materials below to help you make your flick.
+          Use the materials below to get inspired and to help you make your flick.
         {% endtrans %}
         </p>
-        <p><a href="{{ url('flicks.videos.winners') }}" class="button-light go">{{ _('See 2013 Flicks Winners') }}</a></p>
+        <ul class="info">
+          <li><a href="{{ url('flicks.videos.winners') }}" class="button-light go">{{ _('See early entry award winners') }}</a></li>
+          <li><a href="{{ url('flicks.videos.list') }}" class="button-light go">{{ _('View the gallery of entries') }}</a></li>
+          <li><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="button-light dl ga_brief-dl" rel="external">{{ _('Read the creative brief') }}</a></li>
+          <li><a href="http://mzl.la/XootKF" class="button-light dl" rel="external">{{ _('Download the creative assets') }}</a></li>
+        </ul>
+        
+        <p>
+        {% trans %}
+          See what last year's winners have to say about their experience.
+        {% endtrans %}
+          <span class="note">
+        {% trans %}
+          (Please note that last year's theme was Firefox. This year it's about the power of the Web on mobile devices.)
+        {% endtrans %}
+          </span>
+        </p>
       </div>
-
-      <ul class="info">
-        <li><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="button-light dl ga_brief-dl" rel="external">{{ _('Read the creative brief') }}</a></li>
-        <li><a href="http://mzl.la/XootKF" class="button-light dl" rel="external">{{ _('Download the creative assets') }}</a></li>
-        <li class="gallery-link"><a href="{{ url('flicks.videos.list') }}" class="button-light go">{{ _('View the gallery of entries') }}</a></li>
-      </ul>
 
       <ul class="entry-list">
         <li class="entry">

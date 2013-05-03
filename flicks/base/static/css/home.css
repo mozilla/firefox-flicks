@@ -282,21 +282,44 @@
 
 /* @2013 @Flicks *********/
 #flicks2013 .section-intro {
-  width: 760px;
+  width: 90%;
+}
+
+#flicks2013 .section-intro .note {
+  display: block;
+  font-size: .75em;
 }
 
 #flicks2013 .info {
   list-style: none;
-  width: 100%;
-  margin: -10px auto 2em;
-  border-top: 1px solid #ccc;
-  padding-top: 30px;
+  width: 80%;
+  padding: 0 10%;
+  margin: 0 auto 2em;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 30px;
+  overflow: auto;
 }
 
 #flicks2013 .info li {
-  width: 30%;
-  margin: 0 1.5% 1em;
+  width: 46%;
+  margin: 0 2% .5em;
   display: inline-block;
+}
+
+#flicks2013 .info li:nth-child(odd) {
+  clear: left;
+  float: left;
+  text-align: right;
+}
+
+#flicks2013 .info li:nth-child(even) {
+  clear: right;
+  float: right;
+  text-align: left;
+}
+
+#flicks2013 .info .button-light {
+  width: 90%;
   text-align: center;
 }
 
@@ -558,20 +581,16 @@
   .js .slide-desc {
     font-size: 16px;
   }
-
+  
+  #flicks2013 .section-intro {
+    width: 100%;
+    max-width: 100%;
+  }
 
   #flicks2013 .entry {
     width: 205px;
   }
   
-  #flicks2013 .info {
-    list-style: none;
-    width: 100%;
-    margin: -10px auto 2em;
-    border-top: 1px solid #ccc;
-    padding-top: 30px;
-  }
-
   .judges {
     width: 480px;
     margin: 0 auto 2em;
@@ -739,10 +758,21 @@
     display: block;
     margin: 0;
   }
+  
+  #flicks2013 .info {
+    width: auto;
+    padding: 0 0 30px;
+  }
 
   #flicks2013 .info li {
     display: block;
     width: auto;
+  }
+  
+  #flicks2013 .info li:nth-child(odd),
+  #flicks2013 .info li:nth-child(even) {
+    float: none;
+    text-align: center;
   }
 
   #flicks2013 .entry {
