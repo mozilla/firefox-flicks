@@ -1,0 +1,18 @@
+<div class="slide-generic slide slide-earlyentry">
+  <img class="backdrop" src="{{ static('img/home/promo-backdrop-earlyentry.jpg') }}" alt="">
+  <div class="slide-desc">
+    <h2>{{ _('Early entry <br>deadline:') }} {{ _('May 29') }}</h2>
+    <p>
+      {% trans %}
+        Submit your flick by May 29 to qualify for our second Early Entry Award. 
+        You could win $1,000 and automatically qualify for the Grand Prize.
+      {% endtrans %}
+    </p>
+    <p class="act">
+      <a href="{{ url('flicks.videos.upload') }}" class="requires-auth go">{{ _('Enter today') }}</a>
+    </p>
+  </div>
+</div>
+
+
+
