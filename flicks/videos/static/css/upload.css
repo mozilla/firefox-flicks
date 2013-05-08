@@ -286,9 +286,9 @@
 
 .progress {
   position: relative;
-  width: 510px;
+  width: 90%;
   height: 1.5em;
-  padding: 8px 40px 8px 20px;
+  padding: 8px 7% 8px 3%;
   background: #fff;
   font: 14px "Open Sans", sans-serif;
   border-bottom: 8px solid #e8ebec;
@@ -383,6 +383,18 @@
 .button.disabled {
   opacity: .5;
   cursor: default;
+}
+
+.button.loading:after {
+  content: "";
+  height: 30px;
+  width: 30px;
+  margin-top: -15px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  display: block;
+  background: url(/static/img/loading.gif);
 }
 
 /* @Complete *********/

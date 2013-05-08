@@ -40,7 +40,7 @@
         // allow for backend to take time to contact Vimeo.
         $videoForm.on('submit', function(e) {
             $buttons = $videoForm.find('button');
-            $buttons.attr('disabled', 'disabled').addClass('disabled');
+            $buttons.attr('disabled', 'disabled').addClass('disabled loading');
         });
 
         // When the remove link is clicked, cancel the ongoing upload and go
