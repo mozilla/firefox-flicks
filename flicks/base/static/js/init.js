@@ -201,7 +201,7 @@
     /* jshint validthis:true */
     function validateForm(e) {
         var $inputs = $(this).find('input');
-        for (var k = 0; k < $inputs.length; k++) {
+        for (var k = 0, len = $inputs.length; k < len; k++) {
             var input = $inputs[k];
             var $input = $(input);
             var $label = $('label[for="' + input.id + '"]');
