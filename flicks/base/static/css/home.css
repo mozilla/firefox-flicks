@@ -185,8 +185,8 @@
 }
 
 .js .slide-judges .slide-desc {
-  padding: 70px 440px 0 60px; 
-  width: 400px; 
+  padding: 70px 440px 0 60px;
+  width: 400px;
 }
 
 .js .slide-winner .slide-desc,
@@ -195,25 +195,44 @@
 .js .slide-shootingpeople .slide-desc,
 .js .slide-creative .slide-desc,
 .js .slide-winbig .slide-desc {
-  padding: 38px 440px 0 60px; 
-  width: 400px; 
+  padding: 38px 440px 0 60px;
+  width: 400px;
 }
 
 .js .slide-schwartzberg .slide-desc {
-  padding: 53px 440px 0 60px; 
-  width: 440px; 
+  padding: 53px 440px 0 60px;
+  width: 440px;
 }
 
 .js .slide-bafici .slide-desc {
-  padding: 45px 440px 0 60px; 
-  width: 440px; 
+  padding: 45px 440px 0 60px;
+  width: 440px;
 }
 
 .js .slide-schwartzberg .slide-desc p,
 .js .slide-bafici .slide-desc p,
 .js .slide-shootingpeople .slide-desc p,
 .js .slide-winbig .slide-desc p {
-  color: #fff; 
+  color: #fff;
+}
+
+
+/*** Locale Per Slide Overrides *********/
+.de .slide-earlyentry .slide-desc h2 {
+  font-size: 22px;
+}
+
+.de .slide-earlyentry .slide-desc p {
+  font-size: 16px;
+}
+
+.fr .slide-earlyentry .slide-desc h2,
+.es .slide-earlyentry .slide-desc h2,
+.pt-BR .slide-earlyentry .slide-desc h2,
+.pl .slide-earlyentry .slide-desc h2,
+.it .slide-earlyentry .slide-desc h2,
+.es .slide-winner .slide-desc h2 {
+  font-size: 28px;
 }
 
 
@@ -537,17 +556,17 @@
   .js .slide-desc h2 {
     font-size: 30px;
   }
-  
+
   .js .slide-desc p {
     margin: 0 0 1em;
   }
-  
+
   .js .slide-desc .act {
     margin-top: -.25em;
   }
 
   .js #slide-one .thumbnail,
-  .js #slide-three .thumbnail, 
+  .js #slide-three .thumbnail,
   .js .slide-generic .thumbnail {
     width: 260px;
     top: 40px;
@@ -572,7 +591,7 @@
   .js .slide-desc {
     font-size: 16px;
   }
-  
+
   #flicks2013 .section-intro {
     width: 100%;
     max-width: 100%;
@@ -581,7 +600,7 @@
   #flicks2013 .entry {
     width: 205px;
   }
-  
+
   .judges {
     width: 480px;
     margin: 0 auto 2em;
@@ -594,7 +613,7 @@
   .judges .judge:nth-child(3n+1) {
     clear: left;
   }
-  
+
   .judges .judge:nth-child(10) {
     clear: both;
     float: none;
@@ -653,8 +672,8 @@
   }
 
   .js .slide-generic .slide-desc p {
-    color: inherit; 
-  }  
+    color: inherit;
+  }
 
   .js .slide-desc h2 {
     font-size: 36px;
@@ -669,7 +688,7 @@
     background: #fff none;
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
   }
-  
+
   .js .cycle-pager {
     position: absolute;
     bottom: 10px;
@@ -749,7 +768,7 @@
     display: block;
     margin: 0;
   }
-  
+
   #flicks2013 .info {
     width: auto;
     padding: 0 0 30px;
@@ -759,7 +778,7 @@
     display: block;
     width: auto;
   }
-  
+
   #flicks2013 .info li:nth-child(odd),
   #flicks2013 .info li:nth-child(even) {
     float: none;
@@ -793,21 +812,21 @@
     width: auto;
     margin: 0 0 1em;
   }
- 
+
   .judge {
     width: 125px;
     margin-bottom: 1em;
   }
- 
+
   .judges .judge:nth-child(3n+1),
   .judges .judge:nth-child(5n+1) {
     clear: none;
   }
- 
+
   .judges .judge:nth-child(2n+1) {
     clear: left;
   }
-  
+
   .judges .judge:nth-child(10) {
     clear: none;
     float: left;
