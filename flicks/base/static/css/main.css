@@ -495,6 +495,10 @@ a.submit-link:active {
   margin: 0 0 1.5em;
 }
 
+.sidebar .entry-list .entry:before {
+  content: "";
+}
+
 .sidebar .entry-list .title {
   font-size: 14px;
 }
