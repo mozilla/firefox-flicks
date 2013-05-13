@@ -280,15 +280,15 @@
 }
 
 .video-data {
-  padding-left: 230px;
+  padding-left: 267px;
   margin: 0 0 20px;
   overflow: hidden;
 }
 
 .video-data h2 {
-  width: 190px;
+  width: 240px;
   float: left;
-  margin: .15em 0 0 -230px;
+  margin: .15em 0 0 -267px;
 }
 
 .progress {
@@ -356,7 +356,11 @@
   width: 98%;
 }
 
-.video-info .note {
+.video-info .col2 label {
+  margin-bottom: 9.5em;
+}
+
+.user-input .video-info .note {
   display: block;
   width: 100%;
   position: static;
