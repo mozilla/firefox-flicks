@@ -204,13 +204,13 @@
   width: 440px;
 }
 
-.js .slide-bafici .slide-desc {
+.js .slide-winner .slide-desc {
   padding: 45px 440px 0 60px;
   width: 440px;
 }
 
 .js .slide-schwartzberg .slide-desc p,
-.js .slide-bafici .slide-desc p,
+.js .slide-winner .slide-desc p,
 .js .slide-shootingpeople .slide-desc p,
 .js .slide-winbig .slide-desc p {
   color: #fff;
@@ -237,7 +237,7 @@
 
 
 /* one off thumb */
-.js .slide-bafici .video-play div {
+.js .slide-winner .video-play div {
   position: absolute;
   top: 220px;
   right: 140px;
@@ -245,7 +245,7 @@
   font-size: 16px;
 }
 
-.js .slide-bafici .video-play div:after {
+.js .slide-winner .video-play div:after {
   content: " »";
   white-space: nowrap;
 }
@@ -573,7 +573,7 @@
     right: 40px;
   }
 
-  .js .slide-bafici .video-play div {
+  .js .slide-winner .video-play div {
     position: absolute;
     top: 165px;
     right: 80px;
@@ -735,8 +735,7 @@
     width: 260px;
   }
 
-  /* Bafici One off */
-  .js .slide-bafici .video-play div  {
+  .js .slide-winner .video-play div  {
     position: static;
     display: block;
     margin: 1em auto;
@@ -744,7 +743,7 @@
     color: inherit;
   }
 
-  .js .slide-bafici .slide-desc {
+  .js .slide-winner .slide-desc, {
     position: static;
     color: ;
   }

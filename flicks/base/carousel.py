@@ -10,7 +10,10 @@ slide_schedule = (
     ScheduleItem(date(2013, 5, 1), date(2013, 5, 7), ['blogpost_shootingpeople.html', 'blogpost_baficiwinner.html', 'blogpost_makeyourflickawinner.html']),
     ScheduleItem(date(2013, 5, 8), date(2013, 5, 17), ['may29_earlyentry.html', 'blogpost_shootingpeople.html', 'blogpost_makeyourflickawinner.html']),
     ScheduleItem(date(2013, 5, 18), date(2013, 5, 29), ['may29_earlyentry.html', 'blogpost_getmobilized.html', 'blogpost_makeyourflickawinner.html']),
-    ScheduleItem(date(2013, 5, 30), date(2013, 6, 11), ['blogpost_winbig.html', 'blogpost_getmobilized.html', 'blogpost_makeyourflickawinner.html']),
+    ScheduleItem(date(2013, 5, 30), date(2013, 6, 12), ['blogpost_winbig.html', 'blogpost_getmobilized.html', 'blogpost_makeyourflickawinner.html']),
+    ScheduleItem(date(2013, 6, 13), date(2013, 6, 25), ['july3_earlyentry.html', 'blogpost_may29winner.html', 'blogpost_winbig.html']),
+    ScheduleItem(date(2013, 6, 26), date(2013, 7, 3), ['july3_earlyentry.html', 'blogpost_winbig.html', 'blogpost_makeyourflickawinner.html']), 
+    ScheduleItem(date(2013, 7, 4), date(2013, 7, 14), ['july31_earlyentry.html', 'blogpost_winbig.html', 'blogpost_makeyourflickawinner.html']),           
 )
 
 
