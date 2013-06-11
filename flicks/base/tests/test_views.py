@@ -1,6 +1,9 @@
+from datetime import date
+
 from django.conf import settings
 from django.test.client import RequestFactory
 
+from funfactory.urlresolvers import reverse
 from mock import patch
 from nose.tools import eq_
 
@@ -33,3 +36,23 @@ class ViewTests(TestCase):
         request.upload_process = False
         handler500(request)
         render.assert_called_with(request, '500.html', status=500)
+
+    @patch('flicks.base.views.carousel.get_slides')
+    def test_home_promo_preview(self, get_slides):
+        """
+        If a date is passed to the homepage as a querystring argument, show
+        promos for that date instead of the current date.
+        """
+        with self.activate('en-US'):
+            self.client.get(reverse('flicks.base.home'), {'date': '2012-4-15'})
+        get_slides.assert_called_with(date(2012, 4, 15))
+
+    @patch('flicks.base.views.carousel.get_slides')
+    def test_home_promo_preview_invalid(self, get_slides):
+        """
+        If an invalid date is passed to the homepage as a querystring argument,
+        don't pass a date to get_slides.
+        """
+        with self.activate('en-US'):
+            self.client.get(reverse('flicks.base.home'), {'date': 'invalid'})
+        get_slides.assert_called_with(None)
