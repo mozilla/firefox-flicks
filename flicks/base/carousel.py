@@ -35,4 +35,4 @@ def _get_slide_names(display_date):
     for item in slide_schedule:
         if item.start <= display_date <= item.end:
             return item.slides
-    return ['slide-two.html', 'slide-three.html']  # Default
+    return ['blogpost_winbig.html', 'blogpost_getmobilized.html', 'blogpost_makeyourflickawinner.html']  # Default
