@@ -3,13 +3,12 @@
 {% block page_title %}{{ _('Enter your information') }}{% endblock %}
 
 {% block site_css %}
-  {{ css('flicks_css') }}
+  {{ super() }}
   {{ css('upload') }}
 {% endblock %}
 
 {% block site_js %}
-  {{ js('jquery') }}
-  {{ js('flicks_js') }}
+  {{ super() }}
   {{ js('profile') }}
 {% endblock %}
 
