@@ -2,7 +2,9 @@ from django.conf.urls.defaults import patterns, url
 
 from flicks.videos import views
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
+
     # Video pages
     url(r'^$', views.video_list, name='flicks.videos.list'),
     url(r'^2013/(\d+)/$', views.video_detail, name='flicks.videos.detail'),
@@ -14,6 +16,11 @@ urlpatterns = patterns('',
         name='flicks.videos.upload_complete'),
     url(r'^upload/error/$', views.upload_error,
         name='flicks.videos.upload_error'),
+
+    # Voting URLs
+    url(r'^2013/(\d+)/vote/$', views.vote_ajax, name='flicks.videos.vote'),
+    url(r'^2013/(\d+)/unvote/$', views.unvote_ajax,
+        name='flicks.videos.unvote'),
 
     # 2012 Archive pages
     url(r'^(?P<video_id>\d+)$', views.details_2012,

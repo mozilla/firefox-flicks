@@ -106,6 +106,11 @@ body {
   margin-left: 25px;
 }
 
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
 /*** @Headings *********/
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
@@ -316,7 +321,7 @@ a.dl:after {
   transition: all .125s ease-out;
 }
 
-.button-light:hover, 
+.button-light:hover,
 .button-light:focus,
 .button-light:active {
   background-color: #fff;
@@ -627,8 +632,8 @@ a.submit-link:active {
   margin: 6px 0 0 8px;
 }
 
-.nav-social a { 
-  position: relative; 
+.nav-social a {
+  position: relative;
   top: -5px;
   font: 14px 'Open Sans', sans-serif;
   display: inline-block;
@@ -720,7 +725,7 @@ a.submit-link:active {
   transition: all .125s ease-out;
 }
 
-#nav-submit a:hover, 
+#nav-submit a:hover,
 #nav-submit a:focus,
 #nav-submit a:active {
   background-color: #f3f3f3;
@@ -744,7 +749,7 @@ a.submit-link:active {
   box-shadow: none;
 }
 
-#nav-submit.logged-in a:hover, 
+#nav-submit.logged-in a:hover,
 #nav-submit.logged-in a:focus,
 #nav-submit.logged-in a:active {
   background-color: transparent;
@@ -1240,7 +1245,7 @@ body.noscroll .fixed #head-inner {
   .submit-frame {
     width: 720px;
   }
-  
+
   .partners-page .section-intro {
     width: auto;
   }
@@ -1259,7 +1264,7 @@ body.noscroll .fixed #head-inner {
     width: auto;
     float: none;
   }
-  
+
   .sidebar {
     margin: 0 0 2em;
   }
@@ -1347,14 +1352,14 @@ body.noscroll .fixed #head-inner {
     display: block;
     padding: 6px 10px;
   }
-  
+
   #nav-social-head {
     height: auto;
     position: relative;
     text-align: center;
     margin-bottom: -40px;
   }
-  
+
   #nav-submit {
     text-align: right;
     display: block;
@@ -1416,11 +1421,11 @@ body.noscroll .fixed #head-inner {
   body.noscroll {
     padding-right: 0;
   }
-  
+
   .partners-page .section-intro {
     width: auto;
   }
-  
+
   .partners-list li {
     margin: 0 0 20px;
   }
@@ -1454,13 +1459,13 @@ body.noscroll .fixed #head-inner {
   .submit-frame {
     width: 400px;
   }
-  
+
   #nav-social-head {
     height: 30px;
     position: absolute;
     margin-bottom: 0;
   }
-  
+
   #nav-submit {
     text-align: right;
     display: inline-block;

@@ -33,6 +33,9 @@ class Video2013(models.Model, CachingMixin):
     processed = models.BooleanField(default=False)
     user_notified = models.BooleanField(default=False)
 
+    voters = models.ManyToManyField(User, through='Vote',
+                                    related_name='voted_videos')
+
     def _thumbnail_path(self, filename):
         root, ext = os.path.splitext(filename)
         return 'vimeo_thumbs/{0}{1}'.format(self.vimeo_id, ext)
@@ -110,6 +113,10 @@ class Video2013(models.Model, CachingMixin):
         if commit:
             self.save()
 
+    def has_vote_from(self, user):
+        """Check if the given user has voted for this video."""
+        return self.voters.filter(pk=user.pk).exists()
+
     def __unicode__(self):
         profile = self.user.profile
         name = profile.display_name if profile else self.user.email
@@ -128,6 +135,17 @@ def remove_video(sender, **kwargs):
 
 # Assign the alias "Video" to the model for the current year's contest.
 Video = Video2013
+
+
+class Vote(models.Model, CachingMixin):
+    """A vote from a user for a specific video."""
+    user = models.ForeignKey(User)
+    video = models.ForeignKey(Video2013)
+
+    objects = CachingManager()
+
+    class Meta:
+        unique_together = ('user', 'video')
 
 
 ### 2012 Models ###

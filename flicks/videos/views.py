@@ -1,7 +1,10 @@
 from datetime import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
+from django.views.decorators.http import require_POST
 
 from tower import ugettext as _
 
@@ -10,7 +13,7 @@ from flicks.base.util import promo_video_shortlink, redirect
 from flicks.videos import tasks, vimeo
 from flicks.videos.decorators import upload_process
 from flicks.videos.forms import VideoForm
-from flicks.videos.models import Video, Video2012
+from flicks.videos.models import Video, Video2012, Vote
 from flicks.videos.util import vidly_embed_code
 from flicks.users.decorators import profile_required
 
@@ -41,10 +44,27 @@ def video_list(request):
 def video_detail(request, video_id):
     video = get_object_or_404(Video, id=video_id)
     return render(request, 'videos/2013/details.html', {'video': video})
-    
-    
+
+
 def winners(request):
     return render(request, 'videos/2013/winners.html', {'datetime': datetime})
+
+
+# Voting
+@login_required
+@require_POST
+def vote_ajax(request, video_id):
+    video = get_object_or_404(Video, id=video_id)
+    Vote.objects.get_or_create(user=request.user, video=video)
+    return HttpResponse()
+
+
+@login_required
+@require_POST
+def unvote_ajax(request, video_id):
+    vote = get_object_or_404(Vote, user=request.user, video__id=video_id)
+    vote.delete()
+    return HttpResponse()
 
 
 # Upload process

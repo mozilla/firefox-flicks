@@ -212,6 +212,7 @@ MINIFY_BUNDLES = {
         ),
         'flicks_js': (
             'js/init.js',
+            'js/vote.js',
         ),
         'home_js': (
             'js/libs/jquery.waypoints.min.js',

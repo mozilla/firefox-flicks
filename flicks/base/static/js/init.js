@@ -71,10 +71,11 @@
     // Store common functions on flicks global.
     var $strings = $('#strings');
     var flicks = {
-        'trans': function(stringId){
+        trans: function(stringId){
             return $strings.data(stringId);
         },
-        'createModal': function(origin, content, bg_close) {
+
+        createModal: function(origin, content, bg_close) {
             // Clear existing modal, if necessary,
             $('#modal').remove();
             $('.modalOrigin').removeClass('modalOrigin');
@@ -106,7 +107,8 @@
                 $('.cycle-slideshow').cycle('pause');
             }
         },
-        'closeModal': function() {
+
+        closeModal: function() {
             $('#modal').fadeOut(100, function(){
                 $(this).remove();
             });
@@ -115,12 +117,6 @@
             if (typeof cycle === 'function') {
                 $('.cycle-slideshow').cycle('resume');
             }
-        },
-        'notification': function(text) {
-            // TODO: Implement notification popup here.
-        },
-        'isUserAuthenticated': function() {
-            return !!$('#browserid-info').data('userEmail');
         }
     };
     window.flicks = flicks;
