@@ -115,7 +115,8 @@ class Video2013(models.Model, CachingMixin):
 
     def has_vote_from(self, user):
         """Check if the given user has voted for this video."""
-        return self.voters.filter(pk=user.pk).exists()
+        return (user.is_authenticated() and
+                self.voters.filter(pk=user.pk).exists())
 
     def __unicode__(self):
         profile = self.user.profile

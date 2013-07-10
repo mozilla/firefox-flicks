@@ -2,10 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.utils.translation import get_language
 
+import django_browserid.views
+
 from flicks.base import regions
 from flicks.base.util import redirect
 from flicks.users.forms import UserProfileForm
 from flicks.users.tasks import newsletter_subscribe
+from flicks.videos.models import Video, Vote
 
 
 @login_required
@@ -30,3 +33,37 @@ def profile(request):
         'form': form,
         'regions': regions,
     })
+
+
+class Verify(django_browserid.views.Verify):
+    def login_success(self, *args, **kwargs):
+        """
+        Extend successful login to check if the user was attempting to vote for
+        a video, and create the vote if they were.
+        """
+        response = super(Verify, self).login_success(*args, **kwargs)
+
+        try:
+            video_id = self.request.session['vote_video']
+            video = Video.objects.get(id=video_id)
+            Vote.objects.get_or_create(user=self.request.user, video=video)
+            del self.request.session['vote_video']
+        except Video.DoesNotExist:
+            # Avoid retrying on an invalid video.
+            del self.request.session['vote_video']
+        except KeyError:
+            pass  # Do nothing if the key never existed.
+
+        return response
+
+    def login_failure(self, *args, **kwargs):
+        """
+        Extend login failure so that if login fails, the user's attempts to
+        vote for a video are cancelled.
+        """
+        try:
+            del self.request.session['video_id']
+        except KeyError:
+            pass
+
+        return super(Verify, self).login_failure(*args, **kwargs)

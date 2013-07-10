@@ -51,11 +51,17 @@ def winners(request):
 
 
 # Voting
-@login_required
 @require_POST
 def vote_ajax(request, video_id):
-    video = get_object_or_404(Video, id=video_id)
-    Vote.objects.get_or_create(user=request.user, video=video)
+    """
+    Attempt to vote for a video. If the user isn't authenticated, store their
+    intent in the session. Once they login the vote will register.
+    """
+    if request.user.is_authenticated():
+        video = get_object_or_404(Video, id=video_id)
+        Vote.objects.get_or_create(user=request.user, video=video)
+    else:
+        request.session['vote_video'] = video_id
     return HttpResponse()
 
 
