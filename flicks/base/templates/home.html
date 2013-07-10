@@ -2,6 +2,8 @@
 
 {% import 'judge_macros.html' as judge_bio %}
 
+{% from 'macros.html' import facebookShare, twitterShare with context %}
+
 {% block page_title %}{{ _('A Global Video Contest to Mobilize the Web') }}{% endblock %}
 
 {% block site_css %}
@@ -22,10 +24,17 @@
       <h1 class="section-title">{{ _('You&#8217;re the director. Mobile is the star.') }}</h1>
       <div class="section-intro">
         <p>
-        {% trans %}
-          Enter Firefox Flicks, a global video contest about the power of the Web on
-          mobile devices, and get your film seen by millions.
-        {% endtrans %}
+        {% if not waffle.flag('r3') %}
+          {% trans %}
+            Enter Firefox Flicks, a global video contest about the power of the Web on
+            mobile devices, and get your film seen by millions.
+          {% endtrans %}
+        {% else %}
+          {% trans %}
+            Welcome to Firefox Flicks, the global video contest about the power
+            of the Web on mobile devices.
+          {% endtrans %}
+        {% endif %}
         </p>
       </div>
 
@@ -38,22 +47,51 @@
 
       <div class="actions">
         <ul>
-          <li>
-            <h3>{{ _('Meet your competition') }}</h3>
-            <p><a href="{{ url('flicks.videos.list') }}" class="go">{{ _('View the gallery of entries') }}</a></p>
-          </li>
-          <li>
-            <h3>{{ _('Start thinking about your flick') }}</h3>
-            <p><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go ga_brief-dl" rel="external">{{ _('Read the creative brief') }}</a></p>
-          </li>
-          <li class="submit-link">
-            <h3>{{ _('Submit your flick today') }}</h3>
-            <div>
-              <a href="{{ url('flicks.videos.upload') }}" class="requires-auth">
-                {{ _('Start here') }}
-              </a>
-            </div>
-          </li>
+          {% if not waffle.flag('r3') %}
+            <li>
+              <h3>{{ _('Meet your competition') }}</h3>
+              <p><a href="{{ url('flicks.videos.list') }}" class="go">{{ _('View the gallery of entries') }}</a></p>
+            </li>
+            <li>
+              <h3>{{ _('Start thinking about your flick') }}</h3>
+              <p><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="go ga_brief-dl" rel="external">{{ _('Read the creative brief') }}</a></p>
+            </li>
+            <li class="submit-link">
+              <h3>{{ _('Submit your flick today') }}</h3>
+              <div>
+                <a href="{{ url('flicks.videos.upload') }}" class="requires-auth">
+                  {{ _('Start here') }}
+                </a>
+              </div>
+            </li>
+          {% else %}
+            <li>
+              <p><a href="{{ url('flicks.videos.winners') }}" class="button-light">{{ _('See The Early Entry Award Winners') }}</a></p>
+            </li>
+            <li>
+              <p><a href="{{ url('flicks.videos.list') }}" class="button-light">{{ _('Vote For The People\'s Choice Award') }}</a></p>
+            </li>
+            <li>
+              <div class="share share-home">
+                <p class="trigger-share-dialog">
+                  <a href="#" class="button-light">{{ _('Invite Your Friends To Vote') }}</a>
+                </p>
+                <ul class="popup">
+                  <li class="twitter">
+                    {# L10n: Text is used in a tweet, please keep the length under 110 characters. #}
+                    <a href="{{ twitterShare('http://mzl.la/158wtFo', _('Vote for the #FirefoxFlicks People\'s Choice Award! ') , via='firefoxflicks') }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+                      {{ _('Share on Twitter') }}
+                    </a>
+                  </li>
+                  <li class="facebook">
+                    <a href="{{ facebookShare(request.build_absolute_uri()) }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+                      {{ _('Share on Facebook') }}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          {% endif %}
         </ul>
       </div>
     </div>
@@ -64,12 +102,22 @@
       <h1 class="section-title">{{ _('What is Firefox Flicks?') }}</h1>
       <div class="section-intro">
         <p>
-        {% trans %}
-          We're looking for videos that tell the story of how having access to the Web through a mobile device can
-          change the way you see the world and how you function within it. You could win some
-          <a href="#prizes" class="scroll">great prizes</a> and be seen by
-          <a href="#judges" class="scroll">celebrity judges</a> who can make your moviemaking dreams come true.
-        {% endtrans %}
+        {% if not waffle.flag('r3') %}
+          {% trans %}
+            We're looking for videos that tell the story of how having access to the Web through a mobile device can
+            change the way you see the world and how you function within it. You could win some
+            <a href="#prizes" class="scroll">great prizes</a> and be seen by
+            <a href="#judges" class="scroll">celebrity judges</a> who can make your moviemaking dreams come true.
+          {% endtrans %}
+        {% else %}
+          {% trans %}
+            Firefox Flicks is a global video competition encouraging filmmakers
+            to educate others about the issues that affect our online lives.
+            This year, it's all about the power that having access to the Web
+            through mobile devices gives people and how that power can change
+            the way we see the world and function within it.
+          {% endtrans %}
+        {% endif %}
         </p>
       </div>
 
@@ -96,6 +144,7 @@
     </div>
   </section>
 
+ {% if not waffle.flag('r3') %}
   <section id="flicks2013" class="section alt">
     <div class="wrap">
       <h1 class="section-title">{{ _('2013 Flicks') }}</h1>
@@ -177,6 +226,7 @@
 
     </div>
   </section>
+  {% endif %}
 
   <section id="judges" class="section">
     <div class="wrap">
@@ -430,18 +480,20 @@
   <section id="prizes" class="section alt">
     <div class="wrap">
       <h1 class="section-title">{{ _('Prizes') }}</h1>
-      <div class="section-intro">
-        <p>
-        {% trans %}
-          There are many chances and ways to win throughout the competition. That
-          means you're not just in the running for the Grand Prize, but you could
-          win a Regional Prize, People's Choice Award and Early Entry Award as well.
-          Plus, the top three entries from each film festival automatically move on
-          to the finals and a chance at the top prize (so get your flick in early).
-          And just for entering, everyone gets a little something from us to say thanks.
-        {% endtrans %}
-        </p>
-      </div>
+      {% if not waffle.flag('r3') %}
+        <div class="section-intro">
+          <p>
+          {% trans %}
+            There are many chances and ways to win throughout the competition. That
+            means you're not just in the running for the Grand Prize, but you could
+            win a Regional Prize, People's Choice Award and Early Entry Award as well.
+            Plus, the top three entries from each film festival automatically move on
+            to the finals and a chance at the top prize (so get your flick in early).
+            And just for entering, everyone gets a little something from us to say thanks.
+          {% endtrans %}
+          </p>
+        </div>
+      {% endif %}
 
       <section class="prizes">
         <p>
@@ -457,7 +509,10 @@
             The winner (or winning team) will fly to Los Angeles to work with producers
             (and Flicks judges) Franklin Leonard and Couper Samuelson, and representatives
             from Panavision to professionally produce their winning entry using
-            professional equipment.
+            professional equipment. The winning team will also get a one-day
+            training session at the Dolby Institute in LA, as well as an
+            invitation to a movie premiere and after-party at the
+            Dolby Theater (if timing allows).
           {% endtrans %}
         </div>
 
@@ -521,46 +576,55 @@
       </div>
 
       <section class="rules">
-        <h2>{{ _('Sponsor') }}</h2>
-        <p>
-        {% trans %}
-          The sponsor of the contest is the Mozilla Corporation.
-        {% endtrans %}
-        </p>
+        {% if not waffle.flag('r3') %}
+          <h2>{{ _('Sponsor') }}</h2>
+          <p>
+          {% trans %}
+            The sponsor of the contest is the Mozilla Corporation.
+          {% endtrans %}
+          </p>
 
-        <h2>{{ _('Eligibility') }}</h2>
-        <p>
-        {% trans %}
-          No purchase or fee is necessary to enter or claim any prize.
-        {% endtrans %}
-        </p>
+          <h2>{{ _('Eligibility') }}</h2>
+          <p>
+          {% trans %}
+            No purchase or fee is necessary to enter or claim any prize.
+          {% endtrans %}
+          </p>
 
-        <h2>{{ _('Contest period') }}</h2>
-        <p>
-        {% trans %}
-          The Contest begins at 3:00 p.m. Pacific Standard Time (PST) (11:00 p.m. GMT) on
-          Wednesday, February 13, 2013, and ends at 11:59 p.m. PST on Wednesday, July 31, 2013
-          (7:59 a.m. GMT on August 1, 2013).
-        {% endtrans %}
-        </p>
+          <h2>{{ _('Contest period') }}</h2>
+          <p>
+          {% trans %}
+            The Contest begins at 3:00 p.m. Pacific Standard Time (PST) (11:00 p.m. GMT) on
+            Wednesday, February 13, 2013, and ends at 11:59 p.m. PST on Wednesday, July 31, 2013
+            (7:59 a.m. GMT on August 1, 2013).
+          {% endtrans %}
+          </p>
 
-        <h2>{{ _('Privacy') }}</h2>
-        <p>
-        {% trans rules_link=url('flicks.base.rules') %}
-          In order to enter, you'll have to provide your name, email address and country
-          of residence (to determine your contest region). Your name and region will be
-          posted along with your flick in the public galleries, where they can be viewed,
-          liked and shared by everyone. <a href="{{ rules_link }}">Read the complete contest rules to learn more.</a>
-        {% endtrans %}
-        </p>
+          <h2>{{ _('Privacy') }}</h2>
+          <p>
+          {% trans rules_link=url('flicks.base.rules') %}
+            In order to enter, you'll have to provide your name, email address and country
+            of residence (to determine your contest region). Your name and region will be
+            posted along with your flick in the public galleries, where they can be viewed,
+            liked and shared by everyone. <a href="{{ rules_link }}">Read the complete contest rules to learn more.</a>
+          {% endtrans %}
+          </p>
 
-        <h2>{{ _('How to enter') }}</h2>
-        <p>
-        {% trans submit_url=url('flicks.videos.upload') %}
-          Nice work! You made it all the way to the end. When you're ready,
-          <a href="{{ submit_url }}" class="requires-auth">start here to submit your flick.</a>
-        {% endtrans %}
-        </p>
+          <h2>{{ _('How to enter') }}</h2>
+          <p>
+          {% trans submit_url=url('flicks.videos.upload') %}
+            Nice work! You made it all the way to the end. When you're ready,
+            <a href="{{ submit_url }}" class="requires-auth">start here to submit your flick.</a>
+          {% endtrans %}
+          </p>
+        {% else %}
+          <h2>
+          {% trans %}
+            The contest is now closed. The winners will be announced on
+            September 12 at the Toronto International Film Festival.
+          {% endtrans %}
+          </h2>
+        {% endif %}
       </section>
 
     </div>

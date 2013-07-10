@@ -874,6 +874,11 @@ a.submit-link:active {
   margin-top: 8px;
 }
 
+/* Home Variant */
+.actions .share-home {
+  margin-top:0px;
+}
+
 .share .toggle {
   cursor: pointer;
 }
@@ -899,8 +904,16 @@ a.submit-link:active {
   z-index: 999;
 }
 
+/* Home Variant */
+.share-home .popup {
+  left: 40px;
+  top: 1.7em;
+}
+
 .share .popup li {
   margin-bottom: 3px;
+  float:left;
+  width:auto;
 }
 
 .share .embed {

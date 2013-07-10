@@ -91,8 +91,15 @@
 {% macro shareWidget(video=None) -%}
   {% set url = request.build_absolute_uri() %}
   {% if video %}
-    {# L10n: Text is used in a tweet, please keep the length under 110 characters. #}
-    {% set text = _('Watch "%s" on Firefox Flicks')|format(video.title|truncate(90)) %}
+
+    {% if not waffle.flag('r3') %}
+      {# L10n: Text is used in a tweet, please keep the length under 110 characters. #}
+      {% set text = _('Watch "%s" on Firefox Flicks')|format(video.title|truncate(90)) %}
+    {% else  %}
+      {# L10n: Text is used in a tweet, please keep the length under 70 characters. #}
+      {% set text = _('Vote For "%s" in the #FirefoxFlicks #FirefoxOS People\'s Choice Awards!')|format(video.title|truncate(67)) %}
+    {% endif %}
+
     {% set tumblrUrl = tumblrShareVideo(video.embed_html(width='100%'), caption=' '.join([text, url])) %}
   {% else %}
     {# L10n: Text is used in a tweet, please keep the length under 110 characters. #}
@@ -101,7 +108,7 @@
   {% endif %}
 
   <div class="share">
-    <a href="#" class="toggle" title="{{ _('Share this video with your social network') }}">
+    <a href="#" class="toggle trigger-share-dialog" title="{{ _('Share this video with your social network') }}">
       {{ _('Share Video') }}
     </a>
     <ul class="popup">

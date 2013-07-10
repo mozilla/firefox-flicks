@@ -178,7 +178,7 @@
     });
 
     // Open share widget on click, close on hover off.
-    $document.on('click', '.share .toggle', function(e) {
+    $document.on('click', '.share .trigger-share-dialog', function(e) {
         e.preventDefault();
         e.stopPropagation();
         $(this).siblings('.popup').fadeIn(200);
