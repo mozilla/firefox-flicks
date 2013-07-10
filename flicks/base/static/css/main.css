@@ -268,6 +268,11 @@ a.dl:after {
   transition: all linear .25s;
 }
 
+.button.small {
+  padding: 3px 15px;
+  min-width: 0;
+}
+
 .button.next {
   position: relative;
   padding-right: 50px;
@@ -786,8 +791,14 @@ a.submit-link:active {
   margin: 0 0 .75em;
 }
 
-#footer a {
+#footer a:link,
+#footer a:visited {
   color: #b7bcc0;
+}
+
+#footer a:hover,
+#footer a:focus {
+  color: #fff;
 }
 
 #footer .partners {
@@ -962,8 +973,21 @@ a.submit-link:active {
   margin: 0 10px 2em;
 }
 
-.entry-list .entry:nth-child(3n+1) {
+.entry-list .entry:nth-child(4n+1) {
   clear: left;
+  margin-left: 25px;
+}
+
+.main .entry-list .entry:nth-child(3n+1) {
+  clear: left;
+}
+.main .entry-list .entry:nth-child(4n+1) {
+  clear: none;
+  margin-left: 10px;
+}
+#flicks2013 .entry-list .entry:nth-child(4n+1) {
+  clear: none;
+  margin-left: 15px;
 }
 
 .entry .thumbnail {
@@ -1258,6 +1282,14 @@ body.noscroll .fixed #head-inner {
     padding-left: 10px;
     margin: 0 auto 1em;
   }
+  
+  .entry-list .entry:nth-child(4n+1) {
+    clear: none;
+    margin-left: 10px;
+  }
+  .entry-list .entry:nth-child(3n+1) {
+    clear: left;
+  }
 
   #footer .partners {
     width: 480px;
@@ -1418,13 +1450,21 @@ body.noscroll .fixed #head-inner {
     width: 200px;
     margin: 0 auto 2em;
   }
-
+  
+  .entry-list .entry:nth-child(4n+1) {
+    clear: none;
+    margin-left: auto;
+  }
   .entry-list .entry:nth-child(3n+1) {
     clear: none;
   }
 
   .entry-list .entry:nth-child(2n+1) {
     clear: left;
+  }
+  .main .entry-list .entry:nth-child(4n+1),
+  #flicks2013 .entry-list .entry:nth-child(4n+1) {
+    margin-left: auto;
   }
 
   .pagination .prev,
@@ -1496,6 +1536,12 @@ body.noscroll .fixed #head-inner {
     border-right: 1px solid #ccc;
   }
 
+  .entry-list .entry:nth-child(4n+1) {
+    margin-left: 15px;
+  }
+  #flicks2013 .entry-list .entry:nth-child(4n+1) {
+    margin-left: 15px;
+  }
 
 }
 

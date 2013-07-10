@@ -15,19 +15,41 @@
 
 {% block content %}
   <div class="section wrap">
+  {% if waffle.flag('r3') %}
+    <h1 class="page-title">{{ _('Voting is open!') }}</h1>
+  {% else %}
     <h1 class="page-title">{{ _('Welcome to the<br> Firefox Flicks 2013 gallery') }}</h1>
+  {% endif %}
+
     <div class="section-intro">
       <p>
       {% trans %}
-        This year we're asking filmmakers and Firefox fans to inspire
-        others to get mobilized by telling the world about the power and
-        potential of mobile. Have a look at the entries and be sure to
-        share your favorites with your friends.
+        Welcome to the Firefox Flicks 2013 gallery. This year we asked filmmakers
+        to tell stories about the power of the Web on mobile devices. Vote for
+        your favorite flicks and be sure to share them with your friends.
       {% endtrans %}
+      </p>
+
+    {% if waffle.flag('r3') %}
+      <p class="voting">
+      <!-- If not signed in
+      {% trans %}
+        Start voting by clicking on your favorite videos.
+      {% endtrans %}
+      <!-- if signed in and no votes yet
+      {% trans %}
+        Hi there! It looks like you haven’t voted yet. Start voting now by clicking on your favorite videos.
+      {% endtrans %}
+      -->
+      <!-- if signed in and at least one vote -->
+      {% trans voted_gallery='link to gallery of voted videos',
+          voted_count='23' %}
+        Hi there! You have voted for <a href="{{ voted_gallery }}">{{ voted_count }} flicks</a> so far. Keep on voting!
+      {% endtrans %}
+      <!-- -->
       </p>
     </div>
 
-    {% if waffle.flag('r3') %}
       <form id="video-search" data-autocomplete-url="{{ url('flicks.videos.autocomplete') }}">
         {{ form.as_ul() }}
         <button type="submit">Search</button>
@@ -43,10 +65,64 @@
           </li>
         </ul>
       </form>
-    {% endif %}
+
+    <form class="search-form" action="#">
+      <ul>
+        <li class="search-region">
+          <label for="region">{{ _('From region') }}</label>
+          <select id="region" name="region">
+            <option value="all" selected>{{ _('All regions') }}</option>
+            <option value="northam">{{ _('North America') }}</option>
+            <option value="latam">{{ _('Latin America') }}</option>
+            <option value="emea">{{ _('Europe, Middle East, and Africa') }}</option>
+            <option value="apac">{{ _('Asia and Pacific') }}</option>
+          </select>
+        </li>
+        <li class="search-query">
+          <input type="search" id="query" name="q" autocomplete="off">
+
+          <ul id="search-suggest">
+            <li><a href="?query=query&category=username">query <small class="category">in user name</small></a></li>
+            <li><a href="?query=query&category=title">query <small class="category">in video title</small></a></li>
+            <li><a href="?query=query&category=description">query <small class="category">in video description</small></a></li>
+          </ul>
+
+          <label for="query">{{ _('Search for video name, user name, or description') }}</label>
+        </li>
+        <li class="search-submit">
+          <button type="submit" class="button small">{{ _('update results') }}</button>
+        </li>
+      </ul>
+    </form>
+  {% endif %}
 
     {% block results %}
-      <div id="gallery" class="main">
+      <div id="gallery">
+
+      {% if waffle.flag('r3') %}
+        <div class="gallery-header">
+          <h2>
+          {% trans count='87',
+              query='query',
+              region='all regions'
+          %}
+            <i>{{ count }}</i> videos for <i>{{ query }}</i> in <i>{{ region }}</i>
+          {% endtrans %}
+          </h2>
+          <form class="gallery-sort" action="#">
+            <p>
+              <label for="sort">{{ _('Sort:') }}</label>
+              <select id="sort" name="sort">
+                <option value="title" selected>{{ _('by Title') }}</option>
+                <option value="date">{{ _('by Date') }}</option>
+                <option value="popular">{{ _('by Popularity') }}</option>
+              </select>
+              <button type="submit">{{ _('Submit') }}</button>
+            </p>
+          </form>
+        </div>
+      {% endif %}
+
         <ul class="entry-list">
           {% for video in videos %}
             <li class="entry">
@@ -80,69 +156,5 @@
         {% endif %}
       </div>
     {% endblock %}
-
-    <aside id="trailers" class="sidebar aside">
-      <p class="winners"><a href="{{ url('flicks.videos.winners') }}" class="button-light go">{{ _('See Early Entry Award Winners') }}</a></p>
-
-      <h3>{{ _('Directors&#8217; cuts') }}</h3>
-      <p>
-      {% trans %}
-        See what last year's winners have to say about their experience and use
-        the materials below to help you make your flick.
-      {% endtrans %}
-      </p>
-
-      <ul class="entry-list">
-        <li class="entry">
-          <a href="https://vimeo.com/59439701" class="video-play" data-vimeo-id="59439701">
-            <img src="{{ static('img/home/vidthumb-direct-falling.jpg') }}" alt="" class="thumbnail">
-            <hgroup>
-              <h4 class="title">Lee Sang Woo, <cite>Falling in Love with Firefox</cite></h4>
-            </hgroup>
-          </a>
-        </li>
-        <li class="entry">
-          <a href="https://vimeo.com/59440900" class="video-play" data-vimeo-id="59440900">
-            <img src="{{ static('img/home/vidthumb-direct-squares.jpg') }}" alt="" class="thumbnail">
-            <hgroup>
-              <h4 class="title">Eric Perrella, <cite>Squares</cite></h4>
-            </hgroup>
-          </a>
-        </li>
-        <li class="entry">
-          <a href="https://vimeo.com/59440608" class="video-play" data-vimeo-id="59440608">
-            <img src="{{ static('img/home/vidthumb-direct-weird.jpg') }}" alt="" class="thumbnail">
-            <hgroup>
-              <h4 class="title">Ferran Brooks, <cite>Where the Weird Things Are Not</cite></h4>
-            </hgroup>
-          </a>
-        </li>
-        <li class="entry">
-          <a href="https://vimeo.com/62131492" class="video-play" data-vimeo-id="62131492">
-            <img src="{{ static('img/home/vidthumb-direct-hero.jpg') }}" alt="" class="thumbnail">
-            <hgroup>
-              <h4 class="title">Andres Felipe &amp; Mesa Rincon, <cite>Be a Hero</cite></h4>
-            </hgroup>
-          </a>
-        </li>
-        <li class="entry">
-          <a href="https://vimeo.com/62131490" class="video-play" data-vimeo-id="62131490">
-            <img src="{{ static('img/home/vidthumb-direct-firefoxandyou.jpg') }}" alt="" class="thumbnail">
-            <hgroup>
-              <h4 class="title">Girin Studio, <cite>Firefox and You</cite></h4>
-            </hgroup>
-          </a>
-        </li>
-        <li class="entry">
-          <a href="https://vimeo.com/62131493" class="video-play" data-vimeo-id="62131493">
-            <img src="{{ static('img/home/vidthumb-direct-priority.jpg') }}" alt="" class="thumbnail">
-            <hgroup>
-              <h4 class="title">Valeriy Cherevatenko, <cite>Priority</cite></h4>
-            </hgroup>
-          </a>
-        </li>
-      </ul>
-    </aside>
-
   </div>
 {% endblock %}
