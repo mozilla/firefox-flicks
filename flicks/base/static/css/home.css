@@ -194,7 +194,8 @@
 .js .slide-earlyentry .slide-desc,
 .js .slide-shootingpeople .slide-desc,
 .js .slide-creative .slide-desc,
-.js .slide-winbig .slide-desc {
+.js .slide-winbig .slide-desc,
+.js .slide-blogpost .slide-desc{
   padding: 38px 440px 0 60px;
   width: 400px;
 }
@@ -212,7 +213,8 @@
 .js .slide-schwartzberg .slide-desc p,
 .js .slide-winner .slide-desc p,
 .js .slide-shootingpeople .slide-desc p,
-.js .slide-winbig .slide-desc p {
+.js .slide-winbig .slide-desc p,
+.js .slide-blogpost .slide-desc p {
   color: #fff;
 }
 

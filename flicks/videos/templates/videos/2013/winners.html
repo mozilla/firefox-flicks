@@ -22,6 +22,77 @@
       <div id="winners" class="main">
         <section class="period">
           <header>
+            <h2>{{ _('Early Entry Award') }} | {{ _('July 3') }}</h2>
+          </header>
+
+          <ul class="entry-list">
+            <li class="entry winner first-place">
+              <a href="{{ url('flicks.videos.detail', 377) }}" class="detail-play" data-vimeo-id="68673339">
+                <h3 class="placing">{{ _('First Place') }}</h3>
+                <img src="{{ static('img/thumbnails/68673339.jpg') }}" alt="" class="thumbnail">
+                <hgroup>
+                  <h3 class="title">Tortillas on-the-go!</h3>
+                  <h4 class="vcard">
+                    <span class="fn">Alberto García Ballesteros</span>,
+                    <span class="country-name">{{ country_name('mx') }}</span>
+                  </h3>
+                </hgroup>
+              </a>
+              <p>
+              {% set submit_time = datetime(2013, 6, 18) %}
+              {# L10n: Describes the date that a video was submitted to the contest. #}
+              {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                Submitted {{ date }}
+              {% endtrans %}
+              </p>
+            </li>
+
+            <li class="entry winner second-place">
+              <a href="{{ url('flicks.videos.detail', 446) }}" class="detail-play" data-vimeo-id="69670873">
+                <h3 class="placing">{{ _('Second Place') }}</h3>
+                <img src="{{ static('img/thumbnails/69670873.jpg') }}" alt="" class="thumbnail">
+                <hgroup>
+                  <h3 class="title">Beyond the limit</h3>
+                  <h4 class="vcard">
+                    <span class="fn">Fabián Eduardo Ramírez Barreto</span>,
+                    <span class="country-name">{{ country_name('mx') }}</span>
+                  </h3>
+                </hgroup>
+              </a>
+              <p>
+              {% set submit_time = datetime(2013, 7, 3) %}
+              {# L10n: Describes the date that a video was submitted to the contest. #}
+              {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                Submitted {{ date }}
+              {% endtrans %}
+              </p>
+            </li>
+
+            <li class="entry winner third-place">
+              <a href="{{ url('flicks.videos.detail', 436) }}" class="detail-play" data-vimeo-id="69601691">
+                <h3 class="placing">{{ _('Third Place') }}</h3>
+                <img src="{{ static('img/thumbnails/69601691.jpg') }}" alt="" class="thumbnail">
+                <hgroup>
+                  <h3 class="title">The Anniversary</h3>
+                  <h4 class="vcard">
+                    <span class="fn">Kevin Kristian</span>,
+                    <span class="country-name">{{ country_name('sg') }}</span>
+                  </h3>
+                </hgroup>
+              </a>
+              <p>
+              {% set submit_time = datetime(2013, 7, 2) %}
+              {# L10n: Describes the date that a video was submitted to the contest. #}
+              {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                Submitted {{ date }}
+              {% endtrans %}
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="period">
+          <header>
             <h2>{{ _('Early Entry Award') }} | {{ _('May 29') }}</h2>
           </header>
 
