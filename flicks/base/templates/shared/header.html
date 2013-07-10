@@ -9,12 +9,18 @@
 
       <nav id="page-nav">
         <h3 class="toggle">{{ _('Menu') }}</h3>
+
         <ul id="page-nav-list">
           <li id="nav-about"><a href="{{ url('flicks.base.home') }}#about">{{ _('About') }}</a></li>
-          <li id="nav-flicks"><a href="{{ url('flicks.base.home') }}#flicks2013">{{ _('2013 Flicks') }}</a></li>
+          {% if not waffle.flag('r3') %}
+            <li id="nav-flicks"><a href="{{ url('flicks.base.home') }}#flicks2013">{{ _('2013 Flicks') }}</a></li>
+          {% endif %}
           <li id="nav-judges"><a href="{{ url('flicks.base.home') }}#judges">{{ _('Judges') }}</a></li>
           <li id="nav-prizes"><a href="{{ url('flicks.base.home') }}#prizes">{{ _('Prizes') }}</a></li>
           <li id="nav-rules"><a href="{{ url('flicks.base.home') }}#rules">{{ _('Rules') }}</a></li>
+          {% if waffle.flag('r3') %}
+            <li id="nav-vote"><a href="{{ url('flicks.videos.list') }}" class="go">{{ _('Vote Now!') }}</a></li>
+          {% endif %}
           <li id="nav-blog"><a href="http://firefoxflicks.tumblr.com" class="go" rel="external">{{ _('Blog') }}</a></li>
         </ul>
       </nav>
@@ -24,13 +30,15 @@
   <div class="wrap">
     <nav id="nav-social-head" class="nav-social">
       <ul>
-        <li id="nav-submit" {% if user.is_authenticated() %}class="logged-in"{% endif %}>
-          {% if user.is_authenticated() %}
+        {% if user.is_authenticated() %}
+          <li id="nav-submit" class="logged-in">
             {{ browserid_logout(text=_('Sign out')) }}
-          {% else %}
+          </li>
+        {% elif not waffle.flag('r3') %}
+          <li id="nav-submit">
             {{ browserid_login(text=_('Submit your flick'), next=url('flicks.videos.upload')) }}
-          {% endif %}
-        </li>
+          </li>
+        {% endif %}
         <li><a href="http://vimeo.com/firefoxflicks" title="Vimeo" class="vimeo" rel="external">Vimeo</a></li>
         <li><a href="http://facebook.com/firefoxflicks" title="Facebook" class="facebook" rel="external">Facebook</a></li>
         <li><a href="http://twitter.com/firefoxflicks" title="Twitter" class="twitter" rel="external">Twitter</a></li>
