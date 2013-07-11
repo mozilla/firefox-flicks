@@ -3,6 +3,7 @@ from urllib import urlencode
 from funfactory.urlresolvers import reverse
 from mock import patch
 from nose.tools import eq_, ok_
+from waffle import Flag
 
 from flicks.base.tests import TestCase
 from flicks.base.tests.tools import redirects_
@@ -185,6 +186,10 @@ class VideoListTests(TestCase):
 
 
 class VoteAjaxTests(TestCase):
+    def setUp(self):
+        super(VoteAjaxTests, self).setUp()
+        Flag.objects.create(name='r3', everyone=True)
+
     def _vote_ajax(self, video_id):
         with self.activate('en-US'):
             url = reverse('flicks.videos.vote', args=(video_id,))
@@ -223,6 +228,10 @@ class VoteAjaxTests(TestCase):
 
 
 class UnvoteAjaxTests(TestCase):
+    def setUp(self):
+        super(UnvoteAjaxTests, self).setUp()
+        Flag.objects.create(name='r3', everyone=True)
+
     def _unvote_ajax(self, video_id):
         with self.activate('en-US'):
             url = reverse('flicks.videos.unvote', args=(video_id,))

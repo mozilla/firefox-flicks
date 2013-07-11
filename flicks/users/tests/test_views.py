@@ -4,6 +4,7 @@ from django.test.client import RequestFactory
 from funfactory.urlresolvers import reverse
 from mock import ANY, patch
 from nose.tools import eq_, ok_
+from waffle import Flag
 
 from flicks.base.tests import TestCase
 from flicks.base.tests.tools import redirects_
@@ -71,6 +72,8 @@ class ProfileTests(TestCase):
 class VerifyTests(TestCase):
     def setUp(self):
         super(VerifyTests, self).setUp()
+        Flag.objects.create(name='r3', everyone=True)
+
         self.factory = RequestFactory()
         self.request = self.factory.post('/')
         self.user = UserFactory.create()

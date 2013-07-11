@@ -40,9 +40,11 @@
   </div>
 
   {# TODO: Replace placeholder with actual button. #}
-  {% set has_vote = video.has_vote_from(user) %}
-  <button class="remove-vote {{ has_vote|ifeq(False, 'hidden') }}" data-url="{{ url('flicks.videos.unvote', video.id) }}">Unvote!</button>
-  <button class="add-vote {{ has_vote|ifeq(True, 'hidden') }}" data-url="{{ url('flicks.videos.vote', video.id) }}">Vote!</button>
+  {% if waffle.flag('r3') %}
+    {% set has_vote = video.has_vote_from(user) %}
+    <button class="remove-vote {{ has_vote|ifeq(False, 'hidden') }}" data-url="{{ url('flicks.videos.unvote', video.id) }}">Unvote!</button>
+    <button class="add-vote {{ has_vote|ifeq(True, 'hidden') }}" data-url="{{ url('flicks.videos.vote', video.id) }}">Vote!</button>
+  {% endif %}
 
   <p class="description">{{ video.description }}</p>
 {% endblock %}

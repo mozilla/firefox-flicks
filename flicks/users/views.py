@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.utils.translation import get_language
 
 import django_browserid.views
+import waffle
 
 from flicks.base import regions
 from flicks.base.util import redirect
@@ -42,6 +43,8 @@ class Verify(django_browserid.views.Verify):
         a video, and create the vote if they were.
         """
         response = super(Verify, self).login_success(*args, **kwargs)
+        if not waffle.flag_is_active(self.request, 'r3'):
+            return response
 
         try:
             video_id = self.request.session['vote_video']

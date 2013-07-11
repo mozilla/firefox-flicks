@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
 
 from tower import ugettext as _
+from waffle.decorators import waffle_flag
 
 from flicks.base import regions
 from flicks.base.util import promo_video_shortlink, redirect
@@ -50,6 +51,7 @@ def winners(request):
 
 
 # Voting
+@waffle_flag('r3')
 @require_POST
 def vote_ajax(request, video_id):
     """
@@ -64,6 +66,7 @@ def vote_ajax(request, video_id):
     return HttpResponse()
 
 
+@waffle_flag('r3')
 @require_POST
 def unvote_ajax(request, video_id):
     if not request.user.is_authenticated():
