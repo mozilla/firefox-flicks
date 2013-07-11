@@ -38,5 +38,9 @@ class GetSlidesTests(TestCase):
         If the date given to get_slides doesn't match any of the configured
         dates, it should return the default slides.
         """
-        eq_(list(get_slides(date(2012, 2, 2))),
-            ['carousel/slide-two.html', 'carousel/slide-three.html'])
+        defaults = [
+            'carousel/blogpost_winbig.html',
+            'carousel/blogpost_getmobilized.html',
+            'carousel/blogpost_makeyourflickawinner.html'
+        ]
+        eq_(list(get_slides(date(2012, 2, 2))), defaults)

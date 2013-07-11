@@ -48,7 +48,7 @@ class Verify(django_browserid.views.Verify):
             video = Video.objects.get(id=video_id)
             Vote.objects.get_or_create(user=self.request.user, video=video)
             del self.request.session['vote_video']
-        except Video.DoesNotExist:
+        except (Video.DoesNotExist, ValueError):
             # Avoid retrying on an invalid video.
             del self.request.session['vote_video']
         except KeyError:
@@ -62,7 +62,7 @@ class Verify(django_browserid.views.Verify):
         vote for a video are cancelled.
         """
         try:
-            del self.request.session['video_id']
+            del self.request.session['vote_video']
         except KeyError:
             pass
 

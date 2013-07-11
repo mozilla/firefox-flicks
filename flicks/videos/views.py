@@ -1,8 +1,7 @@
 from datetime import datetime
 
-from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
 
@@ -65,12 +64,14 @@ def vote_ajax(request, video_id):
     return HttpResponse()
 
 
-@login_required
 @require_POST
 def unvote_ajax(request, video_id):
-    vote = get_object_or_404(Vote, user=request.user, video__id=video_id)
-    vote.delete()
-    return HttpResponse()
+    if not request.user.is_authenticated():
+        return HttpResponseNotFound()
+    else:
+        vote = get_object_or_404(Vote, user=request.user, video__id=video_id)
+        vote.delete()
+        return HttpResponse()
 
 
 # Upload process
