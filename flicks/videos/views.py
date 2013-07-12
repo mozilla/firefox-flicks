@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
 
+import waffle
 from tower import ugettext as _
 from waffle.decorators import waffle_flag
 
@@ -12,8 +13,9 @@ from flicks.base import regions
 from flicks.base.util import promo_video_shortlink, redirect
 from flicks.videos import tasks, vimeo
 from flicks.videos.decorators import upload_process
-from flicks.videos.forms import VideoForm
+from flicks.videos.forms import VideoForm, VideoSearchForm
 from flicks.videos.models import Video, Video2012, Vote
+from flicks.videos.search import search_videos
 from flicks.videos.util import vidly_embed_code
 from flicks.users.decorators import profile_required
 
@@ -24,11 +26,27 @@ def video_list(request):
     """Show a list of recent videos, optionally filtered by region or search."""
     page = request.GET.get('page', 1)
     region = request.GET.get('region', None)
-    videos = Video.objects.filter(approved=True).order_by('-created')
-    if region:
-        countries = regions.get_countries(region)
-        if countries:
-            videos = videos.filter(user__userprofile__country__in=countries)
+    ctx = {}
+
+    if waffle.flag_is_active(request, 'r3'):
+        form = VideoSearchForm(request.GET)
+        if form.is_valid():
+            videos = search_videos(
+                query=form.cleaned_data['query'],
+                region=form.cleaned_data['region'],
+                sort=form.cleaned_data['sort']
+            )
+        else:
+            videos = search_videos()
+
+        ctx['form'] = form
+    else:
+        videos = Video.objects.filter(approved=True).order_by('-created')
+        if region:
+            countries = regions.get_countries(region)
+            if countries:
+                videos = videos.filter(
+                    user__userprofile__country__in=countries)
 
     paginator = Paginator(videos, 12)
     try:
@@ -38,7 +56,8 @@ def video_list(request):
     except EmptyPage:
         videos = paginator.page(paginator.num_pages)  # Empty page goes to last
 
-    return render(request, 'videos/2013/list.html', {'videos': videos})
+    ctx['videos'] = videos
+    return render(request, 'videos/2013/list.html', ctx)
 
 
 def video_detail(request, video_id):

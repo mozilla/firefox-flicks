@@ -27,6 +27,13 @@
       </p>
     </div>
 
+    {% if waffle.flag('r3') %}
+      <form>
+        {{ form.as_ul() }}
+        <button type="submit">Search</button>
+      </form>
+    {% endif %}
+
     {% block results %}
       <div id="gallery" class="main">
         <ul class="entry-list">
@@ -62,7 +69,7 @@
 
     <aside id="trailers" class="sidebar aside">
       <p class="winners"><a href="{{ url('flicks.videos.winners') }}" class="button-light go">{{ _('See Early Entry Award Winners') }}</a></p>
-    
+
       <h3>{{ _('Directors&#8217; cuts') }}</h3>
       <p>
       {% trans %}
