@@ -43,7 +43,10 @@ def country_name(country_code):
     if locale == 'es':
         locale = 'es-ES'
 
-    return product_details.get_regions(locale)[country_code]
+    try:
+        return product_details.get_regions(locale)[country_code]
+    except KeyError:
+        return ''
 
 
 @register.function

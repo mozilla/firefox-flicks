@@ -1,23 +1,23 @@
 from django.contrib.auth.models import Group, User
 
-from factory import Factory, Sequence, SubFactory
+from factory import DjangoModelFactory, Sequence, SubFactory
 
 from flicks.users.models import UserProfile
 
 
-class UserFactory(Factory):
+class UserFactory(DjangoModelFactory):
     FACTORY_FOR = User
 
     username = Sequence(lambda n: 'test{0}'.format(n))
 
 
-class GroupFactory(Factory):
+class GroupFactory(DjangoModelFactory):
     FACTORY_FOR = Group
 
     name = Sequence(lambda n: 'test{0}'.format(n))
 
 
-class UserProfileFactory(Factory):
+class UserProfileFactory(DjangoModelFactory):
     FACTORY_FOR = UserProfile
 
     user = SubFactory(UserFactory)

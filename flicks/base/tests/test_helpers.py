@@ -39,3 +39,9 @@ class TestHelpers(TestCase):
 
         eq_(name, 'test')
         product_details.get_regions.assert_called_with('es-ES')
+
+    @patch('flicks.base.helpers.product_details')
+    def test_country_name_empty(self, product_details):
+        """If the given country code can't be found, return an empty string."""
+        product_details.get_regions.side_effect = lambda l: {'fr': 'test'}
+        eq_(country_name('au'), '')

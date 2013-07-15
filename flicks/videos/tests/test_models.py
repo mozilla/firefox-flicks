@@ -49,15 +49,16 @@ class Video2013Tests(TestCase):
         video.save()
         ok_(not video.process_approval.called)
 
-    @patch('flicks.videos.models.send_approval_email')
-    def test_save_unapproved_no_email(self, send_approval_email):
+    def test_save_unapproved_no_email(self):
         """If the video is not approved, do not call send_approval_email."""
-        video = Video2013Factory.create(approved=True, user_notified=False)
-        eq_(video.user_notified, False)
+        video = Video2013Factory.create(approved=True)
+        video.user_notified = False
         video.approved = False
-        video.save()
 
-        ok_(not send_approval_email.called)
+        path = 'flicks.videos.models.send_approval_email'
+        with patch(path) as send_approval_email:
+            video.save()
+            ok_(not send_approval_email.called)
 
     @patch('flicks.videos.models.send_approval_email')
     def test_save_approved_notified_no_email(self, send_approval_email):
@@ -123,7 +124,7 @@ class Video2013Tests(TestCase):
         with self.settings(VIMEO_VIDEO_PASSWORD='testpass'):
             video.process_approval()
         vimeo.set_privacy.assert_called_with(video.vimeo_id, 'password',
-                                                   password='testpass')
+                                             password='testpass')
 
     @patch('flicks.videos.models.vimeo')
     def test_process_approval_thumbnail_fail(self, vimeo):
