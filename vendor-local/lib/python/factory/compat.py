@@ -20,61 +20,49 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-__version__ = '2.1.1'
-__author__ = 'Raphaël Barrois <raphael.barrois+fboy@polytechnique.org>'
 
+"""Compatibility tools"""
 
-from .base import (
-    Factory,
-    BaseDictFactory,
-    DictFactory,
-    BaseListFactory,
-    ListFactory,
-    StubFactory,
+import datetime
+import sys
 
-    BUILD_STRATEGY,
-    CREATE_STRATEGY,
-    STUB_STRATEGY,
-    use_strategy,
-)
+PY2 = (sys.version_info[0] == 2)
 
-from .mogo import MogoFactory
-from .django import DjangoModelFactory
+if PY2:  # pragma: no cover
+    def is_string(obj):
+        return isinstance(obj, (str, unicode))
 
-from .declarations import (
-    LazyAttribute,
-    Iterator,
-    Sequence,
-    LazyAttributeSequence,
-    SelfAttribute,
-    ContainerAttribute,
-    SubFactory,
-    Dict,
-    List,
-    PostGeneration,
-    PostGenerationMethodCall,
-    RelatedFactory,
-)
+    from StringIO import StringIO as BytesIO
 
-from .helpers import (
-    build,
-    create,
-    stub,
-    generate,
-    simple_generate,
-    make_factory,
+else:  # pragma: no cover
+    def is_string(obj):
+        return isinstance(obj, str)
 
-    build_batch,
-    create_batch,
-    stub_batch,
-    generate_batch,
-    simple_generate_batch,
+    from io import BytesIO
 
-    lazy_attribute,
-    iterator,
-    sequence,
-    lazy_attribute_sequence,
-    container_attribute,
-    post_generation,
-)
+try:  # pragma: no cover
+    # Python >= 3.2
+    UTC = datetime.timezone.utc
+except AttributeError:  # pragma: no cover
+    try:
+        # Fallback to pytz
+        from pytz import UTC
+    except ImportError:
 
+        # Ok, let's write our own.
+        class _UTC(datetime.tzinfo):
+            """The UTC tzinfo."""
+
+            def utcoffset(self, dt):
+                return datetime.timedelta(0)
+
+            def tzname(self, dt):
+                return "UTC"
+
+            def dst(self, dt):
+                return datetime.timedelta(0)
+
+            def localize(self, dt):
+                dt.astimezone(self)
+
+        UTC = _UTC()
