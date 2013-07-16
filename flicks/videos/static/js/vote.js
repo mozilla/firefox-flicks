@@ -17,12 +17,16 @@
                 }
 
                 // The server will save the vote after they auth.
-                var next = window.location.pathname + '#voted';
-                django_browserid.verifyAssertion(assertion, next);
+                voteXHR.done(function() {
+                    var next = window.location.pathname + '#voted';
+                    django_browserid.verifyAssertion(assertion, next);
+                });
             });
         } else {
-            $button.addClass('hidden');
-            $button.siblings('.remove-vote').removeClass('hidden');
+            voteXHR.done(function() {
+                $button.addClass('hidden');
+                $button.siblings('.remove-vote').removeClass('hidden');
+            });
         }
     });
 

@@ -18,9 +18,8 @@ urlpatterns = patterns(
         name='flicks.videos.upload_error'),
 
     # Voting URLs
-    url(r'^2013/(\d+)/vote/$', views.vote_ajax, name='flicks.videos.vote'),
-    url(r'^2013/(\d+)/unvote/$', views.unvote_ajax,
-        name='flicks.videos.unvote'),
+    url(r'^2013/(\d+)/vote/$', views.vote, name='flicks.videos.vote'),
+    url(r'^2013/(\d+)/unvote/$', views.unvote, name='flicks.videos.unvote'),
 
     # 2012 Archive pages
     url(r'^(?P<video_id>\d+)$', views.details_2012,

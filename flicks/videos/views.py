@@ -53,7 +53,7 @@ def winners(request):
 # Voting
 @waffle_flag('r3')
 @require_POST
-def vote_ajax(request, video_id):
+def vote(request, video_id):
     """
     Attempt to vote for a video. If the user isn't authenticated, store their
     intent in the session. Once they login the vote will register.
@@ -68,7 +68,7 @@ def vote_ajax(request, video_id):
 
 @waffle_flag('r3')
 @require_POST
-def unvote_ajax(request, video_id):
+def unvote(request, video_id):
     if not request.user.is_authenticated():
         return HttpResponseNotFound()
     else:
