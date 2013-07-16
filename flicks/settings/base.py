@@ -200,6 +200,7 @@ MINIFY_BUNDLES = {
     'js': {
         'jquery': (
             'js/libs/jquery-1.7.1.min.js',
+            'js/libs/jquery.typing-0.2.0.js',
         ),
         'google_analytics': (
             'js/ga.js',
@@ -213,6 +214,7 @@ MINIFY_BUNDLES = {
         'flicks_js': (
             'js/init.js',
             'js/vote.js',
+            'js/search.js',
         ),
         'home_js': (
             'js/libs/jquery.waypoints.min.js',

@@ -1,11 +1,12 @@
 from urllib import urlencode
 
+from django.core.exceptions import ValidationError
+
 from funfactory.urlresolvers import reverse
-from mock import patch
+from mock import ANY, patch
 from nose.tools import eq_, ok_
 from waffle import Flag
 
-from flicks.base import regions
 from flicks.base.tests import TestCase
 from flicks.base.tests.tools import redirects_
 from flicks.users.tests import UserFactory, UserProfileFactory
@@ -185,39 +186,34 @@ class VideoListTests(TestCase):
         response = self._video_list(page=2)
         eq_(response.context['videos'].number, 2)
 
-    @patch('flicks.videos.views.search_videos')
-    def test_video_search(self, search_videos):
+    @patch('flicks.videos.views.VideoSearchForm')
+    def test_r3_video_search(self, VideoSearchForm):
         """
-        GET parameters for query, region, and sort should be passed to
-        search_videos.
-        """
-        Flag.objects.create(name='r3', everyone=True)
-        video_1 = VideoFactory.create()
-        video_2 = VideoFactory.create()
-        search_videos.return_value = [video_1, video_2]
-
-        response = self._video_list(query='asdf', region=regions.NORTH_AMERICA,
-                                    sort='popular')
-        search_videos.assert_called_with(query='asdf',
-                                         region=regions.NORTH_AMERICA,
-                                         sort='popular')
-        ok_(video_1 in response.context['videos'])
-        ok_(video_2 in response.context['videos'])
-
-    @patch('flicks.videos.views.search_videos')
-    def test_invalid_video_search(self, search_videos):
-        """
-        If the search parameters are invalid, do not perform any search.
+        If the r3 flag is active, use the VideoSearchForm to determine the
+        videos being paginated.
         """
         Flag.objects.create(name='r3', everyone=True)
-        video_1 = VideoFactory.create()
-        video_2 = VideoFactory.create()
-        search_videos.return_value = [video_1, video_2]
+        form = VideoSearchForm.return_value
 
-        response = self._video_list(region=600, sort='silly')
-        search_videos.assert_called_with()
-        ok_(video_1 in response.context['videos'])
-        ok_(video_2 in response.context['videos'])
+        response = self._video_list()
+        eq_(response.context['form'], form)
+        eq_(response.context['videos'].paginator.object_list,
+            form.perform_search.return_value)
+
+    @patch('flicks.videos.views.VideoSearchForm')
+    @patch('flicks.videos.views.search_videos')
+    def test_invalid_search(self, search_videos, VideoSearchForm):
+        """
+        If a the search form isn't valid, perform an empty video search to
+        determine the videos being paginated.
+        """
+        Flag.objects.create(name='r3', everyone=True)
+        form = VideoSearchForm.return_value
+        form.perform_search.side_effect = ValidationError('asdf')
+
+        response = self._video_list()
+        eq_(response.context['videos'].paginator.object_list,
+            search_videos.return_value)
 
 
 class VoteAjaxTests(TestCase):

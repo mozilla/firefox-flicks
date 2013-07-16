@@ -3,7 +3,8 @@ from nose.tools import eq_
 
 from flicks.base.tests import TestCase
 from flicks.users.tests import UserProfileFactory
-from flicks.videos.search import search_videos
+from flicks.videos.models import Video
+from flicks.videos.search import autocomplete_suggestion, search_videos
 from flicks.videos.tests import VideoFactory
 
 
@@ -45,10 +46,24 @@ class SearchVideosTests(TestCase):
         # Terms may match only part of a word in the video.
         eq_(list(search_videos(query='floor do')), [v1, v2, v3])
 
-        # Terms only have to match on of the three possible fields.
+        # Terms only have to match one of the three possible fields.
         eq_(list(search_videos(query='mytitle')), [v1])
         eq_(list(search_videos(query='mydesc')), [v2])
         eq_(list(search_videos(query='name')), [v3])
+
+    def test_fields(self):
+        """
+        If the fields parameter is specified, only perform a search on the
+        fields specified in that list.
+        """
+        v1 = VideoFactory.create(title='foo', description='bar', approved=True)
+        v2 = VideoFactory.create(title='bar', description='foo', approved=True)
+
+        eq_(list(search_videos('foo', fields=['title'])), [v1])
+        eq_(list(search_videos('bar', fields=['title'])), [v2])
+        eq_(list(search_videos('bar', fields=['description'])), [v1])
+        eq_(list(search_videos('bar', fields=['title', 'description'])),
+            [v2, v1])
 
     @patch('flicks.videos.views.regions.get_countries')
     def test_region(self, get_countries):
@@ -94,3 +109,32 @@ class SearchVideosTests(TestCase):
         video_3 = VideoFactory.create(title='B', approved=True, vote_count=7)
 
         eq_(list(search_videos(sort='popular')), [video_3, video_1, video_2])
+
+
+class AutocompleteSuggestionTests(TestCase):
+    def setUp(self):
+        self.patch = patch('flicks.videos.search.search_videos')
+        self.mock_search_videos = self.patch.start()
+
+        self.v1 = VideoFactory.create(title='foo')
+        self.v2 = VideoFactory.create(title='baz')
+        self.mock_search_videos.return_value = Video.objects.filter(
+            id__in=[self.v1.id, self.v2.id]).order_by('id')
+
+    def tearDown(self):
+        self.patch.stop()
+
+    def test_result_found(self):
+        """
+        If a video is found matching the query, return the value of the field
+        we searched for on that video.
+        """
+        suggestion = autocomplete_suggestion('fo', 'title')
+        eq_(suggestion, 'foo')  # Title of the first result.
+        self.mock_search_videos.assert_called_with(query='fo',
+                                                   fields=('title',))
+
+    def test_no_results(self):
+        """If no videos are matched, return None."""
+        self.mock_search_videos.return_value = Video.objects.filter(id=9999999)
+        eq_(autocomplete_suggestion('fo', 'title'), None)

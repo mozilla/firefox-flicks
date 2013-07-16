@@ -1,8 +1,11 @@
 from datetime import datetime
 
+from django.core.exceptions import ValidationError
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import (HttpResponse, HttpResponseBadRequest,
+                         HttpResponseNotFound)
 from django.shortcuts import get_object_or_404, render
+from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_POST
 
 import waffle
@@ -10,12 +13,13 @@ from tower import ugettext as _
 from waffle.decorators import waffle_flag
 
 from flicks.base import regions
+from flicks.base.http import JSONResponse
 from flicks.base.util import promo_video_shortlink, redirect
 from flicks.videos import tasks, vimeo
 from flicks.videos.decorators import upload_process
 from flicks.videos.forms import VideoForm, VideoSearchForm
 from flicks.videos.models import Video, Video2012, Vote
-from flicks.videos.search import search_videos
+from flicks.videos.search import autocomplete_suggestion, search_videos
 from flicks.videos.util import vidly_embed_code
 from flicks.users.decorators import profile_required
 
@@ -30,13 +34,9 @@ def video_list(request):
 
     if waffle.flag_is_active(request, 'r3'):
         form = VideoSearchForm(request.GET)
-        if form.is_valid():
-            videos = search_videos(
-                query=form.cleaned_data['query'],
-                region=form.cleaned_data['region'],
-                sort=form.cleaned_data['sort']
-            )
-        else:
+        try:
+            videos = form.perform_search()
+        except ValidationError:
             videos = search_videos()
 
         ctx['form'] = form
@@ -58,6 +58,22 @@ def video_list(request):
 
     ctx['videos'] = videos
     return render(request, 'videos/2013/list.html', ctx)
+
+
+@cache_control(public=True, max_age=60*60*24*30)  # 30 days
+def autocomplete(request):
+    """Return results for the autocomplete feature on the search page."""
+    query = request.GET.get('query', None)
+    if not query:
+        return HttpResponseBadRequest()
+
+    results = {
+        'by_title': autocomplete_suggestion(query, 'title'),
+        'by_description': autocomplete_suggestion(query, 'description'),
+        'by_author': autocomplete_suggestion(query,
+                                             'user__userprofile__full_name'),
+    }
+    return JSONResponse(results)
 
 
 def video_detail(request, video_id):

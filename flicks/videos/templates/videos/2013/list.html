@@ -28,9 +28,20 @@
     </div>
 
     {% if waffle.flag('r3') %}
-      <form>
+      <form id="video-search" data-autocomplete-url="{{ url('flicks.videos.autocomplete') }}">
         {{ form.as_ul() }}
         <button type="submit">Search</button>
+        <ul class="suggestions">
+          <li class="title" data-field="title">
+            Title: <span></span>
+          </li>
+          <li class="description" data-field="description">
+            Description: <span></span>
+          </li>
+          <li class="author" data-field="author">
+            Author Name: <span></span>
+          </li>
+        </ul>
       </form>
     {% endif %}
 
@@ -64,7 +75,8 @@
           {{ pagination(videos, url('flicks.videos.list'),
                         region=request.GET.get('region', None),
                         query=request.GET.get('query', None),
-                        sort=request.GET.get('sort', None)) }}
+                        sort=request.GET.get('sort', None),
+                        field=request.GET.get('field', None)) }}
         {% endif %}
       </div>
     {% endblock %}

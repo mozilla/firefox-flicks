@@ -223,6 +223,14 @@
     background-image: linear-gradient(150deg, #c0a665 0%, #ffe8d0 35%, #9f7d38 100%);
 }
 
+.suggestions {
+  display: none;
+}
+
+.suggestions .selected {
+  background: #999;
+}
+
 /* Tablet Layout: 760px */
 @media only screen and (min-width: 760px) and (max-width: 1000px) {
 
@@ -248,11 +256,11 @@
     float: left;
     margin: 0 15px 1.5em;
   }
-  
+
   .winners-page .section-intro {
       width: auto;
   }
-  
+
   .period {
       margin: 0 -20px 2em 0;
       width: auto;
@@ -300,7 +308,7 @@
   .winners-page .entry-list {
     width: auto;
   }
-  
+
   .period {
     margin: 0 0 2em;
   }
@@ -337,15 +345,15 @@
   #trailers .entry:nth-child(2n+1) {
     clear: none;
   }
-  
+
   .period .entry-list {
     margin-left: -10px;
   }
-  
+
   .period .entry-list .entry {
       width: 190px;
   }
-  
+
   .period .entry-list .third-place {
     float: none;
     clear: both;

@@ -10,6 +10,10 @@ urlpatterns = patterns(
     url(r'^2013/(\d+)/$', views.video_detail, name='flicks.videos.detail'),
     url(r'^winners/?$', views.winners, name='flicks.videos.winners'),
 
+    # Search pages
+    url(r'^autocomplete/$', views.autocomplete,
+        name='flicks.videos.autocomplete'),
+
     # Upload pages
     url(r'^upload/$', views.upload, name='flicks.videos.upload'),
     url(r'^upload/complete/$', views.upload_complete,
