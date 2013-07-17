@@ -77,12 +77,18 @@
 
     <h2 id="q5">{{ _('How do I submit my flick to Firefox Flicks and enter the contest?') }}</h2>
     <p>
-    {% trans link_submit=url('flicks.base.home')|urlparams(hash='submit') %}
-      Fill out your filmmaker profile and submit your video <a href="{{ link_submit }}">here.</a>
-      All flicks will be posted to the Firefox Flicks website using the Vimeo API.
-      You'll need to provide your contact information, including your email, title your flick and select
-      your country and region.
-    {% endtrans %}
+    {% if not waffle.flag('r3') %}
+      {% trans link_submit=url('flicks.base.home')|urlparams(hash='submit') %}
+        Fill out your filmmaker profile and submit your video <a href="{{ link_submit }}">here.</a>
+        All flicks will be posted to the Firefox Flicks website using the Vimeo API.
+        You'll need to provide your contact information, including your email, title your flick and select
+        your country and region.
+      {% endtrans %}
+    {% else %}
+      {% trans %}
+        Submissions closed on July 31 and Firefox Flicks is no longer accepting entries for this year.
+      {% endtrans %}
+    {% endif %}
     </p>
 
     <h2 id="q6">{{ _('How does Flicks get and use my email address?') }}</h2>
