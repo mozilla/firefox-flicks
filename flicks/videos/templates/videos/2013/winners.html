@@ -13,9 +13,15 @@
     <h1 class="page-title">{{ _('2013 Flicks Winners') }}</h1>
     <div class="section-intro">
       <p>
-      {% trans %}
-        Submit your flick by July 31, 2013 and add your name to the growing list of Flicks winners.
-      {% endtrans %}
+      {% if not waffle.flag('r3') %}
+        {% trans %}
+          Submit your flick by July 31, 2013 and add your name to the growing list of Flicks winners.
+        {% endtrans %}
+      {% else %}
+        {% trans %}
+          Join us in congratulating this year's winners.
+        {% endtrans %}
+      {% endif %}
       </p>
     </div>
 
@@ -27,7 +33,7 @@
 
           <ul class="entry-list">
             <li class="entry winner first-place">
-              <a href="{{ url('flicks.videos.detail', 377) }}" class="detail-play" data-vimeo-id="68673339">
+              <a href="{{ url('flicks.videos.detail', 377) }}" {% if not waffle.flag('r3') %} class="detail-play" data-vimeo-id="68673339"{% endif %}>
                 <h3 class="placing">{{ _('First Place') }}</h3>
                 <img src="{{ static('img/thumbnails/68673339.jpg') }}" alt="" class="thumbnail">
                 <hgroup>
@@ -48,7 +54,7 @@
             </li>
 
             <li class="entry winner second-place">
-              <a href="{{ url('flicks.videos.detail', 446) }}" class="detail-play" data-vimeo-id="69670873">
+              <a href="{{ url('flicks.videos.detail', 446) }}" {% if not waffle.flag('r3') %} class="detail-play" data-vimeo-id="69670873"{% endif %}>
                 <h3 class="placing">{{ _('Second Place') }}</h3>
                 <img src="{{ static('img/thumbnails/69670873.jpg') }}" alt="" class="thumbnail">
                 <hgroup>
@@ -69,7 +75,7 @@
             </li>
 
             <li class="entry winner third-place">
-              <a href="{{ url('flicks.videos.detail', 436) }}" class="detail-play" data-vimeo-id="69601691">
+              <a href="{{ url('flicks.videos.detail', 436) }}" {% if not waffle.flag('r3') %} class="detail-play" data-vimeo-id="69601691"{% endif %}>
                 <h3 class="placing">{{ _('Third Place') }}</h3>
                 <img src="{{ static('img/thumbnails/69601691.jpg') }}" alt="" class="thumbnail">
                 <hgroup>
@@ -98,7 +104,7 @@
 
           <ul class="entry-list">
             <li class="entry winner first-place">
-              <a href="{{ url('flicks.videos.detail', 345) }}" class="detail-play" data-vimeo-id="67201988">
+              <a href="{{ url('flicks.videos.detail', 345) }}" {% if not waffle.flag('r3') %} class="detail-play" data-vimeo-id="67201988"{% endif %}>
                 <h3 class="placing">{{ _('First Place') }}</h3>
                 <img src="{{ static('img/thumbnails/67201988.jpg') }}" alt="" class="thumbnail">
                 <hgroup>
@@ -119,7 +125,7 @@
             </li>
 
             <li class="entry winner second-place">
-              <a href="{{ url('flicks.videos.detail', 247) }}" class="detail-play" data-vimeo-id="62884008">
+              <a href="{{ url('flicks.videos.detail', 247) }}" {% if not waffle.flag('r3') %} class="detail-play" data-vimeo-id="62884008"{% endif %}>
                 <h3 class="placing">{{ _('Second Place') }}</h3>
                 <img src="{{ static('img/thumbnails/62884008.jpg') }}" alt="" class="thumbnail">
                 <hgroup>
@@ -140,7 +146,7 @@
             </li>
 
             <li class="entry winner third-place">
-              <a href="{{ url('flicks.videos.detail', 304) }}" class="detail-play" data-vimeo-id="64899789">
+              <a href="{{ url('flicks.videos.detail', 304) }}" {% if not waffle.flag('r3') %} class="detail-play" data-vimeo-id="64899789"{% endif %}>
                 <h3 class="placing">{{ _('Third Place') }}</h3>
                 <img src="{{ static('img/thumbnails/64899789.jpg') }}" alt="" class="thumbnail">
                 <hgroup>
@@ -169,7 +175,7 @@
 
           <ul class="entry-list">
             <li class="entry winner first-place">
-              <a href="{{ url('flicks.videos.detail', 260) }}" class="detail-play" data-vimeo-id="63166600">
+              <a href="{{ url('flicks.videos.detail', 260) }}" {% if not waffle.flag('r3') %} class="detail-play" data-vimeo-id="63166600"{% endif %}>
                 <h3 class="placing">{{ _('First Place') }}</h3>
                 <img src="{{ static('img/thumbnails/63166600.jpg') }}" alt="" class="thumbnail">
                 <hgroup>
@@ -190,7 +196,7 @@
             </li>
 
             <li class="entry winner second-place">
-              <a href="{{ url('flicks.videos.detail', 41) }}" class="detail-play" data-vimeo-id="60739100">
+              <a href="{{ url('flicks.videos.detail', 41) }}" {% if not waffle.flag('r3') %} class="detail-play" data-vimeo-id="60739100"{% endif %}>
                 <h3 class="placing">{{ _('Second Place') }}</h3>
                 <img src="{{ static('img/thumbnails/60739100.jpg') }}" alt="" class="thumbnail">
                 <hgroup>
@@ -211,7 +217,7 @@
             </li>
 
             <li class="entry winner third-place">
-              <a href="{{ url('flicks.videos.detail', 30) }}" class="detail-play" data-vimeo-id="59994222">
+              <a href="{{ url('flicks.videos.detail', 30) }}" {% if not waffle.flag('r3') %} class="detail-play" data-vimeo-id="59994222"{% endif %}>
                 <h3 class="placing">{{ _('Third Place') }}</h3>
                 <img src="{{ static('img/thumbnails/59994222.jpg') }}" alt="" class="thumbnail">
                 <hgroup>
@@ -235,6 +241,7 @@
       </div>
 
       <aside id="upcoming" class="sidebar aside">
+      {% if not waffle.flag('r3') %}
         <h2>{{ _('Don\'t miss your chance to win one of many upcoming awards') }}</h2>
 
         <h3>{{ _('Early Entry Awards Deadlines') }}</h3>
@@ -257,6 +264,18 @@
         <p><a href="{{ url('flicks.base.home')|urlparams(hash='prizes') }}" class="go">{{ _('Learn more about Flicks prizes') }}</a></p>
 
         <p><a href="{{ url('flicks.base.home')|urlparams(hash='submit') }}" class="submit-link">{{ _('Submit Your Flick Today!') }}</a></p>
+      {% else %}
+        <h2>{{ _('Upcoming announcements') }}</h2>
+
+        <h3>{{ _('Flicks Grand Prize, Regional Awards &amp; People\'s Choice Award:') }}</h3>
+        <ul>
+          <li>{{ _('September 12 &mdash; Toronto International Film Festival') }}</li>
+        </ul>
+
+        <p><a href="{{ url('flicks.base.home')|urlparams(hash='prizes') }}" class="go">{{ _('Learn more about Flicks prizes') }}</a></p>
+
+        <p><a href="{{ url('flicks.videos.list') }}" class="submit-link">{{ _('Vote now for the People\'s Choice Award') }}</a></p>
+      {% endif %}
 
       </aside>
 
