@@ -906,8 +906,8 @@ a.submit-link:active {
 
 /* Home Variant */
 .share-home .popup {
-  left: 40px;
-  top: 1.7em;
+  left: 40%;
+  top: 2.6em;
 }
 
 .share .popup li {
