@@ -21,7 +21,8 @@
 
 {% block video_details %}
   <h1>{{ video.title }}</h1>
-
+  <p class="description">{{ video.description }}</p>
+  
   <div class="vcard">
 
     {{ gravatar_img(video.user.email, img_class='photo', size=48) }}
@@ -36,17 +37,29 @@
       </a>
     </div>
     <div class="date">{{ video.created|babel_date }}</div>
-    {{ shareWidget(video) }}
+    
   </div>
 
-  {# TODO: Replace placeholder with actual button. #}
   {% if waffle.flag('r3') %}
-    {% set has_vote = video.has_vote_from(user) %}
-    <button class="remove-vote {{ has_vote|ifeq(False, 'hidden') }}" data-url="{{ url('flicks.videos.unvote', video.id) }}">Unvote!</button>
-    <button class="add-vote {{ has_vote|ifeq(True, 'hidden') }}" data-url="{{ url('flicks.videos.vote', video.id) }}">Vote!</button>
+    <div class="vote-control">
+      <p class="vote-count">
+      {# TODO: vote_count should be the actual vote count, of course. Voting/unvoting should increment/decrement the number. #}
+      {% trans vote_count='287' %}
+        <b>{{ vote_count }}</b> votes
+      {% endtrans %}
+      <!-- if no votes yet
+        {{ _('No votes yet') }}
+      -->
+      </p>
+      <p class="vote-button">
+        {% set has_vote = video.has_vote_from(user) %}
+        <button type="button" class="remove-vote {{ has_vote|ifeq(False, 'hidden') }}" data-url="{{ url('flicks.videos.unvote', video.id) }}">{{ _('Voted') }}</button>
+        <button type="button" class="add-vote {{ has_vote|ifeq(True, 'hidden') }}" data-url="{{ url('flicks.videos.vote', video.id) }}">{{ _('Vote') }}</button>
+      </p>
+      {{ shareWidget(video) }}
+    </div>
   {% endif %}
 
-  <p class="description">{{ video.description }}</p>
 {% endblock %}
 
 

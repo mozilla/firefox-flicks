@@ -107,7 +107,7 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
   visibility: hidden;
 }
 
@@ -876,7 +876,8 @@ a.submit-link:active {
 
 /* Home Variant */
 .actions .share-home {
-  margin-top:0px;
+  margin-top: 0;
+  position: relative;
 }
 
 .share .toggle {
@@ -884,14 +885,15 @@ a.submit-link:active {
 }
 
 .share .popup {
-  background: #212A2F;
+  background: #2d3438;
+  background: rgba(27,34,38,.9);
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
   -moz-box-shadow: 0 2px 6px rgba(0,0,0,.5);
   -webkit-box-shadow: 0 2px 6px rgba(0,0,0,.5);
   box-shadow: 0 2px 6px rgba(0,0,0,.5);
-  color: #B7BCC0;
+  color: #b7bCC0;
   display: none;
   font-size: 16px;
   left: -6px;
@@ -904,10 +906,16 @@ a.submit-link:active {
   z-index: 999;
 }
 
+.share .popup a:link,
+.share .popup a:visited {
+  color: #2092dd;
+}
+
 /* Home Variant */
 .share-home .popup {
-  left: 40%;
+  left: 50%;
   top: 2.6em;
+  margin-left: -115px;
 }
 
 .share .popup li {

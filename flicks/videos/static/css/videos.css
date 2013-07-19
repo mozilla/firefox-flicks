@@ -19,7 +19,8 @@
 
 .video-details {
     border-top: none;
-    padding: 30px 15px 0;
+    padding: 30px 240px 0 15px;
+    position: relative;
 }
 
 .video-details .awards {
@@ -42,7 +43,7 @@
 }
 
 .video-details .vcard {
-    margin-bottom: 20px;
+    margin: 30px 0;
     padding-left: 65px;
 }
 
@@ -62,6 +63,78 @@
     margin: -3px 0 .5em -68px;
     border: 3px solid #fff;
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
+}
+
+/* Voting controls */
+.video-details .vote-control {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    width: 220px;
+}
+
+.vote-control .vote-count { 
+    margin: 0 0 10px;
+    font: 20px/1.15 "Open Sans", sans-serif;
+    color: #fff;
+    background: #2d3438;
+    background: rgba(27,34,38,.9);
+    padding: .5em 20px;
+    border-radius: 1.75em;
+    text-align: center;
+}
+
+.vote-control .vote-button {
+    margin: 0 0 10px;
+}
+
+.vote-button button,
+.vote-control .share .toggle {
+    font-size: 18px;
+    line-height: 1;
+    display: inline-block;
+    width: 153px;
+    padding: 10px 50px 10px 15px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    text-align: left;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    border-radius: 6px;
+    -moz-box-shadow: 0 2px 0 0 rgba(0,0,0,.1), inset 0 -2px 0 0 rgba(0,0,0,.1);
+    -webkit-box-shadow: 0 2px 0 0 rgba(0,0,0,.1), inset 0 -2px 0 0 rgba(0,0,0,.1);
+    box-shadow: 0 2px 0 0 rgba(0,0,0,.1), inset 0 -1px 0 0 rgba(0,0,0,.05);
+}
+
+.add-vote {
+    background: #3a90d4;
+    background: url(/static/img/icn-vote.png) 176px 7px no-repeat, #3a90d4 linear-gradient(to bottom, #3c88cc, #276195);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0,0,0,.25);
+    border-color: #5ea3da;
+}
+.add-vote:hover,
+.add-vote:focus {
+    background: #409de7;
+    background: url(/static/img/icn-vote.png) 176px 7px no-repeat, #409de7 linear-gradient(to bottom, #409de7, #3484c5);
+}
+
+.remove-vote {
+    background: url(/static/img/icn-vote.png) 176px -93px no-repeat, linear-gradient(#fff, #e8e8e8);
+}
+.remove-vote:hover,
+.remove-vote:focus {
+    background: url(/static/img/icn-vote.png) 176px -93px no-repeat, linear-gradient(#fff, #dcdcdc);
+}
+
+.vote-control .share .toggle {
+    font-size: 18px;
+    background: url(/static/img/icn-vote.png) 176px -196px no-repeat, linear-gradient(#fff, #e8e8e8);
+}
+
+.vote-control .share .popup {
+    top: 42px;
 }
 
 #modal .video {
@@ -230,6 +303,15 @@
   
   .period {
     margin: 0 0 2em;
+  }
+  
+  .video-details {
+    padding-right: 15px;
+  }
+  
+  .video-details .vote-control {
+    position: static;
+    margin: 0 auto 30px;
   }
 
 }

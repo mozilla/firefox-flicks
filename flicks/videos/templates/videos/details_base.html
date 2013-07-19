@@ -16,10 +16,11 @@
       </div>
       <div class="video-details">
         {% block video_details %}{% endblock %}
-        <a href="{{ settings.LINK_CCLICENSE[request.locale] }}" rel="external license"><img src="{{ static('img/cc-logo.png') }}" 
-          width="100" height="35" 
+        <a href="{{ settings.LINK_CCLICENSE[request.locale] }}" rel="external license">
+          <img src="{{ static('img/cc-logo.png') }}" width="100" height="35" 
           title="{{ _('Creative Commons Attribution - NonCommercial - ShareAlike license') }}"
-          alt="{{ _('Creative Commons Attribution - NonCommercial - ShareAlike license') }}"></a>        
+          alt="{{ _('Creative Commons Attribution - NonCommercial - ShareAlike license') }}">
+        </a>        
       </div>
     </article>
   </div>

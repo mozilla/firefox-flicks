@@ -185,7 +185,7 @@
     });
 
     $document.on('mouseleave', '.share', function() {
-        $(this).find('.popup').fadeOut(200);
+        $(this).find('.popup').delay(200).fadeOut(200);
     });
 
     // JS Shim for HTML5 form `requires` attribute.

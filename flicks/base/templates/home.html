@@ -160,7 +160,7 @@
           <li><a href="{{ settings.LINK_BRIEF[request.locale] }}" class="button-light dl ga_brief-dl" rel="external">{{ _('Read the creative brief') }}</a></li>
           <li><a href="http://mzl.la/XootKF" class="button-light dl" rel="external">{{ _('Download the creative assets') }}</a></li>
         </ul>
-        
+
         <p>
         {% trans %}
           See what last year's winners have to say about their experience.
@@ -477,7 +477,7 @@
     </div>
   </section>
 
-  <section id="prizes" class="section alt">
+  <section id="prizes" class="section">
     <div class="wrap">
       <h1 class="section-title">{{ _('Prizes') }}</h1>
       {% if not waffle.flag('r3') %}

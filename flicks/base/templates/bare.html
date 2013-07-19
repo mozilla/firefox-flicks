@@ -40,7 +40,7 @@
       {{ js('google_analytics') }}
     {% endblock %}
   </head>
-  <body class="{{ page_type }}" data-csrf-token="{{ csrf_token }}" {% block body_data %}{% endblock %}>
+  <body class="{{ page_type }} {% if waffle.flag('r3') %}voting{% endif %}" data-csrf-token="{{ csrf_token }}" {% block body_data %}{% endblock %}>
     <div id="strings"
          data-close="{{ _('Close') }}"
          data-input-required="{{ _('This field is required.') }}"

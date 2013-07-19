@@ -351,6 +351,10 @@
   background: url(/static/img/spot-1.png) 170% 10px no-repeat, url(/static/img/spot-2.png) -20% 200% no-repeat, url(/static/img/spot-3.png) 5% -320px no-repeat;
 }
 
+body.voting #judges {
+  background: #e9e9e9 url(/static/img/bg-grid.png);
+}
+
 #judges .section-intro {
   width: 620px;
 }
@@ -455,6 +459,10 @@
 }
 
 /* @Prizes *********/
+body.voting #prizes {
+  background: url(/static/img/spot-1.png) 170% 10px no-repeat, url(/static/img/spot-2.png) -20% 200% no-repeat, url(/static/img/spot-3.png) 5% -320px no-repeat;
+}
+
 .prizes {
   text-align: center;
   overflow: auto;
@@ -508,6 +516,10 @@
 #rules {
   background: url(/static/img/spot-1.png) -50% 50% no-repeat, url(/static/img/spot-2.png) 85% 180% no-repeat, url(/static/img/spot-3.png) 120% -120px no-repeat;
   text-align: center;
+}
+
+body.voting #rules {
+  background: #e9e9e9 url(/static/img/bg-grid.png);
 }
 
 #rules .section-intro {
