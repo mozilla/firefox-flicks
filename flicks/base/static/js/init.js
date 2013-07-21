@@ -71,8 +71,16 @@
     // Store common functions on flicks global.
     var $strings = $('#strings');
     var flicks = {
-        trans: function(stringId){
-            return $strings.data(stringId);
+        trans: function(stringId, data){
+            var string = $strings.data(stringId);
+            if (data) {
+                for (var key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        string = string.replace('%(' + key + ')s', data[key]);
+                    }
+                }
+            }
+            return string;
         },
 
         createModal: function(origin, content, bg_close) {

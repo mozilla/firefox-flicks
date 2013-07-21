@@ -53,6 +53,10 @@ class Video2013(models.Model, CachingMixin):
         return (self.thumbnail.url if self.thumbnail else
                 static('img/video-blank.jpg'))
 
+    @property
+    def vote_count(self):
+        return self.voters.count()
+
     def save(self, *args, **kwargs):
         """
         Prior to saving, trigger approval processing if approval status has

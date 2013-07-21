@@ -15,6 +15,13 @@
   ) %}
 {% endif %}
 
+{% block string_data %}
+  {{ super() }}
+  data-vote-count-none="{{ _('No votes yet') }}"
+  data-vote-count-one="{{ _('<b>%(vote_count)s</b> vote') }}"
+  data-vote-count-some="{{ _('<b>%(vote_count)s</b> votes') }}"
+{% endblock %}
+
 {% block video_embed %}
   {{ video.embed_html(width='100%') }}
 {% endblock %}
@@ -22,7 +29,7 @@
 {% block video_details %}
   <h1>{{ video.title }}</h1>
   <p class="description">{{ video.description }}</p>
-  
+
   <div class="vcard">
 
     {{ gravatar_img(video.user.email, img_class='photo', size=48) }}
@@ -37,19 +44,23 @@
       </a>
     </div>
     <div class="date">{{ video.created|babel_date }}</div>
-    
+
   </div>
 
   {% if waffle.flag('r3') %}
     <div class="vote-control">
       <p class="vote-count">
-      {# TODO: vote_count should be the actual vote count, of course. Voting/unvoting should increment/decrement the number. #}
-      {% trans vote_count='287' %}
-        <b>{{ vote_count }}</b> votes
-      {% endtrans %}
-      <!-- if no votes yet
-        {{ _('No votes yet') }}
-      -->
+        {% set vote_count = video.vote_count %}
+        {% if vote_count < 1 %}
+          {{ _('No votes yet') }}
+        {% else %}
+          {# L10n: <b> tag is used to place the number of votes, please do not remove it. #}
+          {% trans vote_count=video.vote_count %}
+            <b>{{ vote_count }}</b> vote
+          {% pluralize %}
+            <b>{{ vote_count }}</b> votes
+          {% endtrans %}
+        {% endif %}
       </p>
       <p class="vote-button">
         {% set has_vote = video.has_vote_from(user) %}

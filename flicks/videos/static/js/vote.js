@@ -1,4 +1,4 @@
-;(function($, django_browserid) {
+;(function($, django_browserid, flicks) {
     'use strict';
 
     var csrfToken = $('body').data('csrfToken');
@@ -26,6 +26,7 @@
             voteXHR.done(function() {
                 $button.addClass('hidden');
                 $button.siblings('.remove-vote').removeClass('hidden');
+                modifyVoteCount(1);
             });
         }
     });
@@ -36,6 +37,28 @@
         $.post(url, {csrfmiddlewaretoken: csrfToken}).done(function() {
             $button.addClass('hidden');
             $button.siblings('.add-vote').removeClass('hidden');
+            modifyVoteCount(-1);
         });
     });
-})(jQuery, django_browserid);
+
+    function modifyVoteCount(mod) {
+        var $countContainer = $('.vote-count');
+        var $count = $countContainer.find('b');
+        var newCount = 0;
+        if ($count.length) {
+            newCount = parseInt($count.text(), 10) || 0;
+        }
+        newCount += mod;
+        $countContainer.html(voteCountText(newCount));
+    }
+
+    function voteCountText(count) {
+        if (count < 1) {
+            return flicks.trans('voteCountNone');
+        } else if (count === 1) {
+            return flicks.trans('voteCountOne', {vote_count: count});
+        } else {
+            return flicks.trans('voteCountSome', {vote_count: count});
+        }
+    }
+})(jQuery, django_browserid, flicks);
