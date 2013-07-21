@@ -31,7 +31,7 @@ FIELD_FILTERS = {
 class VideoSearchForm(forms.Form):
     """Form for the search feature on the video listing page."""
     FIELD_CHOICES = [(value, '') for value in FIELD_FILTERS.keys()]
-    REGION_CHOICES = [('', _lazy('All Regions'))] + region_names.items()
+    REGION_CHOICES = [(None, _lazy('All regions'))] + region_names.items()
     SORT_CHOICES = (
         ('', _lazy('by Title')),
         ('popular', _lazy('by Popularity')),
@@ -39,7 +39,10 @@ class VideoSearchForm(forms.Form):
 
     query = forms.CharField(
         required=False,
-        widget=forms.TextInput(attrs={'autocomplete': 'off'}))
+        widget=forms.TextInput(attrs={
+            'type': 'search',
+            'autocomplete': 'off'
+        }))
     region = forms.TypedChoiceField(
         required=False,
         choices=REGION_CHOICES,
@@ -52,6 +55,8 @@ class VideoSearchForm(forms.Form):
         required=False,
         choices=FIELD_CHOICES,
         widget=forms.HiddenInput)
+
+    region_names = dict(REGION_CHOICES)
 
     def perform_search(self):
         """

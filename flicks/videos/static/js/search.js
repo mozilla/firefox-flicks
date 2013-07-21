@@ -7,8 +7,13 @@
 
     $(function() {
         // Hook up the search form manipulator and autocomplete widget.
-        var searchForm = new SearchForm($('#video-search'));
+        var searchForm = new SearchForm($('.search-form'));
         new AutoComplete(searchForm);
+
+        // Submit sorting form when the sorting input changes value.
+        $('.gallery-sort select[name="sort"]').change(function() {
+            $(this).parents('form').submit();
+        });
     });
 
     /**
@@ -39,8 +44,13 @@
             // Clicking a suggestion also triggers an autocomplete search.
             this.form.onSuggestionClick(function(e) {
                 self.autocompleteSubmit = true;
-                self.form.setSelected($elem.data('field'));
+                self.form.setSelected(this);
                 self.form.submitSelected();
+            });
+
+            // Hovering over a suggestion clears the keyboard selection.
+            this.form.onSuggestionHover(function(e) {
+                self.form.clearSelected();
             });
 
             // Clear the field input if we are not performing an autocomplete
@@ -124,14 +134,15 @@
         this.$form = $form;
         this.$query = $form.find('input[name="query"]');
         this.$field = $form.find('input[name="field"]');
-        this.$suggestions = $form.find('.suggestions');
+        this.$suggestions = $form.find('#search-suggest');
 
         this.autoCompleteUrl = this.$form.data('autocompleteUrl');
 
         this._suggestions = {
-            title: this.$suggestions.find('.title'),
-            description: this.$suggestions.find('.description'),
-            author: this.$suggestions.find('.author')
+            title: this.$suggestions.find('li[data-field="title"]'),
+            description: this.$suggestions.find(
+                'li[data-field="description"]'),
+            author: this.$suggestions.find('li[data-field="author"]')
         };
     }
 
@@ -151,6 +162,10 @@
 
         onSuggestionClick: function(handler) {
             this.$suggestions.on('click', 'li:visible', handler);
+        },
+
+        onSuggestionHover: function(handler) {
+            this.$suggestions.on('hover', 'li:visible', handler);
         },
 
         onSubmit: function(handler) {
@@ -174,7 +189,7 @@
             } else if (!value) {
                 $suggestion.hide();
                 return false;
-            } else if (value) {
+            } else {
                 $suggestion.show().find('span').text(value);
                 return true;
             }
@@ -218,12 +233,9 @@
             $next.addClass('selected');
         },
 
-        setSelected: function(field) {
-            var $suggestion = this._suggestions['$' + field];
-            if ($suggestion) {
-                this.clearSelected();
-                $suggestion.addClass('selected');
-            }
+        setSelected: function(suggestion) {
+            this.clearSelected();
+            $(suggestion).addClass('selected');
         },
 
         // Miscellaneous

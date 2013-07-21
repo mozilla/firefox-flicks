@@ -24,6 +24,12 @@ def user_profile(self):
 User.add_to_class('profile', user_profile)
 
 
+@property
+def vote_count(self):
+    return self.voted_videos.count()
+User.add_to_class('vote_count', vote_count)
+
+
 class UserProfile(models.Model, CachingMixin):
     """Additional fields required for a user."""
     user = models.OneToOneField(User, primary_key=True)

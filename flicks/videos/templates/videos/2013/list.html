@@ -15,113 +15,115 @@
 
 {% block content %}
   <div class="section wrap">
-  {% if waffle.flag('r3') %}
-    <h1 class="page-title">{{ _('Voting is open!') }}</h1>
-  {% else %}
-    <h1 class="page-title">{{ _('Welcome to the<br> Firefox Flicks 2013 gallery') }}</h1>
-  {% endif %}
+    {% if waffle.flag('r3') %}
+      <h1 class="page-title">{{ _('Voting is open!') }}</h1>
+    {% else %}
+      <h1 class="page-title">{{ _('Welcome to the<br> Firefox Flicks 2013 gallery') }}</h1>
+    {% endif %}
 
     <div class="section-intro">
-      <p>
-      {% trans %}
-        Welcome to the Firefox Flicks 2013 gallery. This year we asked filmmakers
-        to tell stories about the power of the Web on mobile devices. Vote for
-        your favorite flicks and be sure to share them with your friends.
-      {% endtrans %}
-      </p>
+      {% if not waffle.flag('r3') %}
+        <p>
+          {% trans %}
+            This year we're asking filmmakers and Firefox fans to inspire
+            others to get mobilized by telling the world about the power and
+            potential of mobile. Have a look at the entries and be sure to
+            share your favorites with your friends.
+          {% endtrans %}
+        </p>
+      {% else %}
+        <p>
+          {% trans %}
+            Welcome to the Firefox Flicks 2013 gallery. This year we asked filmmakers
+            to tell stories about the power of the Web on mobile devices. Vote for
+            your favorite flicks and be sure to share them with your friends.
+          {% endtrans %}
+        </p>
 
-    {% if waffle.flag('r3') %}
-      <p class="voting">
-      <!-- If not signed in
-      {% trans %}
-        Start voting by clicking on your favorite videos.
-      {% endtrans %}
-      <!-- if signed in and no votes yet
-      {% trans %}
-        Hi there! It looks like you haven’t voted yet. Start voting now by clicking on your favorite videos.
-      {% endtrans %}
-      -->
-      <!-- if signed in and at least one vote -->
-      {% trans voted_gallery='link to gallery of voted videos',
-          voted_count='23' %}
-        Hi there! You have voted for <a href="{{ voted_gallery }}">{{ voted_count }} flicks</a> so far. Keep on voting!
-      {% endtrans %}
-      <!-- -->
-      </p>
+        <p class="voting">
+          {% if not user.is_authenticated() %}
+            {% trans %}
+              Start voting by clicking on your favorite videos.
+            {% endtrans %}
+          {% elif user.vote_count < 1 %}
+            {% trans %}
+              Hi there! It looks like you haven’t voted yet. Start voting now by clicking on your favorite videos.
+            {% endtrans %}
+          {% else %}
+            {% trans url='#placeholder', vote_count=user.vote_count %}
+              Hi there! You have voted for <a href="{{ url }}">{{ vote_count }} flick</a> so far. Keep on voting!
+              {% pluralize vote_count %}
+              Hi there! You have voted for <a href="{{ url }}">{{ vote_count }} flicks</a> so far. Keep on voting!
+            {% endtrans %}
+          {% endif %}
+        </p>
+      {% endif %}
     </div>
 
-      <form id="video-search" data-autocomplete-url="{{ url('flicks.videos.autocomplete') }}">
-        {{ form.as_ul() }}
-        <button type="submit">Search</button>
-        <ul class="suggestions">
-          <li class="title" data-field="title">
-            Title: <span></span>
+    {% if waffle.flag('r3') %}
+      <form class="search-form" data-autocomplete-url="{{ url('flicks.videos.autocomplete') }}">
+        <ul>
+          <li class="search-region">
+            {{ form.region.label_tag(_('From region')) }}
+            {{ form.region }}
           </li>
-          <li class="description" data-field="description">
-            Description: <span></span>
+          <li class="search-query">
+            {{ form.query }}
+
+            <ul id="search-suggest">
+              <li data-field="author">
+                {{ _('<span>{query}</span> <small class="category">in user name</small>')|fe(query='') }}
+              </li>
+              <li data-field="title">
+                {{ _('<span>{query}</span> <small class="category">in video title</small>')|fe(query='') }}
+              </li>
+              <li data-field="description">
+                {{ _('<span>{query}</span> <small class="category">in video description</small>')|fe(query='') }}
+              </li>
+            </ul>
+
+            {{ form.query.label_tag(_('Search for video name, user name, or description')) }}
           </li>
-          <li class="author" data-field="author">
-            Author Name: <span></span>
+          <li class="search-field">
+            {{ form.field }}
+          </li>
+          <li class="search-sort">
+            {{ form.sort }}
+          </li>
+          <li class="search-submit">
+            <button type="submit" class="button small">{{ _('update results') }}</button>
           </li>
         </ul>
       </form>
-
-    <form class="search-form" action="#">
-      <ul>
-        <li class="search-region">
-          <label for="region">{{ _('From region') }}</label>
-          <select id="region" name="region">
-            <option value="all" selected>{{ _('All regions') }}</option>
-            <option value="northam">{{ _('North America') }}</option>
-            <option value="latam">{{ _('Latin America') }}</option>
-            <option value="emea">{{ _('Europe, Middle East, and Africa') }}</option>
-            <option value="apac">{{ _('Asia and Pacific') }}</option>
-          </select>
-        </li>
-        <li class="search-query">
-          <input type="search" id="query" name="q" autocomplete="off">
-
-          <ul id="search-suggest">
-            <li><a href="?query=query&category=username">query <small class="category">in user name</small></a></li>
-            <li><a href="?query=query&category=title">query <small class="category">in video title</small></a></li>
-            <li><a href="?query=query&category=description">query <small class="category">in video description</small></a></li>
-          </ul>
-
-          <label for="query">{{ _('Search for video name, user name, or description') }}</label>
-        </li>
-        <li class="search-submit">
-          <button type="submit" class="button small">{{ _('update results') }}</button>
-        </li>
-      </ul>
-    </form>
-  {% endif %}
+    {% endif %}
 
     {% block results %}
       <div id="gallery">
+        {% if waffle.flag('r3') %}
+          <div class="gallery-header">
+            {% if form.is_valid() and form.cleaned_data['query'] %}
+              <h2>
+                {% trans count=videos.paginator.count,
+                         query=form.cleaned_data['query'],
+                         region=form.region_names[form.cleaned_data['region']] %}
+                  <i>{{ count }}</i> videos for <i>{{ query }}</i> in <i>{{ region }}</i>
+                {% endtrans %}
+              </h2>
+            {% endif %}
 
-      {% if waffle.flag('r3') %}
-        <div class="gallery-header">
-          <h2>
-          {% trans count='87',
-              query='query',
-              region='all regions'
-          %}
-            <i>{{ count }}</i> videos for <i>{{ query }}</i> in <i>{{ region }}</i>
-          {% endtrans %}
-          </h2>
-          <form class="gallery-sort" action="#">
-            <p>
-              <label for="sort">{{ _('Sort:') }}</label>
-              <select id="sort" name="sort">
-                <option value="title" selected>{{ _('by Title') }}</option>
-                <option value="date">{{ _('by Date') }}</option>
-                <option value="popular">{{ _('by Popularity') }}</option>
-              </select>
-              <button type="submit">{{ _('Submit') }}</button>
-            </p>
-          </form>
-        </div>
-      {% endif %}
+            <form class="gallery-sort">
+              <div class="hidden-inputs">
+                {{ form.query }}
+                {{ form.region }}
+                {{ form.field }}
+              </div>
+              <p>
+                {{ form.sort.label_tag(_('Sort:')) }}
+                {{ form.sort }}
+              </p>
+            </form>
+          </div>
+        {% endif %}
 
         <ul class="entry-list">
           {% for video in videos %}
