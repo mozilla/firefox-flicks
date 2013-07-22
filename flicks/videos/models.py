@@ -25,6 +25,7 @@ class Video2013(models.Model, CachingMixin):
     description = models.TextField(blank=True)
     user = models.ForeignKey(User)
     created = models.DateTimeField(default=datetime.now)
+    random_ordering = models.IntegerField(default=0)
 
     vimeo_id = models.IntegerField()
     filename = models.CharField(max_length=255, blank=False)

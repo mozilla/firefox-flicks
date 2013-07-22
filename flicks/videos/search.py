@@ -28,8 +28,9 @@ def search_videos(query=None, fields=None, region=None, sort=None):
         Values for this parameter can be found in `flicks.base.regions`.
 
     :param sort:
-        How to sort the resulting videos. Defaults to alphabetical by title
-        sort. Only other valid option is 'popular' which sorts by vote count.
+        How to sort the resulting videos. Defaults to a random sort that
+        changes every hour. Other valid options are 'popular', which sorts by
+        vote count, and 'title', which sorts alphabetically by title.
     """
     qs = Video.objects.filter(approved=True)
 
@@ -54,8 +55,10 @@ def search_videos(query=None, fields=None, region=None, sort=None):
         # NOTE: Naming this count `vote_count` triggers a bug in Django since
         # there's a property named that on the model.
         qs = qs.annotate(votecount=Count('voters')).order_by('-votecount')
-    else:
+    elif sort == 'title':
         qs = qs.order_by('title')  # Default sort is by title.
+    else:
+        qs = qs.order_by('random_ordering')
 
     return qs
 

@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 
 from mock import patch
-from nose.tools import assert_raises, eq_
+from nose.tools import assert_raises, eq_, ok_
 
 from flicks.base.regions import NORTH_AMERICA
 from flicks.base.tests import TestCase
@@ -48,3 +48,36 @@ class VideoSearchFormTests(TestCase):
 
         with assert_raises(ValidationError):
             form.perform_search()
+
+    def test_clean_no_query(self):
+        """
+        If no search query is specified, do not alter the sort value or
+        choices.
+        """
+        form = VideoSearchForm({'region': NORTH_AMERICA, 'sort': 'title'})
+        form.full_clean()
+
+        eq_(form.cleaned_data['sort'], 'title')
+        choice_values = zip(*form.fields['sort'].choices)[0]
+        ok_('' in choice_values)
+
+    def test_clean_query(self):
+        """
+        If a search query is specified, remove the random option from the sort
+        choices and, if the sort is currently set to random, switch to title
+        sort.
+        """
+        form = VideoSearchForm({'query': 'blah', 'sort': ''})
+        form.full_clean()
+
+        eq_(form.cleaned_data['sort'], 'title')
+        choice_values = zip(*form.fields['sort'].choices)[0]
+        ok_('' not in choice_values)
+
+        # Check that sort is preserved if it is not random.
+        form = VideoSearchForm({'query': 'blah', 'sort': 'popular'})
+        form.full_clean()
+
+        eq_(form.cleaned_data['sort'], 'popular')
+        choice_values = zip(*form.fields['sort'].choices)[0]
+        ok_('' not in choice_values)

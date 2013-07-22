@@ -31,9 +31,13 @@ FIELD_FILTERS = {
 class VideoSearchForm(forms.Form):
     """Form for the search feature on the video listing page."""
     FIELD_CHOICES = [(value, '') for value in FIELD_FILTERS.keys()]
-    REGION_CHOICES = [(None, _lazy('All regions'))] + region_names.items()
+    REGION_CHOICES = [('', _lazy('All regions'))] + region_names.items()
     SORT_CHOICES = (
-        ('', _lazy('by Title')),
+        # L10n: Label for the order in which to sort a list of videos.
+        ('', _lazy('Random')),
+        # L10n: Label for the order in which to sort a list of videos.
+        ('title', _lazy('by Title')),
+        # L10n: Label for the order in which to sort a list of videos.
         ('popular', _lazy('by Popularity')),
     )
 
@@ -57,6 +61,17 @@ class VideoSearchForm(forms.Form):
         widget=forms.HiddenInput)
 
     region_names = dict(REGION_CHOICES)
+
+    def clean(self):
+        super(VideoSearchForm, self).clean()
+
+        # If the user is performing a search, remove the random sorting option.
+        if self.cleaned_data['query']:
+            sort = self.fields['sort']
+            sort.choices = filter(lambda choice: choice[0] != '', sort.choices)
+            self.cleaned_data['sort'] = self.cleaned_data['sort'] or 'title'
+
+        return self.cleaned_data
 
     def perform_search(self):
         """

@@ -16,7 +16,7 @@ class SearchVideosTests(TestCase):
         VideoFactory.create(approved=False)
         v1 = VideoFactory.create(approved=True)
         v2 = VideoFactory.create(approved=True)
-        eq_(list(search_videos()), [v1, v2])
+        eq_(set(search_videos()), set([v1, v2]))
 
     def test_query(self):
         """
@@ -35,21 +35,21 @@ class SearchVideosTests(TestCase):
         user = UserProfileFactory.create(full_name='does match name').user
         v3 = VideoFactory.create(title='C', user=user, approved=True)
 
-        eq_(list(search_videos(query='does')), [v1, v2, v3])
+        eq_(set(search_videos(query='does')), set([v1, v2, v3]))
 
         # ANY term in the query can be used for matching.
-        eq_(list(search_videos(query='what does bylaw')), [v1, v2, v3])
+        eq_(set(search_videos(query='what does bylaw')), set([v1, v2, v3]))
 
         # Search is case-insensitive.
-        eq_(list(search_videos(query='DoEs')), [v1, v2, v3])
+        eq_(set(search_videos(query='DoEs')), set([v1, v2, v3]))
 
         # Terms may match only part of a word in the video.
-        eq_(list(search_videos(query='floor do')), [v1, v2, v3])
+        eq_(set(search_videos(query='floor do')), set([v1, v2, v3]))
 
         # Terms only have to match one of the three possible fields.
-        eq_(list(search_videos(query='mytitle')), [v1])
-        eq_(list(search_videos(query='mydesc')), [v2])
-        eq_(list(search_videos(query='name')), [v3])
+        eq_(set(search_videos(query='mytitle')), set([v1]))
+        eq_(set(search_videos(query='mydesc')), set([v2]))
+        eq_(set(search_videos(query='name')), set([v3]))
 
     def test_fields(self):
         """
@@ -59,11 +59,12 @@ class SearchVideosTests(TestCase):
         v1 = VideoFactory.create(title='foo', description='bar', approved=True)
         v2 = VideoFactory.create(title='bar', description='foo', approved=True)
 
-        eq_(list(search_videos('foo', fields=['title'])), [v1])
-        eq_(list(search_videos('bar', fields=['title'])), [v2])
-        eq_(list(search_videos('bar', fields=['description'])), [v1])
-        eq_(list(search_videos('bar', fields=['title', 'description'])),
-            [v2, v1])
+        eq_(set(search_videos('foo', fields=['title'])), set([v1]))
+        eq_(set(search_videos('bar', fields=['title'])), set([v2]))
+        eq_(set(search_videos('bar', fields=['description'])), set([v1]))
+        videos = search_videos(
+            'bar', fields=['title', 'description'], sort='title')
+        eq_(set(videos), set([v2, v1]))
 
     @patch('flicks.videos.views.regions.get_countries')
     def test_region(self, get_countries):
@@ -78,7 +79,7 @@ class SearchVideosTests(TestCase):
         video_fr = VideoFactory.create(user=user_fr, approved=True)
         VideoFactory.create(user=user_pt, approved=True)
 
-        eq_(list(search_videos(region=1)), [video_fr])
+        eq_(set(search_videos(region=1)), set([video_fr]))
         get_countries.assert_called_with(1)
 
     @patch('flicks.videos.views.regions.get_countries')
@@ -91,16 +92,24 @@ class SearchVideosTests(TestCase):
         video_fr = VideoFactory.create(user=user_fr, approved=True)
         video_pt = VideoFactory.create(user=user_pt, approved=True)
 
-        eq_(list(search_videos(region=1)), [video_fr, video_pt])
+        eq_(set(search_videos(region=1)), set([video_fr, video_pt]))
         get_countries.assert_called_with(1)
 
+    def test_random_sort(self):
+        """By default, sort the videos by their random_ordering index."""
+        video_1 = VideoFactory.create(random_ordering=3, approved=True)
+        video_2 = VideoFactory.create(random_ordering=1, approved=True)
+        video_3 = VideoFactory.create(random_ordering=2, approved=True)
+
+        eq_(list(search_videos()), [video_2, video_3, video_1])
+
     def test_title_sort(self):
-        """By default, sort videos alphabetically by their title."""
+        """If sort is 'title', sort videos alphabetically by their title."""
         video_1 = VideoFactory.create(title='A', approved=True)
         video_2 = VideoFactory.create(title='C', approved=True)
         video_3 = VideoFactory.create(title='B', approved=True)
 
-        eq_(list(search_videos()), [video_1, video_3, video_2])
+        eq_(list(search_videos(sort='title')), [video_1, video_3, video_2])
 
     def test_popular_sort(self):
         """If sort is 'popular', sort by the number of votes."""
