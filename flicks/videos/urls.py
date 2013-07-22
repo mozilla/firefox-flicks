@@ -6,7 +6,9 @@ urlpatterns = patterns(
     '',
 
     # Video pages
-    url(r'^$', views.video_list, name='flicks.videos.list'),
+    url(r'^$', views.gallery, name='flicks.videos.list'),
+    url(r'^my_voted_videos/$', views.my_voted_videos,
+        name='flicks.videos.my_voted_videos'),
     url(r'^2013/(\d+)/$', views.video_detail, name='flicks.videos.detail'),
     url(r'^winners/?$', views.winners, name='flicks.videos.winners'),
 

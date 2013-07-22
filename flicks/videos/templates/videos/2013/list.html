@@ -50,7 +50,7 @@
               Hi there! It looks like you haven’t voted yet. Start voting now by clicking on your favorite videos.
             {% endtrans %}
           {% else %}
-            {% trans url='#placeholder', vote_count=user.vote_count %}
+            {% trans url=url('flicks.videos.my_voted_videos'), vote_count=user.vote_count %}
               Hi there! You have voted for <a href="{{ url }}">{{ vote_count }} flick</a> so far. Keep on voting!
               {% pluralize vote_count %}
               Hi there! You have voted for <a href="{{ url }}">{{ vote_count }} flicks</a> so far. Keep on voting!
@@ -61,7 +61,9 @@
     </div>
 
     {% if waffle.flag('r3') %}
-      <form class="search-form" data-autocomplete-url="{{ url('flicks.videos.autocomplete') }}">
+      <form class="search-form"
+            action="{{ url('flicks.videos.list') }}"
+            data-autocomplete-url="{{ url('flicks.videos.autocomplete') }}">
         <ul>
           <li class="search-region">
             {{ form.region.label_tag(_('From region')) }}
@@ -99,7 +101,7 @@
 
     {% block results %}
       <div id="gallery">
-        {% if waffle.flag('r3') %}
+        {% if waffle.flag('r3') and not hide_gallery_header %}
           <div class="gallery-header">
             {% if form.is_valid() and form.cleaned_data['query'] %}
               <h2>
@@ -111,7 +113,7 @@
               </h2>
             {% endif %}
 
-            <form class="gallery-sort">
+            <form class="gallery-sort" action="{{ url('flicks.videos.list') }}">
               <div class="hidden-inputs">
                 {{ form.query }}
                 {{ form.region }}

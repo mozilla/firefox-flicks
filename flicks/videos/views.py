@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import (HttpResponse, HttpResponseBadRequest,
@@ -26,9 +27,8 @@ from flicks.users.decorators import profile_required
 
 ### 2013 Contest ###
 # Video pages
-def video_list(request):
-    """Show a list of recent videos, optionally filtered by region or search."""
-    page = request.GET.get('page', 1)
+def gallery(request):
+    """Show the gallery of all submitted videos."""
     region = request.GET.get('region', None)
     ctx = {}
 
@@ -48,6 +48,26 @@ def video_list(request):
                 videos = videos.filter(
                     user__userprofile__country__in=countries)
 
+    return video_list(request, videos, ctx)
+
+
+@waffle_flag('r3')
+@login_required
+def my_voted_videos(request):
+    """Show videos that the current user has voted for."""
+    # Order by most-recently voted.
+    videos = request.user.voted_videos.order_by('-vote__id')
+    return video_list(request, videos, {'hide_gallery_header': True})
+
+
+def video_list(request, videos, ctx=None):
+    """Show a list of videos."""
+    page = request.GET.get('page', 1)
+    ctx = ctx or {}
+
+    if 'form' not in ctx:
+        ctx['form'] = VideoSearchForm(request.GET)
+
     paginator = Paginator(videos, 12)
     try:
         videos = paginator.page(page)
@@ -60,6 +80,7 @@ def video_list(request):
     return render(request, 'videos/2013/list.html', ctx)
 
 
+@waffle_flag('r3')
 @cache_control(public=True, max_age=60*60*24*30)  # 30 days
 def autocomplete(request):
     """Return results for the autocomplete feature on the search page."""

@@ -1,9 +1,10 @@
 from urllib import urlencode
 
 from django.core.exceptions import ValidationError
+from django.test.client import RequestFactory
 
 from funfactory.urlresolvers import reverse
-from mock import ANY, patch
+from mock import Mock, patch
 from nose.tools import eq_, ok_
 from waffle import Flag
 
@@ -12,6 +13,7 @@ from flicks.base.tests.tools import redirects_
 from flicks.users.tests import UserFactory, UserProfileFactory
 from flicks.videos.models import Video, Vote
 from flicks.videos.tests import VideoFactory
+from flicks.videos.views import video_list
 
 
 class TestUpload(TestCase):
@@ -110,16 +112,16 @@ class TestUpload(TestCase):
         redirects_(response, 'flicks.videos.upload_complete')
 
 
-class VideoListTests(TestCase):
+class GalleryTests(TestCase):
     def setUp(self):
-        super(VideoListTests, self).setUp()
+        super(GalleryTests, self).setUp()
         self.us_user = UserProfileFactory.create(country='us').user
         self.fr_user = UserProfileFactory.create(country='fr').user
 
         self.v1 = VideoFactory.create(user=self.us_user, approved=True)
         self.v2 = VideoFactory.create(user=self.fr_user, approved=True)
 
-    def _video_list(self, **kwargs):
+    def _gallery(self, **kwargs):
         with self.activate('en-US'):
             url = '?'.join([reverse('flicks.videos.list'), urlencode(kwargs)])
             return self.client.get(url)
@@ -132,7 +134,7 @@ class VideoListTests(TestCase):
         """
         get_countries.return_value = ['us', 'pt']
 
-        response = self._video_list(region=1)
+        response = self._gallery(region=1)
         videos = response.context['videos']
         ok_(self.v1 in videos)
         ok_(self.v2 not in videos)
@@ -143,7 +145,7 @@ class VideoListTests(TestCase):
         """If region is invalid or empty, do not filter the returned videos."""
         # Region empty.
         get_countries.return_value = ['us', 'pt']
-        response = self._video_list()
+        response = self._gallery()
 
         videos = response.context['videos']
         ok_(self.v1 in videos)
@@ -152,39 +154,12 @@ class VideoListTests(TestCase):
 
         # Region invalid.
         get_countries.return_value = None
-        response = self._video_list(region='asdf')
+        response = self._gallery(region='asdf')
 
         videos = response.context['videos']
         ok_(self.v1 in videos)
         ok_(self.v2 in videos)
         get_countries.assert_called_with('asdf')
-
-    def test_invalid_page(self):
-        """
-        Invalid or missing page numbers default to the first page. Pages beyond
-        the last page go to the last page.
-        """
-        response = self._video_list(page='asdf')
-        eq_(response.context['videos'].number, 1)
-
-        response = self._video_list(page=-1)
-        eq_(response.context['videos'].number, 1)
-
-        # Create more videos to get past 12
-        for _ in range(12):
-            VideoFactory.create(user=self.us_user, approved=True)
-
-        # Pages beyond the max go to the last page
-        response = self._video_list(page=5555)
-        eq_(response.context['videos'].number, 2)
-
-    def test_valid_page(self):
-        # Create more videos to get past 12
-        for _ in range(12):
-            VideoFactory.create(user=self.us_user, approved=True)
-
-        response = self._video_list(page=2)
-        eq_(response.context['videos'].number, 2)
 
     @patch('flicks.videos.views.VideoSearchForm')
     def test_r3_video_search(self, VideoSearchForm):
@@ -195,7 +170,7 @@ class VideoListTests(TestCase):
         Flag.objects.create(name='r3', everyone=True)
         form = VideoSearchForm.return_value
 
-        response = self._video_list()
+        response = self._gallery()
         eq_(response.context['form'], form)
         eq_(response.context['videos'].paginator.object_list,
             form.perform_search.return_value)
@@ -211,9 +186,64 @@ class VideoListTests(TestCase):
         form = VideoSearchForm.return_value
         form.perform_search.side_effect = ValidationError('asdf')
 
-        response = self._video_list()
+        response = self._gallery()
         eq_(response.context['videos'].paginator.object_list,
             search_videos.return_value)
+
+
+class VideoListTests(TestCase):
+    def setUp(self):
+        super(VideoListTests, self).setUp()
+        self.factory = RequestFactory()
+
+    def _video_list_ctx(self, ctx=None, **kwargs):
+        request = self.factory.get('/', kwargs)
+        with patch('flicks.videos.views.render') as render:
+            video_list(request, Video.objects.all(), ctx)
+            return render.call_args[0][2]
+
+    @patch('flicks.videos.views.VideoSearchForm')
+    def test_form(self, VideoSearchForm):
+        """
+        If the given context has a form, do not replace it. If it doesn't, add
+        a VideoSearchForm to it.
+        """
+        form = Mock()
+        ctx = self._video_list_ctx(ctx={'form': form})
+        eq_(ctx['form'], form)
+        ok_(not VideoSearchForm.called)
+
+        ctx = self._video_list_ctx()
+        eq_(ctx['form'], VideoSearchForm.return_value)
+
+    def test_invalid_page(self):
+        """
+        Invalid or missing page numbers default to the first page. Pages beyond
+        the last page go to the last page.
+        """
+        VideoFactory.create(approved=True)
+
+        ctx = self._video_list_ctx(page=1)
+        eq_(ctx['videos'].number, 1)
+
+        ctx = self._video_list_ctx(page=-1)
+        eq_(ctx['videos'].number, 1)
+
+        # Create more videos to get past 12
+        for _ in range(12):
+            VideoFactory.create(approved=True)
+
+        # Pages beyond the max go to the last page
+        ctx = self._video_list_ctx(page=5555)
+        eq_(ctx['videos'].number, 2)
+
+    def test_valid_page(self):
+        # Create more videos to get past 12
+        for _ in range(14):
+            VideoFactory.create(approved=True)
+
+        ctx = self._video_list_ctx(page=2)
+        eq_(ctx['videos'].number, 2)
 
 
 class VoteAjaxTests(TestCase):
