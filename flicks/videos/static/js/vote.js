@@ -26,8 +26,17 @@
             voteXHR.done(function() {
                 $button.addClass('hidden');
                 $button.siblings('.remove-vote').removeClass('hidden');
+                showShareDialog();
                 modifyVoteCount(1);
             });
+        }
+    });
+
+    // When the page loads, if we just voted (URL hash is #voted) show the
+    // share dialog.
+    $(function() {
+        if (window.location.hash === '#voted') {
+            showShareDialog();
         }
     });
 
@@ -60,5 +69,9 @@
         } else {
             return flicks.trans('voteCountSome', {vote_count: count});
         }
+    }
+
+    function showShareDialog() {
+        $('.share .popup').fadeIn(200);
     }
 })(jQuery, django_browserid, flicks);
