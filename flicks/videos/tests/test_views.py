@@ -1,7 +1,9 @@
 from urllib import urlencode
 
 from django.core.exceptions import ValidationError
+from django.http import HttpResponse
 from django.test.client import RequestFactory
+from django.test.utils import override_settings
 
 from funfactory.urlresolvers import reverse
 from mock import Mock, patch
@@ -216,27 +218,32 @@ class VideoListTests(TestCase):
         ctx = self._video_list_ctx()
         eq_(ctx['form'], VideoSearchForm.return_value)
 
+    @override_settings(VIDEOS_PER_PAGE=12)
     def test_invalid_page(self):
         """
         Invalid or missing page numbers default to the first page. Pages beyond
-        the last page go to the last page.
+        the last page or negative pages go to the last page.
         """
-        VideoFactory.create(approved=True)
+        for _ in range(30):
+            VideoFactory.create(approved=True)
 
         ctx = self._video_list_ctx(page=1)
         eq_(ctx['videos'].number, 1)
 
         ctx = self._video_list_ctx(page=-1)
+        eq_(ctx['videos'].number, 3)
+
+        ctx = self._video_list_ctx(page='asdf')
         eq_(ctx['videos'].number, 1)
 
-        # Create more videos to get past 12
-        for _ in range(12):
-            VideoFactory.create(approved=True)
+        ctx = self._video_list_ctx()
+        eq_(ctx['videos'].number, 1)
 
         # Pages beyond the max go to the last page
         ctx = self._video_list_ctx(page=5555)
-        eq_(ctx['videos'].number, 2)
+        eq_(ctx['videos'].number, 3)
 
+    @override_settings(VIDEOS_PER_PAGE=12)
     def test_valid_page(self):
         # Create more videos to get past 12
         for _ in range(14):
@@ -244,6 +251,55 @@ class VideoListTests(TestCase):
 
         ctx = self._video_list_ctx(page=2)
         eq_(ctx['videos'].number, 2)
+
+
+@patch('flicks.videos.views.video_list')
+class MyVotedVideosTests(TestCase):
+    def setUp(self):
+        super(MyVotedVideosTests, self).setUp()
+        Flag.objects.create(name='r3', everyone=True)
+
+    def _my_voted_videos(self, user):
+        self.browserid_login(user.email)
+        with self.activate('en-US'):
+            return self.client.get(reverse('flicks.videos.my_voted_videos'))
+
+    def test_basic(self, video_list):
+        """
+        my_voted_videos should list all the videos a user has voted for in the
+        reverse order that they voted for them.
+        """
+        video_list.return_value = HttpResponse()
+
+        user = UserFactory.create()
+        v1 = VideoFactory.create(approved=True)
+        v2 = VideoFactory.create(approved=True)
+        Vote.objects.create(user=user, video=v1)
+        Vote.objects.create(user=user, video=v2)
+        for _ in range(14):
+            VideoFactory.create(approved=True)
+
+        response = self._my_voted_videos(user)
+        eq_(response, video_list.return_value)
+
+        videos = video_list.call_args[0][1]
+        eq_(list(videos), [v2, v1])  # Also asserts the order of the votes.
+
+    def test_empty(self, video_list):
+        """
+        If a user hasn't voted for any videos, my_voted_videos should be empty.
+        """
+        video_list.return_value = HttpResponse()
+
+        user = UserFactory.create()
+        for _ in range(14):
+            VideoFactory.create(approved=True)
+
+        response = self._my_voted_videos(user)
+        eq_(response, video_list.return_value)
+
+        videos = video_list.call_args[0][1]
+        eq_(list(videos), [])
 
 
 class VoteAjaxTests(TestCase):

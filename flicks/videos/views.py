@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -68,7 +69,7 @@ def video_list(request, videos, ctx=None):
     if 'form' not in ctx:
         ctx['form'] = VideoSearchForm(request.GET)
 
-    paginator = Paginator(videos, 12)
+    paginator = Paginator(videos, settings.VIDEOS_PER_PAGE)
     try:
         videos = paginator.page(page)
     except PageNotAnInteger:

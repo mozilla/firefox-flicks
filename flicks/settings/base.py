@@ -152,6 +152,9 @@ STATSD_PATCHES = [
 PREVIEW_PATH = lambda inst, filename: 'previews/images/%s_%s' % (inst.id, filename)
 MAX_FILEPATH_LENGTH = 100
 
+# Display settings
+VIDEOS_PER_PAGE = 12  # Number of videos on each page of the gallery.
+
 # Google Analytics
 GA_ACCOUNT_CODE = ''
 
