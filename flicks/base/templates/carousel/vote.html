@@ -1,0 +1,16 @@
+<div class="slide-generic slide slide-earlyentry">
+  <img class="backdrop" src="{{ static('img/home/promo-backdrop-vote.jpg') }}" alt="">
+  <div class="slide-desc">
+    <h2>{{ _('Choose your favorites') }}</h2>
+    <p>
+      {% trans %}
+        August 31 is the last day to vote for the People's Choice Awards.
+        Don't miss your chance.
+      {% endtrans %}
+    </p>
+    <p class="act">
+      <a href="{{ url('flicks.videos.list') }}" class="go">{{ _('Vote now') }}</a>
+    </p>
+  </div>
+</div>
+

@@ -1,0 +1,16 @@
+<div class="slide-generic slide slide-earlyentry">
+  <img class="backdrop" src="{{ static('img/home/promo-backdrop-tiff.jpg') }}" alt="">
+  <div class="slide-desc">
+    <h2>{{ _('Winners announced') }} {{ _('Sept. 12') }}</h2>
+    <p>
+      {% trans %}
+        We're gearing up to present the final results at the Toronto International
+        Film Festival. Get ready by watching our latest Early Entry Award winners.
+      {% endtrans %}
+    </p>
+    <p class="act">
+      <a href="{{ url('flicks.videos.winners') }}" class="go">{{ _('See the winning flicks') }}</a>
+    </p>
+  </div>
+</div>
+

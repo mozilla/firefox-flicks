@@ -12,10 +12,11 @@ slide_schedule = (
     ScheduleItem(date(2013, 5, 18), date(2013, 5, 29), ['may29_earlyentry.html', 'blogpost_getmobilized.html', 'blogpost_makeyourflickawinner.html']),
     ScheduleItem(date(2013, 5, 30), date(2013, 6, 12), ['blogpost_winbig.html', 'blogpost_getmobilized.html', 'blogpost_makeyourflickawinner.html']),
     ScheduleItem(date(2013, 6, 13), date(2013, 6, 25), ['july3_earlyentry.html', 'blogpost_may29winner.html', 'blogpost_winbig.html']),
-    ScheduleItem(date(2013, 6, 26), date(2013, 7, 3), ['july3_earlyentry.html', 'blogpost_winbig.html', 'blogpost_makeyourflickawinner.html']), 
+    ScheduleItem(date(2013, 6, 26), date(2013, 7, 3), ['july3_earlyentry.html', 'blogpost_winbig.html', 'blogpost_makeyourflickawinner.html']),
     ScheduleItem(date(2013, 7, 4), date(2013, 7, 17), ['july31_earlyentry.html', 'blogpost_winbig.html', 'blogpost_makeyourflickawinner.html']),
     ScheduleItem(date(2013, 7, 18), date(2013, 7, 21), ['blogpost_july3winner.html', 'july31_earlyentry.html', 'blogpost_winbig.html']),
     ScheduleItem(date(2013, 7, 22), date(2013, 7, 31), ['july31_earlyentry.html', 'blogpost_aug1voting.html', 'blogpost_july3winner.html']),
+    ScheduleItem(date(2013, 8, 1), date(2013, 8, 2), ['vote.html', 'tiff-teaser.html', 'blogpost_judges.html']),
 )
 
 
