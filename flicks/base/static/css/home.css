@@ -59,6 +59,10 @@
   color: #999;
 }
 
+.actions .button-light {
+    padding: 12px 20px;
+}
+
 /*** @Slides *********/
 .js #slideshow {
   position: relative;
