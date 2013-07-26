@@ -5,7 +5,7 @@ from tower import ugettext_lazy as _lazy
 
 from flicks.base.regions import region_names
 from flicks.videos.models import Video
-from flicks.videos.search import search_videos
+from flicks.videos.search import AUTOCOMPLETE_FIELDS, search_videos
 
 
 class VideoForm(forms.ModelForm):
@@ -21,16 +21,9 @@ class VideoForm(forms.ModelForm):
         }
 
 
-FIELD_FILTERS = {
-    'title': ('title',),
-    'description': ('description',),
-    'author': ('user__userprofile__full_name',)
-}
-
-
 class VideoSearchForm(forms.Form):
     """Form for the search feature on the video listing page."""
-    FIELD_CHOICES = [(value, '') for value in FIELD_FILTERS.keys()]
+    FIELD_CHOICES = [(value, '') for value in AUTOCOMPLETE_FIELDS.keys()]
     REGION_CHOICES = [('', _lazy('All regions'))] + region_names.items()
     SORT_CHOICES = (
         # L10n: Label for the order in which to sort a list of videos.
@@ -84,7 +77,7 @@ class VideoSearchForm(forms.Form):
 
         return search_videos(
             query=self.cleaned_data['query'],
-            fields=FIELD_FILTERS.get(self.cleaned_data['field'], None),
+            fields=AUTOCOMPLETE_FIELDS.get(self.cleaned_data['field'], None),
             region=self.cleaned_data['region'],
             sort=self.cleaned_data['sort'],
         )

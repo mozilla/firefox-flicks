@@ -1,3 +1,4 @@
+import json
 from urllib import urlencode
 
 from django.core.exceptions import ValidationError
@@ -300,6 +301,38 @@ class MyVotedVideosTests(TestCase):
 
         videos = video_list.call_args[0][1]
         eq_(list(videos), [])
+
+
+class AutocompleteTests(TestCase):
+    def setUp(self):
+        super(AutocompleteTests, self).setUp()
+        Flag.objects.create(name='r3', everyone=True)
+
+    def _autocomplete(self, **kwargs):
+        with self.activate('en-US'):
+            return self.client.get(reverse('flicks.videos.autocomplete'),
+                                   kwargs)
+
+    def test_no_query(self):
+        """If no query is passed, return a 400 Bad Request."""
+        response = self._autocomplete()
+        eq_(response.status_code, 400)
+
+        response = self._autocomplete(query='')
+        eq_(response.status_code, 400)
+
+    @patch('flicks.videos.views.AUTOCOMPLETE_FIELDS', {
+           'title': ('title',),
+           'description': ('description',)
+    })
+    @patch('flicks.videos.views.autocomplete_suggestion')
+    def test_with_query(self, autocomplete_suggestion):
+        autocomplete_suggestion.return_value = 'asdf'
+        response = self._autocomplete(query='foo bar')
+
+        eq_(response.status_code, 200)
+        eq_(json.loads(response.content),
+            {'by_title': 'asdf', 'by_description': 'asdf'})
 
 
 class VoteAjaxTests(TestCase):

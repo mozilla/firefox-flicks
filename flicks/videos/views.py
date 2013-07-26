@@ -21,7 +21,8 @@ from flicks.videos import tasks, vimeo
 from flicks.videos.decorators import upload_process
 from flicks.videos.forms import VideoForm, VideoSearchForm
 from flicks.videos.models import Video, Video2012, Vote
-from flicks.videos.search import autocomplete_suggestion, search_videos
+from flicks.videos.search import (AUTOCOMPLETE_FIELDS, autocomplete_suggestion,
+                                  search_videos)
 from flicks.videos.util import vidly_embed_code
 from flicks.users.decorators import profile_required
 
@@ -89,12 +90,10 @@ def autocomplete(request):
     if not query:
         return HttpResponseBadRequest()
 
-    results = {
-        'by_title': autocomplete_suggestion(query, 'title'),
-        'by_description': autocomplete_suggestion(query, 'description'),
-        'by_author': autocomplete_suggestion(query,
-                                             'user__userprofile__full_name'),
-    }
+    results = {}
+    for key, fields in AUTOCOMPLETE_FIELDS.items():
+        results['by_{0}'.format(key)] = autocomplete_suggestion(query, fields)
+
     return JSONResponse(results)
 
 

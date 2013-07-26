@@ -6,7 +6,14 @@ from flicks.base import regions
 from flicks.videos.models import Video
 
 
-DEFAULT_QUERY_FIELDS = ('title', 'description', 'user__userprofile__full_name')
+AUTOCOMPLETE_FIELDS = {
+    'title': ('title',),
+    'description': ('description',),
+    'author': ('user__userprofile__full_name', 'user__userprofile__nickname')
+}
+
+DEFAULT_QUERY_FIELDS = ('title', 'description', 'user__userprofile__full_name',
+                        'user__userprofile__nickname')
 
 
 def search_videos(query=None, fields=None, region=None, sort=None):
@@ -21,7 +28,7 @@ def search_videos(query=None, fields=None, region=None, sort=None):
 
     :param fields:
         Fields to apply search query to. Defaults to video title, description,
-        and user's full name.
+        and user's full name and nickname.
 
     :param region:
         If present, filters videos to only those found in the specified region.
@@ -63,19 +70,27 @@ def search_videos(query=None, fields=None, region=None, sort=None):
     return qs
 
 
-def autocomplete_suggestion(query, field):
+def autocomplete_suggestion(query, fields):
     """
-    Perform a search on a specific field and return the value of that field on
-    the first result as a suggested autocompletion value.
+    Perform a search on a field or set of fields and return the value of those
+    fields on the first result as a suggested autocompletion value.
 
     :param query:
         Search query that we are attempting to autocomplete.
 
-    :param field:
-        Field that we are attempting autocompletion for.
+    :param fields:
+        Fields that we are attempting autocompletion for. Suggestions are
+        prioritized based on the order of fields; if a match is found for the
+        first field, it will be returned, otherwise the next field will be
+        searched until a suggestion is found or all fields are searched.
+
+    :returns: The value of the matched field on the matched Video, or None
     """
-    try:
-        result = search_videos(query=query, fields=(field,)).values(field)[0]
-        return result[field]
-    except IndexError:
-        return None
+    for field in fields:
+        try:
+            result = search_videos(query=query, fields=(field,))
+            return result.values(field)[0][field]
+        except (AttributeError, IndexError):
+            pass
+
+    return None

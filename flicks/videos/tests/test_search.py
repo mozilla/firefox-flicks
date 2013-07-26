@@ -125,10 +125,8 @@ class AutocompleteSuggestionTests(TestCase):
         self.patch = patch('flicks.videos.search.search_videos')
         self.mock_search_videos = self.patch.start()
 
-        self.v1 = VideoFactory.create(title='foo')
-        self.v2 = VideoFactory.create(title='baz')
-        self.mock_search_videos.return_value = Video.objects.filter(
-            id__in=[self.v1.id, self.v2.id]).order_by('id')
+        self.v1 = VideoFactory.create(title='foo', description='bar')
+        self.v2 = VideoFactory.create(title='baz', description='biff')
 
     def tearDown(self):
         self.patch.stop()
@@ -138,7 +136,10 @@ class AutocompleteSuggestionTests(TestCase):
         If a video is found matching the query, return the value of the field
         we searched for on that video.
         """
-        suggestion = autocomplete_suggestion('fo', 'title')
+        self.mock_search_videos.return_value = Video.objects.filter(
+            id__in=[self.v1.id, self.v2.id]).order_by('id')
+
+        suggestion = autocomplete_suggestion('fo', ('title',))
         eq_(suggestion, 'foo')  # Title of the first result.
         self.mock_search_videos.assert_called_with(query='fo',
                                                    fields=('title',))
@@ -146,4 +147,23 @@ class AutocompleteSuggestionTests(TestCase):
     def test_no_results(self):
         """If no videos are matched, return None."""
         self.mock_search_videos.return_value = Video.objects.filter(id=9999999)
-        eq_(autocomplete_suggestion('fo', 'title'), None)
+        eq_(autocomplete_suggestion('fo', ('title',)), None)
+
+    def test_multiple_fields(self):
+        """
+        If multiple fields are given, search them in order until a match is
+        found.
+        """
+        def func(*args, **kwargs):
+            """Returns None once, then returns a queryset with v1."""
+            if func.return_none:
+                func.return_none = False
+                return None
+            return Video.objects.filter(id=self.v1.id)
+        func.return_none = True
+        self.mock_search_videos.side_effect = func
+
+        # Ensure that it returns the value of description, as the first search
+        # for title should fail.
+        suggestion = autocomplete_suggestion('fo', ('title', 'description'))
+        eq_(suggestion, 'bar')

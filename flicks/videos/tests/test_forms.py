@@ -5,7 +5,8 @@ from nose.tools import assert_raises, eq_, ok_
 
 from flicks.base.regions import NORTH_AMERICA
 from flicks.base.tests import TestCase
-from flicks.videos.forms import FIELD_FILTERS, VideoSearchForm
+from flicks.videos.forms import VideoSearchForm
+from flicks.videos.search import AUTOCOMPLETE_FIELDS
 
 
 class VideoSearchFormTests(TestCase):
@@ -21,7 +22,7 @@ class VideoSearchFormTests(TestCase):
         eq_(form.perform_search(), search_videos.return_value)
         search_videos.assert_called_with(
             query='asdf',
-            fields=FIELD_FILTERS['title'],
+            fields=AUTOCOMPLETE_FIELDS['title'],
             region=NORTH_AMERICA,
             sort='popular'
         )
