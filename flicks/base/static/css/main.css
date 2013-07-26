@@ -922,13 +922,6 @@ a.submit-link:active {
   color: #2092dd;
 }
 
-/* Home Variant */
-.share-home .popup {
-  left: 50%;
-  top: 2.6em;
-  margin-left: -115px;
-}
-
 .share .popup li {
   margin-bottom: 3px;
   float:left;
