@@ -107,7 +107,7 @@
               <h2>
                 {% trans count=videos.paginator.count,
                          query=form.cleaned_data['query'],
-                         region=form.region_names[form.cleaned_data['region']] %}
+                         region=form.region_names[form.cleaned_data['region'] or ''] %}
                   <i>{{ count }}</i> videos for <i>{{ query }}</i> in <i>{{ region }}</i>
                 {% endtrans %}
               </h2>

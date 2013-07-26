@@ -45,7 +45,7 @@ def search_videos(query=None, fields=None, region=None, sort=None):
         qs = qs.filter(reduce(operator.or_, filters))  # Mash 'em all together!
 
     # Filter by region
-    if region:
+    if region is not None:
         countries = regions.get_countries(region)
         if countries:
             qs = qs.filter(user__userprofile__country__in=countries)
