@@ -26,7 +26,7 @@
             voteXHR.done(function() {
                 $button.addClass('hidden');
                 $button.siblings('.remove-vote').removeClass('hidden');
-                showShareDialog();
+                showThanks();
                 modifyVoteCount(1);
             });
         }
@@ -36,7 +36,7 @@
     // share dialog.
     $(function() {
         if (window.location.hash === '#voted') {
-            showShareDialog();
+            showThanks();
         }
     });
 
@@ -46,6 +46,7 @@
         $.post(url, {csrfmiddlewaretoken: csrfToken}).done(function() {
             $button.addClass('hidden');
             $button.siblings('.add-vote').removeClass('hidden');
+            hideThanks();
             modifyVoteCount(-1);
         });
     });
@@ -71,7 +72,11 @@
         }
     }
 
-    function showShareDialog() {
-        $('.share .popup').fadeIn(200);
+    function showThanks() {
+        $('.vote-thanks').slideDown(300);
+    }
+
+    function hideThanks() {
+        $('.vote-thanks').slideUp(300);
     }
 })(jQuery, django_browserid, flicks);

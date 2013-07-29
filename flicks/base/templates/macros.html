@@ -89,9 +89,17 @@
 {%- endmacro %}
 
 {% macro shareWidget(video=None) -%}
+  <div class="share">
+    <a href="#" class="toggle trigger-share-dialog" title="{{ _('Share this video with your social network') }}">
+      {{ _('Share Video') }}
+    </a>
+    {{ shareLinks(video, 'popup') }}
+  </div>
+{%- endmacro %}
+
+{% macro shareLinks(video=None, class='', showEmbed=True) -%}
   {% set url = request.build_absolute_uri() %}
   {% if video %}
-
     {% if not waffle.flag('r3') %}
       {# L10n: Text is used in a tweet, please keep the length under 110 characters. #}
       {% set text = _('Watch "%s" on Firefox Flicks')|format(video.title|truncate(90)) %}
@@ -107,32 +115,29 @@
     {% set tumblrUrl = tumblrShareLink(url, title=text, description=video.description) %}
   {% endif %}
 
-  <div class="share">
-    <a href="#" class="toggle trigger-share-dialog" title="{{ _('Share this video with your social network') }}">
-      {{ _('Share Video') }}
-    </a>
-    <ul class="popup">
-      <li class="twitter">
-        <a href="{{ twitterShare(url, text, via='firefoxflicks') }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
-          {{ _('Share on Twitter') }}
-        </a>
-      </li>
-      <li class="facebook">
-        <a href="{{ facebookShare(url) }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
-          {{ _('Share on Facebook') }}
-        </a>
-      </li>
-      <li class="tumblr">
-        <a href="{{ tumblrUrl }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
-          {{ _('Share on Tumblr') }}
-        </a>
-      </li>
+  <ul class="{{ class }}">
+    <li class="twitter">
+      <a href="{{ twitterShare(url, text, via='firefoxflicks') }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+        {{ _('Share on Twitter') }}
+      </a>
+    </li>
+    <li class="facebook">
+      <a href="{{ facebookShare(url) }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+        {{ _('Share on Facebook') }}
+      </a>
+    </li>
+    <li class="tumblr">
+      <a href="{{ tumblrUrl }}" rel="external" data-window-opts="toolbar=0, status=0, resizable=1, width=626, height=436">
+        {{ _('Share on Tumblr') }}
+      </a>
+    </li>
+    {% if showEmbed %}
       <li class="embed">
         <span>{{ _('Embed') }}</span>
         <textarea readonly="readonly">
           {{- video.embed_html(width='100%')|e -}}
         </textarea>
       </li>
-    </ul>
-  </div>
+    {% endif %}
+  </ul>
 {%- endmacro %}

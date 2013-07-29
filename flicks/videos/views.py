@@ -134,6 +134,7 @@ def unvote(request, video_id):
 
 
 # Upload process
+@waffle_flag('!r3')
 @profile_required
 @upload_process
 def upload(request):
@@ -175,6 +176,7 @@ def upload_complete(request):
     return render(request, 'videos/upload_complete.html')
 
 
+@waffle_flag('!r3')
 @upload_process
 def upload_error(request):
     return render(request, 'videos/upload_error.html', status=500)

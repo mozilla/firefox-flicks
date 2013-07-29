@@ -73,7 +73,7 @@
     width: 220px;
 }
 
-.vote-control .vote-count { 
+.vote-control .vote-count {
     margin: 0 0 10px;
     font: 20px/1.15 "Open Sans", sans-serif;
     color: #fff;
@@ -135,6 +135,52 @@
 
 .vote-control .share .popup {
     top: 42px;
+}
+
+/* Post-vote Thanks */
+.vote-thanks {
+    border: 1px solid #d0e7f9;
+    background: #dff0f5;
+    display: none;
+    margin: 20px 0 0;
+    padding: 19px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,.25);
+}
+
+.vote-thanks h2 {
+    font-size: 28px;
+    font-weight: normal;
+    margin: 0 0 20px;
+}
+
+.vote-thanks .share {
+  list-style: none;
+  font-size: 16px;
+  margin: 0;
+}
+
+.vote-thanks .share li {
+  background: url(/static/img/social-icons-dark.png) no-repeat;
+  display: inline-block;
+  margin: 0 25px .5em;
+}
+
+.vote-thanks .share a {
+  display: inline-block;
+  padding: 8px 5px 8px 45px;
+}
+
+.vote-thanks .share .facebook {
+  background-position: 0 -98px;
+}
+
+.vote-thanks .share .twitter {
+  background-position: 0 -198px;
+}
+
+.vote-thanks .share .tumblr {
+  background-position: 0 -298px;
 }
 
 #modal .video {
@@ -517,11 +563,11 @@
       float: none;
       text-align: left;
   }
-  
+
   .video-details {
     padding-right: 15px;
   }
-  
+
   .video-details .vote-control {
     position: static;
     margin: 0 auto 30px;

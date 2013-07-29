@@ -1,6 +1,6 @@
 {% extends 'videos/details_base.html' %}
 
-{% from 'macros.html' import shareWidget with context %}
+{% from 'macros.html' import shareLinks, shareWidget with context %}
 
 {% block page_title %}{{ video.title }}{% endblock %}
 
@@ -24,6 +24,13 @@
 
 {% block video_embed %}
   {{ video.embed_html(width='100%') }}
+{% endblock %}
+
+{% block video_messages %}
+  <div class="vote-thanks">
+    <h2>{{ _('Thanks for voting!') }}</h2>
+    {{ shareLinks(video, 'share', showEmbed=False) }}
+  </div>
 {% endblock %}
 
 {% block video_details %}
