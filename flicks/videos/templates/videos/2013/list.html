@@ -152,7 +152,7 @@
 
         {# Only show pagination if there is more than one page of results. #}
         {% if videos.paginator.num_pages > 1 %}
-          {{ pagination(videos, url('flicks.videos.list'),
+          {{ pagination(videos, request.path,
                         region=request.GET.get('region', None),
                         query=request.GET.get('query', None),
                         sort=request.GET.get('sort', None),
