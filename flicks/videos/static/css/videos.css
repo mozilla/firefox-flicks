@@ -90,6 +90,7 @@
 
 .vote-button button,
 .vote-control .share .toggle {
+    position: relative;
     font-size: 18px;
     line-height: 1;
     display: inline-block;
@@ -106,10 +107,24 @@
     -webkit-box-shadow: 0 2px 0 0 rgba(0,0,0,.1), inset 0 -2px 0 0 rgba(0,0,0,.1);
     box-shadow: 0 2px 0 0 rgba(0,0,0,.1), inset 0 -1px 0 0 rgba(0,0,0,.05);
 }
+.vote-button button:after,
+.vote-control .share .toggle:after {
+  font-size: 30px;
+  font-family: 'Awesome';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  position: absolute;
+  right: 12px;
+  top: .2em;
+}
 
 .add-vote {
     background: #3a90d4;
-    background: url(/static/img/icn-vote.png) 176px 7px no-repeat, #3a90d4 linear-gradient(to bottom, #3c88cc, #276195);
+    background: -webkit-linear-gradient(to bottom, #3c88cc, #276195);
+    background:    -moz-linear-gradient(to bottom, #3c88cc, #276195);
+    background:      -o-linear-gradient(to bottom, #3c88cc, #276195);
+    background:         linear-gradient(to bottom, #3c88cc, #276195);
     color: #fff;
     text-shadow: 0 1px 0 rgba(0,0,0,.25);
     border-color: #5ea3da;
@@ -117,20 +132,38 @@
 .add-vote:hover,
 .add-vote:focus {
     background: #409de7;
-    background: url(/static/img/icn-vote.png) 176px 7px no-repeat, #409de7 linear-gradient(to bottom, #409de7, #3484c5);
+    background: -webkit-linear-gradient(to bottom, #409de7, #3484c5);
+    background:    -moz-linear-gradient(to bottom, #409de7, #3484c5);
+    background:      -o-linear-gradient(to bottom, #409de7, #3484c5);
+    background:         linear-gradient(to bottom, #409de7, #3484c5);
+}
+.add-vote:after,
+.remove-vote:after {
+    content: "\f046";
 }
 
-.remove-vote {
-    background: url(/static/img/icn-vote.png) 176px -93px no-repeat, linear-gradient(#fff, #e8e8e8);
+.remove-vote,
+.vote-control .share .toggle {
+    background: #e8e8e8;
+    background: -webkit-linear-gradient(to bottom, #fff, #e8e8e8);
+    background:    -moz-linear-gradient(to bottom, #fff, #e8e8e8);
+    background:      -o-linear-gradient(to bottom, #fff, #e8e8e8);
+    background:         linear-gradient(to bottom, #fff, #e8e8e8);
 }
 .remove-vote:hover,
-.remove-vote:focus {
-    background: url(/static/img/icn-vote.png) 176px -93px no-repeat, linear-gradient(#fff, #dcdcdc);
+.remove-vote:focus,
+.vote-control .share .toggle:hover,
+.vote-control .share .toggle:focus {
+    background: #dcdcdc;
+    background: -webkit-linear-gradient(to bottom, #fff, #dcdcdc);
+    background:    -moz-linear-gradient(to bottom, #fff, #dcdcdc);
+    background:      -o-linear-gradient(to bottom, #fff, #dcdcdc);
+    background:         linear-gradient(to bottom, #fff, #dcdcdc);
+    text-decoration: none;
 }
 
-.vote-control .share .toggle {
-    font-size: 18px;
-    background: url(/static/img/icn-vote.png) 176px -196px no-repeat, linear-gradient(#fff, #e8e8e8);
+.vote-control .share .toggle:after {
+    content: "\f045";
 }
 
 .vote-control .share .popup {

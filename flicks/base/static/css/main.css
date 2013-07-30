@@ -65,6 +65,16 @@
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'Awesome';
+    src: url('/static/fonts/fontawesome-webfont.eot');
+    src: url('/static/fonts/fontawesome-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/fontawesome-webfont.woff') format('woff'),
+         url('/static/fonts/fontawesome-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* @Reset defaults *********/
 header, hgroup, nav, section, article, main, aside, footer { display: block; }
 html, body, form, fieldset, legend, h1, h2, h3, h4, h5, h6, dd { margin: 0; padding: 0; }
