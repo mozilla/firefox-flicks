@@ -47,7 +47,7 @@
             {% endtrans %}
           {% elif user.vote_count < 1 %}
             {% trans %}
-              Hi there! It looks like you haven’t voted yet. Start voting now by clicking on your favorite videos.
+              Hi there! It looks like you haven't voted yet. Start voting now by clicking on your favorite videos.
             {% endtrans %}
           {% else %}
             {% trans url=url('flicks.videos.my_voted_videos'), vote_count=user.vote_count %}

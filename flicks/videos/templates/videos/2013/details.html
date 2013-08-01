@@ -18,8 +18,8 @@
 {% block string_data %}
   {{ super() }}
   data-vote-count-none="{{ _('No votes yet') }}"
-  data-vote-count-one="{{ _('<b>%(vote_count)s</b> vote') }}"
-  data-vote-count-some="{{ _('<b>%(vote_count)s</b> votes') }}"
+  data-vote-count-one="{{ ngettext('<b>%(vote_count)s</b> vote', '<b>%(vote_count)s</b> votes', 1) }}"
+  data-vote-count-some="{{ ngettext('<b>%(vote_count)s</b> vote', '<b>%(vote_count)s</b> votes', 2) }}"
 {% endblock %}
 
 {% block video_embed %}
