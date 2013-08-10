@@ -321,6 +321,9 @@ class AutocompleteTests(TestCase):
         response = self._autocomplete(query='')
         eq_(response.status_code, 400)
 
+        response = self._autocomplete(query='   ')
+        eq_(response.status_code, 400)
+
     @patch('flicks.videos.views.AUTOCOMPLETE_FIELDS', {
            'title': ('title',),
            'description': ('description',)

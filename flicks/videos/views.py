@@ -86,7 +86,7 @@ def video_list(request, videos, ctx=None):
 @cache_control(public=True, max_age=60*60*24*30)  # 30 days
 def autocomplete(request):
     """Return results for the autocomplete feature on the search page."""
-    query = request.GET.get('query', None)
+    query = request.GET.get('query', '').strip()
     if not query:
         return HttpResponseBadRequest()
 

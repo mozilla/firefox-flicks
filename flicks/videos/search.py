@@ -16,7 +16,7 @@ DEFAULT_QUERY_FIELDS = ('title', 'description', 'user__userprofile__full_name',
                         'user__userprofile__nickname')
 
 
-def search_videos(query=None, fields=None, region=None, sort=None):
+def search_videos(query='', fields=None, region=None, sort=None):
     """
     Retrieve a sorted list of videos, optionally filtered by a text search
     query and region.
@@ -40,6 +40,7 @@ def search_videos(query=None, fields=None, region=None, sort=None):
         vote count, and 'title', which sorts alphabetically by title.
     """
     qs = Video.objects.filter(approved=True)
+    query = query.strip()
 
     # Text search
     if query:
