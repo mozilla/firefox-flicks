@@ -51,6 +51,14 @@ class SearchVideosTests(TestCase):
         eq_(set(search_videos(query='mydesc')), set([v2]))
         eq_(set(search_videos(query='name')), set([v3]))
 
+    def test_empty_query(self):
+        """If the search query has no terms, do not use it to filter videos."""
+        v1 = VideoFactory.create(title='A', approved=True)
+        v2 = VideoFactory.create(title='B', approved=True)
+
+        eq_(set(search_videos(query='')), set([v1, v2]))
+        eq_(set(search_videos(query='      ')), set([v1, v2]))
+
     def test_fields(self):
         """
         If the fields parameter is specified, only perform a search on the
