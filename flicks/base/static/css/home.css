@@ -214,6 +214,12 @@
   width: 440px;
 }
 
+.js .slide-recap .slide-desc {
+  padding: 30px 440px 0 60px;
+  width: 470px;
+}
+
+
 .js .slide-schwartzberg .slide-desc p,
 .js .slide-winner .slide-desc p,
 .js .slide-shootingpeople .slide-desc p,
