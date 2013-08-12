@@ -44,7 +44,7 @@ class VideoSearchForm(forms.Form):
         required=False,
         choices=REGION_CHOICES,
         coerce=int,
-        empty_value=None)
+        empty_value='')
     sort = forms.ChoiceField(
         required=False,
         choices=SORT_CHOICES)
