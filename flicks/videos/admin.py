@@ -1,14 +1,15 @@
 from django.contrib import admin
+from django.db.models import Count
 
-from flicks.base.admin import BaseModelAdmin
-from flicks.videos.models import Award, Video2012, Video2013
+from flicks.base.admin import BaseModelAdmin, NumVotesFilter
+from flicks.videos import models
 from flicks.videos.tasks import process_video
 
 
 class Video2013Admin(BaseModelAdmin):
-    list_display = ['title', 'user_full_name', 'user_email', 'created',
+    list_display = ['title', 'user_full_name', 'user_email', 'num_votes', 'created',
                     'vimeo_id', 'filename', 'processed', 'approved']
-    list_filter = ['processed', 'approved']
+    list_filter = ['processed', 'approved', NumVotesFilter]
 
     search_fields = ['title', 'description', 'user__userprofile__full_name',
                      'user__email']
@@ -26,6 +27,17 @@ class Video2013Admin(BaseModelAdmin):
 
     actions = ['process_videos', 'download_thumbnails']
     change_form_template = 'admin/video2013_change_form.html'
+
+    def queryset(self, request):
+        """Add num_votes field to queryset."""
+        qs = super(Video2013Admin, self).queryset(request)
+        qs = qs.annotate(num_votes=Count('voters'))
+        return qs
+
+    def num_votes(self, video):
+        # Use method on admin so we can sort by this field.
+        return video.vote_count
+    num_votes.admin_order_field = 'num_votes'
 
     def user_full_name(self, instance):
         return instance.user.profile.full_name if instance.user.profile else ''
@@ -63,7 +75,17 @@ class Video2013Admin(BaseModelAdmin):
     download_thumbnails.short_description = 'Download thumbnails from Vimeo'
 
 
-admin.site.register(Video2013, Video2013Admin)
+class VoteAdmin(BaseModelAdmin):
+    list_display = ['user_nickname', 'user_email', 'video', 'created']
+    list_filter = ['created']
+    search_fields = ['user__userprofile__full_name', 'user__userprofile__nickname', 'user__email',
+                     'video__title']
+
+    def user_nickname(self, vote):
+        return vote.user.userprofile.nickname
+
+    def user_email(self, vote):
+        return vote.user.email
 
 
 class Video2012Admin(BaseModelAdmin):
@@ -72,10 +94,14 @@ class Video2012Admin(BaseModelAdmin):
                     'region', 'shortlink', 'created']
     list_filter = ['state', 'judge_mark', 'category', 'region']
     search_fields = ['title', 'description', 'user__email']
-admin.site.register(Video2012, Video2012Admin)
 
 
 class AwardAdmin(BaseModelAdmin):
     """Configuration for the award admin pages."""
     list_display = ['region', 'award_type', 'category', 'video', 'preview']
-admin.site.register(Award, AwardAdmin)
+
+
+admin.site.register(models.Video2013, Video2013Admin)
+admin.site.register(models.Vote, VoteAdmin)
+admin.site.register(models.Video2012, Video2012Admin)
+admin.site.register(models.Award, AwardAdmin)

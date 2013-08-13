@@ -6,6 +6,28 @@ from django.utils.html import escape
 from caching.base import CachingQuerySet
 
 
+class NumVotesFilter(admin.SimpleListFilter):
+    """Allows filtering on the `num_votes` attribute."""
+    title = 'number of votes'
+    parameter_name = 'num_votes'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('0', 'No votes'),
+            ('1', 'At least 1'),
+            ('5', 'At least 5'),
+            ('10', 'At least 10'),
+            ('20', '20 or more'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == '0':
+            return queryset.filter(num_votes=0)
+        elif self.value():
+            minimum = int(self.value())
+            return queryset.filter(num_votes__gte=minimum)
+
+
 class BaseModelAdmin(admin.ModelAdmin):
     """
     Base class to use for ModalAdmins across the site.

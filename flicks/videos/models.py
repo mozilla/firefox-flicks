@@ -148,6 +148,8 @@ class Vote(models.Model, CachingMixin):
     user = models.ForeignKey(User)
     video = models.ForeignKey(Video2013)
 
+    created = models.DateTimeField(default=datetime.now)
+
     objects = CachingManager()
 
     class Meta:
