@@ -1,20 +1,32 @@
 ;(function($, django_browserid, flicks) {
     'use strict';
 
-    var csrfToken = $('body').data('csrfToken');
+    var $body = $('body');
+    var videoTrackingName = $body.data('videoId') + ': ' + $body.data('videoTitle');
+    var csrfToken = $body.data('csrfToken');
     var $details = $('.video-details');
 
     // Voting and unvoting handlers.
     $details.on('click', '.add-vote', function() {
+
         var $button = $(this);
         var url = $button.data('url');
 
         var voteXHR = $.post(url, {csrfmiddlewaretoken: csrfToken});
+
+        // Track voting actions via GA.
+        voteXHR.done(function() {
+            _gaq.push(['_trackEvent', 'Votes', 'Add Vote', videoTrackingName]);
+        });
+
         if (!django_browserid.isUserAuthenticated()) {
             django_browserid.getAssertion(function(assertion) {
                 if (!assertion) {
                     return;
                 }
+
+                // Track login attempts to help determine Persona attrition.
+                _gaq.push(['_trackEvent', 'Logged in Status', 'Start Login']);
 
                 // The server will save the vote after they auth.
                 voteXHR.done(function() {
@@ -44,6 +56,9 @@
         var $button = $(this);
         var url = $button.data('url');
         $.post(url, {csrfmiddlewaretoken: csrfToken}).done(function() {
+            // Track voting actions via GA.
+            _gaq.push(['_trackEvent', 'Votes', 'Remove Vote', videoTrackingName])
+
             $button.addClass('hidden');
             $button.siblings('.add-vote').removeClass('hidden');
             hideThanks();

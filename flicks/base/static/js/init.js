@@ -178,6 +178,7 @@
 
             var href = $(this).attr('href');
             if (!django_browserid.isUserAuthenticated()) {
+                _gaq.push(['_trackEvent', 'Logged in Status', 'Start Login']);
                 django_browserid.login(href);
             } else {
                 window.location = href;

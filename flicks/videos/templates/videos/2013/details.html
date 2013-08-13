@@ -15,6 +15,12 @@
   ) %}
 {% endif %}
 
+{% block body_data %}
+  {{ super() }}
+  data-video-id="{{ video.id }}"
+  data-video-title="{{ video.title }}"
+{% endblock %}
+
 {% block string_data %}
   {{ super() }}
   data-vote-count-none="{{ _('No votes yet') }}"
@@ -61,7 +67,7 @@
         {% if vote_count < 1 %}
           {{ _('No votes yet') }}
         {% else %}
-          {# L10n: <b> tag is used to place the number of votes, please do not remove it. #}
+          {# L10n: This shows the number of people who have voted for a video. This is NOT the number of views. <b> tag is used to place the number of votes, please do not remove it. #}
           {% trans vote_count=video.vote_count %}
             <b>{{ vote_count }}</b> vote
           {% pluralize %}
