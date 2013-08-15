@@ -51,6 +51,9 @@ class Verify(django_browserid.views.Verify):
             video = Video.objects.get(id=video_id)
             Vote.objects.get_or_create(user=self.request.user, video=video)
             del self.request.session['vote_video']
+
+            # Set cookie so the JavaScript knows they successfully voted.
+            response.set_cookie('just_voted', '1', max_age=3600, httponly=False)
         except (Video.DoesNotExist, ValueError):
             # Avoid retrying on an invalid video.
             del self.request.session['vote_video']

@@ -13,20 +13,14 @@
         var url = $button.data('url');
 
         var voteXHR = $.post(url, {csrfmiddlewaretoken: csrfToken});
-
-        // Track voting actions via GA.
-        voteXHR.done(function() {
-            _gaq.push(['_trackEvent', 'Votes', 'Add Vote', videoTrackingName]);
-        });
-
         if (!django_browserid.isUserAuthenticated()) {
+            // Track login attempts to help determine Persona attrition.
+            _gaq.push(['_trackEvent', 'Logged in Status', 'Start Login']);
+
             django_browserid.getAssertion(function(assertion) {
                 if (!assertion) {
                     return;
                 }
-
-                // Track login attempts to help determine Persona attrition.
-                _gaq.push(['_trackEvent', 'Logged in Status', 'Start Login']);
 
                 // The server will save the vote after they auth.
                 voteXHR.done(function() {
@@ -36,6 +30,9 @@
             });
         } else {
             voteXHR.done(function() {
+                // Track voting action.
+                _gaq.push(['_trackEvent', 'Votes', 'Add Vote', videoTrackingName]);
+
                 $button.addClass('hidden');
                 $button.siblings('.remove-vote').removeClass('hidden');
                 showThanks();
@@ -49,6 +46,13 @@
     $(function() {
         if (window.location.hash === '#voted') {
             showThanks();
+
+            // If the user just voted (signalled by the cookie 'just_voted'), tell GA and clear
+            // the cookie.
+            if (document.cookie.indexOf('just_voted=1') !== -1) {
+                _gaq.push(['_trackEvent', 'Votes', 'Add Vote', videoTrackingName]);
+                document.cookie = 'just_voted=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            }
         }
     });
 
