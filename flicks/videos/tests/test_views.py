@@ -167,10 +167,10 @@ class GalleryTests(TestCase):
     @patch('flicks.videos.views.VideoSearchForm')
     def test_r3_video_search(self, VideoSearchForm):
         """
-        If the r3 flag is active, use the VideoSearchForm to determine the
+        If the voting flag is active, use the VideoSearchForm to determine the
         videos being paginated.
         """
-        Flag.objects.create(name='r3', everyone=True)
+        Flag.objects.create(name='voting', everyone=True)
         form = VideoSearchForm.return_value
 
         response = self._gallery()
@@ -185,7 +185,7 @@ class GalleryTests(TestCase):
         If a the search form isn't valid, perform an empty video search to
         determine the videos being paginated.
         """
-        Flag.objects.create(name='r3', everyone=True)
+        Flag.objects.create(name='voting', everyone=True)
         form = VideoSearchForm.return_value
         form.perform_search.side_effect = ValidationError('asdf')
 
@@ -258,7 +258,7 @@ class VideoListTests(TestCase):
 class MyVotedVideosTests(TestCase):
     def setUp(self):
         super(MyVotedVideosTests, self).setUp()
-        Flag.objects.create(name='r3', everyone=True)
+        Flag.objects.create(name='voting', everyone=True)
 
     def _my_voted_videos(self, user):
         self.browserid_login(user.email)
@@ -306,7 +306,7 @@ class MyVotedVideosTests(TestCase):
 class AutocompleteTests(TestCase):
     def setUp(self):
         super(AutocompleteTests, self).setUp()
-        Flag.objects.create(name='r3', everyone=True)
+        Flag.objects.create(name='voting', everyone=True)
 
     def _autocomplete(self, **kwargs):
         with self.activate('en-US'):
@@ -341,7 +341,7 @@ class AutocompleteTests(TestCase):
 class VoteAjaxTests(TestCase):
     def setUp(self):
         super(VoteAjaxTests, self).setUp()
-        Flag.objects.create(name='r3', everyone=True)
+        Flag.objects.create(name='voting', everyone=True)
 
     def _vote_ajax(self, video_id):
         with self.activate('en-US'):
@@ -383,7 +383,7 @@ class VoteAjaxTests(TestCase):
 class UnvoteAjaxTests(TestCase):
     def setUp(self):
         super(UnvoteAjaxTests, self).setUp()
-        Flag.objects.create(name='r3', everyone=True)
+        Flag.objects.create(name='voting', everyone=True)
 
     def _unvote_ajax(self, video_id):
         with self.activate('en-US'):

@@ -72,7 +72,7 @@ class ProfileTests(TestCase):
 class VerifyTests(TestCase):
     def setUp(self):
         super(VerifyTests, self).setUp()
-        Flag.objects.create(name='r3', everyone=True)
+        Flag.objects.create(name='voting', everyone=True)
 
         self.factory = RequestFactory()
         self.request = self.factory.post('/')

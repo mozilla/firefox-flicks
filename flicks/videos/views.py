@@ -34,7 +34,7 @@ def gallery(request):
     region = request.GET.get('region', None)
     ctx = {}
 
-    if waffle.flag_is_active(request, 'r3'):
+    if waffle.flag_is_active(request, 'voting'):
         form = VideoSearchForm(request.GET)
         try:
             videos = form.perform_search()
@@ -53,7 +53,7 @@ def gallery(request):
     return video_list(request, videos, ctx)
 
 
-@waffle_flag('r3')
+@waffle_flag('voting')
 @login_required
 def my_voted_videos(request):
     """Show videos that the current user has voted for."""
@@ -82,7 +82,7 @@ def video_list(request, videos, ctx=None):
     return render(request, 'videos/2013/list.html', ctx)
 
 
-@waffle_flag('r3')
+@waffle_flag('voting')
 @cache_control(public=True, max_age=60*60*24*30)  # 30 days
 def autocomplete(request):
     """Return results for the autocomplete feature on the search page."""
@@ -107,7 +107,7 @@ def winners(request):
 
 
 # Voting
-@waffle_flag('r3')
+@waffle_flag('voting')
 @require_POST
 def vote(request, video_id):
     """
@@ -122,7 +122,7 @@ def vote(request, video_id):
     return HttpResponse()
 
 
-@waffle_flag('r3')
+@waffle_flag('voting')
 @require_POST
 def unvote(request, video_id):
     if not request.user.is_authenticated():
@@ -134,7 +134,7 @@ def unvote(request, video_id):
 
 
 # Upload process
-@waffle_flag('!r3')
+@waffle_flag('video-submit')
 @profile_required
 @upload_process
 def upload(request):
@@ -176,7 +176,7 @@ def upload_complete(request):
     return render(request, 'videos/upload_complete.html')
 
 
-@waffle_flag('!r3')
+@waffle_flag('video-submit')
 @upload_process
 def upload_error(request):
     return render(request, 'videos/upload_error.html', status=500)

@@ -43,7 +43,7 @@ class Verify(django_browserid.views.Verify):
         a video, and create the vote if they were.
         """
         response = super(Verify, self).login_success(*args, **kwargs)
-        if not waffle.flag_is_active(self.request, 'r3'):
+        if not waffle.flag_is_active(self.request, 'voting'):
             return response
 
         try:

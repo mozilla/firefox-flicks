@@ -24,7 +24,7 @@
       <h1 class="section-title">{{ _('You&#8217;re the director. Mobile is the star.') }}</h1>
       <div class="section-intro">
         <p>
-        {% if not waffle.flag('r3') %}
+        {% if waffle.flag('video-submit') %}
           {% trans %}
             Enter Firefox Flicks, a global video contest about the power of the Web on
             mobile devices, and get your film seen by millions.
@@ -47,7 +47,7 @@
 
       <div class="actions">
         <ul>
-          {% if not waffle.flag('r3') %}
+          {% if waffle.flag('video-submit') %}
             <li>
               <h3>{{ _('Meet your competition') }}</h3>
               <p><a href="{{ url('flicks.videos.list') }}" class="go">{{ _('View the gallery of entries') }}</a></p>
@@ -64,7 +64,9 @@
                 </a>
               </div>
             </li>
-          {% else %}
+          {% endif %}
+
+         {% if waffle.flag('voting') %}
             <li>
               <h3>{{ _('See Early Entry Award winners') }}</h3>
               <p><a href="{{ url('flicks.videos.winners') }}" class="go">{{ _('View the winning flicks so far') }}</a></p>
@@ -88,7 +90,7 @@
       <h1 class="section-title">{{ _('What is Firefox Flicks?') }}</h1>
       <div class="section-intro">
         <p>
-        {% if not waffle.flag('r3') %}
+        {% if waffle.flag('video-submit') %}
           {% trans %}
             We're looking for videos that tell the story of how having access to the Web through a mobile device can
             change the way you see the world and how you function within it. You could win some
@@ -130,7 +132,7 @@
     </div>
   </section>
 
- {% if not waffle.flag('r3') %}
+ {% if waffle.flag('video-submit') %}
   <section id="flicks2013" class="section alt">
     <div class="wrap">
       <h1 class="section-title">{{ _('2013 Flicks') }}</h1>
@@ -466,7 +468,7 @@
   <section id="prizes" class="section">
     <div class="wrap">
       <h1 class="section-title">{{ _('Prizes') }}</h1>
-      {% if not waffle.flag('r3') %}
+      {% if waffle.flag('video-submit') %}
         <div class="section-intro">
           <p>
           {% trans %}
@@ -562,7 +564,7 @@
       </div>
 
       <section class="rules">
-        {% if not waffle.flag('r3') %}
+        {% if waffle.flag('video-submit') %}
           <h2>{{ _('Sponsor') }}</h2>
           <p>
           {% trans %}

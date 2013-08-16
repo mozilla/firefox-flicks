@@ -15,14 +15,14 @@
 
 {% block content %}
   <div class="section wrap">
-    {% if waffle.flag('r3') %}
+    {% if waffle.flag('voting') %}
       <h1 class="page-title">{{ _('Voting is open!') }}</h1>
     {% else %}
       <h1 class="page-title">{{ _('Welcome to the<br> Firefox Flicks 2013 gallery') }}</h1>
     {% endif %}
 
     <div class="section-intro">
-      {% if not waffle.flag('r3') %}
+      {% if not waffle.flag('voting') %}
         <p>
           {% trans %}
             This year we're asking filmmakers and Firefox fans to inspire
@@ -60,7 +60,7 @@
       {% endif %}
     </div>
 
-    {% if waffle.flag('r3') %}
+    {% if waffle.flag('voting') %}
       <form class="search-form"
             action="{{ url('flicks.videos.list') }}"
             data-autocomplete-url="{{ url('flicks.videos.autocomplete') }}">
@@ -101,7 +101,7 @@
 
     {% block results %}
       <div id="gallery">
-        {% if waffle.flag('r3') and not hide_gallery_header %}
+        {% if waffle.flag('voting') and not hide_gallery_header %}
           <div class="gallery-header">
             {% if form.is_valid() and form.cleaned_data['query'] %}
               <h2>

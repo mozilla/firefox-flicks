@@ -77,7 +77,7 @@
 
     <h2 id="q5">{{ _('How do I submit my flick to Firefox Flicks and enter the contest?') }}</h2>
     <p>
-    {% if not waffle.flag('r3') %}
+    {% if waffle.flag('video-submit') %}
       {% trans link_submit=url('flicks.base.home')|urlparams(hash='submit') %}
         Fill out your filmmaker profile and submit your video <a href="{{ link_submit }}">here.</a>
         All flicks will be posted to the Firefox Flicks website using the Vimeo API.

@@ -100,12 +100,12 @@
 {% macro shareLinks(video=None, class='', showEmbed=True) -%}
   {% set url = request.build_absolute_uri() %}
   {% if video %}
-    {% if not waffle.flag('r3') %}
-      {# L10n: Text is used in a tweet, please keep the length under 110 characters. #}
-      {% set text = _('Watch "%s" on Firefox Flicks')|format(video.title|truncate(90)) %}
-    {% else  %}
+    {% if waffle.flag('voting') %}
       {# L10n: Text is used in a tweet, please keep the length under 70 characters. #}
       {% set text = _('Vote For "%s" in the #FirefoxFlicks #FirefoxOS People\'s Choice Awards!')|format(video.title|truncate(67)) %}
+    {% else  %}
+      {# L10n: Text is used in a tweet, please keep the length under 110 characters. #}
+      {% set text = _('Watch "%s" on Firefox Flicks')|format(video.title|truncate(90)) %}
     {% endif %}
 
     {% set tumblrUrl = tumblrShareVideo(video.embed_html(width='100%'), caption=' '.join([text, url])) %}
