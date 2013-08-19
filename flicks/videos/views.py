@@ -33,27 +33,17 @@ def gallery(request):
     """Show the gallery of all submitted videos."""
     region = request.GET.get('region', None)
     ctx = {}
+    form = VideoSearchForm(request.GET)
 
-    if waffle.flag_is_active(request, 'voting'):
-        form = VideoSearchForm(request.GET)
-        try:
-            videos = form.perform_search()
-        except ValidationError:
-            videos = search_videos()
+    try:
+        videos = form.perform_search()
+    except ValidationError:
+        videos = search_videos()
 
-        ctx['form'] = form
-    else:
-        videos = Video.objects.filter(approved=True).order_by('-created')
-        if region:
-            countries = regions.get_countries(region)
-            if countries:
-                videos = videos.filter(
-                    user__userprofile__country__in=countries)
-
+    ctx['form'] = form
     return video_list(request, videos, ctx)
 
 
-@waffle_flag('voting')
 @login_required
 def my_voted_videos(request):
     """Show videos that the current user has voted for."""
@@ -82,7 +72,6 @@ def video_list(request, videos, ctx=None):
     return render(request, 'videos/2013/list.html', ctx)
 
 
-@waffle_flag('voting')
 @cache_control(public=True, max_age=60*60*24*30)  # 30 days
 def autocomplete(request):
     """Return results for the autocomplete feature on the search page."""
