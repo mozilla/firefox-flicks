@@ -60,8 +60,8 @@
 
   </div>
 
-  {% if waffle.flag('voting') %}
     <div class="vote-control">
+    {% if not waffle.flag('video-submit') %}
       <p class="vote-count">
         {% set vote_count = video.vote_count %}
         {% if vote_count < 1 %}
@@ -75,14 +75,17 @@
           {% endtrans %}
         {% endif %}
       </p>
+    {% endif %}
+
+    {% if waffle.flag('voting') %}
       <p class="vote-button">
         {% set has_vote = video.has_vote_from(user) %}
         <button type="button" class="remove-vote {{ has_vote|ifeq(False, 'hidden') }}" data-url="{{ url('flicks.videos.unvote', video.id) }}">{{ _('Voted') }}</button>
         <button type="button" class="add-vote {{ has_vote|ifeq(True, 'hidden') }}" data-url="{{ url('flicks.videos.vote', video.id) }}">{{ _('Vote') }}</button>
       </p>
+    {% endif %}
       {{ shareWidget(video) }}
     </div>
-  {% endif %}
 
 {% endblock %}
 

@@ -13,7 +13,7 @@
         <ul id="page-nav-list">
           <li id="nav-about"><a href="{{ url('flicks.base.home') }}#about">{{ _('About') }}</a></li>
           {% if not waffle.flag('voting') %}
-            <li id="nav-flicks"><a href="{{ url('flicks.base.home') }}#flicks2013">{{ _('2013 Flicks') }}</a></li>
+            <li id="nav-flicks"><a href="{{ url('flicks.videos.list') }}">{{ _('2013 Flicks') }}</a></li>
           {% endif %}
           <li id="nav-judges"><a href="{{ url('flicks.base.home') }}#judges">{{ _('Judges') }}</a></li>
           <li id="nav-prizes"><a href="{{ url('flicks.base.home') }}#prizes">{{ _('Prizes') }}</a></li>
