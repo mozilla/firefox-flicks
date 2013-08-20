@@ -273,7 +273,9 @@
         </ul>
 
         <p><a href="{{ url('flicks.base.home')|urlparams(hash='prizes') }}" class="go">{{ _('Learn more about Flicks prizes') }}</a></p>
+      {% endif %}
 
+      {% if waffle.flag('voting') %}
         <p><a href="{{ url('flicks.videos.list') }}" class="submit-link">{{ _('Vote now for the People\'s Choice Award') }}</a></p>
       {% endif %}
 
