@@ -22,6 +22,8 @@ from flicks.videos.views import video_list
 class TestUpload(TestCase):
     def setUp(self):
         super(TestUpload, self).setUp()
+        Flag.objects.create(name='video-submit', everyone=True)
+
         self.user = UserProfileFactory.create(user__email='a@b.com').user
         self.browserid_login(self.user.email)
 
@@ -129,48 +131,9 @@ class GalleryTests(TestCase):
             url = '?'.join([reverse('flicks.videos.list'), urlencode(kwargs)])
             return self.client.get(url)
 
-    @patch('flicks.videos.views.regions.get_countries')
-    def test_region(self, get_countries):
-        """
-        If region is specified, filter the returned videos to only ones
-        available in that region.
-        """
-        get_countries.return_value = ['us', 'pt']
-
-        response = self._gallery(region=1)
-        videos = response.context['videos']
-        ok_(self.v1 in videos)
-        ok_(self.v2 not in videos)
-        get_countries.assert_called_with('1')
-
-    @patch('flicks.videos.views.regions.get_countries')
-    def test_region_invalid(self, get_countries):
-        """If region is invalid or empty, do not filter the returned videos."""
-        # Region empty.
-        get_countries.return_value = ['us', 'pt']
-        response = self._gallery()
-
-        videos = response.context['videos']
-        ok_(self.v1 in videos)
-        ok_(self.v2 in videos)
-        ok_(not get_countries.called)
-
-        # Region invalid.
-        get_countries.return_value = None
-        response = self._gallery(region='asdf')
-
-        videos = response.context['videos']
-        ok_(self.v1 in videos)
-        ok_(self.v2 in videos)
-        get_countries.assert_called_with('asdf')
-
     @patch('flicks.videos.views.VideoSearchForm')
-    def test_r3_video_search(self, VideoSearchForm):
-        """
-        If the voting flag is active, use the VideoSearchForm to determine the
-        videos being paginated.
-        """
-        Flag.objects.create(name='voting', everyone=True)
+    def test_video_search(self, VideoSearchForm):
+        """Use the VideoSearchForm to determine the videos being paginated."""
         form = VideoSearchForm.return_value
 
         response = self._gallery()
@@ -185,7 +148,6 @@ class GalleryTests(TestCase):
         If a the search form isn't valid, perform an empty video search to
         determine the videos being paginated.
         """
-        Flag.objects.create(name='voting', everyone=True)
         form = VideoSearchForm.return_value
         form.perform_search.side_effect = ValidationError('asdf')
 

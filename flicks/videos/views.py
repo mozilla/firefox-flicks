@@ -10,11 +10,9 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.cache import cache_control
 from django.views.decorators.http import require_POST
 
-import waffle
 from tower import ugettext as _
 from waffle.decorators import waffle_flag
 
-from flicks.base import regions
 from flicks.base.http import JSONResponse
 from flicks.base.util import promo_video_shortlink, redirect
 from flicks.videos import tasks, vimeo
@@ -31,7 +29,6 @@ from flicks.users.decorators import profile_required
 # Video pages
 def gallery(request):
     """Show the gallery of all submitted videos."""
-    region = request.GET.get('region', None)
     ctx = {}
     form = VideoSearchForm(request.GET)
 

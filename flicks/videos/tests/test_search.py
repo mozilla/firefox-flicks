@@ -74,7 +74,7 @@ class SearchVideosTests(TestCase):
             'bar', fields=['title', 'description'], sort='title')
         eq_(set(videos), set([v2, v1]))
 
-    @patch('flicks.videos.views.regions.get_countries')
+    @patch('flicks.videos.search.regions.get_countries')
     def test_region(self, get_countries):
         """
         If the region filter is given, only return videos from countries in
@@ -90,7 +90,7 @@ class SearchVideosTests(TestCase):
         eq_(set(search_videos(region=1)), set([video_fr]))
         get_countries.assert_called_with(1)
 
-    @patch('flicks.videos.views.regions.get_countries')
+    @patch('flicks.videos.search.regions.get_countries')
     def test_invaid_region(self, get_countries):
         """If the given region is invalid, do not filter by it."""
         get_countries.return_value = None
