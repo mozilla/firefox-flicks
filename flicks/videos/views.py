@@ -30,7 +30,7 @@ from flicks.users.decorators import profile_required
 def gallery(request):
     """Show the gallery of all submitted videos."""
     ctx = {}
-    form = VideoSearchForm(request.GET)
+    form = VideoSearchForm(request, request.GET)
 
     try:
         videos = form.perform_search()
@@ -55,7 +55,7 @@ def video_list(request, videos, ctx=None):
     ctx = ctx or {}
 
     if 'form' not in ctx:
-        ctx['form'] = VideoSearchForm(request.GET)
+        ctx['form'] = VideoSearchForm(request, request.GET)
 
     paginator = Paginator(videos, settings.VIDEOS_PER_PAGE)
     try:

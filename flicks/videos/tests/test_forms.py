@@ -1,7 +1,9 @@
 from django.core.exceptions import ValidationError
+from django.test.client import RequestFactory
 
 from mock import patch
 from nose.tools import assert_raises, eq_, ok_
+from waffle import Flag
 
 from flicks.base.regions import NORTH_AMERICA
 from flicks.base.tests import TestCase
@@ -10,9 +12,26 @@ from flicks.videos.search import AUTOCOMPLETE_FIELDS
 
 
 class VideoSearchFormTests(TestCase):
+    def setUp(self):
+        super(VideoSearchFormTests, self).setUp()
+        self.factory = RequestFactory()
+        self.request = self.factory.get('/')
+
+    def test_popular_sort_include(self):
+        """If the voting-end waffle flag is not set, include the popular option for sorting."""
+        Flag.objects.create(name='voting-end', everyone=False)
+        form = VideoSearchForm(self.request)
+        ok_('popular' in [c[0] for c in form.fields['sort'].choices])
+
+    def test_popular_sort_exclude(self):
+        """If the voting-end waffle flag is set, do not include the popular option for sorting."""
+        Flag.objects.create(name='voting-end', everyone=True)
+        form = VideoSearchForm(self.request)
+        ok_('popular' not in [c[0] for c in form.fields['sort'].choices])
+
     @patch('flicks.videos.forms.search_videos')
     def test_valid_search(self, search_videos):
-        form = VideoSearchForm({
+        form = VideoSearchForm(self.request, {
             'query': 'asdf',
             'field': 'title',
             'region': NORTH_AMERICA,
@@ -30,7 +49,7 @@ class VideoSearchFormTests(TestCase):
     @patch('flicks.videos.forms.search_videos')
     def test_empty_field_passes_none(self, search_videos):
         """If the field isn't specified, pass None to the fields parameter."""
-        form = VideoSearchForm({
+        form = VideoSearchForm(self.request, {
             'query': 'asdf',
             'region': NORTH_AMERICA,
             'sort': 'popular'
@@ -42,7 +61,7 @@ class VideoSearchFormTests(TestCase):
 
     def test_invalid_form(self):
         """If the form fails validation, throw a ValidationError."""
-        form = VideoSearchForm({
+        form = VideoSearchForm(self.request, {
             'region': -5,
             'sort': 'invalid'
         })
@@ -55,7 +74,7 @@ class VideoSearchFormTests(TestCase):
         If no search query is specified, do not alter the sort value or
         choices.
         """
-        form = VideoSearchForm({'region': NORTH_AMERICA, 'sort': 'title'})
+        form = VideoSearchForm(self.request, {'region': NORTH_AMERICA, 'sort': 'title'})
         form.full_clean()
 
         eq_(form.cleaned_data['sort'], 'title')
@@ -68,7 +87,7 @@ class VideoSearchFormTests(TestCase):
         choices and, if the sort is currently set to random, switch to title
         sort.
         """
-        form = VideoSearchForm({'query': 'blah', 'sort': ''})
+        form = VideoSearchForm(self.request, {'query': 'blah', 'sort': ''})
         form.full_clean()
 
         eq_(form.cleaned_data['sort'], 'title')
@@ -76,7 +95,7 @@ class VideoSearchFormTests(TestCase):
         ok_('' not in choice_values)
 
         # Check that sort is preserved if it is not random.
-        form = VideoSearchForm({'query': 'blah', 'sort': 'popular'})
+        form = VideoSearchForm(self.request, {'query': 'blah', 'sort': 'popular'})
         form.full_clean()
 
         eq_(form.cleaned_data['sort'], 'popular')

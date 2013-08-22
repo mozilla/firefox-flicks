@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+import waffle
 from tower import ugettext_lazy as _lazy
 
 from flicks.base.regions import region_names
@@ -25,14 +26,12 @@ class VideoSearchForm(forms.Form):
     """Form for the search feature on the video listing page."""
     FIELD_CHOICES = [(value, '') for value in AUTOCOMPLETE_FIELDS.keys()]
     REGION_CHOICES = [('', _lazy('All regions'))] + region_names.items()
-    SORT_CHOICES = (
+    SORT_CHOICES = [
         # L10n: Label for the order in which to sort a list of videos.
         ('', _lazy('Random')),
         # L10n: Label for the order in which to sort a list of videos.
         ('title', _lazy('by Title')),
-        # L10n: Label for the order in which to sort a list of videos.
-        ('popular', _lazy('by Popularity')),
-    )
+    ]
 
     query = forms.CharField(
         required=False,
@@ -54,6 +53,15 @@ class VideoSearchForm(forms.Form):
         widget=forms.HiddenInput)
 
     region_names = dict(REGION_CHOICES)
+
+    def __init__(self, request, *args, **kwargs):
+        super(VideoSearchForm, self).__init__(*args, **kwargs)
+
+        # Only make popular option available if voting hasn't ended.
+        if not waffle.flag_is_active(request, 'voting-end'):
+
+            # L10n: Label for the order in which to sort a list of videos.
+            self.fields['sort'].choices += [('popular', _lazy('by Popularity'))]
 
     def clean(self):
         super(VideoSearchForm, self).clean()
