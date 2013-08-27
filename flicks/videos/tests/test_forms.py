@@ -101,3 +101,14 @@ class VideoSearchFormTests(TestCase):
         eq_(form.cleaned_data['sort'], 'popular')
         choice_values = zip(*form.fields['sort'].choices)[0]
         ok_('' not in choice_values)
+
+    def test_invalid_sort(self):
+        """
+        An invalid value for sort should not break clean.
+
+        Regression test for an issue where a user was attempting to break Flicks by submitting a
+        bunch of invalid values for sort.
+        """
+        form = VideoSearchForm(self.request, {'query': 'blah', 'sort': 'invalid'})
+        form.full_clean()
+        eq_(form.is_valid(), False)

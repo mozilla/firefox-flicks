@@ -70,7 +70,7 @@ class VideoSearchForm(forms.Form):
         if self.cleaned_data['query']:
             sort = self.fields['sort']
             sort.choices = filter(lambda choice: choice[0] != '', sort.choices)
-            self.cleaned_data['sort'] = self.cleaned_data['sort'] or 'title'
+            self.cleaned_data['sort'] = self.cleaned_data.get('sort') or 'title'
 
         return self.cleaned_data
 
