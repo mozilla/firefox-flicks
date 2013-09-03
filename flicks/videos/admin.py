@@ -6,6 +6,10 @@ from flicks.videos import models
 from flicks.videos.tasks import process_video
 
 
+class SelectRelatedFieldListFilter(admin.filters.RelatedFieldListFilter):
+    template = 'admin/filters_select.html'
+
+
 class Video2013Admin(BaseModelAdmin):
     list_display = ['title', 'user_full_name', 'user_email', 'num_votes', 'created',
                     'vimeo_id', 'filename', 'processed', 'approved']
@@ -77,7 +81,7 @@ class Video2013Admin(BaseModelAdmin):
 
 class VoteAdmin(BaseModelAdmin):
     list_display = ['user_nickname', 'user_email', 'video', 'created']
-    list_filter = ['created']
+    list_filter = ['created', ('video', SelectRelatedFieldListFilter)]
     search_fields = ['user__userprofile__full_name', 'user__userprofile__nickname', 'user__email',
                      'video__title']
 
