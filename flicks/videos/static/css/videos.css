@@ -239,35 +239,65 @@
     width: 60%;
 }
 
-.winners-page .entry-list {
-    margin: 0 0 2em;
-    margin-left: -10px;
+.winners-page .section-title {
+    font-size: 34px;
+    text-align: center;
+    margin: 0 0 .75em;
 }
 
-.period {
-    margin: 0 -10px 2em;
-    padding: 19px 19px 0;
-    background: rgba(255,255,255,.35);
-    border: 1px solid #dbdbdb;
+#grand-prize iframe {
+    height: 425px;
+}
+
+#grand-prize figcaption {
+    font-family: 'Open Sans', sans-serif;
+    margin: 20px 0;
+}
+
+#grand-prize .title {
+    text-align: left;
+    font-size: 24px;
+}
+
+#grand-prize .vcard {
+    font-size: 18px;
+}
+
+.group {
+    background: rgba(255, 255, 255, .35);
     border-radius: 6px;
-    box-shadow: inset 0 0 3px rgba(0,0,0,.1);
+    border: 1px solid #dbdbdb;
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, .1);
+    margin: 0 auto 2em;
+    padding: 19px 19px 0;
+    width: 700px;
 }
 
-.period header h2 {
-    margin: 0 auto .5em;
+.group h2 {
+    font-size: 24px;
+    text-align: center;
+    margin: 0 auto .75em;
 }
-.period header h2 span {
-    display: block;
-    font-size: .823em;
+
+.group .entry {
+    width: 210px;
 }
 
 .period .entry-list {
-  margin: 0 -20px 0 0;
+    margin: 0 -10px 0 -5px;
 }
 
-.period .entry-list .entry {
-    width: 210px;
+.region .entry-list {
+    margin: 0 auto;
+    width: 700px;
+    padding-left: 10px;
 }
+
+.region .entry-list .entry {
+    width: 310px;
+    margin: 0 20px 2em;
+}
+
 
 .winner {
     position: relative;
@@ -515,7 +545,7 @@
       width: auto;
   }
 
-  .period {
+  .group {
       margin: 0 -20px 2em 0;
       width: auto;
   }
@@ -574,8 +604,19 @@
       width: auto;
   }
 
-  .period {
+  .group {
       margin: 0 0 2em;
+      width: auto;
+  }
+
+  .region .entry-list .entry {
+    width: auto;
+    margin: 0 10px 2em 0;
+    float: none;
+  }
+
+  #grand-prize iframe {
+      height: 180px;
   }
 
   .search-query,
@@ -630,15 +671,25 @@
       clear: none;
   }
 
-  .period .entry-list {
+  #grand-prize iframe {
+      height: 260px;
+  }
+
+  .group .entry-list {
       margin-left: -10px;
   }
 
-  .period .entry-list .entry {
+  .group .entry-list .entry {
       width: 190px;
   }
 
-  .period .entry-list .third-place {
+  .region .entry-list .entry {
+    width: 310px;
+    margin: 0 auto 2em;
+    float: none;
+  }
+
+  .group .entry-list .third-place {
       float: none;
       clear: both;
       display: block;

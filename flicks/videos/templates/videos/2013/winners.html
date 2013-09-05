@@ -25,11 +25,297 @@
       </p>
     </div>
 
-      <div id="winners" class="main">
-        <section class="period">
-          <header>
-            <h2>{{ _('Early Entry Award') }} | {{ _('July 3') }}</h2>
-          </header>
+      <div id="winners">
+
+        <section id="grand-prize" class="category">
+          <h1 class="section-title">{{ _('Grand Prize') }}</h1>
+          <figure class="group entry">
+            <div class="video">
+              <iframe src="https://player.vimeo.com/video/71322691?color=ffffff&portrait=0&autoplay=0&byline=0&title=0" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+            <figcaption>
+              <a href="{{ url('flicks.videos.detail', 600) }}">
+                <h2 class="title">Spot the difference</h2>
+                <h4 class="vcard">
+                  <span class="fn">Leo</span>,
+                  <span class="country-name">{{ country_name('pl') }}</span>
+                </h4>
+              </a>
+              <p>
+              {% set submit_time = datetime(2013, 7, 30) %}
+              {# L10n: Describes the date that a video was submitted to the contest. #}
+              {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                Submitted {{ date }}
+              {% endtrans %}
+              </p>
+            </figcaption>
+          </figure>
+        </section>
+
+        <hr>
+
+        <section class="category">
+          <h1 class="section-title">{{ _('Regional Prizes') }}</h1>
+
+          <div id="northam" class="group region">
+            <h2>{{ _('North America') }}</h2>
+            <ul class="entry-list">
+              <li class="entry winner first-place">
+                <a href="{{ url('flicks.videos.detail', 441) }}">
+                  <h3 class="placing">{{ _('Winner') }}</h3>
+                  <img src="{{ static('img/thumbnails/69637982_295.jpg') }}" alt="" class="thumbnail">
+                  <hgroup>
+                    <h3 class="title">Whole is Greater</h3>
+                    <h4 class="vcard">
+                      <span class="fn">Dave</span>,
+                      <span class="country-name">{{ country_name('us') }}</span>
+                    </h4>
+                  </hgroup>
+                </a>
+                <p>
+                {% set submit_time = datetime(2013, 7, 3) %}
+                {# L10n: Describes the date that a video was submitted to the contest. #}
+                {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                  Submitted {{ date }}
+                {% endtrans %}
+                </p>
+              </li>
+              <li class="entry winner second-place">
+                <a href="{{ url('flicks.videos.detail', 279) }}">
+                  <h3 class="placing">{{ _('Runner Up') }}</h3>
+                  <img src="{{ static('img/thumbnails/63297510_295.jpg') }}" alt="" class="thumbnail">
+                  <hgroup>
+                    <h3 class="title">Scooter</h3>
+                    <h4 class="vcard">
+                      <span class="fn">Samuel Thomas</span>,
+                      <span class="country-name">{{ country_name('us') }}</span>
+                    </h4>
+                  </hgroup>
+                </a>
+                <p>
+                {% set submit_time = datetime(2013, 4, 3) %}
+                {# L10n: Describes the date that a video was submitted to the contest. #}
+                {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                  Submitted {{ date }}
+                {% endtrans %}
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <div id="emea" class="group region">
+            <h2>{{ _('Europe, Middle East, Africa') }}</h2>
+            <ul class="entry-list">
+              <li class="entry winner first-place">
+                <a href="{{ url('flicks.videos.detail', 345) }}">
+                  <h3 class="placing">{{ _('Winner') }}</h3>
+                  <img src="{{ static('img/thumbnails/67201988_295.jpg') }}" alt="" class="thumbnail">
+                  <hgroup>
+                    <h3 class="title">Be a part of it - Get mobilized</h3>
+                    <h4 class="vcard">
+                      <span class="fn">Marvin Nuecklaus</span>,
+                      <span class="country-name">{{ country_name('de') }}</span>
+                    </h4>
+                  </hgroup>
+                </a>
+                <p>
+                {% set submit_time = datetime(2013, 5, 29) %}
+                {# L10n: Describes the date that a video was submitted to the contest. #}
+                {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                  Submitted {{ date }}
+                {% endtrans %}
+                </p>
+              </li>
+              <li class="entry winner second-place">
+                <a href="{{ url('flicks.videos.detail', 443) }}">
+                  <h3 class="placing">{{ _('Runner Up') }}</h3>
+                  <img src="{{ static('img/thumbnails/69646392_295.jpg') }}" alt="" class="thumbnail">
+                  <hgroup>
+                    <h3 class="title">Be part of it</h3>
+                    <h4 class="vcard">
+                      <span class="fn">Andrei Stan</span>,
+                      <span class="country-name">{{ country_name('uk') }}</span>
+                    </h4>
+                  </hgroup>
+                </a>
+                <p>
+                {% set submit_time = datetime(2013, 7, 3) %}
+                {# L10n: Describes the date that a video was submitted to the contest. #}
+                {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                  Submitted {{ date }}
+                {% endtrans %}
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <div id="latam" class="group region">
+            <h2>{{ _('Latin America') }}</h2>
+            <ul class="entry-list">
+              <li class="entry winner first-place">
+                <a href="{{ url('flicks.videos.detail', 377) }}">
+                  <h3 class="placing">{{ _('Winner') }}</h3>
+                  <img src="{{ static('img/thumbnails/68673339_295.jpg') }}" alt="" class="thumbnail">
+                  <hgroup>
+                    <h3 class="title">Tortillas on-the-go!</h3>
+                    <h4 class="vcard">
+                      <span class="fn">Alberto García Ballesteros</span>,
+                      <span class="country-name">{{ country_name('mx') }}</span>
+                    </h4>
+                  </hgroup>
+                </a>
+                <p>
+                {% set submit_time = datetime(2013, 6, 18) %}
+                {# L10n: Describes the date that a video was submitted to the contest. #}
+                {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                  Submitted {{ date }}
+                {% endtrans %}
+                </p>
+              </li>
+              <li class="entry winner second-place">
+                <a href="{{ url('flicks.videos.detail', 446) }}">
+                  <h3 class="placing">{{ _('Runner Up') }}</h3>
+                  <img src="{{ static('img/thumbnails/69670873_295.jpg') }}" alt="" class="thumbnail">
+                  <hgroup>
+                    <h3 class="title">Beyond the limit</h3>
+                    <h4 class="vcard">
+                      <span class="fn">Fabián Eduardo Ramírez Barreto</span>,
+                      <span class="country-name">{{ country_name('mx') }}</span>
+                    </h4>
+                  </hgroup>
+                </a>
+                <p>
+                {% set submit_time = datetime(2013, 7, 3) %}
+                {# L10n: Describes the date that a video was submitted to the contest. #}
+                {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                  Submitted {{ date }}
+                {% endtrans %}
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <div id="apac" class="group region">
+            <h2>{{ _('Asia Pacific') }}</h2>
+            <ul class="entry-list">
+              <li class="entry winner first-place">
+                <a href="{{ url('flicks.videos.detail', 548) }}">
+                  <h3 class="placing">{{ _('Winner') }}</h3>
+                  <img src="{{ static('img/thumbnails/71223820_295.jpg') }}" alt="" class="thumbnail">
+                  <hgroup>
+                    <h3 class="title">Stand by you always.</h3>
+                    <h4 class="vcard">
+                      <span class="fn">Kei</span>,
+                      <span class="country-name">{{ country_name('jp') }}</span>
+                    </h4>
+                  </hgroup>
+                </a>
+                <p>
+                {% set submit_time = datetime(2013, 7, 28) %}
+                {# L10n: Describes the date that a video was submitted to the contest. #}
+                {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                  Submitted {{ date }}
+                {% endtrans %}
+                </p>
+              </li>
+              <li class="entry winner second-place">
+                <a href="{{ url('flicks.videos.detail', 436) }}">
+                  <h3 class="placing">{{ _('Runner Up') }}</h3>
+                  <img src="{{ static('img/thumbnails/69601691_295.jpg') }}" alt="" class="thumbnail">
+                  <hgroup>
+                    <h3 class="title">The Anniversary</h3>
+                    <h4 class="vcard">
+                      <span class="fn">Kevin Kristian</span>,
+                      <span class="country-name">{{ country_name('sg') }}</span>
+                    </h4>
+                  </hgroup>
+                </a>
+                <p>
+                {% set submit_time = datetime(2013, 7, 2) %}
+                {# L10n: Describes the date that a video was submitted to the contest. #}
+                {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                  Submitted {{ date }}
+                {% endtrans %}
+                </p>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <hr>
+
+        <section id="peoples-choice" class="group">
+          <h1 class="section-title">{{ _('People’s Choice Award') }}</h1>
+          <ul class="entry-list">
+            <li class="entry winner first-place">
+              <a href="{{ url('flicks.videos.detail', 30) }}">
+                <h3 class="placing">{{ _('First Place') }}</h3>
+                <img src="{{ static('img/thumbnails/59994222.jpg') }}" alt="" class="thumbnail">
+                <hgroup>
+                  <h3 class="title">Anyone, Anywhere</h3>
+                  <h4 class="vcard">
+                    <span class="fn">Jaibin</span>,
+                    <span class="country-name">{{ country_name('tw') }}</span>
+                  </h4>
+                </hgroup>
+              </a>
+              <p>
+              {% set submit_time = datetime(2013, 2, 19) %}
+              {# L10n: Describes the date that a video was submitted to the contest. #}
+              {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                Submitted {{ date }}
+              {% endtrans %}
+              </p>
+            </li>
+
+            <li class="entry winner second-place">
+              <a href="{{ url('flicks.videos.detail', 478) }}">
+                <h3 class="placing">{{ _('Second Place') }}</h3>
+                <img src="{{ static('img/thumbnails/70928073.jpg') }}" alt="" class="thumbnail">
+                <hgroup>
+                  <h3 class="title">The right way...</h3>
+                  <h4 class="vcard">
+                    <span class="fn">Mirabilia</span>,
+                    <span class="country-name">{{ country_name('it') }}</span>
+                  </h4>
+                </hgroup>
+              </a>
+              <p>
+              {% set submit_time = datetime(2013, 7, 24) %}
+              {# L10n: Describes the date that a video was submitted to the contest. #}
+              {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                Submitted {{ date }}
+              {% endtrans %}
+              </p>
+            </li>
+
+            <li class="entry winner third-place">
+              <a href="{{ url('flicks.videos.detail', 600) }}">
+                <h3 class="placing">{{ _('Third Place') }}</h3>
+                <img src="{{ static('img/thumbnails/71322691.jpg') }}" alt="" class="thumbnail">
+                <hgroup>
+                  <h3 class="title">Spot the difference</h3>
+                  <h4 class="vcard">
+                    <span class="fn">Leo</span>,
+                    <span class="country-name">{{ country_name('pl') }}</span>
+                  </h4>
+                </hgroup>
+              </a>
+              <p>
+              {% set submit_time = datetime(2013, 7, 30) %}
+              {# L10n: Describes the date that a video was submitted to the contest. #}
+              {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                Submitted {{ date }}
+              {% endtrans %}
+              </p>
+            </li>
+          </ul>
+        </section>
+
+        <hr>
+
+        <section id="july" class="group period">
+          <h2>{{ _('Early Entry Award') }} | {{ _('July 3') }}</h2>
 
           <ul class="entry-list">
             <li class="entry winner first-place">
@@ -41,7 +327,7 @@
                   <h4 class="vcard">
                     <span class="fn">Alberto García Ballesteros</span>,
                     <span class="country-name">{{ country_name('mx') }}</span>
-                  </h3>
+                  </h4>
                 </hgroup>
               </a>
               <p>
@@ -62,7 +348,7 @@
                   <h4 class="vcard">
                     <span class="fn">Fabián Eduardo Ramírez Barreto</span>,
                     <span class="country-name">{{ country_name('mx') }}</span>
-                  </h3>
+                  </h4>
                 </hgroup>
               </a>
               <p>
@@ -83,7 +369,7 @@
                   <h4 class="vcard">
                     <span class="fn">Kevin Kristian</span>,
                     <span class="country-name">{{ country_name('sg') }}</span>
-                  </h3>
+                  </h4>
                 </hgroup>
               </a>
               <p>
@@ -97,10 +383,8 @@
           </ul>
         </section>
 
-        <section class="period">
-          <header>
-            <h2>{{ _('Early Entry Award') }} | {{ _('May 29') }}</h2>
-          </header>
+        <section id="may" class="group period">
+          <h2>{{ _('Early Entry Award') }} | {{ _('May 29') }}</h2>
 
           <ul class="entry-list">
             <li class="entry winner first-place">
@@ -112,7 +396,7 @@
                   <h4 class="vcard">
                     <span class="fn">Marvin Nuecklaus </span>,
                     <span class="country-name">{{ country_name('de') }}</span>
-                  </h3>
+                  </h4>
                 </hgroup>
               </a>
               <p>
@@ -133,7 +417,7 @@
                   <h4 class="vcard">
                     <span class="fn">AdriLauTheo</span>,
                     <span class="country-name">{{ country_name('fr') }}</span>
-                  </h3>
+                  </h4>
                 </hgroup>
               </a>
               <p>
@@ -154,7 +438,7 @@
                   <h4 class="vcard">
                     <span class="fn">Ian J. Walton</span>,
                     <span class="country-name">{{ country_name('gb') }}</span>
-                  </h3>
+                  </h4>
                 </hgroup>
               </a>
               <p>
@@ -168,10 +452,8 @@
           </ul>
         </section>
 
-        <section class="period">
-          <header>
-            <h2>{{ _('Early Entry Award') }} | {{ _('April 3') }}</h2>
-          </header>
+        <section id="april" class="group period">
+          <h2>{{ _('Early Entry Award') }} | {{ _('April 3') }}</h2>
 
           <ul class="entry-list">
             <li class="entry winner first-place">
@@ -183,7 +465,7 @@
                   <h4 class="vcard">
                     <span class="fn">Arman</span>,
                     <span class="country-name">{{ country_name('id') }}</span>
-                  </h3>
+                  </h4>
                 </hgroup>
               </a>
               <p>
@@ -204,7 +486,7 @@
                   <h4 class="vcard">
                     <span class="fn">fujes</span>,
                     <span class="country-name">{{ country_name('ke') }}</span>
-                  </h3>
+                  </h4>
                 </hgroup>
               </a>
               <p>
@@ -225,7 +507,7 @@
                   <h4 class="vcard">
                     <span class="fn">Jaibin</span>,
                     <span class="country-name">{{ country_name('tw') }}</span>
-                  </h3>
+                  </h4>
                 </hgroup>
               </a>
               <p>
@@ -239,47 +521,6 @@
           </ul>
         </section>
       </div>
-
-      <aside id="upcoming" class="sidebar aside">
-      {% if  waffle.flag('video-submit') %}
-        <h2>{{ _('Don\'t miss your chance to win one of many upcoming awards') }}</h2>
-
-        <h3>{{ _('Early Entry Awards Deadlines') }}</h3>
-        <ul>
-          <li>{{ _('April 3') }}</li>
-          <li>{{ _('May 29') }}</li>
-          <li>{{ _('July 3') }}</li>
-        </ul>
-
-        <h3>{{ _('People\'s Choice Award') }}</h3>
-        <ul>
-          <li>{{ _('Submit by July 31') }}</li>
-        </ul>
-
-        <h3>{{ _('Flicks Grand Prize and Regional awards') }}</h3>
-        <ul>
-          <li>{{ _('Submit by July 31') }}</li>
-        </ul>
-
-        <p><a href="{{ url('flicks.base.home')|urlparams(hash='prizes') }}" class="go">{{ _('Learn more about Flicks prizes') }}</a></p>
-
-        <p><a href="{{ url('flicks.base.home')|urlparams(hash='submit') }}" class="submit-link">{{ _('Submit Your Flick Today!') }}</a></p>
-      {% else %}
-        <h2>{{ _('Upcoming announcements') }}</h2>
-
-        <h3>{{ _('Flicks Grand Prize, Regional Awards &amp; People\'s Choice Award:') }}</h3>
-        <ul>
-          <li>{{ _('September 12 &mdash; Toronto International Film Festival') }}</li>
-        </ul>
-
-        <p><a href="{{ url('flicks.base.home')|urlparams(hash='prizes') }}" class="go">{{ _('Learn more about Flicks prizes') }}</a></p>
-      {% endif %}
-
-      {% if waffle.flag('voting') %}
-        <p><a href="{{ url('flicks.videos.list') }}" class="submit-link">{{ _('Vote now for the People\'s Choice Award') }}</a></p>
-      {% endif %}
-
-      </aside>
 
   </div>
 {% endblock %}
