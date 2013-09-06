@@ -19,6 +19,7 @@ slide_schedule = (
     ScheduleItem(date(2013, 8, 1), date(2013, 8, 15), ['vote.html', 'tiff-teaser.html', 'blogpost_judges.html']),
     ScheduleItem(date(2013, 8, 16), date(2013, 8, 31), ['vote.html', 'tiff-teaser.html', 'blogpost_recap_nowe.html']),
     ScheduleItem(date(2013, 9, 1), date(2013, 9, 12), ['tiff-teaser.html', 'blogpost_winbig.html', 'blogpost_judges.html']),
+    ScheduleItem(date(2013, 9, 13), date(2015, 1, 01), ['sept13_winner.html']),
 )
 
 
