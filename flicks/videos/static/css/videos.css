@@ -332,6 +332,14 @@
     background-image: linear-gradient(150deg, #c0a665 0%, #ffe8d0 35%, #9f7d38 100%);
 }
 
+.main .group {
+  width: auto;
+}
+
+.main .period {
+  margin: 0 -10px 2em;
+}
+
 /* Search */
 .search-form {
     background: #e4e4e4;
@@ -669,6 +677,10 @@
 
   #trailers .entry:nth-child(2n+1) {
       clear: none;
+  }
+
+  .main .period .entry-list {
+    padding-left: 25px;
   }
 
   #grand-prize iframe {
