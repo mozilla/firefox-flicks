@@ -199,28 +199,8 @@
             <h2>{{ _('Asia Pacific') }}</h2>
             <ul class="entry-list">
               <li class="entry winner first-place">
-                <a href="{{ url('flicks.videos.detail', 548) }}">
-                  <h3 class="placing">{{ _('Winner') }}</h3>
-                  <img src="{{ static('img/thumbnails/71223820_295.jpg') }}" alt="" class="thumbnail">
-                  <hgroup>
-                    <h3 class="title">Stand by you always.</h3>
-                    <h4 class="vcard">
-                      <span class="fn">Kei</span>,
-                      <span class="country-name">{{ country_name('jp') }}</span>
-                    </h4>
-                  </hgroup>
-                </a>
-                <p>
-                {% set submit_time = datetime(2013, 7, 28) %}
-                {# L10n: Describes the date that a video was submitted to the contest. #}
-                {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
-                  Submitted {{ date }}
-                {% endtrans %}
-                </p>
-              </li>
-              <li class="entry winner second-place">
                 <a href="{{ url('flicks.videos.detail', 436) }}">
-                  <h3 class="placing">{{ _('Runner Up') }}</h3>
+                  <h3 class="placing">{{ _('Winner') }}</h3>
                   <img src="{{ static('img/thumbnails/69601691_295.jpg') }}" alt="" class="thumbnail">
                   <hgroup>
                     <h3 class="title">The Anniversary</h3>
@@ -232,6 +212,26 @@
                 </a>
                 <p>
                 {% set submit_time = datetime(2013, 7, 2) %}
+                {# L10n: Describes the date that a video was submitted to the contest. #}
+                {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
+                  Submitted {{ date }}
+                {% endtrans %}
+                </p>
+              </li>
+              <li class="entry winner second-place">
+                <a href="{{ url('flicks.videos.detail', 548) }}">
+                  <h3 class="placing">{{ _('Runner Up') }}</h3>
+                  <img src="{{ static('img/thumbnails/71223820_295.jpg') }}" alt="" class="thumbnail">
+                  <hgroup>
+                    <h3 class="title">Stand by you always.</h3>
+                    <h4 class="vcard">
+                      <span class="fn">Kei</span>,
+                      <span class="country-name">{{ country_name('jp') }}</span>
+                    </h4>
+                  </hgroup>
+                </a>
+                <p>
+                {% set submit_time = datetime(2013, 7, 28) %}
                 {# L10n: Describes the date that a video was submitted to the contest. #}
                 {% trans date='<time datetime="{0}">{1}</time>'|fe(submit_time.isoformat(), submit_time|babel_date) %}
                   Submitted {{ date }}
