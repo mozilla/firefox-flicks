@@ -97,11 +97,17 @@
             this.xhr = $.get(this.form.autoCompleteUrl, {query: query});
             this.xhr.done(function(results) {
                 var titleFound = self.form.fillSuggestion(
-                    'title', results.by_title);
+                    'title',
+                    truncate(results.by_title, 80)
+                );
                 var descFound = self.form.fillSuggestion(
-                    'description', results.by_description);
+                    'description',
+                    truncate(results.by_description, 80)
+                );
                 var nameFound = self.form.fillSuggestion(
-                    'author', results.by_author);
+                    'author',
+                    truncate(results.by_author, 80)
+                );
 
                 // If at least one suggestion is found, show the dropdown.
                 if (titleFound || descFound || nameFound) {
@@ -248,7 +254,6 @@
             return this.$query.val();
         },
 
-
         submitSelected: function() {
             var $suggestion = this.getSelected();
             if ($suggestion.length) {
@@ -258,4 +263,15 @@
             }
         }
     };
+
+    // Utility functions.
+    function truncate(string, length, end) {
+        end = end || '...';
+
+        if (string && string.length > length) {
+            string = string.substr(0, length) + end;
+        }
+
+        return string;
+    }
 })(jQuery, flicks);
