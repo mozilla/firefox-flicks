@@ -1,18 +1,29 @@
-from django.contrib.admin import site
-from django.contrib.auth import admin
-from django.contrib.auth.models import User
+from django.contrib import admin, auth
 from django.db import models
 
 from flicks.base.admin import NumVotesFilter
+from flicks.users.models import UserProfile
 
 
-class UserAdmin(admin.UserAdmin):
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
+    max_num = 1
+    can_delete = False
+    fieldsets = (
+        (None, {'fields': ('full_name', 'nickname', 'country')}),
+        ('Address', {'fields': ('address1', 'address2', 'city', 'state', 'postal_code',
+                                'mailing_country')}),
+    )
+
+
+class UserAdmin(auth.admin.UserAdmin):
     """Configuration for the user admin pages."""
     list_display = ['email', 'nickname', 'num_votes', 'username', 'full_name', 'country',
                     'is_staff']
     search_fields = ['email', 'userprofile__nickname', 'username',
                      'userprofile__full_name', 'userprofile__nickname']
     list_filter = [NumVotesFilter, 'is_staff']
+    inlines = [UserProfileInline]
 
     def queryset(self, request):
         """Add num_votes field to queryset."""
@@ -33,5 +44,7 @@ class UserAdmin(admin.UserAdmin):
         # Use method on the admin so we can sort by this field.
         return user.vote_count
     num_votes.admin_order_field = 'num_votes'
-site.unregister(User)
-site.register(User, UserAdmin)
+
+
+admin.site.unregister(auth.models.User)
+admin.site.register(auth.models.User, UserAdmin)
