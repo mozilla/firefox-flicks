@@ -243,18 +243,29 @@
 .pt-BR .slide-earlyentry .slide-desc h2,
 .pl .slide-earlyentry .slide-desc h2,
 .it .slide-earlyentry .slide-desc h2,
-.es .slide-winner .slide-desc h2 {
+.es .slide-winner .slide-desc h2,
+.de .slide-winner .slide-desc h2,
+.pl .slide-winner .slide-desc h2 {
   font-size: 28px;
+}
+
+.de .slide-winner .go {
+  font-size: 20px;
 }
 
 
 /* one off thumb */
+.js .slide-winner .video-play {
+  overflow: hidden;
+}
+
 .js .slide-winner .video-play div {
+  bottom: 10px;
   position: absolute;
-  top: 220px;
-  right: 140px;
+  left: 5px;
   color: #fff;
   font-size: 16px;
+  white-space: nowrap;
 }
 
 .js .slide-winner .video-play div:after {
@@ -598,10 +609,7 @@ body.voting #rules {
   }
 
   .js .slide-winner .video-play div {
-    position: absolute;
-    top: 165px;
-    right: 80px;
-    color: #fff;
+    bottom: 6px;
     font-size: 16px;
   }
 
@@ -663,6 +671,10 @@ body.voting #rules {
     background-position: -460px -40px, 170% 280px, 75% 165%;
   }
 
+  /* Locale-specific slide fixes */
+  .it .slide-winner .slide-desc p {
+    font-size: 14px;
+  }
 }
 
 /* Mobile Layout: 320px */
