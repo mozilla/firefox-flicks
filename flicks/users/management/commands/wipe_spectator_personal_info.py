@@ -9,7 +9,7 @@ class Command(BaseCommand):
         print 'Deleting spectator profiles...'
         for user in User.objects.all():
             if user.profile and self.is_spectator(user):
-                print 'Deleting profile for {0}.'.format(user.profile.display_name)
+                print u'Deleting profile for {0}.'.format(user.profile.display_name)
                 user.profile.delete()
         print 'Done.'
 

@@ -25,3 +25,12 @@ class WipeSpectatorPersonalInfoTests(TestCase):
         ok_(not UserProfile.objects.filter(user=user_no_profile_no_videos).exists())
         ok_(UserProfile.objects.filter(user=user_with_profile_with_videos).exists())
         ok_(not UserProfile.objects.filter(user=user_no_profile_with_videos).exists())
+
+    def test_unicode_name(self):
+        """Users with unicode names should be deleted normally."""
+        user = UserProfileFactory.create(nickname=u'\u265E').user
+
+        command = wipe_spectator_personal_info.Command()
+        command.handle()
+
+        ok_(not UserProfile.objects.filter(user=user).exists())
