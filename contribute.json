@@ -1,0 +1,23 @@
+{
+    "name": "Firefox Flicks",
+    "description": "Firefox Flicks is a contest that invites Firefox fans and filmmakers from all over the world to create short videos to help tell the Firefox story.",
+    "repository": {
+        "url": "https://github.com/mozilla/firefox-flicks",
+        "license": "BSD 2-Clause"
+    },
+    "bugs": {
+        "list": "https://bugzilla.mozilla.org/buglist.cgi?product=Websites&component=Firefox%20Flicks&resolution=---",
+        "report": "https://bugzilla.mozilla.org/enter_bug.cgi?product=Websites&component=Firefox%20Flicks"
+    },
+    "urls": {
+        "prod": "https://firefoxflicks.mozilla.org/",
+        "stage": "https://firefoxflicks.allizom.org/",
+        "dev": "https://firefoxflicks-dev.allizom.org/"
+    },
+    "keywords": [
+        "django",
+        "jquery",
+        "python",
+        "javascript"
+    ]
+}
